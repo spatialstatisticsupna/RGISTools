@@ -1,0 +1,171 @@
+#' Search landsat 7 time-series images list.
+#'
+#' \code{ls7Search} searches the LANDSAT 7 image repository to find those which are relevant for
+#' a particular location and date interval. The function returns the search result as a data frame
+#' with the names of the images and their metadata.
+#'
+#' \code{ls7Search} is a stand-alone function. If the metadata for the time and region of interest has been
+#' downloaded before, \code{ls8Search} will use this metadata by default. In case the metadata has not
+#' been yet downloaded, \code{ls8Search} will make the call for you.
+#'
+#' The search is done by defining a temporal interval and a location. The arguments \code{startDate}
+#' and \code{endDate} defines the temporal interval.These are mandatory arguments. The function defines the spatial location
+#' using at least one of the following arguments: \code{pathrow}, \code{extent}, \code{latlon} y \code{polygon}. When more than one of these argument is defined,
+#' the function will work with the first evaluated method, when no one is defined, the function shows an error message.
+#'
+#' \code{ls7Search} uses the metadata file downloaded by \code{ls7LoadMetadata}. However, it also works as a stand-alone function.
+#' If the metadata for the time and region of interest was downloaded before, \code{ls7Search} uses this metadata by default.
+#' In case the metadata was not download, \code{ls7Search} makes the call for you.
+#'
+#' Landsat images are catalogued spatially using a unique path and row. The fastest way to search an image
+#' in the metadata file is filtering by its path and row. This search method requires previous knowledge on
+#' the path and row relevant for your region of interest.
+#'
+#' From the user point of view, the easiest way to search a time series of Landsat-8 is using the extent,
+#' latlon and polygon arguments. These methods do not requires to know in advance the path and rows of the images.
+#' These method uses spatial objects to define the region of interest. The projection of the spatial needs to be
+#' "\code{+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs}”. The argument \code{extent} accepts any R objects being defined
+#' by a spatial extent. The argument latlon only accepts an R vector with one coordinate in the form of
+#' latitude-longitude (ex. \code{c(42.81687, -1.64323)}, where the first element is the latitude and the second is the longitude).
+#' The argument \code{polygon}, accepts \code{spatialpolygon} or s\code{patialpolygondataframe} objects.
+#'
+#' The search procedure using spatial objects compares the spatial extension of Landsat images with the
+#' the extension of the objects provided by the user. The function checks which ones overlays.
+#' The search functions has an estimate of the extension of each
+#' path row as preprocessed. The function first compares
+#' the object with the predefined extension and gets the path and row of the images that overlays with the spatial
+#' object. Then, it uses the path and row to get the search result which reduces its.
+#' The function gives the possibility to evaluate and compare each image without preprocess data. These can
+#' be specified with the \code{precise=T} argument in the function call, but this procedure will be slower.
+#'
+#' In addition, the search function enables further filtering. The function can filter
+#' the results by any column name in the metadata file, using the column name as an argument. For example, to
+#' filter the images that can be previewed, the user has to find the images with a “Y” in the browseAvaliable column.
+#' This can be achieved by adding \code{browseAvaliable=”Y”} as a function argument.
+#'
+#' @param startDate Starting date of the time series for search images
+#' @param endDate Ending date of the time series for search images
+#' @param verbose Debbug Flag
+#' @param precise Flag for fast search NOT ALLOWED YET
+#' @param ... Argument for function nestering accepts:
+#'  \itemize{
+#'   \item \code{pathrow} A list of vectors defining the path and row number for the region of interest according
+#' to the Worldwide Reference System (\url{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/})
+#' This argument is mandatory if extent is not defined.
+#'   \item \code{latlon} This flag is optional. A vector or a polygon with the coordinates of
+#' the point or region of interest in latitude/longitude format.
+#'   \item \code{extent} This flag is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
+#' object are acceptable formats as long as are latitude/longitude format.
+#' This argument is mandatory if pathrow is not defined.
+#'   \item \code{AppRoot} the root directory where meta data file will be saved,
+#'   \item All column names in .LS7MD data frame for filter results
+#' }
+#'
+#' @examples
+#' \dontrun{
+#' #search by known row and path
+#' search<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
+#'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
+#'                   pathrow=list(c(200,31),c(200,30)),
+#'                   browseAvaliable="Y")
+#'
+#' #search by projected file must be in lat long projection
+#' data(navarre)
+#' search<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
+#'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
+#'                   extent=navarre,
+#'                   precise=T,
+#'                   browseAvaliable="Y")
+#'
+#'#search by projected file fast
+#' search<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
+#'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
+#'                   extent=navarre,
+#'                   precise=F,
+#'                   browseAvaliable="Y")
+#' }
+ls7Search<-function(startDate,endDate,verbose=F,precise=F,...){
+  stopifnot(class(startDate)=="Date")
+  stopifnot(class(endDate)=="Date")
+  arg<-list(...)
+  AppRoot<-defineAppRoot(...)
+
+  if(!ls7IsMetaData()|endDate>as.Date(Sys.time())|getRGISToolsOpt("LS7META.var")%in%ls(all.names=T)){
+    message("MetaData not loaded! loading...")
+    ls7LoadMetadata(AppRoot=AppRoot,update=F)
+  }
+   # now it can be found
+  #first filter by date
+  LS7MD<-get(getRGISToolsOpt("LS7META.var"), envir=globalenv())[as.Date(get(getRGISToolsOpt("LS7META.var"), envir=globalenv())$acquisitionDate)>=startDate&
+                                                                as.Date(get(getRGISToolsOpt("LS7META.var"), envir=globalenv())$acquisitionDate)<=endDate,]
+
+  #filter by position
+  #pathrow list(c(path1,row1),c(path2,row2)...)
+  #extent in latlog
+
+  if("pathrow"%in%names(arg)){
+      stopifnot(class(arg$pathrow)=="list")
+      LS7MD<-do.call(rbind,lapply(arg$pathrow,function(rp,LS7MD,verbose)return(genFilterDF(LS7MD,row=rp[2],path=rp[1],verbose=verbose)),
+                                   LS7MD,
+                                   verbose=verbose))
+  }else if("extent"%in%names(arg)){
+      stopifnot(class(extent(arg$extent))=="Extent")
+      if(precise){
+        tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=extent(arg$extent)))
+        LS7MD<-LS7MD[tiles,]
+      }else{
+        #data(ls7pr)
+        pathrow<-names(ls7pr)[unlist(lapply(ls7pr,tileInExt,ext2=extent(arg$extent)))]
+        pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
+        pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) unname(pathrow[x[1],]))
+        LS7MD<-do.call(rbind,lapply(pathrow,
+                                    function(pr,LS7MD,verbose){pr=unlist(pr);return(genFilterDF(LS7MD,row=pr[2],path=pr[1],verbose=verbose))},
+                                    LS7MD=LS7MD,
+                                    verbose=verbose))
+      }
+  }else if("latlon"%in%names(arg)){
+    stopifnot(class(arg$latlon)=="numeric")
+    stopifnot(length(arg$latlon)==2)
+    circle=list()
+    circle[[1]]<-Polygons(list(Polygon(genCreateSpatialCircle(x=arg$latlon[2],y=arg$latlon[1]))),ID=1)
+
+    circle<-SpatialPolygons(circle,proj4string=CRS('+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'))
+    if(precise){
+      tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=circle))
+      LS7MD<-LS7MD[tiles,]
+    }else{
+      #data(ls7pr)
+      pathrow<-names(ls7pr)[unlist(lapply(ls7pr,tileInExt,ext2=circle))]
+      pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
+      pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) unname(pathrow[x[1],]))
+      LS7MD<-do.call(rbind,lapply(pathrow,
+                                  function(pr,LS7MD,verbose){pr=unlist(pr);return(genFilterDF(LS7MD,row=pr[2],path=pr[1],verbose=verbose))},
+                                  LS7MD=LS7MD,
+                                  verbose=verbose))
+    }
+  }else if("polygon"%in%names(arg)){
+    stopifnot(class(arg$polygon)=="SpatialPolygons"||class(arg$polygon)=="SpatialPolygonsDataFrame")
+    if(precise){
+      tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=extent(arg$polygon)))
+      LS7MD<-LS7MD[tiles,]
+    }else{
+      #data(ls7pr)
+      pathrow<-names(ls7pr)[unlist(lapply(ls7pr,tileInExt,ext2=extent(arg$polygon)))]
+      pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
+      pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) unname(pathrow[x[1],]))
+      LS7MD<-do.call(rbind,lapply(pathrow,
+                                  function(pr,LS7MD,verbose){pr=unlist(pr);return(genFilterDF(LS7MD,row=pr[2],path=pr[1],verbose=verbose))},
+                                  LS7MD=LS7MD,
+                                  verbose=verbose))
+    }
+  }else{
+    warning("Location not defined!")
+  }
+
+  arg<-arg[names(arg)[which(!names(arg)%in%c("pathrow","extent"))]]
+  if(length(arg)>0)
+    LS7MD<-genFilterDF(LS7MD,verbose=verbose,...)
+  return(LS7MD)
+}
+
+

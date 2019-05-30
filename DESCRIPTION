@@ -1,0 +1,15 @@
+Type: Package
+Package: RGISTools
+Title: Tools for Downloading and Processing Time-Series of Satellite Images
+Version: 0.9.0
+Author: U Pérez - Goya [aut, cre] <unai.perez@unavarra.es>,
+        A F Militino [aut] <militino@unavarra.es>,
+        M D Ugarte [aut] <lola@unavarra.es>,
+        M Montesino - SanMartin [aut] <manuel.montesino@unavarra.es>
+Maintainer: U Perez - Goya <unai.perez@unavarra.es>
+Description: Download and filling time series of satellite images of a region of interest. The functions of RGISTools allow a unified access to multispectral images from the Landsat, MODIS and Sentinel repositories. RGISTools  also offers capabilities for processing satellite images, including tile mosaicking, cropping and extracting the variables of interest.   Finally, the package implements  the genFillingIMA and genSmoothingIMA functions for gap-filling long time-series of images.
+Depends: R (>= 3.5.0), raster, curl,XML, rjson, rvest, urltools,tools, fields, gdalUtils, magick, methods, sp, xml2
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1

@@ -1,0 +1,23 @@
+export(genCompositions,genFillingIMA,genFilterStack,
+       genGetDates,senGetDates,lsGetDates,modGetDates,
+       genLimitRasterRange,genMosaicList,genPlotGIS,
+       genSaveTSRData,genSmoothingIMA,ls7FolderToVar,
+       ls7LoadMetadata,ls7Search,ls8FolderToVar,
+       ls8LoadMetadata,ls8Search,lsGetPathRow,lsPreview,modGetPathRow,
+       lsDownload,lsDownSearch,modExtractHDF,modFolderToVar,modDownload,
+       modGetPathRow,modMosaic,modPreview,modDownSearch,modSearch,setRGISToolsOpt,
+       getRGISToolsOpt,showRGISToolsOpt,senDownload,senDownSearch,
+       senFolderToVar,senSearch,senMosaic,senPreview,varEVI,varMSAVI2,varNBR,
+       varNBR2,varNDMI,varNDVI,varNDWI,varRGB,varSAVI)
+import("raster","curl", "rjson","rvest", "urltools","tools",
+       "fields", "gdalUtils", "magick", "methods")
+importFrom("sp","bbox","layout.scale.bar","layout.north.arrow",
+           "proj4string","spplot","Polygons","Polygon",
+           "SpatialPolygons","CRS","spTransform")
+importFrom("XML","xmlNativeTreeParse","xmlSApply",
+           "xmlValue","xmlRoot")
+importFrom("xml2","read_xml","xml_attr",
+           "read_html")
+importFrom("utils", "URLencode", "data", "download.file",
+           "read.csv","untar")
+

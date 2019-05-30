@@ -1,0 +1,29 @@
+#' calculates normalized difference water index (NDWI)
+#'
+#' \code{varNDWI} computes the NDWI index from green and nir bands.
+#'
+#' NDWI is used to monitor changes related to water content in water bodies, using green and NIR bands.
+#' This function is used within
+#' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
+#'
+#' @param green the green band of the capture in \code{raster} format
+#' @param nir the swir1 band of the capture in \code{raster} format
+#'
+#' @return NDWI in \code{raster} format
+#'
+#' @examples
+#' # dir path of cropped and cutted modis image in the region of navarre as example
+#' img.dir <- system.file("ExNavarra", package = "RGISTools")
+#' # list all tif files
+#' img.files <- list.files(img.dir,pattern="\\.tif$",recursive = TRUE,full.names = TRUE)
+#' #select the green and nir bands
+#' green <- raster(img.files[4])
+#' nir <- raster(img.files[2])
+#' # calculate the ndwi image
+#' ndwi <- varNDWI(green,nir)
+#' # plot the image
+#' spplot(ndwi)
+varNDWI<-function(green,nir){
+  ndwi<-(green-nir)/(green+nir)
+  return(ndwi)
+}

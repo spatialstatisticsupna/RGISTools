@@ -1,0 +1,67 @@
+#' Searchs and downloads Sentinel images
+#'
+#' \code{senDownload} conbines both \code{senSearch} and \code{senDownSearch} to easy
+#' the procedure of download Sentinel images.
+#'
+#' This function accepts all the arguments in \code{senSearch} function and automatically downloads
+#' images matching with the search query. The function creates a folder hierarchy give the posibility
+#' of unzip the images.
+#'
+#' @param username Scihub username
+#' @param password Scihub password
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{product} Sentinel product type
+#'   \item \code{startDate} Starting date of time series
+#'   \item \code{endDate} Ending date of time series
+#'   \item \code{extent} Location as projecte file with extention
+#'   \item \code{platform} platform name of the Sentinel mission (Sentine-1, Sentinel-2,...)
+#'   \item \code{nattempts} the number of attempts that the function has to carry out
+#'   to download an image in case the file becomes corrupted.
+#'   \item \code{error.log} error log file name
+#'   \item \code{AppRoot} the directory where the images will be saved
+#' }
+#'
+#' @examples
+#' \dontrun{
+#' # Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
+#' data(navarre)
+#' senDownload(startDate=as.Date("2018210","%Y%j"),
+#'             endDate=as.Date("2018218","%Y%j"),
+#'             platform="Sentinel-2",
+#'             extent=navarre,
+#'             product="S2MSI1C",
+#'             pathrow=c("R094"),
+#'             username="rgistools",
+#'             password="EspacialUPNA88")
+#' }
+senDownload<-function(username,
+                      password,
+                      ...){
+  arg<-list(...)
+
+  AppRoot<-defineAppRoot(...)
+
+  senURL<-senSearch(username=username,
+                    password=password,
+                    ...)
+
+  if(!is.null(arg$pathrow)){
+      #senURL<-senURL[grepl(arg$filter,names(senURL))]
+    senURL<-senURL[Reduce("&",lapply(arg$filter,grepl,names(senURL)))]
+  }
+  if(!is.null(arg$senbox)){
+    senURL<-senURL[Reduce("|",lapply(arg$senbox,grepl,names(senURL)))]
+  }
+
+  senDownSearch(searchres=senURL,
+                username=username,
+                password=password,
+                AppRoot=AppRoot,
+                unzip=T,
+                overwrite=TRUE,
+                ...)
+}
+
+
+

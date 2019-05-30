@@ -1,0 +1,11 @@
+defineAppRoot<-function(...){
+  arg<-list(...)
+  if(!"AppRoot"%in%names(arg)){
+    AppRoot=getRGISToolsOpt("AppRoot")
+    if(is.null(AppRoot))
+      AppRoot=getwd()
+  }else{
+    AppRoot=arg$AppRoot
+  }
+  return(AppRoot)
+}
