@@ -1,4 +1,4 @@
-#' Creates variables from Landsat 7 multispectral bands
+#' Creates variables from Landsat 8 multispectral bands
 #'
 #' \code{ls8FolderToVar} calculates an index using the bands from Landsat multispectral
 #' images. The images are specified by a path to the storing folder (resulting from
@@ -16,22 +16,24 @@
 #' implemented \code{var} are acceptable functions.
 #' @param getStack if \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD)
 #' @param overwrite flag to overwrite the existing images with the same name
-#' @param ... accepts \code{AppRoot} as the directory to save the resulting time series
-#' or/and other argument for function nestering
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{AppRoot} the directory of the resulting time series
+#' }
 #'
 #' @examples
 #' \dontrun{
 #' #load a spatial polygon object of navarre for the example
-#' data(navarre)
+#' data(ex.navarre)
 #' #asign the folder where the example will be run
 #' src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat8"
 #' #download landsat8 images
 #' search<-lsDownload(satellite="ls8",
-#'                    username="rgistools",
-#'                    password="EspacialUPNA88",
+#'                    username="username",
+#'                    password="password",
 #'                    startDate=as.Date("01-01-2018","%d-%m-%Y"),
 #'                    endDate=as.Date("20-01-2018","%d-%m-%Y"),
-#'                    extent=navarre,
+#'                    extent=ex.navarre,
 #'                    untarDir="untar",
 #'                    AppRoot=src)
 #' #asign the folder with the landsat 8 images untared
@@ -56,7 +58,6 @@ ls8FolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
     dir.create(AppRoot,showWarnings = F,recursive=T)
     print(vartype)
   }
-  # src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat7/untar/outfile"
   ls.list<-list.files(src,full.names = T)
   rstack<-stack()
   result<-raster()
@@ -77,7 +78,6 @@ ls8FolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
     if(getStack){
       rstack<-addLayer(rstack,result)
     }else{
-      #print(paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"))
       writeRaster(result,paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"),overwrite=overwrite)
     }
   }

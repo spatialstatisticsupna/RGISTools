@@ -5,7 +5,10 @@
 #' The function reads a date from a character type variable in year-julian format and returns an R date format variable
 #'
 #' @param str String containing the date in "\%Y\%j" format
-#' @param ... accepts \code{date.format} to modify the format of the date being returned
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{date.format} modify the format of the date being returned
+#' }
 #'
 #' @examples
 #' library(raster)

@@ -9,7 +9,10 @@ senGetDates(str, ...)
 \arguments{
 \item{str}{a string or a list of strings defining the file path(s) or file name(s)}
 
-\item{...}{accepts \code{date.format} to modify the format of the date being returned}
+\item{...}{argument to allow function nestering
+\itemize{
+  \item \code{date.format} modify the format of the date being returned
+}}
 }
 \description{
 \code{senGetDates} extracts the capturing date of one or several Sentinel

@@ -30,13 +30,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' data(navarre)
+#' data(ex.navarre)
 #' search<-lsDownload(satellite="ls8",
-#'                    username="rgistools",
-#'                    password="EspacialUPNA88",
+#'                    username="username",
+#'                    password="password",
 #'                    startDate=as.Date("01-01-2018","%d-%m-%Y"),
 #'                    endDate=as.Date("20-01-2018","%d-%m-%Y"),
-#'                    extent=navarre)
+#'                    extent=ex.navarre)
 #' }
 lsDownload<-function(satellite,
                      startDate,

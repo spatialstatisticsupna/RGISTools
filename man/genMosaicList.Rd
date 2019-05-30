@@ -4,14 +4,14 @@
 \alias{genMosaicList}
 \title{Mosaics a list of raster images}
 \usage{
-genMosaicList(imageList, fun = "max", showWarnings = T)
+genMosaicList(imageList, fun = "max", verbose = T)
 }
 \arguments{
 \item{imageList}{list of raster images}
 
 \item{fun}{the function applied to overlapping pixels}
 
-\item{showWarnings}{\code{TRUE/FALSE} argument to print or omit warnnings}
+\item{verbose}{flag for debugging}
 }
 \description{
 \code{genMosaicList} makes a single mosaic from a list of raster images

@@ -42,15 +42,15 @@ For further information on ESA’s missions and data products, please visit:
 \examples{
 \dontrun{
 #load a spatial polygon object of navarre for the example
-data(navarre)
+data(ex.navarre)
 #perform the search query
 searchres<-senSearch(startDate=as.Date("2018210","\%Y\%j"),
                      endDate=as.Date("2018218","\%Y\%j"),
                      platform="Sentinel-2",
-                     extent=navarre,
+                     extent=ex.navarre,
                      product="S2MSI1C",
-                     username="rgistools",
-                     password="EspacialUPNA88")
+                     username="username",
+                     password="password")
 head(searchres)
 }
 }

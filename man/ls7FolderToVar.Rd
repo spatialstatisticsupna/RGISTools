@@ -18,8 +18,10 @@ implemented \code{var} are acceptable functions.}
 
 \item{overwrite}{flag to overwrite the existing images with the same name}
 
-\item{...}{accepts \code{AppRoot} as the directory to save the resulting time series
-or/and other argument for function nestering}
+\item{...}{argument to allow function nestering
+\itemize{
+  \item \code{AppRoot} the directory of the resulting time series
+}}
 }
 \description{
 \code{ls7FolderToVar} calculates an index using the bands from Landsat multispectral
@@ -35,16 +37,16 @@ the variable of interest using any of the functions in the packages starting wit
 \examples{
 \dontrun{
 #load a spatial polygon object of navarre for the example
-data(navarre)
+data(ex.navarre)
 #asign the folder where the example will be run
-src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat7"
+src<-"Path_for_downloading_folder"
 #download landsat7 images
 search<-lsDownload(satellite="ls7",
-                   username="rgistools",
-                   password="EspacialUPNA88",
+                   username="username",
+                   password="password",
                    startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
                    endDate=as.Date("20-01-2018","\%d-\%m-\%Y"),
-                   extent=navarre,
+                   extent=ex.navarre,
                    untarDir="untar",
                    AppRoot=src)
 #asign the folder with the Landsat 7 images untared

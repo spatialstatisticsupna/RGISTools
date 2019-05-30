@@ -48,14 +48,14 @@ may occur when trying to connect with their server during this day of the week.
 }
 \examples{
 \dontrun{
-data(navarre)
+data(ex.navarre)
 # Searching MODIS MYD13A2 images between 2011 and 2013 by latitude and longitude
 using a polygon class variable
 img.list<-modSearch(product="MYD13A2",
                     startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                     endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
                     collection=6,
-                    extent=navarre)
+                    extent=ex.navarre)
                     # Area of interest: defined based on longitude-latitude extent
 # Searching MODIS MYD13A2 images in the whole 2010 by latitude and longitude
 using a extent class variable defined by the user

@@ -19,7 +19,7 @@ All functions in the package starting with three characters
 
 \item{...}{argument to allow function nestering
 \itemize{
-  \item \code{AppRoot} the directory to save the resulting time series
+  \item \code{AppRoot} the directory of the resulting time series
 }}
 }
 \description{
@@ -40,18 +40,18 @@ The function requires the definition of src and fun arguments. The argument \cod
 \examples{
 \dontrun{
 #load a spatial polygon object of navarre for the example
-data(navarre)
+data(ex.navarre)
 #asign the folder where the example will be run
-src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Sentinel"
+src<-"Path_for_downloading_folder"
 #download sentinel images
 senDownload(startDate=as.Date("2018210","\%Y\%j"),
             endDate=as.Date("2018218","\%Y\%j"),
             platform="Sentinel-2",
-            intersects=navarre,
+            extent=ex.navarre,
             product="S2MSI1C",
             pathrow=c("R094"),
-            username="rgistools",
-            password="EspacialUPNA88",
+            username="username",
+            password="password",
             AppRoot=src)
 #asign the folder with the sentinel images unzipped
 src.unzip<-file.path(src,"unzip")

@@ -11,9 +11,11 @@ genPlotGIS(r, region = NULL, ...)
 
 \item{region}{a \code{polygon} class variable defining the area of interest}
 
-\item{...}{other arguments accepted by the function \code{spplot} or
-\code{compOpt} as options to fit the size and the location of the
-GIS components as the arrow and the scales}
+\item{...}{argument to allow function nestering
+\itemize{
+  \item \code{...} any argument accepted by the \code{spplot} function
+  \item \code{compOpt} option to fit the size and the location of the GIS components as the arrow and the scales
+}}
 }
 \description{
 This function helps displaying satellite images with usual GIS information, such as scale, the north arrow and the region of interest
@@ -28,11 +30,11 @@ located by default in relative positions. Their positions can be modified with t
 }
 \examples{
 data(ex.ndvi.navarre)
-data(navarre)
+data(ex.navarre)
 
 # Shows a panel of maps, one per date and the region of interest in shown on the fourth map
 genPlotGIS(r=ex.ndvi.navarre[[1:4]],
-           region=navarre,
+           region=ex.navarre,
            which = c(4),#show region only y 4th image
            wComp=c(4)  #show component only y 4th image
 )
@@ -43,7 +45,7 @@ genPlotGIS(r=ex.ndvi.navarre[[1:4]],
 library('RColorBrewer')
 my.palette <- rev(brewer.pal(n = 9, name = "YlOrRd"))
 genPlotGIS(r=ex.ndvi.navarre[[1]],
-           region=navarre,
+           region=ex.navarre,
            proj=CRS("+init=epsg:4670"), #project all components
            col.regions=colorRampPalette(my.palette),
 )
@@ -51,7 +53,7 @@ genPlotGIS(r=ex.ndvi.navarre[[1]],
 
 # change scale text relative Y
 genPlotGIS(r=ex.ndvi.navarre[[1:4]],
-         region=navarre,
+         region=ex.navarre,
            proj=CRS("+init=epsg:4670"),
          compOpt=list(
            #arrow relatives 0-1

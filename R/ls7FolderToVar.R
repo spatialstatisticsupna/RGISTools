@@ -16,22 +16,24 @@
 #' implemented \code{var} are acceptable functions.
 #' @param getStack if \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD)
 #' @param overwrite flag to overwrite the existing images with the same name
-#' @param ... accepts \code{AppRoot} as the directory to save the resulting time series
-#' or/and other argument for function nestering
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{AppRoot} the directory of the resulting time series
+#' }
 #'
 #' @examples
 #' \dontrun{
 #' #load a spatial polygon object of navarre for the example
-#' data(navarre)
+#' data(ex.navarre)
 #' #asign the folder where the example will be run
-#' src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat7"
+#' src<-"Path_for_downloading_folder"
 #' #download landsat7 images
 #' search<-lsDownload(satellite="ls7",
-#'                    username="rgistools",
-#'                    password="EspacialUPNA88",
+#'                    username="username",
+#'                    password="password",
 #'                    startDate=as.Date("01-01-2018","%d-%m-%Y"),
 #'                    endDate=as.Date("20-01-2018","%d-%m-%Y"),
-#'                    extent=navarre,
+#'                    extent=ex.navarre,
 #'                    untarDir="untar",
 #'                    AppRoot=src)
 #' #asign the folder with the Landsat 7 images untared
@@ -57,7 +59,6 @@ ls7FolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
     print(vartype)
   }
 
-  # lsfd<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat7/untar/outfile"
   ls.list<-list.files(src,full.names = T)
   rstack<-stack()
   result<-raster()
@@ -78,7 +79,6 @@ ls7FolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
     if(getStack){
       rstack<-addLayer(rstack,result)
     }else{
-      #print(paste0(AppRoot,"/",vartype,"_",format(genGetDate(imgfd),"%Y%j"),".tif"))
       writeRaster(result,paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"),overwrite=overwrite)
     }
   }

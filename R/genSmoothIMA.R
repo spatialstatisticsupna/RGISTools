@@ -21,8 +21,10 @@
 #' @param snow.mode a flag to use \code{snow} package for parallelizing the reconstruction procedure
 #' @param fact an aggregation factor to be used to reduce the anomalies before smoothing
 #' @param out.name the name of the images if the result is written in the HDD
-#' @param ... accepts \code{AppRoot} the path where the smoothed data will
-#' be saved or/and other argument for function nestering
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{AppRoot} the path where the images will be saved in tif format
+#' }
 #'
 #' @examples
 #' set.seed(0)

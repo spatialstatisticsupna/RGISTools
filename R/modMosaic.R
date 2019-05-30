@@ -23,7 +23,7 @@
 #' @param extent spatial polygon object representing the region of interest
 #' @param gutils a boolean flag to use GDAL utilities for mosaicking
 #' @param overwrite a boolean flag to overwrite the existing merged images
-#' @param showWarnings  a boolean flag to print warning messages from external functions
+#' @param verbose flag for debugging 
 #' @param ... Argument for function nestering accepts:
 #'  \itemize{
 #'   \item \code{pathrow} a list with the path and row numbers for the region of interest
@@ -35,20 +35,20 @@
 #' @examples
 #' \dontrun{
 #' #load a spatial polygon object of navarre for the example
-#' data(navarre)
+#' data(ex.navarre)
 #' #asign the folder where the example will be run
-#' src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Modis"
+#' src<-"Path_for_downloading_folder"
 #' #download modis images
 #' modDownload(product="MOD09GA",
 #'             startDate=as.Date("01-01-2018","%d-%m-%Y"),
 #'             endDate=as.Date("03-01-2018","%d-%m-%Y"),
-#'             username="rgistools",
-#'             password="EspacialUPNA88",
+#'             username="username",
+#'             password="password",
 #'             AppRoot=src,
 #'             hdfdir="hdf",
 #'             tiffdir="tif",
 #'             collection=6,
-#'             extent=navarre)
+#'             extent=ex.navarre)
 #' #asign the folder with the sentinel images untared
 #' src<-file.path(src,"MOD09GA")
 #' tif.src<-file.path(src,"tif")
@@ -58,16 +58,15 @@
 #'           out.name = "Navarre",
 #'           gutils = T,
 #'           overwrite = T,
-#'           extent=navarre)
+#'           extent=ex.navarre)
 #' }
 modMosaic<-function(src,
                     extent=NULL,
                     out.name="outfile",
-                    showWarnings=T,
+                    verbose=F,
                     gutils=F,
                     overwrite=F,
                     ...){
-  #src<-"Z:/ImagenesSatelite/MODIS/MOD09GA/tif"
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
 
@@ -88,7 +87,7 @@ modMosaic<-function(src,
     #filter the images to one day
     dayImg<-imgFolders[modGetDates(imgFolders)%in%dates[d]]
     if(length(dayImg)<1){
-      if(showWarnings)
+      if(verbose)
         warning(paste0("No tiles for date ",dates[d]))
       next #breaks one iteration only
     }
@@ -121,7 +120,7 @@ modMosaic<-function(src,
     }
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
     if(!file.exists(AppRoot)||overwrite){
-      dir.create(AppRoot,recursive = T,showWarnings = showWarnings)
+      dir.create(AppRoot,recursive = T,showWarnings = verbose)
       for(dt in 1:length(dtype)){
         typechunks<-flist[grepl(dtype[dt],flist)]
         if(!gutils){
@@ -129,13 +128,13 @@ modMosaic<-function(src,
           typechunks<-lapply(typechunks,raster)
           tryCatch(
             {
-              img<- genMosaicList(typechunks)
+              img<- genMosaicList(typechunks,verbose)
             },
             error=function(cond) {
               message(paste0(cond,"\nProjecting to the same CRS..."))
               if(cond=="different CRS"){
                 typechunks<-lapply(typechunks,projectRaster,to=typechunks[[1]])
-                img<- genMosaicList(typechunks)
+                img<- genMosaicList(typechunks,verbose)
               }
             })
           if(!is.null(extent)){
@@ -163,7 +162,7 @@ modMosaic<-function(src,
         }
       }
     }else{
-      if(showWarnings){
+      if(verbose){
         warning("File exists! not mergin...")
       }
     }

@@ -25,7 +25,7 @@
 #' @param overwrite a boolean flag to overwrite the existing merged images
 #' @param reprojectFirst if the origin images have different projection, the function reprojects to the first readed image
 #' @param gutils a boolean flag to use GDAL utilities for mosaicking
-#' @param showWarnings  a boolean flag to print warning messages from external functions
+#' @param verbose flag for debugging 
 #' @param ... Argument for function nestering accepts:
 #'  \itemize{
 #'   \item \code{pathrow} a list with the path and row numbers for the region of interest
@@ -37,18 +37,18 @@
 #' @examples
 #' \dontrun{
 #' #load a spatial polygon object of navarre for the example
-#' data(navarre)
+#' data(ex.navarre)
 #' #asign the folder where the example will be run
-#' src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Sentinel"
+#' src<-"Path_for_downloading_folder"
 #' #download sentinel images
 #' senDownload(startDate=as.Date("2018210","%Y%j"),
 #'             endDate=as.Date("2018218","%Y%j"),
 #'             platform="Sentinel-2",
-#'             intersects=navarre,
+#'             intersects=ex.navarre,
 #'             product="S2MSI1C",
 #'             pathrow=c("R094"),
-#'             username="rgistools",
-#'             password="EspacialUPNA88",
+#'             username="username",
+#'             password="password",
 #'             AppRoot=src)
 #' #asign the folder with the sentinel images unzipped
 #' src.unzip<-file.path(src,"unzip")
@@ -61,13 +61,11 @@
 senMosaic<-function(src,
                     extent=NULL,
                     out.name="outfile",
-                    showWarnings=T,
+                    verbose=F,
                     gutils=F,
                     overwrite=F,
                     reprojectFirst=F,
                     ...){
-  #src<-"Z:/ImagenesSatelite/Sentinel/unzip"
-  #AppRoot<-"Z:/ImagenesSatelite/Sentinel/"
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
 
@@ -88,7 +86,7 @@ senMosaic<-function(src,
     #filter the images to one day
     dayImg<-imgFolders[senGetDates(imgFolders)%in%dates[d]]
     if(length(dayImg)<1){
-      if(showWarnings)
+      if(verbose)
         warning(paste0("No tiles for date ",dates[d]))
       next #breaks one iteration only
     }
@@ -117,7 +115,7 @@ senMosaic<-function(src,
 
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
     if(!file.exists(AppRoot)||overwrite){
-      dir.create(AppRoot,recursive = T,showWarnings = showWarnings)
+      dir.create(AppRoot,recursive = T,showWarnings = verbose)
       for(dt in 1:length(dtype)){
         typechunks<-flist[grepl(dtype[dt],flist)]
         if(!gutils){
@@ -126,13 +124,13 @@ senMosaic<-function(src,
           typechunks<-lapply(typechunks,raster)
           tryCatch(
             {
-              img<- genMosaicList(typechunks)
+              img<- genMosaicList(typechunks,verbose)
             },
             error=function(cond) {
               message(paste0(cond,"\nProjecting to the same CRS..."))
               if(cond=="different CRS"){
                 typechunks<-lapply(typechunks,projectRaster,to=typechunks[[1]])
-                img<- genMosaicList(typechunks)
+                img<- genMosaicList(typechunks,verbose)
               }
             })
           if(!is.null(extent)){
@@ -166,7 +164,7 @@ senMosaic<-function(src,
         }
       }
     }else{
-      if(showWarnings){
+      if(verbose){
         warning("File exists! not mergin...")
       }
     }

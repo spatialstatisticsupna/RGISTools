@@ -70,17 +70,17 @@
 #'                   browseAvaliable="Y")
 #'
 #' #search by projected file must be in lat long projection
-#' data(navarre)
+#' data(ex.navarre)
 #' search<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
-#'                   extent=navarre,
+#'                   extent=ex.navarre,
 #'                   precise=T,
 #'                   browseAvaliable="Y")
 #'
 #'#search by projected file fast
 #' search<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
-#'                   extent=navarre,
+#'                   extent=ex.navarre,
 #'                   precise=F,
 #'                   browseAvaliable="Y")
 #' }

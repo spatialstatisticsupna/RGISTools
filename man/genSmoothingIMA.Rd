@@ -29,8 +29,10 @@ genSmoothingIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 
 \item{snow.mode}{a flag to use \code{snow} package for parallelizing the reconstruction procedure}
 
-\item{...}{accepts \code{AppRoot} the path where the smoothed data will
-be saved or/and other argument for function nestering}
+\item{...}{argument to allow function nestering
+\itemize{
+  \item \code{AppRoot} the path where the images will be saved in tif format
+}}
 }
 \description{
 \code{genSmoothingIMA} is the implementation of a spatio-temporal smoothing

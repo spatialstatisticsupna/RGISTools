@@ -20,12 +20,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' data(navarre)
+#' data(ex.navarre)
 #' mList<-modSearch(product="MYD13A2",
 #'                  startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                  endDate=as.Date("31-12-2013","%d-%m-%Y"),
 #'                  collection=6,
-#'                  latlon=navarre)
+#'                  latlon=ex.navarre)
 #' head(mList)
 #' #download first image in mList
 #' modDownSearch(mList[1],"user","pass")

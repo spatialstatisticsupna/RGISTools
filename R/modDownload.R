@@ -27,17 +27,17 @@
 #'
 #' @examples
 #' \dontrun{
-#' data(navarre)
+#' data(ex.navarre)
 #' modDownload(product="MOD09GA",
 #'            startDate=as.Date("01-01-2018","%d-%m-%Y"),
 #'            endDate=as.Date("03-01-2018","%d-%m-%Y"),
-#'            username="rgistools",
-#'            password="EspacialUPNA88",
-#'            AppRoot="D:/TestEnvironment",
+#'            username="username",
+#'            password="password",
+#'            AppRoot="Path_for_downloading_folder",
 #'            hdfdir="hdf",
 #'            tiffdir="tif",
 #'            collection=6,
-#'            extent=navarre)
+#'            extent=ex.navarre)
 #'}
 modDownload<-function(product,
                      startDate,

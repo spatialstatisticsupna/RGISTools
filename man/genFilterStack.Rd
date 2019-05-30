@@ -9,8 +9,12 @@ genFilterStack(r, ...)
 \arguments{
 \item{r}{the raster stack to be filtered}
 
-\item{...}{accepts \code{startDate} and \code{endDate} as the starting date of
-the range of interest and the ending date of the range of interest}
+\item{...}{argument to allow function nestering
+\itemize{
+  \item \code{startDate} the starting date of the range of interest
+  \item \code{endDate} the ending date of the range of interest
+  \item \code{AppRoot} the path where the RData will be saved
+}}
 }
 \description{
 \code{genFilterStack} filters the raster layers within a range of dates

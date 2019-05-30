@@ -50,10 +50,10 @@ directory. To change this setting, provide AppRoot = the full path as an argumen
 \dontrun{
 # Search and download the images from Landsat 8 comprised between
 # 2011 and 2013 for the region of Navarre
-data(navarre)
+data(ex.navarre)
 search<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                   endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
-                  extent=navarre,
+                  extent=ex.navarre,
                   browseAvaliable="Y")
 
 #download 1 image
@@ -65,10 +65,10 @@ lsDownSearch(search,username="user",password="pass",untarDir=T,raw.rm=T)
 
 # Search and download the images from Landsat 7 comprised between
 # 2011 and 2013 for the region of Navarre
-data(navarre)
+data(ex.navarre)
 search<-ls7Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                   endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
-                  extent=navarre,
+                  extent=ex.navarre,
                   browseAvaliable="Y")
 #download 1 image
 lsDownSearch(search[1,],username="user",password="pass",untarDir=T,raw.rm=T)

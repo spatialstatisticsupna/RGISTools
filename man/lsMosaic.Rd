@@ -4,7 +4,7 @@
 \alias{lsMosaic}
 \title{Mosaics a set of Landsat images}
 \usage{
-lsMosaic(src, extent = NULL, out.name = "outfile", showWarnings = T,
+lsMosaic(src, extent = NULL, out.name = "outfile", verbose = F,
   gutils = F, overwrite = F, ...)
 }
 \arguments{
@@ -14,7 +14,7 @@ lsMosaic(src, extent = NULL, out.name = "outfile", showWarnings = T,
 
 \item{out.name}{the name of the region, if is not defined "outfile" will be asigned}
 
-\item{showWarnings}{a boolean flag to print warning messages from external functions}
+\item{verbose}{flag for debugging}
 
 \item{gutils}{a boolean flag to use GDAL utilities for mosaicking}
 
@@ -53,16 +53,16 @@ default the output file is named as ‘outfile’.
 \examples{
 \dontrun{
 #load a spatial polygon object of navarre for the example
-data(navarre)
+data(ex.navarre)
 #asign the folder where the example will be run
-src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat8"
+src<-"Path_for_downloading_folder"
 #download landsat8 images
 search<-lsDownload(satellite="ls8",
-                   username="rgistools",
-                   password="EspacialUPNA88",
+                   username="username",
+                   password="password",
                    startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
                    endDate=as.Date("20-01-2018","\%d-\%m-\%Y"),
-                   extent=navarre,
+                   extent=ex.navarre,
                    untarDir="untar",
                    AppRoot=src)
 #asign the folder with the landsat 8 images untared
@@ -75,7 +75,7 @@ lsMosaic(tif.src,
 lsMosaic(tif.src,
          AppRoot=src,
          out.name="Navarre",
-         extent=navarre,
+         extent=ex.navarre,
          gutils=T,#using gdalUtils
          overwrite=T)#overwrite
 }

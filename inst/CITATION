@@ -8,7 +8,7 @@ citEntry(entry = "Manual",
 
   textVersion  =
   paste("U Pérez - Goya, A F Militino, M D Ugarte, M Montesino - SanMartin (2019).",
-        "RGISTools: Tools for downloading and processing time-series of satellite images"),
+        "RGISTools: Tools for downloading and processing time-series of satellite images."),
   header = "To cite the package:"
 )
 

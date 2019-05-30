@@ -24,8 +24,11 @@
 #' @param predictSE a flag to calculate the standard error
 #' @param factSE the fact used in the standard error prediction to reduce the processing time
 #' @param out.name the name of the output images
-#' @param ... accepts \code{AppRoot} the path where the filled data will be saved or/and other argument for function nestering
-#'
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{AppRoot} if a path is assigned its save the filled time series of images in this location
+#' }
+#' 
 #' @return \code{RasterStack} object with the smoothed time series
 #'
 #' @examples

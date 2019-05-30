@@ -43,14 +43,14 @@ sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}
 \examples{
 \dontrun{
 # Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
-data(navarre)
+data(ex.navarre)
 searchres<-senSearch(startDate=as.Date("2018-07-29","\%Y-\%m-\%d"),
                      endDate=as.Date("2018-08-06","\%Y-\%m-\%d"),
                      platform="Sentinel-2",
-                     extent=navarre,
+                     extent=ex.navarre,
                      product="S2MSI1C",
-                     username="rgistools",
-                     password="EspacialUPNA88")
+                     username="username",
+                     password="password")
 
 #filtering the path R094 where Navarre is located
 length(searchres)
@@ -59,9 +59,9 @@ length(searchres)
 
 #sentinel download function
 senDownSearch(searchres=searchres,
-              username="rgistools",
-              password="EspacialUPNA88",
-              AppRoot="D:/TestEnvironment",
+              username="username",
+              password="password",
+              AppRoot="Path_for_downloading_folder",
               unzip=T)
 }
 }

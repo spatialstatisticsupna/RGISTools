@@ -26,4 +26,4 @@
 #' Geographically projected spatial polygon of the region of Navarre in Spain
 #'
 #' \code{SpatialPolygonsDataFrame} containing the region of Navarre projected in latitude/longitude
-"navarre"
+"ex.navarre"

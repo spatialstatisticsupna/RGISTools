@@ -24,11 +24,11 @@ The preview is downloaded from Landsat’s website. Please, be aware that only s
 }
 \examples{
 \dontrun{
-data(navarre)
+data(ex.navarre)
 # Retrieve metadata of images covering Navarre region between 2011 and 2013
 search<-ls7Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                   endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
-                  extent=navarre,
+                  extent=ex.navarre,
                   precise=T,
                   browseAvaliable="Y")
 lsPreview(search,1)

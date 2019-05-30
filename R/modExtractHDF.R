@@ -21,14 +21,14 @@
 #' }
 #' @examples
 #' \dontrun{
-#' data(navarre)
+#' data(ex.navarre)
 #' img.list<-modSearch(product="MOD11A1",
 #'                     startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                     endDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                     collection=6,
-#'                     extent=navarre)
+#'                     extent=ex.navarre)
 #' #download first image of image list
-#' modDownSearch(img.list,"rgistools","EspacialUPNA88")
+#' modDownSearch(img.list,"username","password")
 #' #Extract one layer from downloaded image
 #' hdf.files <- list.files("./",full.names = T,pattern="\\.hdf$")
 #' first.hdf.file <-hdf.files[1]

@@ -13,8 +13,10 @@ ls8LoadMetadata(update = F, verbose = T, omit.question = F, ...)
 
 \item{omit.question}{omit the question for ensure the loading of the metadata}
 
-\item{...}{accepts \code{AppRoot} as root directory where meta data file will be saved
-or/and other argument for function nestering}
+\item{...}{argument to allow function nestering
+\itemize{
+  \item \code{AppRoot} the directory where the metadata will be saved
+}}
 }
 \description{
 \code{ls8MetaDataFile} loads a data frame called \code{.LS8MD}

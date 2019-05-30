@@ -15,7 +15,10 @@ genCompositions(rstack, n.days, fun, by.periods = F, ...)
 
 \item{by.periods}{flag to specify the number of images to aggregate instead a temporal window}
 
-\item{...}{accepts \code{AppRoot} the path where the RData will be saved and argument for nested functions}
+\item{...}{argument to allow function nestering
+\itemize{
+  \item \code{AppRoot} the path where the images will be saved in tif image format
+}}
 }
 \description{
 \code{genCompositions} combines satellite images over a temporal window to create composites

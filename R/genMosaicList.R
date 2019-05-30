@@ -8,7 +8,7 @@
 #'
 #' @param imageList list of raster images
 #' @param fun the function applied to overlapping pixels
-#' @param showWarnings \code{TRUE/FALSE} argument to print or omit warnnings
+#' @param verbose flag for debugging 
 #'
 #' @examples
 #' #create simulated rasters
@@ -22,7 +22,7 @@
 #' #mosaic simulated rasters
 #' mr<-genMosaicList(imageList)
 #' spplot(mr)
-genMosaicList <-function(imageList, fun="max",showWarnings=T){
+genMosaicList <-function(imageList, fun="max",verbose=T){
   if(length(imageList)>1){
     names(imageList) <- NULL
     imageList$fun<-fun
@@ -30,7 +30,7 @@ genMosaicList <-function(imageList, fun="max",showWarnings=T){
     mosaic <- do.call(mosaic, imageList)
     return(mosaic)
   }else{
-    if(showWarnings){
+    if(verbose){
       warning("There is only one raster image in imgList. No need to merge.")
     }
     return(imageList[[1]])

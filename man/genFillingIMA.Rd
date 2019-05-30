@@ -31,7 +31,10 @@ genFillingIMA(imgTS, Img2Fill = NULL, aFilter = c(0.05, 0.95),
 
 \item{out.name}{the name of the output images}
 
-\item{...}{accepts \code{AppRoot} the path where the filled data will be saved or/and other argument for function nestering}
+\item{...}{argument to allow function nestering
+\itemize{
+  \item \code{AppRoot} if a path is assigned its save the filled time series of images in this location
+}}
 }
 \value{
 \code{RasterStack} object with the smoothed time series

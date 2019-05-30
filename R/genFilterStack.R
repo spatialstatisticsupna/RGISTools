@@ -5,9 +5,13 @@
 #' This is a helper function used by other functions in this package.
 #'
 #' @param r the raster stack to be filtered
-#' @param ... accepts \code{startDate} and \code{endDate} as the starting date of
-#' the range of interest and the ending date of the range of interest
-#'
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{startDate} the starting date of the range of interest
+#'   \item \code{endDate} the ending date of the range of interest
+#'   \item \code{AppRoot} the path where the RData will be saved
+#' }
+#' 
 #' @examples
 #' #generate random images
 #' img <- matrix(1:16, ncol = 4, byrow = TRUE)

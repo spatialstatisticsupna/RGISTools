@@ -5,8 +5,12 @@
 #' This is a generic function to limit the maximun and minimun values in a raster image.
 #'
 #' @param r raster type object
-#' @param ... accepts \code{mx} and \code{mn} as the maximun
-#' value in the raster and the minimun value in the raster
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{mx} maximun value in raster
+#'   \item \code{mn} minimun value in raster
+#'   \item \code{AppRoot} the path where the RData will be saved
+#' }
 #'
 #' @examples
 #' #generate random images

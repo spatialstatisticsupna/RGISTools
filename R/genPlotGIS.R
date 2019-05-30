@@ -11,17 +11,19 @@
 #'
 #' @param r \code{raster} class variable with the image or image stack to be plotted
 #' @param region a \code{polygon} class variable defining the area of interest
-#' @param ... other arguments accepted by the function \code{spplot} or
-#' \code{compOpt} as options to fit the size and the location of the
-#' GIS components as the arrow and the scales
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{...} any argument accepted by the \code{spplot} function
+#'   \item \code{compOpt} option to fit the size and the location of the GIS components as the arrow and the scales
+#' }
 #'
 #' @examples
 #' data(ex.ndvi.navarre)
-#' data(navarre)
+#' data(ex.navarre)
 #'
 #' # Shows a panel of maps, one per date and the region of interest in shown on the fourth map
 #' genPlotGIS(r=ex.ndvi.navarre[[1:4]],
-#'            region=navarre,
+#'            region=ex.navarre,
 #'            which = c(4),#show region only y 4th image
 #'            wComp=c(4)  #show component only y 4th image
 #' )
@@ -32,7 +34,7 @@
 #' library('RColorBrewer')
 #' my.palette <- rev(brewer.pal(n = 9, name = "YlOrRd"))
 #' genPlotGIS(r=ex.ndvi.navarre[[1]],
-#'            region=navarre,
+#'            region=ex.navarre,
 #'            proj=CRS("+init=epsg:4670"), #project all components
 #'            col.regions=colorRampPalette(my.palette),
 #' )
@@ -40,7 +42,7 @@
 #'
 #' # change scale text relative Y
 #' genPlotGIS(r=ex.ndvi.navarre[[1:4]],
-#'          region=navarre,
+#'          region=ex.navarre,
 #'            proj=CRS("+init=epsg:4670"),
 #'          compOpt=list(
 #'            #arrow relatives 0-1

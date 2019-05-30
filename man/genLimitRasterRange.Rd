@@ -9,8 +9,12 @@ genLimitRasterRange(r, ...)
 \arguments{
 \item{r}{raster type object}
 
-\item{...}{accepts \code{mx} and \code{mn} as the maximun
-value in the raster and the minimun value in the raster}
+\item{...}{argument to allow function nestering
+\itemize{
+  \item \code{mx} maximun value in raster
+  \item \code{mn} minimun value in raster
+  \item \code{AppRoot} the path where the RData will be saved
+}}
 }
 \description{
 \code{genLimitRasterRange} limits the maximum and minimum values of a raster image to a given range

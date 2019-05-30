@@ -4,7 +4,7 @@
 \alias{senMosaic}
 \title{Mosaics a set of Sentinel images}
 \usage{
-senMosaic(src, extent = NULL, out.name = "outfile", showWarnings = T,
+senMosaic(src, extent = NULL, out.name = "outfile", verbose = F,
   gutils = F, overwrite = F, reprojectFirst = F, ...)
 }
 \arguments{
@@ -14,7 +14,7 @@ senMosaic(src, extent = NULL, out.name = "outfile", showWarnings = T,
 
 \item{out.name}{a character string with the name of the region of interest}
 
-\item{showWarnings}{a boolean flag to print warning messages from external functions}
+\item{verbose}{flag for debugging}
 
 \item{gutils}{a boolean flag to use GDAL utilities for mosaicking}
 
@@ -55,18 +55,18 @@ file is named as ‘outfile’
 \examples{
 \dontrun{
 #load a spatial polygon object of navarre for the example
-data(navarre)
+data(ex.navarre)
 #asign the folder where the example will be run
-src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Sentinel"
+src<-"Path_for_downloading_folder"
 #download sentinel images
 senDownload(startDate=as.Date("2018210","\%Y\%j"),
             endDate=as.Date("2018218","\%Y\%j"),
             platform="Sentinel-2",
-            intersects=navarre,
+            intersects=ex.navarre,
             product="S2MSI1C",
             pathrow=c("R094"),
-            username="rgistools",
-            password="EspacialUPNA88",
+            username="username",
+            password="password",
             AppRoot=src)
 #asign the folder with the sentinel images unzipped
 src.unzip<-file.path(src,"unzip")

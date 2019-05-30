@@ -19,7 +19,7 @@ All functions in the package starting with three characters
 
 \item{...}{argument to allow function nestering
 \itemize{
-  \item \code{AppRoot} the directory to save the resulting time series
+  \item \code{AppRoot} the directory of the resulting time series
 }}
 }
 \description{
@@ -38,20 +38,20 @@ indices in \code{RGISTools}. Functions with the pre-programmed indexes start wit
 \examples{
 \dontrun{
 #load a spatial polygon object of navarre for the example
-data(navarre)
+data(ex.navarre)
 #asign the folder where the example will be run
-src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Modis"
+src<-"Path_for_downloading_folder"
 #download modis images
 modDownload(product="MOD09GA",
             startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
             endDate=as.Date("03-01-2018","\%d-\%m-\%Y"),
-            username="rgistools",
-            password="EspacialUPNA88",
+            username="username",
+            password="password",
             AppRoot=src,
             hdfdir="hdf",
             tiffdir="tif",
             collection=6,
-            extent=navarre)
+            extent=ex.navarre)
 #asign the folder with the sentinel images untared
 src<-file.path(src,"MOD09GA")
 tif.src<-file.path(src,"tif")

@@ -13,25 +13,29 @@
 #' @param startDate the starting date of the time series
 #' @param endDate the ending date of the time series
 #' @param recursive a flag to read folders recursively
-#' @param ... accepts \code{AppRoot} the path where the RData will
-#' be saved or/and other argument for function nestering
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{AppRoot} the path where the RData will be saved
+#' }
 #'
 #' @examples
 #' \dontrun{
+#' # load georeferenced polygon of Navarre as example
+#' data(ex.navarre)
 #' # set the download folder
 #' s.start<-Sys.time()
-#' src<-"D:/TestEnvironment"
+#' src<-"Path_for_downloading_folder"
 #' #download the images
 #' modDownload(product="MOD09GA",
 #'             startDate=as.Date("30-07-2018","%d-%m-%Y"),
 #'             endDate=as.Date("06-08-2018","%d-%m-%Y"),
-#'             username="rgistools",
-#'             password="EspacialUPNA88",
+#'             username="username",
+#'             password="password",
 #'             AppRoot=src,
 #'             hdfdir="hdf",
 #'             tiffdir="tif",
 #'             collection=6,
-#'             extent=navarre)
+#'             extent=ex.navarre)
 #' #set tif folder where hdf will be imported
 #' src<-file.path(src,"MOD09GA")
 #' #set the tif folder path
@@ -40,7 +44,7 @@
 #' modMosaic(tif.src,
 #'           AppRoot=src,
 #'           out.name="Navarre",
-#'           extent=navarre)
+#'           extent=ex.navarre)
 #' #change src to navarre folder
 #' src<-file.path(src,"Navarre")
 #' #calculate NDVI from navarre folder
@@ -54,9 +58,6 @@
 #' s.end<-Sys.time()
 #' }
 genSaveTSRData<-function(src,ts.name="TS.Name",startDate=NULL,endDate=NULL,recursive=F,...){
-  # src<-"Z:/ImagenesSatelite/MODIS_v6/NDVI"
-  # startDate=as.Date("2017020",format="%Y%j")
-  # endDate=as.Date("2017120",format="%Y%j")
   AppRoot=defineAppRoot(...)
   flist<-list.files(src,full.names = T,pattern="\\.tif$",recursive=recursive)
   allDates<-genGetDates(flist)

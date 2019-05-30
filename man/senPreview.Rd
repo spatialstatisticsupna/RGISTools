@@ -28,17 +28,17 @@ Please, be aware that only some images have this feature.
 }
 \examples{
 \dontrun{
-data(navarre)
+data(ex.navarre)
 # perform the search query
 searchres<-senSearch(startDate=as.Date("2018210","\%Y\%j"),
                      endDate=as.Date("2018218","\%Y\%j"),
                      platform="Sentinel-2",
-                     intersects=navarre,
+                     intersects=ex.navarre,
                      product="S2MSI1C",
-                     username="rgistools",
-                     password="EspacialUPNA88")
+                     username="username",
+                     password="password")
 #Preview some images
-senPreview(searchres,3,username="rgistools",password="EspacialUPNA88")
-senPreview(searchres,1,username="rgistools",password="EspacialUPNA88",600)
+senPreview(searchres,3,username="username",password="password")
+senPreview(searchres,1,username="username",password="password",600)
 }
 }

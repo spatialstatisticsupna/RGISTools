@@ -4,7 +4,7 @@
 \alias{modMosaic}
 \title{Mosaics a set of MODIS images}
 \usage{
-modMosaic(src, extent = NULL, out.name = "outfile", showWarnings = T,
+modMosaic(src, extent = NULL, out.name = "outfile", verbose = F,
   gutils = F, overwrite = F, ...)
 }
 \arguments{
@@ -14,7 +14,7 @@ modMosaic(src, extent = NULL, out.name = "outfile", showWarnings = T,
 
 \item{out.name}{the name of the region, if is not defined "outfile" will be asigned}
 
-\item{showWarnings}{a boolean flag to print warning messages from external functions}
+\item{verbose}{flag for debugging}
 
 \item{gutils}{a boolean flag to use GDAL utilities for mosaicking}
 
@@ -52,20 +52,20 @@ by default the output file is named as ‘outfile’
 \examples{
 \dontrun{
 #load a spatial polygon object of navarre for the example
-data(navarre)
+data(ex.navarre)
 #asign the folder where the example will be run
-src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Modis"
+src<-"Path_for_downloading_folder"
 #download modis images
 modDownload(product="MOD09GA",
             startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
             endDate=as.Date("03-01-2018","\%d-\%m-\%Y"),
-            username="rgistools",
-            password="EspacialUPNA88",
+            username="username",
+            password="password",
             AppRoot=src,
             hdfdir="hdf",
             tiffdir="tif",
             collection=6,
-            extent=navarre)
+            extent=ex.navarre)
 #asign the folder with the sentinel images untared
 src<-file.path(src,"MOD09GA")
 tif.src<-file.path(src,"tif")
@@ -75,6 +75,6 @@ modMosaic(tif.src,
           out.name = "Navarre",
           gutils = T,
           overwrite = T,
-          extent=navarre)
+          extent=ex.navarre)
 }
 }

@@ -21,24 +21,24 @@
 #' @param overwrite flag to overwrite the existing images with the same name
 #' @param ... argument to allow function nestering
 #' \itemize{
-#'   \item \code{AppRoot} the directory to save the resulting time series
+#'   \item \code{AppRoot} the directory of the resulting time series
 #' }
 #'
 #' @examples
 #' \dontrun{
 #' #load a spatial polygon object of navarre for the example
-#' data(navarre)
+#' data(ex.navarre)
 #' #asign the folder where the example will be run
-#' src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Sentinel"
+#' src<-"Path_for_downloading_folder"
 #' #download sentinel images
 #' senDownload(startDate=as.Date("2018210","%Y%j"),
 #'             endDate=as.Date("2018218","%Y%j"),
 #'             platform="Sentinel-2",
-#'             intersects=navarre,
+#'             extent=ex.navarre,
 #'             product="S2MSI1C",
 #'             pathrow=c("R094"),
-#'             username="rgistools",
-#'             password="EspacialUPNA88",
+#'             username="username",
+#'             password="password",
 #'             AppRoot=src)
 #' #asign the folder with the sentinel images unzipped
 #' src.unzip<-file.path(src,"unzip")
@@ -63,7 +63,6 @@ senFolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
     print(vartype)
   }
 
-  # senfd<-"Z:/ImagenesSatelite/Sentinelv2/Navarra"
   sen.list<-list.files(src,full.names = T)
   rstack<-stack()
   result<-raster()
@@ -84,7 +83,6 @@ senFolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
     if(getStack){
       rstack<-addLayer(rstack,result)
     }else{
-      #print(paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"))
       writeRaster(result,paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"),overwrite=overwrite)
     }
   }

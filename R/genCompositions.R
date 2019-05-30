@@ -17,7 +17,10 @@
 #' @param n.days number of days considered in the temporal window
 #' @param fun the function used to create the composite, such as \code{max}, \code{min}, \code{mean}, ...
 #' @param by.periods flag to specify the number of images to aggregate instead a temporal window
-#' @param ... accepts \code{AppRoot} the path where the RData will be saved and argument for nested functions
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{AppRoot} the path where the images will be saved in tif image format
+#' }
 #'
 #' @examples
 #' # load a time series of NDVI images over Navarre
@@ -39,7 +42,6 @@
 genCompositions<-function(rstack,n.days,fun,by.periods=F,...){
   args<-list(...)
   AppRoot<-defineAppRoot(...)
-  #rstack<-stack(list.files("Z:/ImagenesSatelite/MODIS_v6/NDVI",full.names=T,pattern="\\.tif"))
   if(!by.periods){
     # Create compositions using dates
     dates<-genGetDates(names(rstack))

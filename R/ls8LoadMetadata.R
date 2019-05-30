@@ -17,8 +17,10 @@
 #' @param update TRUE/FALSE argument to force update of metadata file
 #' @param verbose TRUE/FALSE argument to print all steps of metadata download process
 #' @param omit.question omit the question for ensure the loading of the metadata
-#' @param ... accepts \code{AppRoot} as root directory where meta data file will be saved
-#' or/and other argument for function nestering
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{AppRoot} the directory where the metadata will be saved
+#' }
 #'
 #' @examples
 #' \dontrun{

@@ -24,7 +24,7 @@
 #' @param extent a character string with the name of the region of interest (optional)
 #' @param overwrite a boolean flag to overwrite the existing merged images
 #' @param gutils a boolean flag to use GDAL utilities for mosaicking
-#' @param showWarnings  a boolean flag to print warning messages from external functions
+#' @param verbose flag for debugging 
 #' @param ... Argument for function nestering accepts:
 #'  \itemize{
 #'   \item \code{pathrow} a list with the path and row numbers for the region of interest
@@ -36,16 +36,16 @@
 #' @examples
 #' \dontrun{
 #' #load a spatial polygon object of navarre for the example
-#' data(navarre)
+#' data(ex.navarre)
 #' #asign the folder where the example will be run
-#' src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat8"
+#' src<-"Path_for_downloading_folder"
 #' #download landsat8 images
 #' search<-lsDownload(satellite="ls8",
-#'                    username="rgistools",
-#'                    password="EspacialUPNA88",
+#'                    username="username",
+#'                    password="password",
 #'                    startDate=as.Date("01-01-2018","%d-%m-%Y"),
 #'                    endDate=as.Date("20-01-2018","%d-%m-%Y"),
-#'                    extent=navarre,
+#'                    extent=ex.navarre,
 #'                    untarDir="untar",
 #'                    AppRoot=src)
 #' #asign the folder with the landsat 8 images untared
@@ -58,18 +58,17 @@
 #' lsMosaic(tif.src,
 #'          AppRoot=src,
 #'          out.name="Navarre",
-#'          extent=navarre,
+#'          extent=ex.navarre,
 #'          gutils=T,#using gdalUtils
 #'          overwrite=T)#overwrite
 #' }
 lsMosaic<-function(src,
                    extent=NULL,
                    out.name="outfile",
-                   showWarnings=T,
+                   verbose=F,
                    gutils=F,
                    overwrite=F,
                    ...){
-  #src<-"Z:/ImagenesSatelite/MODIS/MOD09GA/tif"
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
 
@@ -100,7 +99,7 @@ lsMosaic<-function(src,
     #filter the images to one day
     dayImg<-imgFolders[lsGetDates(imgFolders)%in%dates[d]]
     if(length(dayImg)<1){
-      if(showWarnings)
+      if(verbose)
         warning(paste0("No tiles for date ",dates[d]))
       next #breaks one iteration only
     }
@@ -127,7 +126,7 @@ lsMosaic<-function(src,
     }
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
     if(!file.exists(AppRoot)||overwrite){
-      dir.create(AppRoot,recursive = T,showWarnings = showWarnings)
+      dir.create(AppRoot,recursive = T,showWarnings = verbose)
       for(dt in 1:length(dtype)){
         typechunks<-flist[grepl(toupper(dtype[dt]),flist)]
         if(!gutils){
@@ -135,13 +134,13 @@ lsMosaic<-function(src,
           typechunks<-lapply(typechunks,raster)
           tryCatch(
             {
-              img<- genMosaicList(typechunks)
+              img<- genMosaicList(typechunks,verbose)
             },
             error=function(cond) {
               message(paste0(cond,"\nProjecting to the same CRS..."))
               if(cond=="different CRS"){
                 typechunks<-lapply(typechunks,projectRaster,to=typechunks[[1]])
-                img<- genMosaicList(typechunks)
+                img<- genMosaicList(typechunks,verbose)
               }
             })
 
@@ -177,7 +176,7 @@ lsMosaic<-function(src,
         }
       }
     }else{
-      if(showWarnings){
+      if(verbose){
         warning("File exists! not mergin...")
       }
     }

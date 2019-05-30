@@ -9,7 +9,10 @@ genGetDates(str, ...)
 \arguments{
 \item{str}{String containing the date in "\%Y\%j" format}
 
-\item{...}{accepts \code{date.format} to modify the format of the date being returned}
+\item{...}{argument to allow function nestering
+\itemize{
+  \item \code{date.format} modify the format of the date being returned
+}}
 }
 \description{
 \code{genGetDates} extracts the date of one or several images when the date is included in "\%Y\%j" date format.

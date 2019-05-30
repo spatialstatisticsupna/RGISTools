@@ -25,15 +25,15 @@
 #' @examples
 #' \dontrun{
 #' # Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
-#' data(navarre)
+#' data(ex.navarre)
 #' senDownload(startDate=as.Date("2018210","%Y%j"),
 #'             endDate=as.Date("2018218","%Y%j"),
 #'             platform="Sentinel-2",
-#'             extent=navarre,
+#'             extent=ex.navarre,
 #'             product="S2MSI1C",
 #'             pathrow=c("R094"),
-#'             username="rgistools",
-#'             password="EspacialUPNA88")
+#'             username="username",
+#'             password="password")
 #' }
 senDownload<-function(username,
                       password,

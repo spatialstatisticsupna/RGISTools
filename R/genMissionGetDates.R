@@ -9,7 +9,10 @@
 #'  If another format is required, it can be modified through the argument date.format.
 #'
 #' @param str a string or a list of strings defining the file path(s) or file name(s)
-#' @param ... accepts \code{date.format} to modify the format of the date being returned
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{date.format} modify the format of the date being returned
+#' }
 #'
 #' @examples
 #' #example of getting the date from the name of a Landsat-8 image
@@ -47,7 +50,10 @@ lsGetDates<-function(str,...){
 #'  If another format is required, it can be modified through the argument date.format.
 #'
 #' @param str a string or a list of strings defining the file path(s) or file name(s)
-#' @param ... accepts \code{date.format} to modify the format of the date being returned
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{date.format} modify the format of the date being returned
+#' }
 #'
 #' @examples
 #' #example of getting date from Sentinel2 image name
@@ -97,7 +103,10 @@ senGetDates<-function(str,...){
 #'  If another format is required, it can be modified through the argument date.format.
 #'
 #' @param str a string or a list of strings defining the file path(s) or file name(s)
-#' @param ... accepts \code{date.format} to modify the format of the date being returned
+#' @param ... argument to allow function nestering
+#' \itemize{
+#'   \item \code{date.format} modify the format of the date being returned
+#' }
 #'
 #' @examples
 #' # example of getting date from Sentinel2 image name
@@ -110,7 +119,6 @@ senGetDates<-function(str,...){
 #' modGetDates(imgsPaths)
 modGetDates<-function(str,...){
   arg<-list(...)
-  #imgPath<-"D:/01-Packages/TestEnvironment/Modis/MYD13A2/tiff/MYD13A2.A2016361.h17v04.006.2017285133407"
   if("date.format"%in%names(arg)){
     return(format(as.Date(gsub(".*\\As*(\\d{7}).*", "\\1", str),"%Y%j"),format=arg$date.format))
   }else{
