@@ -4,8 +4,8 @@
 \alias{modExtractHDF}
 \title{Converts an .hdf file into a set of .tif files}
 \usage{
-modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
-  showWarnings = T, bFilter = NULL, ...)
+modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL, vebose = F,
+  bFilter = NULL, ...)
 }
 \arguments{
 \item{filesHDF}{the full path of the .hdf files to be converted}
@@ -14,7 +14,7 @@ modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
 
 \item{shp}{the shape file of the area of interest}
 
-\item{showWarnings}{a boolean flag to print warning messages from external functions}
+\item{vebose}{a boolean flag to print warning messages from external functions}
 
 \item{bFilter}{a vector containing the names of the bands to extract}
 

@@ -25,7 +25,7 @@ genFillingIMA(imgTS, Img2Fill = NULL, aFilter = c(0.05, 0.95),
 
 \item{factSE}{the fact used in the standard error prediction to reduce the processing time}
 
-\item{snow.mode}{a flag to use \code{raster} package parallelizing options for reconstructing (requires \code{snow} package)}
+\item{snow.mode}{a flag to use \code{raster} package parallelizing options for reconstructing. Requires \code{snow} package.}
 
 \item{predictSE}{a flag to calculate the standard error}
 
