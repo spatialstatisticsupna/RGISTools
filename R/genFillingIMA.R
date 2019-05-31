@@ -1,7 +1,7 @@
 #' Fills the gaps in a time series of satellite images
 #'
 #' \code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly
-#' for gap filling published in (\url{http://dx.doi.org/10.1109/TGRS.2019.2904193})
+#' for gap filling published in (\url{http://dx.doi.org/10.1109/TGRS.2019.2904193}).
 #'
 #' The time series is decomposed into a mean and a residual (anomaly)
 #' components. Instead of smoothing images, the procedure applies
@@ -13,23 +13,23 @@
 #' a pixel, and \code{aggfact} sets the level of spatial aggregation.
 #' See more information in \url{http://dx.doi.org/10.1109/TGRS.2019.2904193}.
 #'
-#' @param imgTS the time series of images to be filled
-#' @param Img2Fill a vector defining the images to fill
-#' @param aFilter two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95)
-#' @param fact an aggregation factor to be used to reduce the anomalies before the interpolation
-#' @param nPeriods number of periods used in the temporal window
-#' @param nYears number of years used in the temporal window
-#' @param fun function used to calculate the mean image, \code{mean}, \code{median} are acceptable functions
-#' @param snow.mode a flag to use \code{raster} package parallelizing options for reconstructing. Requires \code{snow} package.
-#' @param predictSE a flag to calculate the standard error
-#' @param factSE the fact used in the standard error prediction to reduce the processing time
-#' @param out.name the name of the output images
-#' @param ... argument to allow function nestering
+#' @param imgTS the time series of images to be filled.
+#' @param Img2Fill a vector defining the images to fill.
+#' @param aFilter two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
+#' @param fact an aggregation factor to be used to reduce the anomalies before the interpolation.
+#' @param nPeriods number of periods used in the temporal window.
+#' @param nYears number of years used in the temporal window.
+#' @param fun function used to calculate the mean image, \code{mean}, \code{median} are acceptable functions.
+#' @param snow.mode logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.
+#' @param predictSE logical argument. If \code{TRUE} the filling process will calculate the standard error instead the prediction.
+#' @param factSE the fact used in the standard error prediction to reduce the processing time.
+#' @param out.name the name of the output images.
+#' @param ... argument to allow function nestering.
 #' \itemize{
-#'   \item \code{AppRoot} if a path is assigned its save the filled time series of images in this location
+#'   \item \code{AppRoot} if a path is assigned its save the filled time series of images in this location.
 #' }
 #' 
-#' @return \code{RasterStack} object with the smoothed time series
+#' @return \code{RasterStack} object with the smoothed time series.
 #'
 #' @examples
 #' # load an example of NDVI time series in Navarre

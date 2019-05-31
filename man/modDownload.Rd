@@ -5,44 +5,51 @@
 \title{Search and downloads Modis images in structured folder}
 \usage{
 modDownload(product, startDate, endDate, username, password,
-  collection = 6, verbose = F, hdfdir = "hdf", tiffdir = "tif",
+  collection = 6, verbose = FALSE, hdfdir = "hdf", tiffdir = "tif",
   ...)
 }
 \arguments{
-\item{product}{modis product type}
+\item{product}{Modis product type.}
 
-\item{startDate}{Start date of time series}
+\item{startDate}{start date of time series.}
 
-\item{endDate}{End date of time series}
+\item{endDate}{end date of time series.}
 
-\item{username}{EarthData username}
+\item{username}{EarthData username.}
 
-\item{password}{EarthData password}
+\item{password}{EarthData password.}
 
-\item{collection}{Modis collection}
+\item{collection}{Modis collection.}
 
-\item{verbose}{Flag for printing debugging information}
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{hdfdir}{folder name for hdf download}
+\item{hdfdir}{folder name for hdf download.}
 
-\item{tiffdir}{folder name for tif format images}
+\item{tiffdir}{folder name for tif format images.}
 
-\item{...}{argument for function nestering
+\item{...}{argument for function nestering:
 \itemize{
-  \item \code{AppRoot} Aplication environment root path
-  \item \code{latlon} Vectorial projected file
+  \item \code{latlon} A vector or a polygon with the coordinates of
+the point or region of interest in latitude/longitude format.
+This argument is mandatory if polygon or extent is not defined.
+  \item \code{extent} Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints* object are acceptable formats
+as long as coordinates are in latitude/longitude format.
+This argument is mandatory if polygon or latlon is not defined.
+  \item \code{polygon} A list of vectors defining the points of the polygon in latitude/longitude format
+This argument is mandatory if latlon or extent is not defined.
+  \item \code{AppRoot} the directory to save the resulting time series
 }}
 }
 \description{
-\code{modDownload} searches and downloads the MODIS products on the  NASA Common Metadata
+\code{modDownload} searches and downloads the Modis products on the  NASA Common Metadata
 Repository to find those which are relevant for a particular location and date interval.
 }
 \details{
 \code{modDownload} NASA Common Metadata Repository (CMR) powered api \url{https://lpdaacsvc.cr.usgs.gov/services/inventory}
-The catalogue of  MODIS products with their short names and other
+The catalogue of  Modis products with their short names and other
 information can be found at: \url{https://modis.gsfc.nasa.gov/data/dataprod/}
-For further information on collections, please visit MODIS website at: \url{https://modis-atmos.gsfc.nasa.gov/collections/overview}
-By the time the RGISTools package is released, NASA carries out the maintenance of the MODIS website on Wednesdays. Therefore, an error
+For further information on collections, please visit Modis website at: \url{https://modis-atmos.gsfc.nasa.gov/collections/overview}
+By the time the RGISTools package is released, NASA carries out the maintenance of the Modis website on Wednesdays. Therefore, an error
 may occur when trying to connect with their server during this day of the week.
 }
 \examples{

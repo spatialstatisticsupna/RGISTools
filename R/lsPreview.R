@@ -8,9 +8,9 @@
 #' The preview is downloaded from Landsat’s website. Please, be aware that only some images have this feature.
 #'
 #'
-#' @param searchres a data frame with  the results from a search of Landsat images provided by the functions ls7Search or ls8Search
-#' @param n a number with the row corresponding to the image of interest in the search data frame
-#' @param size a number specifying the size of the preview to be displayed. The number determines pixels numbe
+#' @param searchres a data frame with  the results from a search of Landsat images provided by the functions ls7Search or ls8Search.
+#' @param n a number with the row corresponding to the image of interest in the search data frame.
+#' @param size a number specifying the size of the preview to be displayed. The number determines pixels number.
 #'
 #' @examples
 #' \dontrun{

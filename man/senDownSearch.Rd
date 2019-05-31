@@ -5,31 +5,31 @@
 \title{Downloads Sentinel images from search function response}
 \usage{
 senDownSearch(searchres, username, password,
-  error.log = "download_error.log", nattempts = NULL, unzip = F,
-  overwrite = F, ...)
+  error.log = "download_error.log", nattempts = NULL, unzip = FALSE,
+  overwrite = FALSE, ...)
 }
 \arguments{
-\item{searchres}{response from \code{senSearch}}
+\item{searchres}{response from \code{senSearch}.}
 
-\item{username}{login credentials to access the ESA’s SciHub web service}
+\item{username}{login credentials to access the ESA’s SciHub web service.}
 
-\item{password}{login credentials to access the ESA’s SciHub web service}
+\item{password}{login credentials to access the ESA’s SciHub web service.}
 
-\item{error.log}{error log file name}
+\item{error.log}{the name of the error log.}
 
 \item{nattempts}{the number of attempts that the function has to carry out to download an image in case the file becomes corrupted.}
 
-\item{unzip}{flag for unzipping the images}
+\item{unzip}{logical argument. If \code{TRUE} unzips the images}
 
-\item{overwrite}{flag for overwriting the resulting the images}
+\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering.
 \itemize{
-  \item \code{AppRoot} the directory to save the resulting time series
+  \item \code{AppRoot} the directory to save the resulting time series.
 }}
 }
 \description{
-\code{senDownSearch} downloads the list of urls generated y the function senSearch by using the ESA’s SciHub API
+\code{senDownSearch} downloads the list of urls generated y the function senSearch by using the ESA’s SciHub API.
 }
 \details{
 \code{senDownSearch} downloads the images from Sentinel products using the search results provided by \code{\link{senSearch}}.
@@ -38,7 +38,7 @@ senDownSearch(searchres, username, password,
  To prevent the computer from crashing, the nattempts  flag limits the number of attempts to download the image.
  The default number of attempts is set to 3.
 senDownload requires the credentials to access the ESA’s SciHub data service. Please,
-sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}
+sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}.
 }
 \examples{
 \dontrun{

@@ -1,8 +1,9 @@
-#' calculates normalized burn ratio (NBR)
+#' Calculates normalized burn ratio (NBR)
 #'
 #' \code{varNBR} computes the NBR index from nir and swir2 bands.
 #'
-#' NBR is used to monitor areas that have burned, using nir and swir2 bands.
+#' The Normalized Burn Ratio (NBR) is an index to identify burned areas by 
+#' comparing its value before and after the fire event. Is calculated using nir and swir2 bands.
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'

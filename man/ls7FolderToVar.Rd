@@ -4,23 +4,24 @@
 \alias{ls7FolderToVar}
 \title{Creates variables from Landsat 7 multispectral bands}
 \usage{
-ls7FolderToVar(src, fun, getStack = F, overwrite = F, ...)
+ls7FolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
-\item{src}{path to the folder with the Landsat multispectral image}
+\item{src}{path to the folder with the Landsat multispectral image.}
 
 \item{fun}{is a function with the calculation of the index.
 All functions in the package starting with three characters
 'var' are acceptable functions. Custom functions can be also
 implemented \code{var} are acceptable functions.}
 
-\item{getStack}{if \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD)}
+\item{getStack}{logical argument. If \code{TRUE}, returns the time-series as a 
+raster or otherwise as Hard Drive Devide (HDD).}
 
-\item{overwrite}{flag to overwrite the existing images with the same name}
+\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering.
 \itemize{
-  \item \code{AppRoot} the directory of the resulting time series
+  \item \code{AppRoot} the directory of the resulting time series.
 }}
 }
 \description{

@@ -1,17 +1,17 @@
 #' Returns the capturing date of a Landsat 7 or 8 image
 #'
 #' \code{lsGetDates} extracts the capturing date of one or several Landsat images,
-#' given their file paths or names. The function returns a date class object
+#' given their file paths or names. The function returns a date class object.
 #'
 #'  The function works with names or file paths having either of the two file extensions,
 #'  \code{.tar.gz} or \code{.tif} files. The function accepts more than on file path or file names.
 #'  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
-#'  If another format is required, it can be modified through the argument date.format.
+#'  If another format is required, it can be modified through the argument \code{date.format}.
 #'
-#' @param str a string or a list of strings defining the file path(s) or file name(s)
-#' @param ... argument to allow function nestering
+#' @param str a string or a list of strings defining the file path(s) or file name(s).
+#' @param ... argument to allow function nestering:
 #' \itemize{
-#'   \item \code{date.format} modify the format of the date being returned
+#'   \item \code{date.format} modify the format of the date being returned.
 #' }
 #'
 #' @examples
@@ -47,12 +47,12 @@ lsGetDates<-function(str,...){
 #' The function works with names or file paths having either of the two file extensions,
 #'  \code{.jp2} or \code{.tif} files. The function accepts more than on file path or file names.
 #'  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
-#'  If another format is required, it can be modified through the argument date.format.
+#'  If another format is required, it can be modified through the argument \code{date.format}.
 #'
-#' @param str a string or a list of strings defining the file path(s) or file name(s)
-#' @param ... argument to allow function nestering
+#' @param str a string or a list of strings defining the file path(s) or file name(s).
+#' @param ... argument to allow function nestering:
 #' \itemize{
-#'   \item \code{date.format} modify the format of the date being returned
+#'   \item \code{date.format} modify the format of the date being returned.
 #' }
 #'
 #' @examples
@@ -100,12 +100,12 @@ senGetDates<-function(str,...){
 #' The function works with names or file paths having either of the two file extensions,
 #'  \code{.hdf} or \code{.tif} files. The function accepts more than on file path or file names.
 #'  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
-#'  If another format is required, it can be modified through the argument date.format.
+#'  If another format is required, it can be modified through the argument \code{date.format}.
 #'
-#' @param str a string or a list of strings defining the file path(s) or file name(s)
-#' @param ... argument to allow function nestering
+#' @param str a string or a list of strings defining the file path(s) or file name(s).
+#' @param ... argument to allow function nestering:
 #' \itemize{
-#'   \item \code{date.format} modify the format of the date being returned
+#'   \item \code{date.format} modify the format of the date being returned.
 #' }
 #'
 #' @examples

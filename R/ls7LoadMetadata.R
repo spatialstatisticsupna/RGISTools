@@ -4,7 +4,7 @@
 #'  with the names of the Landsat-7 images and their metadata.The metadata provides
 #'  auxiliary information regarding Landsat-7 images repository such as image quality, acquisition
 #'  data, cloud cover, etc. You can find a description of the metadata at
-#'  \url{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}
+#'  \url{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}.
 #'
 #' All captures done by Landsat-7 are cataloged in a unique csv file. The size of the file
 #' might be larger than 360MB. Therefore, the process of downloading and importing R may take several
@@ -15,12 +15,12 @@
 #'
 #'
 #'
-#' @param update TRUE/FALSE argument to force update of metadata file
-#' @param verbose TRUE/FALSE argument to print all steps of metadata download process
-#' @param omit.question omit the question for ensure the loading of the metadata
-#' @param ... argument to allow function nestering
+#' @param update logical argument. If \code{TRUE} is mandatory to update the metadata file.
+#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param omit.question logical argument. If \code{TRUE} omits the question for ensuring the loading of the metadata file.
+#' @param ... argument to allow function nestering:
 #' \itemize{
-#'   \item \code{AppRoot} the directory where the metadata will be saved
+#'   \item \code{AppRoot} the directory where the metadata will be saved.
 #' }
 #'
 #' @examples
@@ -34,7 +34,7 @@
 #' Force renew existing meta data csv
 #' ls7LoadMetadata(update=TRUE)
 #' }
-ls7LoadMetadata<-function(update=F,verbose=T,omit.question=F,...){
+ls7LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=TRUE,...){
   stopifnot(class(update)=="logical")
   arg<-list(...)
   AppRoot<-defineAppRoot(...)

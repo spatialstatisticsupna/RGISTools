@@ -4,21 +4,21 @@
 \alias{modExtractHDF}
 \title{Converts an .hdf file into a set of .tif files}
 \usage{
-modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL, vebose = F,
-  bFilter = NULL, ...)
+modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
+  verbose = FALSE, bFilter = NULL, ...)
 }
 \arguments{
-\item{filesHDF}{the full path of the .hdf files to be converted}
+\item{filesHDF}{the full path of the .hdf files to be converted.}
 
-\item{overwrite}{Flag for overwrite existing images}
+\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 
-\item{shp}{the shape file of the area of interest}
+\item{shp}{the shape file of the area of interest.}
 
-\item{vebose}{a boolean flag to print warning messages from external functions}
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{bFilter}{a vector containing the names of the bands to extract}
+\item{bFilter}{a vector containing the names of the bands to extract.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering:
 \itemize{
   \item \code{AppRoot} the directory where the extracted images should be located
 }}

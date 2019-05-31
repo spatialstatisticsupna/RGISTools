@@ -9,13 +9,15 @@
 #' the variable of interest using any of the functions in the packages starting with \code{var} (\code{\link{varNDVI}},
 #'  \code{\link{varEVI}}, ...)
 #'
-#' @param src path to the folder with the Landsat multispectral image
+#' @param src path to the folder with the Landsat multispectral image.
 #' @param fun is a function with the calculation of the index.
 #' All functions in the package starting with three characters
 #' 'var' are acceptable functions. Custom functions can be also
 #' implemented \code{var} are acceptable functions.
-#' @param getStack if \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD)
-#' @param overwrite flag to overwrite the existing images with the same name
+#' @param getStack logical argument. If \code{TRUE}, returns the 
+#' time-series as a raster or otherwise as Hard Drive Devide (HDD).
+#' @param overwrite logical argument. If \code{TRUE} overwrites the 
+#' existing images with the same name.
 #' @param ... argument to allow function nestering
 #' \itemize{
 #'   \item \code{AppRoot} the directory of the resulting time series
@@ -50,7 +52,7 @@
 #'                AppRoot=file.path(dirname(src)),
 #'                overwrite = T)
 #' }
-ls8FolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
+ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   AppRoot=defineAppRoot(...)
   if(!getStack){
     vartype<-gsub("var","",as.character(match.call()[c("fun")]))

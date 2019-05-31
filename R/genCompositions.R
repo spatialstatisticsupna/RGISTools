@@ -1,6 +1,6 @@
 #' Creates image compositions from a time series of satellite images
 #'
-#' \code{genCompositions} combines satellite images over a temporal window to create composites
+#' \code{genCompositions} combines satellite images over a temporal window to create composites.
 #'
 #' This function supports temporal aggregations with different function specifying \code{fun} argument.
 #' THe number of images aggregated is defined using \code{n.days} argument.
@@ -11,15 +11,17 @@
 #' images of remote sensing indices. Clouds and outliers usually appear as
 #' very low values the index. Hence, the \code{MVC} builds a composite using the
 #' maximum value a pixel over a period of time. Write \code{fun = max} to use the
-#' \code{MVC} technique. Other functions are also supported
+#' \code{MVC} technique. Other functions are also supported.
 #'
-#' @param rstack a \code{RasterStack} where every layer is named after the date it was captured in \%Y\%j format
-#' @param n.days number of days considered in the temporal window
+#' @param rstack a \code{RasterStack} where every layer is named after the 
+#' date it was captured in julian format as "\code{YYYYJJJ}".
+#' @param n.days number of days considered in the temporal window.
 #' @param fun the function used to create the composite, such as \code{max}, \code{min}, \code{mean}, ...
-#' @param by.periods flag to specify the number of images to aggregate instead a temporal window
-#' @param ... argument to allow function nestering
+#' @param by.periods logical argument. If \code{TRUE} the function will aggregate.
+#' \code{n.days} periods instead of use \code{n.days} temporal window.
+#' @param ... argument to allow function nestering.
 #' \itemize{
-#'   \item \code{AppRoot} the path where the images will be saved in tif image format
+#'   \item \code{AppRoot} the path where the images will be saved in tif image format.
 #' }
 #'
 #' @examples
@@ -39,7 +41,7 @@
 #'                                     n.days = 3,
 #'                                     fun = max)
 #' genPlotGIS(composite.NDVI.2)
-genCompositions<-function(rstack,n.days,fun,by.periods=F,...){
+genCompositions<-function(rstack,n.days,fun,by.periods=FALSE,...){
   args<-list(...)
   AppRoot<-defineAppRoot(...)
   if(!by.periods){

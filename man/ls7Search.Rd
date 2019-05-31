@@ -2,31 +2,31 @@
 % Please edit documentation in R/ls7Search.R
 \name{ls7Search}
 \alias{ls7Search}
-\title{Search landsat 7 time-series images list.}
+\title{Search landsat 7 time-series images list}
 \usage{
-ls7Search(startDate, endDate, verbose = F, precise = F, ...)
+ls7Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 }
 \arguments{
-\item{startDate}{Starting date of the time series for search images}
+\item{startDate}{starting date of the time series for search images.}
 
-\item{endDate}{Ending date of the time series for search images}
+\item{endDate}{ending date of the time series for search images.}
 
-\item{verbose}{Debbug Flag}
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{precise}{Flag for fast search NOT ALLOWED YET}
+\item{precise}{logical argument. If \code{TRUE} the search is donw tile by tile (slower).}
 
-\item{...}{Argument for function nestering accepts:
+\item{...}{argument to allow function nestering:
  \itemize{
-  \item \code{pathrow} A list of vectors defining the path and row number for the region of interest according
+  \item \code{pathrow} a list of vectors defining the path and row number for the region of interest according
 to the Worldwide Reference System (\url{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/})
 This argument is mandatory if extent is not defined.
-  \item \code{latlon} This flag is optional. A vector or a polygon with the coordinates of
+  \item \code{latlon} this argument is optional. A vector or a polygon with the coordinates of
 the point or region of interest in latitude/longitude format.
-  \item \code{extent} This flag is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
+  \item \code{extent} this argument is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
 object are acceptable formats as long as are latitude/longitude format.
 This argument is mandatory if pathrow is not defined.
-  \item \code{AppRoot} the root directory where meta data file will be saved,
-  \item All column names in .LS7MD data frame for filter results
+  \item \code{AppRoot} the root directory where meta data file will be saved.
+  \item all column names in .LS7MD data frame for filter results.
 }}
 }
 \description{

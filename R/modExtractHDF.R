@@ -10,12 +10,12 @@
 #' files can be loaded in R using the raster package. Go to \code{\link{modSearch}} and \code{\link{modDownload}}
 #' for further details about these functions. Further details about the \code{gdalUtils} and \code{gdalUtils} packages
 #'
-#' @param filesHDF  the full path of the .hdf files to be converted
-#' @param shp  the shape file of the area of interest
-#' @param overwrite Flag for overwrite existing images
-#' @param bFilter a vector containing the names of the bands to extract
-#' @param vebose  a boolean flag to print warning messages from external functions
-#' @param ... argument to allow function nestering
+#' @param filesHDF  the full path of the .hdf files to be converted.
+#' @param shp  the shape file of the area of interest.
+#' @param bFilter a vector containing the names of the bands to extract.
+#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
+#' @param ... argument to allow function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} the directory where the extracted images should be located
 #' }
@@ -34,14 +34,14 @@
 #' first.hdf.file <-hdf.files[1]
 #' modExtractHDF(first.hdf.file)
 #' }
-modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,vebose=F,bFilter=NULL,...){
+modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=NULL,...){
     arg<-list(...)
     AppRoot<-defineAppRoot(...)
-    dir.create(AppRoot,showWarnings = vebose)
+    dir.create(AppRoot,showWarnings = verbose)
     for(fileHDF in filesHDF){
       image.name<-gsub(".hdf","",basename(fileHDF))
       if(!file.exists(paste0(AppRoot,"/",image.name))||overwrite){
-        dir.create(paste0(AppRoot,"/",image.name),recursive = T,showWarnings = vebose)
+        dir.create(paste0(AppRoot,"/",image.name),recursive = T,showWarnings = verbose)
         print(paste0("Extracting bands from hdf file of image ",image.name))
         image.data<-gdalinfo(fileHDF)
         bands.names<-image.data[grepl(".*SUBDATASET_.*_NAME.*", image.data)]
@@ -82,7 +82,7 @@ modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,vebose=F,bFilter=NULL,
           }
         }
       }else{
-        if(vebose){
+        if(verbose){
           warning("File exists! not extracting...")
         }
       }

@@ -7,17 +7,17 @@
 genLimitRasterRange(r, ...)
 }
 \arguments{
-\item{r}{raster type object}
+\item{r}{\code{Raster}* type object.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering.
 \itemize{
-  \item \code{mx} maximun value in raster
-  \item \code{mn} minimun value in raster
-  \item \code{AppRoot} the path where the RData will be saved
+  \item \code{mx} maximun value in raster.
+  \item \code{mn} minimun value in raster.
+  \item \code{AppRoot} the path where the RData will be saved.
 }}
 }
 \description{
-\code{genLimitRasterRange} limits the maximum and minimum values of a raster image to a given range
+\code{genLimitRasterRange} limits the maximum and minimum values of a raster image to a given range.
 }
 \details{
 This is a generic function to limit the maximun and minimun values in a raster image.

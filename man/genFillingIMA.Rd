@@ -9,39 +9,39 @@ genFillingIMA(imgTS, Img2Fill = NULL, aFilter = c(0.05, 0.95),
   snow.mode = FALSE, predictSE = FALSE, out.name = "outname", ...)
 }
 \arguments{
-\item{imgTS}{the time series of images to be filled}
+\item{imgTS}{the time series of images to be filled.}
 
-\item{Img2Fill}{a vector defining the images to fill}
+\item{Img2Fill}{a vector defining the images to fill.}
 
-\item{aFilter}{two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95)}
+\item{aFilter}{two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).}
 
-\item{fact}{an aggregation factor to be used to reduce the anomalies before the interpolation}
+\item{fact}{an aggregation factor to be used to reduce the anomalies before the interpolation.}
 
-\item{nPeriods}{number of periods used in the temporal window}
+\item{nPeriods}{number of periods used in the temporal window.}
 
-\item{nYears}{number of years used in the temporal window}
+\item{nYears}{number of years used in the temporal window.}
 
-\item{fun}{function used to calculate the mean image, \code{mean}, \code{median} are acceptable functions}
+\item{fun}{function used to calculate the mean image, \code{mean}, \code{median} are acceptable functions.}
 
-\item{factSE}{the fact used in the standard error prediction to reduce the processing time}
+\item{factSE}{the fact used in the standard error prediction to reduce the processing time.}
 
-\item{snow.mode}{a flag to use \code{raster} package parallelizing options for reconstructing. Requires \code{snow} package.}
+\item{snow.mode}{logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.}
 
-\item{predictSE}{a flag to calculate the standard error}
+\item{predictSE}{logical argument. If \code{TRUE} the filling process will calculate the standard error instead the prediction.}
 
-\item{out.name}{the name of the output images}
+\item{out.name}{the name of the output images.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering.
 \itemize{
-  \item \code{AppRoot} if a path is assigned its save the filled time series of images in this location
+  \item \code{AppRoot} if a path is assigned its save the filled time series of images in this location.
 }}
 }
 \value{
-\code{RasterStack} object with the smoothed time series
+\code{RasterStack} object with the smoothed time series.
 }
 \description{
 \code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly
-for gap filling published in (\url{http://dx.doi.org/10.1109/TGRS.2019.2904193})
+for gap filling published in (\url{http://dx.doi.org/10.1109/TGRS.2019.2904193}).
 }
 \details{
 The time series is decomposed into a mean and a residual (anomaly)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/varNDWI.R
 \name{varNDWI}
 \alias{varNDWI}
-\title{calculates normalized difference water index (NDWI)}
+\title{Calculates normalized difference water index (NDWI)}
 \usage{
 varNDWI(green, nir)
 }
@@ -18,7 +18,9 @@ NDWI in \code{raster} format
 \code{varNDWI} computes the NDWI index from green and nir bands.
 }
 \details{
-NDWI is used to monitor changes related to water content in water bodies, using green and NIR bands.
+The Normalized Difference Water Index (NDWI) is a ratio between bands of the spectrum 
+that was developed to detect open water areas and minimize the influence of the soil 
+and vegetation variations.
 This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }

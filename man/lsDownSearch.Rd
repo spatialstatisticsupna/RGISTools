@@ -9,28 +9,28 @@ lsDownSearch(searchres, username = NULL, password = NULL,
   untar = FALSE, ...)
 }
 \arguments{
-\item{searchres}{the results from \code{ls7Search} or \code{ls8Search}}
+\item{searchres}{the results from \code{ls7Search} or \code{ls8Search}.}
 
-\item{username}{login credentials to access the USGS EROS web service}
+\item{username}{login credentials to access the USGS EROS web service.}
 
-\item{password}{login credentials to access the USGS EROS web service}
+\item{password}{login credentials to access the USGS EROS web service.}
 
-\item{cookies.file}{File path for saving the cookies that are used in the download process}
+\item{cookies.file}{File path for saving the cookies that are used in the download process.}
 
-\item{verbose}{Flag for debugging mode}
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{raw.rm}{Flag for removing the raw images}
+\item{raw.rm}{logical argument. If \code{TRUE} removes the raw images.}
 
-\item{untar}{Flag for untaring downloaded images}
+\item{untar}{logical argument. If \code{TRUE} untars downloaded images.}
 
-\item{...}{argument for function nestering and/or
+\item{...}{argument for function nestering accepts:
 \itemize{
-  \item \code{AppRoot}  Root directory where the images will be saved
+  \item \code{AppRoot} the directory to save the downloaded images.
 }}
 }
 \description{
 \code{lsDownSearch} downloads the list of images provided by \code{ls7Search} and \code{ls8Search} functions.
-The images are saved as ‘.tiff’ files in the AppRoot directory..
+The images are saved as ‘.tiff’ files in the AppRoot directory.
 }
 \details{
 This function is used for download landsat images. Uses the data frame result from  any landsat

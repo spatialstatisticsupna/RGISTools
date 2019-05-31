@@ -7,18 +7,18 @@
 senPreview(searchres, username, password, n, size = NULL)
 }
 \arguments{
-\item{searchres}{a data frame with  the results from a search of Landsat images provided by the function senSearch}
+\item{searchres}{a data frame with  the results from a search of Landsat images provided by the function senSearch.}
 
-\item{username}{Scihub username}
+\item{username}{Scihub username.}
 
-\item{password}{Scihub password}
+\item{password}{Scihub password.}
 
-\item{n}{a number with the row corresponding to the image of interest in the search data frame}
+\item{n}{a number with the row corresponding to the image of interest in the search data frame.}
 
-\item{size}{a number specifying the size of the preview to be displayed. The number determines pixels numbe}
+\item{size}{a number specifying the size of the preview to be displayed. The number determines pixels number.}
 }
 \description{
-\code{senPreview} shows a preview of the n image from a set of search results
+\code{senPreview} shows a preview of the n image from a set of search results.
 }
 \details{
 The functions shows a preview of an image resulting from a search in Scihub platform.

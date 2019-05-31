@@ -1,14 +1,15 @@
-#' calculates soil-adjusted vegetation index (SAVI) from raster bands
+#' Calculates soil-adjusted vegetation index (SAVI) from raster bands
 #'
 #' \code{varSAVI} computes the the SAVI index from red and nir bands.
 #'
-#' The index minimized the soil brightness influences from spectral
-#' vegetation indices using red and near-infrared (NIR) wavelengths. This function is used within
+#' The Soil Adjusted Vegetation Index (SAVI) is a vegetation index engineered to remove 
+#' the influence of the soil background effect.  
+#' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'
-#' @param red the red band of the capture in \code{raster} format
-#' @param nir the nir band of the capture in \code{raster} format
-#' @param L value of 0.5 in reflectance space was found to minimize soil brightness variations
+#' @param red the red band of the capture in \code{raster} format.
+#' @param nir the nir band of the capture in \code{raster} format.
+#' @param L value of 0.5 in reflectance space was found to minimize soil brightness variations.
 #'
 #' @return SAVI in \code{raster} format
 #'

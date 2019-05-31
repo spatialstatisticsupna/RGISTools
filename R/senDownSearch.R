@@ -1,6 +1,6 @@
 #' Downloads Sentinel images from search function response
 #'
-#' \code{senDownSearch} downloads the list of urls generated y the function senSearch by using the ESA’s SciHub API
+#' \code{senDownSearch} downloads the list of urls generated y the function senSearch by using the ESA’s SciHub API.
 #'
 #' \code{senDownSearch} downloads the images from Sentinel products using the search results provided by \code{\link{senSearch}}.
 #'  The raw images are downloaded into the Aproot directory. In case the download is interrupted,
@@ -8,18 +8,18 @@
 #'  To prevent the computer from crashing, the nattempts  flag limits the number of attempts to download the image.
 #'  The default number of attempts is set to 3.
 #' senDownload requires the credentials to access the ESA’s SciHub data service. Please,
-#' sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}
+#' sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}.
 #'
-#' @param searchres response from \code{senSearch}
-#' @param username login credentials to access the ESA’s SciHub web service
-#' @param password login credentials to access the ESA’s SciHub web service
-#' @param unzip flag for unzipping the images
-#' @param overwrite flag for overwriting the resulting the images
+#' @param searchres response from \code{senSearch}.
+#' @param username login credentials to access the ESA’s SciHub web service.
+#' @param password login credentials to access the ESA’s SciHub web service.
+#' @param unzip logical argument. If \code{TRUE} unzips the images
+#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param nattempts the number of attempts that the function has to carry out to download an image in case the file becomes corrupted.
-#' @param error.log error log file name
-#' @param ... argument to allow function nestering
+#' @param error.log the name of the error log.
+#' @param ... argument to allow function nestering.
 #' \itemize{
-#'   \item \code{AppRoot} the directory to save the resulting time series
+#'   \item \code{AppRoot} the directory to save the resulting time series.
 #' }
 #'
 #' @examples
@@ -51,16 +51,16 @@ senDownSearch<-function(searchres,
                         password,
                         error.log = "download_error.log",
                         nattempts = NULL,
-                        unzip=F,
-                        overwrite=F,
+                        unzip=FALSE,
+                        overwrite=FALSE,
                         ...){
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
   downFolder<-file.path(AppRoot,"/raw")
-  dir.create(downFolder,recursive=T,showWarnings = F)
+  dir.create(downFolder,recursive=T,showWarnings = FALSE)
   if(unzip){
     unzipFolder<-file.path(AppRoot,"/unzip")
-    dir.create(unzipFolder,recursive=T,showWarnings = F)
+    dir.create(unzipFolder,recursive=T,showWarnings = FALSE)
   }
 
   for(i in 1:length(searchres)){
@@ -80,7 +80,7 @@ senDownSearch<-function(searchres,
       curl_download(image.url, destfile=downPath,handle = c.handle)
 
       #md5 check
-      md5.url<-paste0(gsub("$value","",url,fixed = T),"Checksum/Value/$value")
+      md5.url<-paste0(gsub("$value","",url,fixed = TRUE),"Checksum/Value/$value")
       print(md5.url)
       repeat{
         response<-curl(md5.url,handle =c.handle)
@@ -109,7 +109,7 @@ senDownSearch<-function(searchres,
     }, error = function(e) {
       print(paste0("ERROR:",e))
       close(file)
-      cat(file.name,file=error.log,sep="\n",append = T)
+      cat(file.name,file=error.log,sep="\n",append = TRUE)
       file.remove(downPath)
       senDownSearch(username,password,url,file.path,error.log,AppRoot=AppRoot,nattempts +1)
     }, finally = {

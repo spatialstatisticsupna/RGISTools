@@ -2,26 +2,26 @@
 % Please edit documentation in R/varEVI.R
 \name{varEVI}
 \alias{varEVI}
-\title{calculates the enhanced vegetation index (EVI) from raster bands}
+\title{Calculates the enhanced vegetation index (EVI) from raster bands}
 \usage{
 varEVI(blue, red, nir)
 }
 \arguments{
-\item{blue}{the blue band of the capture in \code{raster} format}
+\item{blue}{the blue band of the capture in \code{raster} format.}
 
-\item{red}{the red band of the capture in \code{raster} format}
+\item{red}{the red band of the capture in \code{raster} format.}
 
-\item{nir}{the nir band of the capture in \code{raster} format}
+\item{nir}{the nir band of the capture in \code{raster} format.}
 }
 \value{
-EVI in \code{raster} format
+EVI in \code{raster} format.
 }
 \description{
 \code{varEVI} computes the the EVI index from blue, nir and red bands.
 }
 \details{
-The enhanced vegetation index (EVI) is an 'optimized' vegetation index designed to enhance the
-vegetation signal with improved sensitivity in high biomass.
+The Enhanced Vegetation Index (EVI) is a vegetation indicator that improves sensitivity 
+towards high biomass densities compared to NDVI.
 This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }

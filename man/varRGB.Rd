@@ -7,17 +7,17 @@
 varRGB(red, green, blue, range = c(), rPath = NULL, cutline = NULL)
 }
 \arguments{
-\item{red}{the red band of the capture in \code{raster} format}
+\item{red}{the red band of the capture in \code{raster} format.}
 
-\item{green}{the green band of the capture in \code{raster} format}
+\item{green}{the green band of the capture in \code{raster} format.}
 
-\item{blue}{the blue band of the capture in \code{raster} format}
+\item{blue}{the blue band of the capture in \code{raster} format.}
 
-\item{range}{a vector with the minimum and maximum reflectance quantiles being considered}
+\item{range}{a vector with the minimum and maximum reflectance quantiles being considered.}
 
-\item{rPath}{file path were resulting RGB image is saved}
+\item{rPath}{file path were resulting RGB image is saved.}
 
-\item{cutline}{\code{SpatialPolygonsDataFrame} for cutting the image by a region}
+\item{cutline}{\code{SpatialPolygonsDataFrame} for cutting the image by a region.}
 }
 \description{
 \code{varRGB} creates RGB raster stack in scaling the range of the images to 0-255 color range.

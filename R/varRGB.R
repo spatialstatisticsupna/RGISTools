@@ -8,12 +8,12 @@
 #' argument to remove the outliers and get a better-looking image.
 #'
 #'
-#' @param red the red band of the capture in \code{raster} format
-#' @param green the green band of the capture in \code{raster} format
-#' @param blue the blue band of the capture in \code{raster} format
-#' @param range a vector with the minimum and maximum reflectance quantiles being considered
-#' @param rPath file path were resulting RGB image is saved
-#' @param cutline \code{SpatialPolygonsDataFrame} for cutting the image by a region
+#' @param red the red band of the capture in \code{raster} format.
+#' @param green the green band of the capture in \code{raster} format.
+#' @param blue the blue band of the capture in \code{raster} format.
+#' @param range a vector with the minimum and maximum reflectance quantiles being considered.
+#' @param rPath file path were resulting RGB image is saved.
+#' @param cutline \code{SpatialPolygonsDataFrame} for cutting the image by a region.
 #'
 #' @examples
 #' # dir path of cropped and cutted modis image in the region of navarre as example

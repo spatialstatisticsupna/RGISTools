@@ -2,7 +2,7 @@
 % Please edit documentation in R/lsRemoveMetadata.R
 \name{lsRemoveMetadata}
 \alias{lsRemoveMetadata}
-\title{removes from R environment LS7 and LS8 metadata files}
+\title{Removes from R environment LS7 and LS8 metadata files}
 \usage{
 lsRemoveMetadata()
 }

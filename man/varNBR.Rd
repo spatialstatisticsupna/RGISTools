@@ -2,7 +2,7 @@
 % Please edit documentation in R/varNBR.R
 \name{varNBR}
 \alias{varNBR}
-\title{calculates normalized burn ratio (NBR)}
+\title{Calculates normalized burn ratio (NBR)}
 \usage{
 varNBR(nir, swir2)
 }
@@ -18,7 +18,8 @@ NBR in \code{raster} format
 \code{varNBR} computes the NBR index from nir and swir2 bands.
 }
 \details{
-NBR is used to monitor areas that have burned, using nir and swir2 bands.
+The Normalized Burn Ratio (NBR) is an index to identify burned areas by 
+comparing its value before and after the fire event. Is calculated using nir and swir2 bands.
 This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }

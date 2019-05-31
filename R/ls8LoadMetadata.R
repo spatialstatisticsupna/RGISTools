@@ -1,10 +1,10 @@
-#' Sinchronizes landsat 8 meta data file, for image search.
+#' Sinchronizes landsat 8 meta data file, for image search
 #'
 #' \code{ls8MetaDataFile} loads a data frame called \code{.LS8MD}
 #'  with the names of the Landsat-8 images and their metadata.The metadata provides
 #'  auxiliary information regarding Landsat-8 images repository such as image quality, acquisition
 #'  data, cloud cover, etc. You can find a description of the metadata at
-#'  \url{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}
+#'  \url{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}.
 #'
 #' All captures done by Landsat-8 are cataloged in a unique csv file. The size of the file
 #' might be larger than 210MB. Therefore, the process of downloading and importing to R may take several
@@ -14,12 +14,12 @@
 #' time of metadata in the future.
 #'
 #'
-#' @param update TRUE/FALSE argument to force update of metadata file
-#' @param verbose TRUE/FALSE argument to print all steps of metadata download process
-#' @param omit.question omit the question for ensure the loading of the metadata
+#' @param update logical argument. If \code{TRUE} is mandatory to update the metadata file.
+#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param omit.question logical argument. If \code{TRUE} omits the question for ensuring the loading of the metadata file.
 #' @param ... argument to allow function nestering
 #' \itemize{
-#'   \item \code{AppRoot} the directory where the metadata will be saved
+#'   \item \code{AppRoot} the directory where the metadata will be saved.
 #' }
 #'
 #' @examples
@@ -33,7 +33,7 @@
 #' Force renew existing meta data csv
 #' ls8LoadMetadata(update=TRUE)
 #' }
-ls8LoadMetadata<-function(update=F,verbose=T,omit.question=F,...){
+ls8LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=FALSE,...){
   stopifnot(class(update)=="logical")
   #define AppRoot
 

@@ -8,19 +8,19 @@ genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
   endDate = NULL, recursive = F, ...)
 }
 \arguments{
-\item{src}{path to the folder where the time series of images is located}
+\item{src}{path to the folder where the time series of images is located.}
 
-\item{ts.name}{the name of the variable containing the time series in R}
+\item{ts.name}{the name of the variable containing the time series in R.}
 
-\item{startDate}{the starting date of the time series}
+\item{startDate}{the starting date of the time series.}
 
-\item{endDate}{the ending date of the time series}
+\item{endDate}{the ending date of the time series.}
 
-\item{recursive}{a flag to read folders recursively}
+\item{recursive}{logical argument. If \code{TRUE} reads folders recursively.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering.
 \itemize{
-  \item \code{AppRoot} the path where the RData will be saved
+  \item \code{AppRoot} the path where the RData will be saved.
 }}
 }
 \description{

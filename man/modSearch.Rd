@@ -2,48 +2,48 @@
 % Please edit documentation in R/modSearch.R
 \name{modSearch}
 \alias{modSearch}
-\title{Search MODIS Images on the NASA Common Metadata Repository}
+\title{Search Modis Images on the NASA Common Metadata Repository}
 \usage{
 modSearch(product, startDate, endDate, collection = 6, resType = "url",
-  verbose = F, ...)
+  verbose = FALSE, ...)
 }
 \arguments{
-\item{product}{the short name of the MODIS product}
+\item{product}{the short name of the Modis product.}
 
-\item{startDate}{Starting date of the time series of relevant images}
+\item{startDate}{starting date of the time series of relevant images.}
 
-\item{endDate}{Ending data of the time series of relevant  images}
+\item{endDate}{ending data of the time series of relevant  images.}
 
-\item{collection}{MODIS collection}
+\item{collection}{Modis collection.}
 
 \item{resType}{response type of the query (browseurl or url), by default the url where the images are located.}
 
-\item{verbose}{if \code{TRUE} prints statements of completion for each subtask}
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering:
 \itemize{
-  \item \code{latlon} A vector or a polygon with the coordinates of
+  \item \code{latlon} a vector or a polygon with the coordinates of
 the point or region of interest in latitude/longitude format.
 This argument is mandatory if polygon or extent is not defined.
   \item \code{extent} Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints* object are acceptable formats
 as long as coordinates are in latitude/longitude format.
 This argument is mandatory if polygon or latlon is not defined.
-  \item \code{polygon} A list of vectors defining the points of the polygon in latitude/longitude format
+  \item \code{polygon} a list of vectors defining the points of the polygon in latitude/longitude format
 This argument is mandatory if latlon or extent is not defined.
-  \item \code{AppRoot} the directory to save the resulting time series
+  \item \code{AppRoot} the directory to save the resulting time series.
 }}
 }
 \description{
-\code{modSearch} searches the MODIS products on the  NASA Common Metadata
+\code{modSearch} searches the Modis products on the  NASA Common Metadata
 Repository to find those which are relevant for a particular location and date interval.
 The function returns the search result as an array of urls with the relevant images.
 }
 \details{
 \code{modSearch} NASA Common Metadata Repository (CMR) powered api \url{https://lpdaacsvc.cr.usgs.gov/services/inventory}
-The catalogue of  MODIS products with their short names and other
+The catalogue of  Modis products with their short names and other
 information can be found at: \url{https://modis.gsfc.nasa.gov/data/dataprod/}
-For further information on collections, please visit MODIS website at: \url{https://modis-atmos.gsfc.nasa.gov/collections/overview}
-By the time the RGISTools package is released, NASA carries out the maintenance of the MODIS website on Wednesdays. Therefore, an error
+For further information on collections, please visit Modis website at: \url{https://modis-atmos.gsfc.nasa.gov/collections/overview}
+By the time the RGISTools package is released, NASA carries out the maintenance of the Modis website on Wednesdays. Therefore, an error
 may occur when trying to connect with their server during this day of the week.
 }
 \examples{
@@ -58,7 +58,7 @@ img.list<-modSearch(product="MYD13A2",
                     extent=ex.navarre)
                     # Area of interest: defined based on longitude-latitude extent
 # Searching MODIS MYD13A2 images in the whole 2010 by latitude and longitude
-using a extent class variable defined by the user
+# using a extent class variable defined by the user
 aoi = extent(c(-2.49,-0.72,41.91,43.31))
 my.imgs<-modSearch(product="MYD13A2",
                    startDate=as.Date("01-01-2010","\%d-\%m-\%Y"),

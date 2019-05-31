@@ -1,15 +1,15 @@
 #' Subsets a raster stack given a range of dates
 #'
-#' \code{genFilterStack} filters the raster layers within a range of dates
+#' \code{genFilterStack} filters the raster layers within a range of dates.
 #'
 #' This is a helper function used by other functions in this package.
 #'
-#' @param r the raster stack to be filtered
-#' @param ... argument to allow function nestering
+#' @param r the raster stack to be filtered.
+#' @param ... argument to allow function nestering.
 #' \itemize{
-#'   \item \code{startDate} the starting date of the range of interest
-#'   \item \code{endDate} the ending date of the range of interest
-#'   \item \code{AppRoot} the path where the RData will be saved
+#'   \item \code{startDate} the starting date of the range of interest.
+#'   \item \code{endDate} the ending date of the range of interest.
+#'   \item \code{AppRoot} the path where the RData will be saved.
 #' }
 #' 
 #' @examples

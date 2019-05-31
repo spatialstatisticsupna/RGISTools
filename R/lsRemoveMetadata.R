@@ -1,4 +1,4 @@
-#' removes from R environment LS7 and LS8 metadata files
+#' Removes from R environment LS7 and LS8 metadata files
 #'
 #' \code{lsRemoveMetadata} frees the memory used by metadata data frame loaded in R enviroment.
 #'

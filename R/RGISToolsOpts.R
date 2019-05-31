@@ -57,7 +57,9 @@ assign("SEN3BANDS",NULL, env=optEnv)
 
 
 
-#' changes the default value of an RGISTools option
+#' Changes the default value of an RGISTools option
+#'
+#' \code{setRGISToolsOpt} changes the default value of an RGISTools option.
 #'
 #' @param opt the name of the option to change in character format
 #' @param value the new value of selected option
@@ -71,10 +73,12 @@ setRGISToolsOpt <- function(opt,value,env=optEnv) {
   assign(opt, value, envir=env)
 }
 
-#' gets the current value of an RGISTools option
+#' Gets the current value of an RGISTools option
 #'
-#' @param opt the name of the option to get
-#' @param env the environment where the RGISTools option are saved
+#' \code{getRGISToolsOpt} gets the current value of an RGISTools option.
+#'
+#' @param opt the name of the option to get.
+#' @param env the environment where the RGISTools option are saved.
 #'
 #' @examples
 #' getRGISToolsOpt("SEN2BANDS")
@@ -83,9 +87,11 @@ getRGISToolsOpt <- function(opt,env=optEnv) {
   return(get(opt, envir=env))
 }
 
-#' prints the name of all options in RGISTools package
+#' Prints the name of all options in RGISTools package
+#' 
+#'\code{showRGISToolsOpt} prints the name of all options in RGISTools package.
 #'
-#' @param env the environment where the RGISTools option are saved
+#' @param env the environment where the RGISTools option are saved.
 #' @examples
 #' showRGISToolsOpt()
 showRGISToolsOpt<-function(env=optEnv){

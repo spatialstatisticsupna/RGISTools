@@ -7,18 +7,19 @@
 genPlotGIS(r, region = NULL, ...)
 }
 \arguments{
-\item{r}{\code{raster} class variable with the image or image stack to be plotted}
+\item{r}{\code{raster} class variable with the image or image stack to be plotted.}
 
-\item{region}{a \code{polygon} class variable defining the area of interest}
+\item{region}{a \code{polygon} class variable defining the area of interest.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering.
 \itemize{
-  \item \code{...} any argument accepted by the \code{spplot} function
-  \item \code{compOpt} option to fit the size and the location of the GIS components as the arrow and the scales
+  \item \code{compOpt} list to fit the size and the location of the GIS components as the arrow and the scales.
+  \item any argument accepted by the \code{spplot} function.
 }}
 }
 \description{
-This function helps displaying satellite images with usual GIS information, such as scale, the north arrow and the region of interest
+This function helps displaying satellite images with usual GIS information, 
+such as scale, the north arrow and the region of interest.
 }
 \details{
 The function plots any raster type class as, \code{raster}, \code{RasterStack} or \code{RasterBrick}.

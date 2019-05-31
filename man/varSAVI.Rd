@@ -2,16 +2,16 @@
 % Please edit documentation in R/varSAVI.R
 \name{varSAVI}
 \alias{varSAVI}
-\title{calculates soil-adjusted vegetation index (SAVI) from raster bands}
+\title{Calculates soil-adjusted vegetation index (SAVI) from raster bands}
 \usage{
 varSAVI(red, nir, L = 0.5)
 }
 \arguments{
-\item{red}{the red band of the capture in \code{raster} format}
+\item{red}{the red band of the capture in \code{raster} format.}
 
-\item{nir}{the nir band of the capture in \code{raster} format}
+\item{nir}{the nir band of the capture in \code{raster} format.}
 
-\item{L}{value of 0.5 in reflectance space was found to minimize soil brightness variations}
+\item{L}{value of 0.5 in reflectance space was found to minimize soil brightness variations.}
 }
 \value{
 SAVI in \code{raster} format
@@ -20,8 +20,9 @@ SAVI in \code{raster} format
 \code{varSAVI} computes the the SAVI index from red and nir bands.
 }
 \details{
-The index minimized the soil brightness influences from spectral
-vegetation indices using red and near-infrared (NIR) wavelengths. This function is used within
+The Soil Adjusted Vegetation Index (SAVI) is a vegetation index engineered to remove 
+the influence of the soil background effect.  
+This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }
 \examples{

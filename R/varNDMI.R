@@ -1,8 +1,9 @@
-#' calculates normalized difference moisture (water) index (NDMI)
+#' Calculates normalized difference moisture (water) index (NDMI)
 #'
 #' \code{varNDMI} computes the NDMI index from nir and swir1 bands.
 #'
-#' NDMI used to monitor changes in water content of leaves, using near-infrared (NIR) and short-wave infrared (SWIR).
+#' The Normalized Difference Moisture Index (NDMI) is an index that represents the water 
+#' stress levels of the canopy, using near-infrared (NIR) and short-wave infrared (SWIR).
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'

@@ -4,24 +4,26 @@
 \alias{genCompositions}
 \title{Creates image compositions from a time series of satellite images}
 \usage{
-genCompositions(rstack, n.days, fun, by.periods = F, ...)
+genCompositions(rstack, n.days, fun, by.periods = FALSE, ...)
 }
 \arguments{
-\item{rstack}{a \code{RasterStack} where every layer is named after the date it was captured in \%Y\%j format}
+\item{rstack}{a \code{RasterStack} where every layer is named after the 
+date it was captured in julian format as "\code{YYYYJJJ}".}
 
-\item{n.days}{number of days considered in the temporal window}
+\item{n.days}{number of days considered in the temporal window.}
 
 \item{fun}{the function used to create the composite, such as \code{max}, \code{min}, \code{mean}, ...}
 
-\item{by.periods}{flag to specify the number of images to aggregate instead a temporal window}
+\item{by.periods}{logical argument. If \code{TRUE} the function will aggregate.
+\code{n.days} periods instead of use \code{n.days} temporal window.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering.
 \itemize{
-  \item \code{AppRoot} the path where the images will be saved in tif image format
+  \item \code{AppRoot} the path where the images will be saved in tif image format.
 }}
 }
 \description{
-\code{genCompositions} combines satellite images over a temporal window to create composites
+\code{genCompositions} combines satellite images over a temporal window to create composites.
 }
 \details{
 This function supports temporal aggregations with different function specifying \code{fun} argument.
@@ -33,7 +35,7 @@ techniques is the Maximum Value Composition (\code{MVC}). The \code{MVC} applied
 images of remote sensing indices. Clouds and outliers usually appear as
 very low values the index. Hence, the \code{MVC} builds a composite using the
 maximum value a pixel over a period of time. Write \code{fun = max} to use the
-\code{MVC} technique. Other functions are also supported
+\code{MVC} technique. Other functions are also supported.
 }
 \examples{
 # load a time series of NDVI images over Navarre

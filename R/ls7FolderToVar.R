@@ -9,16 +9,17 @@
 #' the variable of interest using any of the functions in the packages starting with \code{var} (\code{\link{varNDVI}},
 #'  \code{\link{varEVI}}, ...)
 #'
-#' @param src path to the folder with the Landsat multispectral image
+#' @param src path to the folder with the Landsat multispectral image.
 #' @param fun is a function with the calculation of the index.
 #' All functions in the package starting with three characters
 #' 'var' are acceptable functions. Custom functions can be also
 #' implemented \code{var} are acceptable functions.
-#' @param getStack if \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD)
-#' @param overwrite flag to overwrite the existing images with the same name
-#' @param ... argument to allow function nestering
+#' @param getStack logical argument. If \code{TRUE}, returns the time-series as a 
+#' raster or otherwise as Hard Drive Devide (HDD).
+#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
+#' @param ... argument to allow function nestering.
 #' \itemize{
-#'   \item \code{AppRoot} the directory of the resulting time series
+#'   \item \code{AppRoot} the directory of the resulting time series.
 #' }
 #'
 #' @examples
@@ -50,22 +51,22 @@
 #'                AppRoot=file.path(dirname(src)),
 #'                overwrite = T)
 #' }
-ls7FolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
+ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   AppRoot=defineAppRoot(...)
   if(!getStack){
     vartype<-gsub("var","",as.character(match.call()[c("fun")]))
     AppRoot<-file.path(AppRoot,vartype)
-    dir.create(AppRoot,showWarnings = F,recursive=T)
+    dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
     print(vartype)
   }
 
-  ls.list<-list.files(src,full.names = T)
+  ls.list<-list.files(src,full.names = TRUE)
   rstack<-stack()
   result<-raster()
   for(imgfd in ls.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     ls7bands<-getRGISToolsOpt("LS7BANDS")
-    ls.img<-list.files(imgfd,full.names = T,pattern = "\\.tif$")
+    ls.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
     funString<-"result<-fun("
     for(arg in formalArgs(fun)){
       band<-ls7bands[names(ls7bands)%in%arg]

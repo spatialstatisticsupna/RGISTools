@@ -7,14 +7,14 @@
 modGetPathRow(str)
 }
 \arguments{
-\item{str}{the full path or official image name of the Modis image from which the path and row is extracted}
+\item{str}{the full path or official image name of the Modis image from which the path and row is extracted.}
 }
 \value{
-an string with the path and row of the image in "hXXvYY" format
+an string with the path and row of the image in "hXXvYY" format.
 }
 \description{
 \code{modGetPathRow} reads the official name of a modis image and returns the path and row data
-as Modis name convention of horizontal and vertical "hXXvYY"
+as Modis name convention of horizontal and vertical "hXXvYY".
 }
 \examples{
 #example of getting date from Landsat-8 image name

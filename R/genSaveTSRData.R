@@ -8,14 +8,14 @@
 #'  is loaded into the global environment. The name of the raster stack will be the one specified
 #'  in ts.name. The RasterStack is saved into an RData file in the Approot directory.
 #'
-#' @param src path to the folder where the time series of images is located
-#' @param ts.name the name of the variable containing the time series in R
-#' @param startDate the starting date of the time series
-#' @param endDate the ending date of the time series
-#' @param recursive a flag to read folders recursively
-#' @param ... argument to allow function nestering
+#' @param src path to the folder where the time series of images is located.
+#' @param ts.name the name of the variable containing the time series in R.
+#' @param startDate the starting date of the time series.
+#' @param endDate the ending date of the time series.
+#' @param recursive logical argument. If \code{TRUE} reads folders recursively.
+#' @param ... argument to allow function nestering.
 #' \itemize{
-#'   \item \code{AppRoot} the path where the RData will be saved
+#'   \item \code{AppRoot} the path where the RData will be saved.
 #' }
 #'
 #' @examples

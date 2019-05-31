@@ -7,11 +7,11 @@
 modGetDates(str, ...)
 }
 \arguments{
-\item{str}{a string or a list of strings defining the file path(s) or file name(s)}
+\item{str}{a string or a list of strings defining the file path(s) or file name(s).}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering:
 \itemize{
-  \item \code{date.format} modify the format of the date being returned
+  \item \code{date.format} modify the format of the date being returned.
 }}
 }
 \description{
@@ -22,7 +22,7 @@ images, given their file paths or names. The function returns a date class objec
 The function works with names or file paths having either of the two file extensions,
  \code{.hdf} or \code{.tif} files. The function accepts more than on file path or file names.
  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
- If another format is required, it can be modified through the argument date.format.
+ If another format is required, it can be modified through the argument \code{date.format}.
 }
 \examples{
 # example of getting date from Sentinel2 image name

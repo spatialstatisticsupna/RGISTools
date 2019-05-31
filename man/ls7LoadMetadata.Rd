@@ -4,18 +4,19 @@
 \alias{ls7LoadMetadata}
 \title{Sinchronizes landsat 7 meta data file for image search.}
 \usage{
-ls7LoadMetadata(update = F, verbose = T, omit.question = F, ...)
+ls7LoadMetadata(update = FALSE, verbose = TRUE, omit.question = TRUE,
+  ...)
 }
 \arguments{
-\item{update}{TRUE/FALSE argument to force update of metadata file}
+\item{update}{logical argument. If \code{TRUE} is mandatory to update the metadata file.}
 
-\item{verbose}{TRUE/FALSE argument to print all steps of metadata download process}
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{omit.question}{omit the question for ensure the loading of the metadata}
+\item{omit.question}{logical argument. If \code{TRUE} omits the question for ensuring the loading of the metadata file.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering:
 \itemize{
-  \item \code{AppRoot} the directory where the metadata will be saved
+  \item \code{AppRoot} the directory where the metadata will be saved.
 }}
 }
 \description{
@@ -23,7 +24,7 @@ ls7LoadMetadata(update = F, verbose = T, omit.question = F, ...)
  with the names of the Landsat-7 images and their metadata.The metadata provides
  auxiliary information regarding Landsat-7 images repository such as image quality, acquisition
  data, cloud cover, etc. You can find a description of the metadata at
- \url{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}
+ \url{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}.
 }
 \details{
 All captures done by Landsat-7 are cataloged in a unique csv file. The size of the file

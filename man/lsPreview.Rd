@@ -7,11 +7,11 @@
 lsPreview(searchres, n, size = NULL)
 }
 \arguments{
-\item{searchres}{a data frame with  the results from a search of Landsat images provided by the functions ls7Search or ls8Search}
+\item{searchres}{a data frame with  the results from a search of Landsat images provided by the functions ls7Search or ls8Search.}
 
-\item{n}{a number with the row corresponding to the image of interest in the search data frame}
+\item{n}{a number with the row corresponding to the image of interest in the search data frame.}
 
-\item{size}{a number specifying the size of the preview to be displayed. The number determines pixels numbe}
+\item{size}{a number specifying the size of the preview to be displayed. The number determines pixels number.}
 }
 \description{
 \code{lsPreview} shows a preview of the n image from a set of search results

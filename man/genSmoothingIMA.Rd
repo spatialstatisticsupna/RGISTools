@@ -9,29 +9,29 @@ genSmoothingIMA(rStack, cStack, Img2Process = NULL, fun = mean,
   aFilter = c(), snow.mode = FALSE, ...)
 }
 \arguments{
-\item{rStack}{a \code{RasterStack} with time series of satellite images}
+\item{rStack}{a \code{RasterStack} with time series of satellite images.}
 
-\item{cStack}{a \code{RasterStack} with time series of covariates}
+\item{cStack}{a \code{RasterStack} with time series of covariates.}
 
-\item{Img2Process}{a vector defining the images to smooth}
+\item{Img2Process}{a vector defining the images to smooth.}
 
 \item{fun}{a function used to calculate the mean image. Both the \code{mean} or \code{median} functions are acceptable.}
 
-\item{nPeriods}{number of periods used in the temporal window}
+\item{nPeriods}{number of periods used in the temporal window.}
 
-\item{nYears}{number of years used in the temporal window}
+\item{nYears}{number of years used in the temporal window.}
 
-\item{fact}{an aggregation factor to be used to reduce the anomalies before smoothing}
+\item{fact}{an aggregation factor to be used to reduce the anomalies before smoothing.}
 
-\item{out.name}{the name of the images if the result is written in the HDD}
+\item{out.name}{the name of the images if the result is written in the HDD.}
 
-\item{aFilter}{two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95)}
+\item{aFilter}{two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).}
 
-\item{snow.mode}{a flag to use \code{snow} package for parallelizing the reconstruction procedure}
+\item{snow.mode}{logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering.
 \itemize{
-  \item \code{AppRoot} the path where the images will be saved in tif format
+  \item \code{AppRoot} the path where the images will be saved in tif format.
 }}
 }
 \description{

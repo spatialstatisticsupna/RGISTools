@@ -1,9 +1,9 @@
-#' calculates normalized burn ratio 2 (NBR2)
+#' Calculates normalized burn ratio 2 (NBR2)
 #'
 #' \code{varNBR2} computes the NBR2 index from swir1 and swir2 bands.
 #'
-#' NBR2 is used to monitor areas that have burned but highlightint the
-#' sensitivity to water in vegetation using swir1 instead of nir.
+#' The Normalized Burn Ratio 2 (NRB) is an index to identify burned areas. 
+#' In contrast to NBR highlight the sensitivity to water in vegetation.
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'

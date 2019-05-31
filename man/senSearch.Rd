@@ -7,21 +7,21 @@
 senSearch(username, password, ...)
 }
 \arguments{
-\item{username}{Scihub username}
+\item{username}{Scihub username.}
 
-\item{password}{Scihub password}
+\item{password}{Scihub password.}
 
-\item{...}{argument to allow function nestering
+\item{...}{argument to allow function nestering:
 \itemize{
-  \item \code{product} Sentinel product type
-  \item \code{startDate} Starting date of time series
-  \item \code{endDate} Ending date of time series
-  \item \code{extent} Location as projecte file with extention
-  \item \code{platform} platform name of the Sentinel mission (Sentine-1, Sentinel-2,...)
+  \item \code{product} Sentinel product type.
+  \item \code{startDate} starting date of time series.
+  \item \code{endDate} ending date of time series.
+  \item \code{extent} location as projecte file with extention.
+  \item \code{platform} platform name of the Sentinel mission (Sentine-1, Sentinel-2,...).
   \item \code{qformat} format of response
-  \item \code{verbose} Debugging flag
-  \item \code{error.log} error log file name
-  \item \code{AppRoot} the directory where the images will be saved
+  \item \code{verbose} logical argument. If \code{TRUE} the function prints running stages and warnings.
+  \item \code{error.log} the name of the error log file.
+  \item \code{AppRoot} the directory where the images will be saved.
 }}
 }
 \description{
@@ -37,7 +37,7 @@ Credentials from ESA’s SciHub are needed to use this function.
 Please, sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}
 
 For further information on ESA’s missions and data products, please visit:
-\url{https://sentinel.esa.int/web/sentinel/missions}
+\url{https://sentinel.esa.int/web/sentinel/missions}.
 }
 \examples{
 \dontrun{

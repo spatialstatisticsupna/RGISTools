@@ -2,7 +2,7 @@
 % Please edit documentation in R/varNDVI.R
 \name{varNDVI}
 \alias{varNDVI}
-\title{calculates the normalized difference vegetation index (NDVI) from raster bands}
+\title{Calculates the normalized difference vegetation index (NDVI) from raster bands}
 \usage{
 varNDVI(red, nir)
 }

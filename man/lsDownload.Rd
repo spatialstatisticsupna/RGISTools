@@ -8,28 +8,32 @@ lsDownload(satellite, startDate, endDate, username, password,
   verbose = FALSE, untar = TRUE, raw.rm = FALSE, ...)
 }
 \arguments{
-\item{satellite}{string containing the type of satellite for downloading (\code{"ls7"} or \code{"ls8"})}
+\item{satellite}{string containing the type of satellite for downloading (\code{"ls7"} or \code{"ls8"}).}
 
-\item{startDate}{starting date of the time series for search images}
+\item{startDate}{starting date of the time series for search images.}
 
-\item{endDate}{ending date of the time series for search images}
+\item{endDate}{ending date of the time series for search images.}
 
-\item{username}{login credentials to access the USGS EROS web service}
+\item{username}{login credentials to access the USGS EROS web service.}
 
-\item{password}{login credentials to access the USGS EROS web service}
+\item{password}{login credentials to access the USGS EROS web service.}
 
-\item{verbose}{Flag for debugging mode}
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{untar}{Flag for untaring downloaded images}
+\item{untar}{logical argument. If \code{TRUE} untars downloaded images.}
 
-\item{raw.rm}{Flag for removing the raw images}
+\item{raw.rm}{logical argument. If \code{TRUE} removes the raw images.}
 
-\item{...}{any argument for function nestering including all \code{ls8Search/ls7Search} or \code{lsDownSearch}
-function arguments}
+\item{...}{argument for function nestering accepts:
+ \itemize{
+  \item any argument for function nestering including all \code{ls8Search/ls7Search} or \code{lsDownSearch}
+function arguments.
+  \item \code{AppRoot} the directory to save the downloaded images.
+}}
 }
 \description{
 \code{lsDownSearch} downloads the list of images provided by \code{ls7Search} and \code{ls8Search} functions.
-The images are saved as ‘.tiff’ files in the AppRoot directory..
+The images are saved as ‘.tiff’ files in the AppRoot directory.
 }
 \details{
 This function is used for searching and downloading landsat images. The function uses landsat

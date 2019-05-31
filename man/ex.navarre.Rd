@@ -3,12 +3,12 @@
 \docType{data}
 \name{ex.navarre}
 \alias{ex.navarre}
-\title{Geographically projected spatial polygon of the region of Navarre in Spain}
+\title{Geographically projected spatial polygon of the region of Navarre in Spain to use in examples}
 \format{An object of class \code{SpatialPolygonsDataFrame} with 1 rows and 3 columns.}
 \usage{
 ex.navarre
 }
 \description{
-\code{SpatialPolygonsDataFrame} containing the region of Navarre projected in latitude/longitude
+\code{SpatialPolygonsDataFrame} containing the region of Navarre projected in latitude/longitude.
 }
 \keyword{datasets}

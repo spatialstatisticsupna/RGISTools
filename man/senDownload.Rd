@@ -13,15 +13,15 @@ senDownload(username, password, ...)
 
 \item{...}{argument to allow function nestering
 \itemize{
-  \item \code{product} Sentinel product type
-  \item \code{startDate} Starting date of time series
-  \item \code{endDate} Ending date of time series
-  \item \code{extent} Location as projecte file with extention
-  \item \code{platform} platform name of the Sentinel mission (Sentine-1, Sentinel-2,...)
-  \item \code{nattempts} the number of attempts that the function has to carry out
+  \item \code{product} Sentinel product type.
+  \item \code{startDate} starting date of time series.
+  \item \code{endDate} ending date of time series.
+  \item \code{extent} location as projecte file with extention.
+  \item \code{platform} platform name of the Sentinel mission (Sentine-1, Sentinel-2,...).
+  \item \code{nattempts} the number of attempts that the function has to carry out.
   to download an image in case the file becomes corrupted.
-  \item \code{error.log} error log file name
-  \item \code{AppRoot} the directory where the images will be saved
+  \item \code{error.log} error log file name.
+  \item \code{AppRoot} the directory where the images will be saved.
 }}
 }
 \description{

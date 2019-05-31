@@ -1,4 +1,4 @@
-#' Search landsat 7 time-series images list.
+#' Search landsat 7 time-series images list
 #'
 #' \code{ls7Search} searches the LANDSAT 7 image repository to find those which are relevant for
 #' a particular location and date interval. The function returns the search result as a data frame
@@ -43,22 +43,22 @@
 #' filter the images that can be previewed, the user has to find the images with a “Y” in the browseAvaliable column.
 #' This can be achieved by adding \code{browseAvaliable=”Y”} as a function argument.
 #'
-#' @param startDate Starting date of the time series for search images
-#' @param endDate Ending date of the time series for search images
-#' @param verbose Debbug Flag
-#' @param precise Flag for fast search NOT ALLOWED YET
-#' @param ... Argument for function nestering accepts:
+#' @param startDate starting date of the time series for search images.
+#' @param endDate ending date of the time series for search images.
+#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param precise logical argument. If \code{TRUE} the search is donw tile by tile (slower).
+#' @param ... argument to allow function nestering:
 #'  \itemize{
-#'   \item \code{pathrow} A list of vectors defining the path and row number for the region of interest according
+#'   \item \code{pathrow} a list of vectors defining the path and row number for the region of interest according
 #' to the Worldwide Reference System (\url{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/})
 #' This argument is mandatory if extent is not defined.
-#'   \item \code{latlon} This flag is optional. A vector or a polygon with the coordinates of
+#'   \item \code{latlon} this argument is optional. A vector or a polygon with the coordinates of
 #' the point or region of interest in latitude/longitude format.
-#'   \item \code{extent} This flag is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
+#'   \item \code{extent} this argument is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
 #' object are acceptable formats as long as are latitude/longitude format.
 #' This argument is mandatory if pathrow is not defined.
-#'   \item \code{AppRoot} the root directory where meta data file will be saved,
-#'   \item All column names in .LS7MD data frame for filter results
+#'   \item \code{AppRoot} the root directory where meta data file will be saved.
+#'   \item all column names in .LS7MD data frame for filter results.
 #' }
 #'
 #' @examples
@@ -84,7 +84,7 @@
 #'                   precise=F,
 #'                   browseAvaliable="Y")
 #' }
-ls7Search<-function(startDate,endDate,verbose=F,precise=F,...){
+ls7Search<-function(startDate,endDate,verbose=FALSE,precise=FALSE,...){
   stopifnot(class(startDate)=="Date")
   stopifnot(class(endDate)=="Date")
   arg<-list(...)

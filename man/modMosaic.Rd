@@ -4,33 +4,33 @@
 \alias{modMosaic}
 \title{Mosaics a set of MODIS images}
 \usage{
-modMosaic(src, extent = NULL, out.name = "outfile", verbose = F,
-  gutils = F, overwrite = F, ...)
+modMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
+  gutils = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
-\item{src}{the path of the folder with the MODIS images in tif format}
+\item{src}{the path of the folder with the MODIS images in tif format.}
 
-\item{extent}{spatial polygon object representing the region of interest}
+\item{extent}{spatial polygon object representing the region of interest.}
 
-\item{out.name}{the name of the region, if is not defined "outfile" will be asigned}
+\item{out.name}{the name of the region, if is not defined "outfile" will be asigned.}
 
-\item{verbose}{flag for debugging}
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{gutils}{a boolean flag to use GDAL utilities for mosaicking}
+\item{gutils}{logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking.}
 
-\item{overwrite}{a boolean flag to overwrite the existing merged images}
+\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 
-\item{...}{Argument for function nestering accepts:
+\item{...}{argument for function nestering accepts:
  \itemize{
-  \item \code{pathrow} a list with the path and row numbers for the region of interest
+  \item \code{pathrow} a list with the path and row numbers for the region of interest.
   \item \code{bandFilter} a vector with the name of the image bands to be mosaicked.
-If it is not supplied, the function is applied to all the bands available in \code{src}
-  \item \code{dayFilter} a vector containing the days in date format to filter the days wanted
-  \item \code{AppRoot} the directory to save the mosaicked images
+If it is not supplied, the function is applied to all the bands available in \code{src}.
+  \item \code{dayFilter} a vector containing the days in date format to filter the days wanted.
+  \item \code{AppRoot} the directory to save the mosaicked images.
 }}
 }
 \description{
-\code{modMosaic} merges the tiles of MODIS covering a region of interest returns a single image for each date
+\code{modMosaic} merges the tiles of MODIS covering a region of interest returns a single image for each date.
 }
 \details{
 The function mosaics the tiles of satellite images in the \code{src} folder.
@@ -47,7 +47,7 @@ projection format. The function \code{modMosaic} automatically reprojects the ex
 to match the projection of the image. The resulting images will be placed in
 the \code{AppRoot} directory. The output files are named after region of interest
 provided by the argument \code{out.name}. If no name is provided,
-by default the output file is named as ‘outfile’
+by default the output file is named as ‘outfile’.
 }
 \examples{
 \dontrun{

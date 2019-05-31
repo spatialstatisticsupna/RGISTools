@@ -1,7 +1,7 @@
 #' Downloads a time series of satellite images from Landsat 7-8
 #'
 #' \code{lsDownSearch} downloads the list of images provided by \code{ls7Search} and \code{ls8Search} functions.
-#' The images are saved as ‘.tiff’ files in the AppRoot directory..
+#' The images are saved as ‘.tiff’ files in the AppRoot directory.
 #'
 #' This function is used for download landsat images. Uses the data frame result from  any landsat
 #' search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}) and download all images in data frame.
@@ -16,16 +16,16 @@
 #' in the future and avoid further downloads. By default, lsDownSearch saves the images in (...), in the AppRoot
 #' directory. To change this setting, provide AppRoot = the full path as an argument.
 #'
-#' @param searchres the results from \code{ls7Search} or \code{ls8Search}
-#' @param username login credentials to access the USGS EROS web service
-#' @param password login credentials to access the USGS EROS web service
-#' @param cookies.file  File path for saving the cookies that are used in the download process
-#' @param verbose Flag for debugging mode
-#' @param raw.rm Flag for removing the raw images
-#' @param untar Flag for untaring downloaded images
-#' @param ... argument for function nestering and/or
+#' @param searchres the results from \code{ls7Search} or \code{ls8Search}.
+#' @param username login credentials to access the USGS EROS web service.
+#' @param password login credentials to access the USGS EROS web service.
+#' @param cookies.file  File path for saving the cookies that are used in the download process.
+#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param raw.rm logical argument. If \code{TRUE} removes the raw images.
+#' @param untar logical argument. If \code{TRUE} untars downloaded images.
+#' @param ... argument for function nestering accepts:
 #' \itemize{
-#'   \item \code{AppRoot}  Root directory where the images will be saved
+#'   \item \code{AppRoot} the directory to save the downloaded images.
 #' }
 #'
 #'

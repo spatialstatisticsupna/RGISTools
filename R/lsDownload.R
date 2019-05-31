@@ -1,7 +1,7 @@
 #' Search and downloads a time series of satellite images from Landsat 7-8
 #'
 #' \code{lsDownSearch} downloads the list of images provided by \code{ls7Search} and \code{ls8Search} functions.
-#' The images are saved as ‘.tiff’ files in the AppRoot directory..
+#' The images are saved as ‘.tiff’ files in the AppRoot directory.
 #'
 #' This function is used for searching and downloading landsat images. The function uses landsat
 #' search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}) depending on the \code{satellite} argument,
@@ -17,16 +17,20 @@
 #' in the future and avoid further downloads. By default, lsDownload saves the images in (...), in the AppRoot
 #' directory. To change this setting, provide AppRoot = the full path as an argument.
 #'
-#' @param satellite string containing the type of satellite for downloading (\code{"ls7"} or \code{"ls8"})
-#' @param startDate starting date of the time series for search images
-#' @param endDate ending date of the time series for search images
-#' @param username login credentials to access the USGS EROS web service
-#' @param password login credentials to access the USGS EROS web service
-#' @param verbose Flag for debugging mode
-#' @param raw.rm Flag for removing the raw images
-#' @param untar Flag for untaring downloaded images
-#' @param ... any argument for function nestering including all \code{ls8Search/ls7Search} or \code{lsDownSearch}
-#' function arguments
+#' @param satellite string containing the type of satellite for downloading (\code{"ls7"} or \code{"ls8"}).
+#' @param startDate starting date of the time series for search images.
+#' @param endDate ending date of the time series for search images.
+#' @param username login credentials to access the USGS EROS web service.
+#' @param password login credentials to access the USGS EROS web service.
+#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param raw.rm logical argument. If \code{TRUE} removes the raw images.
+#' @param untar logical argument. If \code{TRUE} untars downloaded images.
+#' @param ... argument for function nestering accepts:
+#'  \itemize{
+#'   \item any argument for function nestering including all \code{ls8Search/ls7Search} or \code{lsDownSearch}
+#' function arguments.
+#'   \item \code{AppRoot} the directory to save the downloaded images.
+#' }
 #'
 #' @examples
 #' \dontrun{

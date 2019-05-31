@@ -4,29 +4,29 @@
 \alias{lsMosaic}
 \title{Mosaics a set of Landsat images}
 \usage{
-lsMosaic(src, extent = NULL, out.name = "outfile", verbose = F,
-  gutils = F, overwrite = F, ...)
+lsMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
+  gutils = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
-\item{src}{the path of the folder with the Sentinel images in tif format}
+\item{src}{the path of the folder with the Sentinel images in tif format.}
 
-\item{extent}{a character string with the name of the region of interest (optional)}
+\item{extent}{a character string with the name of the region of interest (optional).}
 
-\item{out.name}{the name of the region, if is not defined "outfile" will be asigned}
+\item{out.name}{the name of the region, if is not defined "outfile" will be asigned.}
 
-\item{verbose}{flag for debugging}
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{gutils}{a boolean flag to use GDAL utilities for mosaicking}
+\item{gutils}{logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking.}
 
-\item{overwrite}{a boolean flag to overwrite the existing merged images}
+\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 
-\item{...}{Argument for function nestering accepts:
+\item{...}{argument for function nestering accepts:
  \itemize{
-  \item \code{pathrow} a list with the path and row numbers for the region of interest
+  \item \code{pathrow} a list with the path and row numbers for the region of interest.
   \item \code{bandFilter} a vector with the name of the image bands to be mosaicked.
-If it is not supplied, the function is applied to all the bands available in \code{src}
-  \item \code{dayFilter} a vector containing the days in date format to filter the days wanted
-  \item \code{AppRoot} the directory to save the mosaicked images
+If it is not supplied, the function is applied to all the bands available in \code{src}.
+  \item \code{dayFilter} a vector containing the days in date format to filter the days wanted.
+  \item \code{AppRoot} the directory to save the mosaicked images.
 }}
 }
 \description{

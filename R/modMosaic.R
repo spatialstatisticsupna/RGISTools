@@ -1,6 +1,6 @@
 #' Mosaics a set of MODIS images
 #'
-#' \code{modMosaic} merges the tiles of MODIS covering a region of interest returns a single image for each date
+#' \code{modMosaic} merges the tiles of MODIS covering a region of interest returns a single image for each date.
 #'
 #' The function mosaics the tiles of satellite images in the \code{src} folder.
 #' The function uses the folder resulting from the \code{modeExtractHDF} function.
@@ -16,21 +16,21 @@
 #' to match the projection of the image. The resulting images will be placed in
 #' the \code{AppRoot} directory. The output files are named after region of interest
 #' provided by the argument \code{out.name}. If no name is provided,
-#' by default the output file is named as ‘outfile’
+#' by default the output file is named as ‘outfile’.
 #'
-#' @param src the path of the folder with the MODIS images in tif format
-#' @param out.name the name of the region, if is not defined "outfile" will be asigned
-#' @param extent spatial polygon object representing the region of interest
-#' @param gutils a boolean flag to use GDAL utilities for mosaicking
-#' @param overwrite a boolean flag to overwrite the existing merged images
-#' @param verbose flag for debugging 
-#' @param ... Argument for function nestering accepts:
+#' @param src the path of the folder with the MODIS images in tif format.
+#' @param out.name the name of the region, if is not defined "outfile" will be asigned.
+#' @param extent spatial polygon object representing the region of interest.
+#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
+#' @param gutils logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking.
+#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param ... argument for function nestering accepts:
 #'  \itemize{
-#'   \item \code{pathrow} a list with the path and row numbers for the region of interest
+#'   \item \code{pathrow} a list with the path and row numbers for the region of interest.
 #'   \item \code{bandFilter} a vector with the name of the image bands to be mosaicked.
-#' If it is not supplied, the function is applied to all the bands available in \code{src}
-#'   \item \code{dayFilter} a vector containing the days in date format to filter the days wanted
-#'   \item \code{AppRoot} the directory to save the mosaicked images
+#' If it is not supplied, the function is applied to all the bands available in \code{src}.
+#'   \item \code{dayFilter} a vector containing the days in date format to filter the days wanted.
+#'   \item \code{AppRoot} the directory to save the mosaicked images.
 #' }
 #' @examples
 #' \dontrun{
@@ -61,11 +61,11 @@
 #'           extent=ex.navarre)
 #' }
 modMosaic<-function(src,
-                    extent=NULL,
-                    out.name="outfile",
-                    verbose=F,
-                    gutils=F,
-                    overwrite=F,
+                    extent = NULL,
+                    out.name = "outfile",
+                    verbose = FALSE,
+                    gutils = FALSE,
+                    overwrite = FALSE,
                     ...){
   arg<-list(...)
   AppRoot<-defineAppRoot(...)

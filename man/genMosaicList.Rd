@@ -4,22 +4,22 @@
 \alias{genMosaicList}
 \title{Mosaics a list of raster images}
 \usage{
-genMosaicList(imageList, fun = "max", verbose = T)
+genMosaicList(imageList, fun = "max", verbose = TRUE)
 }
 \arguments{
-\item{imageList}{list of raster images}
+\item{imageList}{list of raster images.}
 
-\item{fun}{the function applied to overlapping pixels}
+\item{fun}{the function applied to overlapping pixels.}
 
-\item{verbose}{flag for debugging}
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 }
 \description{
-\code{genMosaicList} makes a single mosaic from a list of raster images
+\code{genMosaicList} makes a single mosaic from a list of raster images.
 }
 \details{
 This is a helper function used by other functions in this package. It combines
 a list of raster images with different geolocation. If the images overlap, by
-default the application selects the maximum value
+default the application selects the maximum value.
 }
 \examples{
 #create simulated rasters

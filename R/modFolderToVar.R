@@ -11,15 +11,15 @@
 #' indices in \code{RGISTools}. Functions with the pre-programmed indexes start with var
 #' (\code{varNDVI}, \code{varEVI}). The user can define its own functions.
 #'
-#' @param src path to the folder with the MODIS multispectral images
+#' @param src path to the folder with the MODIS multispectral images.
 #' @param fun is a function with the calculation of the index.
 #' All functions in the package starting with three characters
-#' 'var' are acceptable functions. Custom functions can be also implemented
-#' @param getStack if \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD)
-#' @param overwrite flag to overwrite the existing images with the same name
-#' @param ... argument to allow function nestering
+#' 'var' are acceptable functions. Custom functions can be also implemented.
+#' @param getStack logical argument. If \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD).
+#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
+#' @param ... argument to allow function nestering:
 #' \itemize{
-#'   \item \code{AppRoot} the directory of the resulting time series
+#'   \item \code{AppRoot} the directory of the resulting time series.
 #' }
 #'
 #' @examples
@@ -54,21 +54,21 @@
 #'                AppRoot=file.path(dirname(src)),
 #'                overwrite = T)
 #' }
-modFolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
+modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   AppRoot=defineAppRoot(...)
   if(!getStack){
     vartype<-gsub("var","",as.character(match.call()[c("fun")]))
     AppRoot<-file.path(AppRoot,vartype)
-    dir.create(AppRoot,showWarnings = F,recursive=T)
+    dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
     print(vartype)
   }
-  mod.list<-list.files(src,full.names = T)
+  mod.list<-list.files(src,full.names = TRUE)
   result<-raster()
   rstack<-stack()
   for(imgfd in mod.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     modbands<-getRGISToolsOpt("MOD09BANDS")
-    mod.img<-list.files(imgfd,full.names = T,pattern = "\\.tif$")
+    mod.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
     funString<-"result<-fun("
     for(arg in formalArgs(fun)){
       band<-modbands[names(modbands)%in%arg]

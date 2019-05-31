@@ -11,19 +11,19 @@
 #' the number of periods or years in the definition of the spatio temporal neighbourhoood, or the size of the
 #' aggregation. All these particularities are explained in the publication.
 #'
-#' @param rStack a \code{RasterStack} with time series of satellite images
-#' @param cStack a \code{RasterStack} with time series of covariates
-#' @param Img2Process a vector defining the images to smooth
-#' @param nPeriods number of periods used in the temporal window
-#' @param nYears number of years used in the temporal window
-#' @param aFilter two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95)
+#' @param rStack a \code{RasterStack} with time series of satellite images.
+#' @param cStack a \code{RasterStack} with time series of covariates.
+#' @param Img2Process a vector defining the images to smooth.
+#' @param nPeriods number of periods used in the temporal window.
+#' @param nYears number of years used in the temporal window.
+#' @param aFilter two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
 #' @param fun a function used to calculate the mean image. Both the \code{mean} or \code{median} functions are acceptable.
-#' @param snow.mode a flag to use \code{snow} package for parallelizing the reconstruction procedure
-#' @param fact an aggregation factor to be used to reduce the anomalies before smoothing
-#' @param out.name the name of the images if the result is written in the HDD
-#' @param ... argument to allow function nestering
+#' @param snow.mode logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.
+#' @param fact an aggregation factor to be used to reduce the anomalies before smoothing.
+#' @param out.name the name of the images if the result is written in the HDD.
+#' @param ... argument to allow function nestering.
 #' \itemize{
-#'   \item \code{AppRoot} the path where the images will be saved in tif format
+#'   \item \code{AppRoot} the path where the images will be saved in tif format.
 #' }
 #'
 #' @examples

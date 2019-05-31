@@ -2,27 +2,24 @@
 % Please edit documentation in R/varMSAVI2.R
 \name{varMSAVI2}
 \alias{varMSAVI2}
-\title{calculates the modified soil-adjusted vegetation index (MSAVI2) from raster bands}
+\title{Calculates the modified soil-adjusted vegetation index (MSAVI2) from raster bands}
 \usage{
 varMSAVI2(nir, red)
 }
 \arguments{
-\item{nir}{the red band of the capture in \code{raster} format}
+\item{nir}{the red band of the capture in \code{raster} format.}
 
-\item{red}{the nir band of the capture in \code{raster} format}
+\item{red}{the nir band of the capture in \code{raster} format.}
 }
 \value{
-MSAVI2 in \code{raster} format
+MSAVI2 in \code{raster} format.
 }
 \description{
 \code{varMSAVI2} computes the the MSAVI index from nir and red bands.
 }
 \details{
-MSAVI is soil adjusted vegetation indices that seek to address some of the limitation of NDVI when
-applied to areas with a high degree of exposed soil surface. The problem with the original
-soil-adjusted vegetation index (SAVI) is specifing the
-correction factor (L) through trial-and-error based. MSAVI2 is an evolution MSAVI to more
-reliably and simply calculate a soil brightness correction factor.
+The Modified Soil Adjusted Vegetation Index 2 (MSAVI2) is a vegetation indicator that 
+removes the effect of background variations.
 This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }
