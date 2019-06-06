@@ -86,7 +86,7 @@ ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   if(getStack){
     return(result)
   }else{
-    message(paste0(vartype," images saved in HHD"))
+    message(paste0(vartype," images saved in HDD"))
     message(paste0("File dir: ",AppRoot))
   }
 }

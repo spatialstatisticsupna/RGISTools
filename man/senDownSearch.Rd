@@ -25,6 +25,7 @@ senDownSearch(searchres, username, password,
 
 \item{...}{argument to allow function nestering.
 \itemize{
+  \item all input arguments in \code{senSearch}.
   \item \code{AppRoot} the directory to save the resulting time series.
 }}
 }

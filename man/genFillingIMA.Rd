@@ -41,7 +41,7 @@ genFillingIMA(imgTS, Img2Fill = NULL, aFilter = c(0.05, 0.95),
 }
 \description{
 \code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly
-for gap filling published in (\url{http://dx.doi.org/10.1109/TGRS.2019.2904193}).
+for gap filling published in  (\url{http://dx.doi.org/10.1109/TGRS.2019.2904193}).
 }
 \details{
 The time series is decomposed into a mean and a residual (anomaly)
@@ -52,7 +52,7 @@ The arguments configure the smoothing procedure:
 \code{Img2Fill} identifies the images to filled, \code{nPeriods} defines
 the spatio temporal neighbourhoood considered when smoothing
 a pixel, and \code{aggfact} sets the level of spatial aggregation.
-See more information in \url{http://dx.doi.org/10.1109/TGRS.2019.2904193}.
+See more information in \insertCite{militino2019interpolation}{RGISTools}.
 }
 \examples{
 # load an example of NDVI time series in Navarre
@@ -69,4 +69,7 @@ genPlotGIS(ndvi.filled)
 ndvi.comp<-stack(ex.ndvi.navarre[[1]],ndvi.filled[[1]],
                  ex.ndvi.navarre[[2]],ndvi.filled[[2]])
 genPlotGIS(ndvi.comp,layout=c(2,2))
+}
+\references{
+\insertRef{militino2019interpolation}{RGISTools}
 }

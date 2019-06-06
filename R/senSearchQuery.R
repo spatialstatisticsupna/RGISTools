@@ -33,14 +33,14 @@ senSearchQuery<-function(...){
                 ,ext@xmin," ",ext@ymin,")))",'"')
 
   }
-  if("intersects"%in%names(arg)){
+  if("lonlat"%in%names(arg)){
     if(arg$verbose){
       print(print("Adding query intersects"))
     }
-    if(!length(arg$intersects)==2){
+    if(!length(arg$lonlat)==2){
       stop("The intersects argument is not a latitude longitude valid location.")
     }
-    url<-paste0(url," AND footprint:",'"',"intersects(",arg$intersects[[1]],", ",arg$intersects[[2]],")",'"')
+    url<-paste0(url," AND footprint:",'"',"intersects(",arg$lonlat[[1]],", ",arg$lonlat[[2]],")",'"')
   }
   if("product"%in%names(arg)){
     if(arg$verbose){

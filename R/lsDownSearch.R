@@ -115,9 +115,9 @@ lsDownSearch<-function(searchres,
   }
 
   if(untar){
-    message(paste0("The images have been downloaded and saved on HHD. \nFile path: ",untarDir))
+    message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",untarDir))
   }else{
-    message(paste0("The images have been downloaded and saved on HHD. \nFile path: ",downPath))
+    message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",downPath))
   }
 
 }

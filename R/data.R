@@ -1,16 +1,16 @@
-#' An example time series of Digital Elevation Model (DEM) for the region of Navarre in Spain to use in examples
+#' Time series of Digital Elevation Model (DEM) for the region of Navarre in Spain
 #'
-#' Geographically projected \code{RasterBrick} object with the DEM values for
+#' Geographically projected \code{RasterStack} object with the DEM values for
 #' the region of Navarre, to use as example in \code{genSmoothingIMA}.
 #'
-#' @format The \code{RasterBrick} contains 6 time-periods, with the same DEM:
+#' @format The \code{RasterStack} contains 6 time-periods, with the same DEM:
 #' \describe{
 #'   \item{name}{the name of each layer contains the date of the period in julian format as "\code{YYYYJJJ}"}.
 #'   \item{size}{each layer contains 113 rows and 105 columns}.
 #' }
 "ex.dem.navarre"
 
-#' An example time series of NDVI for the region of Navarre in Spain
+#' NDVI time series for the tile containing the region of Navarre in Spain
 #'
 #' Geographically projected \code{RasterBrick} object with the NDVI values for the region of Navarre.
 #'
@@ -25,3 +25,6 @@
 #'
 #' \code{SpatialPolygonsDataFrame} containing the region of Navarre projected in latitude/longitude.
 "ex.navarre"
+
+#' @docType package
+#' @bibliography D:/Aplicaciones/Paquetes/REFERENCES.bib

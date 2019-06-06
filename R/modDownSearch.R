@@ -25,7 +25,7 @@
 #'                  startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                  endDate=as.Date("31-12-2013","%d-%m-%Y"),
 #'                  collection=6,
-#'                  latlon=ex.navarre)
+#'                  extent=ex.navarre)
 #' head(mList)
 #' #download first image in mList
 #' modDownSearch(mList[1],"user","pass")
@@ -68,6 +68,6 @@ modDownSearch<-function(searchres ,username,password,overwrite=FALSE,...){
       message("File already exists.")
     }
   }
-  message(paste0("The images have been downloaded and saved on HHD. \nFile path: ",AppRoot))
+  message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",AppRoot))
 }
 

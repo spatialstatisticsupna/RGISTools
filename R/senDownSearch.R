@@ -19,6 +19,7 @@
 #' @param error.log the name of the error log.
 #' @param ... argument to allow function nestering.
 #' \itemize{
+#'   \item all input arguments in \code{senSearch}.
 #'   \item \code{AppRoot} the directory to save the resulting time series.
 #' }
 #'
@@ -119,6 +120,6 @@ senDownSearch<-function(searchres,
   if(unzip){
     message(paste0("The images have been unzipped in: ",unzipFolder))
   }else{
-    message(paste0("The images have been downloaded and saved on HHD. \nFile path: ",downFolder))
+    message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",downFolder))
   }
 }

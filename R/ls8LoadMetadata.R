@@ -83,7 +83,7 @@ ls8LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=FALSE,...){
       .LS8MD<<-.LS8MD
       et<-Sys.time()
 
-      message(paste0("MetaData downloaded and saved on HHD for future queries. \nElapsed time: ",et-st," minutes.\nFile Saved in ",mdRdata))
+      message(paste0("MetaData downloaded and saved on HDD for future queries. \nElapsed time: ",et-st," minutes.\nFile Saved in ",mdRdata))
     }else{
       stop("Metadata not loaded!")
     }

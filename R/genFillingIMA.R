@@ -1,7 +1,7 @@
 #' Fills the gaps in a time series of satellite images
 #'
 #' \code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly
-#' for gap filling published in (\url{http://dx.doi.org/10.1109/TGRS.2019.2904193}).
+#' for gap filling published in  (\url{http://dx.doi.org/10.1109/TGRS.2019.2904193}).
 #'
 #' The time series is decomposed into a mean and a residual (anomaly)
 #' components. Instead of smoothing images, the procedure applies
@@ -11,7 +11,9 @@
 #' \code{Img2Fill} identifies the images to filled, \code{nPeriods} defines
 #' the spatio temporal neighbourhoood considered when smoothing
 #' a pixel, and \code{aggfact} sets the level of spatial aggregation.
-#' See more information in \url{http://dx.doi.org/10.1109/TGRS.2019.2904193}.
+#' See more information in \insertCite{militino2019interpolation}{RGISTools}.
+#'
+#' @references \insertRef{militino2019interpolation}{RGISTools}
 #'
 #' @param imgTS the time series of images to be filled.
 #' @param Img2Fill a vector defining the images to fill.
@@ -30,7 +32,8 @@
 #' }
 #' 
 #' @return \code{RasterStack} object with the smoothed time series.
-#'
+#' 
+#' 
 #' @examples
 #' # load an example of NDVI time series in Navarre
 #' data(ex.ndvi.navarre)

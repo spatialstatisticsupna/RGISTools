@@ -22,14 +22,14 @@
 # This argument is mandatory if extent is not defined.
 #' @param ... argument to allow function nestering:
 #' \itemize{
-#'   \item \code{latlon} a vector or a polygon with the coordinates of
+#'   \item \code{lonlat} a vector or a polygon with the coordinates of
 #' the point or region of interest in latitude/longitude format.
 #' This argument is mandatory if polygon or extent is not defined.
 #'   \item \code{extent} Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints* object are acceptable formats
 #' as long as coordinates are in latitude/longitude format.
-#' This argument is mandatory if polygon or latlon is not defined.
+#' This argument is mandatory if polygon or lonlat is not defined.
 #'   \item \code{polygon} a list of vectors defining the points of the polygon in latitude/longitude format
-#' This argument is mandatory if latlon or extent is not defined.
+#' This argument is mandatory if lonlat or extent is not defined.
 #'   \item \code{AppRoot} the directory to save the resulting time series.
 #' }
 #' @examples
@@ -61,14 +61,14 @@ modSearch<-function(product,startDate,endDate,collection=6,resType="url",verbose
     stopifnot(class(arg$pathrow)=="list")
     #TODO
     stop("pathrow search not supported yet")
-  }else if("latlon"%in%names(arg)){
-    stopifnot(class(arg$latlon)=="numeric")
-    stopifnot(length(arg$latlon)==2)
+  }else if("lonlat"%in%names(arg)){
+    stopifnot(class(arg$lonlat)=="numeric")
+    stopifnot(length(arg$lonlat)==2)
     loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
                 "?product=",product,
                 "&version=",collection,
-                "&latitude=",arg$latlon[1],
-                "&longitude=",arg$latlon[2],
+                "&latitude=",arg$lonlat[1],
+                "&longitude=",arg$lonlat[2],
                 "&return=",resType,
                 "&date=",format(startDate,"%Y-%m-%d"),
                 ",",format(endDate,"%Y-%m-%d"))

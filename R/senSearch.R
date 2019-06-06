@@ -21,6 +21,8 @@
 #'   \item \code{startDate} starting date of time series.
 #'   \item \code{endDate} ending date of time series.
 #'   \item \code{extent} location as projecte file with extention.
+#'   \item \code{lonlat} a vector or a polygon with the coordinates of
+#' the point or region of interest in latitude/longitude format.
 #'   \item \code{platform} platform name of the Sentinel mission (Sentine-1, Sentinel-2,...).
 #'   \item \code{qformat} format of response
 #'   \item \code{verbose} logical argument. If \code{TRUE} the function prints running stages and warnings.

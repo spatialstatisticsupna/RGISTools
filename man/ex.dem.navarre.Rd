@@ -3,8 +3,8 @@
 \docType{data}
 \name{ex.dem.navarre}
 \alias{ex.dem.navarre}
-\title{An example time series of Digital Elevation Model (DEM) for the region of Navarre in Spain to use in examples}
-\format{The \code{RasterBrick} contains 6 time-periods, with the same DEM:
+\title{Time series of Digital Elevation Model (DEM) for the region of Navarre in Spain}
+\format{The \code{RasterStack} contains 6 time-periods, with the same DEM:
 \describe{
   \item{name}{the name of each layer contains the date of the period in julian format as "\code{YYYYJJJ}"}.
   \item{size}{each layer contains 113 rows and 105 columns}.
@@ -13,7 +13,7 @@
 ex.dem.navarre
 }
 \description{
-Geographically projected \code{RasterBrick} object with the DEM values for
+Geographically projected \code{RasterStack} object with the DEM values for
 the region of Navarre, to use as example in \code{genSmoothingIMA}.
 }
 \keyword{datasets}

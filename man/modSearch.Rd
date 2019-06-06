@@ -22,14 +22,14 @@ modSearch(product, startDate, endDate, collection = 6, resType = "url",
 
 \item{...}{argument to allow function nestering:
 \itemize{
-  \item \code{latlon} a vector or a polygon with the coordinates of
+  \item \code{lonlat} a vector or a polygon with the coordinates of
 the point or region of interest in latitude/longitude format.
 This argument is mandatory if polygon or extent is not defined.
   \item \code{extent} Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints* object are acceptable formats
 as long as coordinates are in latitude/longitude format.
-This argument is mandatory if polygon or latlon is not defined.
+This argument is mandatory if polygon or lonlat is not defined.
   \item \code{polygon} a list of vectors defining the points of the polygon in latitude/longitude format
-This argument is mandatory if latlon or extent is not defined.
+This argument is mandatory if lonlat or extent is not defined.
   \item \code{AppRoot} the directory to save the resulting time series.
 }}
 }
