@@ -137,10 +137,14 @@ lsMosaic<-function(src,
               img<- genMosaicList(typechunks,verbose)
             },
             error=function(cond) {
-              message(paste0(cond,"\nProjecting to the same CRS..."))
-              if(cond=="different CRS"){
+              if(any(grepl("different CRS",cond))){
+                message(paste0("Different CRS when mosaicing tiles!\nProjecting to the same CRS..."))
                 typechunks<-lapply(typechunks,projectRaster,to=typechunks[[1]])
                 img<- genMosaicList(typechunks,verbose)
+              }else if(any(grepl("subscript out of bounds",cond))){
+                warning("Tile for ",dt," not found! Check ",d," date image forders for extrating errors.")
+              }else{
+                stop(cond)
               }
             })
 
