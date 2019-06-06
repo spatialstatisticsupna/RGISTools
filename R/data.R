@@ -27,4 +27,4 @@
 "ex.navarre"
 
 #' @docType package
-#' @bibliography D:/Aplicaciones/Paquetes/REFERENCES.bib
+#' @bibliography system.file("REFERENCES.bib", package = "RGISTools")
