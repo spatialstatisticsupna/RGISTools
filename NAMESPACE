@@ -10,7 +10,8 @@ export(genCompositions,genFillingIMA,genFilterStack,
        senFolderToVar,senSearch,senMosaic,senPreview,varEVI,varMSAVI2,varNBR,
        varNBR2,varNDMI,varNDVI,varNDWI,varRGB,varSAVI)
 import("raster","curl", "rjson","rvest", "urltools","tools",
-       "fields", "gdalUtils", "magick", "methods")
+       "fields", "gdalUtils", "magick")
+importFrom("methods", "formalArgs")
 importFrom("sp","bbox","layout.scale.bar","layout.north.arrow",
            "proj4string","spplot","Polygons","Polygon",
            "SpatialPolygons","CRS","spTransform")
@@ -20,4 +21,4 @@ importFrom("xml2","read_xml","xml_attr",
            "read_html")
 importFrom("utils", "URLencode", "data", "download.file",
            "read.csv","untar")
-
+importFrom("Rdpack","reprompt")
