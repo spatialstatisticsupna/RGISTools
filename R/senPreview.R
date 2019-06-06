@@ -1,14 +1,14 @@
 #' Allows Sentinel satellite images preview before its download
 #'
-#' \code{senPreview} shows a preview of the n image from a set of search results.
+#' \code{\link{senPreview}} shows a preview of the n image from a set of search results.
 #'
 #' The functions shows a preview of an image resulting from a search in Scihub platform.
-#' A search with \code{senSearch} has to be carried before proceeding with the preview.
+#' A search with \code{\link{senSearch}} has to be carried before proceeding with the preview.
 #' The preview is downloaded from Scihub website, and the crediantials are needed.
 #' Please, be aware that only some images have this feature.
 #'
 #'
-#' @param searchres a data frame with  the results from a search of Landsat images provided by the function senSearch.
+#' @param searchres a data frame with  the results from a search of Landsat images provided by the function \code{\link{senSearch}}.
 #' @param username Scihub username.
 #' @param password Scihub password.
 #' @param n a number with the row corresponding to the image of interest in the search data frame.

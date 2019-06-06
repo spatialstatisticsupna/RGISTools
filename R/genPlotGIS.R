@@ -1,11 +1,11 @@
 #' Plots satellite images with a proper GIS format
 #'
-#' This function displaying satellite images with usual GIS information, 
-#' such as scale, the north arrow and the region of interest.
+#' This function displays satellite images with usual GIS information, 
+#' such as the scale, the north arrow, and the region of interest.
 #'
 #' The function plots any raster type class as, \code{raster}, \code{RasterStack} or \code{RasterBrick}.
 #' Accepts all parameter used by the function \code{spplot}.
-#' The function genPlotGIS adds a north arrow and a polygon with the area of interest.
+#' The function \code{genPlotGIS} adds a north arrow and a polygon with the area of interest.
 #' If necessary, the projection of the polygon is transformed to match the projection of the raster.
 #' The projection of the map can be changed by adding the \code{proj} argument. The arrow and scale bar are
 #' located by default in relative positions. Their positions can be modified with the \code{compOpt} paragram.

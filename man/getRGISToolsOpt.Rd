@@ -9,10 +9,10 @@ getRGISToolsOpt(opt, env = optEnv)
 \arguments{
 \item{opt}{the name of the option to get.}
 
-\item{env}{the environment where the RGISTools option are saved.}
+\item{env}{the environment where the \code{RGISTools} option are saved.}
 }
 \description{
-\code{getRGISToolsOpt} gets the current value of an RGISTools option.
+\code{\link{getRGISToolsOpt}} gets the current value of an \code{RGISTools} option.
 }
 \examples{
 getRGISToolsOpt("SEN2BANDS")

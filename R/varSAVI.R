@@ -1,6 +1,6 @@
 #' Calculates soil-adjusted vegetation index (SAVI) from raster bands
 #'
-#' \code{varSAVI} computes the the SAVI index from red and nir bands.
+#' \code{\link{varSAVI}} computes the the SAVI index from red and nir bands.
 #'
 #' The Soil Adjusted Vegetation Index (SAVI) is a vegetation index engineered to remove 
 #' the influence of the soil background effect.  

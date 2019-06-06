@@ -3,8 +3,8 @@
 #' \code{genSmoothingIMA} is the implementation of a spatio-temporal smoothing
 #' method that uses covariates. The methodology is explained in \insertCite{militino2019interpolation}{RGISTools}.
 #'
-#' The procedure uses spatio temporal data to exprese each image in the time series as a mean
-#' image plus a residual called anomaly.The procedure smoothed the anomaly using covariates to
+#' The procedure uses spatio temporal data to decompose each image in the time series as a mean
+#' image plus a residual or anomaly.The procedure smoothed the anomaly using covariates to
 #' smooth the outliers in the anomaly. See more information in \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' This function provides a set of arguments to configure the run of the precedure, such as the images to fill (\code{Img2Process}),
@@ -13,13 +13,13 @@
 #'
 #' @references \insertRef{militino2018improving}{RGISTools}
 #'
-#' @param rStack a \code{RasterStack} with time series of satellite images.
-#' @param cStack a \code{RasterStack} with time series of covariates.
+#' @param rStack a \code{RasterStack} containing a time series of satellite images.
+#' @param cStack a \code{RasterStack} containing a time series of covariates.
 #' @param Img2Process a vector defining the images to smooth.
-#' @param nPeriods number of periods used in the temporal window.
-#' @param nYears number of years used in the temporal window.
-#' @param aFilter two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
-#' @param fun a function used to calculate the mean image. Both the \code{mean} or \code{median} functions are acceptable.
+#' @param nPeriods number of periods used to define the neighborhood
+#' @param nYears number of years used to define the neighborhood.
+#' @param aFilter a vector with the lower and upper extreme values for filtering the anomalies. Ex. c(0.05,0.95).
+#' @param fun a function used to calculate the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.
 #' @param snow.mode logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.
 #' @param fact an aggregation factor to be used to reduce the anomalies before smoothing.
 #' @param out.name the name of the images if the result is written in the HDD.
@@ -37,7 +37,8 @@
 #' genPlotGIS(ex.ndvi.navarre)
 #' genPlotGIS(ex.dem.navarre)
 #'
-#' # distort ndvi data
+#' # Distorts 5% of the original ndvi data by 
+#' # altering 50% its values
 #' for(x in c(2,5)){
 #'   aux <- sampleRandom(ex.ndvi.navarre[[x]],
 #'                       ncell(ex.ndvi.navarre)*0.05,
@@ -51,12 +52,12 @@
 #' smth.ndvi<-genSmoothingIMA(rStack=ex.ndvi.navarre,
 #'                            cStack=ex.dem.navarre,
 #'                            Img2Process=c(2,5))
-#' # plot the result
-#' genPlotGIS(stack(ex.ndvi.navarre[[2]],
+#' # plot the distorted 1, smoothed 1, 
+#' # distorted 5, smoothed 5 images
+#' plot(stack(ex.ndvi.navarre[[2]],
 #'                  smth.ndvi[[1]],
 #'                  ex.ndvi.navarre[[5]],
-#'                  smth.ndvi[[2]]),
-#'            layout=c(2,2))
+#'                  smth.ndvi[[2]]))
 genSmoothingIMA <- function (rStack,
                              cStack,
                              Img2Process=NULL,
@@ -135,8 +136,8 @@ genSmoothingIMA <- function (rStack,
     message(paste0("Smoothing image of date ",target.date))
     neighbours<-dateNeighbours(rStack,
                                target.date,
-                               nPeriods=10,
-                               nYears=10)
+                               nPeriods=nPeriods,
+                               nYears=nYears)
 
 
 

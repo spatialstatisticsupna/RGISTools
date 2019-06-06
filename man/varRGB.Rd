@@ -20,7 +20,7 @@ varRGB(red, green, blue, range = c(), rPath = NULL, cutline = NULL)
 \item{cutline}{\code{SpatialPolygonsDataFrame} for cutting the image by a region.}
 }
 \description{
-\code{varRGB} creates RGB raster stack in scaling the range of the images to 0-255 color range.
+\code{\link{varRGB}} creates RGB raster stack in scaling the range of the images to 0-255 color range.
 }
 \details{
 The function rescales the original reflectance values to a range of 0-255. The functions

@@ -1,6 +1,6 @@
 #' Calculates normalized difference moisture (water) index (NDMI)
 #'
-#' \code{varNDMI} computes the NDMI index from nir and swir1 bands.
+#' \code{\link{varNDMI}} computes the NDMI index from nir and swir1 bands.
 #'
 #' The Normalized Difference Moisture Index (NDMI) is an index that represents the water 
 #' stress levels of the canopy, using near-infrared (NIR) and short-wave infrared (SWIR).

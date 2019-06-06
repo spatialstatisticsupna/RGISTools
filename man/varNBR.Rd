@@ -15,7 +15,7 @@ varNBR(nir, swir2)
 NBR in \code{raster} format
 }
 \description{
-\code{varNBR} computes the NBR index from nir and swir2 bands.
+\code{\link{varNBR}} computes the NBR index from nir and swir2 bands.
 }
 \details{
 The Normalized Burn Ratio (NBR) is an index to identify burned areas by 

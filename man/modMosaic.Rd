@@ -30,11 +30,11 @@ If it is not supplied, the function is applied to all the bands available in \co
 }}
 }
 \description{
-\code{modMosaic} merges the tiles of MODIS covering a region of interest returns a single image for each date.
+\code{\link{modMosaic}} merges the tiles of MODIS covering a region of interest returns a single image for each date.
 }
 \details{
 The function mosaics the tiles of satellite images in the \code{src} folder.
-The function uses the folder resulting from the \code{modeExtractHDF} function.
+The function uses the folder resulting from the \code{\link{modExtractHDF}} function.
 The folder may contain multiple tiles as tif files, for one or several dates
 and one or several bands. When only one band has to be mosaicked, the name of
 the band can be provided through the argument \code{bandFilter}. The name of the band
@@ -42,8 +42,8 @@ should be defined as a character string beginning with the letter b and a two-di
 band number (e.g. ‘b01’). Similarly, when only a subset of dates has to be mosaicked,
 the date(s) should be provided through the argument \code{dayFilter}. The dates must be
 provided as date objects. Once the images are mosaicked, they are cropped using
-the extent defined by \code{extent} (optional). The extent can be defined in any
-projection format. The function \code{modMosaic} automatically reprojects the extent
+the extent defined by \code{\link{extent}} (optional). The extent can be defined in any
+projection format. The function \code{\link{modMosaic}} automatically reprojects the extent
 to match the projection of the image. The resulting images will be placed in
 the \code{AppRoot} directory. The output files are named after region of interest
 provided by the argument \code{out.name}. If no name is provided,

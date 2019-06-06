@@ -1,6 +1,6 @@
 #' Calculates the enhanced vegetation index (EVI) from raster bands
 #'
-#' \code{varEVI} computes the the EVI index from blue, nir and red bands.
+#' \code{\link{varEVI}} computes the the EVI index from blue, nir and red bands.
 #'
 #' The Enhanced Vegetation Index (EVI) is a vegetation indicator that improves sensitivity 
 #' towards high biomass densities compared to NDVI.

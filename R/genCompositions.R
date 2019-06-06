@@ -1,16 +1,14 @@
 #' Creates image compositions from a time series of satellite images
 #'
-#' \code{genCompositions} combines satellite images over a temporal window to create composites.
+#' \code{genCompositions} combines satellite images over a temporal window to create composite images.
 #'
-#' This function supports temporal aggregations with different function specifying \code{fun} argument.
+#' This function supports temporal aggregations by specifying \code{fun} argument.
 #' THe number of images aggregated is defined using \code{n.days} argument.
 #'
-#' Composites reduce the number of images, but improve the quality of the images,
-#' since clouds and potential outliers are removed. One of the most used
-#' techniques is the Maximum Value Composition (\code{MVC}). The \code{MVC} applied over
-#' images of remote sensing indices. Clouds and outliers usually appear as
-#' very low values the index. Hence, the \code{MVC} builds a composite using the
-#' maximum value a pixel over a period of time. Write \code{fun = max} to use the
+#' \code{genCompositions} reduce the number of images, improving their quality,
+#' since clouds and potential outliers are removed. Clouds and outliers usually appear with
+#' very low values the index. For example, the Maximun value compostion (\code{MVC}) builds composites using the
+#' maximum pixel value over a period of time. Write \code{fun = max} to use the
 #' \code{MVC} technique. Other functions are also supported.
 #'
 #' @param rstack a \code{RasterStack} where every layer is named after the 

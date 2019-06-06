@@ -23,17 +23,17 @@ All functions in the package starting with three characters
 }}
 }
 \description{
-\code{modFolderToVar} calculates an index using the bands from MODIS multispectral images.
-The images are specified by a path to the storing folder (resulting from the \code{modMosaic} function).
-The function returns a \code{rasterStack} with the time-series of the index.
+\code{\link{modFolderToVar}} calculates an index using the bands from MODIS multispectral images.
+The images are specified by a path to the storing folder (resulting from the \code{\link{modMosaic}} function).
+The function returns a \code{RasterStack} with the time series of the index.
 }
 \details{
 The function requires the definition of src and fun arguments. The argument \code{src}
 contains the path to the folder with the multispectral images. It can be easily
-defined as the path resulting from \code{modMosaic}. The fun argument is a function with
+defined as the path resulting from \code{\link{modMosaic}}. The fun argument is a function with
 the calculation of the index based on spectral bands. There are some pre-programmed
 indices in \code{RGISTools}. Functions with the pre-programmed indexes start with var
-(\code{varNDVI}, \code{varEVI}). The user can define its own functions.
+(\code{\link{varNDVI}}, \code{\link{varEVI}}). The user can define its own functions.
 }
 \examples{
 \dontrun{

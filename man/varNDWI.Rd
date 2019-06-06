@@ -15,7 +15,7 @@ varNDWI(green, nir)
 NDWI in \code{raster} format
 }
 \description{
-\code{varNDWI} computes the NDWI index from green and nir bands.
+\code{\link{varNDWI}} computes the NDWI index from green and nir bands.
 }
 \details{
 The Normalized Difference Water Index (NDWI) is a ratio between bands of the spectrum 

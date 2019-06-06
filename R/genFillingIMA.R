@@ -1,10 +1,10 @@
 #' Fills the gaps in a time series of satellite images
 #'
 #' \code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly
-#' for gap filling published in  (\url{http://dx.doi.org/10.1109/TGRS.2019.2904193}).
+#' for gap filling published in  \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' The time series is decomposed into a mean and a residual (anomaly)
-#' components. Instead of smoothing images, the procedure applies
+#' components. The procedure applies
 #' the smoothing algorithm over the anomaly.
 #'
 #' The arguments configure the smoothing procedure:
@@ -18,10 +18,10 @@
 #' @param imgTS the time series of images to be filled.
 #' @param Img2Fill a vector defining the images to fill.
 #' @param aFilter two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
-#' @param fact an aggregation factor to be used to reduce the anomalies before the interpolation.
+#' @param fact an aggregation factor of the anomalies before the interpolation.
 #' @param nPeriods number of periods used in the temporal window.
 #' @param nYears number of years used in the temporal window.
-#' @param fun function used to calculate the mean image, \code{mean}, \code{median} are acceptable functions.
+#' @param fun function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.
 #' @param snow.mode logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.
 #' @param predictSE logical argument. If \code{TRUE} the filling process will calculate the standard error instead the prediction.
 #' @param factSE the fact used in the standard error prediction to reduce the processing time.

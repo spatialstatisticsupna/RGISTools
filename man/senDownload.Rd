@@ -25,11 +25,11 @@ senDownload(username, password, ...)
 }}
 }
 \description{
-\code{senDownload} conbines both \code{senSearch} and \code{senDownSearch} to easy
+\code{\link{senDownload}} conbines both \code{\link{senSearch}} and \code{\link{senDownSearch}} to easy
 the procedure of download Sentinel images.
 }
 \details{
-This function accepts all the arguments in \code{senSearch} function and automatically downloads
+This function accepts all the arguments in \code{\link{senSearch}} function and automatically downloads
 images matching with the search query. The function creates a folder hierarchy give the posibility
 of unzip the images.
 }

@@ -18,7 +18,7 @@ senSearch(username, password, ...)
   \item \code{endDate} ending date of time series.
   \item \code{extent} location as projecte file with extention.
   \item \code{lonlat} a vector or a polygon with the coordinates of
-the point or region of interest in latitude/longitude format.
+the point or region of interest in longitude/latitude format.
   \item \code{platform} platform name of the Sentinel mission (Sentine-1, Sentinel-2,...).
   \item \code{qformat} format of response
   \item \code{verbose} logical argument. If \code{TRUE} the function prints running stages and warnings.
@@ -27,13 +27,13 @@ the point or region of interest in latitude/longitude format.
 }}
 }
 \description{
-\code{senSearch} senSearch searches sentinel products on ESA powered api  \url{http://scihub.copernicus.eu}.
+\code{\link{senSearch}} senSearch searches sentinel products on ESA powered api  \url{http://scihub.copernicus.eu}.
 }
 \details{
 Provides the images and urls to be downloaded from ESA’s SciHub API. The images are
 searched based on a range of dates and a region of interest. Dates have to be
 provided as a date class object. The region of interest should be provided as a
-spatial class object with an EPSG:4326 coordinate projection. ESA’s API only returns
+spatial class object with an "\code{EPSG:4326}" coordinate projection. ESA’s API only returns
 as much as 100 entries.
 Credentials from ESA’s SciHub are needed to use this function.
 Please, sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}

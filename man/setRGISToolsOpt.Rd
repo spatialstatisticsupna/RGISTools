@@ -11,10 +11,10 @@ setRGISToolsOpt(opt, value, env = optEnv)
 
 \item{value}{the new value of selected option}
 
-\item{env}{the environment where the RGISTools option are saved}
+\item{env}{the environment where the \code{RGISTools} option are saved}
 }
 \description{
-\code{setRGISToolsOpt} changes the default value of an RGISTools option.
+\code{\link{setRGISToolsOpt}} changes the default value of an \code{RGISTools} option.
 }
 \examples{
 getRGISToolsOpt("LS7META.dir")

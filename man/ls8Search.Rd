@@ -21,32 +21,32 @@ ls8Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 to the Worldwide Reference System (\url{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/})
 This argument is mandatory if extent is not defined.
   \item \code{lonlat} this argument is optional. A vector or a polygon with the coordinates of
-the point or region of interest in latitude/longitude format.
+the point or region of interest in longitude/latitude format.
   \item \code{extent} this argument is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
-object are acceptable formats as long as are latitude/longitude format.
+object are acceptable formats as long as are longitude/latitude format.
 This argument is mandatory if pathrow is not defined.
   \item \code{AppRoot} the root directory where meta data file will be saved.
   \item all column names in .LS8MD data frame for filter results.
 }}
 }
 \description{
-\code{ls8Search} searches the LANDSAT 8 image repository to find those which are relevant for
+\code{\link{ls8Search}} searches the LANDSAT 8 image repository to find those which are relevant for
 a particular location and date interval. The function returns the search result as a data frame
 with the names of the images and their metadata.
 }
 \details{
-\code{ls8Search} is a stand-alone function. If the metadata for the time and region of interest has been
-downloaded before, \code{ls8Search} will use this metadata by default. In case the metadata has not
-been yet downloaded, \code{ls8Search} will make the call for you.
+\code{\link{ls8Search}} is a stand-alone function. If the metadata for the time and region of interest has been
+downloaded before, \code{\link{ls8Search}} will use this metadata by default. In case the metadata has not
+been yet downloaded, \code{\link{ls8Search}} will make the call for you.
 
 The search is done by defining a temporal interval and a location. The arguments \code{startDate}
 and \code{endDate} defines the temporal interval.These are mandatory arguments. The function defines the spatial location
 using at least one of the following arguments: \code{pathrow}, \code{extent}, \code{lonlat} y \code{polygon}. When more than one of these argument is defined,
 the function will work with the first evaluated method, when none of them is defined, the function shows an error message.
 
-\code{ls8Search} uses the metadata file downloaded by \code{ls8LoadMetadata}. However, it also works as a stand-alone function.
-If the metadata for the time and region of interest was downloaded before, \code{ls8Search} uses this metadata by default.
-When the metadata was not download, \code{ls8Search} makes the call for you.
+\code{\link{ls8Search}} uses the metadata file downloaded by \code{\link{ls8LoadMetadata}}. However, it also works as a stand-alone function.
+If the metadata for the time and region of interest was downloaded before, \code{\link{ls8Search}} uses this metadata by default.
+When the metadata was not download, \code{\link{ls8Search}} makes the call for you.
 
 Landsat images are catalogued spatially using a unique path and row. The fastest way to search an image
 in the metadata file is filtering by its path and row. This search method requires previous knowledge on
@@ -57,8 +57,8 @@ From the user point of view, the easiest way to search a time series of Landsat-
 These method uses spatial objects to define the region of interest. The projection of the spatial needs to be
 "\code{+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs}”. The argument \code{extent} accepts any R objects being defined
 by a spatial extent. The argument \code{lonlat} only accepts an R vector with one coordinate in the form of
-latitude-longitude (ex. \code{c(42.81687, -1.64323)}, where the first element is the latitude and the second is the longitude).
-The argument \code{polygon}, accepts \code{spatialpolygon} or s\code{patialpolygondataframe} objects.
+longitude/latitude (ex. \code{c(-1.64323,42.81687)}, where the first element is the longitude and the second is the latitude).
+The argument \code{polygon}, accepts \code{spatialpolygon} or \code{spatialpolygondataframe} objects.
 
 The search procedure using spatial objects compares the spatial extension of Landsat images with the
 the extension of the objects provided by the user. The function checks which ones overlays.

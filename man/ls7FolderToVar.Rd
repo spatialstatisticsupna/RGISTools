@@ -10,8 +10,8 @@ ls7FolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
 \item{src}{path to the folder with the Landsat multispectral image.}
 
 \item{fun}{is a function with the calculation of the index.
-All functions in the package starting with three characters
-'var' are acceptable functions. Custom functions can be also
+All functions created in RGISTools starting with
+'var' are avaliable functions. Custom functions can be also
 implemented \code{var} are acceptable functions.}
 
 \item{getStack}{logical argument. If \code{TRUE}, returns the time-series as a 
@@ -25,9 +25,9 @@ raster or otherwise as Hard Drive Devide (HDD).}
 }}
 }
 \description{
-\code{ls7FolderToVar} calculates an index using the bands from Landsat multispectral
+\code{\link{ls7FolderToVar}} calculates an index using the bands from Landsat multispectral
 images. The images are specified by a path to the storing folder (resulting from
-the \code{lsMosaic} function). The function returns a rasterStack with the time-series of the index.
+the \code{\link{lsMosaic}} function). The function returns a rasterStack with the time-series of the indexes.
 }
 \details{
 The function requires to define \code{src} and \code{fun} attributes. \code{src} defines the path to
@@ -52,13 +52,13 @@ search<-lsDownload(satellite="ls7",
                    AppRoot=src)
 #asign the folder with the Landsat 7 images untared
 tif.src<-file.path(src,"untar")
-#mosaic the Landsat7 images
+# mosaic the Landsat7 images
 lsMosaic(tif.src,
          AppRoot=src,
          out.name="Navarre")
-#asign src as the path to mosaiced folder
+# asign src as the path to mosaicked folder
 src<-file.path(src,"Navarre")
-#generate NDVI images of Navarre
+# generate NDVI images of Navarre
 ls7FolderToVar(src,
                fun=varNDVI,
                AppRoot=file.path(dirname(src)),

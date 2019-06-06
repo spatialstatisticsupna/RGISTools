@@ -25,20 +25,20 @@ senDownSearch(searchres, username, password,
 
 \item{...}{argument to allow function nestering.
 \itemize{
-  \item all input arguments in \code{senSearch}.
+  \item all input arguments in \code{\link{senSearch}}.
   \item \code{AppRoot} the directory to save the resulting time series.
 }}
 }
 \description{
-\code{senDownSearch} downloads the list of urls generated y the function senSearch by using the ESA’s SciHub API.
+\code{\link{senDownSearch}} downloads the list of urls generated y the function senSearch by using the ESA’s SciHub API.
 }
 \details{
-\code{senDownSearch} downloads the images from Sentinel products using the search results provided by \code{\link{senSearch}}.
- The raw images are downloaded into the Aproot directory. In case the download is interrupted,
+\code{\link{senDownSearch}} downloads the images from Sentinel products using the search results provided by \code{\link{senSearch}}.
+ The raw images are downloaded into the \code{AppRoot} directory. In case the download is interrupted,
  the image file could be corrupted. The function detects the corrupted files to restart the process.
  To prevent the computer from crashing, the nattempts  flag limits the number of attempts to download the image.
  The default number of attempts is set to 3.
-senDownload requires the credentials to access the ESA’s SciHub data service. Please,
+\code{\link{senDownload}} requires the credentials to access the ESA’s SciHub data service. Please,
 sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}.
 }
 \examples{

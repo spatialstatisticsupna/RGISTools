@@ -1,21 +1,21 @@
 #' Sinchronizes landsat 7 meta data file for image search.
 #'
-#' \code{ls7LoadMetadata} loads a data frame called \code{.LS7MD}
+#' \code{\link{ls7LoadMetadata}} loads a data frame called "\code{.LS7MD}"
 #'  with the names of the Landsat-7 images and their metadata.The metadata provides
 #'  auxiliary information regarding Landsat-7 images repository such as image quality, acquisition
 #'  data, cloud cover, etc. You can find a description of the metadata at
-#'  \url{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}.
+#'  \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{bulk-metadata-service}.
 #'
 #' All captures done by Landsat-7 are cataloged in a unique csv file. The size of the file
 #' might be larger than 360MB. Therefore, the process of downloading and importing R may take several
 #' minutes (around 15 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device). The function creates an
-#' RData file with the metadata csv. Thus, every time \code{ls7MetaDataFile} is called,
+#' RData file with the metadata csv. Thus, every time \code{\link{ls7LoadMetadata}} is called,
 #' this function loads the existing RData in the Approot. This is intended to reduce the loading
 #' time of metadata in the future.
 #'
 #'
 #'
-#' @param update logical argument. If \code{TRUE} is mandatory to update the metadata file.
+#' @param update logical argument. If \code{TRUE} updates the metadata file.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param omit.question logical argument. If \code{TRUE} omits the question for ensuring the loading of the metadata file.
 #' @param ... argument to allow function nestering:

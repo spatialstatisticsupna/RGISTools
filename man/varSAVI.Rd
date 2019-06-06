@@ -17,7 +17,7 @@ varSAVI(red, nir, L = 0.5)
 SAVI in \code{raster} format
 }
 \description{
-\code{varSAVI} computes the the SAVI index from red and nir bands.
+\code{\link{varSAVI}} computes the the SAVI index from red and nir bands.
 }
 \details{
 The Soil Adjusted Vegetation Index (SAVI) is a vegetation index engineered to remove 

@@ -29,8 +29,8 @@ lsDownSearch(searchres, username = NULL, password = NULL,
 }}
 }
 \description{
-\code{lsDownSearch} downloads the list of images provided by \code{ls7Search} and \code{ls8Search} functions.
-The images are saved as ‘.tiff’ files in the AppRoot directory.
+\code{\link{lsDownSearch}} downloads the list of images provided by \code{\link{ls7Search}} and \code{\link{ls8Search}} functions.
+The images are saved as ‘.tiff’ files in the \code{AppRoot} directory.
 }
 \details{
 This function is used for download landsat images. Uses the data frame result from  any landsat
@@ -40,10 +40,10 @@ Image download requires USGS login account from \url{https://ers.cr.usgs.gov/reg
 The image files from the USGS EROS web service are compressed as ‘.tar.gz’ files. lsDownSearch decompresses the
 images and obtains the corresponding ‘.tiff’ files. The ‘.tiff’ files are saved in the
 \code{AppRoot} directory. When \code{untarDir} is defined the function untars the images in this folder.
-This replicates the images in compresses version as tar.gz and uncompresses version. To save space in the disk
-\code{raw.rm = T} can be defined, and \code{lsDownSearch} will remove the ‘tar.gz’ files.
+This replicates the images in compresses version as 'tar.gz' and uncompresses version. To save space in the disk
+\code{raw.rm = T} can be defined, and \code{\link{lsDownSearch}} will remove the ‘tar.gz’ files.
 If \code{raw.rm = F}, the original files remain, which might be useful to have access to the original files
-in the future and avoid further downloads. By default, lsDownSearch saves the images in (...), in the AppRoot
+in the future and avoid further downloads. By default, \code{\link{lsDownSearch}} saves the images in (...), in the \code{AppRoot}
 directory. To change this setting, provide AppRoot = the full path as an argument.
 }
 \examples{

@@ -1,10 +1,10 @@
 #' Mosaics a set of Sentinel images
 #'
-#' \code{senMosaic} merges the tiles of Sentinel images covering a region of interest and
+#' \code{\link{senMosaic}} merges the tiles of Sentinel images covering a region of interest and
 #'  returns a single image for each date
 #'
 #' The function mosaics the tiles of satellite images in the src folder.
-#' The function uses the folder resulting from the \code{senDownSearch} function.
+#' The function uses the folder resulting from the \code{\link{senDownSearch}} function.
 #' The folder may contain multiple tiles as tif files, for one or several dates
 #' and one or several bands. When only one band has to be mosaicked, the name of
 #' the band can be provided through the argument \code{bandFilter}. The name of the band
@@ -13,7 +13,7 @@
 #' to be mosaicked, the date(s) should be provided through the argument \code{dayFilter}.
 #' The dates must be provided as date objects. Once the images are mosaicked, they are
 #' cropped using the extent defined by \code{extent} (optional). The extent can be defined
-#' in any projection format. The function \code{senMosaic} automatically reprojects the
+#' in any projection format. The function \code{\link{senMosaic}} automatically reprojects the
 #' extent to match the projection of the image. The resulting images will be placed
 #' in the \code{AppRoot} directory. The output files are named after region of interest
 #' provided by the argument \code{out.name}. If no name is provided, by default the output
@@ -21,7 +21,7 @@
 #'
 #' @param src the path of the folder with the Sentinel images in tif format.
 #' @param out.name a character string with the name of the region of interest.
-#' @param extent  an extent object representing the region of interest.
+#' @param extent  an \code{Extent} object representing the region of interest.
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param gutils logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.

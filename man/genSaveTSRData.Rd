@@ -24,14 +24,14 @@ genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
 }}
 }
 \description{
-\code{genSaveTSRData} imports time series of (tif) satellite images into R from a folder and creates an RData.
+\code{genSaveTSRData} imports the time series of (tif) satellite images into R from a folder, creating an RData.
 }
 \details{
 The function reads all the images inside the folder specified in \code{src}. The images must be .tif files.
- The \code{src} can take the path created by other functions of this package, such as \code{senMosaic},
- \code{modMosaic}, \code{senFolderToVar}, etc. The images are imported into R to build a \code{RasterStack} that
- is loaded into the global environment. The name of the raster stack will be the one specified
- in ts.name. The RasterStack is saved into an RData file in the Approot directory.
+ The \code{src} can take the path created by other functions of this package, such as \code{\link{senMosaic}},
+ \code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are imported into R to build a \code{RasterStack} that
+ is loaded into the global environment. The name of the \code{RasterStack} is one specified
+ in \code{ts.name}. The \code{RasterStack} is saved into an RData file in the \code{Approot} directory.
 }
 \examples{
 \dontrun{
@@ -40,36 +40,37 @@ data(ex.navarre)
 # set the download folder
 s.start<-Sys.time()
 src<-"Path_for_downloading_folder"
-#download the images
-modDownload(product="MOD09GA",
-            startDate=as.Date("30-07-2018","\%d-\%m-\%Y"),
-            endDate=as.Date("06-08-2018","\%d-\%m-\%Y"),
-            username="username",
-            password="password",
-            AppRoot=src,
-            hdfdir="hdf",
-            tiffdir="tif",
-            collection=6,
-            extent=ex.navarre)
-#set tif folder where hdf will be imported
-src<-file.path(src,"MOD09GA")
-#set the tif folder path
-tif.src<-file.path(src,"tif")
+# download the images
+modDownload(product = "MOD09GA",
+            startDate = as.Date("30-07-2018","\%d-\%m-\%Y"),
+            endDate = as.Date("06-08-2018","\%d-\%m-\%Y"),
+            username = "username",
+            password = "password",
+            AppRoot = src,
+            hdfdir = "hdf",
+            tiffdir = "tif",
+            collection = 6,
+            extent = ex.navarre)
+# set tif folder where hdf will be imported
+src1<-file.path(src,"MOD09GA")
+# set the tif folder path
+tif.src<-file.path(src1,"tif")
 #mosaic and cut navarre region
 modMosaic(tif.src,
-          AppRoot=src,
-          out.name="Navarre",
-          extent=ex.navarre)
-#change src to navarre folder
-src<-file.path(src,"Navarre")
-#calculate NDVI from navarre folder
-modFolderToVar(src,
-               fun=varNDVI,
-               AppRoot=dirname(src))
-#change src TS_sample
-src<-file.path(dirname(src),"NDVI")
-#create the Rdata
-genSaveTSRData(src,ts.name="ModisNDVI",AppRoot=dirname(src))
+          AppRoot = src1,
+          out.name = "Navarre",
+          extent = ex.navarre)
+# change src to navarre folder
+src2<-file.path(src1,"Navarre")
+# calculate NDVI from navarre folder
+modFolderToVar(src2,
+               fun = varNDVI,
+               AppRoot = dirname(src2),
+               overwrite = TRUE)
+# change src TS_sample
+src3<-file.path(dirname(src2),"NDVI")
+# create the Rdata
+genSaveTSRData(src3, ts.name = "ModisNDVI", AppRoot = src)
 s.end<-Sys.time()
 }
 }

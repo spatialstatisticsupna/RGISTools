@@ -20,17 +20,17 @@ ls8LoadMetadata(update = FALSE, verbose = TRUE,
 }}
 }
 \description{
-\code{ls8MetaDataFile} loads a data frame called \code{.LS8MD}
+\code{\link{ls8LoadMetadata}} loads a data frame called \code{.LS8MD}
  with the names of the Landsat-8 images and their metadata.The metadata provides
  auxiliary information regarding Landsat-8 images repository such as image quality, acquisition
  data, cloud cover, etc. You can find a description of the metadata at
- \url{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}.
+ \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{bulk-metadata-service}.
 }
 \details{
 All captures done by Landsat-8 are cataloged in a unique csv file. The size of the file
 might be larger than 210MB. Therefore, the process of downloading and importing to R may take several
 minutes (around 7 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive storage). The function creates an
-RData file with the metadata csv. Thus, every time \code{ls8MetaDataFile} is called,
+RData file with the metadata csv. Thus, every time \code{\link{ls8LoadMetadata}} is called,
 this function loads the existing RData in the Approot. This is intended to reduce the loading
 time of metadata in the future.
 }

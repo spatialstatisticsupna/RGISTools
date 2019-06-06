@@ -1,32 +1,32 @@
 #' Search landsat 7 time-series images list
 #'
-#' \code{ls7Search} searches the LANDSAT 7 image repository to find those which are relevant for
+#' \code{\link{ls7Search}} searches the LANDSAT 7 image repository to find those which are relevant for
 #' a particular location and date interval. The function returns the search result as a data frame
 #' with the names of the images and their metadata.
 #'
-#' \code{ls7Search} is a stand-alone function. If the metadata for the time and region of interest has been
-#' downloaded before, \code{ls8Search} will use this metadata by default. In case the metadata has not
-#' been yet downloaded, \code{ls8Search} will make the call for you.
+#' \code{\link{ls7Search}} is a stand-alone function. If the metadata for the time and region of interest has been
+#' downloaded before, \code{\link{ls7Search}} will use this metadata by default. In case the metadata has not
+#' been yet downloaded, \code{\link{ls7Search}} will make the call for you.
 #'
 #' The search is done by defining a temporal interval and a location. The arguments \code{startDate}
 #' and \code{endDate} defines the temporal interval.These are mandatory arguments. The function defines the spatial location
 #' using at least one of the following arguments: \code{pathrow}, \code{extent}, \code{lonlat} y \code{polygon}. When more than one of these argument is defined,
 #' the function will work with the first evaluated method, when no one is defined, the function shows an error message.
 #'
-#' \code{ls7Search} uses the metadata file downloaded by \code{ls7LoadMetadata}. However, it also works as a stand-alone function.
-#' If the metadata for the time and region of interest was downloaded before, \code{ls7Search} uses this metadata by default.
-#' In case the metadata was not download, \code{ls7Search} makes the call for you.
+#' \code{\link{ls7Search}} uses the metadata file downloaded by \code{\link{ls7LoadMetadata}}. However, it also works as a stand-alone function.
+#' If the metadata for the time and region of interest was downloaded before, \code{\link{ls7Search}} uses this metadata by default.
+#' In case the metadata was not download, \code{\link{ls7Search}} makes the call for you.
 #'
 #' Landsat images are catalogued spatially using a unique path and row. The fastest way to search an image
 #' in the metadata file is filtering by its path and row. This search method requires previous knowledge on
 #' the path and row relevant for your region of interest.
 #'
-#' From the user point of view, the easiest way to search a time series of Landsat-8 is using the extent,
+#' From the user point of view, the easiest way to search a time series of Landsat-7 is using the extent,
 #' \code{lonlat} and \code{polygon} arguments. These methods do not requires to know in advance the path and rows of the images.
 #' These method uses spatial objects to define the region of interest. The projection of the spatial needs to be
 #' "\code{+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs}”. The argument \code{extent} accepts any R objects being defined
 #' by a spatial extent. The argument \code{lonlat} only accepts an R vector with one coordinate in the form of
-#' latitude-longitude (ex. \code{c(42.81687, -1.64323)}, where the first element is the latitude and the second is the longitude).
+#' latitude-longitude (ex. \code{c(-1.64323,42.81687)}, where the first element is the latitude and the second is the longitude).
 #' The argument \code{polygon}, accepts \code{spatialpolygon} or s\code{patialpolygondataframe} objects.
 #'
 #' The search procedure using spatial objects compares the spatial extension of Landsat images with the
@@ -53,9 +53,9 @@
 #' to the Worldwide Reference System (\url{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/})
 #' This argument is mandatory if extent is not defined.
 #'   \item \code{lonlat} this argument is optional. A vector or a polygon with the coordinates of
-#' the point or region of interest in latitude/longitude format.
+#' the point or region of interest in longitude/latitude format.
 #'   \item \code{extent} this argument is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
-#' object are acceptable formats as long as are latitude/longitude format.
+#' object are acceptable formats as long as are longitude/latitude format.
 #' This argument is mandatory if pathrow is not defined.
 #'   \item \code{AppRoot} the root directory where meta data file will be saved.
 #'   \item all column names in .LS7MD data frame for filter results.
@@ -127,7 +127,7 @@ ls7Search<-function(startDate,endDate,verbose=FALSE,precise=FALSE,...){
     stopifnot(class(arg$lonlat)=="numeric")
     stopifnot(length(arg$lonlat)==2)
     circle=list()
-    circle[[1]]<-Polygons(list(Polygon(genCreateSpatialCircle(x=arg$lonlat[2],y=arg$lonlat[1]))),ID=1)
+    circle[[1]]<-Polygons(list(Polygon(genCreateSpatialCircle(x=arg$lonlat[1],y=arg$lonlat[2]))),ID=1)
 
     circle<-SpatialPolygons(circle,proj4string=CRS('+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'))
     if(precise){

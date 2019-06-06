@@ -7,24 +7,24 @@
 modPreview(searchres, n, size = NULL)
 }
 \arguments{
-\item{searchres}{a vector with the results from a search of Modis images provided by the functions modSearch with resType="browseurl" argument.}
+\item{searchres}{a vector with the results from a search of Modis images provided by the functions modSearch with \code{resType="browseurl"} argument.}
 
-\item{n}{the number with the element corresponding to the image of interest in the search vector.}
+\item{n}{the number of the image of interest in the search vector.}
 
-\item{size}{a number specifying the size of the preview to be displayed. The number determines pixels numbers.}
+\item{size}{a number specifying the size of the preview to be displayed, in pixels.}
 }
 \description{
-\code{modPreview} shows a preview of the n image from a set of search results.
+\code{\link{modPreview}} shows a preview of the n image from a set of search results.
 }
 \details{
-The functions shows a preview of an image resulting from a search in Landsat imagery metadata.
-A search with \code{modSearch} has to be carried before proceeding with the preview.
+The function shows a preview of an image resulting from a search in Landsat imagery metadata.
+A search with \code{\link{modSearch}} has to be carried out before proceeding with the preview.
 The preview is downloaded from Landsat’s website. Please, be aware that only some images have this feature.
 }
 \examples{
 \dontrun{
 data(ex.navarre)
-# Retrieve metadata of images covering Navarre region between 2011 and 2013
+# Retrieve jpg images covering Navarre region between 2011 and 2013
 searchres<-modSearch(product="MOD09GA",
                     startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                     endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),

@@ -17,7 +17,7 @@ varEVI(blue, red, nir)
 EVI in \code{raster} format.
 }
 \description{
-\code{varEVI} computes the the EVI index from blue, nir and red bands.
+\code{\link{varEVI}} computes the the EVI index from blue, nir and red bands.
 }
 \details{
 The Enhanced Vegetation Index (EVI) is a vegetation indicator that improves sensitivity 

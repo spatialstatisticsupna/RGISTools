@@ -1,8 +1,8 @@
 #' Creates variables from Landsat 8 multispectral bands
 #'
-#' \code{ls8FolderToVar} calculates an index using the bands from Landsat multispectral
+#' \code{\link{ls8FolderToVar}} calculates an index using the bands from Landsat multispectral
 #' images. The images are specified by a path to the storing folder (resulting from
-#' the \code{lsMosaic} function). The function returns a rasterStack with the time-series of the index.
+#' the \code{\link{lsMosaic}} function). The function returns a rasterStack with the time-series of the index.
 #'
 #' The function requires to define \code{src} and \code{fun} attributes. \code{src} defines the path to
 #' the result of \code{\link{lsMosaic}}, with all bands of Landsat-7 for a region of interest. \code{fun} defines
@@ -28,7 +28,7 @@
 #' #load a spatial polygon object of navarre for the example
 #' data(ex.navarre)
 #' #asign the folder where the example will be run
-#' src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat8"
+#' src<-"Path_for_downloading_folder"
 #' #download landsat8 images
 #' search<-lsDownload(satellite="ls8",
 #'                    username="username",
@@ -45,11 +45,11 @@
 #'          AppRoot=src,
 #'          out.name="Navarre")
 #' #asign src as the path to mosaiced folder
-#' src<-file.path(src,"Navarre")
+#' src2<-file.path(src,"Navarre")
 #' #generate NDVI images of Navarre
-#' ls8FolderToVar(src,
+#' ls8FolderToVar(src2,
 #'                fun=varNDVI,
-#'                AppRoot=file.path(dirname(src)),
+#'                AppRoot=src,
 #'                overwrite = T)
 #' }
 ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){

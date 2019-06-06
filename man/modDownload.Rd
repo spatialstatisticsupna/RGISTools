@@ -30,12 +30,12 @@ modDownload(product, startDate, endDate, username, password,
 \item{...}{argument for function nestering:
 \itemize{
   \item \code{lonlat} A vector or a polygon with the coordinates of
-the point or region of interest in latitude/longitude format.
+the point or region of interest in longitude/latitude format.
 This argument is mandatory if polygon or extent is not defined.
   \item \code{extent} \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or \code{SpatialPoints*} object are acceptable formats
-as long as coordinates are in latitude/longitude format.
+as long as coordinates are in longitude/latitude format.
 This argument is mandatory if \code{polygon} or \code{lonlat} is not defined.
-  \item \code{polygon} A list of vectors defining the points of the polygon in latitude/longitude format
+  \item \code{polygon} A list of vectors defining the points of the polygon in longitude/latitude format
 This argument is mandatory if \code{lonlat} or extent is not defined.
   \item \code{AppRoot} the directory to save the resulting time series
 }}

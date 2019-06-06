@@ -7,10 +7,10 @@
 showRGISToolsOpt(env = optEnv)
 }
 \arguments{
-\item{env}{the environment where the RGISTools option are saved.}
+\item{env}{the environment where the \code{RGISTools} option are saved.}
 }
 \description{
-\code{showRGISToolsOpt} prints the name of all options in RGISTools package.
+\code{\link{showRGISToolsOpt}} prints the name of all options in \code{RGISTools} package.
 }
 \examples{
 showRGISToolsOpt()

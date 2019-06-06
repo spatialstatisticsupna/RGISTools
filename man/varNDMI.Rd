@@ -15,7 +15,7 @@ varNDMI(nir, swir1)
 NDMI in \code{raster} format
 }
 \description{
-\code{varNDMI} computes the NDMI index from nir and swir1 bands.
+\code{\link{varNDMI}} computes the NDMI index from nir and swir1 bands.
 }
 \details{
 The Normalized Difference Moisture Index (NDMI) is an index that represents the water 

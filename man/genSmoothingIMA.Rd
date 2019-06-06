@@ -9,23 +9,23 @@ genSmoothingIMA(rStack, cStack, Img2Process = NULL, fun = mean,
   aFilter = c(), snow.mode = FALSE, ...)
 }
 \arguments{
-\item{rStack}{a \code{RasterStack} with time series of satellite images.}
+\item{rStack}{a \code{RasterStack} containing a time series of satellite images.}
 
-\item{cStack}{a \code{RasterStack} with time series of covariates.}
+\item{cStack}{a \code{RasterStack} containing a time series of covariates.}
 
 \item{Img2Process}{a vector defining the images to smooth.}
 
-\item{fun}{a function used to calculate the mean image. Both the \code{mean} or \code{median} functions are acceptable.}
+\item{fun}{a function used to calculate the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.}
 
-\item{nPeriods}{number of periods used in the temporal window.}
+\item{nPeriods}{number of periods used to define the neighborhood}
 
-\item{nYears}{number of years used in the temporal window.}
+\item{nYears}{number of years used to define the neighborhood.}
 
 \item{fact}{an aggregation factor to be used to reduce the anomalies before smoothing.}
 
 \item{out.name}{the name of the images if the result is written in the HDD.}
 
-\item{aFilter}{two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).}
+\item{aFilter}{a vector with the lower and upper extreme values for filtering the anomalies. Ex. c(0.05,0.95).}
 
 \item{snow.mode}{logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.}
 
@@ -39,8 +39,8 @@ genSmoothingIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 method that uses covariates. The methodology is explained in \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{
-The procedure uses spatio temporal data to exprese each image in the time series as a mean
-image plus a residual called anomaly.The procedure smoothed the anomaly using covariates to
+The procedure uses spatio temporal data to decompose each image in the time series as a mean
+image plus a residual or anomaly.The procedure smoothed the anomaly using covariates to
 smooth the outliers in the anomaly. See more information in \insertCite{militino2019interpolation}{RGISTools}.
 
 This function provides a set of arguments to configure the run of the precedure, such as the images to fill (\code{Img2Process}),
@@ -56,7 +56,8 @@ data(ex.dem.navarre)
 genPlotGIS(ex.ndvi.navarre)
 genPlotGIS(ex.dem.navarre)
 
-# distort ndvi data
+# Distorts 5\% of the original ndvi data by 
+# altering 50\% its values
 for(x in c(2,5)){
   aux <- sampleRandom(ex.ndvi.navarre[[x]],
                       ncell(ex.ndvi.navarre)*0.05,
@@ -70,12 +71,12 @@ genPlotGIS(ex.ndvi.navarre)
 smth.ndvi<-genSmoothingIMA(rStack=ex.ndvi.navarre,
                            cStack=ex.dem.navarre,
                            Img2Process=c(2,5))
-# plot the result
-genPlotGIS(stack(ex.ndvi.navarre[[2]],
+# plot the distorted 1, smoothed 1, 
+# distorted 5, smoothed 5 images
+plot(stack(ex.ndvi.navarre[[2]],
                  smth.ndvi[[1]],
                  ex.ndvi.navarre[[5]],
-                 smth.ndvi[[2]]),
-           layout=c(2,2))
+                 smth.ndvi[[2]]))
 }
 \references{
 \insertRef{militino2018improving}{RGISTools}

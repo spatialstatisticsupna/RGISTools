@@ -1,16 +1,16 @@
 #' Calculates an index from Sentinel-2 multispectral bands
 #'
-#' \code{senFolderToVar} calculates an index using the bands from Sentinel-2 multispectral
+#' \code{\link{senFolderToVar}} calculates an index using the bands from Sentinel-2 multispectral
 #' images. The images are specified by a path to the storing folder
-#' (resulting from the senMosaic function). The function returns a
+#' (resulting from the \code{\link{senMosaic}} function). The function returns a
 #' \code{rasterStack} with the time-series of the index.
 #'
 #' The function requires the definition of src and fun arguments. The argument \code{src}
 #'  contains the path to the folder with the multispectral
-#'  images. It can be easily defined as the path resulting from \code{senMosaic}.
+#'  images. It can be easily defined as the path resulting from \code{\link{senMosaic}}.
 #'  The fun argument is a function with the calculation of the index based
 #'  on spectral bands. There are some pre-programmed indexes in \code{RGISTools}.
-#'  Functions with the pre-programmed indices start with var (\code{varNDVI}, \code{varEVI}).
+#'  Functions with the pre-programmed indices start with var (\code{\link{varNDVI}}, \code{\link{varEVI}}).
 #'  The user can define its own functions.
 #'
 #' @param src path to the folder with the Sentinel multispectral images.
@@ -48,11 +48,11 @@
 #'           gutils=T,
 #'           out.name="Navarre")
 #' #asign src as the path to mosaiced folder
-#' src<-file.path(src,"Navarre")
+#' src2<-file.path(src,"Navarre")
 #' #generate EVI images of Navarre
-#' senFolderToVar(src,
+#' senFolderToVar(src2,
 #'                fun=varEVI,
-#'                AppRoot=file.path(dirname(src)))
+#'                AppRoot=src)
 #' }
 senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   AppRoot=defineAppRoot(...)

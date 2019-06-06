@@ -1,8 +1,8 @@
 #' Creates variables from Landsat 7 multispectral bands
 #'
-#' \code{ls7FolderToVar} calculates an index using the bands from Landsat multispectral
+#' \code{\link{ls7FolderToVar}} calculates an index using the bands from Landsat multispectral
 #' images. The images are specified by a path to the storing folder (resulting from
-#' the \code{lsMosaic} function). The function returns a rasterStack with the time-series of the index.
+#' the \code{\link{lsMosaic}} function). The function returns a rasterStack with the time-series of the indexes.
 #'
 #' The function requires to define \code{src} and \code{fun} attributes. \code{src} defines the path to
 #' the result of \code{\link{lsMosaic}}, with all bands of Landsat-7 for a region of interest. \code{fun} defines
@@ -11,8 +11,8 @@
 #'
 #' @param src path to the folder with the Landsat multispectral image.
 #' @param fun is a function with the calculation of the index.
-#' All functions in the package starting with three characters
-#' 'var' are acceptable functions. Custom functions can be also
+#' All functions created in RGISTools starting with
+#' 'var' are avaliable functions. Custom functions can be also
 #' implemented \code{var} are acceptable functions.
 #' @param getStack logical argument. If \code{TRUE}, returns the time-series as a 
 #' raster or otherwise as Hard Drive Devide (HDD).
@@ -39,16 +39,16 @@
 #'                    AppRoot=src)
 #' #asign the folder with the Landsat 7 images untared
 #' tif.src<-file.path(src,"untar")
-#' #mosaic the Landsat7 images
+#' # mosaic the Landsat7 images
 #' lsMosaic(tif.src,
 #'          AppRoot=src,
 #'          out.name="Navarre")
-#' #asign src as the path to mosaiced folder
-#' src<-file.path(src,"Navarre")
-#' #generate NDVI images of Navarre
-#' ls7FolderToVar(src,
+#' # asign src as the path to mosaicked folder
+#' src2<-file.path(src,"Navarre")
+#' # generate NDVI images of Navarre
+#' ls7FolderToVar(src2,
 #'                fun=varNDVI,
-#'                AppRoot=file.path(dirname(src)),
+#'                AppRoot=src),
 #'                overwrite = T)
 #' }
 ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){

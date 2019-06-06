@@ -23,18 +23,18 @@ All functions in the package starting with three characters.
 }}
 }
 \description{
-\code{senFolderToVar} calculates an index using the bands from Sentinel-2 multispectral
+\code{\link{senFolderToVar}} calculates an index using the bands from Sentinel-2 multispectral
 images. The images are specified by a path to the storing folder
-(resulting from the senMosaic function). The function returns a
+(resulting from the \code{\link{senMosaic}} function). The function returns a
 \code{rasterStack} with the time-series of the index.
 }
 \details{
 The function requires the definition of src and fun arguments. The argument \code{src}
  contains the path to the folder with the multispectral
- images. It can be easily defined as the path resulting from \code{senMosaic}.
+ images. It can be easily defined as the path resulting from \code{\link{senMosaic}}.
  The fun argument is a function with the calculation of the index based
  on spectral bands. There are some pre-programmed indexes in \code{RGISTools}.
- Functions with the pre-programmed indices start with var (\code{varNDVI}, \code{varEVI}).
+ Functions with the pre-programmed indices start with var (\code{\link{varNDVI}}, \code{\link{varEVI}}).
  The user can define its own functions.
 }
 \examples{

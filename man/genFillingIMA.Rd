@@ -15,13 +15,13 @@ genFillingIMA(imgTS, Img2Fill = NULL, aFilter = c(0.05, 0.95),
 
 \item{aFilter}{two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).}
 
-\item{fact}{an aggregation factor to be used to reduce the anomalies before the interpolation.}
+\item{fact}{an aggregation factor of the anomalies before the interpolation.}
 
 \item{nPeriods}{number of periods used in the temporal window.}
 
 \item{nYears}{number of years used in the temporal window.}
 
-\item{fun}{function used to calculate the mean image, \code{mean}, \code{median} are acceptable functions.}
+\item{fun}{function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.}
 
 \item{factSE}{the fact used in the standard error prediction to reduce the processing time.}
 
@@ -41,11 +41,11 @@ genFillingIMA(imgTS, Img2Fill = NULL, aFilter = c(0.05, 0.95),
 }
 \description{
 \code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly
-for gap filling published in  (\url{http://dx.doi.org/10.1109/TGRS.2019.2904193}).
+for gap filling published in  \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{
 The time series is decomposed into a mean and a residual (anomaly)
-components. Instead of smoothing images, the procedure applies
+components. The procedure applies
 the smoothing algorithm over the anomaly.
 
 The arguments configure the smoothing procedure:

@@ -24,16 +24,17 @@ modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
 }}
 }
 \description{
-\code{modExtractHDF} converts the original compressed from MODIS (.df) into a file
+\code{\link{modExtractHDF}} converts the original compressed from MODIS (.df) into a file
 format loadable by R (.tif). The function extracts all image layers and crops the
-area of interest (if needed)
+area of interest (if needed).
 }
 \details{
-HDF files cannot be directly loaded into R. The function modExtractHDF
-borrows gdalwarp and gdal_translate functions from the gdalUtils package.
-These functions are used to convert the .hdf files into .tif files. The .tif
+HDF files cannot be directly loaded into R. The function \code{\link{modExtractHDF}}
+borrows \code{gdalwarp} and \code{gdal_translate} functions from the \code{gdalUtils} package.
+These functions are used to convert the '.hdf' files into .tif files. The .tif
 files can be loaded in R using the raster package. Go to \code{\link{modSearch}} and \code{\link{modDownload}}
-for further details about these functions. Further details about the \code{gdalUtils} and \code{gdalUtils} packages
+for further details about these functions. Further details about the \code{gdalUtils} 
+in \code{gdalUtils} package manual.
 }
 \examples{
 \dontrun{
