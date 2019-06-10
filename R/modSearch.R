@@ -35,7 +35,7 @@
 #' @examples
 #' \dontrun{
 #' data(ex.navarre)
-#' # Searching MODIS MYD13A2 images between 2011 and 2013 by longitude/latitude
+#' # Searching Modis MYD13A2 images between 2011 and 2013 by longitude/latitude
 #' using a polygon class variable
 #' img.list<-modSearch(product="MYD13A2",
 #'                     startDate=as.Date("01-01-2011","%d-%m-%Y"),
@@ -43,7 +43,7 @@
 #'                     collection=6,
 #'                     extent=ex.navarre)
 #'                     # Area of interest: defined based on longitude-latitude extent
-#' # Searching MODIS MYD13A2 images in the whole 2010 by longitude/latitude
+#' # Searching Modis MYD13A2 images in the whole 2010 by longitude/latitude
 #' # using a extent class variable defined by the user
 #' aoi = extent(c(-2.49,-0.72,41.91,43.31))
 #' my.imgs<-modSearch(product="MYD13A2",

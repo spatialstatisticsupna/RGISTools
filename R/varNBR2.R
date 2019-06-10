@@ -13,11 +13,11 @@
 #' @return NBR2 in \code{raster} format
 #'
 #' @examples
-#' # dir path of cropped and cutted modis image in the region of navarre as example
+#' # dir path of cropped and cutted Modis image in the region of navarre as example
 #' img.dir <- system.file("ExNavarra", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir,pattern="\\.tif$",recursive = TRUE,full.names = TRUE)
-#' #select the swir1 and swir2 bands
+#' # select the swir1 and swir2 bands
 #' swir1 <- raster(img.files[6])
 #' swir2 <- raster(img.files[7])
 #' # calculate the nbr2 image

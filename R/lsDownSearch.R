@@ -3,7 +3,7 @@
 #' \code{\link{lsDownSearch}} downloads the list of images provided by \code{\link{ls7Search}} and \code{\link{ls8Search}} functions.
 #' The images are saved as ‘.tiff’ files in the \code{AppRoot} directory.
 #'
-#' This function is used for download landsat images. Uses the data frame result from  any landsat
+#' This function is used for download Landsat images. Uses the data frame result from  any landsat
 #' search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}) and download all images in data frame.
 #' Image download requires USGS login account from \url{https://ers.cr.usgs.gov/register/}.
 #'

@@ -14,11 +14,11 @@
 #' @return NDWI in \code{raster} format
 #'
 #' @examples
-#' # dir path of cropped and cutted modis image in the region of navarre as example
+#' # dir path of cropped and cutted Modis image in the region of navarre as example
 #' img.dir <- system.file("ExNavarra", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir,pattern="\\.tif$",recursive = TRUE,full.names = TRUE)
-#' #select the green and nir bands
+#' # select the green and nir bands
 #' green <- raster(img.files[4])
 #' nir <- raster(img.files[2])
 #' # calculate the ndwi image

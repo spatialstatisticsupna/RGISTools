@@ -1,6 +1,6 @@
 #' Search Sentinel images using ESA’s SciHub API
 #'
-#' \code{\link{senSearch}} senSearch searches sentinel products on ESA powered api  \url{http://scihub.copernicus.eu}.
+#' \code{\link{senSearch}} senSearch searches Sentinel products on ESA powered api  \url{http://scihub.copernicus.eu}.
 #'
 #' Provides the images and urls to be downloaded from ESA’s SciHub API. The images are
 #' searched based on a range of dates and a region of interest. Dates have to be

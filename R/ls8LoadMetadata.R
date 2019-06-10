@@ -1,4 +1,4 @@
-#' Sinchronizes landsat 8 meta data file, for image search
+#' Sinchronizes Landsat 8 meta data file, for image search
 #'
 #' \code{\link{ls8LoadMetadata}} loads a data frame called \code{.LS8MD}
 #'  with the names of the Landsat-8 images and their metadata.The metadata provides

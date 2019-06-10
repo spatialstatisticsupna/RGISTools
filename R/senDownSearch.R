@@ -35,12 +35,12 @@
 #'                      username="username",
 #'                      password="password")
 #'
-#' #filtering the path R094 where Navarre is located
+#' # filtering the path R094 where Navarre is located
 #' length(searchres)
 #' searchres<-searchres[grepl("R094",names(searchres))]
 #' length(searchres)
 #'
-#' #sentinel download function
+#' # Sentinel download function
 #' senDownSearch(searchres=searchres,
 #'               username="username",
 #'               password="password",

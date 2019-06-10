@@ -13,11 +13,11 @@
 #' @return NDMI in \code{raster} format
 #'
 #' @examples
-#' # dir path of cropped and cutted modis image in the region of navarre as example
+#' # dir path of cropped and cutted Modis image in the region of navarre as example
 #' img.dir <- system.file("ExNavarra", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir,pattern="\\.tif$",recursive = TRUE,full.names = TRUE)
-#' #select the nir and swir1 bands
+#' # select the nir and swir1 bands
 #' nir <- raster(img.files[2])
 #' swir1 <- raster(img.files[6])
 #' # calculate the ndmi image

@@ -29,7 +29,7 @@
 #' data(ex.navarre)
 #' #asign the folder where the example will be run
 #' src<-"Path_for_downloading_folder"
-#' #download landsat8 images
+#' #download Landsat 8 images
 #' search<-lsDownload(satellite="ls8",
 #'                    username="username",
 #'                    password="password",
@@ -38,7 +38,7 @@
 #'                    extent=ex.navarre,
 #'                    untarDir="untar",
 #'                    AppRoot=src)
-#' #asign the folder with the landsat 8 images untared
+#' #asign the folder with the Landsat 8 images untared
 #' tif.src<-file.path(src,"untar")
 #' #mosaic the Landsat 8 images
 #' lsMosaic(tif.src,

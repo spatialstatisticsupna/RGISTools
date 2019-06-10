@@ -1,4 +1,4 @@
-#' Search landsat 8 time-series images list
+#' Search Landsat 8 time-series images list
 #'
 #' \code{\link{ls8Search}} searches the LANDSAT 8 image repository to find those which are relevant for
 #' a particular location and date interval. The function returns the search result as a data frame

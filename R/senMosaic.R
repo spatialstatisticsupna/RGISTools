@@ -39,7 +39,7 @@
 #' data(ex.navarre)
 #' #asign the folder where the example will be run
 #' src<-"Path_for_downloading_folder"
-#' #download sentinel images
+#' # download Sentinel images
 #' senDownload(startDate=as.Date("2018210","%Y%j"),
 #'             endDate=as.Date("2018218","%Y%j"),
 #'             platform="Sentinel-2",
@@ -49,9 +49,9 @@
 #'             username="username",
 #'             password="password",
 #'             AppRoot=src)
-#' #asign the folder with the sentinel images unzipped
+#' # asign the folder with the Sentinel images unzipped
 #' src.unzip<-file.path(src,"unzip")
-#' #mosaic the sentinel images
+#' # mosaic the Sentinel images
 #' senMosaic(src.unzip,
 #'           AppRoot=src,
 #'           gutils=T,

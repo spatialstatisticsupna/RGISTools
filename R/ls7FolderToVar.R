@@ -28,7 +28,7 @@
 #' data(ex.navarre)
 #' #asign the folder where the example will be run
 #' src<-"Path_for_downloading_folder"
-#' #download landsat7 images
+#' #download Landsat 7 images
 #' search<-lsDownload(satellite="ls7",
 #'                    username="username",
 #'                    password="password",

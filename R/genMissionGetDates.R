@@ -113,7 +113,7 @@ senGetDates<-function(str,...){
 #' imgPath <- 'MYD13A2.A2016361.h17v04.006.2017285133407.hdf'
 #' modGetDates(imgPath)
 #'
-#' # example of a list of the full file paths of MODIS images, mixing .hdf and .tif files
+#' # example of a list of the full file paths of Modis images, mixing .hdf and .tif files
 #' imgsPaths<-list('MYD13A2.A2013297.h17v04.006.2015269230726.hdf',
 #'                 'MYD13A2.A2013313.h17v04.006.2015271071143.tif')
 #' modGetDates(imgsPaths)

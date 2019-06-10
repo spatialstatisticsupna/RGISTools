@@ -1,4 +1,4 @@
-#' Search landsat 7 time-series images list
+#' Search Landsat 7 time-series images list
 #'
 #' \code{\link{ls7Search}} searches the LANDSAT 7 image repository to find those which are relevant for
 #' a particular location and date interval. The function returns the search result as a data frame
