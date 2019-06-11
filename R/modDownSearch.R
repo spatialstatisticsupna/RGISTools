@@ -32,8 +32,11 @@
 #' #download all images in mList
 #' modDownSearch(mList,"user","pass")
 #' }
-modDownSearch<-function(searchres ,username,password,overwrite=FALSE,...){
+modDownSearch<-function(searchres ,username = NULL,password = NULL,overwrite=FALSE,...){
   arg<-list(...)
+  if(is.null(username)|is.null(password)){
+    stop("Username and/or password not defined!")
+  }
   AppRoot<-defineAppRoot(...)
   dir.create(AppRoot,showWarnings = F,recursive = T)
   for(l in searchres){

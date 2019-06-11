@@ -71,7 +71,7 @@ lsDownSearch<-function(searchres,
                        ...){
   stopifnot(class(searchres)=="data.frame")
   if(is.null(username)|is.null(password)){
-    stop("Username or password not defined!")
+    stop("Username and/or password not defined!")
   }
   arg<-list(...)
   AppRoot<-defineAppRoot(...)

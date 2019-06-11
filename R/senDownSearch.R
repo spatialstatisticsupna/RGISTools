@@ -48,14 +48,17 @@
 #'               unzip=T)
 #' }
 senDownSearch<-function(searchres,
-                        username,
-                        password,
+                        username=NULL,
+                        password=NULL,
                         error.log = "download_error.log",
                         nattempts = NULL,
                         unzip=FALSE,
                         overwrite=FALSE,
                         ...){
   arg<-list(...)
+  if(is.null(username)|is.null(password)){
+    stop("Username and/or password not defined!")
+  }
   AppRoot<-defineAppRoot(...)
   downFolder<-file.path(AppRoot,"/raw")
   dir.create(downFolder,recursive=T,showWarnings = FALSE)
