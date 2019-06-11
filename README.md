@@ -16,7 +16,7 @@ library(devtools)
 install_github("spatialstatisticsupna/RGISTools")
 ```
 
-## Descarga de images
+## Downloading satellite images
 
 ### Modis
 Credentials [EarthData](https://ers.cr.usgs.gov/register/) 
@@ -26,3 +26,6 @@ Credentials [EarthData](https://ers.cr.usgs.gov/register/)
 
 ### Sentinel
 Credentials [SciHub](https://scihub.copernicus.eu/dhus/#/self-registration) 
+
+## License
+Licensed under the [GPL-3 License](https://github.com/spatialstatisticsupna/RGISTools/blob/master/README.md).

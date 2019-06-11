@@ -53,8 +53,8 @@
 #' }
 ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   AppRoot=defineAppRoot(...)
+  vartype<-gsub("var","",as.character(match.call()[c("fun")]))
   if(!getStack){
-    vartype<-gsub("var","",as.character(match.call()[c("fun")]))
     AppRoot<-file.path(AppRoot,vartype)
     dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
     print(vartype)

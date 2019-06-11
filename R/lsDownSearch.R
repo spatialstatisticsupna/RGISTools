@@ -104,7 +104,7 @@ lsDownSearch<-function(searchres,
     #Unzip in downDir when available
     if(untar){
       print(paste0("Untar ",scene," file."))
-      untarDir<-file.path(AppRoot,downDir,untar,scene)
+      untarDir<-file.path(AppRoot,downDir,"untar",scene)
       if(overwrite){
         file.remove(untarDir,showWarnings=FALSE,recursive=TRUE)
       }
