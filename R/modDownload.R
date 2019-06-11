@@ -58,18 +58,18 @@ modDownload<-function(product,
                      ...){
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
-  search<-modSearch(product=product,
+  search.res<-modSearch(product=product,
                     startDate=startDate,
                     endDate=endDate,
                     collection=collection,
                     ...)
   if(verbose){
-    print(search)
+    print(search.res)
   }
   downdir<-file.path(AppRoot,product,hdfdir)
   tiffdir<-file.path(AppRoot,product,tiffdir)
   dir.create(downdir,recursive = T,showWarnings = F)
-  for(s in search){
+  for(s in search.res){
     print(basename(s))
     modDownSearch(s,username,password,AppRoot=downdir)
     dir.create(tiffdir,recursive=T,showWarnings = F)

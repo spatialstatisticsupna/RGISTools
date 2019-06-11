@@ -65,21 +65,21 @@
 #' @examples
 #' \dontrun{
 #' #search by known row and path
-#' search<-ls8Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
+#' search.res<-ls8Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
 #'                   pathrow=list(c(200,31),c(200,30)),
 #'                   browseAvaliable="Y")
 #'
 #' #search by projected file must be in lat long projection
 #' data(ex.navarre)
-#' search<-ls8Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
+#' search.res<-ls8Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
 #'                   extent=ex.navarre,
 #'                   precise=T,
 #'                   browseAvaliable="Y")
 #'
 #' #search by projected file fast
-#' search<-ls8Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
+#' search.res<-ls8Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
 #'                   extent=ex.navarre,
 #'                   precise=F,

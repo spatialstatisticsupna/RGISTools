@@ -35,12 +35,12 @@
 #' @examples
 #' \dontrun{
 #' data(ex.navarre)
-#' search<-lsDownload(satellite="ls8",
-#'                    username="username",
-#'                    password="password",
-#'                    startDate=as.Date("01-01-2018","%d-%m-%Y"),
-#'                    endDate=as.Date("20-01-2018","%d-%m-%Y"),
-#'                    extent=ex.navarre)
+#' lsDownload(satellite="ls8",
+#'            username="username",
+#'            password="password",
+#'            startDate=as.Date("01-01-2018","%d-%m-%Y"),
+#'            endDate=as.Date("20-01-2018","%d-%m-%Y"),
+#'            extent=ex.navarre)
 #' }
 lsDownload<-function(satellite,
                      startDate,

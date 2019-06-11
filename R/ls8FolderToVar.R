@@ -30,14 +30,14 @@
 #' #asign the folder where the example will be run
 #' src<-"Path_for_downloading_folder"
 #' #download Landsat 8 images
-#' search<-lsDownload(satellite="ls8",
-#'                    username="username",
-#'                    password="password",
-#'                    startDate=as.Date("01-01-2018","%d-%m-%Y"),
-#'                    endDate=as.Date("20-01-2018","%d-%m-%Y"),
-#'                    extent=ex.navarre,
-#'                    untarDir="untar",
-#'                    AppRoot=src)
+#' lsDownload(satellite="ls8",
+#'            username="username",
+#'            password="password",
+#'            startDate=as.Date("01-01-2018","%d-%m-%Y"),
+#'            endDate=as.Date("20-01-2018","%d-%m-%Y"),
+#'            extent=ex.navarre,
+#'            untarDir="untar",
+#'            AppRoot=src)
 #' #asign the folder with the Landsat 8 images untared
 #' tif.src<-file.path(src,"untar")
 #' #mosaic the Landsat 8 images

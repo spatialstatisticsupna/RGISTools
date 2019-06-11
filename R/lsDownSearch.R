@@ -34,31 +34,31 @@
 #' # Search and download the images from Landsat 8 comprised between
 #' # 2011 and 2013 for the region of Navarre
 #' data(ex.navarre)
-#' search<-ls8Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
+#' search.res<-ls8Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
 #'                   extent=ex.navarre,
 #'                   browseAvaliable="Y")
 #'
 #' #download 1 image
-#' lsDownSearch(search[1,],username="user",password="pass",untarDir=T,raw.rm=T)
+#' lsDownSearch(search.res[1,],username="user",password="pass",untar=T,raw.rm=T)
 #' # download 10 images
-#' lsDownSearch(search[1:10,],username="user",password="pass",untarDir=T,raw.rm=T)
+#' lsDownSearch(search.res[1:10,],username="user",password="pass",untar=T,raw.rm=T)
 #' # download all the images
-#' lsDownSearch(search,username="user",password="pass",untarDir=T,raw.rm=T)
+#' lsDownSearch(search.res,username="user",password="pass",untar=T,raw.rm=T)
 #'
 #' # Search and download the images from Landsat 7 comprised between
 #' # 2011 and 2013 for the region of Navarre
 #' data(ex.navarre)
-#' search<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
+#' search.res<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
 #'                   extent=ex.navarre,
 #'                   browseAvaliable="Y")
 #' #download 1 image
-#' lsDownSearch(search[1,],username="user",password="pass",untarDir=T,raw.rm=T)
+#' lsDownSearch(search.res[1,],username="user",password="pass",untar=T,raw.rm=T)
 #' #download 10 images
-#' lsDownSearch(search[1:10,],username="user",password="pass",untarDir=T,raw.rm=T)
+#' lsDownSearch(search.res[1:10,],username="user",password="pass",untar=T,raw.rm=T)
 #' #download all the images
-#' lsDownSearch(search,username="user",password="pass",untarDir=T,raw.rm=T)
+#' lsDownSearch(search.res,username="user",password="pass",untar=T,raw.rm=T)
 #' }
 lsDownSearch<-function(searchres,
                        username=NULL,
@@ -67,10 +67,11 @@ lsDownSearch<-function(searchres,
                        verbose=FALSE,
                        raw.rm=FALSE,
                        untar=FALSE,
+                       overwrite=FALSE,
                        ...){
   stopifnot(class(searchres)=="data.frame")
   if(is.null(username)|is.null(password)){
-    stop("User")
+    stop("Username or password not defined!")
   }
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
@@ -92,19 +93,21 @@ lsDownSearch<-function(searchres,
   handler<-startUSGSsession(username,password,cookies.file,verbose)
   if(verbose)
     print("USGS session started, downloading images...")
-
   for(scene in searchres$sceneID){
     if(!file.exists(paste0(downPath,"/",scene,".tar.gz"))){
       if(grepl("LC8",searchres[1,]$sceneID)){
-        .ls8DownloadUSGS(scene,downPath,handler,verbose=verbose)
+        .ls8DownloadUSGS(scene,downPath,handler,verbose=verbose,overwrite=overwrite)
       }else if(grepl("LE7",searchres[1,]$sceneID)){
-        .ls7DownloadUSGS(scene,downPath,handler,verbose=verbose)
+        .ls7DownloadUSGS(scene,downPath,handler,verbose=verbose,overwrite=overwrite)
       }
     }
     #Unzip in downDir when available
     if(untar){
       print(paste0("Untar ",scene," file."))
       untarDir<-file.path(AppRoot,downDir,untar,scene)
+      if(overwrite){
+        file.remove(untarDir,showWarnings=FALSE,recursive=TRUE)
+      }
       dir.create(untarDir,recursive=T)
       untar(paste0(downPath,"/",scene,".tar.gz"),exdir=untarDir)
       #Flag is true, so remove compressed files
