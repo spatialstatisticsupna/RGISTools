@@ -27,7 +27,7 @@ the point or region of interest in longitude/latitude format.
 }}
 }
 \description{
-\code{\link{senSearch}} senSearch searches sentinel products on ESA powered api  \url{http://scihub.copernicus.eu}.
+\code{\link{senSearch}} senSearch searches Sentinel products on ESA powered api  \url{http://scihub.copernicus.eu}.
 }
 \details{
 Provides the images and urls to be downloaded from ESA’s SciHub API. The images are

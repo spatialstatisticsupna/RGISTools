@@ -2,7 +2,7 @@
 % Please edit documentation in R/ls8LoadMetadata.R
 \name{ls8LoadMetadata}
 \alias{ls8LoadMetadata}
-\title{Sinchronizes landsat 8 meta data file, for image search}
+\title{Sinchronizes Landsat 8 meta data file, for image search}
 \usage{
 ls8LoadMetadata(update = FALSE, verbose = TRUE,
   omit.question = FALSE, ...)

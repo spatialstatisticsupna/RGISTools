@@ -7,6 +7,8 @@
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'
+#' @references \insertRef{gao1995normalized}{RGISTools}
+#'
 #' @param nir the nir band of the capture in \code{raster} format
 #' @param swir1 the swir1 band of the capture in \code{raster} format
 #'

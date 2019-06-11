@@ -2,13 +2,13 @@
 % Please edit documentation in R/modMosaic.R
 \name{modMosaic}
 \alias{modMosaic}
-\title{Mosaics a set of MODIS images}
+\title{Mosaics a set of Modis images}
 \usage{
 modMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
   gutils = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
-\item{src}{the path of the folder with the MODIS images in tif format.}
+\item{src}{the path of the folder with the Modis images in tif format.}
 
 \item{extent}{spatial polygon object representing the region of interest.}
 
@@ -30,7 +30,7 @@ If it is not supplied, the function is applied to all the bands available in \co
 }}
 }
 \description{
-\code{\link{modMosaic}} merges the tiles of MODIS covering a region of interest returns a single image for each date.
+\code{\link{modMosaic}} merges the tiles of Modis covering a region of interest returns a single image for each date.
 }
 \details{
 The function mosaics the tiles of satellite images in the \code{src} folder.
@@ -51,11 +51,11 @@ by default the output file is named as ‘outfile’.
 }
 \examples{
 \dontrun{
-#load a spatial polygon object of navarre for the example
+# load a spatial polygon object of navarre for the example
 data(ex.navarre)
 #asign the folder where the example will be run
 src<-"Path_for_downloading_folder"
-#download modis images
+# download Modis images
 modDownload(product="MOD09GA",
             startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
             endDate=as.Date("03-01-2018","\%d-\%m-\%Y"),
@@ -66,10 +66,10 @@ modDownload(product="MOD09GA",
             tiffdir="tif",
             collection=6,
             extent=ex.navarre)
-#asign the folder with the sentinel images untared
+# asign the folder with the Sentinel images untared
 src<-file.path(src,"MOD09GA")
 tif.src<-file.path(src,"tif")
-#mosaic the modis images
+# mosaic the Modis images
 modMosaic(tif.src,
           AppRoot = src,
           out.name = "Navarre",

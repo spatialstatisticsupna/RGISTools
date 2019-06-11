@@ -6,7 +6,7 @@
 \usage{
 lsDownSearch(searchres, username = NULL, password = NULL,
   cookies.file = "lscookies.txt", verbose = FALSE, raw.rm = FALSE,
-  untar = FALSE, ...)
+  untar = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
 \item{searchres}{the results from \code{ls7Search} or \code{ls8Search}.}
@@ -33,7 +33,7 @@ lsDownSearch(searchres, username = NULL, password = NULL,
 The images are saved as ‘.tiff’ files in the \code{AppRoot} directory.
 }
 \details{
-This function is used for download landsat images. Uses the data frame result from  any landsat
+This function is used for download Landsat images. Uses the data frame result from  any landsat
 search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}) and download all images in data frame.
 Image download requires USGS login account from \url{https://ers.cr.usgs.gov/register/}.
 
@@ -51,30 +51,30 @@ directory. To change this setting, provide AppRoot = the full path as an argumen
 # Search and download the images from Landsat 8 comprised between
 # 2011 and 2013 for the region of Navarre
 data(ex.navarre)
-search<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
+search.res<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                   endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
                   extent=ex.navarre,
                   browseAvaliable="Y")
 
 #download 1 image
-lsDownSearch(search[1,],username="user",password="pass",untarDir=T,raw.rm=T)
+lsDownSearch(search.res[1,],username="user",password="pass",untar=T,raw.rm=T)
 # download 10 images
-lsDownSearch(search[1:10,],username="user",password="pass",untarDir=T,raw.rm=T)
+lsDownSearch(search.res[1:10,],username="user",password="pass",untar=T,raw.rm=T)
 # download all the images
-lsDownSearch(search,username="user",password="pass",untarDir=T,raw.rm=T)
+lsDownSearch(search.res,username="user",password="pass",untar=T,raw.rm=T)
 
 # Search and download the images from Landsat 7 comprised between
 # 2011 and 2013 for the region of Navarre
 data(ex.navarre)
-search<-ls7Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
+search.res<-ls7Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                   endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
                   extent=ex.navarre,
                   browseAvaliable="Y")
 #download 1 image
-lsDownSearch(search[1,],username="user",password="pass",untarDir=T,raw.rm=T)
+lsDownSearch(search.res[1,],username="user",password="pass",untar=T,raw.rm=T)
 #download 10 images
-lsDownSearch(search[1:10,],username="user",password="pass",untarDir=T,raw.rm=T)
+lsDownSearch(search.res[1:10,],username="user",password="pass",untar=T,raw.rm=T)
 #download all the images
-lsDownSearch(search,username="user",password="pass",untarDir=T,raw.rm=T)
+lsDownSearch(search.res,username="user",password="pass",untar=T,raw.rm=T)
 }
 }

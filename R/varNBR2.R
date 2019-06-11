@@ -7,6 +7,8 @@
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'
+#' @references \insertRef{lutes2006firemon}{RGISTools}
+#'
 #' @param swir1 the nir band of the capture in \code{raster} format
 #' @param swir2 the swir2 band of the capture in \code{raster} format
 #'

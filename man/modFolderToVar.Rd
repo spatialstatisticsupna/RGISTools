@@ -2,12 +2,12 @@
 % Please edit documentation in R/modFolderToVar.R
 \name{modFolderToVar}
 \alias{modFolderToVar}
-\title{Calculates an index from MODIS multispectral bands}
+\title{Calculates an index from Modis multispectral bands}
 \usage{
 modFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
-\item{src}{path to the folder with the MODIS multispectral images.}
+\item{src}{path to the folder with the Modis multispectral images.}
 
 \item{fun}{is a function with the calculation of the index.
 All functions in the package starting with three characters
@@ -23,7 +23,7 @@ All functions in the package starting with three characters
 }}
 }
 \description{
-\code{\link{modFolderToVar}} calculates an index using the bands from MODIS multispectral images.
+\code{\link{modFolderToVar}} calculates an index using the bands from Modis multispectral images.
 The images are specified by a path to the storing folder (resulting from the \code{\link{modMosaic}} function).
 The function returns a \code{RasterStack} with the time series of the index.
 }
@@ -37,11 +37,11 @@ indices in \code{RGISTools}. Functions with the pre-programmed indexes start wit
 }
 \examples{
 \dontrun{
-#load a spatial polygon object of navarre for the example
+# load a spatial polygon object of navarre for the example
 data(ex.navarre)
-#asign the folder where the example will be run
+# asign the folder where the example will be run
 src<-"Path_for_downloading_folder"
-#download modis images
+# download Modis images
 modDownload(product="MOD09GA",
             startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
             endDate=as.Date("03-01-2018","\%d-\%m-\%Y"),
@@ -52,19 +52,19 @@ modDownload(product="MOD09GA",
             tiffdir="tif",
             collection=6,
             extent=ex.navarre)
-#asign the folder with the sentinel images untared
+# asign the folder with the Sentinel images untared
 src<-file.path(src,"MOD09GA")
 tif.src<-file.path(src,"tif")
-#mosaic the modis images
+#mosaic the Modis images
 modMosaic(tif.src,
           AppRoot=src,
           out.name="Navarre")
-#asign src as the path to mosaiced folder
-src<-file.path(src,"Navarre")
-#generate NDVI images of Navarre
-modFolderToVar(src,
+# asign src as the path to mosaiced folder
+src2<-file.path(src,"Navarre")
+# generate NDVI images of Navarre
+modFolderToVar(src2,
                fun=varEVI,
-               AppRoot=file.path(dirname(src)),
+               AppRoot=src),
                overwrite = T)
 }
 }

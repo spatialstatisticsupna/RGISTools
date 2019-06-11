@@ -26,15 +26,18 @@ This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }
 \examples{
-# dir path of cropped and cutted modis image in the region of navarre as example
+# dir path of cropped and cutted Modis image in the region of navarre as example
 img.dir <- system.file("ExNavarra", package = "RGISTools")
 # list all tif files
 img.files <- list.files(img.dir,pattern="\\\\.tif$",recursive = TRUE,full.names = TRUE)
-#select the red and nir bands
+# select the red and nir bands
 red <- raster(img.files[1])
 nir <- raster(img.files[2])
 # calculate the ndwi image
 savi <- varSAVI(red,nir)
 # plot the image
 spplot(savi)
+}
+\references{
+\insertRef{huete1988soil}{RGISTools}
 }

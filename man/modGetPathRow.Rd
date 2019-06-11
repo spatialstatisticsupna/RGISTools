@@ -13,7 +13,7 @@ modGetPathRow(str)
 an string with the path and row of the image in "\code{hXXvYY}" format.
 }
 \description{
-\code{\link{modGetPathRow}} reads the official name of a modis image and returns the path and row data
+\code{\link{modGetPathRow}} reads the official name of a Modis image and returns the path and row data
 as Modis name convention of horizontal and vertical "\code{hXXvYY}".
 }
 \examples{

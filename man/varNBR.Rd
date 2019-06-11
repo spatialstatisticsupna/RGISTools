@@ -24,15 +24,18 @@ This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }
 \examples{
-# dir path of cropped and cutted modis image in the region of navarre as example
+# dir path of cropped and cutted Modis image in the region of navarre as example
 img.dir <- system.file("ExNavarra", package = "RGISTools")
 # list all tif files
 img.files <- list.files(img.dir,pattern="\\\\.tif$",recursive = TRUE,full.names = TRUE)
-#select the nir and swir2 bands
+# select the nir and swir2 bands
 nir <- raster(img.files[2])
 swir2 <- raster(img.files[7])
 # calculate the nbr image
 nbr <- varNBR(nir,swir2)
 # plot the image
 spplot(nbr)
+}
+\references{
+\insertRef{garcia1991mapping}{RGISTools}
 }

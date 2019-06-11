@@ -7,7 +7,6 @@
 #' Bands may contain reflectance outliers which cause the image to look dark. Use the range
 #' argument to remove the outliers and get a better-looking image.
 #'
-#'
 #' @param red the red band of the capture in \code{raster} format.
 #' @param green the green band of the capture in \code{raster} format.
 #' @param blue the blue band of the capture in \code{raster} format.

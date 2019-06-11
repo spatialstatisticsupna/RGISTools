@@ -26,14 +26,14 @@ The preview is downloaded from Landsat’s website. Please, be aware that only s
 \dontrun{
 data(ex.navarre)
 # Retrieve metadata of images covering Navarre region between 2011 and 2013
-search<-ls7Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
+search.res<-ls7Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                   endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
                   extent=ex.navarre,
                   precise=T,
                   browseAvaliable="Y")
-lsPreview(search,1)
+lsPreview(search.res,1)
 # Filter the images with less than 1\% pixels covered by clouds
-search_cloudFree = subset(search, search$cloudCover < 1)
+search_cloudFree = subset(search.res, search.res$cloudCover < 1)
 lsPreview(search_cloudFree,1)
 lsPreview(search_cloudFree,2)
 }

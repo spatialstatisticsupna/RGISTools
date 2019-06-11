@@ -2,7 +2,7 @@
 % Please edit documentation in R/lsGetPathRow.R
 \name{lsGetPathRow}
 \alias{lsGetPathRow}
-\title{Returns the pathrow of Modis tile in "hXXvYY" string format}
+\title{Returns the pathrow of Modis tile in "\code{hXXvYY}" string format}
 \usage{
 lsGetPathRow(str)
 }
@@ -10,7 +10,7 @@ lsGetPathRow(str)
 \item{str}{the full path or official image name of the Lansat 7 or 8 image from which the path and row will be extracted.}
 }
 \value{
-an string with the path and row of the image in "ppprrr" format.
+an string with the path and row of the image in "\code{ppprrr}" format.
 }
 \description{
 \code{lsGetPathRow} reads the official name of a Lansat 7 or 8 image and returns the path and row.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ls8Search.R
 \name{ls8Search}
 \alias{ls8Search}
-\title{Search landsat 8 time-series images list}
+\title{Search Landsat 8 time-series images list}
 \usage{
 ls8Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 }
@@ -77,21 +77,21 @@ This can be achieved by adding \code{browseAvaliable=”Y”} as a function argu
 \examples{
 \dontrun{
 #search by known row and path
-search<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
+search.res<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                   endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
                   pathrow=list(c(200,31),c(200,30)),
                   browseAvaliable="Y")
 
 #search by projected file must be in lat long projection
 data(ex.navarre)
-search<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
+search.res<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                   endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
                   extent=ex.navarre,
                   precise=T,
                   browseAvaliable="Y")
 
 #search by projected file fast
-search<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
+search.res<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
                   endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
                   extent=ex.navarre,
                   precise=F,

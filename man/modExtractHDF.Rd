@@ -24,7 +24,7 @@ modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
 }}
 }
 \description{
-\code{\link{modExtractHDF}} converts the original compressed from MODIS (.df) into a file
+\code{\link{modExtractHDF}} converts the original compressed from Modis (.df) into a file
 format loadable by R (.tif). The function extracts all image layers and crops the
 area of interest (if needed).
 }

@@ -43,7 +43,7 @@ The function requires the definition of src and fun arguments. The argument \cod
 data(ex.navarre)
 #asign the folder where the example will be run
 src<-"Path_for_downloading_folder"
-#download sentinel images
+#d ownload Sentinel images
 senDownload(startDate=as.Date("2018210","\%Y\%j"),
             endDate=as.Date("2018218","\%Y\%j"),
             platform="Sentinel-2",
@@ -53,18 +53,18 @@ senDownload(startDate=as.Date("2018210","\%Y\%j"),
             username="username",
             password="password",
             AppRoot=src)
-#asign the folder with the sentinel images unzipped
+# asign the folder with the Sentinel images unzipped
 src.unzip<-file.path(src,"unzip")
-#mosaic the sentinel images
+# mosaic the Sentinel images
 senMosaic(src.unzip,
           AppRoot=src,
           gutils=T,
           out.name="Navarre")
 #asign src as the path to mosaiced folder
-src<-file.path(src,"Navarre")
+src2<-file.path(src,"Navarre")
 #generate EVI images of Navarre
-senFolderToVar(src,
+senFolderToVar(src2,
                fun=varEVI,
-               AppRoot=file.path(dirname(src)))
+               AppRoot=src)
 }
 }

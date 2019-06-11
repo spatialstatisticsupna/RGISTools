@@ -7,6 +7,8 @@
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'
+#' @references \insertRef{huete2002overview}{RGISTools}
+#'
 #' @param blue the blue band of the capture in \code{raster} format.
 #' @param red the red band of the capture in \code{raster} format.
 #' @param nir the nir band of the capture in \code{raster} format.

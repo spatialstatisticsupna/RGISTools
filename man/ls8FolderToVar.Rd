@@ -41,28 +41,28 @@ the variable of interest using any of the functions in the packages starting wit
 #load a spatial polygon object of navarre for the example
 data(ex.navarre)
 #asign the folder where the example will be run
-src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat8"
-#download landsat8 images
-search<-lsDownload(satellite="ls8",
-                   username="username",
-                   password="password",
-                   startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
-                   endDate=as.Date("20-01-2018","\%d-\%m-\%Y"),
-                   extent=ex.navarre,
-                   untarDir="untar",
-                   AppRoot=src)
-#asign the folder with the landsat 8 images untared
+src<-"Path_for_downloading_folder"
+#download Landsat 8 images
+lsDownload(satellite="ls8",
+           username="username",
+           password="password",
+           startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
+           endDate=as.Date("20-01-2018","\%d-\%m-\%Y"),
+           extent=ex.navarre,
+           untarDir="untar",
+           AppRoot=src)
+#asign the folder with the Landsat 8 images untared
 tif.src<-file.path(src,"untar")
 #mosaic the Landsat 8 images
 lsMosaic(tif.src,
          AppRoot=src,
          out.name="Navarre")
 #asign src as the path to mosaiced folder
-src<-file.path(src,"Navarre")
+src2<-file.path(src,"Navarre")
 #generate NDVI images of Navarre
-ls8FolderToVar(src,
+ls8FolderToVar(src2,
                fun=varNDVI,
-               AppRoot=file.path(dirname(src)),
+               AppRoot=src,
                overwrite = T)
 }
 }

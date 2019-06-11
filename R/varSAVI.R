@@ -7,6 +7,8 @@
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'
+#' @references \insertRef{huete1988soil}{RGISTools}
+#'
 #' @param red the red band of the capture in \code{raster} format.
 #' @param nir the nir band of the capture in \code{raster} format.
 #' @param L value of 0.5 in reflectance space was found to minimize soil brightness variations.

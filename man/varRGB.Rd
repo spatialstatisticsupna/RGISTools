@@ -29,11 +29,11 @@ Bands may contain reflectance outliers which cause the image to look dark. Use t
 argument to remove the outliers and get a better-looking image.
 }
 \examples{
-# dir path of cropped and cutted modis image in the region of navarre as example
+# dir path of cropped and cutted Modis image in the region of navarre as example
 img.dir <- system.file("ExNavarra", package = "RGISTools")
 # list all tif files
 img.files <- list.files(img.dir,pattern="\\\\.tif$",recursive = TRUE,full.names = TRUE)
-#select the red, blue and nir bands
+# select the red, blue and nir bands
 red <- raster(img.files[1])
 blue <- raster(img.files[3])
 green <- raster(img.files[4])
