@@ -7,7 +7,7 @@
 senPreview(searchres, username, password, n, size = NULL)
 }
 \arguments{
-\item{searchres}{a data frame with  the results from a search of Landsat images provided by the function \code{\link{senSearch}}.}
+\item{searchres}{a data frame with the results from a search of Landsat images provided by the function \code{\link{senSearch}}.}
 
 \item{username}{Scihub username.}
 
@@ -18,7 +18,7 @@ senPreview(searchres, username, password, n, size = NULL)
 \item{size}{a number specifying the size of the preview to be displayed. The number determines pixels number.}
 }
 \description{
-\code{\link{senPreview}} shows a preview of the n image from a set of search results.
+\code{senPreview} shows a preview of the \code{n} image from a set of \code{searchres}.
 }
 \details{
 The functions shows a preview of an image resulting from a search in Scihub platform.
@@ -30,15 +30,15 @@ Please, be aware that only some images have this feature.
 \dontrun{
 data(ex.navarre)
 # perform the search query
-searchres<-senSearch(startDate=as.Date("2018210","\%Y\%j"),
-                     endDate=as.Date("2018218","\%Y\%j"),
-                     platform="Sentinel-2",
-                     intersects=ex.navarre,
-                     product="S2MSI1C",
-                     username="username",
-                     password="password")
-#Preview some images
-senPreview(searchres,3,username="username",password="password")
-senPreview(searchres,1,username="username",password="password",600)
+searchres <- senSearch(startDate = as.Date("2018210","\%Y\%j"),
+                       endDate = as.Date("2018218","\%Y\%j"),
+                       platform = "Sentinel-2",
+                       intersects = ex.navarre,
+                       product = "S2MSI1C",
+                       username = "username",
+                       password = "password")
+# Preview some images
+senPreview(searchres, 3, username="username", password="password")
+senPreview(searchres, 1, username="username", password="password", 600)
 }
 }

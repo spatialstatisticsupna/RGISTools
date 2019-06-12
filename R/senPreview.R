@@ -1,6 +1,6 @@
 #' Allows Sentinel satellite images preview before its download
 #'
-#' \code{\link{senPreview}} shows a preview of the n image from a set of search results.
+#' \code{senPreview} shows a preview of the \code{n} image from a set of \code{searchres}.
 #'
 #' The functions shows a preview of an image resulting from a search in Scihub platform.
 #' A search with \code{\link{senSearch}} has to be carried before proceeding with the preview.
@@ -8,7 +8,7 @@
 #' Please, be aware that only some images have this feature.
 #'
 #'
-#' @param searchres a data frame with  the results from a search of Landsat images provided by the function \code{\link{senSearch}}.
+#' @param searchres a data frame with the results from a search of Landsat images provided by the function \code{\link{senSearch}}.
 #' @param username Scihub username.
 #' @param password Scihub password.
 #' @param n a number with the row corresponding to the image of interest in the search data frame.
@@ -18,16 +18,16 @@
 #' \dontrun{
 #' data(ex.navarre)
 #' # perform the search query
-#' searchres<-senSearch(startDate=as.Date("2018210","%Y%j"),
-#'                      endDate=as.Date("2018218","%Y%j"),
-#'                      platform="Sentinel-2",
-#'                      intersects=ex.navarre,
-#'                      product="S2MSI1C",
-#'                      username="username",
-#'                      password="password")
-#' #Preview some images
-#' senPreview(searchres,3,username="username",password="password")
-#' senPreview(searchres,1,username="username",password="password",600)
+#' searchres <- senSearch(startDate = as.Date("2018210","%Y%j"),
+#'                        endDate = as.Date("2018218","%Y%j"),
+#'                        platform = "Sentinel-2",
+#'                        intersects = ex.navarre,
+#'                        product = "S2MSI1C",
+#'                        username = "username",
+#'                        password = "password")
+#' # Preview some images
+#' senPreview(searchres, 3, username="username", password="password")
+#' senPreview(searchres, 1, username="username", password="password", 600)
 #' }
 senPreview<-function(searchres,username,password,n,size=NULL){
   ser<-searchres[n]
@@ -49,7 +49,3 @@ senPreview<-function(searchres,username,password,n,size=NULL){
   file.remove(tmp)
   message(paste0("Printing the image ",names(ser),"."))
 }
-
-
-
-"Products('Quicklook')/$value"

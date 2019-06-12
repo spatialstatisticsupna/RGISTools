@@ -4,7 +4,7 @@
 \alias{varRGB}
 \title{Generates an RGB image from 3 spectral bands}
 \usage{
-varRGB(red, green, blue, range = c(), rPath = NULL, cutline = NULL)
+varRGB(red, green, blue, q.range = c(), rPath = NULL, cutline = NULL)
 }
 \arguments{
 \item{red}{the red band of the capture in \code{raster} format.}
@@ -13,18 +13,18 @@ varRGB(red, green, blue, range = c(), rPath = NULL, cutline = NULL)
 
 \item{blue}{the blue band of the capture in \code{raster} format.}
 
-\item{range}{a vector with the minimum and maximum reflectance quantiles being considered.}
+\item{q.range}{a vector with the minimum and maximum reflectance quantiles being considered.}
 
 \item{rPath}{file path were resulting RGB image is saved.}
 
 \item{cutline}{\code{SpatialPolygonsDataFrame} for cutting the image by a region.}
 }
 \description{
-\code{\link{varRGB}} creates RGB raster stack in scaling the range of the images to 0-255 color range.
+\code{varRGB} creates RGB \code{RasterStack} scaling the range of the images to 0-255 color range.
 }
 \details{
 The function rescales the original reflectance values to a range of 0-255. The functions
-rearranges the RGB bands to create a stack with a RGB image ready to visualize with plotRGB.
+rear ranges the RGB bands to create a stack with a RGB image ready to visualize with plotRGB.
 Bands may contain reflectance outliers which cause the image to look dark. Use the range
 argument to remove the outliers and get a better-looking image.
 }
@@ -38,7 +38,7 @@ red <- raster(img.files[1])
 blue <- raster(img.files[3])
 green <- raster(img.files[4])
 
-range=c(0.001,0.999)
-image<-varRGB(red,green,blue,range)
+q.range=c(0.001,0.999)
+image<-varRGB(red,green,blue,q.range)
 print(plotRGB(image))
 }

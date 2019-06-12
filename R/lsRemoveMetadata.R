@@ -1,9 +1,9 @@
 #' Removes from R environment LS7 and LS8 metadata files
 #'
-#' \code{lsRemoveMetadata} frees the memory used by metadata data frame loaded in R enviroment.
+#' \code{lsRemoveMetadata} removes metadata from R enviroment.
 #'
 #' If the metadata file has been loaded by any Landsat search function or using load
-#' metadata funcion, \code{lsRemoveMetadata} removes anoy of both dataframes \code{.LS8MD} or \code{.LS7MD}.
+#' metadata function, \code{lsRemoveMetadata} removes both dataframes \code{.LS8MD} and/or \code{.LS7MD}.
 #'
 #' @examples
 #' \dontrun{

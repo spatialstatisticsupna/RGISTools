@@ -10,7 +10,8 @@ modMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
 \arguments{
 \item{src}{the path of the folder with the Modis images in tif format.}
 
-\item{extent}{spatial polygon object representing the region of interest.}
+\item{extent}{\code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
+\code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.}
 
 \item{out.name}{the name of the region, if is not defined "outfile" will be asigned.}
 

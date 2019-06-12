@@ -2,7 +2,7 @@
 % Please edit documentation in R/RGISToolsOpts.R
 \name{setRGISToolsOpt}
 \alias{setRGISToolsOpt}
-\title{Changes the default value of an RGISTools option}
+\title{Changes the default value of an RGISTools configuration variable}
 \usage{
 setRGISToolsOpt(opt, value, env = optEnv)
 }
@@ -14,10 +14,10 @@ setRGISToolsOpt(opt, value, env = optEnv)
 \item{env}{the environment where the \code{RGISTools} option are saved}
 }
 \description{
-\code{\link{setRGISToolsOpt}} changes the default value of an \code{RGISTools} option.
+\code{setRGISToolsOpt} changes the default value of an \code{RGISTools} option.
 }
 \examples{
 getRGISToolsOpt("LS7META.dir")
-setRGISToolsOpt("LS7META.dir","NewMTDir")
+setRGISToolsOpt("LS7META.dir", "NewMTDir")
 getRGISToolsOpt("LS7META.dir")
 }

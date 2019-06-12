@@ -2,7 +2,7 @@
 % Please edit documentation in R/ls8Search.R
 \name{ls8Search}
 \alias{ls8Search}
-\title{Search Landsat 8 time-series images list}
+\title{Search Landsat-8 time-series images list}
 \usage{
 ls8Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 }
@@ -18,11 +18,11 @@ ls8Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 \item{...}{argument to allow function nestering:
  \itemize{
   \item \code{pathrow} a list of vectors defining the path and row number for the region of interest according
-to the Worldwide Reference System (\url{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/})
+to the \href{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/}{Worldwide Reference System}
 This argument is mandatory if extent is not defined.
   \item \code{lonlat} this argument is optional. A vector or a polygon with the coordinates of
 the point or region of interest in longitude/latitude format.
-  \item \code{extent} this argument is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
+  \item \code{extent} this argument is optional. \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or \code{SpatialPoints*}
 object are acceptable formats as long as are longitude/latitude format.
 This argument is mandatory if pathrow is not defined.
   \item \code{AppRoot} the root directory where meta data file will be saved.
@@ -30,23 +30,19 @@ This argument is mandatory if pathrow is not defined.
 }}
 }
 \description{
-\code{\link{ls8Search}} searches the LANDSAT 8 image repository to find those which are relevant for
+\code{ls8Search} searches the Landsat-8 image repository to find those which are relevant for
 a particular location and date interval. The function returns the search result as a data frame
 with the names of the images and their metadata.
 }
 \details{
-\code{\link{ls8Search}} is a stand-alone function. If the metadata for the time and region of interest has been
-downloaded before, \code{\link{ls8Search}} will use this metadata by default. In case the metadata has not
-been yet downloaded, \code{\link{ls8Search}} will make the call for you.
+\code{ls8Search} is a stand-alone function. If the metadata for the time and region of interest has been
+downloaded before, \code{ls8Search} will use this metadata by default. In case the metadata has not
+been yet downloaded, \code{ls8Search} will make the call for you.
 
 The search is done by defining a temporal interval and a location. The arguments \code{startDate}
 and \code{endDate} defines the temporal interval.These are mandatory arguments. The function defines the spatial location
 using at least one of the following arguments: \code{pathrow}, \code{extent}, \code{lonlat} y \code{polygon}. When more than one of these argument is defined,
 the function will work with the first evaluated method, when none of them is defined, the function shows an error message.
-
-\code{\link{ls8Search}} uses the metadata file downloaded by \code{\link{ls8LoadMetadata}}. However, it also works as a stand-alone function.
-If the metadata for the time and region of interest was downloaded before, \code{\link{ls8Search}} uses this metadata by default.
-When the metadata was not download, \code{\link{ls8Search}} makes the call for you.
 
 Landsat images are catalogued spatially using a unique path and row. The fastest way to search an image
 in the metadata file is filtering by its path and row. This search method requires previous knowledge on
@@ -58,16 +54,7 @@ These method uses spatial objects to define the region of interest. The projecti
 "\code{+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs}”. The argument \code{extent} accepts any R objects being defined
 by a spatial extent. The argument \code{lonlat} only accepts an R vector with one coordinate in the form of
 longitude/latitude (ex. \code{c(-1.64323,42.81687)}, where the first element is the longitude and the second is the latitude).
-The argument \code{polygon}, accepts \code{spatialpolygon} or \code{spatialpolygondataframe} objects.
-
-The search procedure using spatial objects compares the spatial extension of Landsat images with the
-the extension of the objects provided by the user. The function checks which ones overlays.
-The search functions has an estimate of the extension of each
-path row as preprocessed. The function first compares
-the object with the predefined extension and gets the path and row of the images that overlays with the spatial
-object. Then, it uses the path and row to get the search result which reduces its.
-The function gives the possibility to evaluate and compare each image without preprocess data. These can
-be specified with the \code{precise=T} argument in the function call, but this procedure will be slower.
+The argument \code{Polygon}, accepts \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} objects.
 
 In addition, the search function enables further filtering. The function can filter
 the results by any column name in the metadata file, using the column name as an argument. For example, to
@@ -76,25 +63,27 @@ This can be achieved by adding \code{browseAvaliable=”Y”} as a function argu
 }
 \examples{
 \dontrun{
-#search by known row and path
-search.res<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                  endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
-                  pathrow=list(c(200,31),c(200,30)),
-                  browseAvaliable="Y")
+# search by known row and path
+search.res <- ls8Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                        endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
+                        pathrow = list(c(200, 31), c(200, 30)),
+                        browseAvaliable = "Y")
 
-#search by projected file must be in lat long projection
+# search by projected file must be in lat long projection
 data(ex.navarre)
-search.res<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                  endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
-                  extent=ex.navarre,
-                  precise=T,
-                  browseAvaliable="Y")
+search.res <- ls8Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                        endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
+                        extent = ex.navarre,
+                        precise = TRUE,
+                        browseAvaliable = "Y")
 
-#search by projected file fast
-search.res<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                  endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
-                  extent=ex.navarre,
-                  precise=F,
-                  browseAvaliable="Y")
+# search by projected file fast
+search.res <- ls8Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                      endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
+                      extent = ex.navarre,
+                      precise = FALSE,
+                      browseAvaliable = "Y")
+# remove metadata data frame to free memory
+lsRemoveMetadata()
 }
 }

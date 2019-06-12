@@ -1,4 +1,4 @@
-#' Returns the capturing date of a Landsat 7 or 8 image
+#' Returns the capturing date of a Landsat-7 or Landsat-8 images
 #'
 #' \code{lsGetDates} extracts the capturing date of one or several Landsat images,
 #' given their file paths or names. The function returns a date class object.
@@ -25,7 +25,6 @@
 #' str<-c("LE72330822017009ASN01","LC82000312017010LGN01_B1.TIF")
 #' dt<-lsGetDates(str)
 #' print(dt)
-#' print(format(df,"%Y%j"))
 #'
 lsGetDates<-function(str,...){
   arg<-list(...)

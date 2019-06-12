@@ -7,9 +7,9 @@
 senDownload(username, password, ...)
 }
 \arguments{
-\item{username}{Scihub username}
+\item{username}{Scihub platform username.}
 
-\item{password}{Scihub password}
+\item{password}{Scihub platform password.}
 
 \item{...}{argument to allow function nestering
 \itemize{
@@ -25,7 +25,7 @@ senDownload(username, password, ...)
 }}
 }
 \description{
-\code{\link{senDownload}} conbines both \code{\link{senSearch}} and \code{\link{senDownSearch}} to easy
+\code{senDownload} combines both \code{\link{senSearch}} and \code{\link{senDownSearch}} to easy
 the procedure of download Sentinel images.
 }
 \details{
@@ -37,13 +37,13 @@ of unzip the images.
 \dontrun{
 # Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
 data(ex.navarre)
-senDownload(startDate=as.Date("2018210","\%Y\%j"),
-            endDate=as.Date("2018218","\%Y\%j"),
-            platform="Sentinel-2",
-            extent=ex.navarre,
-            product="S2MSI1C",
-            pathrow=c("R094"),
-            username="username",
-            password="password")
+senDownload(startDate = as.Date("2018210", "\%Y\%j"),
+            endDate = as.Date("2018218", "\%Y\%j"),
+            platform = "Sentinel-2",
+            extent = ex.navarre,
+            product = "S2MSI1C",
+            pathrow = c("R094"),
+            username = "username",
+            password = "password")
 }
 }

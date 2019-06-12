@@ -2,7 +2,7 @@
 % Please edit documentation in R/senSearch.R
 \name{senSearch}
 \alias{senSearch}
-\title{Search Sentinel images using ESA’s SciHub API}
+\title{Searches Sentinel images using ESA’s SciHub API}
 \usage{
 senSearch(username, password, ...)
 }
@@ -27,7 +27,7 @@ the point or region of interest in longitude/latitude format.
 }}
 }
 \description{
-\code{\link{senSearch}} senSearch searches Sentinel products on ESA powered api  \url{http://scihub.copernicus.eu}.
+\code{senSearch} searches Sentinel products on ESA powered api called \href{http://scihub.copernicus.eu}{Scihub}.
 }
 \details{
 Provides the images and urls to be downloaded from ESA’s SciHub API. The images are
@@ -36,23 +36,23 @@ provided as a date class object. The region of interest should be provided as a
 spatial class object with an "\code{EPSG:4326}" coordinate projection. ESA’s API only returns
 as much as 100 entries.
 Credentials from ESA’s SciHub are needed to use this function.
-Please, sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}
+\href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 
-For further information on ESA’s missions and data products, please visit:
-\url{https://sentinel.esa.int/web/sentinel/missions}.
+For further information on ESA’s missions and data products, please visit
+\href{https://sentinel.esa.int/web/sentinel/missions}{Sentinel mission web page}.
 }
 \examples{
 \dontrun{
-#load a spatial polygon object of navarre for the example
+# load a spatial polygon object of navarre for the example
 data(ex.navarre)
-#perform the search query
-searchres<-senSearch(startDate=as.Date("2018210","\%Y\%j"),
-                     endDate=as.Date("2018218","\%Y\%j"),
-                     platform="Sentinel-2",
-                     extent=ex.navarre,
-                     product="S2MSI1C",
-                     username="username",
-                     password="password")
+# perform the search query
+searchres <- senSearch(startDate = as.Date("2018210", "\%Y\%j"),
+                       endDate = as.Date("2018218", "\%Y\%j"),
+                       platform = "Sentinel-2",
+                       extent = ex.navarre,
+                       product = "S2MSI1C",
+                       username = "username",
+                       password = "password")
 head(searchres)
 }
 }

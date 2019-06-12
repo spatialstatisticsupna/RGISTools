@@ -2,7 +2,7 @@
 % Please edit documentation in R/genMissionGetDates.R
 \name{lsGetDates}
 \alias{lsGetDates}
-\title{Returns the capturing date of a Landsat 7 or 8 image}
+\title{Returns the capturing date of a Landsat-7 or Landsat-8 images}
 \usage{
 lsGetDates(str, ...)
 }
@@ -35,6 +35,5 @@ print(format(df,"\%Y\%j"))
 str<-c("LE72330822017009ASN01","LC82000312017010LGN01_B1.TIF")
 dt<-lsGetDates(str)
 print(dt)
-print(format(df,"\%Y\%j"))
 
 }

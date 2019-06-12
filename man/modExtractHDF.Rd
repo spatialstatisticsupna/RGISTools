@@ -24,14 +24,14 @@ modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
 }}
 }
 \description{
-\code{\link{modExtractHDF}} converts the original compressed from Modis (.df) into a file
+\code{modExtractHDF} converts the original Modis format (.hdf) into a file
 format loadable by R (.tif). The function extracts all image layers and crops the
 area of interest (if needed).
 }
 \details{
 HDF files cannot be directly loaded into R. The function \code{\link{modExtractHDF}}
 borrows \code{gdalwarp} and \code{gdal_translate} functions from the \code{gdalUtils} package.
-These functions are used to convert the '.hdf' files into .tif files. The .tif
+These functions are used to convert the '.hdf' files into '.tif' files. The '.tif'
 files can be loaded in R using the raster package. Go to \code{\link{modSearch}} and \code{\link{modDownload}}
 for further details about these functions. Further details about the \code{gdalUtils} 
 in \code{gdalUtils} package manual.
@@ -39,16 +39,16 @@ in \code{gdalUtils} package manual.
 \examples{
 \dontrun{
 data(ex.navarre)
-img.list<-modSearch(product="MOD11A1",
-                    startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                    endDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                    collection=6,
-                    extent=ex.navarre)
-#download first image of image list
+img.list <- modSearch(product = "MOD11A1",
+                    startDate = as.Date("01-01-2011","\%d-\%m-\%Y"),
+                    endDate = as.Date("01-01-2011","\%d-\%m-\%Y"),
+                    collection = 6,
+                    extent = ex.navarre)
+# download first image of image list
 modDownSearch(img.list,"username","password")
-#Extract one layer from downloaded image
+# Extract one layer from downloaded image
 hdf.files <- list.files("./",full.names = T,pattern="\\\\.hdf$")
-first.hdf.file <-hdf.files[1]
+first.hdf.file <- hdf.files[1]
 modExtractHDF(first.hdf.file)
 }
 }

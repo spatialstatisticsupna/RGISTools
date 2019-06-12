@@ -14,24 +14,24 @@ modPreview(searchres, n, size = NULL)
 \item{size}{a number specifying the size of the preview to be displayed, in pixels.}
 }
 \description{
-\code{\link{modPreview}} shows a preview of the n image from a set of search results.
+\code{modPreview} shows a preview of the n image from a set of search results.
 }
 \details{
-The function shows a preview of an image resulting from a search in Landsat imagery metadata.
+The function shows a preview of an image resulting from a search in Modis imagery metadata.
 A search with \code{\link{modSearch}} has to be carried out before proceeding with the preview.
-The preview is downloaded from Landsat’s website. Please, be aware that only some images have this feature.
+The preview is downloaded from Modis website. Please, be aware that only some images have this feature.
 }
 \examples{
 \dontrun{
 data(ex.navarre)
 # Retrieve jpg images covering Navarre region between 2011 and 2013
-searchres<-modSearch(product="MOD09GA",
-                    startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                    endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
-                    collection=6,
-                    resType="browseurl",
-                    extent=ex.navarre)
-modPreview(searchres,1)
-modPreview(searchres,1,size=600)
+searchres <- modSearch(product = "MOD09GA",
+                      startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                      endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
+                      collection = 6,
+                      resType = "browseurl",
+                      extent = ex.navarre)
+modPreview(searchres, 1)
+modPreview(searchres, 1, size=600)
 }
 }

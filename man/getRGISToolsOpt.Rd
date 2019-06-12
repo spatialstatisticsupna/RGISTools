@@ -2,7 +2,7 @@
 % Please edit documentation in R/RGISToolsOpts.R
 \name{getRGISToolsOpt}
 \alias{getRGISToolsOpt}
-\title{Gets the current value of an RGISTools option}
+\title{Gets the current value of an RGISTools configuration variable}
 \usage{
 getRGISToolsOpt(opt, env = optEnv)
 }
@@ -12,7 +12,7 @@ getRGISToolsOpt(opt, env = optEnv)
 \item{env}{the environment where the \code{RGISTools} option are saved.}
 }
 \description{
-\code{\link{getRGISToolsOpt}} gets the current value of an \code{RGISTools} option.
+\code{getRGISToolsOpt} gets the current value of an \code{RGISTools} option.
 }
 \examples{
 getRGISToolsOpt("SEN2BANDS")

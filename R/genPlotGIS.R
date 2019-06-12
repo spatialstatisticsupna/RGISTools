@@ -10,7 +10,7 @@
 #' The projection of the map can be changed by adding the \code{proj} argument. The arrow and scale bar are
 #' located by default in relative positions. Their positions can be modified with the \code{compOpt} paragram.
 #'
-#' @param r \code{raster}* class variable with the image or image stack to be plotted.
+#' @param r \code{Raster}* class variable with the image or image stack to be plotted.
 #' @param region a \code{polygon} class variable defining the area of interest.
 #' @param ... argument to allow function nestering.
 #' \itemize{

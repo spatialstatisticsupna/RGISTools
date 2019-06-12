@@ -5,11 +5,11 @@
 \title{Downloads Sentinel images from search function response}
 \usage{
 senDownSearch(searchres, username = NULL, password = NULL,
-  error.log = "download_error.log", nattempts = NULL, unzip = FALSE,
+  error.log = "Sentinel_error.log", nattempts = NULL, unzip = FALSE,
   overwrite = FALSE, ...)
 }
 \arguments{
-\item{searchres}{response from \code{senSearch}.}
+\item{searchres}{output from \code{\link{senSearch}} function.}
 
 \item{username}{login credentials to access the ESA’s SciHub web service.}
 
@@ -30,39 +30,39 @@ senDownSearch(searchres, username = NULL, password = NULL,
 }}
 }
 \description{
-\code{\link{senDownSearch}} downloads the list of urls generated y the function senSearch by using the ESA’s SciHub API.
+\code{senDownSearch} downloads the list of urls generated y the function senSearch by using the ESA’s SciHub API.
 }
 \details{
-\code{\link{senDownSearch}} downloads the images from Sentinel products using the search results provided by \code{\link{senSearch}}.
- The raw images are downloaded into the \code{AppRoot} directory. In case the download is interrupted,
+\code{\link{senDownSearch}} downloads Sentinel images using the search results provided by \code{\link{senSearch}}.
+ Images are downloaded into the \code{AppRoot} directory. In case the download is interrupted,
  the image file could be corrupted. The function detects the corrupted files to restart the process.
  To prevent the computer from crashing, the nattempts  flag limits the number of attempts to download the image.
  The default number of attempts is set to 3.
-\code{\link{senDownload}} requires the credentials to access the ESA’s SciHub data service. Please,
-sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}.
+\code{\link{senDownload}} requires the credentials to access the ESA’s SciHub data service.
+\href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 }
 \examples{
 \dontrun{
 # Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
 data(ex.navarre)
-searchres<-senSearch(startDate=as.Date("2018-07-29","\%Y-\%m-\%d"),
-                     endDate=as.Date("2018-08-06","\%Y-\%m-\%d"),
-                     platform="Sentinel-2",
-                     extent=ex.navarre,
-                     product="S2MSI1C",
-                     username="username",
-                     password="password")
+searchres <- senSearch(startDate = as.Date("2018-07-29","\%Y-\%m-\%d"),
+                       endDate = as.Date("2018-08-06","\%Y-\%m-\%d"),
+                       platform = "Sentinel-2",
+                       extent = ex.navarre,
+                       product = "S2MSI1C",
+                       username = "username",
+                      password = "password")
 
 # filtering the path R094 where Navarre is located
 length(searchres)
-searchres<-searchres[grepl("R094",names(searchres))]
+searchres <- searchres[grepl("R094",names(searchres))]
 length(searchres)
 
 # Sentinel download function
-senDownSearch(searchres=searchres,
-              username="username",
-              password="password",
-              AppRoot="Path_for_downloading_folder",
-              unzip=T)
+senDownSearch(searchres = searchres,
+              username = "username",
+              password = "password",
+              AppRoot = "Path_for_downloading_folder",
+              unzip = TRUE)
 }
 }

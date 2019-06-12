@@ -1,6 +1,6 @@
 #' Generates an RGB image from 3 spectral bands
 #'
-#' \code{\link{varRGB}} creates RGB raster stack in scaling the range of the images to 0-255 color range.
+#' \code{varRGB} creates RGB \code{RasterStack} scaling the range of the images to 0-255 color range.
 #'
 #' The function rescales the original reflectance values to a range of 0-255. The functions
 #' rear ranges the RGB bands to create a stack with a RGB image ready to visualize with plotRGB.

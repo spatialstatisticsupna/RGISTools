@@ -9,11 +9,12 @@ genFillingIMA(imgTS, Img2Fill = NULL, aFilter = c(0.05, 0.95),
   snow.mode = FALSE, predictSE = FALSE, out.name = "outname", ...)
 }
 \arguments{
-\item{imgTS}{the time series of images to be filled.}
+\item{imgTS}{the time series of images to be filled in \code{RasterStack}format 
+with the name of the layers containing the date in julian format (YYYYJJJ).}
 
-\item{Img2Fill}{a vector defining the images to fill.}
+\item{Img2Fill}{a vector defining the images to be filled.}
 
-\item{aFilter}{two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).}
+\item{aFilter}{two component vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).}
 
 \item{fact}{an aggregation factor of the anomalies before the interpolation.}
 

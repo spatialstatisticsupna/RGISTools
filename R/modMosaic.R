@@ -20,7 +20,8 @@
 #'
 #' @param src the path of the folder with the Modis images in tif format.
 #' @param out.name the name of the region, if is not defined "outfile" will be asigned.
-#' @param extent spatial polygon object representing the region of interest.
+#' @param extent \code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
+#' \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param gutils logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.

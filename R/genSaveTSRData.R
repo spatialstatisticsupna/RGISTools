@@ -6,7 +6,7 @@
 #'  The \code{src} can take the path created by other functions of this package, such as \code{\link{senMosaic}},
 #'  \code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are imported into R to build a \code{RasterStack} that
 #'  is loaded into the global environment. The name of the \code{RasterStack} is one specified
-#'  in \code{ts.name}. The \code{RasterStack} is saved into an RData file in the \code{Approot} directory.
+#'  in \code{ts.name}. The \code{RasterStack} is saved into an RData file in the \code{AppRoot} directory.
 #'
 #' @param src path to the folder where the time series of images is located.
 #' @param ts.name the name of the variable containing the time series in R.

@@ -34,15 +34,15 @@ This argument is mandatory if lonlat or extent is not defined.
 }}
 }
 \description{
-\code{\link{modSearch}} searches the Modis products on the  NASA Common Metadata
+\code{modSearch} searches the Modis products on the  NASA Common Metadata
 Repository to find those which are relevant for a particular location and date interval.
 The function returns the search result as an array of urls with the relevant images.
 }
 \details{
-\code{\link{modSearch}} NASA Common Metadata Repository (CMR) powered api \url{https://lpdaacsvc.cr.usgs.gov/services/inventory}
+\code{modSearch} \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} (CMR) powered api.
 The catalogue of  Modis products with their short names and other
-information can be found at: \url{https://modis.gsfc.nasa.gov/data/dataprod/}
-For further information on collections, please visit Modis website at: \url{https://modis-atmos.gsfc.nasa.gov/collections/overview}
+information can be found at: \href{https://modis.gsfc.nasa.gov/data/dataprod/}{Modis data product info}.
+For further information on collections, please visit \href{https://modis-atmos.gsfc.nasa.gov/collections/overview}{Modis website}.
 By the time the \code{RGISTools} package is released, NASA carries out the maintenance of the Modis website on Wednesdays. Therefore, an error
 may occur when trying to connect with their server during this day of the week.
 }
@@ -51,20 +51,20 @@ may occur when trying to connect with their server during this day of the week.
 data(ex.navarre)
 # Searching Modis MYD13A2 images between 2011 and 2013 by longitude/latitude
 using a polygon class variable
-img.list<-modSearch(product="MYD13A2",
-                    startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                    endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
-                    collection=6,
-                    extent=ex.navarre)
-                    # Area of interest: defined based on longitude-latitude extent
+img.list <- modSearch(product = "MYD13A2",
+                      startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                      endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
+                      collection = 6,
+                      extent = ex.navarre)
+# Area of interest: defined based on longitude-latitude extent
 # Searching Modis MYD13A2 images in the whole 2010 by longitude/latitude
 # using a extent class variable defined by the user
-aoi = extent(c(-2.49,-0.72,41.91,43.31))
-my.imgs<-modSearch(product="MYD13A2",
-                   startDate=as.Date("01-01-2010","\%d-\%m-\%Y"),
-                   endDate=as.Date("31-12-2010","\%d-\%m-\%Y"),
-                   collection=6,
-                   extent=aoi)
+aoi = extent(c(-2.49, -0.72, 41.91, 43.31))
+my.imgs <- modSearch(product = "MYD13A2",
+                     startDate = as.Date("01-01-2010", "\%d-\%m-\%Y"),
+                     endDate = as.Date("31-12-2010", "\%d-\%m-\%Y"),
+                     collection = 6,
+                     extent = aoi)
 head(my.imgs)
 }
 }

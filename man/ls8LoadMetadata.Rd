@@ -2,7 +2,7 @@
 % Please edit documentation in R/ls8LoadMetadata.R
 \name{ls8LoadMetadata}
 \alias{ls8LoadMetadata}
-\title{Sinchronizes Landsat 8 meta data file, for image search}
+\title{Sinchronizes Landsat-8 meta data file, for image search}
 \usage{
 ls8LoadMetadata(update = FALSE, verbose = TRUE,
   omit.question = FALSE, ...)
@@ -20,8 +20,7 @@ ls8LoadMetadata(update = FALSE, verbose = TRUE,
 }}
 }
 \description{
-\code{\link{ls8LoadMetadata}} loads a data frame called \code{.LS8MD}
- with the names of the Landsat-8 images and their metadata.The metadata provides
+\code{ls8LoadMetadata} downloads the csv format file of Metadata and loads a hidden data frame called .LS8MD into R.The metadata provides
  auxiliary information regarding Landsat-8 images repository such as image quality, acquisition
  data, cloud cover, etc. You can find a description of the metadata at
  \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{bulk-metadata-service}.
@@ -30,17 +29,16 @@ ls8LoadMetadata(update = FALSE, verbose = TRUE,
 All captures done by Landsat-8 are cataloged in a unique csv file. The size of the file
 might be larger than 210MB. Therefore, the process of downloading and importing to R may take several
 minutes (around 7 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive storage). The function creates an
-RData file with the metadata csv. Thus, every time \code{\link{ls8LoadMetadata}} is called,
-this function loads the existing RData in the Approot. This is intended to reduce the loading
-time of metadata in the future.
+RData file with the metadata csv. Thus, every time \code{ls8LoadMetadata} is called,
+this function loads the existing RData in the \code{AppRoot}.
 }
 \examples{
 \dontrun{
 #creates a MetaData folder and downloads the csv on working directory
 ls8LoadMetadata()
 
-#creates a MetaData folder and downloads the csv on "C:/LandsatDownload" directory
-ls8LoadMetadata(AppRoot="C:/LandsatDownload")
+#creates a MetaData folder and downloads the csv on "Path_for_metadata" directory
+ls8LoadMetadata(AppRoot="Path_for_metadata")
 
 Force renew existing meta data csv
 ls8LoadMetadata(update=TRUE)

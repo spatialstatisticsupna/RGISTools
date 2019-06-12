@@ -2,20 +2,20 @@
 % Please edit documentation in R/ls7FolderToVar.R
 \name{ls7FolderToVar}
 \alias{ls7FolderToVar}
-\title{Creates variables from Landsat 7 multispectral bands}
+\title{Computes derived variables from Landsat-7 multispectral bands}
 \usage{
 ls7FolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
 \item{src}{path to the folder with the Landsat multispectral image.}
 
-\item{fun}{is a function with the calculation of the index.
+\item{fun}{is a function defined by the package for computing indexes.
 All functions created in RGISTools starting with
 'var' are avaliable functions. Custom functions can be also
 implemented \code{var} are acceptable functions.}
 
 \item{getStack}{logical argument. If \code{TRUE}, returns the time-series as a 
-raster or otherwise as Hard Drive Devide (HDD).}
+\code{RasterStack}, otherwise as Hard Drive Devide (HDD).}
 
 \item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 
@@ -25,7 +25,7 @@ raster or otherwise as Hard Drive Devide (HDD).}
 }}
 }
 \description{
-\code{\link{ls7FolderToVar}} calculates an index using the bands from Landsat multispectral
+\code{\link{ls7FolderToVar}} computes indexes using the bands from Landsat multispectral
 images. The images are specified by a path to the storing folder (resulting from
 the \code{\link{lsMosaic}} function). The function returns a rasterStack with the time-series of the indexes.
 }
@@ -37,31 +37,31 @@ the variable of interest using any of the functions in the packages starting wit
 }
 \examples{
 \dontrun{
-#load a spatial polygon object of navarre for the example
+# load a spatial polygon object of navarre for the example
 data(ex.navarre)
-#asign the folder where the example will be run
+# asign the folder where the example will be run
 src<-"Path_for_downloading_folder"
-#download Landsat 7 images
-lsDownload(satellite="ls7",
-           username="username",
-           password="password",
-           startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
-           endDate=as.Date("20-01-2018","\%d-\%m-\%Y"),
-           extent=ex.navarre,
-           untarDir="untar",
-           AppRoot=src)
-#asign the folder with the Landsat 7 images untared
-tif.src<-file.path(src,"untar")
+# download Landsat-7 images
+lsDownload(satellite = "ls7",
+           username = "username",
+           password = "password",
+           startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+           endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
+           extent = ex.navarre,
+           untarDir = "untar",
+           AppRoot = src)
+# asign the folder with the Landsat-7 images untared
+tif.src<-file.path(src, "untar")
 # mosaic the Landsat7 images
 lsMosaic(tif.src,
-         AppRoot=src,
-         out.name="Navarre")
+         AppRoot = src,
+         out.name = "Navarre")
 # asign src as the path to mosaicked folder
-src2<-file.path(src,"Navarre")
+src2<-file.path(src, "Navarre")
 # generate NDVI images of Navarre
 ls7FolderToVar(src2,
-               fun=varNDVI,
-               AppRoot=src),
+               fun = varNDVI,
+               AppRoot = src),
                overwrite = T)
 }
 }

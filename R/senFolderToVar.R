@@ -1,6 +1,6 @@
-#' Calculates an index from Sentinel-2 multispectral bands
+#' Computes derived variables from Sentinel-2 multispectral bands
 #'
-#' \code{\link{senFolderToVar}} calculates an index using the bands from Sentinel-2 multispectral
+#' \code{senFolderToVar} calculates an index using the bands from Sentinel-2 multispectral
 #' images. The images are specified by a path to the storing folder
 #' (resulting from the \code{\link{senMosaic}} function). The function returns a
 #' \code{rasterStack} with the time-series of the index.
@@ -14,7 +14,7 @@
 #'  The user can define its own functions.
 #'
 #' @param src path to the folder with the Sentinel multispectral images.
-#' @param fun function with the calculation of the index.
+#' @param fun is a function defined by the package for computing indexes.
 #' All functions in the package starting with three characters.
 #' 'var' are acceptable functions. Custom functions can be also implemented.
 #' @param getStack logical argument. If \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD).
@@ -26,33 +26,33 @@
 #'
 #' @examples
 #' \dontrun{
-#' #load a spatial polygon object of navarre for the example
+#' # load a spatial polygon object of navarre for the example
 #' data(ex.navarre)
-#' #asign the folder where the example will be run
-#' src<-"Path_for_downloading_folder"
-#' #d ownload Sentinel images
-#' senDownload(startDate=as.Date("2018210","%Y%j"),
-#'             endDate=as.Date("2018218","%Y%j"),
-#'             platform="Sentinel-2",
-#'             extent=ex.navarre,
-#'             product="S2MSI1C",
-#'             pathrow=c("R094"),
-#'             username="username",
-#'             password="password",
-#'             AppRoot=src)
+#' # asign the folder where the example will be run
+#' src <- "Path_for_downloading_folder"
+#' # download Sentinel images
+#' senDownload(startDate = as.Date("2018210","%Y%j"),
+#'             endDate = as.Date("2018218","%Y%j"),
+#'             platform = "Sentinel-2",
+#'             extent = ex.navarre,
+#'             product = "S2MSI1C",
+#'             pathrow = c("R094"),
+#'             username = "username",
+#'             password = "password",
+#'             AppRoot = src)
 #' # asign the folder with the Sentinel images unzipped
-#' src.unzip<-file.path(src,"unzip")
+#' src.unzip <- file.path(src, "unzip")
 #' # mosaic the Sentinel images
 #' senMosaic(src.unzip,
-#'           AppRoot=src,
-#'           gutils=T,
-#'           out.name="Navarre")
-#' #asign src as the path to mosaiced folder
-#' src2<-file.path(src,"Navarre")
-#' #generate EVI images of Navarre
+#'           AppRoot = src,
+#'           gutils = TRUE,
+#'           out.name = "Navarre")
+#' # asign src as the path to mosaicked folder
+#' src2 <- file.path(src, "Navarre")
+#' # generate EVI images of Navarre
 #' senFolderToVar(src2,
-#'                fun=varEVI,
-#'                AppRoot=src)
+#'                fun = varEVI,
+#'                AppRoot = src)
 #' }
 senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   AppRoot=defineAppRoot(...)

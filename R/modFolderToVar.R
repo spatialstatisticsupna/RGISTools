@@ -1,4 +1,4 @@
-#' Calculates an index from Modis multispectral bands
+#' Computes derived variables from Modis multispectral bands
 #'
 #' \code{\link{modFolderToVar}} calculates an index using the bands from Modis multispectral images.
 #' The images are specified by a path to the storing folder (resulting from the \code{\link{modMosaic}} function).
@@ -12,7 +12,7 @@
 #' (\code{\link{varNDVI}}, \code{\link{varEVI}}). The user can define its own functions.
 #'
 #' @param src path to the folder with the Modis multispectral images.
-#' @param fun is a function with the calculation of the index.
+#' @param fun is a function defined by the package for computing indexes.
 #' All functions in the package starting with three characters
 #' 'var' are acceptable functions. Custom functions can be also implemented.
 #' @param getStack logical argument. If \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD).
@@ -27,31 +27,31 @@
 #' # load a spatial polygon object of navarre for the example
 #' data(ex.navarre)
 #' # asign the folder where the example will be run
-#' src<-"Path_for_downloading_folder"
+#' src <- "Path_for_downloading_folder"
 #' # download Modis images
-#' modDownload(product="MOD09GA",
-#'             startDate=as.Date("01-01-2018","%d-%m-%Y"),
-#'             endDate=as.Date("03-01-2018","%d-%m-%Y"),
-#'             username="username",
-#'             password="password",
-#'             AppRoot=src,
-#'             hdfdir="hdf",
-#'             tiffdir="tif",
-#'             collection=6,
-#'             extent=ex.navarre)
+#' modDownload(product = "MOD09GA",
+#'             startDate = as.Date("01-01-2018","%d-%m-%Y"),
+#'             endDate = as.Date("03-01-2018","%d-%m-%Y"),
+#'             username = "username",
+#'             password = "password",
+#'             AppRoot = src,
+#'             hdfdir = "hdf",
+#'             tiffdir = "tif",
+#'             collection = 6,
+#'             extent = ex.navarre)
 #' # asign the folder with the Sentinel images untared
-#' src<-file.path(src,"MOD09GA")
-#' tif.src<-file.path(src,"tif")
+#' src <- file.path(src, "MOD09GA")
+#' tif.src <- file.path(src, "tif")
 #' #mosaic the Modis images
 #' modMosaic(tif.src,
-#'           AppRoot=src,
-#'           out.name="Navarre")
-#' # asign src as the path to mosaiced folder
-#' src2<-file.path(src,"Navarre")
+#'           AppRoot = src,
+#'           out.name = "Navarre")
+#' # asign src as the path to mosaicked folder
+#' src2<-file.path(src, "Navarre")
 #' # generate NDVI images of Navarre
 #' modFolderToVar(src2,
-#'                fun=varEVI,
-#'                AppRoot=src),
+#'                fun = varEVI,
+#'                AppRoot = src),
 #'                overwrite = T)
 #' }
 modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){

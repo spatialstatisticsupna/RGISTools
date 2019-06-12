@@ -10,7 +10,9 @@ senMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
 \arguments{
 \item{src}{the path of the folder with the Sentinel images in tif format.}
 
-\item{extent}{an \code{Extent} object representing the region of interest.}
+\item{extent}{\code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
+\code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing 
+the region of interest.}
 
 \item{out.name}{a character string with the name of the region of interest.}
 
@@ -30,12 +32,12 @@ If it is not supplied, the function is applied to all the bands available in \co
 }}
 }
 \description{
-\code{\link{senMosaic}} merges the tiles of Sentinel images covering a region of interest and
- returns a single image for each date
+\code{senMosaic} merges the tiles of Sentinel images covering a region of interest
+ returning a single image for each date
 }
 \details{
 The function mosaics the tiles of satellite images in the src folder.
-The function uses the folder resulting from the \code{\link{senDownSearch}} function.
+The function uses the folder from the \code{\link{senDownSearch}} function.
 The folder may contain multiple tiles as tif files, for one or several dates
 and one or several bands. When only one band has to be mosaicked, the name of
 the band can be provided through the argument \code{bandFilter}. The name of the band
@@ -43,35 +45,35 @@ should be defined as a character string beginning with the letter b and a
 two-digit band number (e.g. ‘b01’). Similarly, when only a subset of dates has
 to be mosaicked, the date(s) should be provided through the argument \code{dayFilter}.
 The dates must be provided as date objects. Once the images are mosaicked, they are
-cropped using the extent defined by \code{extent} (optional). The extent can be defined
+cropped using the extent defined by \code{Extent} (optional). The extent can be defined
 in any projection format. The function \code{\link{senMosaic}} automatically reprojects the
-extent to match the projection of the image. The resulting images will be placed
-in the \code{AppRoot} directory. The output files are named after region of interest
-provided by the argument \code{out.name}. If no name is provided, by default the output
+extent to match the projection of the image. The output images will be placed
+in the \code{AppRoot} directory. The output files are named 
+by the argument \code{out.name}. If no name is provided, by default the output
 file is named as ‘outfile’
 }
 \examples{
 \dontrun{
-#load a spatial polygon object of navarre for the example
+# load a spatial polygon object of navarre for the example
 data(ex.navarre)
-#asign the folder where the example will be run
-src<-"Path_for_downloading_folder"
+# asign the folder where the example will be run
+src <- "Path_for_downloading_folder"
 # download Sentinel images
-senDownload(startDate=as.Date("2018210","\%Y\%j"),
-            endDate=as.Date("2018218","\%Y\%j"),
-            platform="Sentinel-2",
-            intersects=ex.navarre,
-            product="S2MSI1C",
-            pathrow=c("R094"),
-            username="username",
-            password="password",
-            AppRoot=src)
+senDownload(startDate = as.Date("2018210", "\%Y\%j"),
+            endDate = as.Date("2018218", "\%Y\%j"),
+            platform = "Sentinel-2",
+            intersects = ex.navarre,
+            product = "S2MSI1C",
+            pathrow = c("R094"),
+            username = "username",
+            password = "password",
+            AppRoot = src)
 # asign the folder with the Sentinel images unzipped
-src.unzip<-file.path(src,"unzip")
+src.unzip <- file.path(src,"unzip")
 # mosaic the Sentinel images
 senMosaic(src.unzip,
-          AppRoot=src,
-          gutils=T,
-          out.name="Navarre")
+          AppRoot = src,
+          gutils = T,
+          out.name = "Navarre")
 }
 }

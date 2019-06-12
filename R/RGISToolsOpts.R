@@ -6,7 +6,7 @@ assign("AppRoot", NULL, env=optEnv)
 assign("USERAGENT","Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0", env=optEnv)
 
 
-# landsat 8 options
+# Landsat-8 options
 # new 16/04/2019 landsat metadata web page url https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service
 assign("LS8META.csv", "https://landsat.usgs.gov/landsat/metadata_service/bulk_metadata_files/LANDSAT_8_C1.csv.gz", env=optEnv)
 assign("LS8META.dir","MetaData", env=optEnv)
@@ -14,7 +14,7 @@ assign("LS8META.rdata","LS8MD.RData", env=optEnv)
 assign("LS8META.var",".LS8MD", env=optEnv)
 assign("LS8DownloadDir","Landsat8", env=optEnv)
 
-# landsat 7 options
+# Landsat-7 options
 assign("LS7META.csv", "https://landsat.usgs.gov/landsat/metadata_service/bulk_metadata_files/LANDSAT_ETM_C1.csv.gz", env=optEnv)
 assign("LS7META.dir","MetaData", env=optEnv)
 assign("LS7META.rdata","LS7MD.RData", env=optEnv)
@@ -57,9 +57,9 @@ assign("SEN3BANDS",NULL, env=optEnv)
 
 
 
-#' Changes the default value of an RGISTools option
+#' Changes the default value of an RGISTools configuration variable
 #'
-#' \code{\link{setRGISToolsOpt}} changes the default value of an \code{RGISTools} option.
+#' \code{setRGISToolsOpt} changes the default value of an \code{RGISTools} option.
 #'
 #' @param opt the name of the option to change in character format
 #' @param value the new value of selected option
@@ -67,15 +67,15 @@ assign("SEN3BANDS",NULL, env=optEnv)
 #'
 #' @examples
 #' getRGISToolsOpt("LS7META.dir")
-#' setRGISToolsOpt("LS7META.dir","NewMTDir")
+#' setRGISToolsOpt("LS7META.dir", "NewMTDir")
 #' getRGISToolsOpt("LS7META.dir")
 setRGISToolsOpt <- function(opt,value,env=optEnv) {
   assign(opt, value, envir=env)
 }
 
-#' Gets the current value of an RGISTools option
+#' Gets the current value of an RGISTools configuration variable
 #'
-#' \code{\link{getRGISToolsOpt}} gets the current value of an \code{RGISTools} option.
+#' \code{getRGISToolsOpt} gets the current value of an \code{RGISTools} option.
 #'
 #' @param opt the name of the option to get.
 #' @param env the environment where the \code{RGISTools} option are saved.
@@ -87,9 +87,9 @@ getRGISToolsOpt <- function(opt,env=optEnv) {
   return(get(opt, envir=env))
 }
 
-#' Prints the name of all options in RGISTools package
+#' Prints the name of all RGISTools configuration variables
 #' 
-#'\code{\link{showRGISToolsOpt}} prints the name of all options in \code{RGISTools} package.
+#'\code{showRGISToolsOpt} prints the name of all options in \code{RGISTools} package.
 #'
 #' @param env the environment where the \code{RGISTools} option are saved.
 #' @examples

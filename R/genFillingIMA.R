@@ -15,9 +15,10 @@
 #'
 #' @references \insertRef{militino2019interpolation}{RGISTools}
 #'
-#' @param imgTS the time series of images to be filled.
-#' @param Img2Fill a vector defining the images to fill.
-#' @param aFilter two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
+#' @param imgTS the time series of images to be filled in \code{RasterStack}format 
+#' with the name of the layers containing the date in julian format (YYYYJJJ).
+#' @param Img2Fill a vector defining the images to be filled.
+#' @param aFilter two component vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
 #' @param fact an aggregation factor of the anomalies before the interpolation.
 #' @param nPeriods number of periods used in the temporal window.
 #' @param nYears number of years used in the temporal window.

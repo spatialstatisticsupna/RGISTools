@@ -7,7 +7,7 @@
 genPlotGIS(r, region = NULL, ...)
 }
 \arguments{
-\item{r}{\code{raster}* class variable with the image or image stack to be plotted.}
+\item{r}{\code{Raster}* class variable with the image or image stack to be plotted.}
 
 \item{region}{a \code{polygon} class variable defining the area of interest.}
 

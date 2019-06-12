@@ -17,7 +17,7 @@ genSmoothingIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 
 \item{fun}{a function used to calculate the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.}
 
-\item{nPeriods}{number of periods used to define the neighborhood}
+\item{nPeriods}{number of previous and subsequent days used in the neighborhood used to define the neighborhood}
 
 \item{nYears}{number of years used to define the neighborhood.}
 

@@ -19,9 +19,11 @@
 #' interest provided by the argument \code{out.name}. If no name is provided, by
 #' default the output file is named as ‘outfile’.
 #'
-#' @param src the path of the folder with the Sentinel images in tif format.
+#' @param src the path of the folder with the Landsat images in tif format.
 #' @param out.name the name of the region, if is not defined "outfile" will be asigned.
-#' @param extent a character string with the name of the region of interest (optional).
+#' @param extent \code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
+#' \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.
+#' 
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param gutils logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
@@ -39,18 +41,18 @@
 #' data(ex.navarre)
 #' # asign the folder where the example will be run
 #' src<-"Path_for_downloading_folder"
-#' # download Landsat 8 images
+#' # download Landsat-8 images
 #' lsDownload(satellite="ls8",
 #'                    username="username",
 #'                    password="password",
 #'                    startDate=as.Date("01-01-2018","%d-%m-%Y"),
 #'                    endDate=as.Date("20-01-2018","%d-%m-%Y"),
 #'                    extent=ex.navarre,
-#'                    untarDir="untar",
+#'                    untar=T,
 #'                    AppRoot=src)
-#' # asign the folder with the Landsat 8 images untared
+#' # asign the folder with the Landsat-8 images untared
 #' tif.src<-file.path(src,"untar")
-#' # mosaic the Landsat 8 images
+#' # mosaic the Landsat-8 images
 #' lsMosaic(tif.src,
 #'          AppRoot=src,
 #'          out.name="Navarre")
@@ -86,10 +88,10 @@ lsMosaic<-function(src,
   }
   #definition of bands names
   if(any(grepl("LE7",imgFolders))){
-    message("Landsat 7 images detected!")
+    message("Landsat-7 images detected!")
     dtype<-getRGISToolsOpt("LS7BANDS")
   }else if(any(grepl("LC8",imgFolders))){
-    message("Landsat 8 images detected!")
+    message("Landsat-8 images detected!")
     dtype<-getRGISToolsOpt("LS8BANDS")
   }else{
     stop("Satellite not supported for Day mosaic.")

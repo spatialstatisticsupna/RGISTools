@@ -1,6 +1,6 @@
 #' Calculates the normalized difference vegetation index (NDVI) from raster bands
 #'
-#' \code{\link{varNDVI}} computes the the NDVI index from nir and red bands.
+#' \code{varNDVI} computes the the NDVI index from nir and red bands.
 #'
 #' The normalized difference vegetation index (NDVI) is a simple graphical indicator
 #' that can be used to analyze remote sensing measurements

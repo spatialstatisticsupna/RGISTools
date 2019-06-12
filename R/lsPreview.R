@@ -1,21 +1,21 @@
 #' Allows Landsat satellite images preview before its download
 #'
 #' \code{lsPreview} shows a preview of the n image from a set of search results
-#'  \url{https://landsat.usgs.gov/download-entire-collection-metadata}
+#'  \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{bulk-metadata-service}.
 #'
-#' The functions shows a preview of an image resulting from a search in Landsat imagery metadata.
-#' A search with \code{ls7Search} or \code{ls8Search} has to be carried before proceeding with the preview.
+#' The function shows a preview of an image resulting from a search in Landsat imagery metadata.
+#' A search with \code{\link{ls7Search}} or \code{\link{ls8Search}} has to be carried before proceeding with the preview.
 #' The preview is downloaded from Landsat’s website. Please, be aware that only some images have this feature.
 #'
 #'
-#' @param searchres a data frame with  the results from a search of Landsat images provided by the functions ls7Search or ls8Search.
-#' @param n a number with the row corresponding to the image of interest in the search data frame.
-#' @param size a number specifying the size of the preview to be displayed. The number determines pixels number.
+#' @param searchres a data frame with  the results from a search of Landsat images provided by the functions \code{\link{ls7Search}} or \code{\link{ls8Search}}.
+#' @param n a number of the image of interest in the search data frame.
+#' @param size a number specifying the size of the preview to be displayed, in pixels.
 #'
 #' @examples
 #' \dontrun{
 #' data(ex.navarre)
-#' # Retrieve metadata of images covering Navarre region between 2011 and 2013
+#' # Retrieve jpg images covering Navarre region between 2011 and 2013
 #' search.res<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
 #'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
 #'                   extent=ex.navarre,

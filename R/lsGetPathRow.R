@@ -1,8 +1,8 @@
 #' Returns the pathrow of Modis tile in "\code{hXXvYY}" string format
 #'
-#' \code{lsGetPathRow} reads the official name of a Lansat 7 or 8 image and returns the path and row.
+#' \code{lsGetPathRow} reads the name of a Lansat 7 or 8 image and returns the path and row.
 #'
-#' @param str the full path or official image name of the Lansat 7 or 8 image from which the path and row will be extracted.
+#' @param str the full path or name of the Lansat 7 or 8 image from which the path and row will be extracted.
 #'
 #' @return an string with the path and row of the image in "\code{ppprrr}" format.
 #'

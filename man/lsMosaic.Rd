@@ -8,9 +8,10 @@ lsMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
   gutils = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
-\item{src}{the path of the folder with the Sentinel images in tif format.}
+\item{src}{the path of the folder with the Landsat images in tif format.}
 
-\item{extent}{a character string with the name of the region of interest (optional).}
+\item{extent}{\code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
+\code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.}
 
 \item{out.name}{the name of the region, if is not defined "outfile" will be asigned.}
 
@@ -56,18 +57,18 @@ default the output file is named as ‘outfile’.
 data(ex.navarre)
 # asign the folder where the example will be run
 src<-"Path_for_downloading_folder"
-# download Landsat 8 images
+# download Landsat-8 images
 lsDownload(satellite="ls8",
                    username="username",
                    password="password",
                    startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
                    endDate=as.Date("20-01-2018","\%d-\%m-\%Y"),
                    extent=ex.navarre,
-                   untarDir="untar",
+                   untar=T,
                    AppRoot=src)
-# asign the folder with the Landsat 8 images untared
+# asign the folder with the Landsat-8 images untared
 tif.src<-file.path(src,"untar")
-# mosaic the Landsat 8 images
+# mosaic the Landsat-8 images
 lsMosaic(tif.src,
          AppRoot=src,
          out.name="Navarre")

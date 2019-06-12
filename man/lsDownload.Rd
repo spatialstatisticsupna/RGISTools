@@ -10,7 +10,7 @@ lsDownload(satellite, startDate, endDate, username, password,
 \arguments{
 \item{satellite}{string containing the type of satellite for downloading (\code{"ls7"} or \code{"ls8"}).}
 
-\item{startDate}{starting date of the time series for search images.}
+\item{startDate}{starting date of the time series for searching images.}
 
 \item{endDate}{ending date of the time series for search images.}
 
@@ -39,7 +39,7 @@ The images are saved as ‘.tiff’ files in the \code{AppRoot} directory.
 This function is used for searching and downloading landsat images. The function uses landsat
 search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}) depending on the \code{satellite} argument,
 and then, calls \code{\link{lsDownload}} function with the response of the search.
-Image download requires USGS login account from \url{https://ers.cr.usgs.gov/register/}.
+Image download requires USGS login account. \href{https://ers.cr.usgs.gov/register/}{Get your credentials}.
 
 The image files from the USGS EROS web service are compressed as ‘.tar.gz’ files. \code{\link{lsDownload}} decompresses the
 images and obtains the corresponding ‘.tif’ files. The ‘.tif’ files are saved in the
@@ -48,16 +48,19 @@ This replicates the images in compresses version as tar.gz and uncompresses vers
 \code{raw.rm = T} can be defined, and \code{\link{lsDownload}} will remove the ‘tar.gz’ files.
 If \code{raw.rm = F}, the original files remain, which might be useful to have access to the original files
 in the future and avoid further downloads. By default, \code{\link{lsDownload}} saves the images in (...), in the \code{AppRoot}
-directory. To change this setting, provide \code{AppRoot = the full path as an argument}.
+directory. To change this setting, provide \code{AppRoot = "the full path as an argument"}.
 }
 \examples{
 \dontrun{
 data(ex.navarre)
-lsDownload(satellite="ls8",
-           username="username",
-           password="password",
-           startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
-           endDate=as.Date("20-01-2018","\%d-\%m-\%Y"),
-           extent=ex.navarre)
+lsDownload(satellite = "ls8",
+           username = "username",
+           password = "password",
+           startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+           endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
+           extent = ex.navarre)
+           
+# remove metadata data frame to free memory
+lsRemoveMetadata()
 }
 }

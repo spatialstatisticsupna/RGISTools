@@ -1,6 +1,6 @@
-#' Search Sentinel images using ESA’s SciHub API
+#' Searches Sentinel images using ESA’s SciHub API
 #'
-#' \code{\link{senSearch}} senSearch searches Sentinel products on ESA powered api  \url{http://scihub.copernicus.eu}.
+#' \code{senSearch} searches Sentinel products on ESA powered api called \href{http://scihub.copernicus.eu}{Scihub}.
 #'
 #' Provides the images and urls to be downloaded from ESA’s SciHub API. The images are
 #' searched based on a range of dates and a region of interest. Dates have to be
@@ -8,10 +8,10 @@
 #' spatial class object with an "\code{EPSG:4326}" coordinate projection. ESA’s API only returns
 #' as much as 100 entries.
 #' Credentials from ESA’s SciHub are needed to use this function.
-#' Please, sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}
+#' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 #'
-#' For further information on ESA’s missions and data products, please visit:
-#' \url{https://sentinel.esa.int/web/sentinel/missions}.
+#' For further information on ESA’s missions and data products, please visit
+#' \href{https://sentinel.esa.int/web/sentinel/missions}{Sentinel mission web page}.
 #'
 #' @param username Scihub username.
 #' @param password Scihub password.
@@ -32,16 +32,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' #load a spatial polygon object of navarre for the example
+#' # load a spatial polygon object of navarre for the example
 #' data(ex.navarre)
-#' #perform the search query
-#' searchres<-senSearch(startDate=as.Date("2018210","%Y%j"),
-#'                      endDate=as.Date("2018218","%Y%j"),
-#'                      platform="Sentinel-2",
-#'                      extent=ex.navarre,
-#'                      product="S2MSI1C",
-#'                      username="username",
-#'                      password="password")
+#' # perform the search query
+#' searchres <- senSearch(startDate = as.Date("2018210", "%Y%j"),
+#'                        endDate = as.Date("2018218", "%Y%j"),
+#'                        platform = "Sentinel-2",
+#'                        extent = ex.navarre,
+#'                        product = "S2MSI1C",
+#'                        username = "username",
+#'                        password = "password")
 #' head(searchres)
 #' }
 senSearch<-function(username,

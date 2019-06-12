@@ -1,14 +1,14 @@
 #' Searchs and downloads Sentinel images
 #'
-#' \code{\link{senDownload}} conbines both \code{\link{senSearch}} and \code{\link{senDownSearch}} to easy
+#' \code{senDownload} combines both \code{\link{senSearch}} and \code{\link{senDownSearch}} to easy
 #' the procedure of download Sentinel images.
 #'
 #' This function accepts all the arguments in \code{\link{senSearch}} function and automatically downloads
 #' images matching with the search query. The function creates a folder hierarchy give the posibility
 #' of unzip the images.
 #'
-#' @param username Scihub username
-#' @param password Scihub password
+#' @param username Scihub platform username.
+#' @param password Scihub platform password.
 #' @param ... argument to allow function nestering
 #' \itemize{
 #'   \item \code{product} Sentinel product type.
@@ -26,14 +26,14 @@
 #' \dontrun{
 #' # Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
 #' data(ex.navarre)
-#' senDownload(startDate=as.Date("2018210","%Y%j"),
-#'             endDate=as.Date("2018218","%Y%j"),
-#'             platform="Sentinel-2",
-#'             extent=ex.navarre,
-#'             product="S2MSI1C",
-#'             pathrow=c("R094"),
-#'             username="username",
-#'             password="password")
+#' senDownload(startDate = as.Date("2018210", "%Y%j"),
+#'             endDate = as.Date("2018218", "%Y%j"),
+#'             platform = "Sentinel-2",
+#'             extent = ex.navarre,
+#'             product = "S2MSI1C",
+#'             pathrow = c("R094"),
+#'             username = "username",
+#'             password = "password")
 #' }
 senDownload<-function(username,
                       password,
