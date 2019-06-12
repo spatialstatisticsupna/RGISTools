@@ -28,4 +28,4 @@ Credentials [EarthData](https://ers.cr.usgs.gov/register/)
 Credentials [SciHub](https://scihub.copernicus.eu/dhus/#/self-registration) 
 
 ## License
-Licensed under the [GPL-3 License](https://github.com/spatialstatisticsupna/RGISTools/blob/master/README.md).
+Licensed under the [GPL-3 License](https://github.com/spatialstatisticsupna/RGISTools/blob/master/LICENSE.md).

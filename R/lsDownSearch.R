@@ -108,7 +108,7 @@ lsDownSearch<-function(searchres,
       if(overwrite){
         file.remove(untarDir,showWarnings=FALSE,recursive=TRUE)
       }
-      dir.create(untarDir,recursive=T)
+      dir.create(untarDir,recursive=T,showWarnings=FALSE)
       untar(paste0(downPath,"/",scene,".tar.gz"),exdir=untarDir)
       #Flag is true, so remove compressed files
       if(raw.rm){
