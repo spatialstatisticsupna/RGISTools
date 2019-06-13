@@ -36,12 +36,12 @@
 #'                       password = "password")
 #'
 #' # filtering the path R094 where Navarre is located
-#' length(searchres)
-#' searchres <- searchres[grepl("R094",names(searchres))]
-#' length(searchres)
+#' names(searchres)
+#' searchres.R094 <- searchres[grepl("R094",names(searchres))]
+#' names(searchres.R094)
 #'
 #' # Sentinel download function
-#' senDownSearch(searchres = searchres,
+#' senDownSearch(searchres = searchres.R094,
 #'               username = "username",
 #'               password = "password",
 #'               AppRoot = "Path_for_downloading_folder",

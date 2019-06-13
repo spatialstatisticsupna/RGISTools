@@ -28,8 +28,6 @@
 #'
 lsGetDates<-function(str,...){
   arg<-list(...)
-  #str<-"LC82000312017010LGN01"
-  #str<-"LE72330822017009ASN01"
   if("date.format"%in%names(arg)){
     return(format(as.Date(substr(basename(str),10,16),"%Y%j"),format=arg$date.format))
   }else{
