@@ -11,9 +11,9 @@ modDownload(product, startDate, endDate, username, password,
 \arguments{
 \item{product}{Modis product type.}
 
-\item{startDate}{starting date of time series.}
+\item{startDate}{starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
-\item{endDate}{ending date of time series.}
+\item{endDate}{ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
 \item{username}{EarthData username.}
 

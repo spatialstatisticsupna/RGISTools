@@ -14,8 +14,8 @@ senSearch(username, password, ...)
 \item{...}{argument to allow function nestering:
 \itemize{
   \item \code{product} Sentinel product type.
-  \item \code{startDate} starting date of time series.
-  \item \code{endDate} ending date of time series.
+  \item \code{startDate} starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+  \item \code{endDate} ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
   \item \code{extent} location as projecte file with extention.
   \item \code{lonlat} a vector or a polygon with the coordinates of
 the point or region of interest in longitude/latitude format.

@@ -7,9 +7,9 @@
 ls8Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 }
 \arguments{
-\item{startDate}{starting date of the time series for search images.}
+\item{startDate}{starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
-\item{endDate}{ending date of the time series for search images.}
+\item{endDate}{ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
 \item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 

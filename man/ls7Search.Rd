@@ -7,9 +7,9 @@
 ls7Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 }
 \arguments{
-\item{startDate}{starting date of the time series for searching images.}
+\item{startDate}{starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
-\item{endDate}{ending date of the time series for searching images.}
+\item{endDate}{ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
 \item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
@@ -54,7 +54,7 @@ These method uses spatial objects to define the region of interest. The projecti
 "\code{+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs}”. The argument \code{extent} accepts any R objects being defined
 by a spatial extent. The argument \code{lonlat} only accepts an R vector with one coordinate in the form of
 latitude-longitude (ex. \code{c(-1.64323,42.81687)}, where the first element is the latitude and the second is the longitude).
-The argument \code{Polygon}, accepts \code{SpatialPolygon} or s\code{SpatialPolygonDataFrame} objects.
+The argument \code{Polygon}, accepts \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} objects.
 
 In addition, the search function enables further filtering. The function can filter
 the results by any column name in the metadata file, using the column name as an argument. For example, to

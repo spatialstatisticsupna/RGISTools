@@ -10,9 +10,9 @@ modSearch(product, startDate, endDate, collection = 6, resType = "url",
 \arguments{
 \item{product}{the short name of the Modis product.}
 
-\item{startDate}{starting date of the time series of relevant images.}
+\item{startDate}{starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
-\item{endDate}{ending data of the time series of relevant  images.}
+\item{endDate}{ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
 \item{collection}{Modis collection.}
 

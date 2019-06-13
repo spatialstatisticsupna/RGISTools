@@ -10,8 +10,9 @@
 #'
 #' @param src path to the folder where the time series of images is located.
 #' @param ts.name the name of the variable containing the time series in R.
-#' @param startDate the starting date of the time series.
-#' @param endDate the ending date of the time series.
+#' @param startDate starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param endDate ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param dextent creates the \code{RasterStack} from different extent tif images.
 #' @param recursive logical argument. If \code{TRUE} reads folders recursively.
 #' @param ... argument to allow function nestering.
 #' \itemize{
@@ -58,7 +59,7 @@
 #' genSaveTSRData(src3, ts.name = "ModisNDVI", AppRoot = src)
 #' s.end<-Sys.time()
 #' }
-genSaveTSRData<-function(src,ts.name="TS.Name",startDate=NULL,endDate=NULL,recursive=F,...){
+genSaveTSRData<-function(src,ts.name="TS.Name",startDate=NULL,endDate=NULL,dextent=FALSE,recursive=FALSE,...){
   AppRoot=defineAppRoot(...)
   flist<-list.files(src,full.names = T,pattern="\\.tif$",recursive=recursive)
   allDates<-genGetDates(flist)
@@ -70,7 +71,26 @@ genSaveTSRData<-function(src,ts.name="TS.Name",startDate=NULL,endDate=NULL,recur
     flist<-flist[allDates<endDate]
     allDates<-allDates[allDates<endDate]
   }
-  assign(ts.name,readAll(stack(flist)))
+  
+  if(dextent){
+    imgs<-lapply(flist,raster)
+    rstack<-NULL
+    for(result in imgs){
+      if(is.null(rstack)){
+        rstack<-result
+      }else{
+        result<-extend(result,rstack)
+        rstack<-extend(rstack,result)
+        rstack<-addLayer(rstack,result)
+      }
+    } 
+    assign(ts.name,readAll(rstack))
+  }else{
+    assign(ts.name,readAll(stack(flist)))
+  }
+ 
+  
+  
   save(list=c(ts.name), file = paste0(AppRoot,"/",ts.name,".RData"))
   eval(parse(text=paste0(ts.name,"<<-",ts.name) ))
   message(paste0("The time series of images in ",src," have been saved as RData.\nYou can find the RDAta in: ",paste0(AppRoot,"/",ts.name,".RData")))
