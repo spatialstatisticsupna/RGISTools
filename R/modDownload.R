@@ -11,8 +11,8 @@
 #' may occur when trying to connect with their server during this day of the week.
 #'
 #' @param product Modis product type.
-#' @param startDate starting date of time series.
-#' @param endDate ending date of time series.
+#' @param startDate starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param endDate ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param username EarthData username.
 #' @param password EarthData password.
 #' @param collection Modis collection.

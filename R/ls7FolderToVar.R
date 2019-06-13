@@ -78,13 +78,19 @@ ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
     funString<-paste0(substr(funString,1,nchar(funString)-1),")")
     eval(parse(text=funString))
     if(getStack){
-      rstack<-addLayer(rstack,result)
+      if(is.null(rstack)){
+        rstack<-result
+      }else{
+        result<-extend(result,rstack)
+        rstack<-extend(rstack,result)
+        rstack<-addLayer(rstack,result)
+      }
     }else{
       writeRaster(result,paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"),overwrite=overwrite)
     }
   }
   if(getStack){
-    return(result)
+    return(rstack)
   }else{
     message(paste0(vartype," images saved in HDD"))
     message(paste0("File dir: ",AppRoot))

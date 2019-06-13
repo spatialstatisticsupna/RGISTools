@@ -31,8 +31,8 @@
 #' This can be achieved by adding \code{browseAvaliable=”Y”} as a function argument.
 #'
 #'
-#' @param startDate starting date of the time series for search images.
-#' @param endDate ending date of the time series for search images.
+#' @param startDate starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param endDate ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param precise logical argument. If \code{TRUE} the search is donw tile by tile (slower).
 #' @param ... argument to allow function nestering:
@@ -84,7 +84,7 @@ ls8Search<-function(startDate,endDate,verbose=FALSE,precise=FALSE,...){
 
   if(!ls8IsMetaData()|endDate>as.Date(Sys.time())|getRGISToolsOpt("LS8META.var")%in%ls(all.names=T)){
     message("MetaData not loaded! loading...")
-    ls8LoadMetadata(AppRoot=AppRoot,update=F)
+    ls8LoadMetadata(AppRoot=AppRoot,update=F,...)
   }
 
   #first filter by date

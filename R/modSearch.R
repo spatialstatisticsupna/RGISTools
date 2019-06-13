@@ -12,8 +12,8 @@
 #' may occur when trying to connect with their server during this day of the week.
 #'
 #' @param product the short name of the Modis product.
-#' @param startDate starting date of the time series of relevant images.
-#' @param endDate ending data of the time series of relevant  images.
+#' @param startDate starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param endDate ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param collection Modis collection.
 #' @param resType response type of the query (\code{browseurl} or \code{url}), by default the url where the images are located.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.

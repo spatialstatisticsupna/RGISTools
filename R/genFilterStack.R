@@ -7,11 +7,10 @@
 #' @param r the raster stack to be filtered.
 #' @param ... argument to allow function nestering.
 #' \itemize{
-#'   \item \code{startDate} the starting date of the range of interest.
-#'   \item \code{endDate} the ending date of the range of interest.
+#'   \item \code{startDate} starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#'   \item \code{endDate} ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #'   \item \code{AppRoot} the path where the RData will be saved.
 #' }
-#' 
 #' @examples
 #' #generate random images
 #' img <- matrix(1:16, ncol = 4, byrow = TRUE)

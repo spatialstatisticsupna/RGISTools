@@ -18,8 +18,8 @@
 #' directory. To change this setting, provide \code{AppRoot = "the full path as an argument"}.
 #'
 #' @param satellite string containing the type of satellite for downloading (\code{"ls7"} or \code{"ls8"}).
-#' @param startDate starting date of the time series for searching images.
-#' @param endDate ending date of the time series for search images.
+#' @param startDate starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param endDate ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param username login credentials to access the USGS EROS web service.
 #' @param password login credentials to access the USGS EROS web service.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
