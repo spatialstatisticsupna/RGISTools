@@ -79,9 +79,11 @@ ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
     eval(parse(text=funString))
     if(getStack){
       if(is.null(rstack)){
+        names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
         rstack<-result
       }else{
         result<-extend(result,rstack)
+        names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
         rstack<-extend(rstack,result)
         rstack<-addLayer(rstack,result)
       }
