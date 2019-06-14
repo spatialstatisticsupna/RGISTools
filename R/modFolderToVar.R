@@ -63,8 +63,8 @@ modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
     print(vartype)
   }
   mod.list<-list.files(src,full.names = TRUE)
-  result<-raster()
-  rstack<-stack()
+  result<-NULL
+  rstack<-NULL
   for(imgfd in mod.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     modbands<-getRGISToolsOpt("MOD09BANDS")

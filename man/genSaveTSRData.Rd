@@ -5,16 +5,18 @@
 \title{Imports time series of images and saves as RData}
 \usage{
 genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
-  endDate = NULL, recursive = F, ...)
+  endDate = NULL, dextent = FALSE, recursive = FALSE, ...)
 }
 \arguments{
 \item{src}{path to the folder where the time series of images is located.}
 
 \item{ts.name}{the name of the variable containing the time series in R.}
 
-\item{startDate}{the starting date of the time series.}
+\item{startDate}{starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
-\item{endDate}{the ending date of the time series.}
+\item{endDate}{ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+
+\item{dextent}{creates the \code{RasterStack} from different extent tif images.}
 
 \item{recursive}{logical argument. If \code{TRUE} reads folders recursively.}
 

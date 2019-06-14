@@ -65,7 +65,7 @@ senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
 
   sen.list<-list.files(src,full.names = T)
   rstack<-NULL
-  result<-raster()
+  result<-NULL
   for(imgfd in sen.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     senbands<-getRGISToolsOpt("SEN2BANDS")

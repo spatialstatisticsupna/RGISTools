@@ -61,8 +61,8 @@ ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   }
 
   ls.list<-list.files(src,full.names = TRUE)
-  rstack<-stack()
-  result<-raster()
+  rstack<-NULL
+  result<-NULL
   for(imgfd in ls.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     ls7bands<-getRGISToolsOpt("LS7BANDS")
