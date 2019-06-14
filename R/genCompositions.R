@@ -52,14 +52,14 @@ genCompositions<-function(rstack,n.days,fun,by.periods=FALSE,...){
     rnp<-ceiling(n.ped/n.days)
     idx<-rep(1:rnp,each=n.days)[1:length(alldates)]
     idx<-idx[alldates%in%dates]
-    comp<-stackApply(rstack,idx,fun=fun)
+    comp<-stackApply(rstack,idx,fun=fun, ...)
     names(comp)<-paste0("Comp_",n.days,"_",format(alldates,"%Y%j")[unique(idx)])
   }else{
     # Create compositions using periods
     n.ped<-nlayers(rstack)
     rnp<-ceiling(n.ped/n.days)
     idx<-rep(1:rnp,each=n.days)[1:n.ped]
-    comp<-stackApply(rstack,idx,fun=fun)
+    comp<-stackApply(rstack,idx,fun=fun, ...)
     names(comp)<-paste0(names(rstack)[unique(idx)],"_Comp_",n.days)
   }
   if("AppRoot"%in%names(args)){
