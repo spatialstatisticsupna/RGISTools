@@ -4,18 +4,18 @@
 \alias{genCompositions}
 \title{Creates image compositions from a time series of satellite images}
 \usage{
-genCompositions(rstack, n.days, fun, by.periods = FALSE, ...)
+genCompositions(rstack, n, fun, by.days = FALSE, ...)
 }
 \arguments{
 \item{rstack}{a \code{RasterStack} where every layer is named after the 
 date it was captured in julian format as "\code{YYYYJJJ}".}
 
-\item{n.days}{number of days considered in the temporal window.}
+\item{n}{number of images combined in the aggregation.}
 
 \item{fun}{the function used to create the composite, such as \code{max}, \code{min}, \code{mean}, ...}
 
-\item{by.periods}{logical argument. If \code{TRUE} the function will aggregate.
-\code{n.days} periods instead of use \code{n.days} temporal window.}
+\item{by.days}{logical argument. If \code{FALSE}, \code{n} indicates the number of images.
+If \code{TRUE}, \code{n} indicates the number of days.}
 
 \item{...}{argument to allow function nestering.
 \itemize{
@@ -40,16 +40,16 @@ maximum pixel value over a period of time. Write \code{fun = max} to use the
 data("ex.ndvi.navarre")
 # show the images: clouds are found
 genPlotGIS(ex.ndvi.navarre)
-# Composites dividing the series in two periods and using MVC
+# Equivalent: Use 3 images for every composite
 composite.NDVI.1 <- genCompositions(ex.ndvi.navarre,
-                                    n.days = 2,
-                                    by.periods = TRUE,
+                                    n = 3,
+                                    fun = max)
+genPlotGIS(composite.NDVI.1)
+# Composites dividing the series in two periods and using MVC
+composite.NDVI.2 <- genCompositions(ex.ndvi.navarre,
+                                    n = 2,
+                                    by.days = TRUE,
                                     fun = max)
 # Check that the clouds were removed
-genPlotGIS(composite.NDVI.1)
-# Equivalent: Use 3 images for every composite
-composite.NDVI.2 <- genCompositions(ex.ndvi.navarre,
-                                    n.days = 3,
-                                    fun = max)
 genPlotGIS(composite.NDVI.2)
 }
