@@ -53,14 +53,14 @@ genCompositions<-function(rstack,n,fun,by.days=FALSE,...){
     idx<-rep(1:rnp,each=n)[1:length(alldates)]
     idx<-idx[alldates%in%dates]
     comp<-stackApply(rstack,idx,fun=fun, ...)
-    names(comp)<-paste0("Comp_",n,"_",format(alldates,"%Y%j")[unique(idx)])
+    names(comp)<-paste0("Comp_",n,"_",format(alldates,"%Y%j")[seq(1,n.ped,n)[unique(idx)]])
   }else{
     # Create compositions using periods
     n.ped<-nlayers(rstack)
     rnp<-ceiling(n.ped/n)
     idx<-rep(1:rnp,each=n)[1:n.ped]
     comp<-stackApply(rstack,idx,fun=fun, ...)
-    names(comp)<-paste0(names(rstack)[unique(idx)],"_Comp_",n)
+    names(comp)<-paste0(names(rstack)[seq(1,n.ped,n)[unique(idx)]],"_Comp_",n)
   }
   if("AppRoot"%in%names(args)){
     writeRaster(comp,filename=paste0(AppRoot,"/",names(comp),".tif"),bylayer=T)
