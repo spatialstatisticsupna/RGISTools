@@ -6,7 +6,7 @@ export(genCompositions,genFillingIMA,genFilterStack,
        ls8LoadMetadata,ls8Search,lsGetPathRow,lsPreview,modGetPathRow,
        lsDownload,lsDownSearch,modExtractHDF,modFolderToVar,modDownload,
        modGetPathRow,modMosaic,modPreview,modDownSearch,modSearch,setRGISToolsOpt,
-       getRGISToolsOpt,showRGISToolsOpt,senDownload,senDownSearch,
+       getRGISToolsOpt,showRGISToolsOpt,senDownload,senDownSearch,senGetTile,senGetOrbit,
        senFolderToVar,senSearch,senMosaic,senPreview,varEVI,varMSAVI2,varNBR,
        varNBR2,varNDMI,varNDVI,varNDWI,varRGB,varSAVI,as.Date)
 import("raster","curl", "rjson","rvest", "urltools","tools",
