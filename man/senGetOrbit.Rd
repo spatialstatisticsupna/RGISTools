@@ -13,7 +13,7 @@ senGetOrbit(str, ...)
 an string with the relative orbit of the image in
 }
 \description{
-\code{senGetOrbit} reads the official name of a Sentinel image and returns relative orbit. Get relative orbit \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/satellite-description/orbit}{here}.
+\code{senGetOrbit} reads the official name of a Sentinel image and returns relative orbit. Get relative orbit information \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/satellite-description/orbit}{here}.
 }
 \examples{
 #example of getting date from Sentinel2 image name

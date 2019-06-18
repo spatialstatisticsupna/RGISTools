@@ -1,6 +1,6 @@
 #' Returns the tile of Sentinel-2 images "TTTSSS" string format
 #'
-#' \code{senGetTile} reads the official name of a Sentinel image and returns its assigned tile. Get tiles \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/news/-/asset_publisher/Ac0d/content/sentinel-2-level-1c-product-tiling-grid-released}{here}.
+#' \code{senGetTile} reads the official name of a Sentinel image and returns its assigned tile. Get tiles information \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/news/-/asset_publisher/Ac0d/content/sentinel-2-level-1c-product-tiling-grid-released}{here}.
 #'
 #' @param str the full path or official image name of the Sentinel image from which the tile is extracted.
 #'
@@ -37,7 +37,7 @@ senGetTile<-function(str,...){
 
 #' Returns the relative orbit of the Sentinel-2 satellite 
 #'
-#' \code{senGetOrbit} reads the official name of a Sentinel image and returns relative orbit. Get relative orbit \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/satellite-description/orbit}{here}.
+#' \code{senGetOrbit} reads the official name of a Sentinel image and returns relative orbit. Get relative orbit information \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/satellite-description/orbit}{here}.
 #'
 #' @param str the full path or official image name of the Sentinel image from which the relative orbit is extracted.
 #'

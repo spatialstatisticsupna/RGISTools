@@ -10,7 +10,7 @@
 #' The arguments configure the smoothing procedure:
 #' \code{Img2Fill} identifies the images to filled, \code{nPeriods} defines
 #' the spatio temporal neighbourhoood considered when smoothing
-#' a pixel, and \code{aggfact} sets the level of spatial aggregation.
+#' a pixel, and \code{fact} sets the level of spatial aggregation.
 #' See more information in \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' @references \insertRef{militino2019interpolation}{RGISTools}
@@ -92,6 +92,7 @@ genFillingIMA<-function(imgTS,
                                target.date=target.date,
                                nPeriods=nPeriods,
                                nYears=nYears)
+    message(paste0("   - Size of the neighbourhood: ",nlayers(neighbours)))
     # calculate mean image
     meanImage<-raster::calc(neighbours,fun=fun,na.rm=T)
     # get target image

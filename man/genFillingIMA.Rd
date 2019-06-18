@@ -52,7 +52,7 @@ the smoothing algorithm over the anomaly.
 The arguments configure the smoothing procedure:
 \code{Img2Fill} identifies the images to filled, \code{nPeriods} defines
 the spatio temporal neighbourhoood considered when smoothing
-a pixel, and \code{aggfact} sets the level of spatial aggregation.
+a pixel, and \code{fact} sets the level of spatial aggregation.
 See more information in \insertCite{militino2019interpolation}{RGISTools}.
 }
 \examples{
