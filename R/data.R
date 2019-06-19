@@ -10,7 +10,7 @@
 #' }
 "ex.dem.navarre"
 
-#' NDVI time series of the tile containing Navarre in Spain
+#' NDVI of the tile containing Navarre in Spain
 #'
 #' Geographically projected \code{RasterBrick} object with the NDVI values for the region of Navarre.
 #'

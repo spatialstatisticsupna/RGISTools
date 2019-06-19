@@ -5,7 +5,6 @@ assign("AppRoot", NULL, env=optEnv)
 # connection
 assign("USERAGENT","Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0", env=optEnv)
 
-
 # Landsat-8 options
 # new 16/04/2019 landsat metadata web page url https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service
 assign("LS8META.csv", "https://landsat.usgs.gov/landsat/metadata_service/bulk_metadata_files/LANDSAT_8_C1.csv.gz", env=optEnv)
@@ -66,8 +65,13 @@ assign("SEN3BANDS",NULL, env=optEnv)
 #' @param env the environment where the \code{RGISTools} option are saved
 #'
 #' @examples
+#' # list avaliable options names
+#' showRGISToolsOpt()
+#' # list the url where the landsat-7 metadata is located
 #' getRGISToolsOpt("LS7META.dir")
+#' # change the url where the landsat-7 metadata is located
 #' setRGISToolsOpt("LS7META.dir", "NewMTDir")
+#' # list the url where the landsat-7 metadata is located
 #' getRGISToolsOpt("LS7META.dir")
 setRGISToolsOpt <- function(opt,value,env=optEnv) {
   assign(opt, value, envir=env)
@@ -81,8 +85,14 @@ setRGISToolsOpt <- function(opt,value,env=optEnv) {
 #' @param env the environment where the \code{RGISTools} option are saved.
 #'
 #' @examples
+#' # list avaliable options names
+#' showRGISToolsOpt()
+#' # list the asignation of Sentinel bands
 #' getRGISToolsOpt("SEN2BANDS")
+#' # list the asignation of Landsat-8 bands
 #' getRGISToolsOpt("LS8BANDS")
+#' # list the asignation of Modis 09 bands
+#' getRGISToolsOpt("MOD09BANDS")
 getRGISToolsOpt <- function(opt,env=optEnv) {
   return(get(opt, envir=env))
 }

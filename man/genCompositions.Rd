@@ -14,8 +14,10 @@ date it was captured in julian format as "\code{YYYYJJJ}".}
 
 \item{fun}{the function used to create the composite, such as \code{max}, \code{min}, \code{mean}, ...}
 
-\item{by.days}{logical argument. If \code{FALSE}, \code{n} indicates the number of images.
-If \code{TRUE}, \code{n} indicates the number of days.}
+\item{by.days}{logical argument. If \code{FALSE}, \code{n} indicates the number of consecutive images of the aggregation.
+If \code{TRUE}, \code{n} indicates the maximun number of aggregated values between 
+the first and the last day of the times series, through different years. 
+The aggregation requires at least one available image.}
 
 \item{...}{argument to allow function nestering.
 \itemize{
@@ -23,7 +25,7 @@ If \code{TRUE}, \code{n} indicates the number of days.}
 }}
 }
 \description{
-\code{genCompositions} combines satellite images over a temporal window to create composite images.
+\code{genCompositions} combines satellite images over a series of images to create composite images.
 }
 \details{
 This function supports temporal aggregations by specifying \code{fun} argument.
@@ -31,25 +33,26 @@ THe number of images aggregated is defined using \code{n.days} argument.
 
 \code{genCompositions} reduce the number of images, improving their quality,
 since clouds and potential outliers are removed. Clouds and outliers usually appear with
-very low values the index. For example, the Maximun value compostion (\code{MVC}) builds composites using the
+very low values. For example, the Maximun value compostion (\code{MVC}) builds composites using the
 maximum pixel value over a period of time. Write \code{fun = max} to use the
 \code{MVC} technique. Other functions are also supported.
 }
 \examples{
-# load a time series of NDVI images over Navarre
+# loading NDVI images of the Navarre tile
 data("ex.ndvi.navarre")
-# show the images: clouds are found
+# Ploting the images: clouds are found
 genPlotGIS(ex.ndvi.navarre)
-# Equivalent: Use 3 images for every composite
-composite.NDVI.1 <- genCompositions(ex.ndvi.navarre,
+# Use n = 3 
+composite.NDVI.a <- genCompositions(ex.ndvi.navarre,
                                     n = 3,
                                     fun = max)
-genPlotGIS(composite.NDVI.1)
-# Composites dividing the series in two periods and using MVC
-composite.NDVI.2 <- genCompositions(ex.ndvi.navarre,
-                                    n = 2,
+genPlotGIS(composite.NDVI.a)
+# when by.days=TRUE, the first composite images is made with images 1, 2 and 3, 
+# the second with image 4, and the third with images 5 and 6.
+composite.NDVI.3a <- genCompositions(ex.ndvi.navarre,
+                                    n = 3,
                                     by.days = TRUE,
                                     fun = max)
 # Check that the clouds were removed
-genPlotGIS(composite.NDVI.2)
+genPlotGIS(composite.NDVI.3a)
 }

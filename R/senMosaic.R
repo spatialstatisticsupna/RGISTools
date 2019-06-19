@@ -29,7 +29,7 @@
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param ... argument for function nestering accepts:
 #'  \itemize{
-#'   \item \code{pathrow} a list with the path and row numbers for the region of interest.
+#'   \item \code{pathrow} a list with the tiles componing the region of interest obtained by \code{\link{senGetOrbit}}.
 #'   \item \code{bandFilter} a vector with the name of the image bands to be mosaicked.
 #' If it is not supplied, the function is applied to all the bands available in \code{src}.
 #'   \item \code{dayFilter} a vector containing the days in date format to filter the days wanted.
@@ -71,9 +71,6 @@ senMosaic<-function(src,
 
   #read all folder names to get all the days
   imgFolders<-list.files(src,full.names = T)
-  #remove folders
-  #imgFolders<-imgFolders[nchar(basename(imgFolders))==83]
-
   dates<-unique(senGetDates(imgFolders))
   bpath<-file.path(AppRoot,out.name)
 

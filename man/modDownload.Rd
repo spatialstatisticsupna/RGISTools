@@ -5,8 +5,7 @@
 \title{Search and downloads Modis images in structured folder}
 \usage{
 modDownload(product, startDate, endDate, username, password,
-  collection = 6, verbose = FALSE, hdfdir = "hdf", tiffdir = "tif",
-  ...)
+  collection = 6, verbose = FALSE, extract.tif = FALSE, ...)
 }
 \arguments{
 \item{product}{Modis product type.}
@@ -23,9 +22,7 @@ modDownload(product, startDate, endDate, username, password,
 
 \item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{hdfdir}{folder name for downloading the hdf files.}
-
-\item{tiffdir}{folder name for downloading the tif files.}
+\item{extract.tif}{logical argument. If \code{TRUE} extracts as tif image format all the layers in a hdf image.}
 
 \item{...}{argument for function nestering:
 \itemize{
@@ -66,5 +63,16 @@ modDownload(product = "MOD09GA",
             tiffdir = "tif",
             collection = 6,
             extent = ex.navarre)
+files<-list.files("./Path_for_downloading_folder/tif",
+                  pattern = "\\\\.tif$",
+                  full.names = T,
+                  recursive = T)[1,4,3]
+files.stack<-stack(files)
+qrange<-c(0.001,0.999)
+imagen<-varRGB(files.stack.raster[[1]], 
+               files.stack.raster[[2]],
+               files.stack.raster[[3]],
+               qrange)
+plotRGB(imagen)
 }
 }

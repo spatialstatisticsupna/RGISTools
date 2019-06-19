@@ -16,8 +16,7 @@
 #' @param username EarthData username.
 #' @param password EarthData password.
 #' @param collection Modis collection.
-#' @param hdfdir folder name for downloading the hdf files.
-#' @param tiffdir folder name for downloading the tif files.
+#' @param extract.tif logical argument. If \code{TRUE} extracts as tif image format all the layers in a hdf image.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param ... argument for function nestering:
 #' \itemize{
@@ -46,6 +45,17 @@
 #'             tiffdir = "tif",
 #'             collection = 6,
 #'             extent = ex.navarre)
+#' files<-list.files("./Path_for_downloading_folder/tif",
+#'                   pattern = "\\.tif$",
+#'                   full.names = T,
+#'                   recursive = T)[1,4,3]
+#' files.stack<-stack(files)
+#' qrange<-c(0.001,0.999)
+#' imagen<-varRGB(files.stack.raster[[1]], 
+#'                files.stack.raster[[2]],
+#'                files.stack.raster[[3]],
+#'                qrange)
+#' plotRGB(imagen)
 #'}
 modDownload<-function(product,
                      startDate,
@@ -54,8 +64,7 @@ modDownload<-function(product,
                      password,
                      collection=6,
                      verbose=FALSE,
-                     hdfdir="hdf",
-                     tiffdir="tif",
+                     extract.tif=FALSE,
                      ...){
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
@@ -67,14 +76,16 @@ modDownload<-function(product,
   if(verbose){
     print(search.res)
   }
-  downdir<-file.path(AppRoot,product,hdfdir)
-  tiffdir<-file.path(AppRoot,product,tiffdir)
+  downdir<-file.path(AppRoot,product,"hdf")
+  tiffdir<-file.path(AppRoot,product,"tif")
   dir.create(downdir,recursive = T,showWarnings = F)
   for(s in search.res){
     print(basename(s))
     modDownSearch(s,username,password,AppRoot=downdir)
-    dir.create(tiffdir,recursive=T,showWarnings = F)
-    modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir)
+    if(extract.tif){
+      dir.create(tiffdir,recursive=T,showWarnings = F)
+      modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir)
+    }
   }
   message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",tiffdir))
 }

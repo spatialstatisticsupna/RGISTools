@@ -26,8 +26,8 @@
 #' # Shows a panel of maps, one per date and the region of interest in shown on the fourth map
 #' genPlotGIS(r=ex.ndvi.navarre[[1:4]],
 #'            region=ex.navarre,
-#'            which = c(4),#show region only y 4th image
-#'            wComp=c(4)  #show component only y 4th image
+#'            which = c(4),#show region only in 4th image
+#'            wComp=c(4)  #show component only in 4th image
 #' )
 #'
 #' \dontrun{
@@ -38,7 +38,7 @@
 #' genPlotGIS(r=ex.ndvi.navarre[[1]],
 #'            region=ex.navarre,
 #'            proj=CRS("+init=epsg:4670"), #project all components
-#'            col.regions=colorRampPalette(my.palette),
+#'            col.regions=colorRampPalette(my.palette)
 #' )
 #' }
 #'
@@ -57,15 +57,17 @@
 #'            scaleRelativeSize=0.15,
 #'            #scale text relatives 0-1
 #'            scaleLabelRelativeX=0.1,
-#'            scaleLabelRelativeY=0.14,
+#'            scaleLabelRelativeY=0.2,
 #'            scaleLabelSize=5000
 #'         )
 #' )
 genPlotGIS<-function(r,region=NULL,...){
   arg<-list(...)
+  if("proj"%in%names(arg)){
+    r<-projectRaster(r,crs=arg$proj)
+  }
   if(!is.null(region)){
     if("proj"%in%names(arg)){
-      r<-projectRaster(r,crs=arg$proj)
       region<-spTransform(region,proj4string(r))
       r<-crop(r,region)
     }else{
@@ -99,12 +101,12 @@ genPlotGIS<-function(r,region=NULL,...){
                  ArrowRelativeY=0.1,
                  ArrowRelativeSize=0.15,
                  #scale relatives
-                 scaleRelativeX=0.1,
+                 scaleRelativeX=0.13,
                  scaleRelativeY=0.1,
-                 scaleRelativeSize=0.15,
+                 scaleRelativeSize=0.18,
                  #scale text relatives
-                 scaleLabelRelativeX=0.1,
-                 scaleLabelRelativeY=0.12,
+                 scaleLabelRelativeX=0.14,
+                 scaleLabelRelativeY=0.16,
                  scaleLabelSize=5000
     )
   }

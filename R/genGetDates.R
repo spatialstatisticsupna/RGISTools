@@ -29,10 +29,4 @@ genGetDates<-function(str,...){
   }
 }
 
-as.Date<-function(x,...){
-  if(is.numeric(x)){
-    return(base::as.Date("1970-01-01")+x)
-  }else{
-    return(base::as.Date(x,...))
-  }
-}
+

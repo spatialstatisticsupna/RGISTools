@@ -24,7 +24,7 @@ the region of interest.}
 
 \item{...}{argument for function nestering accepts:
  \itemize{
-  \item \code{pathrow} a list with the path and row numbers for the region of interest.
+  \item \code{pathrow} a list with the tiles componing the region of interest obtained by \code{\link{senGetOrbit}}.
   \item \code{bandFilter} a vector with the name of the image bands to be mosaicked.
 If it is not supplied, the function is applied to all the bands available in \code{src}.
   \item \code{dayFilter} a vector containing the days in date format to filter the days wanted.

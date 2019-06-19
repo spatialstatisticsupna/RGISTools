@@ -9,8 +9,8 @@
 #'
 #' @references \insertRef{qi1994modified}{RGISTools}
 #'
-#' @param nir the red band of the capture in \code{raster} format.
-#' @param red the nir band of the capture in \code{raster} format.
+#' @param red the red band of the capture in \code{raster} format.
+#' @param nir the nir band of the capture in \code{raster} format.
 #'
 #' @return MSAVI2 in \code{raster} format.
 #'
@@ -26,7 +26,7 @@
 #' msavi2 <- varMSAVI2(red,nir)
 #' # plot the image
 #' spplot(msavi2)
-varMSAVI2<-function(nir, red){
+varMSAVI2<-function(red, nir){
   msavi<-(2*nir+1-sqrt((2*nir+1)^2-8*(nir-red)))/2
   return(msavi)
 }

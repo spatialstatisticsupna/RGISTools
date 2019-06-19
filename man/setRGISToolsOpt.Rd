@@ -17,7 +17,12 @@ setRGISToolsOpt(opt, value, env = optEnv)
 \code{setRGISToolsOpt} changes the default value of an \code{RGISTools} option.
 }
 \examples{
+# list avaliable options names
+showRGISToolsOpt()
+# list the url where the landsat-7 metadata is located
 getRGISToolsOpt("LS7META.dir")
+# change the url where the landsat-7 metadata is located
 setRGISToolsOpt("LS7META.dir", "NewMTDir")
+# list the url where the landsat-7 metadata is located
 getRGISToolsOpt("LS7META.dir")
 }

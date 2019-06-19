@@ -4,12 +4,12 @@
 \alias{varMSAVI2}
 \title{Calculates the modified soil-adjusted vegetation index (MSAVI2) from raster bands}
 \usage{
-varMSAVI2(nir, red)
+varMSAVI2(red, nir)
 }
 \arguments{
-\item{nir}{the red band of the capture in \code{raster} format.}
+\item{red}{the red band of the capture in \code{raster} format.}
 
-\item{red}{the nir band of the capture in \code{raster} format.}
+\item{nir}{the nir band of the capture in \code{raster} format.}
 }
 \value{
 MSAVI2 in \code{raster} format.

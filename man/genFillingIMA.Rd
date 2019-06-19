@@ -5,12 +5,12 @@
 \title{Fills the gaps in a time series of satellite images}
 \usage{
 genFillingIMA(imgTS, Img2Fill = NULL, aFilter = c(0.05, 0.95),
-  fact = 5, nPeriods = 3, nYears = 1, fun = mean, factSE = 8,
+  fact = 5, nDays = 3, nYears = 1, fun = mean, factSE = 8,
   snow.mode = FALSE, predictSE = FALSE, out.name = "outname", ...)
 }
 \arguments{
-\item{imgTS}{the time series of images to be filled in \code{RasterStack}format 
-with the name of the layers containing the date in julian format (YYYYJJJ).}
+\item{imgTS}{the time series of images to be filled in \code{RasterStack} format 
+with the name of the layers containing the date in julian format (\code{YYYYJJJ}).}
 
 \item{Img2Fill}{a vector defining the images to be filled.}
 
@@ -18,9 +18,9 @@ with the name of the layers containing the date in julian format (YYYYJJJ).}
 
 \item{fact}{an aggregation factor of the anomalies before the interpolation.}
 
-\item{nPeriods}{number of periods used in the temporal window.}
+\item{nDays}{number of previous and subsequent days used to define the neighborhood}
 
-\item{nYears}{number of years used in the temporal window.}
+\item{nYears}{number of years used to define the neighborhood.}
 
 \item{fun}{function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.}
 
@@ -41,13 +41,12 @@ with the name of the layers containing the date in julian format (YYYYJJJ).}
 \code{RasterStack} object with the smoothed time series.
 }
 \description{
-\code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly
+\code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly (IMA)
 for gap filling published in  \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{
-The time series is decomposed into a mean and a residual (anomaly)
-components. The procedure applies
-the smoothing algorithm over the anomaly.
+The time series of images are decomposed into the mean images and the anomalies images. The procedure applies
+the smoothing algorithm over the anomaly images.
 
 The arguments configure the smoothing procedure:
 \code{Img2Fill} identifies the images to filled, \code{nPeriods} defines

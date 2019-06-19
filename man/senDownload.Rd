@@ -14,28 +14,29 @@ senDownload(username, password, ...)
 \item{...}{argument to allow function nestering
 \itemize{
   \item \code{product} Sentinel product type.
-  \item \code{startDate} starting date of time series.
-  \item \code{endDate} ending date of time series.
-  \item \code{extent} location as projecte file with extention.
+  \item \code{startDate} starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+  \item \code{endDate} ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+  \item \code{extent} location as project file with extention.
   \item \code{platform} platform name of the Sentinel mission (Sentine-1, Sentinel-2,...).
-  \item \code{nattempts} the number of attempts that the function has to carry out.
-  to download an image in case the file becomes corrupted.
+  \item \code{nattempts} the number of attempts that the function has to carry out
+   an image in case the file becomes corrupted.
   \item \code{error.log} error log file name.
   \item \code{AppRoot} the directory where the images will be saved.
 }}
 }
 \description{
-\code{senDownload} combines both \code{\link{senSearch}} and \code{\link{senDownSearch}} to easy
-the procedure of download Sentinel images.
+\code{senDownload} combines both \code{\link{senSearch}} and \code{\link{senDownSearch}} functions for searching and downloading. 
+It is recommended for creating long time series in an automated way.
 }
 \details{
 This function accepts all the arguments in \code{\link{senSearch}} function and automatically downloads
-images matching with the search query. The function creates a folder hierarchy give the posibility
-of unzip the images.
+images matching with the search query. The function creates a folder hierarchy, and gives the possibility
+of unzipping the images.
 }
 \examples{
 \dontrun{
-# Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
+# Download S2MSI1C products sensed by Sentinel - 2 
+# satellite between the julian dates 210 and 218, 2018
 data(ex.navarre)
 senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             endDate = as.Date("2018218", "\%Y\%j"),
@@ -45,5 +46,16 @@ senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             pathrow = c("R094"),
             username = "username",
             password = "password")
+files<-list.files("./",
+                  pattern = "\\\\.jp2$",
+                  full.names = T,
+                  recursive = T)[4,3,2]
+files.stack<-stack(files)
+qrange<-c(0.001,0.999)
+imagen<-varRGB(files.stack.raster[[1]], 
+               files.stack.raster[[2]],
+               files.stack.raster[[3]],
+               qrange)
+plotRGB(imagen)
 }
 }

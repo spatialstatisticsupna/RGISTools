@@ -5,7 +5,7 @@
 \title{Uses covariates for smoothing outliers in a time series of satellite images}
 \usage{
 genSmoothingIMA(rStack, cStack, Img2Process = NULL, fun = mean,
-  nPeriods = 3, nYears = 1, fact = 5, out.name = "out",
+  nDays = 3, nYears = 1, fact = 5, out.name = "out",
   aFilter = c(), snow.mode = FALSE, ...)
 }
 \arguments{
@@ -17,7 +17,7 @@ genSmoothingIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 
 \item{fun}{a function used to calculate the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.}
 
-\item{nPeriods}{number of previous and subsequent days used in the neighborhood used to define the neighborhood}
+\item{nDays}{number of previous and subsequent days used to define the neighborhood}
 
 \item{nYears}{number of years used to define the neighborhood.}
 

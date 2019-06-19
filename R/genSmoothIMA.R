@@ -16,7 +16,7 @@
 #' @param rStack a \code{RasterStack} containing a time series of satellite images.
 #' @param cStack a \code{RasterStack} containing a time series of covariates.
 #' @param Img2Process a vector defining the images to smooth.
-#' @param nPeriods number of previous and subsequent days used in the neighborhood used to define the neighborhood
+#' @param nDays number of previous and subsequent days used to define the neighborhood
 #' @param nYears number of years used to define the neighborhood.
 #' @param aFilter a vector with the lower and upper extreme values for filtering the anomalies. Ex. c(0.05,0.95).
 #' @param fun a function used to calculate the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.
@@ -62,7 +62,7 @@ genSmoothingIMA <- function (rStack,
                              cStack,
                              Img2Process=NULL,
                              fun=mean,
-                             nPeriods=3,
+                             nDays=3,
                              nYears=1,
                              fact=5,
                              out.name="out",
@@ -136,7 +136,7 @@ genSmoothingIMA <- function (rStack,
     message(paste0("Smoothing image of date ",target.date))
     neighbours<-dateNeighbours(rStack,
                                target.date,
-                               nPeriods=nPeriods,
+                               nPeriods=nDays,
                                nYears=nYears)
 
 

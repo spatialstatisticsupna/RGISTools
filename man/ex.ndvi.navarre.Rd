@@ -3,7 +3,7 @@
 \docType{data}
 \name{ex.ndvi.navarre}
 \alias{ex.ndvi.navarre}
-\title{NDVI time series of the tile containing Navarre in Spain}
+\title{NDVI of the tile containing Navarre in Spain}
 \format{The \code{RasterBrick} contains 6 time-periods:
 \describe{
   \item{name}{the name of each layer contains the date of the period in julian format as "\code{YYYYJJJ}"}.

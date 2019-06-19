@@ -1,11 +1,10 @@
 #' Fills the gaps in a time series of satellite images
 #'
-#' \code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly
+#' \code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly (IMA)
 #' for gap filling published in  \insertCite{militino2019interpolation}{RGISTools}.
 #'
-#' The time series is decomposed into a mean and a residual (anomaly)
-#' components. The procedure applies
-#' the smoothing algorithm over the anomaly.
+#' The time series of images are decomposed into the mean images and the anomalies images. The procedure applies
+#' the smoothing algorithm over the anomaly images.
 #'
 #' The arguments configure the smoothing procedure:
 #' \code{Img2Fill} identifies the images to filled, \code{nPeriods} defines
@@ -15,13 +14,13 @@
 #'
 #' @references \insertRef{militino2019interpolation}{RGISTools}
 #'
-#' @param imgTS the time series of images to be filled in \code{RasterStack}format 
-#' with the name of the layers containing the date in julian format (YYYYJJJ).
+#' @param imgTS the time series of images to be filled in \code{RasterStack} format 
+#' with the name of the layers containing the date in julian format (\code{YYYYJJJ}).
 #' @param Img2Fill a vector defining the images to be filled.
 #' @param aFilter two component vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
 #' @param fact an aggregation factor of the anomalies before the interpolation.
-#' @param nPeriods number of periods used in the temporal window.
-#' @param nYears number of years used in the temporal window.
+#' @param nDays number of previous and subsequent days used to define the neighborhood
+#' @param nYears number of years used to define the neighborhood.
 #' @param fun function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.
 #' @param snow.mode logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.
 #' @param predictSE logical argument. If \code{TRUE} the filling process will calculate the standard error instead the prediction.
@@ -54,7 +53,7 @@ genFillingIMA<-function(imgTS,
                         Img2Fill=NULL,
                         aFilter=c(.05,.95),
                         fact=5,
-                        nPeriods=3,
+                        nDays=3,
                         nYears=1,
                         fun=mean,
                         factSE=8,
@@ -90,7 +89,7 @@ genFillingIMA<-function(imgTS,
     # define temporal neighbourhood
     neighbours<-dateNeighbours(ts.raster=imgTS,
                                target.date=target.date,
-                               nPeriods=nPeriods,
+                               nPeriods=nDays,
                                nYears=nYears)
     message(paste0("   - Size of the neighbourhood: ",nlayers(neighbours)))
     # calculate mean image

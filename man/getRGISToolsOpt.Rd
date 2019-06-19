@@ -15,6 +15,12 @@ getRGISToolsOpt(opt, env = optEnv)
 \code{getRGISToolsOpt} gets the current value of an \code{RGISTools} option.
 }
 \examples{
+# list avaliable options names
+showRGISToolsOpt()
+# list the asignation of Sentinel bands
 getRGISToolsOpt("SEN2BANDS")
+# list the asignation of Landsat-8 bands
 getRGISToolsOpt("LS8BANDS")
+# list the asignation of Modis 09 bands
+getRGISToolsOpt("MOD09BANDS")
 }
