@@ -9,10 +9,7 @@
   \item{name}{the name of each layer contains the date of the period in julian format as "\code{YYYYJJJ}"}.
   \item{size}{each layer contains 113 rows and 105 columns}.
 }}
-\usage{
-ex.ndvi.navarre
-}
 \description{
 Geographically projected \code{RasterBrick} object with the NDVI values for the region of Navarre.
 }
-\keyword{datasets}
+\keyword{data}

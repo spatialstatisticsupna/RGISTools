@@ -4,7 +4,7 @@
 #'
 #' The Normalized Difference Water Index (NDWI) is a ratio between bands of the spectrum 
 #' that was developed to detect open water areas and minimize the influence of the soil 
-#' and vegetation variations.
+#' and vegetation variations \insertCite{mcfeeters1996use}{RGISTools}.
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'

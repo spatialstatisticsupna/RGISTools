@@ -2,7 +2,7 @@
 % Please edit documentation in R/lsGetPathRow.R
 \name{lsGetPathRow}
 \alias{lsGetPathRow}
-\title{Returns the pathrow of Modis tile in "\code{hXXvYY}" string format}
+\title{Returns the pathrow of Landsat tile in "\code{hXXvYY}" string format}
 \usage{
 lsGetPathRow(str)
 }

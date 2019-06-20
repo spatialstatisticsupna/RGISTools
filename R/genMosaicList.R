@@ -3,8 +3,8 @@
 #' \code{genMosaicList} makes a single mosaic from a list of raster images.
 #'
 #' This is a helper function used by other functions in this package. It combines
-#' a list of raster images with different geolocation. If the images overlap, by
-#' default the application selects the maximum value.
+#' a list of raster images with different geolocation. If the images overlap,
+#'  the application selects the maximum value by default.
 #'
 #' @param imageList list of raster images.
 #' @param fun the function applied to overlapping pixels.

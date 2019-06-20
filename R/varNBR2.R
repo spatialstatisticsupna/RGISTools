@@ -3,7 +3,7 @@
 #' \code{varNBR2} computes the NBR2 index from swir1 and swir2 bands.
 #'
 #' The Normalized Burn Ratio 2 (NRB) is an index to identify burned areas. 
-#' In contrast to NBR highlight the sensitivity to water in vegetation.
+#' In contrast to NBR highlight the sensitivity to water in vegetation \insertCite{lutes2006firemon}{RGISTools}.
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'

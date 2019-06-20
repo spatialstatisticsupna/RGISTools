@@ -35,8 +35,8 @@ genSmoothingIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 }}
 }
 \description{
-\code{genSmoothingIMA} is the implementation of a spatio-temporal smoothing
-method that uses covariates. The methodology is explained in \insertCite{militino2019interpolation}{RGISTools}.
+\code{genSmoothingIMA} runs the IMA (\link{genFillingIMA}) smoothing method with covariates. 
+\insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{
 The procedure uses spatio temporal data to decompose each image in the time series as a mean

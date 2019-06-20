@@ -2,8 +2,9 @@
 #'
 #' \code{varNDVI} computes the the NDVI index from nir and red bands.
 #'
-#' The normalized difference vegetation index (NDVI) is a simple graphical indicator
-#' that can be used to analyze remote sensing measurements
+#' The normalized difference vegetation index (NDVI) is the most widely used index for monitoring vegetation dynamics. 
+#' The NDVI reflex vegetation vigour and it is closed related to the amount of photosynthetically 
+#' absorbs active radiation \insertCite{rouse1972monitoring}{RGISTools}.
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'

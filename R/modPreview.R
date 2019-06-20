@@ -1,9 +1,9 @@
-#' Allows Modis satellite images preview before its download
+#' Allows a preview in R of Modis satellite images
 #'
 #' \code{modPreview} shows a preview of the n image from a set of search results.
 #'
 #' The function shows a preview of an image resulting from a search in Modis imagery metadata.
-#' A search with \code{\link{modSearch}} has to be carried out before proceeding with the preview.
+#' A search with \code{\link{modSearch}} has to be done before proceeding with the preview.
 #' The preview is downloaded from Modis website. Please, be aware that only some images have this feature.
 #'
 #'

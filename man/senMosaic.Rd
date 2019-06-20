@@ -76,4 +76,18 @@ senMosaic(src.unzip,
           gutils = TRUE,
           out.name = "Navarre")
 }
+
+# Load and plot in R a sentinel image
+files <- list.files(src, pattern = "\\\\.tif$", full.names = TRUE ,recursive = TRUE)
+files.stack <- stack(files[c(2,3,4)])
+range <- c(0.05,0.95)
+
+ex.navarre.utm <- spTransform(ex.navarre, CRS = crs(files.stack[[1]]))
+imagen.rec <- crop(files.stack, ex.navarre.utm)
+imagen.rec1 <- mask(imagen.rec, ex.navarre.utm)
+imagen <- varRGB(imagen.rec1[[1]], 
+                 imagen.rec1[[2]], 
+                 imagen.rec1[[3]], 
+                 q.range = range)
+plotRGB(imagen)
 }

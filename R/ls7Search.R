@@ -9,29 +9,30 @@
 #' been yet downloaded, \code{ls7Search} will make the call for you.
 #'
 #' The search is done by defining a time interval and a location. The arguments \code{startDate}
-#' and \code{endDate} defines the time interval.These are mandatory arguments. The function defines the spatial location
-#' using at least one of the following arguments: \code{pathrow}, \code{extent}, \code{lonlat} y \code{polygon}. When more than one of these argument is defined,
-#' the function will work with the first evaluated method, when no one is defined, the function shows an error message.
+#' and \code{endDate} defines the time interval. These are mandatory arguments. The function defines the spatial location
+#' using at least one of the following arguments: \code{pathrow}, \code{extent}, \code{lonlat}, and \code{polygon}. 
+#' When more than one of these argument are defined,
+#' the function will work with the first evaluated method, otherwise, the function shows an error message.
 #'
 #' Landsat images are catalogued spatially using a unique path and row. The fastest way to search an image
 #' in the metadata file is filtering by its path and row. This search method requires previous knowledge on
 #' the path and row relevant for your region of interest.
 #'
 #' From the user point of view, the easiest way to search a time series of Landsat-7 is using the extent,
-#' \code{lonlat} and \code{polygon} arguments. These methods do not requires to know in advance the path and rows of the images.
-#' These method uses spatial objects to define the region of interest. The projection of the spatial needs to be
-#' "\code{+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs}”. The argument \code{extent} accepts any R objects being defined
+#' \code{lonlat} and \code{polygon} arguments. These methods do not require to know in advance the path and rows of the images.
+#' These method uses spatial objects to define the region of interest, and needs to be
+#' "\code{+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs}”. The argument \code{extent} accepts any R object being defined
 #' by a spatial extent. The argument \code{lonlat} only accepts an R vector with one coordinate in the form of
-#' latitude-longitude (ex. \code{c(-1.64323,42.81687)}, where the first element is the latitude and the second is the longitude).
+#' longitude/latitude (ex. \code{c(-1.64323,42.81687)}).
 #' The argument \code{Polygon}, accepts \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} objects.
 #'
 #' In addition, the search function enables further filtering. The function can filter
 #' the results by any column name in the metadata file, using the column name as an argument. For example, to
-#' filter the images that can be previewed, the user has to find the images with a “Y” in the browseAvaliable column.
+#' filter the images that can be previewed, the user has to find the images with “Y” in the browseAvaliable column.
 #' This can be achieved by adding \code{browseAvaliable=”Y”} as a function argument.
 #'
-#' @param startDate starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param endDate ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param precise logical argument. If \code{TRUE} the search is done tile by tile (slower).
 #' @param ... argument to allow function nestering:

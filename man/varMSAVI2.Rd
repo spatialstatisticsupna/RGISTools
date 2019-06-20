@@ -19,7 +19,7 @@ MSAVI2 in \code{raster} format.
 }
 \details{
 The Modified Soil Adjusted Vegetation Index 2 (MSAVI2) is a vegetation indicator that 
-removes the effect of background variations.
+removes the effect of background variations \insertCite{qi1994modified}{RGISTools}.
 This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }

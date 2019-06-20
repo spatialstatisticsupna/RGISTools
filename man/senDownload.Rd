@@ -14,8 +14,8 @@ senDownload(username, password, ...)
 \item{...}{argument to allow function nestering
 \itemize{
   \item \code{product} Sentinel product type.
-  \item \code{startDate} starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-  \item \code{endDate} ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+  \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+  \item \code{endDate} ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
   \item \code{extent} location as project file with extention.
   \item \code{platform} platform name of the Sentinel mission (Sentine-1, Sentinel-2,...).
   \item \code{nattempts} the number of attempts that the function has to carry out

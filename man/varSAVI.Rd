@@ -21,7 +21,7 @@ SAVI in \code{raster} format
 }
 \details{
 The Soil Adjusted Vegetation Index (SAVI) is a vegetation index engineered to remove 
-the influence of the soil background effect.  
+the influence of the soil background effect \insertCite{huete1988soil}{RGISTools}.  
 This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }

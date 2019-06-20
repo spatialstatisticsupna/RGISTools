@@ -23,6 +23,8 @@ lsDownSearch(searchres, username = NULL, password = NULL,
 
 \item{untar}{logical argument. If \code{TRUE} untars downloaded images.}
 
+\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+
 \item{...}{argument for function nestering accepts:
 \itemize{
   \item \code{AppRoot} the directory to save the downloaded images.

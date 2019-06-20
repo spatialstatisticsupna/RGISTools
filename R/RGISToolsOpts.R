@@ -99,7 +99,7 @@ getRGISToolsOpt <- function(opt,env=optEnv) {
 
 #' Prints the name of all RGISTools configuration variables
 #' 
-#'\code{showRGISToolsOpt} prints the name of all options in \code{RGISTools} package.
+#' \code{showRGISToolsOpt} prints the name of all options in \code{RGISTools} package.
 #'
 #' @param env the environment where the \code{RGISTools} option are saved.
 #' @examples

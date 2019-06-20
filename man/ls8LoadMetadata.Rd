@@ -27,7 +27,7 @@ ls8LoadMetadata(update = FALSE, verbose = TRUE,
 }
 \details{
 All captures done by Landsat-8 are cataloged in a unique csv file. The size of the file
-might be larger than 210MB. Therefore, the process of downloading and importing to R may take several
+might be larger than 210MB. Therefore, the process of downloading and importing into R may take several
 minutes (around 7 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive storage). The function creates an
 RData file with the metadata csv. Thus, every time \code{ls8LoadMetadata} is called,
 this function loads the existing RData in the \code{AppRoot}.

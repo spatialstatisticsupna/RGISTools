@@ -49,10 +49,10 @@
 #'                    ex.ndvi.navarre[[2]], ndvi.filled[[2]])
 #' genPlotGIS(ndvi.comp, layout=c(2, 2))
 genFillingIMA<-function(imgTS,
-                        Img2Fill=NULL,
-                        aFilter=c(.05,.95),
-                        fact=5,
-                        nDays=3,
+                        Img2Fill = NULL,
+                        aFilter = c(.05,.95),
+                        fact = 5,
+                        nDays = 3,
                         nYears=1,
                         fun=mean,
                         factSE=8,

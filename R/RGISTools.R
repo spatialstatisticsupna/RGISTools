@@ -10,21 +10,97 @@
 #' Images may have clouds or measurement errors that limit their use in subsequent analyses. Hence, the 
 #' package includes a set of functions for removing clouds, gap filling and smoothing. Due to the wide 
 #' variety of procedures and sources of information being handled in RGISTools, the functions are divided 
-#' into 6 categories, which are identified by the first 3 characters of the function names; 
+#' into 7 categories, which are identified by the first 3 characters of the function names; 
 #' \enumerate{
-#'   \item \code{mod} for MODIS Terra and Aqua satellite images
-#'   \item \code{sen} for Sentinel images
-#'   \item \code{ls7} for Landsat 7 images
-#'   \item \code{ls8} for Landsat 8 images
-#'   \item \code{ls} for both Landsat 7 and 8 images
+#'   \item \code{mod} for MODIS Terra and Aqua satellite images.
+#'   \item \code{sen} for Sentinel images.
+#'   \item \code{ls7} for Landsat 7 images.
+#'   \item \code{ls8} for Landsat 8 images.
+#'   \item \code{ls} for both Landsat 7 and 8 images.
 #'   \item \code{gen} for any of the three platforms.
+#'   \item \code{var} for any of the three platforms.
 #' }
 #' 
-#' @section Modis functions
-#' @section Sentinel functions
-#' @section Landsat functions
-#' @section General functions
-#'
+#' Below is a list of the most important functions grouped by running order for creating a time series of
+#' images for each satellite considered by the package.
+#' Each satellite function group considers all the procedure including searching, previewing, 
+#' downloading, mosaicking, extracting variables, composing, and filling-smoothing.
+#' @section I. Landsat time series functions:
+#' Landsat mission releases images comming from two satellites, Landsat-7 and Landsat-8. Each satellite needs its own 
+#' download and processing workflow.
+#' \subsection{Landsat-7}{
+#' \tabular{ll}{
+#'   \code{ \link{ls7LoadMetadata}}\tab To load Landsat-7 meta data file for image search \cr
+#'   \code{\link{ls7Search}} \tab To search Landsat-7 time-series images list \cr
+#'   \code{\link{lsPreview}} \tab To preview in R Landsat satellite images \cr
+#'   \code{\link{lsDownSearch}} \tab To Download a time series of satellite images from Landsat\cr
+#'   \code{\link{lsMosaic}} \tab To mosaic Landsat time series of images \cr
+#'   \code{\link{ls7FolderToVar}} \tab To compute derived variables from Landsat-7 multispectral bands \cr
+#'   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images \cr
+#'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
+#'   }
+#' }
+#' \subsection{Landsat-8}{
+#' \tabular{ll}{
+#'   \code{ \link{ls8LoadMetadata}}\tab To load Landsat-8 meta data file for image search \cr
+#'   \code{\link{ls8Search}} \tab To search Landsat-8 time-series images list \cr
+#'   \code{\link{lsPreview}} \tab To preview in R Landsat satellite images \cr
+#'   \code{\link{lsDownSearch}} \tab To Download a time series of satellite images from Landsat\cr
+#'   \code{\link{lsMosaic}} \tab  To mosaic Landsat time series of images\cr
+#'   \code{\link{ls8FolderToVar}} \tab To compute derived variables from Landsat-8 multispectral bands\cr
+#'   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images \cr
+#'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
+#'   }
+#' }
+#' 
+#' @section II. Modis time series functions:
+#' \tabular{ll}{
+#'   \code{ \link{modSearch}} \tab To search Modis time-series images list \cr
+#'   \code{\link{modPreview}} \tab To preview in R Modis satellite images\cr
+#'   \code{\link{modDownSearch}} \tab To Download a Modis time series of satellite images\cr
+#'   \code{\link{modMosaic}} \tab To mosaic Modis time series of images \cr
+#'   \code{\link{modFolderToVar}} \tab To compute derived variables from Modis multispectral bands\cr
+#'   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images \cr
+#'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
+#'   }
+#' 
+#' @section III. Sentinel time series functions:
+#' 
+#' \tabular{ll}{
+#'   \code{ \link{senSearch}} \tab To search Sentinel time-series images list\cr
+#'   \code{\link{senPreview}} \tab To preview in R Sentinel satellite images\cr
+#'   \code{\link{senDownSearch}} \tab To Download a Sentinel time series of satellite images\cr
+#'   \code{\link{senMosaic}} \tab To mosaic Sentinel time series of images \cr
+#'   \code{\link{senFolderToVar}} \tab To compute derived variables from Sentinel-2 multispectral bands\cr
+#'   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images\cr
+#'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
+#'   }
+#' 
+#' @section IV. Important general functions:
+#' \tabular{ll}{
+#'   \code{ \link{genCompositions}} \tab To create image compositions from a time series of satellite images\cr
+#'   \code{\link{genFillingIMA}} \tab To fill the gaps in a time series of satellite images\cr
+#'   \code{\link{genSmoothingIMA}} \tab To smooth outliers in a time series of satellite images using covariates\cr
+#'   \code{\link{genPlotGIS}} \tab To plot satellite images with a proper GIS format\cr
+#'   \code{\link{genGetDates}} \tab To get a date from the name of a raster layer\cr
+#'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
+#'   }
+#' 
+#' @section V. Variable functions:
+#' 
+#' \tabular{ll}{
+#'   \code{ \link{varEVI}}\tab To calculate the enhanced vegetation index (EVI) from multispectral bands\cr
+#'   \code{\link{varMSAVI2}} \tab To calculate the modified soil-adjusted vegetation index (MSAVI2) from multispectral bands\cr
+#'   \code{\link{varNBR}} \tab To calculate the normalized burn ratio (NBR) from multispectral bands\cr
+#'   \code{\link{varNBR2}} \tab To calculate the normalized burn ratio 2 (NBR2) from multispectral bands\cr
+#'   \code{\link{varNDMI}} \tab To calculate the normalized difference moisture index (NDMI) from multispectral bands\cr
+#'   \code{\link{varNDVI}} \tab To calculate the normalized difference vegetation index (NDVI) from multispectral bands\cr
+#'   \code{\link{varNDWI}} \tab  To calculate the normalized difference water index (NDWI) from multispectral bands\cr
+#'   \code{\link{varRGB}} \tab  To calculate an RGB image from 3 spectral bands from multispectral bands\cr
+#'   \code{\link{varSAVI}} \tab  To calculate the soil-adjusted vegetation index (SAVI) from multispectral bands\cr
+#'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
+#' }
+#' 
 #' @docType package
-#' @name RGISTools
+#' @name RGISTools-package
 NULL

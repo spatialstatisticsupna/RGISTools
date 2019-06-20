@@ -1,7 +1,7 @@
 #' Uses covariates for smoothing outliers in a time series of satellite images
 #'
-#' \code{genSmoothingIMA} is the implementation of a spatio-temporal smoothing
-#' method that uses covariates. The methodology is explained in \insertCite{militino2019interpolation}{RGISTools}.
+#' \code{genSmoothingIMA} runs the IMA (\link{genFillingIMA}) smoothing method with covariates. 
+#' \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' The procedure uses spatio temporal data to decompose each image in the time series as a mean
 #' image plus a residual or anomaly.The procedure smoothed the anomaly using covariates to

@@ -3,7 +3,7 @@
 #' \code{varNDMI} computes the NDMI index from nir and swir1 bands.
 #'
 #' The Normalized Difference Moisture Index (NDMI) is an index that represents the water 
-#' stress levels of the canopy, using near-infrared (NIR) and short-wave infrared (SWIR).
+#' stress levels of the canopy, using near-infrared (NIR) and short-wave infrared (SWIR) \insertCite{gao1995normalized}{RGISTools}.
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'

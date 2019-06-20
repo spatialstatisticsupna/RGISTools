@@ -4,7 +4,7 @@
 \alias{senGetTile}
 \title{Returns the tile of Sentinel-2 images "TTTSSS" string format}
 \usage{
-senGetTile(str, ...)
+senGetTile(str)
 }
 \arguments{
 \item{str}{the full path or official image name of the Sentinel image from which the tile is extracted.}

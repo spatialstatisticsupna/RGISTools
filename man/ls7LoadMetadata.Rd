@@ -28,7 +28,7 @@ ls7LoadMetadata(update = FALSE, verbose = TRUE, omit.question = TRUE,
 }
 \details{
 All captures done by Landsat-7 are cataloged in a unique csv file. The size of the file
-might be larger than 360MB. Therefore, the process of downloading and importing R may take several
+might be larger than 360MB. Therefore, the process of downloading and importing into R may take several
 minutes (around 15 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device). The function creates an
 RData file with the metadata csv. Thus, every time \code{\link{ls7LoadMetadata}} is called,
 this function loads the existing RData in the Approot. This is intended to reduce the loading

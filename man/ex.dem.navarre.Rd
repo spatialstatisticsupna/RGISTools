@@ -9,11 +9,8 @@
   \item{name}{each layer is named with the date of the period in julian format as "\code{YYYYJJJ}"}.
   \item{size}{113 rows by 105 columns and 6 layers}.
 }}
-\usage{
-ex.dem.navarre
-}
 \description{
 Geographically projected \code{RasterStack} with the DEM values for
 the region of Navarre, to use as example in \code{genSmoothingIMA}.
 }
-\keyword{datasets}
+\keyword{data}

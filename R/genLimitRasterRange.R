@@ -1,15 +1,15 @@
 #' Limits the maximum and minimum values of a raster image
 #'
-#' \code{genLimitRasterRange} limits the maximum and minimum values of a raster image to a given range.
+#' \code{genLimitRasterRange} limits the maximum and the minimum values of a raster image to a given range.
 #'
-#' This is a generic function to limit the maximun and minimun values in a \code{raster} image.
+#' This is a generic function to limit the maximun and the minimun values in a \code{raster} image.
 #'
 #' @param r \code{Raster}* type object.
-#' @param mx maximun value in raster.
-#' @param mn maximun value in raster.
-#' @param rm.values logical argument. If \code{FALSE}  \code{mx} and  \code{mn} values are asigned to 
-#'   values highers than \code{mx} and lowers than \code{mn} respectively. If \code{TRUE}, values out of \code{mn}-\code{mx}
-#'   are removed.
+#' @param mx maximun value in the \code{raster}.
+#' @param mn minimun value in the \code{raster}.
+#' @param rm.values logical argument. If \code{FALSE} \code{mx} and  \code{mn} values are asigned to the 
+#'   higher values than \code{mx} and lower values than \code{mn} respectively. If \code{TRUE}, values out of 
+#'   \code{mn}-\code{mx} are removed.
 #'
 #' @examples
 #' # generate random images

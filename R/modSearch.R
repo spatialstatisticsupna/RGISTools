@@ -1,7 +1,8 @@
 #' Search Modis Images on the NASA Common Metadata Repository
 #'
-#' \code{modSearch} searches the Modis products on the  NASA Common Metadata
-#' Repository to find those which are relevant for a particular location and date interval.
+#' \code{modSearch} searches the Modis products on the  
+#' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} to 
+#'  find the avaliable for a particular location and date interval.
 #' The function returns the search result as an array of urls with the relevant images.
 #'
 #' \code{modSearch} \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} (CMR) powered api.
@@ -12,8 +13,8 @@
 #' may occur when trying to connect with their server during this day of the week.
 #'
 #' @param product the short name of the Modis product.
-#' @param startDate starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param endDate ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param collection Modis collection.
 #' @param resType response type of the query (\code{browseurl} or \code{url}), by default the url where the images are located.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.

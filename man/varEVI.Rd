@@ -17,11 +17,11 @@ varEVI(blue, red, nir)
 EVI in \code{raster} format.
 }
 \description{
-\code{varEVI} computes the the EVI index from blue, nir and red bands.
+\code{varEVI} computes the EVI index from blue, nir and red bands.
 }
 \details{
 The Enhanced Vegetation Index (EVI) is a vegetation indicator that improves sensitivity 
-towards high biomass densities compared to NDVI.
+towards high biomass densities compared to NDVI \insertCite{huete2002overview}{RGISTools}.
 This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }

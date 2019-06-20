@@ -4,7 +4,7 @@
 \alias{senGetOrbit}
 \title{Returns the relative orbit of the Sentinel-2 satellite}
 \usage{
-senGetOrbit(str, ...)
+senGetOrbit(str)
 }
 \arguments{
 \item{str}{the full path or official image name of the Sentinel image from which the relative orbit is extracted.}

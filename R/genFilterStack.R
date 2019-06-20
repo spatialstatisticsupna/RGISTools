@@ -7,8 +7,8 @@
 #' @param r the raster stack to be filtered.
 #' @param ... argument to allow function nestering.
 #' \itemize{
-#'   \item \code{startDate} starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#'   \item \code{endDate} ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#'   \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#'   \item \code{endDate} ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #'   \item \code{AppRoot} the path where the RData will be saved.
 #' }
 #' @examples

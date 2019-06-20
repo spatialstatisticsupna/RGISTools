@@ -3,7 +3,7 @@
 #' \code{varNBR} computes the NBR index from nir and swir2 bands.
 #'
 #' The Normalized Burn Ratio (NBR) is an index to identify burned areas by 
-#' comparing its value before and after the fire event. Is calculated using nir and swir2 bands.
+#' comparing its value before and after the fire event. Is calculated using nir and swir2 bands \insertCite{garcia1991mapping}{RGISTools}.
 #' This function is used within
 #' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'

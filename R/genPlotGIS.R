@@ -23,11 +23,11 @@
 #' data(ex.ndvi.navarre)
 #' data(ex.navarre)
 #'
-#' # Shows a panel of maps, one per date and the region of interest in shown on the fourth map
+#' # Shows a panel of 4 maps, one per date. The region of interest is shown in the last map
 #' genPlotGIS(r = ex.ndvi.navarre[[1:4]],
 #'            region = ex.navarre,
-#'            which = c(4), #show region only in 4th image
-#'            wComp = c(4) #show component only in 4th image
+#'            which = c(4), # show region only in the 4th image
+#'            wComp = c(4) # show component only in the 4th image
 #' )
 #'
 #' \dontrun{
@@ -37,7 +37,7 @@
 #' my.palette <- rev(brewer.pal(n = 9, name = "YlOrRd"))
 #' genPlotGIS(r = ex.ndvi.navarre[[1]],
 #'            region = ex.navarre,
-#'            proj = CRS("+init=epsg:4670"), #project all components
+#'            proj = CRS("+init=epsg:4670"), # project all components
 #'            col.regions = colorRampPalette(my.palette)
 #' )
 #' }

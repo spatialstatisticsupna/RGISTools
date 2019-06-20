@@ -18,8 +18,8 @@ genMosaicList(imageList, fun = "max", verbose = TRUE)
 }
 \details{
 This is a helper function used by other functions in this package. It combines
-a list of raster images with different geolocation. If the images overlap, by
-default the application selects the maximum value.
+a list of raster images with different geolocation. If the images overlap,
+ the application selects the maximum value by default.
 }
 \examples{
 # create simulated rasters

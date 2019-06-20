@@ -1,6 +1,6 @@
 #' Returns the capure date from name
 #'
-#' \code{genGetDates} extracts the date of one or several images when the date is included in julian date format "\code{YYYYJJJ}".
+#' \code{genGetDates} extracts the date of one or several images when the name of the layer includes julian date in format "\code{YYYYJJJ}".
 #'
 #' The function reads a date from a character type variable in year-julian format and returns an R date format variable.
 #'

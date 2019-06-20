@@ -23,6 +23,7 @@
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param raw.rm logical argument. If \code{TRUE} removes the raw images.
 #' @param untar logical argument. If \code{TRUE} untars downloaded images.
+#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param ... argument for function nestering accepts:
 #' \itemize{
 #'   \item \code{AppRoot} the directory to save the downloaded images.

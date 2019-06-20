@@ -8,7 +8,10 @@
 #'   \item{name}{each layer is named with the date of the period in julian format as "\code{YYYYJJJ}"}.
 #'   \item{size}{113 rows by 105 columns and 6 layers}.
 #' }
-"ex.dem.navarre"
+#' @name ex.dem.navarre
+#' @docType data
+#' @keywords data
+NULL
 
 #' NDVI of the tile containing Navarre in Spain
 #'
@@ -19,12 +22,19 @@
 #'   \item{name}{the name of each layer contains the date of the period in julian format as "\code{YYYYJJJ}"}.
 #'   \item{size}{each layer contains 113 rows and 105 columns}.
 #' }
-"ex.ndvi.navarre"
+#' @name ex.ndvi.navarre
+#' @docType data
+#' @keywords data
+NULL
 
 #' Geographically projected spatial polygon of Navarre in Spain to use in examples
 #'
 #' \code{SpatialPolygonsDataFrame} containing the region of Navarre projected in longitude/latitude.
-"ex.navarre"
+#' @name ex.navarre
+#' @docType data
+#' @keywords data
+NULL
+
 
 #' @docType package
 #' @bibliography system.file("REFERENCES.bib", package = "RGISTools")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/senPreview.R
 \name{senPreview}
 \alias{senPreview}
-\title{Allows Sentinel satellite images preview before its download}
+\title{Allows a preview in R of Sentinel satellite images}
 \usage{
 senPreview(searchres, username, password, n, size = NULL)
 }
@@ -22,7 +22,7 @@ senPreview(searchres, username, password, n, size = NULL)
 }
 \details{
 The functions shows a preview of an image resulting from a search in Scihub platform.
-A search with \code{\link{senSearch}} has to be carried before proceeding with the preview.
+A search with \code{\link{senSearch}} has to be done before proceeding with the preview.
 The preview is downloaded from Scihub website, and the crediantials are needed.
 Please, be aware that only some images have this feature.
 }

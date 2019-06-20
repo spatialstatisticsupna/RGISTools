@@ -1,8 +1,8 @@
 #' Computes derived variables from Landsat-8 multispectral bands
 #'
-#' \code{ls8FolderToVar} calculates an index using the bands from Landsat multispectral
+#' \code{ls8FolderToVar} calculates an index using the bands from Landsat-8 multispectral
 #' images. The images are specified by a path to the storing folder (resulting from
-#' the \code{\link{lsMosaic}} function). The function returns a rasterStack with the time-series of the index.
+#' the \code{\link{lsMosaic}} function). The function returns a \code{RasterStack} with the time-series of the index.
 #'
 #' The function requires to define \code{src} and \code{fun} attributes. \code{src} defines the path to
 #' the result of \code{\link{lsMosaic}}, with all bands of Landsat-7 for a region of interest. \code{fun} defines

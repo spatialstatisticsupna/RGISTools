@@ -1,9 +1,9 @@
-#' Allows Sentinel satellite images preview before its download
+#' Allows a preview in R of Sentinel satellite images
 #'
 #' \code{senPreview} shows a preview of the \code{n} image from a set of \code{searchres}.
 #'
 #' The functions shows a preview of an image resulting from a search in Scihub platform.
-#' A search with \code{\link{senSearch}} has to be carried before proceeding with the preview.
+#' A search with \code{\link{senSearch}} has to be done before proceeding with the preview.
 #' The preview is downloaded from Scihub website, and the crediantials are needed.
 #' Please, be aware that only some images have this feature.
 #'

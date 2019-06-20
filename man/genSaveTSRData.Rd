@@ -12,9 +12,9 @@ genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
 
 \item{ts.name}{the name of the variable containing the time series in R.}
 
-\item{startDate}{starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{startDate}{starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
-\item{endDate}{ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{endDate}{ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
 \item{dextent}{creates the \code{RasterStack} from different extent tif images.}
 

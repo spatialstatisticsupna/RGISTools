@@ -2,7 +2,7 @@
 % Please edit documentation in R/lsPreview.R
 \name{lsPreview}
 \alias{lsPreview}
-\title{Allows Landsat satellite images preview before its download}
+\title{Allows a preview in R of Landsat satellite images}
 \usage{
 lsPreview(searchres, n, size = NULL)
 }
@@ -19,7 +19,7 @@ lsPreview(searchres, n, size = NULL)
 }
 \details{
 The function shows a preview of an image resulting from a search in Landsat imagery metadata.
-A search with \code{\link{ls7Search}} or \code{\link{ls8Search}} has to be carried before proceeding with the preview.
+A search with \code{\link{ls7Search}} or \code{\link{ls8Search}} has to be done before proceeding with the preview.
 The preview is downloaded from Landsat’s website. Please, be aware that only some images have this feature.
 }
 \examples{

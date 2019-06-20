@@ -1,4 +1,4 @@
-#' Returns the pathrow of Modis tile in "\code{hXXvYY}" string format
+#' Returns the pathrow of Landsat tile in "\code{hXXvYY}" string format
 #'
 #' \code{lsGetPathRow} reads the name of a Lansat 7 or 8 image and returns the path and row.
 #'

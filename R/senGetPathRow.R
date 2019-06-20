@@ -13,8 +13,7 @@
 #' pr <- senGetTile(str)
 #' print(pr)
 #'
-senGetTile<-function(str,...){
-  arg<-list(...)
+senGetTile<-function(str){
   name.first<-gsub(".SAFE","",basename(str))
   # Sentinel-2 images
   if(substr(name.first,1,2)[1]=="S2"){
@@ -50,8 +49,7 @@ senGetTile<-function(str,...){
 #' pr <- senGetOrbit(str)
 #' print(pr)
 #'
-senGetOrbit<-function(str,...){
-  arg<-list(...)
+senGetOrbit<-function(str){
   name.first<-gsub(".SAFE","",basename(str))
 
   # Sentinel-2 images

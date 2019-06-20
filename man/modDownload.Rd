@@ -8,11 +8,11 @@ modDownload(product, startDate, endDate, username, password,
   collection = 6, verbose = FALSE, extract.tif = FALSE, ...)
 }
 \arguments{
-\item{product}{Modis product type.}
+\item{product}{a \code{character} argument with the name of Modis product type.}
 
-\item{startDate}{starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{startDate}{starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
-\item{endDate}{ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{endDate}{ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
 \item{username}{EarthData username.}
 
@@ -43,12 +43,12 @@ This argument is mandatory if \code{lonlat} or extent is not defined.
 Repository to find those which are relevant for a particular location and date interval.
 }
 \details{
-\code{modDownload} \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} (CMR) powered api.
-The catalogue of  Modis products with their short names and other
-information can be found at: \href{https://modis.gsfc.nasa.gov/data/dataprod/}{Modis data product info}.
+\code{modDownload} uses \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} (CMR) 
+powered api to search satellite all ground products releses by NASA. The catalogue of Modis ground products with their 
+short names and other information can be found at: \href{https://modis.gsfc.nasa.gov/data/dataprod/}{Modis data product info}.
 For further information on collections, please visit \href{https://modis-atmos.gsfc.nasa.gov/collections/overview}{Modis website}.
-By the time the \code{RGISTools} package is released, NASA carries out the maintenance of the Modis website on Wednesdays. Therefore, an error
-may occur when trying to connect with their server during this day of the week.
+By the time the \code{RGISTools} package is released, NASA carries out the maintenance of the Modis website on Wednesdays. 
+Therefore, an error may occur when trying to connect with their server during this day of the week.
 }
 \examples{
 \dontrun{

@@ -10,8 +10,8 @@
 #'
 #' @param src path to the folder where the time series of images is located.
 #' @param ts.name the name of the variable containing the time series in R.
-#' @param startDate starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param endDate ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
+#' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param dextent creates the \code{RasterStack} from different extent tif images.
 #' @param recursive logical argument. If \code{TRUE} reads folders recursively.
 #' @param ... argument to allow function nestering.

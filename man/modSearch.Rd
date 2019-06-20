@@ -10,9 +10,9 @@ modSearch(product, startDate, endDate, collection = 6, resType = "url",
 \arguments{
 \item{product}{the short name of the Modis product.}
 
-\item{startDate}{starting date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{startDate}{starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
-\item{endDate}{ending date of image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{endDate}{ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
 \item{collection}{Modis collection.}
 
@@ -34,8 +34,9 @@ This argument is mandatory if lonlat or extent is not defined.
 }}
 }
 \description{
-\code{modSearch} searches the Modis products on the  NASA Common Metadata
-Repository to find those which are relevant for a particular location and date interval.
+\code{modSearch} searches the Modis products on the  
+\href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} to 
+ find the avaliable for a particular location and date interval.
 The function returns the search result as an array of urls with the relevant images.
 }
 \details{
