@@ -32,6 +32,8 @@ It is recommended for creating long time series in an automated way.
 This function accepts all the arguments in \code{\link{senSearch}} function and automatically downloads
 images matching with the search query. The function creates a folder hierarchy, and gives the possibility
 of unzipping the images.
+\code{senDownload} requires the credentials to access the ESA’s SciHub data service.
+\href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 }
 \examples{
 \dontrun{

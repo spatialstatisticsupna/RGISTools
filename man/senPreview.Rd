@@ -25,6 +25,8 @@ The functions shows a preview of an image resulting from a search in Scihub plat
 A search with \code{\link{senSearch}} has to be done before proceeding with the preview.
 The preview is downloaded from Scihub website, and the crediantials are needed.
 Please, be aware that only some images have this feature.
+Credentials from ESA’s SciHub are needed to use this function.
+\href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 }
 \examples{
 \dontrun{

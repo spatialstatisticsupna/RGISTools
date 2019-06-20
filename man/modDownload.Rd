@@ -50,7 +50,7 @@ short names and other information can be found at: \href{https://modis.gsfc.nasa
 For further information on collections, please visit \href{https://modis-atmos.gsfc.nasa.gov/collections/overview}{Modis website}.
 By the time the \code{RGISTools} package is released, NASA carries out the maintenance of the Modis website on Wednesdays. 
 Therefore, an error may occur when trying to connect with their server during this day of the week.
-\href{https://urs.earthdata.nasa.gov/users/new}{Get credentials}.
+\href{https://urs.earthdata.nasa.gov/users/new}{Get your credentials}.
 }
 \examples{
 \dontrun{

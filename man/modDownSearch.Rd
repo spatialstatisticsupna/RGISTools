@@ -31,7 +31,7 @@ These products are published in the \href{https://earthdata.nasa.gov}{Earth Data
 is supported by the Earth Observing System Data and Information System (EODIS)
 and managed NASA’s Earth Science Data Systems (ESDS).
 \code{modDownSearch} requires the credentianls from EarthData to access the NASA’s web data service.
-\href{https://urs.earthdata.nasa.gov/users/new}{Get credentials}.
+\href{https://urs.earthdata.nasa.gov/users/new}{Get your credentials}.
 }
 \examples{
 \dontrun{

@@ -67,7 +67,7 @@ download and processing workflow. The download of any Landsat images requires a 
 \section{II. Modis time series functions}{
 
 The download of any Modis product requires the credentianls from EarthData to access the NASA’s web data service. 
-\href{https://urs.earthdata.nasa.gov/users/new}{Get credentials}.
+\href{https://urs.earthdata.nasa.gov/users/new}{Get your credentials}.
 \tabular{ll}{
   \code{ \link{modSearch}} \tab To search Modis time-series images list \cr
   \code{\link{modPreview}} \tab To preview in R Modis satellite images\cr

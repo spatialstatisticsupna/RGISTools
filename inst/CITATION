@@ -28,7 +28,7 @@ citEntry(entry = "Article",
   paste("Fernández-Militino, A., Ugarte-Martínez, M.D., Pérez-Goya, U. (2019).",
         "Interpolation of the Mean Anomalies for Cloud-Filling in Land Surface Temperature (LST) and Normalized Difference Vegetation Index (NDVI).",
          "IEEE Transactions on Geoscience and Remote Sensing 2019. (Open-access) doi:http://dx.doi.org/10.1109/TGRS.2019.2904193"),
-  header = "To cite the gap filling method implemented in the function genFillingIMA:"
+  header = "To cite the gap filling method implemented in the function genSmoothingIMA:"
 )
 
 citEntry(entry = "Article",
@@ -46,5 +46,5 @@ citEntry(entry = "Article",
   paste("Fernández-Militino, A., Ugarte-Martínez, M.D., Pérez-Goya, U. (2018).",
         "Improving the Quality of Satellite Imagery Based on Ground-Truth Data from Rain Gauge Stations.",
          "Remote Sensing 2018; 10(398): 1-16. (Open-access) doi:http://dx.doi.org/10.3390/rs10030398"),
-  header = "To cite the smoothing method implemented in the function genSmoothingIMA:"
+  header = "To cite the smoothing method implemented in the function genSmoothingCovIMA:"
 )

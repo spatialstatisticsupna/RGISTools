@@ -6,7 +6,8 @@
 #' A search with \code{\link{senSearch}} has to be done before proceeding with the preview.
 #' The preview is downloaded from Scihub website, and the crediantials are needed.
 #' Please, be aware that only some images have this feature.
-#'
+#' Credentials from ESA’s SciHub are needed to use this function.
+#' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 #'
 #' @param searchres a data frame with the results from a search of Landsat images provided by the function \code{\link{senSearch}}.
 #' @param username Scihub username.

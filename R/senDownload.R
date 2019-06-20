@@ -6,6 +6,8 @@
 #' This function accepts all the arguments in \code{\link{senSearch}} function and automatically downloads
 #' images matching with the search query. The function creates a folder hierarchy, and gives the possibility
 #' of unzipping the images.
+#' \code{senDownload} requires the credentials to access the ESA’s SciHub data service.
+#' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 #'
 #' @param username Scihub platform username.
 #' @param password Scihub platform password.
