@@ -19,13 +19,13 @@
 #' # dir path of cropped and cutted Modis image in the region of navarre as example
 #' img.dir <- system.file("ExNavarra", package = "RGISTools")
 #' # list all tif files
-#' img.files <- list.files(img.dir,pattern="\\.tif$",recursive = TRUE,full.names = TRUE)
+#' img.files <- list.files(img.dir, pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
 #' # select the red, blue and nir bands
 #' red <- raster(img.files[1])
 #' blue <- raster(img.files[3])
 #' nir <- raster(img.files[2])
 #' # calculate the evi image
-#' evi <- varEVI(blue,red,nir)
+#' evi <- varEVI(blue, red, nir)
 #' # plot the image
 #' spplot(evi)
 varEVI<-function(blue,red,nir){

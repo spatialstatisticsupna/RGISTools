@@ -22,15 +22,15 @@ a list of raster images with different geolocation. If the images overlap, by
 default the application selects the maximum value.
 }
 \examples{
-#create simulated rasters
+# create simulated rasters
 img <- matrix(1:16, ncol = 4, byrow = TRUE)
-r1<-raster(img)
-r2<-r1
-r3<-r1
-extent(r2)<-extent(1,2,1,2)
-extent(r3)<-extent(1,2,0,1)
-imageList<-list(r1,r2,r3)
-#mosaic simulated rasters
-mr<-genMosaicList(imageList)
+r1 <- raster(img)
+r2 <- r1
+r3 <- r1
+extent(r2) <- extent(1, 2, 1, 2)
+extent(r3) <- extent(1, 2, 0, 1)
+imageList <- list(r1, r2, r3)
+# mosaic simulated rasters
+mr <- genMosaicList(imageList)
 spplot(mr)
 }

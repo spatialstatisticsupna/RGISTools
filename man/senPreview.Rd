@@ -38,7 +38,7 @@ searchres <- senSearch(startDate = as.Date("2018210","\%Y\%j"),
                        username = "username",
                        password = "password")
 # Preview some images
-senPreview(searchres, 3, username="username", password="password")
-senPreview(searchres, 1, username="username", password="password", 600)
+senPreview(searchres, 3, username = "username", password = "password")
+senPreview(searchres, 1, username = "username", password = "password", 600)
 }
 }

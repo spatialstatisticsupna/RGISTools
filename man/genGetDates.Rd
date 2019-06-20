@@ -7,7 +7,7 @@
 genGetDates(str, ...)
 }
 \arguments{
-\item{str}{string containing the date in julian format "\code{YYYYJJJ}".}
+\item{str}{a \code{character} or  containing the date in julian format "\code{YYYYJJJ}".}
 
 \item{...}{argument to allow function nestering.
 \itemize{
@@ -21,11 +21,9 @@ genGetDates(str, ...)
 The function reads a date from a character type variable in year-julian format and returns an R date format variable.
 }
 \examples{
-library(raster)
-
 img <- matrix(1:16, ncol = 4, byrow = TRUE)
-r<-raster(img)
-names(r)<-c("RandomImage_2018034")
+r <- raster(img)
+names(r) <- c("RandomImage_2018034")
 
 spplot(r)
 genGetDates(names(r))

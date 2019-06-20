@@ -23,19 +23,19 @@ genFilterStack(r, ...)
 This is a helper function used by other functions in this package.
 }
 \examples{
-#generate random images
+# generate random images
 img <- matrix(1:16, ncol = 4, byrow = TRUE)
-r<-raster(img)
-r<-stack(r,r,r,r,r,r)
-names(r)<-paste0("RandomImage_201803",1:6)
-#print the names and dates of the random images
+r <- raster(img)
+r <- stack(r, r, r, r, r, r)
+names(r) <- paste0("RandomImage_201803", 1:6)
+# print the names and dates of the random images
 print(names(r))
 genGetDates(names(r))
-#example of filtering the raster stack
-r2<-genFilterStack(r,
-                   startDate=as.Date("2018-02-02","\%Y-\%m-\%d"),
-                   endDate=as.Date("2018-02-04","\%Y-\%m-\%d"))
-#print the names and the number of layers of the filtered stack
+# example of filtering the raster stack
+r2 <- genFilterStack(r,
+                     startDate = as.Date("2018-02-02", "\%Y-\%m-\%d"),
+                     endDate = as.Date("2018-02-04", "\%Y-\%m-\%d"))
+# print the names and the number of layers of the filtered stack
 genGetDates(names(r2))
 nlayers(r2)
 }

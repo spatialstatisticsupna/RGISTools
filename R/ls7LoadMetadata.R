@@ -25,14 +25,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' #creates a MetaData folder and downloads the csv on working directory
+#' # creates a MetaData folder and downloads the csv on working directory
 #' ls7LoadMetadata()
 #'
-#' #creates a MetaData folder and downloads the csv on "C:/LandsatDownload" directory
-#' ls7LoadMetadata(AppRoot="C:/LandsatDownload")
+#' # creates a MetaData folder and downloads the csv on "Path_for_metadata" directory
+#' ls7LoadMetadata(AppRoot = "Path_for_metadata")
 #'
-#' Force renew existing meta data csv
-#' ls7LoadMetadata(update=TRUE)
+#' # Force renew existing meta data csv
+#' ls7LoadMetadata(update = TRUE)
 #' }
 ls7LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=TRUE,...){
   stopifnot(class(update)=="logical")

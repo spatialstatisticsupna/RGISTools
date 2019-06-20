@@ -34,42 +34,69 @@
 #' # Search and download the images from Landsat-8 comprised between
 #' # 2011 and 2013 for the region of Navarre
 #' data(ex.navarre)
-#' search.res<-ls8Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
-#'                       endDate=as.Date("31-12-2013","%d-%m-%Y"),
-#'                       extent=ex.navarre,
-#'                       browseAvaliable="Y")
+#' search.res <- ls8Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
+#'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
+#'                         extent = ex.navarre,
+#'                         browseAvaliable = "Y")
 #'
 #' #download 1 image
-#' lsDownSearch(search.res[1,],username="user",password="pass",untar=T,raw.rm=T)
+#' lsDownSearch(search.res[1,], 
+#'              username = "user", 
+#'              password = "pass", 
+#'              untar = TRUE, 
+#'              raw.rm = TRUE)
 #' # download 10 images
-#' lsDownSearch(search.res[1:10,],username="user",password="pass",untar=T,raw.rm=T)
+#' lsDownSearch(search.res[1:10,], 
+#'              username = "user", 
+#'              password = "pass", 
+#'              untar = TRUE, 
+#'              raw.rm = TRUE)
 #' # download all the images
-#' lsDownSearch(search.res,username="user",password="pass",untar=T,raw.rm=T)
+#' lsDownSearch(search.res, 
+#'              username = "user", 
+#'              password = "pass", 
+#'              untar = TRUE, 
+#'              raw.rm = TRUE)
 #'
 #' # Search and download the images from Landsat-7 comprised between
 #' # 2011 and 2013 for the region of Navarre
 #' data(ex.navarre)
-#' search.res<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
-#'                       endDate=as.Date("31-12-2013","%d-%m-%Y"),
-#'                       extent=ex.navarre,
-#'                       browseAvaliable="Y")
+#' search.res <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
+#'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
+#'                         extent = ex.navarre,
+#'                         browseAvaliable = "Y")
 #' #download 1 image
-#' lsDownSearch(search.res[1,],username="user",password="pass",untar=T,raw.rm=T)
-#' #download 10 images
-#' lsDownSearch(search.res[1:10,],username="user",password="pass",untar=T,raw.rm=T)
-#' #download all the images
-#' lsDownSearch(search.res,username="user",password="pass",untar=T,raw.rm=T)
+#' lsDownSearch(search.res[1,], 
+#'              username = "user", 
+#'              password = "pass", 
+#'              untar = TRUE, 
+#'              raw.rm = TRUE)
+#' # download 10 images
+#' lsDownSearch(search.res[1:10,], 
+#'              username = "user", 
+#'              password = "pass", 
+#'              untar = TRUE, 
+#'              raw.rm = TRUE)
+#' # download all the images
+#' lsDownSearch(search.res, 
+#'              username = "user", 
+#'              password = "pass", 
+#'              untar = TRUE, 
+#'              raw.rm = TRUE)
 #' 
-#' # remove metadata data frame to free memory
+#' # removes metadata data frame to free memory
 #' lsRemoveMetadata()
 #' 
-#' files<-list.files("./",pattern = "\\.TIF$",full.names = T,recursive = T)[6,5,4]
-#' files.stack<-stack(files)
-#' qrange<-c(0.001,0.999)
-#' imagen<-varRGB(files.stack.raster[[1]], 
-#'                files.stack.raster[[2]],
-#'                files.stack.raster[[3]],
-#'                qrange)
+#' files <- list.files("./", 
+#'                     pattern = "\\.TIF$", 
+#'                     full.names = TRUE, 
+#'                     recursive = TRUE)[6,5,4]
+#' files.stack <- stack(files)
+#' qrange <- c(0.001, 0.999)
+#' imagen <- varRGB(files.stack.raster[[1]], 
+#'                  files.stack.raster[[2]],
+#'                  files.stack.raster[[3]],
+#'                  qrange)
 #' plotRGB(imagen)
 #' }
 lsDownSearch<-function(searchres,

@@ -32,7 +32,7 @@ argument to remove the outliers and get a better-looking image.
 # dir path of cropped and cutted Modis image in the region of navarre as example
 img.dir <- system.file("ExNavarra", package = "RGISTools")
 # list all tif files
-img.files <- list.files(img.dir,pattern="\\\\.tif$",recursive = TRUE, full.names = TRUE)
+img.files <- list.files(img.dir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)
 # select the red, blue and nir bands
 red <- raster(img.files[1])
 blue <- raster(img.files[3])

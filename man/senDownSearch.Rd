@@ -51,11 +51,11 @@ searchres <- senSearch(startDate = as.Date("2018-07-29","\%Y-\%m-\%d"),
                        extent = ex.navarre,
                        product = "S2MSI1C",
                        username = "username",
-                      password = "password")
+                       password = "password")
 
 # filtering the path R094 where Navarre is located
 names(searchres)
-searchres.R094 <- searchres[grepl("R094",names(searchres))]
+searchres.R094 <- searchres[grepl("R094", names(searchres))]
 names(searchres.R094)
 
 # Sentinel download function
@@ -66,8 +66,8 @@ senDownSearch(searchres = searchres.R094,
               unzip = TRUE)
 files<-list.files("./Path_for_downloading_folder",
                   pattern = "\\\\TCI.jp2$",
-                  full.names = T,
-                  recursive = T)
+                  full.names = TRUE,
+                  recursive = TRUE)
 rgb<-stack(files[1])
 plotRGB(rgb)
 }

@@ -17,9 +17,9 @@ an string with the path and row of the image in "\code{hXXvYY}" format.
 as Modis name convention of horizontal and vertical "\code{hXXvYY}".
 }
 \examples{
-#example of getting date from Landsat-8 image name
-str<-"MYD09GA.A2003136.h17v04.005.2008324054225"
-pr<-modGetPathRow(str)
+# example of getting date from Landsat-8 image name
+str <- "MYD09GA.A2003136.h17v04.005.2008324054225"
+pr <- modGetPathRow(str)
 print(pr)
 
 }

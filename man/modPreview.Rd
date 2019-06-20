@@ -32,6 +32,6 @@ searchres <- modSearch(product = "MOD09GA",
                       resType = "browseurl",
                       extent = ex.navarre)
 modPreview(searchres, 1)
-modPreview(searchres, 1, size=600)
+modPreview(searchres, 1, size = 600)
 }
 }

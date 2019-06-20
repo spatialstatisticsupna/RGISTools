@@ -25,15 +25,15 @@ The function works with names or file paths having either of the two file extens
  If another format is required, it can be modified through the argument \code{date.format}.
 }
 \examples{
-#example of getting the date from the name of a Landsat-8 image
-str<-"LC82000312017010LGN01_B1.TIF"
-dt<-lsGetDates(str)
+# example of getting the date from the name of a Landsat-8 image
+str <- "LC82000312017010LGN01_B1.TIF"
+dt <- lsGetDates(str)
 print(dt)
-print(format(df,"\%Y\%j"))
+print(format(df, "\%Y\%j"))
 
-#example of getting the date from the name of a Landsat-7 and 8 image
-str<-c("LE72330822017009ASN01","LC82000312017010LGN01_B1.TIF")
-dt<-lsGetDates(str)
+# example of getting the date from the name of a Landsat-7 and 8 image
+str <- c("LE72330822017009ASN01", "LC82000312017010LGN01_B1.TIF")
+dt <- lsGetDates(str)
 print(dt)
 
 }

@@ -22,7 +22,7 @@
 #'                       resType = "browseurl",
 #'                       extent = ex.navarre)
 #' modPreview(searchres, 1)
-#' modPreview(searchres, 1, size=600)
+#' modPreview(searchres, 1, size = 600)
 #' }
 modPreview<-function(searchres,n,size=NULL){
   ser<-searchres[n]

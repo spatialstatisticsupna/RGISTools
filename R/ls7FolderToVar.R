@@ -27,7 +27,7 @@
 #' # load a spatial polygon object of navarre for the example
 #' data(ex.navarre)
 #' # asign the folder where the example will be run
-#' src<-"Path_for_downloading_folder"
+#' src <- "Path_for_downloading_folder"
 #' # download Landsat-7 images
 #' lsDownload(satellite = "ls7",
 #'            username = "username",
@@ -38,17 +38,17 @@
 #'            untarDir = "untar",
 #'            AppRoot = src)
 #' # asign the folder with the Landsat-7 images untared
-#' tif.src<-file.path(src, "untar")
+#' tif.src <- file.path(src, "untar")
 #' # mosaic the Landsat7 images
 #' lsMosaic(tif.src,
 #'          AppRoot = src,
 #'          out.name = "Navarre")
 #' # asign src as the path to mosaicked folder
-#' src2<-file.path(src, "Navarre")
+#' src2 <- file.path(src, "Navarre")
 #' # generate NDVI images of Navarre
 #' ls7FolderToVar(src2,
 #'                fun = varNDVI,
-#'                AppRoot = src),
+#'                AppRoot = src,
 #'                overwrite = T)
 #' }
 ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){

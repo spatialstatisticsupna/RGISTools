@@ -18,9 +18,9 @@ with the name of the layers containing the date in julian format (\code{YYYYJJJ}
 
 \item{fact}{an aggregation factor of the anomalies before the interpolation.}
 
-\item{nDays}{number of previous and subsequent days used to define the neighborhood}
+\item{nDays}{number of previous and subsequent days used to define the neighborhood of the target images.}
 
-\item{nYears}{number of years used to define the neighborhood.}
+\item{nYears}{number of years used to define the neighborhood of the target images.}
 
 \item{fun}{function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.}
 
@@ -28,7 +28,7 @@ with the name of the layers containing the date in julian format (\code{YYYYJJJ}
 
 \item{snow.mode}{logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.}
 
-\item{predictSE}{logical argument. If \code{TRUE} the filling process will calculate the standard error instead the prediction.}
+\item{predictSE}{logical argument. If \code{TRUE} the filling process will calculate the standard error instead of the prediction.}
 
 \item{out.name}{the name of the output images.}
 
@@ -45,14 +45,13 @@ with the name of the layers containing the date in julian format (\code{YYYYJJJ}
 for gap filling published in  \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{
-The time series of images are decomposed into the mean images and the anomalies images. The procedure applies
+The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
 the smoothing algorithm over the anomaly images.
 
 The arguments configure the smoothing procedure:
-\code{Img2Fill} identifies the images to filled, \code{nPeriods} defines
-the spatio temporal neighbourhoood considered when smoothing
-a pixel, and \code{fact} sets the level of spatial aggregation.
-See more information in \insertCite{militino2019interpolation}{RGISTools}.
+\code{Img2Fill} identifies the images to fill, \code{nDays} and \code{nYears} defines
+the spatio temporal neighbourhoood of the target images considered, and \code{fact} sets the 
+level of spatial aggregation. See more information in \insertCite{militino2019interpolation}{RGISTools}.
 }
 \examples{
 # load an example of NDVI time series in Navarre
@@ -61,14 +60,14 @@ data(ex.ndvi.navarre)
 genPlotGIS(ex.ndvi.navarre)
 
 # fill the gaps
-ndvi.filled<-genFillingIMA(ex.ndvi.navarre,
-                           Img2Fill=c(1,2))
+ndvi.filled <- genFillingIMA(ex.ndvi.navarre,
+                           Img2Fill = c(1,2))
 # Show the filled images
 genPlotGIS(ndvi.filled)
 # plot comparison of the cloud and the filled images
-ndvi.comp<-stack(ex.ndvi.navarre[[1]],ndvi.filled[[1]],
-                 ex.ndvi.navarre[[2]],ndvi.filled[[2]])
-genPlotGIS(ndvi.comp,layout=c(2,2))
+ndvi.comp <- stack(ex.ndvi.navarre[[1]], ndvi.filled[[1]],
+                   ex.ndvi.navarre[[2]], ndvi.filled[[2]])
+genPlotGIS(ndvi.comp, layout=c(2, 2))
 }
 \references{
 \insertRef{militino2019interpolation}{RGISTools}

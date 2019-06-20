@@ -24,10 +24,10 @@
 #' data(ex.navarre)
 #'
 #' # Shows a panel of maps, one per date and the region of interest in shown on the fourth map
-#' genPlotGIS(r=ex.ndvi.navarre[[1:4]],
-#'            region=ex.navarre,
-#'            which = c(4),#show region only in 4th image
-#'            wComp=c(4)  #show component only in 4th image
+#' genPlotGIS(r = ex.ndvi.navarre[[1:4]],
+#'            region = ex.navarre,
+#'            which = c(4), #show region only in 4th image
+#'            wComp = c(4) #show component only in 4th image
 #' )
 #'
 #' \dontrun{
@@ -35,30 +35,30 @@
 #' # using color palette
 #' library('RColorBrewer')
 #' my.palette <- rev(brewer.pal(n = 9, name = "YlOrRd"))
-#' genPlotGIS(r=ex.ndvi.navarre[[1]],
-#'            region=ex.navarre,
-#'            proj=CRS("+init=epsg:4670"), #project all components
-#'            col.regions=colorRampPalette(my.palette)
+#' genPlotGIS(r = ex.ndvi.navarre[[1]],
+#'            region = ex.navarre,
+#'            proj = CRS("+init=epsg:4670"), #project all components
+#'            col.regions = colorRampPalette(my.palette)
 #' )
 #' }
 #'
 #' # change scale text relative Y
-#' genPlotGIS(r=ex.ndvi.navarre[[1:4]],
-#'          region=ex.navarre,
-#'            proj=CRS("+init=epsg:4670"),
-#'          compOpt=list(
-#'            #arrow relatives 0-1
-#'            ArrowRelativeX=0.85,
-#'            ArrowRelativeY=0.1,
-#'            ArrowRelativeSize=0.15,
-#'            #scale relatives 0-1
-#'            scaleRelativeX=0.1,
-#'            scaleRelativeY=0.1,
-#'            scaleRelativeSize=0.15,
+#' genPlotGIS(r = ex.ndvi.navarre[[1:4]],
+#'            region = ex.navarre,
+#'            proj = CRS("+init=epsg:4670"),
+#'            compOpt=list(
+#'            # arrow relatives 0-1
+#'            ArrowRelativeX = 0.85,
+#'            ArrowRelativeY = 0.1,
+#'            ArrowRelativeSize = 0.15,
+#'            # scale relatives 0-1
+#'            scaleRelativeX = 0.1,
+#'            scaleRelativeY = 0.1,
+#'            scaleRelativeSize = 0.15,
 #'            #scale text relatives 0-1
-#'            scaleLabelRelativeX=0.1,
-#'            scaleLabelRelativeY=0.2,
-#'            scaleLabelSize=5000
+#'            scaleLabelRelativeX = 0.1,
+#'            scaleLabelRelativeY = 0.2,
+#'            scaleLabelSize = 5000
 #'         )
 #' )
 genPlotGIS<-function(r,region=NULL,...){

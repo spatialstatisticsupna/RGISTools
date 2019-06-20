@@ -24,12 +24,12 @@ are removed.}
 This is a generic function to limit the maximun and minimun values in a \code{raster} image.
 }
 \examples{
-#generate random images
+# generate random images
 img <- matrix(1:16, ncol = 4, byrow = TRUE)
-r<-raster(img)
-#asign the limit of the data in the raster stack
-r2<-genLimitRasterRange(r,mn=4,mx=10)
-r3<-genLimitRasterRange(r,mn=4,mx=10,rm.values=TRUE)
-#plot limited data
-spplot(stack(r,r2,r3))
+r <- raster(img)
+# asign the limit of the data in the raster stack
+r2 <- genLimitRasterRange(r, mn = 4, mx = 10)
+r3 <- genLimitRasterRange(r, mn = 4, mx = 10, rm.values = TRUE)
+# plot limited data
+spplot(stack(r, r2 ,r3))
 }

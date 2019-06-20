@@ -42,8 +42,8 @@ mList <- modSearch(product = "MYD13A2",
                    extent = ex.navarre)
 head(mList)
 # download first image in mList
-modDownSearch(mList[1],"user","pass")
+modDownSearch(mList[1], "user", "pass")
 # download all images in mList
-modDownSearch(mList,"user","pass")
+modDownSearch(mList, "user", "pass")
 }
 }

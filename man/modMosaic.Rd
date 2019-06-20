@@ -55,27 +55,26 @@ by default the output file is named as ‘outfile’.
 # load a spatial polygon object of navarre for the example
 data(ex.navarre)
 #asign the folder where the example will be run
-src<-"Path_for_downloading_folder"
+src <- "Path_for_downloading_folder"
 # download Modis images
-modDownload(product="MOD09GA",
-            startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
-            endDate=as.Date("03-01-2018","\%d-\%m-\%Y"),
-            username="username",
-            password="password",
-            AppRoot=src,
-            hdfdir="hdf",
-            tiffdir="tif",
-            collection=6,
-            extent=ex.navarre)
+modDownload(product = "MOD09GA",
+            startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+            endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
+            username = "username",
+            password = "password",
+            AppRoot = src,
+            extract.tif = TRUE,
+            collection = 6,
+            extent = ex.navarre)
 # asign the folder with the Sentinel images untared
-src<-file.path(src,"MOD09GA")
-tif.src<-file.path(src,"tif")
+src <- file.path(src, "MOD09GA")
+tif.src <- file.path(src, "tif")
 # mosaic the Modis images
 modMosaic(tif.src,
           AppRoot = src,
           out.name = "Navarre",
-          gutils = T,
-          overwrite = T,
-          extent=ex.navarre)
+          gutils = TRUE,
+          overwrite = TRUE,
+          extent = ex.navarre)
 }
 }

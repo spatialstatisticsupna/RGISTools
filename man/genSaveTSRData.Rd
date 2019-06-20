@@ -40,12 +40,12 @@ The function reads all the images inside the folder specified in \code{src}. The
 # load georeferenced polygon of Navarre as example
 data(ex.navarre)
 # set the download folder
-s.start<-Sys.time()
-src<-"Path_for_downloading_folder"
+s.start <- Sys.time()
+src <- "Path_for_downloading_folder"
 # download the images
 modDownload(product = "MOD09GA",
-            startDate = as.Date("30-07-2018","\%d-\%m-\%Y"),
-            endDate = as.Date("06-08-2018","\%d-\%m-\%Y"),
+            startDate = as.Date("30-07-2018", "\%d-\%m-\%Y"),
+            endDate = as.Date("06-08-2018", "\%d-\%m-\%Y"),
             username = "username",
             password = "password",
             AppRoot = src,
@@ -54,25 +54,26 @@ modDownload(product = "MOD09GA",
             collection = 6,
             extent = ex.navarre)
 # set tif folder where hdf will be imported
-src1<-file.path(src,"MOD09GA")
+src1 <- file.path(src,"MOD09GA")
 # set the tif folder path
-tif.src<-file.path(src1,"tif")
+tif.src <- file.path(src1,"tif")
 #mosaic and cut navarre region
 modMosaic(tif.src,
           AppRoot = src1,
           out.name = "Navarre",
           extent = ex.navarre)
 # change src to navarre folder
-src2<-file.path(src1,"Navarre")
+src2 <- file.path(src1,"Navarre")
 # calculate NDVI from navarre folder
 modFolderToVar(src2,
                fun = varNDVI,
                AppRoot = dirname(src2),
                overwrite = TRUE)
 # change src TS_sample
-src3<-file.path(dirname(src2),"NDVI")
+src3 <- file.path(dirname(src2),"NDVI")
 # create the Rdata
 genSaveTSRData(src3, ts.name = "ModisNDVI", AppRoot = src)
-s.end<-Sys.time()
+s.end <- Sys.time()
+s.end - s.start
 }
 }

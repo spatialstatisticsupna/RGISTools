@@ -37,21 +37,21 @@
 #' genPlotGIS(ex.ndvi.navarre)
 #' genPlotGIS(ex.dem.navarre)
 #'
-#' # Distorts 5% of the original ndvi data by 
+#' # distorts 5% of the original ndvi data by 
 #' # altering 50% its values
 #' for(x in c(2,5)){
 #'   aux <- sampleRandom(ex.ndvi.navarre[[x]],
-#'                       ncell(ex.ndvi.navarre)*0.05,
-#'                       cells=TRUE,
+#'                       ncell(ex.ndvi.navarre) * 0.05,
+#'                       cells = TRUE,
 #'                       na.rm = TRUE)
-#'   ex.ndvi.navarre[[x]][aux[,1]]<-aux[,2]*1.5
+#'   ex.ndvi.navarre[[x]][aux[,1]] <- aux[,2] * 1.5
 #' }
 #' genPlotGIS(ex.ndvi.navarre)
 #'
 #' # smoothing the image using dem as covariate
-#' smth.ndvi<-genSmoothingIMA(rStack=ex.ndvi.navarre,
-#'                            cStack=ex.dem.navarre,
-#'                            Img2Process=c(2,5))
+#' smth.ndvi <- genSmoothingIMA(rStack = ex.ndvi.navarre,
+#'                              cStack = ex.dem.navarre,
+#'                              Img2Process = c(2,5))
 #' # plot the distorted 1, smoothed 1, 
 #' # distorted 5, smoothed 5 images
 #' plot(stack(ex.ndvi.navarre[[2]],

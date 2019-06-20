@@ -3,14 +3,13 @@
 #' \code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly (IMA)
 #' for gap filling published in  \insertCite{militino2019interpolation}{RGISTools}.
 #'
-#' The time series of images are decomposed into the mean images and the anomalies images. The procedure applies
+#' The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
 #' the smoothing algorithm over the anomaly images.
 #'
 #' The arguments configure the smoothing procedure:
-#' \code{Img2Fill} identifies the images to filled, \code{nPeriods} defines
-#' the spatio temporal neighbourhoood considered when smoothing
-#' a pixel, and \code{fact} sets the level of spatial aggregation.
-#' See more information in \insertCite{militino2019interpolation}{RGISTools}.
+#' \code{Img2Fill} identifies the images to fill, \code{nDays} and \code{nYears} defines
+#' the spatio temporal neighbourhoood of the target images considered, and \code{fact} sets the 
+#' level of spatial aggregation. See more information in \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' @references \insertRef{militino2019interpolation}{RGISTools}
 #'
@@ -19,11 +18,11 @@
 #' @param Img2Fill a vector defining the images to be filled.
 #' @param aFilter two component vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
 #' @param fact an aggregation factor of the anomalies before the interpolation.
-#' @param nDays number of previous and subsequent days used to define the neighborhood
-#' @param nYears number of years used to define the neighborhood.
+#' @param nDays number of previous and subsequent days used to define the neighborhood of the target images.
+#' @param nYears number of years used to define the neighborhood of the target images.
 #' @param fun function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.
 #' @param snow.mode logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.
-#' @param predictSE logical argument. If \code{TRUE} the filling process will calculate the standard error instead the prediction.
+#' @param predictSE logical argument. If \code{TRUE} the filling process will calculate the standard error instead of the prediction.
 #' @param factSE the fact used in the standard error prediction to reduce the processing time.
 #' @param out.name the name of the output images.
 #' @param ... argument to allow function nestering.
@@ -41,14 +40,14 @@
 #' genPlotGIS(ex.ndvi.navarre)
 #'
 #' # fill the gaps
-#' ndvi.filled<-genFillingIMA(ex.ndvi.navarre,
-#'                            Img2Fill=c(1,2))
+#' ndvi.filled <- genFillingIMA(ex.ndvi.navarre,
+#'                            Img2Fill = c(1,2))
 #' # Show the filled images
 #' genPlotGIS(ndvi.filled)
 #' # plot comparison of the cloud and the filled images
-#' ndvi.comp<-stack(ex.ndvi.navarre[[1]],ndvi.filled[[1]],
-#'                  ex.ndvi.navarre[[2]],ndvi.filled[[2]])
-#' genPlotGIS(ndvi.comp,layout=c(2,2))
+#' ndvi.comp <- stack(ex.ndvi.navarre[[1]], ndvi.filled[[1]],
+#'                    ex.ndvi.navarre[[2]], ndvi.filled[[2]])
+#' genPlotGIS(ndvi.comp, layout=c(2, 2))
 genFillingIMA<-function(imgTS,
                         Img2Fill=NULL,
                         aFilter=c(.05,.95),

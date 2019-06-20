@@ -43,8 +43,8 @@ data(ex.navarre)
 src <- "Path_for_downloading_folder"
 # download Modis images
 modDownload(product = "MOD09GA",
-            startDate = as.Date("01-01-2018","\%d-\%m-\%Y"),
-            endDate = as.Date("03-01-2018","\%d-\%m-\%Y"),
+            startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+            endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
             username = "username",
             password = "password",
             AppRoot = src,
@@ -60,7 +60,7 @@ modMosaic(tif.src,
           AppRoot = src,
           out.name = "Navarre")
 # asign src as the path to mosaicked folder
-src2<-file.path(src, "Navarre")
+src2 <- file.path(src, "Navarre")
 # generate NDVI images of Navarre
 modFolderToVar(src2,
                fun = varEVI,

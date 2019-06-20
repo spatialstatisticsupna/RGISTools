@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' #creates a MetaData folder and downloads the csv on working directory
+#' # creates a MetaData folder and downloads the csv on working directory
 #' ls8LoadMetadata()
 #' lsRemoveMetadata()
 #' }

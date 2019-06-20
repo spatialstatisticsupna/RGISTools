@@ -3,7 +3,7 @@
 #' \code{genCompositions} combines satellite images over a series of images to create composite images.
 #'
 #' This function supports temporal aggregations by specifying \code{fun} argument.
-#' THe number of images aggregated is defined using \code{n.days} argument.
+#' The number of images aggregated is defined using \code{n.days} argument.
 #'
 #' \code{genCompositions} reduce the number of images, improving their quality,
 #' since clouds and potential outliers are removed. Clouds and outliers usually appear with
@@ -11,13 +11,13 @@
 #' maximum pixel value over a period of time. Write \code{fun = max} to use the
 #' \code{MVC} technique. Other functions are also supported.
 #'
-#' @param rstack a \code{RasterStack} where every layer is named after the 
-#' date it was captured in julian format as "\code{YYYYJJJ}".
+#' @param rstack a \code{RasterStack} where every layer is named with any name containing the date
+#'  captured in julian format as "\code{YYYYJJJ}".
 #' @param n number of images combined in the aggregation.
 #' @param fun the function used to create the composite, such as \code{max}, \code{min}, \code{mean}, ...
 #' @param by.days logical argument. If \code{FALSE}, \code{n} indicates the number of consecutive images of the aggregation.
-#' If \code{TRUE}, \code{n} indicates the maximun number of aggregated values between 
-#' the first and the last day of the times series, through different years. 
+#' If \code{TRUE}, \code{n} indicates the maximun number of aggregated images between 
+#' the first and the last day of the time series, through different years. 
 #' The aggregation requires at least one available image.
 #' @param ... argument to allow function nestering.
 #' \itemize{
@@ -34,7 +34,7 @@
 #'                                     n = 3,
 #'                                     fun = max)
 #' genPlotGIS(composite.NDVI.a)
-#' # when by.days=TRUE, the first composite images is made with images 1, 2 and 3, 
+#' # when by.days=TRUE, the first composite image is made with images 1, 2 and 3, 
 #' # the second with image 4, and the third with images 5 and 6.
 #' composite.NDVI.3a <- genCompositions(ex.ndvi.navarre,
 #'                                     n = 3,

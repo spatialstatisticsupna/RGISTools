@@ -11,16 +11,16 @@
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #'
 #' @examples
-#' #create simulated rasters
+#' # create simulated rasters
 #' img <- matrix(1:16, ncol = 4, byrow = TRUE)
-#' r1<-raster(img)
-#' r2<-r1
-#' r3<-r1
-#' extent(r2)<-extent(1,2,1,2)
-#' extent(r3)<-extent(1,2,0,1)
-#' imageList<-list(r1,r2,r3)
-#' #mosaic simulated rasters
-#' mr<-genMosaicList(imageList)
+#' r1 <- raster(img)
+#' r2 <- r1
+#' r3 <- r1
+#' extent(r2) <- extent(1, 2, 1, 2)
+#' extent(r3) <- extent(1, 2, 0, 1)
+#' imageList <- list(r1, r2, r3)
+#' # mosaic simulated rasters
+#' mr <- genMosaicList(imageList)
 #' spplot(mr)
 genMosaicList <-function(imageList, fun="max",verbose=TRUE){
   if(length(imageList)>1){

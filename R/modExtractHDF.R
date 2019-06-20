@@ -24,14 +24,16 @@
 #' \dontrun{
 #' data(ex.navarre)
 #' img.list <- modSearch(product = "MOD11A1",
-#'                     startDate = as.Date("01-01-2011","%d-%m-%Y"),
-#'                     endDate = as.Date("01-01-2011","%d-%m-%Y"),
-#'                     collection = 6,
-#'                     extent = ex.navarre)
+#'                       startDate = as.Date("01-01-2011", "%d-%m-%Y"),
+#'                       endDate = as.Date("01-01-2011", "%d-%m-%Y"),
+#'                       collection = 6,
+#'                       extent = ex.navarre)
 #' # download first image of image list
-#' modDownSearch(img.list,"username","password")
+#' modDownSearch(img.list, "username", "password")
 #' # Extract one layer from downloaded image
-#' hdf.files <- list.files("./",full.names = T,pattern="\\.hdf$")
+#' hdf.files <- list.files("./", 
+#'                         full.names = TRUE, 
+#'                         pattern = "\\.hdf$")
 #' first.hdf.file <- hdf.files[1]
 #' modExtractHDF(first.hdf.file)
 #' }

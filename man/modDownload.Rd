@@ -63,16 +63,16 @@ modDownload(product = "MOD09GA",
             tiffdir = "tif",
             collection = 6,
             extent = ex.navarre)
-files<-list.files("./Path_for_downloading_folder/tif",
-                  pattern = "\\\\.tif$",
-                  full.names = T,
-                  recursive = T)[1,4,3]
-files.stack<-stack(files)
-qrange<-c(0.001,0.999)
-imagen<-varRGB(files.stack.raster[[1]], 
-               files.stack.raster[[2]],
-               files.stack.raster[[3]],
-               qrange)
+files <- list.files("./Path_for_downloading_folder/tif",
+                    pattern = "\\\\.tif$",
+                    full.names = TRUE,
+                    recursive = TRUE)[1,4,3]
+files.stack <- stack(files)
+qrange <- c(0.001, 0.999)
+imagen <- varRGB(files.stack.raster[[1]], 
+                 files.stack.raster[[2]],
+                 files.stack.raster[[3]],
+                 qrange)
 plotRGB(imagen)
 }
 }

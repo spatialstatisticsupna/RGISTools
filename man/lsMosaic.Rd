@@ -56,28 +56,28 @@ default the output file is named as ‘outfile’.
 # load a spatial polygon object of navarre for the example
 data(ex.navarre)
 # asign the folder where the example will be run
-src<-"Path_for_downloading_folder"
+src <- "Path_for_downloading_folder"
 # download Landsat-8 images
-lsDownload(satellite="ls8",
-                   username="username",
-                   password="password",
-                   startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
-                   endDate=as.Date("20-01-2018","\%d-\%m-\%Y"),
-                   extent=ex.navarre,
-                   untar=T,
-                   AppRoot=src)
+lsDownload(satellite = "ls8",
+           username = "username",
+           password = "password",
+           startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+           endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
+           extent = ex.navarre,
+           untar = TRUE,
+           AppRoot = src)
 # asign the folder with the Landsat-8 images untared
-tif.src<-file.path(src,"untar")
+tif.src <- file.path(src, "untar")
 # mosaic the Landsat-8 images
 lsMosaic(tif.src,
-         AppRoot=src,
-         out.name="Navarre")
+         AppRoot = src,
+         out.name = "Navarre")
 
 lsMosaic(tif.src,
-         AppRoot=src,
-         out.name="Navarre",
-         extent=ex.navarre,
-         gutils=T,#using gdalUtils
-         overwrite=T)#overwrite
+         AppRoot = src,
+         out.name = "Navarre",
+         extent = ex.navarre,
+         gutils = TRUE, # using gdalUtils
+         overwrite = TRUE) # overwrite
 }
 }

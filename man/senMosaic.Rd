@@ -69,11 +69,11 @@ senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             password = "password",
             AppRoot = src)
 # asign the folder with the Sentinel images unzipped
-src.unzip <- file.path(src,"unzip")
+src.unzip <- file.path(src, "unzip")
 # mosaic the Sentinel images
 senMosaic(src.unzip,
           AppRoot = src,
-          gutils = T,
+          gutils = TRUE,
           out.name = "Navarre")
 }
 }

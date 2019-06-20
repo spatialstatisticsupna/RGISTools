@@ -25,12 +25,12 @@ The function works with names or file paths having either of the two file extens
  If another format is required, it can be modified through the argument \code{date.format}.
 }
 \examples{
-#example of getting date from Sentinel2 image name
-str<-c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
+# example of getting date from Sentinel2 image name
+str <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
        "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
-dt<-senGetDates(str)
+dt <- senGetDates(str)
 print(dt)
 print(format(dt,"\%Y\%j"))
-senGetDates(str,date.format="\%Y\%j")
+senGetDates(str, date.format = "\%Y\%j")
 
 }

@@ -8,9 +8,9 @@
 #'
 #' @examples
 #' #example of getting date from Landsat-8 image name
-#' str<-c("LE72000302011066ASN00",
-#'        "LE72000302011066ASN00")
-#' pr<-lsGetPathRow(str)
+#' str <- c("LE72000302011066ASN00",
+#'          "LE72000302011066ASN00")
+#' pr <- lsGetPathRow(str)
 #' print(pr)
 #'
 lsGetPathRow<-function(str){

@@ -16,16 +16,16 @@
 #' \dontrun{
 #' data(ex.navarre)
 #' # Retrieve jpg images covering Navarre region between 2011 and 2013
-#' search.res<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
-#'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
-#'                   extent=ex.navarre,
-#'                   precise=T,
-#'                   browseAvaliable="Y")
-#' lsPreview(search.res,1)
+#' search.res <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
+#'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
+#'                         extent = ex.navarre,
+#'                         precise = TRUE,
+#'                         browseAvaliable = "Y")
+#' lsPreview(search.res, 1)
 #' # Filter the images with less than 1% pixels covered by clouds
 #' search_cloudFree = subset(search.res, search.res$cloudCover < 1)
-#' lsPreview(search_cloudFree,1)
-#' lsPreview(search_cloudFree,2)
+#' lsPreview(search_cloudFree, 1)
+#' lsPreview(search_cloudFree, 2)
 #' }
 lsPreview<-function(searchres,n,size=NULL){
   ser<-searchres[n,]
