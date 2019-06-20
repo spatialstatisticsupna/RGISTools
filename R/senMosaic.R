@@ -58,7 +58,6 @@
 #'           AppRoot = src,
 #'           gutils = TRUE,
 #'           out.name = "Navarre")
-#' }
 #' 
 #' # Load and plot in R a sentinel image
 #' files <- list.files(src, pattern = "\\.tif$", full.names = TRUE ,recursive = TRUE)
@@ -73,6 +72,7 @@
 #'                  imagen.rec1[[3]], 
 #'                  q.range = range)
 #' plotRGB(imagen)
+#' }
 senMosaic<-function(src,
                     extent=NULL,
                     out.name="outfile",

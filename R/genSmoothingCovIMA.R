@@ -1,10 +1,10 @@
 #' Uses covariates for smoothing outliers in a time series of satellite images
 #'
-#' \code{genSmoothingIMA} runs the IMA (\link{genFillingIMA}) smoothing method with covariates. 
+#' \code{genSmoothingCovIMA} runs the IMA (\link{genSmoothingIMA}) smoothing method with covariates. 
 #' \insertCite{militino2019interpolation}{RGISTools}.
 #'
-#' The procedure uses spatio temporal data to decompose each image in the time series as a mean
-#' image plus a residual or anomaly.The procedure smoothed the anomaly using covariates to
+#' The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
+#' the smoothing algorithm over the anomaly images. The procedure smoothed the anomaly using covariates to
 #' smooth the outliers in the anomaly. See more information in \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' This function provides a set of arguments to configure the run of the precedure, such as the images to fill (\code{Img2Process}),
@@ -49,16 +49,16 @@
 #' genPlotGIS(ex.ndvi.navarre)
 #'
 #' # smoothing the image using dem as covariate
-#' smth.ndvi <- genSmoothingIMA(rStack = ex.ndvi.navarre,
-#'                              cStack = ex.dem.navarre,
-#'                              Img2Process = c(2,5))
+#' smth.ndvi <- genSmoothingCovIMA(rStack = ex.ndvi.navarre,
+#'                                 cStack = ex.dem.navarre,
+#'                                 Img2Process = c(2,5))
 #' # plot the distorted 1, smoothed 1, 
 #' # distorted 5, smoothed 5 images
 #' plot(stack(ex.ndvi.navarre[[2]],
 #'                  smth.ndvi[[1]],
 #'                  ex.ndvi.navarre[[5]],
 #'                  smth.ndvi[[2]]))
-genSmoothingIMA <- function (rStack,
+genSmoothingCovIMA <- function (rStack,
                              cStack,
                              Img2Process=NULL,
                              fun=mean,

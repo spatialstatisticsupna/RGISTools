@@ -1,7 +1,7 @@
 #' Time series of Digital Elevation Model (DEM) for the region of Navarre in Spain
 #'
 #' Geographically projected \code{RasterStack} with the DEM values for
-#' the region of Navarre, to use as example in \code{genSmoothingIMA}.
+#' the region of Navarre, to use as example in \code{genSmoothingCovIMA}.
 #'
 #' @format The \code{RasterStack} contains 6 time-periods, with the same DEM:
 #' \describe{

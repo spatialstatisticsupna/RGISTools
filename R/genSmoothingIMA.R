@@ -1,6 +1,6 @@
 #' Fills the gaps in a time series of satellite images
 #'
-#' \code{genFillingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly (IMA)
+#' \code{genSmoothingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly (IMA)
 #' for gap filling published in  \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
@@ -40,26 +40,26 @@
 #' genPlotGIS(ex.ndvi.navarre)
 #'
 #' # fill the gaps
-#' ndvi.filled <- genFillingIMA(ex.ndvi.navarre,
-#'                            Img2Fill = c(1,2))
+#' ndvi.filled <- genSmoothingIMA(ex.ndvi.navarre,
+#'                                Img2Fill = c(1,2))
 #' # Show the filled images
 #' genPlotGIS(ndvi.filled)
 #' # plot comparison of the cloud and the filled images
 #' ndvi.comp <- stack(ex.ndvi.navarre[[1]], ndvi.filled[[1]],
 #'                    ex.ndvi.navarre[[2]], ndvi.filled[[2]])
 #' genPlotGIS(ndvi.comp, layout=c(2, 2))
-genFillingIMA<-function(imgTS,
-                        Img2Fill = NULL,
-                        aFilter = c(.05,.95),
-                        fact = 5,
-                        nDays = 3,
-                        nYears=1,
-                        fun=mean,
-                        factSE=8,
-                        snow.mode=FALSE,
-                        predictSE=FALSE,
-                        out.name="outname",
-                        ...){
+genSmoothingIMA<-function(imgTS,
+                          Img2Fill = NULL,
+                          aFilter = c(.05,.95),
+                          fact = 5,
+                          nDays = 3,
+                          nYears=1,
+                          fun=mean,
+                          factSE=8,
+                          snow.mode=FALSE,
+                          predictSE=FALSE,
+                          out.name="outname",
+                          ...){
   args<-list(...)
   AppRoot<-defineAppRoot()
   stime<-Sys.time()

@@ -5,7 +5,7 @@
 #' the \code{\link{lsMosaic}} function). The function returns a \code{RasterStack} with the time-series of the index.
 #'
 #' The function requires to define \code{src} and \code{fun} attributes. \code{src} defines the path to
-#' the result of \code{\link{lsMosaic}}, with all bands of Landsat-7 for a region of interest. \code{fun} defines
+#' the result of \code{\link{lsMosaic}}, with all bands of Landsat-8 for a region of interest. \code{fun} defines
 #' the variable of interest using any of the functions in the packages starting with \code{var} (\code{\link{varNDVI}},
 #'  \code{\link{varEVI}}, ...)
 #'

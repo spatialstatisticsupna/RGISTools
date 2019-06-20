@@ -1,4 +1,4 @@
-#' Limits the maximum and minimum values of a raster image
+#' Limits the maximum and the minimum values of a raster image
 #'
 #' \code{genLimitRasterRange} limits the maximum and the minimum values of a raster image to a given range.
 #'

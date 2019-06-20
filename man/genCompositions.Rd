@@ -29,11 +29,12 @@ The aggregation requires at least one available image.}
 }
 \details{
 This function supports temporal aggregations by specifying \code{fun} argument.
-The number of images aggregated is defined using \code{n.days} argument.
+The maximun number of aggregated images is defined using \code{n} argument. The output image is 
+named with the first image of the aggregation.
 
 \code{genCompositions} reduce the number of images, improving their quality,
 since clouds and potential outliers are removed. Clouds and outliers usually appear with
-very low values. For example, the Maximun value compostion (\code{MVC}) builds composites using the
+very low values. For example, the maximun value compostion (\code{MVC}) builds composites using the
 maximum pixel value over a period of time. Write \code{fun = max} to use the
 \code{MVC} technique. Other functions are also supported.
 }
@@ -42,7 +43,8 @@ maximum pixel value over a period of time. Write \code{fun = max} to use the
 data("ex.ndvi.navarre")
 # Ploting the images: clouds are found
 genPlotGIS(ex.ndvi.navarre)
-# Use n = 3 
+# the first composite image is made with images 1, 2 and 3, 
+# and the second composite image is made with images 4, 5 and 6
 composite.NDVI.a <- genCompositions(ex.ndvi.navarre,
                                     n = 3,
                                     fun = max)

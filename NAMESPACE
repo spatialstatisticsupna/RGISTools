@@ -1,4 +1,4 @@
-export(genCompositions,genFillingIMA,genFilterStack,
+export(genCompositions,genSmoothingCovIMA,genFilterStack,
        genGetDates,senGetDates,lsGetDates,modGetDates,
        genLimitRasterRange,genMosaicList,genPlotGIS,
        genSaveTSRData,genSmoothingIMA,ls7FolderToVar,

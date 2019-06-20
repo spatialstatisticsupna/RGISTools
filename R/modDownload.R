@@ -1,7 +1,8 @@
 #' Search and downloads Modis images in structured folder
 #'
-#' \code{modDownload} searches and downloads the Modis products on the  NASA Common Metadata
-#' Repository to find those which are relevant for a particular location and date interval.
+#' \code{modDownload} searches and downloads the Modis products on the 
+#' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} to find images 
+#' within a particular location and date interval.
 #'
 #' \code{modDownload} uses \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} (CMR) 
 #' powered api to search satellite all ground products releses by NASA. The catalogue of Modis ground products with their 
@@ -9,6 +10,7 @@
 #' For further information on collections, please visit \href{https://modis-atmos.gsfc.nasa.gov/collections/overview}{Modis website}.
 #' By the time the \code{RGISTools} package is released, NASA carries out the maintenance of the Modis website on Wednesdays. 
 #' Therefore, an error may occur when trying to connect with their server during this day of the week.
+#' \href{https://urs.earthdata.nasa.gov/users/new}{Get your credentials}.
 #'
 #' @param product a \code{character} argument with the name of Modis product type.
 #' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.

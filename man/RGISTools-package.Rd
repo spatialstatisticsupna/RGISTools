@@ -3,10 +3,10 @@
 \docType{package}
 \name{RGISTools-package}
 \alias{RGISTools-package}
-\title{RGISTools: Tools for Downloading and Processing Time-Series of Satellite Images}
+\title{RGISTools: Tools for Downloading, Smoothing, and Processing Time-Series of Satellite Images}
 \description{
 This package aims for downloading, processing, and smoothing time series of satellite images from 
-Landsat, MODIS and Sentinel satellite programs in a uniform and standardized way. The functions of 
+Landsat, Modis and Sentinel satellite programs in a uniform and standardized way. The functions of 
 RGISTools automatically convert the original formats into .tif files, which can be loaded into R. 
 The processing functions of RGISTools include tile mosaicking, cropping, and extracting the variables 
 of interest. When multiple tile match the region of interest, RGISTools combines them to generate a 
@@ -17,7 +17,7 @@ package includes a set of functions for removing clouds, gap filling and smoothi
 variety of procedures and sources of information being handled in RGISTools, the functions are divided 
 into 7 categories, which are identified by the first 3 characters of the function names; 
 \enumerate{
-  \item \code{mod} for MODIS Terra and Aqua satellite images.
+  \item \code{mod} for Modis Terra and Aqua satellite images.
   \item \code{sen} for Sentinel images.
   \item \code{ls7} for Landsat 7 images.
   \item \code{ls8} for Landsat 8 images.
@@ -29,19 +29,21 @@ into 7 categories, which are identified by the first 3 characters of the functio
 \details{
 Below is a list of the most important functions grouped by running order for creating a time series of
 images for each satellite considered by the package.
-Each satellite function group considers all the procedure including searching, previewing, 
+Each satellite group of functions considers all the procedure including searching, previewing, 
 downloading, mosaicking, extracting variables, composing, and filling-smoothing.
 }
 \section{I. Landsat time series functions}{
 
 Landsat mission releases images comming from two satellites, Landsat-7 and Landsat-8. Each satellite needs its own 
-download and processing workflow.
+download and processing workflow. The download of any Landsat images requires a USGS login account. 
+\href{https://ers.cr.usgs.gov/register/}{Get your credentials}.
+
 \subsection{Landsat-7}{
 \tabular{ll}{
   \code{ \link{ls7LoadMetadata}}\tab To load Landsat-7 meta data file for image search \cr
   \code{\link{ls7Search}} \tab To search Landsat-7 time-series images list \cr
   \code{\link{lsPreview}} \tab To preview in R Landsat satellite images \cr
-  \code{\link{lsDownSearch}} \tab To Download a time series of satellite images from Landsat\cr
+  \code{\link{lsDownSearch}} \tab To download a time series of satellite images from Landsat\cr
   \code{\link{lsMosaic}} \tab To mosaic Landsat time series of images \cr
   \code{\link{ls7FolderToVar}} \tab To compute derived variables from Landsat-7 multispectral bands \cr
   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images \cr
@@ -53,7 +55,7 @@ download and processing workflow.
   \code{ \link{ls8LoadMetadata}}\tab To load Landsat-8 meta data file for image search \cr
   \code{\link{ls8Search}} \tab To search Landsat-8 time-series images list \cr
   \code{\link{lsPreview}} \tab To preview in R Landsat satellite images \cr
-  \code{\link{lsDownSearch}} \tab To Download a time series of satellite images from Landsat\cr
+  \code{\link{lsDownSearch}} \tab To download a time series of satellite images from Landsat\cr
   \code{\link{lsMosaic}} \tab  To mosaic Landsat time series of images\cr
   \code{\link{ls8FolderToVar}} \tab To compute derived variables from Landsat-8 multispectral bands\cr
   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images \cr
@@ -64,10 +66,12 @@ download and processing workflow.
 
 \section{II. Modis time series functions}{
 
+The download of any Modis product requires the credentianls from EarthData to access the NASA’s web data service. 
+\href{https://urs.earthdata.nasa.gov/users/new}{Get credentials}.
 \tabular{ll}{
   \code{ \link{modSearch}} \tab To search Modis time-series images list \cr
   \code{\link{modPreview}} \tab To preview in R Modis satellite images\cr
-  \code{\link{modDownSearch}} \tab To Download a Modis time series of satellite images\cr
+  \code{\link{modDownSearch}} \tab To download a Modis time series of satellite images\cr
   \code{\link{modMosaic}} \tab To mosaic Modis time series of images \cr
   \code{\link{modFolderToVar}} \tab To compute derived variables from Modis multispectral bands\cr
   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images \cr
@@ -77,11 +81,12 @@ download and processing workflow.
 
 \section{III. Sentinel time series functions}{
 
-
+The download of any Sentinel product requires the credentianls from ESA’s SciHub data service.
+\href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 \tabular{ll}{
   \code{ \link{senSearch}} \tab To search Sentinel time-series images list\cr
   \code{\link{senPreview}} \tab To preview in R Sentinel satellite images\cr
-  \code{\link{senDownSearch}} \tab To Download a Sentinel time series of satellite images\cr
+  \code{\link{senDownSearch}} \tab To download a Sentinel time series of satellite images\cr
   \code{\link{senMosaic}} \tab To mosaic Sentinel time series of images \cr
   \code{\link{senFolderToVar}} \tab To compute derived variables from Sentinel-2 multispectral bands\cr
   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images\cr
@@ -93,8 +98,8 @@ download and processing workflow.
 
 \tabular{ll}{
   \code{ \link{genCompositions}} \tab To create image compositions from a time series of satellite images\cr
-  \code{\link{genFillingIMA}} \tab To fill the gaps in a time series of satellite images\cr
-  \code{\link{genSmoothingIMA}} \tab To smooth outliers in a time series of satellite images using covariates\cr
+  \code{\link{genSmoothingIMA}} \tab To fill the gaps in a time series of satellite images\cr
+  \code{\link{genSmoothingCovIMA}} \tab To smooth outliers in a time series of satellite images using covariates\cr
   \code{\link{genPlotGIS}} \tab To plot satellite images with a proper GIS format\cr
   \code{\link{genGetDates}} \tab To get a date from the name of a raster layer\cr
   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
