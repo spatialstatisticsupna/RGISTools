@@ -51,7 +51,7 @@ assign("MOD09BANDS",c(blue='B03_1.tif',green='B04_1.tif',red='B01_1.tif',nir='B0
 
 assign("SEN1BANDS",NULL, env=optEnv)
 #https://www.spectralcam.com/2019/02/12/maia-s2-and-sentinel-2-multispectral-images-for-agriculture/
-assign("SEN2BANDS",c(bluecoastal='B01.tif',blue='B02.tif',green='B03.tif',red='B04.tif',vegrededge1="B06.tif",vegrededge2="B07.tif",nir='B08.tif',narrownir='B8A.tif',watervapour="B09.tif",cirrus="B10.tif",swir1='B11.tif',swir2='B12.tif'), env=optEnv)
+assign("SEN2BANDS",c(bluecoastal='B01.tif',blue='B02.tif',green='B03.tif',red='B04.tif',vegrededge="B05.tif",vegrededge1="B06.tif",vegrededge2="B07.tif",nir='B08.tif',narrownir='B8A.tif',watervapour="B09.tif",cirrus="B10.tif",swir1='B11.tif',swir2='B12.tif'), env=optEnv)
 assign("SEN3BANDS",NULL, env=optEnv)
 
 
