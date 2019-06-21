@@ -44,17 +44,15 @@ assign("SENUNZIPDir","unzip", env=optEnv)
 assign("SENUNIMAGESDir","images", env=optEnv)
 assign("SENUNZIPEXT",".zip", env=optEnv)
 
-# bands
+#bands
 assign("LS7BANDS",c(blue='B1.tif',green='B2.tif',red='B3.tif',nir='B4.tif',swir1='B5.tif',tirs1='B6_VCID_1.tif',tirs2='B6_VCID_2.tif',swir2='B7.tif',panchromatic='B8.tif',quality='BQA.tif'), env=optEnv)
 assign("LS8BANDS",c(bluecoastal='B1.tif',blue='B2.tif',green='B3.tif',red='B4.tif',nir='B5.tif',swir1='B6.tif',swir2='B7.tif',panchromatic='B8.tif',cirrus='B9.tif',tirs1='B10.tif',tirs2='B11.tif',quality='BQA.tif'), env=optEnv)
-assign("MOD09BANDS",c(blue='B03_1.tif',green='B04_1.tif',red='B01_1.tif',nir='B02_1.tif',swir1='B06_1.tif',tirs1='B05_1.tif',swir2='B07_1.tif',quality='QC'), env=optEnv)
+assign("MOD09BANDS",c(red='B01_1.tif',nir='B02_1.tif',blue='B03_1.tif',green='B04_1.tif',tirs1='B05_1.tif',swir1='B06_1.tif',swir2='B07_1.tif',quality='QC'), env=optEnv)
 
 assign("SEN1BANDS",NULL, env=optEnv)
 #https://www.spectralcam.com/2019/02/12/maia-s2-and-sentinel-2-multispectral-images-for-agriculture/
-assign("SEN2BANDS",c(bluecoastal='B01.tif',blue='B02.tif',green='B03.tif',red='B04.tif',vegrededge="B05.tif",vegrededge1="B06.tif",vegrededge2="B07.tif",nir='B08.tif',narrownir='B8A.tif',watervapour="B09.tif",cirrus="B10.tif",swir1='B11.tif',swir2='B12.tif'), env=optEnv)
+assign("SEN2BANDS",c(bluecoastal='B01.tif',blue='B02.tif',green='B03.tif',red='B04.tif',vegrededge1="B06.tif",vegrededge2="B07.tif",nir='B08.tif',narrownir='B8A.tif',watervapour="B09.tif",cirrus="B10.tif",swir1='B11.tif',swir2='B12.tif'), env=optEnv)
 assign("SEN3BANDS",NULL, env=optEnv)
-
-
 
 #' Changes the default value of an RGISTools configuration variable
 #'
