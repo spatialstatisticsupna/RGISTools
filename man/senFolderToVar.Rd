@@ -62,9 +62,19 @@ senMosaic(src.unzip,
           out.name = "Navarre")
 # asign src as the path to mosaicked folder
 src2 <- file.path(src, "Navarre")
+src3 <- file.path(src1, "Navarre_Variables")
+dir.create(src3)
 # generate EVI images of Navarre
 senFolderToVar(src2,
                fun = varEVI,
-               AppRoot = src)
+               AppRoot = src3)
+               
+flist <- list.files(file.path(src3,"EVI"),
+                    pattern = "\\\\.tif$",
+                    full.names = TRUE,
+                    recursive = TRUE)
+
+files.raster <- stack(flist)
+spplot(files)
 }
 }

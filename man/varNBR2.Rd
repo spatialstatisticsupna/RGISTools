@@ -25,16 +25,19 @@ This function is used within
 }
 \examples{
 # dir path of cropped and cutted Modis image in the region of navarre as example
-img.dir <- system.file("ExNavarra", package = "RGISTools")
+img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 # list all tif files
 img.files <- list.files(img.dir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)
+# print Modis 09 bands
+getRGISToolsOpt("MOD09BANDS")
+
 # select the swir1 and swir2 bands
 swir1 <- raster(img.files[6])
 swir2 <- raster(img.files[7])
 # calculate the nbr2 image
 nbr2 <- varNBR2(swir1,swir2)
 # plot the image
-spplot(nbr2)
+spplot(nbr2,col.regions=rev(heat.colors(20)))
 }
 \references{
 \insertRef{lutes2006firemon}{RGISTools}

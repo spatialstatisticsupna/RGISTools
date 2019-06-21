@@ -53,18 +53,28 @@ modDownload(product = "MOD09GA",
             collection = 6,
             extent = ex.navarre)
 # asign the folder with the Sentinel images untared
-src <- file.path(src, "MOD09GA")
+src1 <- file.path(src, "MOD09GA")
 tif.src <- file.path(src, "tif")
 #mosaic the Modis images
 modMosaic(tif.src,
-          AppRoot = src,
+          AppRoot = src1,
           out.name = "Navarre")
 # asign src as the path to mosaicked folder
-src2 <- file.path(src, "Navarre")
+src2 <- file.path(src1, "Navarre")
 # generate NDVI images of Navarre
+src3 <- file.path(src1, "Variables")
+dir.create(src3)
 modFolderToVar(src2,
                fun = varEVI,
-               AppRoot = src),
+               AppRoot = src3),
                overwrite = T)
+               
+flist <- list.files(file.path(src3,"EVI"),
+                    pattern = "\\\\.tif$",
+                    full.names = TRUE,
+                    recursive = TRUE)
+
+files.raster <-stack(flist)
+spplot(files)
 }
 }

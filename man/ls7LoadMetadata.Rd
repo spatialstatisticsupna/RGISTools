@@ -44,5 +44,8 @@ ls7LoadMetadata(AppRoot = "Path_for_metadata")
 
 # Force renew existing meta data csv
 ls7LoadMetadata(update = TRUE)
+# if .LS8MD is already loaded you can see print its data
+ls(all.names = TRUE)
+head(.LS8MD)
 }
 }

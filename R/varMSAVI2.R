@@ -27,7 +27,7 @@
 #' # calculate the msavi2 image
 #' msavi2 <- varMSAVI2(red, nir)
 #' # plot the image
-#' spplot(msavi2)
+#' spplot(msavi2,col.regions=rev(topo.colors(20)))
 varMSAVI2<-function(red, nir){
   msavi<-(2*nir+1-sqrt((2*nir+1)^2-8*(nir-red)))/2
   return(msavi)

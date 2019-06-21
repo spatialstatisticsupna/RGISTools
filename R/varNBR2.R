@@ -28,7 +28,7 @@
 #' # calculate the nbr2 image
 #' nbr2 <- varNBR2(swir1,swir2)
 #' # plot the image
-#' spplot(nbr2)
+#' spplot(nbr2,col.regions=rev(heat.colors(20)))
 varNBR2<-function(swir1,swir2){
   nbr2<-(swir1-swir2)/(swir1+swir2)
   return(nbr2)

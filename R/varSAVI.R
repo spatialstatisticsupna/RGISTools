@@ -29,7 +29,7 @@
 #' # calculate the ndwi image
 #' savi <- varSAVI(red,nir)
 #' # plot the image
-#' spplot(savi)
+#' spplot(savi,col.regions=rev(topo.colors(20)))
 varSAVI<-function(red,nir,L=0.5){
   savi<-((nir-red)/(nir+red+L))*(1+L)
   return(savi)

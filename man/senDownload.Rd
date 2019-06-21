@@ -17,7 +17,7 @@ senDownload(username, password, ...)
   \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
   \item \code{endDate} ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
   \item \code{extent} location as project file with extention.
-  \item \code{platform} platform name of the Sentinel mission (Sentine-1, Sentinel-2,...).
+  \item \code{platform} platform name of the Sentinel mission (Sentinel-1, Sentinel-2,...).
   \item \code{nattempts} the number of attempts that the function has to carry out
    an image in case the file becomes corrupted.
   \item \code{error.log} error log file name.

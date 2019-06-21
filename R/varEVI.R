@@ -30,7 +30,7 @@
 #' # calculate the evi image
 #' evi <- varEVI(blue, red, nir)
 #' # plot the image
-#' spplot(evi)
+#' spplot(evi,col.regions=rev(terrain.colors(20)))
 varEVI<-function(blue,red,nir){
   evi <- 2.5*((nir - red) / (nir+6 * red-7.5*blue+1))
   return(evi)

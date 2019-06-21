@@ -60,9 +60,19 @@ lsMosaic(tif.src,
 # asign src as the path to mosaiced folder
 src2 <- file.path(src, "Navarre")
 # generate NDVI images of Navarre
+src3 <- file.path(src1, "Navarre_Variables")
+dir.create(src3)
 ls8FolderToVar(src2,
                fun = varNDVI,
-               AppRoot = src,
+               AppRoot = src3,
                overwrite = T)
+               
+flist <- list.files(file.path(src3,"EVI"),
+                    pattern = "\\\\.tif$",
+                    full.names = TRUE,
+                    recursive = TRUE)
+
+files.raster <- stack(flist)
+spplot(files)
 }
 }

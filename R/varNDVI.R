@@ -29,7 +29,7 @@
 #' # calculate the ndvi image
 #' ndvi <- varNDVI(red,nir)
 #' # plot the image
-#' spplot(ndvi)
+#' spplot(ndvi,col.regions=rev(terrain.colors(20)))
 varNDVI<-function(red, nir){
   ndvi <- (nir - red) / (nir + red)
   return(ndvi)

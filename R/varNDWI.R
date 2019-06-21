@@ -29,7 +29,7 @@
 #' # calculate the ndwi image
 #' ndwi <- varNDWI(green,nir)
 #' # plot the image
-#' spplot(ndwi)
+#' spplot(ndwi,col.regions=rev(rainbow(20)))
 varNDWI<-function(green,nir){
   ndwi<-(green-nir)/(green+nir)
   return(ndwi)
