@@ -17,9 +17,12 @@
 #'
 #' @examples
 #' # dir path of cropped and cutted Modis image in the region of navarre as example
-#' img.dir <- system.file("ExNavarra", package = "RGISTools")
+#' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)
+#' # print Modis 09 bands
+#' getRGISToolsOpt("MOD09BANDS")
+#' 
 #' # select the green and nir bands
 #' green <- raster(img.files[4])
 #' nir <- raster(img.files[2])

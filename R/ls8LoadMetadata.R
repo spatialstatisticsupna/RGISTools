@@ -30,6 +30,10 @@
 #'
 #' # Force renew existing meta data csv
 #' ls8LoadMetadata(update = TRUE)
+#' 
+#' # if .LS8MD is already loaded you can see print its data
+#' ls(all.names = TRUE)
+#' head(.LS8MD)
 #' }
 ls8LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=FALSE,...){
   stopifnot(class(update)=="logical")
