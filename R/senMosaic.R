@@ -61,7 +61,9 @@
 #' 
 #' # Load and plot in R a sentinel image
 #' files <- list.files(src, pattern = "\\.tif$", full.names = TRUE ,recursive = TRUE)
-#' files.stack <- stack(files[c(2,3,4)])
+#' # print Sentinel-2 bands
+#' getRGISToolsOpt("SEN2BANDS")
+#' files.stack <- stack(files[c(4,3,2)])
 #' range <- c(0.05,0.95)
 #' 
 #' ex.navarre.utm <- spTransform(ex.navarre, CRS = crs(files.stack[[1]]))
