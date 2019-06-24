@@ -1,13 +1,15 @@
+# RGISTools
+Tools for Downloading, Processing, and Smoothing Time Series of Satellite Images From Landsat, Modis, and Sentinel.
+
 ## Table of contents
 
-- [RGISTools](#rgistools)
+- [Introduction](#introduction)
 - [Installation](#instalation)
 - [Credentials for downloading satellite images](#credentials-for-downloading-satellite-images)
 - [Copyright and license](#copyright-and-license)
 
-# RGISTools
-Tools for Downloading, Processing, and Smoothing Time Series of Satellite Images From Landsat, Modis, and Sentinel.
 
+#Introduction
 This package aims for downloading, processing, and smoothing time series of satellite images from 
 Landsat, Modis and Sentinel satellite programs in a uniform and standardized way. The functions of 
 RGISTools automatically convert the original formats into .tif files, which can be loaded into R. 
