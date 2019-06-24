@@ -4,12 +4,12 @@ Tools for Downloading, Processing, and Smoothing Time Series of Satellite Images
 ## Table of contents
 
 - [Introduction](#introduction)
-- [Installation](#instalation)
+- [Installation](#installation)
 - [Credentials for downloading satellite images](#credentials-for-downloading-satellite-images)
 - [Copyright and license](#copyright-and-license)
 
 
-# Introduction
+# The package
 This package aims for downloading, processing, and smoothing time series of satellite images from 
 Landsat, Modis and Sentinel satellite programs in a uniform and standardized way. The functions of 
 RGISTools automatically convert the original formats into .tif files, which can be loaded into R. 
@@ -125,4 +125,4 @@ Credentials [EarthData](https://ers.cr.usgs.gov/register/)
 Credentials [SciHub](https://scihub.copernicus.eu/dhus/#/self-registration) 
 
 ## Copyright and license
-Licensed under the GPL-3 License. [Full license here.](https://github.com/spatialstatisticsupna/RGISTools/blob/master/LICENSE.md).
+Licensed under the GPL-3 License. [Full license here](/blob/master/LICENSE.md).
