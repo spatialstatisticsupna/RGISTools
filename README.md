@@ -35,7 +35,7 @@ images for each satellite considered by the package.
 Each satellite group of functions considers all the procedure including searching, previewing, 
 downloading, mosaicking, extracting variables, composing, and filling-smoothing.
 
-## Landsat time series functions
+## I. Landsat time series functions
 Landsat mission releases images comming from two satellites, Landsat-7 and Landsat-8. Each satellite needs its own 
 download and processing workflow. The download of any Landsat images requires a USGS login account. 
 [Get your credentials](https://ers.cr.usgs.gov/register/).
