@@ -89,10 +89,10 @@ lsMosaic<-function(src,
   #definition of bands names
   if(any(grepl("LE7",imgFolders))){
     message("Landsat-7 images detected!")
-    dtype<-getRGISToolsOpt("LS7BANDS")
+    dtype<-paste0(getRGISToolsOpt("LS7BANDS"),".tif")
   }else if(any(grepl("LC8",imgFolders))){
     message("Landsat-8 images detected!")
-    dtype<-getRGISToolsOpt("LS8BANDS")
+    dtype<-paste0(getRGISToolsOpt("LS8BANDS"),".tif")
   }else{
     stop("Satellite not supported for Day mosaic.")
   }

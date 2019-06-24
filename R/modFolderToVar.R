@@ -77,7 +77,7 @@ modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   rstack<-NULL
   for(imgfd in mod.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
-    modbands<-getRGISToolsOpt("MOD09BANDS")
+    modbands<-paste0(getRGISToolsOpt("MOD09BANDS"),".tif")
     mod.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
     funString<-"result<-fun("
     for(arg in formalArgs(fun)){

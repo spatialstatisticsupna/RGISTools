@@ -75,7 +75,7 @@ ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   result<-NULL
   for(imgfd in ls.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
-    ls7bands<-getRGISToolsOpt("LS7BANDS")
+    ls7bands<-paste0(getRGISToolsOpt("LS7BANDS"),".tif")
     ls.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
     funString<-"result<-fun("
     for(arg in formalArgs(fun)){
