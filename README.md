@@ -22,13 +22,13 @@ package includes a set of functions for removing clouds, gap filling and smoothi
 variety of procedures and sources of information being handled in RGISTools, the functions are divided 
 into 7 categories, which are identified by the first 3 characters of the function names; 
 
-1.```mod``` for Modis Terra and Aqua satellite images.
-2.```sen``` for Sentinel images.
-3.```ls7``` for Landsat 7 images.
-4.```ls8``` for Landsat 8 images.
-5.```ls``` for both Landsat 7 and 8 images.
-6.```gen``` for any of the three platforms.
-7.```var``` for any of the three platforms.
+1. ```mod``` for Modis Terra and Aqua satellite images.
+2. ```sen``` for Sentinel images.
+3. ```ls7``` for Landsat 7 images.
+4. ```ls8``` for Landsat 8 images.
+5. ```ls``` for both Landsat 7 and 8 images.
+6. ```gen``` for any of the three platforms.
+7. ```var``` for any of the three platforms.
 
 Below is a list of the most important functions grouped by running order for creating a time series of
 images for each satellite considered by the package.
