@@ -127,9 +127,9 @@ senMosaic<-function(src,
     }
 
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
-    if(!file.exists(AppRoot)||overwrite){
-      dir.create(AppRoot,recursive = T,showWarnings = verbose)
-      for(dt in 1:length(dtype)){
+    dir.create(AppRoot,recursive = T,showWarnings = verbose)
+    for(dt in 1:length(dtype)){
+      if(!file.exists(file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif")))||overwrite){
         typechunks<-flist[grepl(dtype[dt],flist)]
         if(!gutils){
           #mosaic with native R libraries
@@ -163,14 +163,16 @@ senMosaic<-function(src,
             mosaic_rasters(typechunks,
                            dst_dataset=file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif")),
                            srcnodata=0,
-                           vrtnodata=0)
+                           vrtnodata=0,
+                           overwrite=overwrite)
           }else{
             ext<-extent(extent)
             temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],"_temp.tif"))
             mosaic_rasters(typechunks,
                            dst_dataset=temp,
                            srcnodata=0,
-                           vrtnodata=0)
+                           vrtnodata=0,
+                           overwrite=TRUE)
             gdalwarp(srcfile=temp,
                      dstfile=file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif")),
                      te=c(ext@xmin,ext@ymin,ext@xmax,ext@ymax),
@@ -179,10 +181,10 @@ senMosaic<-function(src,
             file.remove(temp)
           }
         }
-      }
-    }else{
-      if(verbose){
-        warning("File exists! not mergin...")
+      }else{
+        if(verbose){
+          warning("File exists! not mergin...")
+        }
       }
     }
   }
