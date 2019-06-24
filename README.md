@@ -50,7 +50,7 @@ download and processing workflow. The download of any Landsat images requires a 
 * ```ls7FolderToVar``` To compute derived variables from Landsat-7 multispectral bands .
 * ```genSaveTSRData``` To import into R the processed time series of images .
 
-### Landsat-7
+### Landsat-8
 * ```ls8LoadMetadata``` To load Landsat-8 meta data file for image search .
 * ```ls8Search``` To search Landsat-8 time-series images list .
 * ```lsPreview``` To preview in R Landsat satellite images .
