@@ -19,6 +19,9 @@
 #' 'var' are acceptable functions. Custom functions can be also implemented.
 #' @param getStack logical argument. If \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD).
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
+#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param resbands using Sentinel \code{S2MSI2A} products specifies the resolution of the output images. By default all 
+#' the resolution (10m, 20m and 60m) are calculated.
 #' @param ... argument to allow function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} the directory of the resulting time series.
@@ -64,15 +67,14 @@
 #' files.raster <- stack(flist)
 #' spplot(files)
 #' }
-senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
+senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,resbands=c("10m","20m","60m"),...){
   AppRoot=defineAppRoot(...)
   vartype<-gsub("var","",as.character(match.call()[c("fun")]))
-  if(!getStack){
-    AppRoot<-file.path(AppRoot,vartype)
-    dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
-    print(vartype)
-  }
 
+  AppRoot<-file.path(AppRoot,vartype)
+  dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
+  if(verbose){message(paste0("var type: ",vartype))}
+  resbands=paste0("_",resbands)
   sen.list<-list.files(src,full.names = T)
   rstack<-NULL
   result<-NULL
@@ -80,28 +82,47 @@ senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     senbands<-getRGISToolsOpt("SEN2BANDS")
     sen.img<-list.files(imgfd,full.names = T,pattern = "\\.tif$")
-    funString<-"result<-fun("
-    for(arg in formalArgs(fun)){
-      band<-senbands[names(senbands)%in%arg]
-      if(length(band)==0)
-        next
-      eval(parse( text=paste0(arg,"<-raster('",sen.img[grepl(band,sen.img)],"')") ))
-      funString<-paste0(funString,arg,"=",arg,",")
-    }
-    funString<-paste0(substr(funString,1,nchar(funString)-1),")")
-    eval(parse(text=funString))
-    if(getStack){
-      if(is.null(rstack)){
-        names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
-        rstack<-result
-      }else{
-        result<-extend(result,rstack)
-        rstack<-extend(rstack,result)
-        names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
-        rstack<-addLayer(rstack,result)
-      }
+    
+    #check if there are S2MSI2A images
+    if(sum(unlist(lapply(resbands,grepl,sen.img)))>0){
+      if(verbose){message("Multiple resolution layers, getStack not supported.")}
+      getStack=FALSE
     }else{
-      writeRaster(result,paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"),overwrite=overwrite)
+      resbands=c("")
+    }
+    
+    for(resb in resbands){
+      funString<-"result<-fun("
+      for(arg in formalArgs(fun)){
+        band<-senbands[names(senbands)%in%arg]
+        if(length(band)==0)
+          next
+        l.img<-sen.img[grepl(paste0(band,resb,".tif"),sen.img)]
+        if(length(l.img)==0&arg=='nir'){
+          band<-senbands[names(senbands)%in%'narrownir']
+          l.img<-sen.img[grepl(paste0(band,resb,".tif"),sen.img)]
+        }
+        if(verbose){message(paste0("Loading ",l.img,"..."))}
+        eval(parse( text=paste0(arg,"<-raster('",l.img,"')") ))
+        funString<-paste0(funString,arg,"=",arg,",")
+      }
+      funString<-paste0(substr(funString,1,nchar(funString)-1),")")
+      if(verbose){message(paste0("Running function ",funString,"..."))}
+      eval(parse(text=funString))
+      
+      if(getStack){
+        if(is.null(rstack)){
+          names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
+          rstack<-result
+        }else{
+          result<-extend(result,rstack)
+          rstack<-extend(rstack,result)
+          names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
+          rstack<-addLayer(rstack,result)
+        }
+      }else{
+        writeRaster(result,paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),resb,".tif"),overwrite=overwrite)
+      }
     }
   }
   if(getStack){
