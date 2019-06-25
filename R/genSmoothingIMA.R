@@ -1,7 +1,7 @@
 #' Fills the gaps in a time series of satellite images
 #'
 #' \code{genSmoothingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly (IMA)
-#' for gap filling published in  \insertCite{militino2019interpolation}{RGISTools}.
+#' for gap filling. \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
 #' the smoothing algorithm over the anomaly images.
@@ -9,7 +9,7 @@
 #' The arguments configure the smoothing procedure:
 #' \code{Img2Fill} identifies the images to fill, \code{nDays} and \code{nYears} defines
 #' the spatio temporal neighbourhoood of the target images considered, and \code{fact} sets the 
-#' level of spatial aggregation. See more information in \insertCite{militino2019interpolation}{RGISTools}.
+#' level of spatial aggregation. \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' @references \insertRef{militino2019interpolation}{RGISTools}
 #'

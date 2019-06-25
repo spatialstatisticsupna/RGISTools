@@ -1,7 +1,7 @@
 #' Mosaics a set of Sentinel images
 #'
 #' \code{senMosaic} merges the tiles of Sentinel images covering a region of interest
-#'  returning a single image for each date
+#'  returning a single image for each date.
 #'
 #' The function mosaics the tiles of satellite images in the src folder.
 #' The function uses the folder from the \code{\link{senDownSearch}} function.
@@ -17,7 +17,7 @@
 #' extent to match the projection of the image. The output images will be placed
 #' in the \code{AppRoot} directory. The output files are named 
 #' by the argument \code{out.name}. If no name is provided, by default the output
-#' file is named as ‘outfile’
+#' file is named as ‘outfile’.
 #'
 #' @param src the path of the folder with the Sentinel images in tif format.
 #' @param out.name a character string with the name of the region of interest.
