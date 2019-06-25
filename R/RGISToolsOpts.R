@@ -51,7 +51,7 @@ assign("MOD09BANDS",c(red='B01_1',nir='B02_1',blue='B03_1',green='B04_1',tirs1='
 
 assign("SEN1BANDS",NULL, env=optEnv)
 #https://www.spectralcam.com/2019/02/12/maia-s2-and-sentinel-2-multispectral-images-for-agriculture/
-assign("SEN2BANDS",c(bluecoastal='B01',blue='B02',green='B03',red='B04',vegrededge1="B06",vegrededge2="B07",nir='B08',narrownir='B8A',watervapour="B09",cirrus="B10",swir1='B11',swir2='B12',cloud='CLD',snow='SNW',rgb="TCI",preview='PVI',watervap='WVP'), env=optEnv)
+assign("SEN2BANDS",c(bluecoastal='B01',blue='B02',green='B03',red='B04',vegrededge="B05",vegrededge1="B06",vegrededge2="B07",nir='B08',narrownir='B8A',watervapour="B09",cirrus="B10",swir1='B11',swir2='B12',cloud='CLD',snow='SNW',rgb="TCI",preview='PVI',watervap='WVP'), env=optEnv)
 assign("SEN3BANDS",NULL, env=optEnv)
 
 #' Changes the default value of an RGISTools configuration variable
