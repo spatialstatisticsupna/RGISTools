@@ -43,7 +43,6 @@ modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=
     dir.create(AppRoot,showWarnings = verbose)
     for(fileHDF in filesHDF){
       image.name<-gsub(".hdf","",basename(fileHDF))
-      if(!file.exists(paste0(AppRoot,"/",image.name))||overwrite){
         dir.create(paste0(AppRoot,"/",image.name),recursive = T,showWarnings = verbose)
         print(paste0("Extracting bands from hdf file of image ",image.name))
         image.data<-gdalinfo(fileHDF)
@@ -58,7 +57,7 @@ modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=
         }
 
         for(i in bds){
-          if(!file.exists(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"))){
+          if(!file.exists(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"))||overwrite){
             print(paste0("Extract band ",i))
             if("s_srs"%in%names(arg)){
               gdal_translate(fileHDF,
@@ -75,6 +74,10 @@ modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=
                              overwrite=arg$overwrite)
             }
 
+          }else{
+            if(verbose){
+              warning("File exists! not extracting...")
+            }
           }
           if(!is.null(shp)){
             gdalwarp(srcfile=paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
@@ -84,11 +87,7 @@ modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=
                      overwrite=arg$overwrite)
           }
         }
-      }else{
-        if(verbose){
-          warning("File exists! not extracting...")
-        }
-      }
+      
     }
 
 }
