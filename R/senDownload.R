@@ -21,6 +21,7 @@
 #'   \item \code{nattempts} the number of attempts that the function has to carry out
 #'    an image in case the file becomes corrupted.
 #'   \item \code{error.log} error log file name.
+#'   \item \code{verbose} logical argument. If \code{TRUE} the function prints running stages and warnings.
 #'   \item \code{AppRoot} the directory where the images will be saved.
 #' }
 #'
@@ -51,6 +52,7 @@
 #' }
 senDownload<-function(username,
                       password,
+                      verbose=FALSE,
                       ...){
   arg<-list(...)
 
@@ -59,15 +61,23 @@ senDownload<-function(username,
   senURL<-senSearch(username=username,
                     password=password,
                     ...)
-
+  if(verbose){
+    message("Urls before filters.")
+    message(paste(names(senURL),collapse="\n"))
+  }
   if(!is.null(arg$pathrow)){
       #senURL<-senURL[grepl(arg$filter,names(senURL))]
-    senURL<-senURL[Reduce("&",lapply(arg$filter,grepl,names(senURL)))]
+    senURL<-senURL[Reduce("|",lapply(arg$pathrow,grepl,names(senURL)))]
   }
   if(!is.null(arg$senbox)){
     senURL<-senURL[Reduce("|",lapply(arg$senbox,grepl,names(senURL)))]
   }
 
+  if(verbose){
+    message("Urls for downloading")
+    message(paste(names(senURL),collapse="\n"))
+  }
+  if(length(senURL)==0){stop("There are not images for downloading.")}
   senDownSearch(searchres=senURL,
                 username=username,
                 password=password,
