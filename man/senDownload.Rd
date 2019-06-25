@@ -4,7 +4,7 @@
 \alias{senDownload}
 \title{Searchs and downloads Sentinel images}
 \usage{
-senDownload(username, password, ...)
+senDownload(username, password, verbose = FALSE, ...)
 }
 \arguments{
 \item{username}{Scihub platform username.}
@@ -21,6 +21,7 @@ senDownload(username, password, ...)
   \item \code{nattempts} the number of attempts that the function has to carry out
    an image in case the file becomes corrupted.
   \item \code{error.log} error log file name.
+  \item \code{verbose} logical argument. If \code{TRUE} the function prints running stages and warnings.
   \item \code{AppRoot} the directory where the images will be saved.
 }}
 }

@@ -4,7 +4,8 @@
 \alias{senFolderToVar}
 \title{Computes derived variables from Sentinel-2 multispectral bands}
 \usage{
-senFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
+senFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
+  verbose = FALSE, resbands = c("10m", "20m", "60m"), ...)
 }
 \arguments{
 \item{src}{path to the folder with the Sentinel multispectral images.}
@@ -16,6 +17,11 @@ All functions in the package starting with three characters.
 \item{getStack}{logical argument. If \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD).}
 
 \item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+
+\item{resbands}{using Sentinel \code{S2MSI2A} products specifies the resolution of the output images. By default all 
+the resolution (10m, 20m and 60m) are calculated.}
 
 \item{...}{argument to allow function nestering:
 \itemize{
@@ -62,7 +68,7 @@ senMosaic(src.unzip,
           out.name = "Navarre")
 # asign src as the path to mosaicked folder
 src2 <- file.path(src, "Navarre")
-src3 <- file.path(src1, "Navarre_Variables")
+src3 <- file.path(src, "Navarre_Variables")
 dir.create(src3)
 # generate EVI images of Navarre
 senFolderToVar(src2,

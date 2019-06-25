@@ -49,7 +49,7 @@ lsDownload(satellite = "ls8",
            startDate = as.Date("01-01-2018","\%d-\%m-\%Y"),
            endDate = as.Date("20-01-2018","\%d-\%m-\%Y"),
            extent = ex.navarre,
-           untarDir = "untar",
+           untar = TRUE,
            AppRoot = src)
 # asign the folder with the Landsat-8 images untared
 tif.src <- file.path(src, "untar")

@@ -33,7 +33,7 @@ If it is not supplied, the function is applied to all the bands available in \co
 }
 \description{
 \code{senMosaic} merges the tiles of Sentinel images covering a region of interest
- returning a single image for each date
+ returning a single image for each date.
 }
 \details{
 The function mosaics the tiles of satellite images in the src folder.
@@ -50,7 +50,7 @@ in any projection format. The function \code{\link{senMosaic}} automatically rep
 extent to match the projection of the image. The output images will be placed
 in the \code{AppRoot} directory. The output files are named 
 by the argument \code{out.name}. If no name is provided, by default the output
-file is named as ‘outfile’
+file is named as ‘outfile’.
 }
 \examples{
 \dontrun{

@@ -48,13 +48,12 @@ modDownload(product = "MOD09GA",
             username = "username",
             password = "password",
             AppRoot = src,
-            hdfdir = "hdf",
-            tiffdir = "tif",
+            extract.tif = TRUE,
             collection = 6,
             extent = ex.navarre)
 # asign the folder with the Sentinel images untared
 src1 <- file.path(src, "MOD09GA")
-tif.src <- file.path(src, "tif")
+tif.src <- file.path(src1, "tif")
 #mosaic the Modis images
 modMosaic(tif.src,
           AppRoot = src1,
@@ -66,7 +65,7 @@ src3 <- file.path(src1, "Variables")
 dir.create(src3)
 modFolderToVar(src2,
                fun = varEVI,
-               AppRoot = src3),
+               AppRoot = src3,
                overwrite = T)
                
 flist <- list.files(file.path(src3,"EVI"),

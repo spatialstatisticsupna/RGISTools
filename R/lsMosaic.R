@@ -129,11 +129,7 @@ lsMosaic<-function(src,
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
     dir.create(AppRoot,recursive = T,showWarnings = verbose)
     for(dt in 1:length(dtype)){
-      if(grepl(getRGISToolsOpt("LS8BANDS")["quality"],dtype[dt])){
-        nodata<-1
-      }else{
-        nodata<-0
-      }
+      
       
       out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt]))
       if(!(file.exists(out.file.path))||overwrite){
@@ -167,11 +163,21 @@ lsMosaic<-function(src,
           writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
           #mosaic with gdalutils no supporting cutline
+          if(grepl(getRGISToolsOpt("LS8BANDS")["quality"],dtype[dt])){
+            if(length(typechunks)>1)
+              gif<-gdalinfo(typechunks[2])
+            else
+              gif<-gdalinfo(typechunks[1])
+            nodata<-as.numeric(gsub(".*=","",gif[grepl("STATISTICS_MINIMUM",gif)]))
+            if(verbose)message(paste0("No data value in BQA: ",nodata))
+          }else{
+            nodata<-0
+          }
           if(is.null(extent)){
             mosaic_rasters(typechunks,
                            dst_dataset=out.file.path,
                            srcnodata=nodata,
-                           vrtnodata=0,
+                           vrtnodata=nodata,
                            overwrite=overwrite)
           }else{
             ext<-extent(extent)
@@ -179,7 +185,7 @@ lsMosaic<-function(src,
             mosaic_rasters(typechunks,
                            dst_dataset=temp,
                            srcnodata=nodata,
-                           vrtnodata=0,
+                           vrtnodata=nodata,
                            overwrite=TRUE)
             gdalwarp(srcfile=temp,
                      dstfile=out.file.path,

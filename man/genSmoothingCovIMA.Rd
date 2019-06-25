@@ -41,7 +41,7 @@ genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 \details{
 The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
 the smoothing algorithm over the anomaly images. The procedure smoothed the anomaly using covariates to
-smooth the outliers in the anomaly. See more information in \insertCite{militino2019interpolation}{RGISTools}.
+smooth the outliers in the anomaly. \insertCite{militino2019interpolation}{RGISTools}.
 
 This function provides a set of arguments to configure the run of the precedure, such as the images to fill (\code{Img2Process}),
 the number of periods or years in the definition of the spatio temporal neighbourhoood, or the size of the
