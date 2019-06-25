@@ -135,7 +135,7 @@ lsMosaic<-function(src,
         nodata<-0
       }
       
-      out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif"))
+      out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt]))
       if(!(file.exists(out.file.path))||overwrite){
         typechunks<-flist[grepl(toupper(dtype[dt]),flist)]
         if(!gutils){
