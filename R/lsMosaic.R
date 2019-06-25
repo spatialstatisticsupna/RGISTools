@@ -129,7 +129,14 @@ lsMosaic<-function(src,
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
     dir.create(AppRoot,recursive = T,showWarnings = verbose)
     for(dt in 1:length(dtype)){
-      if(!file.exists(file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif")))||overwrite){
+      if(grepl(getRGISToolsOpt("LS8BANDS")["quality"],dtype[dt])){
+        nodata<-1
+      }else{
+        nodata<-0
+      }
+      
+      out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt]))
+      if(!(file.exists(out.file.path))||overwrite){
         typechunks<-flist[grepl(toupper(dtype[dt]),flist)]
         if(!gutils){
           #mosaic with native R libraries
@@ -157,25 +164,25 @@ lsMosaic<-function(src,
               img<-mask(img,extent)
             }
           }
-          writeRaster(img,file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt])),overwrite=overwrite)
+          writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
           #mosaic with gdalutils no supporting cutline
           if(is.null(extent)){
             mosaic_rasters(typechunks,
-                           dst_dataset=file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt])),
-                           srcnodata=0,
+                           dst_dataset=out.file.path,
+                           srcnodata=nodata,
                            vrtnodata=0,
                            overwrite=overwrite)
           }else{
             ext<-extent(extent)
-            temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],"_temp.tif"))
+            temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",gsub(".tif","",dtype[dt]),"_temp.tif"))
             mosaic_rasters(typechunks,
                            dst_dataset=temp,
-                           srcnodata=0,
+                           srcnodata=nodata,
                            vrtnodata=0,
                            overwrite=TRUE)
             gdalwarp(srcfile=temp,
-                     dstfile=file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt])),
+                     dstfile=out.file.path,
                      te=c(ext@xmin,ext@ymin,ext@xmax,ext@ymax),
                      te_srs=proj4string(extent),
                      overwrite=overwrite)
