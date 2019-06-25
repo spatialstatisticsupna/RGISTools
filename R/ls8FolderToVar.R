@@ -36,7 +36,7 @@
 #'            startDate = as.Date("01-01-2018","%d-%m-%Y"),
 #'            endDate = as.Date("20-01-2018","%d-%m-%Y"),
 #'            extent = ex.navarre,
-#'            untarDir = "untar",
+#'            untar = TRUE,
 #'            AppRoot = src)
 #' # asign the folder with the Landsat-8 images untared
 #' tif.src <- file.path(src, "untar")
@@ -75,7 +75,7 @@ ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   result<-NULL
   for(imgfd in ls.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
-    ls7bands<-paste0(getRGISToolsOpt("LS8BANDS"),".tif")
+    ls7bands<-getRGISToolsOpt("LS8BANDS")
     ls.img<-list.files(imgfd,full.names = T,pattern = "\\.tif$")
     funString<-"result<-fun("
     for(arg in formalArgs(fun)){

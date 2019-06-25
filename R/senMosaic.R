@@ -96,14 +96,14 @@ senMosaic<-function(src,
   }
 
   for(d in 1:length(dates)){
-    #filter the images to one day
+    # filter the images to one day
     dayImg<-imgFolders[senGetDates(imgFolders)%in%dates[d]]
     if(length(dayImg)<1){
       if(verbose)
         warning(paste0("No tiles for date ",dates[d]))
       next #breaks one iteration only
     }
-    #filter the images by pathrow
+    # filter the images by pathrow
     if("pathrow"%in%names(arg)){
       prstr<-c()
       for(pr in arg$pathrow){
@@ -114,7 +114,7 @@ senMosaic<-function(src,
     }
 
     flist<-list.files(dayImg,recursive=T,full.names=T,pattern="\\.jp2$")
-    #filter the images by data type
+    # filter the images by data type
     if("bandFilter"%in%names(arg)){
       flist<-flist[Reduce("|", lapply(arg$bandFilter,grepl,flist))]
     }

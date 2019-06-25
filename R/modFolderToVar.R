@@ -35,13 +35,12 @@
 #'             username = "username",
 #'             password = "password",
 #'             AppRoot = src,
-#'             hdfdir = "hdf",
-#'             tiffdir = "tif",
+#'             extract.tif = TRUE,
 #'             collection = 6,
 #'             extent = ex.navarre)
 #' # asign the folder with the Sentinel images untared
 #' src1 <- file.path(src, "MOD09GA")
-#' tif.src <- file.path(src, "tif")
+#' tif.src <- file.path(src1, "tif")
 #' #mosaic the Modis images
 #' modMosaic(tif.src,
 #'           AppRoot = src1,
@@ -53,7 +52,7 @@
 #' dir.create(src3)
 #' modFolderToVar(src2,
 #'                fun = varEVI,
-#'                AppRoot = src3),
+#'                AppRoot = src3,
 #'                overwrite = T)
 #'                
 #' flist <- list.files(file.path(src3,"EVI"),
@@ -77,7 +76,7 @@ modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   rstack<-NULL
   for(imgfd in mod.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
-    modbands<-paste0(getRGISToolsOpt("MOD09BANDS"),".tif")
+    modbands<-getRGISToolsOpt("MOD09BANDS")
     mod.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
     funString<-"result<-fun("
     for(arg in formalArgs(fun)){

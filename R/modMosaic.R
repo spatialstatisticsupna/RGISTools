@@ -121,7 +121,8 @@ modMosaic<-function(src,
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
     dir.create(AppRoot,recursive = T,showWarnings = verbose)
     for(dt in 1:length(dtype)){
-      if(!file.exists(file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif")))||overwrite){
+      out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif"))
+      if(!file.exists(out.file.path)||overwrite){
         typechunks<-flist[grepl(dtype[dt],flist)]
         if(!gutils){
           #mosaic with native R libraries
@@ -146,11 +147,11 @@ modMosaic<-function(src,
               extent<-spTransform(extent,crs(img))
             img<-crop(img,extent)
           }
-          writeRaster(img,file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt])),overwrite=overwrite)
+          writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
           #mosaic with gdalutils no support cutline
           if(is.null(extent)){
-            mosaic_rasters(typechunks,dst_dataset=file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),dtype[dt])),overwrite=overwrite)
+            mosaic_rasters(typechunks,out.file.path,overwrite=overwrite)
           }else{
             ext<-extent(extent)
             temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),dtype[dt],"_temp.tif"))
@@ -158,7 +159,7 @@ modMosaic<-function(src,
                            dst_dataset=temp,
                            overwrite=TRUE)
             gdalwarp(srcfile=temp,
-                     dstfile=file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),dtype[dt])),
+                     dstfile=out.file.path,
                      te=c(ext@xmin,ext@ymin,ext@xmax,ext@ymax),
                      te_srs=proj4string(extent),
                      overwrite=overwrite)

@@ -43,8 +43,7 @@
 #'             username = "username",
 #'             password = "password",
 #'             AppRoot = "Path_for_downloading_folder",
-#'             hdfdir = "hdf",
-#'             tiffdir = "tif",
+#'             extract.tif = TRUE,
 #'             collection = 6,
 #'             extent = ex.navarre)
 #' files <- list.files("./Path_for_downloading_folder/tif",
@@ -80,13 +79,16 @@ modDownload<-function(product,
   }
   downdir<-file.path(AppRoot,product,"hdf")
   tiffdir<-file.path(AppRoot,product,"tif")
+  if(extract.tif)
+    dir.create(tiffdir,recursive=T,showWarnings = F)
+  
   dir.create(downdir,recursive = T,showWarnings = F)
   for(s in search.res){
     print(basename(s))
     modDownSearch(s,username,password,AppRoot=downdir)
     if(extract.tif){
-      dir.create(tiffdir,recursive=T,showWarnings = F)
-      modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir)
+      if(verbose){message(paste0("Extracting ",file.path(downdir,basename(s))," to dir ",tiffdir))}
+      modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose)
     }
   }
   message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",tiffdir))
