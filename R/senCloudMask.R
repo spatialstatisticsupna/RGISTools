@@ -1,0 +1,36 @@
+# src<-"D:/Downscaling/Sentinel2_L2/Navarre"/2017209
+# AppRoot<-"D:/Downscaling/Sentinel2_L2"
+# library(RGISTools)
+# getRGISToolsOpt("SEN2BANDS")
+# sensitivity 0-100
+# img.res 10m, 20m o 30m img.res<-"20m"
+# senCloudMask(src="D:/Downscaling/Sentinel2_L2/Navarre",img.res="20m",overwrite=T,AppRoot="D:/Downscaling/Sentinel2_L2",sensitivity=98)
+senCloudMask<-function(src,img.res,sensitivity=50,overwrite=FALSE,...){
+  arg<-list(...)
+  AppRoot<-defineAppRoot(...)
+  imgdir.list<-list.dirs(src)[-1]
+  AppRoot<-file.path(AppRoot,"CloudMask")
+  dir.create(AppRoot,showWarnings = F,recursive = T)
+  for(id in imgdir.list){
+    out.img<-file.path(AppRoot,paste0(basename(id),"_CloudMask.tif"))
+    if(!file.exists(out.img)|overwrite){
+      #id<-imgdir.list[1]
+      tif.list<-list.files(id,pattern = "\\.tif$",full.names = T)
+      cloudmask<-tif.list[grepl(getRGISToolsOpt("SEN2BANDS")["cloud"],tif.list)]
+      cloudmask<-cloudmask[grepl(img.res,cloudmask)]
+      if(length(cloudmask)==0){
+        message(paste0("No cloud mask found for date ",genGetDates(basename(id))))
+        next
+      }
+      message("Creating cloud mask from image ",basename(cloudmask))
+      ras.cloud<-raster(cloudmask)
+      ras.cloud[is.na(ras.cloud)]<--1
+      ras.cloud[ras.cloud>=sensitivity]<-NA
+      ras.cloud[!is.na(ras.cloud)]<-1
+
+      writeRaster(ras.cloud,out.img,overwrite=overwrite)
+    }else{
+      messate(paste0("Cloud mask of date ",genGetDates(basename(id))," already exists."))
+    }
+  }
+}
