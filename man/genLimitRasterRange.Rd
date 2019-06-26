@@ -13,7 +13,7 @@ genLimitRasterRange(r, mx = NULL, mn = NULL, rm.values = FALSE)
 
 \item{mn}{minimun value in the \code{raster}.}
 
-\item{rm.values}{logical argument. If \code{FALSE} \code{mx} and  \code{mn} values are asigned to the 
+\item{rm.values}{logical argument. If \code{FALSE} \code{mx} and  \code{mn} values are assigned to the 
 higher values than \code{mx} and lower values than \code{mn} respectively. If \code{TRUE}, values out of 
 \code{mn}-\code{mx} are removed.}
 }
@@ -27,7 +27,7 @@ This is a generic function to limit the maximun and the minimun values in a \cod
 # generate random images
 img <- matrix(1:16, ncol = 4, byrow = TRUE)
 r <- raster(img)
-# asign the limit of the data in the raster stack
+# assign the limit of the data in the raster stack
 r2 <- genLimitRasterRange(r, mn = 4, mx = 10)
 r3 <- genLimitRasterRange(r, mn = 4, mx = 10, rm.values = TRUE)
 # plot limited data

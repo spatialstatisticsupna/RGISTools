@@ -56,7 +56,7 @@ file is named as ‘outfile’.
 \dontrun{
 # load a spatial polygon object of navarre for the example
 data(ex.navarre)
-# asign the folder where the example will be run
+# assign the folder where the example will be run
 src <- "Path_for_downloading_folder"
 # download Sentinel images
 senDownload(startDate = as.Date("2018210", "\%Y\%j"),
@@ -68,7 +68,7 @@ senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             username = "username",
             password = "password",
             AppRoot = src)
-# asign the folder with the Sentinel images unzipped
+# assign the folder with the Sentinel images unzipped
 src.unzip <- file.path(src, "unzip")
 # mosaic the Sentinel images
 senMosaic(src.unzip,

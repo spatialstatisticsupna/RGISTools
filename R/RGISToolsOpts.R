@@ -85,11 +85,11 @@ setRGISToolsOpt <- function(opt,value,env=optEnv) {
 #' @examples
 #' # list avaliable options names
 #' showRGISToolsOpt()
-#' # list the asignation of Sentinel bands
+#' # list the assignation of Sentinel bands
 #' getRGISToolsOpt("SEN2BANDS")
-#' # list the asignation of Landsat-8 bands
+#' # list the assignation of Landsat-8 bands
 #' getRGISToolsOpt("LS8BANDS")
-#' # list the asignation of Modis 09 bands
+#' # list the assignation of Modis 09 bands
 #' getRGISToolsOpt("MOD09BANDS")
 getRGISToolsOpt <- function(opt,env=optEnv) {
   return(get(opt, envir=env))

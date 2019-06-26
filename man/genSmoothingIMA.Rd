@@ -51,7 +51,7 @@ the smoothing algorithm over the anomaly images.
 The arguments configure the smoothing procedure:
 \code{Img2Fill} identifies the images to fill, \code{nDays} and \code{nYears} defines
 the spatio temporal neighbourhoood of the target images considered, and \code{fact} sets the 
-level of spatial aggregation. \insertCite{militino2019interpolation}{RGISTools}.
+level of spatial aggregation \insertCite{militino2019interpolation}{RGISTools}.
 }
 \examples{
 # load an example of NDVI time series in Navarre

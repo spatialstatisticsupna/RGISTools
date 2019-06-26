@@ -13,7 +13,7 @@ lsMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
 \item{extent}{\code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
 \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.}
 
-\item{out.name}{the name of the region, if is not defined "outfile" will be asigned.}
+\item{out.name}{the name of the region, if is not defined "outfile" will be assigned.}
 
 \item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
@@ -55,7 +55,7 @@ default the output file is named as ‘outfile’.
 \dontrun{
 # load a spatial polygon object of navarre for the example
 data(ex.navarre)
-# asign the folder where the example will be run
+# assign the folder where the example will be run
 src <- "Path_for_downloading_folder"
 # download Landsat-8 images
 lsDownload(satellite = "ls8",
@@ -66,7 +66,7 @@ lsDownload(satellite = "ls8",
            extent = ex.navarre,
            untar = TRUE,
            AppRoot = src)
-# asign the folder with the Landsat-8 images untared
+# assign the folder with the Landsat-8 images untared
 tif.src <- file.path(src, "untar")
 # mosaic the Landsat-8 images
 lsMosaic(tif.src,
