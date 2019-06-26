@@ -1,11 +1,32 @@
-# src<-"D:/Downscaling/Sentinel2_L2/Navarre"/2017209
-# AppRoot<-"D:/Downscaling/Sentinel2_L2"
-# library(RGISTools)
-# getRGISToolsOpt("SEN2BANDS")
-# sensitivity 0-100
-# img.res 10m, 20m o 30m img.res<-"20m"
-# senCloudMask(src="D:/Downscaling/Sentinel2_L2/Navarre",img.res="20m",overwrite=T,AppRoot="D:/Downscaling/Sentinel2_L2",sensitivity=98)
+#' Creates clouds layers for sentinel-2 images
+#' 
+#' \code{senCloudMask} creates clouds layers using \code{CLDPROB} band from \code{S2MSI2A} product.
+#'
+#' @param src the path to the folder where the \code{S2MSI2A} product are stored. 
+#' @param img.res character vector argument. Defines the resolution used to create the cloud mask. ex c("10m", "20m", "30m").
+#' @param sensitivity numeric argument. defines how sensitive is the method detecting the clouds. 0
+#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
+#' @param ... argument to allow function nestering:
+#' \itemize{
+#'   \item \code{AppRoot} the directory where the extracted images should be located
+#' }
+#'
+#' @examples
+#' \dontrun{
+#' senCloudMask(src="D:/Downscaling/Sentinel2_L2/Navarre",
+#'              img.res="20m",
+#'              overwrite=TRUE,
+#'              AppRoot="D:/Downscaling/Sentinel2_L2",
+#'              sensitivity=98)
+#' }
 senCloudMask<-function(src,img.res,sensitivity=50,overwrite=FALSE,...){
+  # src<-"D:/Downscaling/Sentinel2_L2/Navarre"/2017209
+  # AppRoot<-"D:/Downscaling/Sentinel2_L2"
+  # library(RGISTools)
+  # getRGISToolsOpt("SEN2BANDS")
+  # sensitivity 0-100
+  # img.res 10m, 20m o 30m img.res<-"20m"
+  # 
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
   imgdir.list<-list.dirs(src)[-1]

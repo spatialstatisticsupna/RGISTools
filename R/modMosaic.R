@@ -73,7 +73,7 @@ modMosaic<-function(src,
   #read all folder names to get all the days
   imgFolders<-list.files(src,full.names = T)
   #remove folders
-  imgFolders<-imgFolders[nchar(basename(imgFolders))==41]
+  #imgFolders<-imgFolders[nchar(basename(imgFolders))==41]
 
   dates<-unique(modGetDates(imgFolders))
   bpath<-file.path(AppRoot,out.name)

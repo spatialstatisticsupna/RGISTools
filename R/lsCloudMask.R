@@ -1,9 +1,29 @@
-# src<-"D:/Downscaling/Landsat8/untar"
-# library(RGISTools)
-# getRGISToolsOpt("SEN2BANDS")
-# sensitivity 0-1
-# lsCloudMask(src,overwrite=T)
+#' Creates clouds layers for Landsat images
+#' 
+#' \code{lsCloudMask} creates clouds layers derived from \code{BQA} band from Landsat-7 or Landsat-8 captures.
+#'
+#' @param src the path to the folder where the Landsat multispectral captures are stored. 
+#' @param sensitivity numeric argument. defines how sensitive is the method detecting the clouds. 0-8000 are
+#' valid values.
+#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
+#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param ... argument to allow function nestering:
+#' \itemize{
+#'   \item \code{AppRoot} the directory where the extracted images should be located
+#' }
+#'
+#' @examples
+#' \dontrun{
+#' lsCloudMask(src="D:/Downscaling/Landsat8/untar",
+#'             overwrite=T,
+#'             sensitivity=98)
+#' }
 lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
+  # src<-"D:/Downscaling/Landsat8/untar"
+  # library(RGISTools)
+  # getRGISToolsOpt("SEN2BANDS")
+  # sensitivity 0-1
+  # lsCloudMask(src,overwrite=T)
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
   imgdir.list<-list.dirs(src)[-1]
