@@ -10,7 +10,7 @@ lsCloudMask(src, sensitivity = 2800, overwrite = FALSE, verbose = F,
 \arguments{
 \item{src}{the path to the folder where the Landsat multispectral captures are stored.}
 
-\item{sensitivity}{numeric argument. defines how sensitive is the method detecting the clouds. 0-8000 are
+\item{sensitivity}{numeric argument. Defines how sensitive is the method detecting the clouds. 0-8000 are
 valid values.}
 
 \item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
@@ -23,12 +23,34 @@ valid values.}
 }}
 }
 \description{
-\code{lsCloudMask} creates clouds layers derived from \code{BQA} band from Landsat-7 or Landsat-8 captures.
+\code{lsCloudMask} creates clouds layers derived from \code{BQA} band from Landsat-7 or Landsat-8 captures. 
+The function run over untar images downloaded by \code{\link{lsDownSearch}} or \code{\link{lsDownload}}, and 
+creates a new band designated with the label \code{CLD}.
 }
 \examples{
 \dontrun{
-lsCloudMask(src="D:/Downscaling/Landsat8/untar",
-            overwrite=T,
+data(ex.navarre)
+src <- "Path_for_downloading_folder"
+
+lsDownload(satellite = "ls8",
+           username = "rgistools",
+           password = "EspacialUPNA88",
+           startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+           endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
+           extent = ex.navarre,
+           untar = TRUE,
+           AppRoot = src)
+src.untar <- file.path(src,"untar")
+lsCloudMask(src=src.untar,
+            overwrite=TRUE,
             sensitivity=98)
+            
+tiles.path <- list.files(src.untar,
+                         full.names = TRUE,
+                         recursive = TRUE,
+                         pattern = "\\\\.tif$")
+cloud.tiles <- tiles.path[grepl("CLD",tiles.path)]
+cloud.tiles.ras <- stack(cloud.tiles)
+spplot(cloud.tiles.ras)
 }
 }

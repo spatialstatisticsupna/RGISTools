@@ -20,6 +20,7 @@
 #'   \item \code{platform} platform name of the Sentinel mission (Sentinel-1, Sentinel-2,...).
 #'   \item \code{nattempts} the number of attempts that the function has to carry out
 #'    an image in case the file becomes corrupted.
+#'   \item \code{unzip} logical argument. If \code{TRUE} unzips the images.
 #'   \item \code{error.log} error log file name.
 #'   \item \code{verbose} logical argument. If \code{TRUE} the function prints running stages and warnings.
 #'   \item \code{AppRoot} the directory where the images will be saved.

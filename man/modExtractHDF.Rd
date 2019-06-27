@@ -5,7 +5,7 @@
 \title{Converts an .hdf file into a set of .tif files}
 \usage{
 modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
-  verbose = FALSE, bFilter = NULL, ...)
+  verbose = FALSE, bFilter = NULL, rm.band = NULL, ...)
 }
 \arguments{
 \item{filesHDF}{the full path of the .hdf files to be converted.}
@@ -17,6 +17,8 @@ modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
 \item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
 \item{bFilter}{a vector containing the names of the bands to extract.}
+
+\item{rm.band}{a vector containing the names of the bands to not extract.}
 
 \item{...}{argument to allow function nestering:
 \itemize{

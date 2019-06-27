@@ -8,15 +8,36 @@
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param ... argument to allow function nestering:
 #' \itemize{
-#'   \item \code{AppRoot} the directory where the extracted images should be located
+#'   \item \code{AppRoot} the directory where the extracted images should be located.
 #' }
 #'
 #' @examples
 #' \dontrun{
-#' senCloudMask(src="D:/Downscaling/Sentinel2_L2/Navarre",
-#'              img.res="20m",
-#'              overwrite=TRUE,
-#'              AppRoot="D:/Downscaling/Sentinel2_L2",
+#' # Download S2MSI1C products sensed by Sentinel - 2 
+#' # satellite between the julian dates 210 and 218, 2018
+#' data(ex.navarre)
+#' src <- "Path_for_downloading_folder"
+#' senDownload(startDate = as.Date("2018210", "%Y%j"),
+#'             endDate = as.Date("2018218", "%Y%j"),
+#'             platform = "Sentinel-2",
+#'             extent = ex.navarre,
+#'             product = "S2MSI1C",
+#'             pathrow = c("R094"),
+#'             username = "username",
+#'             password = "password",
+#'             unzip = TRUE,
+#'             AppRoot = src)
+#' src.unzip <- file.path(src, "unzip")
+#' senMosaic(src.unzip,
+#'           AppRoot = src,
+#'           gutils = TRUE,
+#'           out.name = "Navarre")
+#' src.mosaic <- file.path(src, "Navarre")
+#' src.cloud <- file.path(src, "CloudMask")
+#' senCloudMask(src = src.mosaic,
+#'              img.res = "20m",
+#'              overwrite = TRUE,
+#'              AppRoot = src.cloud,
 #'              sensitivity=98)
 #' }
 senCloudMask<-function(src,img.res,sensitivity=50,overwrite=FALSE,...){

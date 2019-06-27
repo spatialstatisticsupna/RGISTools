@@ -19,7 +19,7 @@ senDownSearch(searchres, username = NULL, password = NULL,
 
 \item{nattempts}{the number of attempts that the function has to carry out to download an image in case the file becomes corrupted.}
 
-\item{unzip}{logical argument. If \code{TRUE} unzips the images}
+\item{unzip}{logical argument. If \code{TRUE} unzips the images.}
 
 \item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 

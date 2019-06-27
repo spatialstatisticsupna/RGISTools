@@ -59,16 +59,20 @@ lsDownload<-function(satellite,
     print("Searching Landsat-7 image time series.")
     searchres=ls7Search(startDate=startDate,
                         endDate=endDate,
+                        verbose=verbose,
                         ...)
   }else if (tolower(satellite)=="ls8"){
     print("Searching Landsat-8 image time series.")
     searchres=ls8Search(startDate=startDate,
                         endDate=endDate,
+                        verbose=verbose,
                         ...)
   }else{
     stop("Satellite not supported. Perform the search with the argument satellite as ls7 or ls8.")
   }
-  message("Search result:")
-  message(searchres)
+  if(verbose){
+    message("Search result:")
+    message(searchres)
+  }
   lsDownSearch(searchres=searchres,username=username,password=password,untar=untar,raw.rm=raw.rm,AppRoot=AppRoot,...)
 }

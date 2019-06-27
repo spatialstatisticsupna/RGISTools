@@ -75,11 +75,11 @@ ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   result<-NULL
   for(imgfd in ls.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
-    ls7bands<-getRGISToolsOpt("LS8BANDS")
+    ls8bands<-getRGISToolsOpt("LS8BANDS")
     ls.img<-list.files(imgfd,full.names = T,pattern = "\\.tif$")
     funString<-"result<-fun("
     for(arg in formalArgs(fun)){
-      band<-ls7bands[names(ls7bands)%in%arg]
+      band<-ls8bands[names(ls8bands)%in%arg]
       if(length(band)==0)
         next
       eval(parse( text=paste0(arg,"<-raster('",ls.img[grepl(band,ls.img)],"')") ))

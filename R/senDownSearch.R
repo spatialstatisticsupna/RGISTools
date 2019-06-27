@@ -13,7 +13,7 @@
 #' @param searchres output from \code{\link{senSearch}} function.
 #' @param username login credentials to access the ESA’s SciHub web service.
 #' @param password login credentials to access the ESA’s SciHub web service.
-#' @param unzip logical argument. If \code{TRUE} unzips the images
+#' @param unzip logical argument. If \code{TRUE} unzips the images.
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param nattempts the number of attempts that the function has to carry out to download an image in case the file becomes corrupted.
 #' @param error.log the name of the error log.

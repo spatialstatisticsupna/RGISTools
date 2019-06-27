@@ -14,6 +14,7 @@
 #' @param filesHDF  the full path of the .hdf files to be converted.
 #' @param shp  the shape file of the area of interest.
 #' @param bFilter a vector containing the names of the bands to extract.
+#' @param rm.band a vector containing the names of the bands to not extract.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param ... argument to allow function nestering:
@@ -37,7 +38,7 @@
 #' first.hdf.file <- hdf.files[1]
 #' modExtractHDF(first.hdf.file)
 #' }
-modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=NULL,...){
+modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=NULL,rm.band=NULL,...){
     arg<-list(...)
     AppRoot<-defineAppRoot(...)
     dir.create(AppRoot,showWarnings = verbose)
@@ -55,6 +56,12 @@ modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=
         }else{
           bds<-1:length(names)
         }
+        if(!is.null(rm.band)){
+          n.exname<-names[Reduce("|", lapply(rm.band,grepl,names))]
+          bds.2<-which(names%in%n.exname)
+          bds<-bds[!bds%in%bds.2]
+        }
+        
 
         for(i in bds){
           if(!file.exists(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"))||overwrite){

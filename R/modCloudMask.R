@@ -4,7 +4,8 @@
 #' 
 #' This function, downloads and process the \code{MOD35_L2} products to create clouds 
 #' mask composed by \code{NA}s and \code{1}. The resulting cloud mask layers need to be
-#' reprojected.
+#' reprojected because resolution and projection differences with other modis products.
+#' This function requires \code{gdalUtils} properly installed.
 #'
 #' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
@@ -15,6 +16,7 @@
 #'   or \code{lonlat} is not defined.
 #' @param out.name 
 #' @param raw.rm logical argument. If \code{TRUE} region images are removed.
+#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param ... argument to allow function nestering:
 #' \itemize{
@@ -23,31 +25,54 @@
 #'
 #' @examples
 #' \dontrun{
-#' modCloudMask(startDate=as.Date("2017208","%Y%j"),
-#'              endDate=as.Date("2017213","%Y%j"),
-#'              extent=ex.navarre,
-#'              AppRoot="D:/Downscaling/CloudMask2",
-#'              out.name="Navarre")
-#' cmask<-list.files("D:/Downscaling/CloudMask2",full.names = T,pattern = "\\.tif$")
-#' a<-lapply(cmask,raster)
-#' navarra.path<-list.files("D:/Downscaling/MOD09GA/Navarre",full.names = T,recursive=T,pattern = "\\.tif$")
-#' navarra.path<-navarra.path[grepl("b01_1",navarra.path)]
-#' b<-lapply(navarra.path,raster)
+#' data(ex.navarre)
+#' src <- "Path_for_downloading_folder"
+#' modDownload(product = "MOD09GA",
+#'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'             endDate = as.Date("03-01-2018", "%d-%m-%Y"),
+#'             username = "username",
+#'             password = "password",
+#'             AppRoot = src,
+#'             extract.tif = TRUE,
+#'             collection = 6,
+#'             extent = ex.navarre)
+#'             
+#' src.tiles <- file.path(src, "MOD09GA")
+#' tif.src.tiles <- file.path(src.tiles, "tif")
+#' # mosaic the Modis images
+#' modMosaic(tif.src.tiles, # the input folder 
+#'           AppRoot = src.tiles, # the output folder 
+#'           out.name = "Navarre", # creates Navarre folder in AppRoot
+#'           gutils = TRUE,
+#'           overwrite = TRUE,
+#'           extent = ex.navarre)
+#'             
+#' src.cloud <- file.path(src,"CloudMask")
+#' modCloudMask(startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'              endDate = as.Date("04-01-2018", "%d-%m-%Y"),
+#'              extent = ex.navarre,
+#'              AppRoot = src.cloud,
+#'              out.name = "Navarre")
+#'
+#' # The cloud mask may have different extent, resolution...            
+#' cmask <- list.files(src.cloud, full.names = TRUE, pattern = "\\.tif$")
+#' cmask.ras <- lapply(cmask, raster) 
+#' 
+#' navarre.path <- file.path(src.tiles, "Navarre")
+#' navarre.img <- list.files(navarre.path,
+#'                           full.names = TRUE,
+#'                           recursive = TRUE,
+#'                           pattern = "\\.tif$")
+#' # select b01
+#' navarre.img<-navarre.img[grepl("b01_1",navarre.img)]
+#' navarre.b01.stack<-stack(navarre.img)
+#' 
+#' # reproject cloud mask
+#' cmask.stack <- stack(lapply(cmask.ras, projectRaster, navarre.b01.stack))
+#' 
+#' spplot(navarre.b01.stack*cmask.stack)
 #' }
-modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,...){
-  # library(RGISTools)
-  # getRGISToolsOpt("SEN2BANDS")
-  # sensitivity 0-1
-  # lsCloudMask(src,overwrite=T)
-  #startDate=as.Date("2017208","%Y%j")
-  #endDate=as.Date("2017213","%Y%j")
-  #extent=ex.navarre
-  #AppRoot="D:/Downscaling/CloudMask2"
-  #ahour aproximate capture hour
-  #gdal_setInstallation(search_path = "C:/Program Files/GDAL", rescan = T, ignore.full_scan = TRUE, verbose = T)
-  #out.name="Navarre"
-  #est.hour=1100 4 digit integer where first 2 digits represent the hour and the second 2 the minutes
-  #' 
+modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,overwrite=FALSE,...){
   arg <- list(...)
   AppRoot <- defineAppRoot(...)
   modDownloadAtmosphere(startDate=startDate,
@@ -55,12 +80,12 @@ modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,...){
                         extent=extent,
                         product = "MOD35_L2",
                         bFilter=c("Cloud_Mask"),
+                        rm.band=c("SPI"),
                         s_srs=CRS("+init=epsg:4326"),
                         AppRoot=AppRoot
   )
   
   tif.dir<-file.path(AppRoot,"tif")
-  file.remove(list.files(tif.dir,recursive = T,pattern = "SPI",full.names = T))
   modMosaic(src=tif.dir,
             extent = extent,
             gutils = T,
@@ -69,33 +94,15 @@ modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,...){
   
   tif.images<-list.files(file.path(AppRoot,out.name),recursive = T,full.names = T,pattern = "\\.tif$")
   for(i in tif.images){
-    cimg<-stack(i)
-    cimg[[5]][!is.na(cimg[[5]])]<-1
-    cimg[[6]][!is.na(cimg[[6]])]<-1
-    cldmask<-cimg[[5]]*cimg[[6]]
-    writeRaster(cldmask,file.path(AppRoot,gsub("__","_",basename(i))))
+    out.file<-file.path(AppRoot,gsub("__","_",basename(i)))
+    if((!file.exists(out.file))||overwrite){
+      cimg<-stack(i)
+      cimg[[5]][!is.na(cimg[[5]])]<-1
+      cimg[[6]][!is.na(cimg[[6]])]<-1
+      cldmask<-cimg[[5]]*cimg[[6]]
+      writeRaster(cldmask,out.file,overwrite=overwrite)
+    }
   }
-  unlink(file.path(AppRoot,out.name),recursive=T)
-  
-  # aa<-stack(tif.images[2])[[3]]
-  # spplot(aa)
-  # aa[aa<20]<-NA
-  # 
-  # moddates<-unique(modGetDates(tif.images))
-  # for(d in 1:length(moddates)){
-  #   dimages<-tif.images[which(modGetDates(tif.images)%in%moddates[d])]
-  #   hours.diff<-abs(est.hour-as.numeric(modGetHour(dimages)))
-  #   mn<-min(hours.diff)
-  #   tif.hour<-tif.images[which(hours.diff==mn)]
-  # 
-  # }
-  #mn<-min(hours.diff)
-  #tif.hour<-tif.images[which(hours.diff==mn)]
-  #stack.imgs<-lapply(tif.hour,stack)
-  #stack.imgs<-lapply(stack.imgs,crop,extent)
-
-  #aa<-stack("D:/Downscaling/CloudMask2/Navarre/2017208/Navarre_2017208__mod35_Cloud_Mask.tif")
-  #spplot(aa)
-  #procesamiento de imagenes
-
+  unlink(file.path(AppRoot,out.name),recursive=TRUE)
+  message(paste0("Clouds masks saved in:",AppRoot))
 }

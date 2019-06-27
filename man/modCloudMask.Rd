@@ -4,7 +4,8 @@
 \alias{modCloudMask}
 \title{Creates clouds layers for Modis images}
 \usage{
-modCloudMask(startDate, endDate, extent, out.name, raw.rm, ...)
+modCloudMask(startDate, endDate, extent, out.name, raw.rm,
+  overwrite = FALSE, ...)
 }
 \arguments{
 \item{startDate}{starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
@@ -19,6 +20,8 @@ or \code{lonlat} is not defined.}
 \item{out.name}{the name of the region, if is not defined "outfile" will be assigned.}
 
 \item{raw.rm}{logical argument. If \code{TRUE} region images are removed.}
+
+\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 
 \item{...}{argument to allow function nestering:
 \itemize{
@@ -35,20 +38,56 @@ or \code{lonlat} is not defined.}
 \details{
 This function, downloads and process the \code{MOD35_L2} products to create clouds 
 mask composed by \code{NA}s and \code{1}. The resulting cloud mask layers need to be
-reprojected.
+reprojected because resolution and projection differences with other modis products.
+This function requires \code{gdalUtils} properly installed.
 }
 \examples{
 \dontrun{
-modCloudMask(startDate=as.Date("2017208","\%Y\%j"),
-             endDate=as.Date("2017213","\%Y\%j"),
-             extent=ex.navarre,
-             AppRoot="D:/Downscaling/CloudMask2",
-             out.name="Navarre")
-cmask<-list.files("D:/Downscaling/CloudMask2",full.names = T,pattern = "\\\\.tif$")
-a<-lapply(cmask,raster)
-navarra.path<-list.files("D:/Downscaling/MOD09GA/Navarre",full.names = T,recursive=T,pattern = "\\\\.tif$")
-navarra.path<-navarra.path[grepl("b01_1",navarra.path)]
-b<-lapply(navarra.path,raster)
-}
+data(ex.navarre)
+src <- "Path_for_downloading_folder"
+modDownload(product = "MOD09GA",
+            startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+            endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
+            username = "username",
+            password = "password",
+            AppRoot = src,
+            extract.tif = TRUE,
+            collection = 6,
+            extent = ex.navarre)
+            
+src.tiles <- file.path(src, "MOD09GA")
+tif.src.tiles <- file.path(src.tiles, "tif")
+# mosaic the Modis images
+modMosaic(tif.src.tiles, # the input folder 
+          AppRoot = src.tiles, # the output folder 
+          out.name = "Navarre", # creates Navarre folder in AppRoot
+          gutils = TRUE,
+          overwrite = TRUE,
+          extent = ex.navarre)
+            
+src.cloud <- file.path(src,"CloudMask")
+modCloudMask(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+             endDate = as.Date("04-01-2018", "\%d-\%m-\%Y"),
+             extent = ex.navarre,
+             AppRoot = src.cloud,
+             out.name = "Navarre")
 
+# The cloud mask may have different extent, resolution...            
+cmask <- list.files(src.cloud, full.names = TRUE, pattern = "\\\\.tif$")
+cmask.ras <- lapply(cmask, raster) 
+
+navarre.path <- file.path(src.tiles, "Navarre")
+navarre.img <- list.files(navarre.path,
+                          full.names = TRUE,
+                          recursive = TRUE,
+                          pattern = "\\\\.tif$")
+# select b01
+navarre.img<-navarre.img[grepl("b01_1",navarre.img)]
+navarre.b01.stack<-stack(navarre.img)
+
+# reproject cloud mask
+cmask.stack <- stack(lapply(cmask.ras, projectRaster, navarre.b01.stack))
+
+spplot(navarre.b01.stack*cmask.stack)
+}
 }
