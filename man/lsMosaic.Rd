@@ -53,9 +53,9 @@ default the output file is named as ‘outfile’.
 }
 \examples{
 \dontrun{
-# load a spatial polygon object of navarre for the example
+# load a spatial polygon object of Navarre
 data(ex.navarre)
-# assign the folder where the example will be run
+# assign the main output directory
 src <- "Path_for_downloading_folder"
 # download Landsat-8 images
 lsDownload(satellite = "ls8",
@@ -66,7 +66,7 @@ lsDownload(satellite = "ls8",
            extent = ex.navarre,
            untar = TRUE,
            AppRoot = src)
-# assign the folder with the Landsat-8 images untared
+# assign the folder with the Landsat-8 untared images
 tif.src <- file.path(src, "untar")
 # mosaic the Landsat-8 images
 lsMosaic(tif.src,

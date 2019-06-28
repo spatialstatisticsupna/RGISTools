@@ -8,8 +8,8 @@
 This package aims for downloading, processing, and smoothing time series of satellite images from 
 Landsat, Modis and Sentinel satellite programs in a uniform and standardized way. The functions of 
 RGISTools automatically convert the original formats into .tif files, which can be loaded into R. 
-The processing functions of RGISTools include tile mosaicking, cropping, and extracting the variables 
-of interest. When multiple tile match the region of interest, RGISTools combines them to generate a 
+The processing functions of RGISTools includes tile mosaicking, cropping, and extracting the variables 
+of interest. When multiple tiles match the region of interest, RGISTools combines them to generate a 
 single image and crops the area of interest to save memory and computing time. All images available 
 in a range of dates are then stacked to produce time series of satellite images for a particular area. 
 Images may have clouds or measurement errors that limit their use in subsequent analyses. Hence, the 
@@ -44,8 +44,10 @@ download and processing workflow. The download of any Landsat images requires a 
   \code{\link{ls7Search}} \tab To search Landsat-7 time-series images list \cr
   \code{\link{lsPreview}} \tab To preview in R Landsat satellite images \cr
   \code{\link{lsDownSearch}} \tab To download a time series of satellite images from Landsat\cr
+  \code{\link{lsCloudMask}} \tab To create clouds layers for Landsat images \cr
   \code{\link{lsMosaic}} \tab To mosaic Landsat time series of images \cr
   \code{\link{ls7FolderToVar}} \tab To compute derived variables from Landsat-7 multispectral bands \cr
+  \code{\link{lsCloudMask}} \tab To create clouds layers for Landsat images \cr
   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images \cr
   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
   }
@@ -56,6 +58,7 @@ download and processing workflow. The download of any Landsat images requires a 
   \code{\link{ls8Search}} \tab To search Landsat-8 time-series images list \cr
   \code{\link{lsPreview}} \tab To preview in R Landsat satellite images \cr
   \code{\link{lsDownSearch}} \tab To download a time series of satellite images from Landsat\cr
+  \code{\link{lsCloudMask}} \tab To create clouds layers for Landsat images \cr
   \code{\link{lsMosaic}} \tab  To mosaic Landsat time series of images\cr
   \code{\link{ls8FolderToVar}} \tab To compute derived variables from Landsat-8 multispectral bands\cr
   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images \cr
@@ -74,6 +77,7 @@ The download of any Modis product requires the credentianls from EarthData to ac
   \code{\link{modDownSearch}} \tab To download a Modis time series of satellite images\cr
   \code{\link{modMosaic}} \tab To mosaic Modis time series of images \cr
   \code{\link{modFolderToVar}} \tab To compute derived variables from Modis multispectral bands\cr
+  \code{\link{modCloudMask}} \tab To create clouds layers for Modis images \cr
   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images \cr
   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
   }
@@ -88,6 +92,7 @@ The download of any Sentinel product requires the credentianls from ESA’s SciH
   \code{\link{senPreview}} \tab To preview in R Sentinel satellite images\cr
   \code{\link{senDownSearch}} \tab To download a Sentinel time series of satellite images\cr
   \code{\link{senMosaic}} \tab To mosaic Sentinel time series of images \cr
+  \code{\link{senCloudMask}} \tab To create clouds layers for Sentinel images \cr
   \code{\link{senFolderToVar}} \tab To compute derived variables from Sentinel-2 multispectral bands\cr
   \code{\link{genSaveTSRData}} \tab To import into R the processed time series of images\cr
   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  

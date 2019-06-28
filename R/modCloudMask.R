@@ -1,8 +1,8 @@
 #' Creates clouds layers for Modis images
 #' 
-#' \code{modCloudMask} creates clouds layers derived from \code{MOD35_L2} products. 
+#' \code{modCloudMask} creates layers of clouds derived from \code{MOD35_L2} products. 
 #' 
-#' This function, downloads and process the \code{MOD35_L2} products to create clouds 
+#' This function, downloads and processes the \code{MOD35_L2} products to create clouds 
 #' mask composed by \code{NA}s and \code{1}. The resulting cloud mask layers need to be
 #' reprojected because resolution and projection differences with other modis products.
 #' This function requires \code{gdalUtils} properly installed.
@@ -44,7 +44,6 @@
 #'           AppRoot = src.tiles, # the output folder 
 #'           out.name = "Navarre", # creates Navarre folder in AppRoot
 #'           gutils = TRUE,
-#'           overwrite = TRUE,
 #'           extent = ex.navarre)
 #'             
 #' src.cloud <- file.path(src,"CloudMask")
@@ -67,7 +66,7 @@
 #' navarre.img<-navarre.img[grepl("b01_1",navarre.img)]
 #' navarre.b01.stack<-stack(navarre.img)
 #' 
-#' # reproject cloud mask
+#' # reproject cloud mask to navarre.b01.stack projection
 #' cmask.stack <- stack(lapply(cmask.ras, projectRaster, navarre.b01.stack))
 #' 
 #' spplot(navarre.b01.stack*cmask.stack)

@@ -47,7 +47,6 @@ earthdataOpenSearchQuery<-function(startDate,
 }
 
 
-
 modDownloadAtmosphere<-function(startDate,
                                      endDate,
                                      extent,

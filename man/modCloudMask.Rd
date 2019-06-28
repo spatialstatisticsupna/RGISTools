@@ -33,10 +33,10 @@ or \code{lonlat} is not defined.}
 \item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 }
 \description{
-\code{modCloudMask} creates clouds layers derived from \code{MOD35_L2} products.
+\code{modCloudMask} creates layers of clouds derived from \code{MOD35_L2} products.
 }
 \details{
-This function, downloads and process the \code{MOD35_L2} products to create clouds 
+This function, downloads and processes the \code{MOD35_L2} products to create clouds 
 mask composed by \code{NA}s and \code{1}. The resulting cloud mask layers need to be
 reprojected because resolution and projection differences with other modis products.
 This function requires \code{gdalUtils} properly installed.
@@ -62,7 +62,6 @@ modMosaic(tif.src.tiles, # the input folder
           AppRoot = src.tiles, # the output folder 
           out.name = "Navarre", # creates Navarre folder in AppRoot
           gutils = TRUE,
-          overwrite = TRUE,
           extent = ex.navarre)
             
 src.cloud <- file.path(src,"CloudMask")
@@ -85,7 +84,7 @@ navarre.img <- list.files(navarre.path,
 navarre.img<-navarre.img[grepl("b01_1",navarre.img)]
 navarre.b01.stack<-stack(navarre.img)
 
-# reproject cloud mask
+# reproject cloud mask to navarre.b01.stack projection
 cmask.stack <- stack(lapply(cmask.ras, projectRaster, navarre.b01.stack))
 
 spplot(navarre.b01.stack*cmask.stack)

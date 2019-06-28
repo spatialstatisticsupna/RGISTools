@@ -1,6 +1,6 @@
 #' Uses covariates for smoothing outliers in a time series of satellite images
 #'
-#' \code{genSmoothingCovIMA} runs the IMA (\link{genSmoothingIMA}) smoothing method with covariates. 
+#' \code{genSmoothingCovIMA} runs the IMA (\link{genSmoothingIMA}) smoothing method with covariates 
 #' \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' The time series of images are decomposed into the mean images and the anomaly images. The procedure applies

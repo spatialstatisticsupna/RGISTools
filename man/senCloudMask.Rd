@@ -33,23 +33,41 @@ senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             endDate = as.Date("2018218", "\%Y\%j"),
             platform = "Sentinel-2",
             extent = ex.navarre,
-            product = "S2MSI1C",
+            product = "S2MSI2A",
             pathrow = c("R094"),
             username = "username",
             password = "password",
-            unzip = TRUE,
             AppRoot = src)
-src.unzip <- file.path(src, "unzip")
+src.sen2 <- file.path(src, "Sentinel-2")
+
+src.unzip <- file.path(src.sen2, "unzip")
 senMosaic(src.unzip,
           AppRoot = src,
           gutils = TRUE,
           out.name = "Navarre")
-src.mosaic <- file.path(src, "Navarre")
-src.cloud <- file.path(src, "CloudMask")
-senCloudMask(src = src.mosaic,
-             img.res = "20m",
+          
+src.navarre <- file.path(src.sen2, "Navarre")
+senCloudMask(src = src.navarre,
+             img.res = "60m",
              overwrite = TRUE,
-             AppRoot = src.cloud,
              sensitivity=98)
+src.cloud <- file.path(src.sen2, "CloudMask")
+
+tiles.navarre <- list.files(src.navarre,
+                            full.names = TRUE,
+                            recursive = TRUE,
+                           pattern = "\\\\.tif$")
+b2.tiles <- tiles.navarre[grepl("B02",tiles.navarre)]
+b2.tiles <- b2.tiles[grepl("60m",b2.tiles)]
+
+cloud.tiles <- list.files(src.cloud,
+                          full.names = TRUE,
+                          pattern = "\\\\.tif$")
+cloud.tiles <- cloud.tiles[grepl("60m",cloud.tiles)]
+
+b2.tiles.stack <- stack(b2.tiles)
+cloud.tiles.stack <- stack(cloud.tiles)
+b2.cloud.free <- b2.tiles.stack*cloud.tiles.stack
+spplot(b2.cloud.free)
 }
 }

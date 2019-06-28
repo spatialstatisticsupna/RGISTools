@@ -8,7 +8,7 @@
 #' The folder may contain multiple tiles as tif files, for one or several dates
 #' and one or several bands. When only one band has to be mosaicked, the name of
 #' the band can be provided through the argument \code{bandFilter}. The name of the band
-#' should be defined as a character string beginning with the letter b and a
+#' should be defined as a character string with the b letter and a
 #' two-digit band number (e.g. ‘b01’). Similarly, when only a subset of dates has
 #' to be mosaicked, the date(s) should be provided through the argument \code{dayFilter}.
 #' The dates must be provided as date objects. Once the images are mosaicked, they are
@@ -37,9 +37,9 @@
 #' }
 #' @examples
 #' \dontrun{
-#' # load a spatial polygon object of navarre for the example
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' # assign the folder where the example will be run
+#' # assign the main output directory
 #' src <- "Path_for_downloading_folder"
 #' # download Sentinel images
 #' senDownload(startDate = as.Date("2018210", "%Y%j"),
@@ -51,7 +51,7 @@
 #'             username = "username",
 #'             password = "password",
 #'             AppRoot = src)
-#' # assign the folder with the Sentinel images unzipped
+#' # assign the folder with the Sentinel unzipped images
 #' src.unzip <- file.path(src, "unzip")
 #' # mosaic the Sentinel images
 #' senMosaic(src.unzip,

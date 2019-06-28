@@ -9,13 +9,13 @@ ls8FolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
 \arguments{
 \item{src}{path to the folder with the Landsat multispectral image.}
 
-\item{fun}{is a function defined by the package for computing indexes.
-All functions in the package starting with three characters
-'var' are acceptable functions. Custom functions can be also
+\item{fun}{is a function defined for computing indexes.
+All functions created in RGISTools starting with
+'var' are avaliable functions. Custom functions can be also
 implemented \code{var} are acceptable functions.}
 
 \item{getStack}{logical argument. If \code{TRUE}, returns the 
-time-series of images as a \code{RasterStack}, otherwise as Hard Drive Devide (HDD).}
+time-series of images as a \code{RasterStack}, otherwise as Hard Drive Device (HDD).}
 
 \item{overwrite}{logical argument. If \code{TRUE} overwrites the 
 existing images with the same name.}
@@ -28,19 +28,19 @@ existing images with the same name.}
 \description{
 \code{ls8FolderToVar} calculates an index using the bands from Landsat-8 multispectral
 images. The images are specified by a path to the storing folder (resulting from
-the \code{\link{lsMosaic}} function). The function returns a \code{RasterStack} with the time-series of the index.
+the \code{\link{lsMosaic}} function). The function returns a \code{RasterStack} with the time-series of the indexes.
 }
 \details{
-The function requires to define \code{src} and \code{fun} attributes. \code{src} defines the path to
+The function requires to define \code{src} and \code{fun} input attributes. \code{src} defines the path to
 the result of \code{\link{lsMosaic}}, with all bands of Landsat-8 for a region of interest. \code{fun} defines
 the variable of interest using any of the functions in the packages starting with \code{var} (\code{\link{varNDVI}},
  \code{\link{varEVI}}, ...)
 }
 \examples{
 \dontrun{
-# load a spatial polygon object of navarre for the example
+# load a spatial polygon object of Navarre
 data(ex.navarre)
-# assign the folder where the example will be run
+# assign the main output directory
 src <- "Path_for_downloading_folder"
 # download Landsat-8 images
 lsDownload(satellite = "ls8",
@@ -51,7 +51,7 @@ lsDownload(satellite = "ls8",
            extent = ex.navarre,
            untar = TRUE,
            AppRoot = src)
-# assign the folder with the Landsat-8 images untared
+# assign the folder with the Landsat-8 untared images
 tif.src <- file.path(src, "untar")
 # mosaic the Landsat-8 images
 lsMosaic(tif.src,

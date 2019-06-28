@@ -25,7 +25,6 @@ senDownSearch(searchres, username = NULL, password = NULL,
 
 \item{...}{argument to allow function nestering.
 \itemize{
-  \item all input arguments in \code{\link{senSearch}}.
   \item \code{AppRoot} the directory to save the resulting time series.
 }}
 }
@@ -58,13 +57,15 @@ names(searchres)
 searchres.R094 <- searchres[grepl("R094", names(searchres))]
 names(searchres.R094)
 
+src = "Patch_for_downloading_folder"
 # Sentinel download function
 senDownSearch(searchres = searchres.R094,
               username = "username",
               password = "password",
-              AppRoot = "Path_for_downloading_folder",
+              AppRoot = src,
               unzip = TRUE)
-files<-list.files("./Path_for_downloading_folder",
+src.unzip <- file.path(src,"unzip")
+files<-list.files(src.unzip,
                   pattern = "\\\\TCI.jp2$",
                   full.names = TRUE,
                   recursive = TRUE)

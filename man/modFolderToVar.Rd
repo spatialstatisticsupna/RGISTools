@@ -7,39 +7,43 @@
 modFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
-\item{src}{path to the folder with the Modis multispectral images.}
+\item{src}{path to the input folder with the Modis multispectral images.}
 
-\item{fun}{is a function defined by the package for computing indexes.
-All functions in the package starting with three characters
-'var' are acceptable functions. Custom functions can be also implemented.}
+\item{fun}{is a function defined for computing indexes.
+All the functions starting with the ´var´ prefix are available 
+functions. Customized functions can also be implemented.}
 
-\item{getStack}{logical argument. If \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD).}
+\item{getStack}{logical argument. If \code{TRUE}, returns the time-series as a \code{RasterStack}, otherwise the result 
+is saved in the Hard Drive Device (HDD).}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, it overwrites the existing images with the same name.}
 
 \item{...}{argument to allow function nestering:
 \itemize{
-  \item \code{AppRoot} the directory of the resulting time series.
+  \item \code{AppRoot} directory of the output time series.
 }}
 }
 \description{
 \code{\link{modFolderToVar}} calculates an index using the bands from Modis multispectral images.
 The images are specified by a path to the storing folder (resulting from the \code{\link{modMosaic}} function).
-The function returns a \code{RasterStack} with the time series of the index.
+The function returns a \code{RasterStack} with the time series of the indexes.
 }
 \details{
-The function requires the definition of src and fun arguments. The argument \code{src}
-contains the path to the folder with the multispectral images. It can be easily
-defined as the path resulting from \code{\link{modMosaic}}. The fun argument is a function with
+The function requires the definition of \code{src} and \code{fun} arguments. The argument \code{src}
+specifies the path to the output folder with the multispectral images, where a new folder with the 
+name of the product is created.
+This function works with the path to the folder containing the tif layers derived from any \code{MOD09} product, or 
+the path to the folder with the result of  \code{\link{modMosaic}}.
+The \code{fun} argument is a function with
 the calculation of the index based on spectral bands. There are some pre-programmed
-indices in \code{RGISTools}. Functions with the pre-programmed indexes start with var
+indixes in \code{RGISTools}. Functions with the pre-programmed indexes start with var
 (\code{\link{varNDVI}}, \code{\link{varEVI}}). The user can define its own functions.
 }
 \examples{
 \dontrun{
-# load a spatial polygon object of navarre for the example
+# load a spatial polygon object of Navarre
 data(ex.navarre)
-# assign the folder where the example will be run
+# assign the main output directory
 src <- "Path_for_downloading_folder"
 # download Modis images
 modDownload(product = "MOD09GA",
@@ -47,14 +51,14 @@ modDownload(product = "MOD09GA",
             endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
             username = "username",
             password = "password",
-            AppRoot = src,
-            extract.tif = TRUE,
+            AppRoot = src, # output folder for tif images
+            extract.tif = TRUE, 
             collection = 6,
             extent = ex.navarre)
-# assign the folder with the Sentinel images untared
-src1 <- file.path(src, "MOD09GA")
-tif.src <- file.path(src1, "tif")
-#mosaic the Modis images
+# assign src1 as the outut folder for ModMosaic
+src1 <- file.path(src, "MOD09GA") # output directory
+tif.src <- file.path(src1, "tif") # input directory
+# mosaic the Modis images
 modMosaic(tif.src,
           AppRoot = src1,
           out.name = "Navarre")
@@ -67,13 +71,13 @@ modFolderToVar(src2,
                fun = varEVI,
                AppRoot = src3,
                overwrite = T)
-               
+# import tif mosaicked images to R environment
 flist <- list.files(file.path(src3,"EVI"),
                     pattern = "\\\\.tif$",
                     full.names = TRUE,
                     recursive = TRUE)
 
 files.raster <-stack(flist)
-spplot(files)
+spplot(files.raster,at=seq(-1,2.5))
 }
 }

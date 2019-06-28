@@ -3,7 +3,7 @@
 #' \code{genCompositions} combines satellite images over a series of images to create composite images.
 #'
 #' This function supports temporal aggregations by specifying \code{fun} argument.
-#' The maximun number of aggregated images is defined using \code{n} argument. The output image is 
+#' The maximun number of aggregated images is defined using the \code{n} argument. The output image is 
 #' named with the first image of the aggregation.
 #'
 #' \code{genCompositions} reduce the number of images, improving their quality,

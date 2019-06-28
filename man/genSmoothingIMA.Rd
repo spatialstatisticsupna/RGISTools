@@ -42,7 +42,7 @@ with the name of the layers containing the date in julian format (\code{YYYYJJJ}
 }
 \description{
 \code{genSmoothingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly (IMA)
-for gap filling. \insertCite{militino2019interpolation}{RGISTools}.
+for gap filling \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{
 The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
@@ -56,10 +56,10 @@ level of spatial aggregation \insertCite{militino2019interpolation}{RGISTools}.
 \examples{
 # load an example of NDVI time series in Navarre
 data(ex.ndvi.navarre)
-# plot data example
+# the 2 images to be filled and the neighbourhood
 genPlotGIS(ex.ndvi.navarre)
 
-# fill the gaps
+# Filled images
 ndvi.filled <- genSmoothingIMA(ex.ndvi.navarre,
                                Img2Fill = c(1,2))
 # Show the filled images

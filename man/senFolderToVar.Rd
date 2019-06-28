@@ -14,11 +14,14 @@ senFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
 All functions in the package starting with three characters.
 'var' are acceptable functions. Custom functions can be also implemented.}
 
-\item{getStack}{logical argument. If \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD).}
+\item{getStack}{logical argument. If \code{TRUE}, returns the time-series as a 
+raster or otherwise the images are saved in the Hard Drive Devide (HDD).}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE} 
+overwrites the existing images with the same name.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE} the 
+function prints running stages and warnings.}
 
 \item{resbands}{using Sentinel \code{S2MSI2A} products specifies the resolution of the output images. By default all 
 the resolution (10m, 20m and 60m) are calculated.}
@@ -32,7 +35,7 @@ the resolution (10m, 20m and 60m) are calculated.}
 \code{senFolderToVar} calculates an index using the bands from Sentinel-2 multispectral
 images. The images are specified by a path to the storing folder
 (resulting from the \code{\link{senMosaic}} function). The function returns a
-\code{rasterStack} with the time-series of the index.
+\code{rasterStack} with the time-series of the indexes.
 }
 \details{
 The function requires the definition of src and fun arguments. The argument \code{src}
@@ -45,9 +48,9 @@ The function requires the definition of src and fun arguments. The argument \cod
 }
 \examples{
 \dontrun{
-# load a spatial polygon object of navarre for the example
+# load a spatial polygon object of Navarre
 data(ex.navarre)
-# assign the folder where the example will be run
+# assign the main output directory
 src <- "Path_for_downloading_folder"
 # download Sentinel images
 senDownload(startDate = as.Date("2018210","\%Y\%j"),
@@ -59,7 +62,7 @@ senDownload(startDate = as.Date("2018210","\%Y\%j"),
             username = "username",
             password = "password",
             AppRoot = src)
-# assign the folder with the Sentinel images unzipped
+# assign the folder with the Sentinel unzipped images
 src.unzip <- file.path(src, "unzip")
 # mosaic the Sentinel images
 senMosaic(src.unzip,

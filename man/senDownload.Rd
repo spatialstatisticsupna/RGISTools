@@ -42,6 +42,7 @@ of unzipping the images.
 # Download S2MSI1C products sensed by Sentinel - 2 
 # satellite between the julian dates 210 and 218, 2018
 data(ex.navarre)
+src <- "Path_for_downloading_folder"
 senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             endDate = as.Date("2018218", "\%Y\%j"),
             platform = "Sentinel-2",
@@ -49,17 +50,16 @@ senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             product = "S2MSI1C",
             pathrow = c("R094"),
             username = "username",
-            password = "password")
-files<-list.files("./",
-                  pattern = "\\\\.jp2$",
-                  full.names = T,
-                  recursive = T)[4,3,2]
-files.stack<-stack(files)
-qrange<-c(0.001,0.999)
-imagen<-varRGB(files.stack.raster[[1]], 
-               files.stack.raster[[2]],
-               files.stack.raster[[3]],
-               qrange)
-plotRGB(imagen)
+            password = "password",
+            AppRoot = src)
+src.sen <- file.path(src, "Sentinel-2")
+src.sen.unzip <- file.path(src.sen, "unzip")
+                  
+files<-list.files(src.unzip,
+                  pattern = "\\\\TCI.jp2$",
+                  full.names = TRUE,
+                  recursive = TRUE)
+rgb<-stack(files[1])
+plotRGB(rgb)
 }
 }

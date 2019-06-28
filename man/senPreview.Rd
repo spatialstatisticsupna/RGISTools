@@ -42,5 +42,8 @@ searchres <- senSearch(startDate = as.Date("2018210","\%Y\%j"),
 # Preview some images
 senPreview(searchres, 3, username = "username", password = "password")
 senPreview(searchres, 1, username = "username", password = "password", 600)
+
+# Checking downloads dates in different formats
+senGetDates(names(searchres),format="\%Y\%j")
 }
 }

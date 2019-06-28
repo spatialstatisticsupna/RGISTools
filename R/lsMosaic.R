@@ -37,9 +37,9 @@
 #' }
 #' @examples
 #' \dontrun{
-#' # load a spatial polygon object of navarre for the example
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' # assign the folder where the example will be run
+#' # assign the main output directory
 #' src <- "Path_for_downloading_folder"
 #' # download Landsat-8 images
 #' lsDownload(satellite = "ls8",
@@ -50,7 +50,7 @@
 #'            extent = ex.navarre,
 #'            untar = TRUE,
 #'            AppRoot = src)
-#' # assign the folder with the Landsat-8 images untared
+#' # assign the folder with the Landsat-8 untared images
 #' tif.src <- file.path(src, "untar")
 #' # mosaic the Landsat-8 images
 #' lsMosaic(tif.src,
@@ -90,11 +90,13 @@ lsMosaic<-function(src,
   if(any(grepl("LE7",imgFolders))){
     message("Landsat-7 images detected!")
     dtype<-paste0(getRGISToolsOpt("LS7BANDS"),".tif")
+    qcband<-getRGISToolsOpt("LS7BANDS")["quality"]
   }else if(any(grepl("LC8",imgFolders))){
     message("Landsat-8 images detected!")
     dtype<-paste0(getRGISToolsOpt("LS8BANDS"),".tif")
+    qcband<-getRGISToolsOpt("LS8BANDS")["quality"]
   }else{
-    stop("Satellite not supported for Day mosaic.")
+    stop("Satellite not supported for Day mosaicing.")
   }
 
   for(d in 1:length(dates)){
@@ -115,10 +117,11 @@ lsMosaic<-function(src,
       stopifnot(length(dayImg)>0)
     }
 
-    flist<-list.files(dayImg,recursive=T,full.names=T,pattern="\\.TIF$")
+    flist<-list.files(dayImg,recursive=T,full.names=T,pattern="\\.TIF$",ignore.case = T)
     #filter the images by data type
     if("bandFilter"%in%names(arg)){
       flist<-flist[Reduce("|", lapply(arg$bandFilter,grepl,flist))]
+      dtype<-dtype[Reduce("|", lapply(arg$bandFilter,grepl,dtype))]
     }
 
     if(gutils){
@@ -129,17 +132,15 @@ lsMosaic<-function(src,
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
     dir.create(AppRoot,recursive = T,showWarnings = verbose)
     for(dt in 1:length(dtype)){
-      
-      
       out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt]))
       if(!(file.exists(out.file.path))||overwrite){
-        typechunks<-flist[grepl(toupper(dtype[dt]),flist)]
+        typechunks<-flist[grepl(dtype[dt], flist, ignore.case = TRUE)]
         if(!gutils){
           #mosaic with native R libraries
           typechunks<-lapply(typechunks,raster)
           tryCatch(
             {
-              img<- genMosaicList(typechunks,verbose)
+              img <- genMosaicList(typechunks,verbose)
             },
             error=function(cond) {
               if(any(grepl("different CRS",cond))){
@@ -163,22 +164,27 @@ lsMosaic<-function(src,
           writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
           #mosaic with gdalutils no supporting cutline
-          if(grepl(getRGISToolsOpt("LS8BANDS")["quality"],dtype[dt])){
-            if(length(typechunks)>1)
-              gif<-gdalinfo(typechunks[2])
-            else
-              gif<-gdalinfo(typechunks[1])
-            nodata<-as.numeric(gsub(".*=","",gif[grepl("STATISTICS_MINIMUM",gif)]))
-            if(verbose)message(paste0("No data value in BQA: ",nodata))
+          if(grepl(qcband,dtype[dt])){
+            nodata<-1
           }else{
             nodata<-0
+          }
+          if(verbose){message(paste0("Nodata to ",nodata))}
+          if(any(grepl("_T1_",typechunks))){
+            gindex<-which(grepl("_T1_",typechunks))[1]
+            if(verbose){message(paste0("gdalwarp_index to ",gindex))}
+          }else{
+            gindex<-1
+            message(paste0("Tier 1 image not detected gdalwarp_index to ",gindex))
           }
           if(is.null(extent)){
             mosaic_rasters(typechunks,
                            dst_dataset=out.file.path,
                            srcnodata=nodata,
                            vrtnodata=nodata,
-                           overwrite=overwrite)
+                           gdalwarp_index=gindex,
+                           overwrite=overwrite,
+                           verbose = verbose)
           }else{
             ext<-extent(extent)
             temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",gsub(".tif","",dtype[dt]),"_temp.tif"))
@@ -186,12 +192,15 @@ lsMosaic<-function(src,
                            dst_dataset=temp,
                            srcnodata=nodata,
                            vrtnodata=nodata,
-                           overwrite=TRUE)
+                           gdalwarp_index=gindex,
+                           overwrite=TRUE,
+                           verbose = verbose)
             gdalwarp(srcfile=temp,
                      dstfile=out.file.path,
                      te=c(ext@xmin,ext@ymin,ext@xmax,ext@ymax),
                      te_srs=proj4string(extent),
-                     overwrite=overwrite)
+                     overwrite=overwrite,
+                     verbose = verbose)
             file.remove(temp)
           }
         }

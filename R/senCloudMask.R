@@ -21,24 +21,42 @@
 #'             endDate = as.Date("2018218", "%Y%j"),
 #'             platform = "Sentinel-2",
 #'             extent = ex.navarre,
-#'             product = "S2MSI1C",
+#'             product = "S2MSI2A",
 #'             pathrow = c("R094"),
 #'             username = "username",
 #'             password = "password",
-#'             unzip = TRUE,
 #'             AppRoot = src)
-#' src.unzip <- file.path(src, "unzip")
+#' src.sen2 <- file.path(src, "Sentinel-2")
+#' 
+#' src.unzip <- file.path(src.sen2, "unzip")
 #' senMosaic(src.unzip,
 #'           AppRoot = src,
 #'           gutils = TRUE,
 #'           out.name = "Navarre")
-#' src.mosaic <- file.path(src, "Navarre")
-#' src.cloud <- file.path(src, "CloudMask")
-#' senCloudMask(src = src.mosaic,
-#'              img.res = "20m",
+#'           
+#' src.navarre <- file.path(src.sen2, "Navarre")
+#' senCloudMask(src = src.navarre,
+#'              img.res = "60m",
 #'              overwrite = TRUE,
-#'              AppRoot = src.cloud,
 #'              sensitivity=98)
+#' src.cloud <- file.path(src.sen2, "CloudMask")
+#' 
+#' tiles.navarre <- list.files(src.navarre,
+#'                             full.names = TRUE,
+#'                             recursive = TRUE,
+#'                            pattern = "\\.tif$")
+#' b2.tiles <- tiles.navarre[grepl("B02",tiles.navarre)]
+#' b2.tiles <- b2.tiles[grepl("60m",b2.tiles)]
+#' 
+#' cloud.tiles <- list.files(src.cloud,
+#'                           full.names = TRUE,
+#'                           pattern = "\\.tif$")
+#' cloud.tiles <- cloud.tiles[grepl("60m",cloud.tiles)]
+#' 
+#' b2.tiles.stack <- stack(b2.tiles)
+#' cloud.tiles.stack <- stack(cloud.tiles)
+#' b2.cloud.free <- b2.tiles.stack*cloud.tiles.stack
+#' spplot(b2.cloud.free)
 #' }
 senCloudMask<-function(src,img.res,sensitivity=50,overwrite=FALSE,...){
   # src<-"D:/Downscaling/Sentinel2_L2/Navarre"/2017209
@@ -54,14 +72,14 @@ senCloudMask<-function(src,img.res,sensitivity=50,overwrite=FALSE,...){
   AppRoot<-file.path(AppRoot,"CloudMask")
   dir.create(AppRoot,showWarnings = F,recursive = T)
   for(id in imgdir.list){
-    out.img<-file.path(AppRoot,paste0(basename(id),"_CloudMask.tif"))
+    out.img<-file.path(AppRoot,paste0(basename(id),"_",img.res,"_CloudMask.tif"))
     if(!file.exists(out.img)|overwrite){
       #id<-imgdir.list[1]
       tif.list<-list.files(id,pattern = "\\.tif$",full.names = T)
       cloudmask<-tif.list[grepl(getRGISToolsOpt("SEN2BANDS")["cloud"],tif.list)]
       cloudmask<-cloudmask[grepl(img.res,cloudmask)]
       if(length(cloudmask)==0){
-        message(paste0("No cloud mask found for date ",genGetDates(basename(id))))
+        message(paste0("No cloud mask of ",img.res," found for date ",genGetDates(basename(id))))
         next
       }
       message("Creating cloud mask from image ",basename(cloudmask))

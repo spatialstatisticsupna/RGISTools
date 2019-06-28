@@ -1,6 +1,6 @@
 #' Creates clouds layers for Landsat images
 #' 
-#' \code{lsCloudMask} creates clouds layers derived from \code{BQA} band from Landsat-7 or Landsat-8 captures. 
+#' \code{lsCloudMask} creates layers of clouds derived from \code{BQA} band from Landsat-7 or Landsat-8 captures. 
 #' The function run over untar images downloaded by \code{\link{lsDownSearch}} or \code{\link{lsDownload}}, and 
 #' creates a new band designated with the label \code{CLD}.
 #'
@@ -20,25 +20,37 @@
 #' src <- "Path_for_downloading_folder"
 #' 
 #' lsDownload(satellite = "ls8",
-#'            username = "rgistools",
-#'            password = "EspacialUPNA88",
+#'            username = "username",
+#'            password = "password",
 #'            startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'            endDate = as.Date("20-01-2018", "%d-%m-%Y"),
 #'            extent = ex.navarre,
 #'            untar = TRUE,
 #'            AppRoot = src)
-#' src.untar <- file.path(src,"untar")
+#' src.untar <- file.path(src,"Landsat8","untar")
 #' lsCloudMask(src=src.untar,
-#'             overwrite=TRUE,
-#'             sensitivity=98)
+#'             overwrite=TRUE)
 #'             
-#' tiles.path <- list.files(src.untar,
+#' src.ls8 <- dirname(src.untar)
+#' lsMosaic(src = src.untar,
+#'          AppRoot = src.ls8,
+#'          out.name = "Navarre",
+#'          extent = ex.navarre,
+#'          bandFilter = c("CLD"),
+#'          gutils = TRUE, # using gdalUtils
+#'          overwrite = TRUE) # overwrite
+#'          
+#' src.navarre <- file.path(src,"Landsat8","Navarre")
+#' tiles.path <- list.files(src.navarre,
 #'                          full.names = TRUE,
 #'                          recursive = TRUE,
 #'                          pattern = "\\.tif$")
 #' cloud.tiles <- tiles.path[grepl("CLD",tiles.path)]
+#' b1.tiles <- tiles.path[grepl("B1.tif",tiles.path)]
 #' cloud.tiles.ras <- stack(cloud.tiles)
-#' spplot(cloud.tiles.ras)
+#' b1.tiles.ras <- stack(b1.tiles)
+#' b1.cloud.free <- b1.tiles.ras*cloud.tiles.ras
+#' spplot(b1.cloud.free)
 #' }
 lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
   arg<-list(...)
@@ -54,9 +66,9 @@ lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
       message(paste0("No cloud mask found for date ",genGetDates(basename(id))))
       next
     }
-    out.img<-gsub(paste0(qc,".tif"),"CLD.tif",qcmask,ignore.case = T)
+    out.img<-gsub(paste0(qc,".TIF"),"CLD.TIF",qcmask,ignore.case = T)
     
-    if(!file.exists(out.img)|overwrite){
+    if(!file.exists(out.img)||overwrite){
       message("Creating cloud mask for tile ",dirname(qcmask))
       
       ras.cloud<-readAll(raster(qcmask))
@@ -64,11 +76,11 @@ lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
       if(verbose){
         message(paste0("Minimun: ",mn))
       }
-      ras.cloud[ras.cloud<=mn]<-NA
-      ras.cloud[ras.cloud<sensitivity]<-NA
-      ras.cloud[ras.cloud>=sensitivity]<-1
+      ras.cloud[ras.cloud<=mn]<-0
+      ras.cloud[ras.cloud>=sensitivity]<-0
+      ras.cloud[ras.cloud>1]<-1
       
-      print(spplot(ras.cloud))
+      NAvalue(ras.cloud)<-0
       writeRaster(ras.cloud,out.img,overwrite=overwrite)
       rm(ras.cloud)
     }else{

@@ -35,7 +35,7 @@ genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 }}
 }
 \description{
-\code{genSmoothingCovIMA} runs the IMA (\link{genSmoothingIMA}) smoothing method with covariates. 
+\code{genSmoothingCovIMA} runs the IMA (\link{genSmoothingIMA}) smoothing method with covariates 
 \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{

@@ -43,7 +43,7 @@ For further information on ESA’s missions and data products, please visit
 }
 \examples{
 \dontrun{
-# load a spatial polygon object of navarre for the example
+# load a spatial polygon object of Navarre
 data(ex.navarre)
 # perform the search query
 searchres <- senSearch(startDate = as.Date("2018210", "\%Y\%j"),

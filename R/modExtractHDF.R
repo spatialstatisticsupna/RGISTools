@@ -7,8 +7,8 @@
 #' HDF files cannot be directly loaded into R. The function \code{\link{modExtractHDF}}
 #' borrows \code{gdalwarp} and \code{gdal_translate} functions from the \code{gdalUtils} package.
 #' These functions are used to convert the '.hdf' files into '.tif' files. The '.tif'
-#' files can be loaded in R using the raster package. Go to \code{\link{modSearch}} and \code{\link{modDownload}}
-#' for further details about these functions. Further details about the \code{gdalUtils} 
+#' files can be loaded in R using the \code{raster} package. Go to \code{\link{modSearch}} and \code{\link{modDownload}}
+#' for further details about these functions. Further details about the \code{gdalUtils} functions
 #' in \code{gdalUtils} package manual.
 #'
 #' @param filesHDF  the full path of the .hdf files to be converted.
