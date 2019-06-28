@@ -18,7 +18,8 @@ the region of interest.}
 
 \item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
-\item{gutils}{logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking.}
+\item{gutils}{logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking. The mosacking 
+process is faster using \code{gutils} but requires the proper install of \code{gdalUtils} library.}
 
 \item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 

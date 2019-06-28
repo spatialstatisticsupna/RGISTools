@@ -13,7 +13,8 @@ senGetTile(str)
 an string with the path and row of the image in "\code{TTTSSS}" format.
 }
 \description{
-\code{senGetTile} reads the official name of a Sentinel image and returns its assigned tile. Get tiles information \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/news/-/asset_publisher/Ac0d/content/sentinel-2-level-1c-product-tiling-grid-released}{here}.
+\code{senGetTile} reads the official name of a Sentinel image and returns its assigned tile. 
+\href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/news/-/asset_publisher/Ac0d/content/sentinel-2-level-1c-product-tiling-grid-released}{Get more Sentinel tile detalis here}.
 }
 \examples{
 #example of getting date from Sentinel2 image name

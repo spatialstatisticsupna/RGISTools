@@ -25,7 +25,8 @@
 #' \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.
 #' 
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
-#' @param gutils logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking.
+#' @param gutils logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking. The mosacking 
+#' process is faster using \code{gutils} but requires the proper install of \code{gdalUtils} library.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param ... argument for function nestering accepts:
 #'  \itemize{
