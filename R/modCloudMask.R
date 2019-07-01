@@ -9,12 +9,11 @@
 #'
 #' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param out.name the name of the region, if is not defined "outfile" will be assigned.
+#' @param out.name the name of the region.
 #' @param extent \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or 
 #'   \code{SpatialPoints*} object are acceptable formats as long as coordinates 
 #'   are in longitude/latitude format. This argument is mandatory if \code{polygon} 
 #'   or \code{lonlat} is not defined.
-#' @param out.name 
 #' @param raw.rm logical argument. If \code{TRUE} region images are removed.
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
@@ -25,8 +24,12 @@
 #'
 #' @examples
 #' \dontrun{
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' src <- "Path_for_downloading_folder"
+#' 
+#' # Search and download the images from Modis comprised between
+#' # 01-01-2018 and 03-01-2018 for the region of Navarre
 #' modDownload(product = "MOD09GA",
 #'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'             endDate = as.Date("03-01-2018", "%d-%m-%Y"),
@@ -37,6 +40,7 @@
 #'             collection = 6,
 #'             extent = ex.navarre)
 #'             
+#' # assign src1 as the outut folder for ModMosaic
 #' src.tiles <- file.path(src, "MOD09GA")
 #' tif.src.tiles <- file.path(src.tiles, "tif")
 #' # mosaic the Modis images
@@ -45,15 +49,17 @@
 #'           out.name = "Navarre", # creates Navarre folder in AppRoot
 #'           gutils = TRUE,
 #'           extent = ex.navarre)
-#'             
-#' src.cloud <- file.path(src,"CloudMask")
+#'           
+#' # assign src as the path to cloud folder      
+#' src.cloud <- file.path(src,"CloudMasks")
 #' modCloudMask(startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'              endDate = as.Date("04-01-2018", "%d-%m-%Y"),
 #'              extent = ex.navarre,
 #'              AppRoot = src.cloud,
 #'              out.name = "Navarre")
 #'
-#' # The cloud mask may have different extent, resolution...            
+#' # The cloud mask may have different extent, resolution...  
+#' src.cloud.navarre <- file.path(src.cloud,"Navarre")
 #' cmask <- list.files(src.cloud, full.names = TRUE, pattern = "\\.tif$")
 #' cmask.ras <- lapply(cmask, raster) 
 #' 
@@ -63,15 +69,16 @@
 #'                           recursive = TRUE,
 #'                           pattern = "\\.tif$")
 #' # select b01
-#' navarre.img<-navarre.img[grepl("b01_1",navarre.img)]
-#' navarre.b01.stack<-stack(navarre.img)
+#' navarre.img <- navarre.img[grepl("b01_1",navarre.img)]
+#' navarre.b01.stack <- stack(navarre.img)
 #' 
 #' # reproject cloud mask to navarre.b01.stack projection
 #' cmask.stack <- stack(lapply(cmask.ras, projectRaster, navarre.b01.stack))
 #' 
+#' # plot the cloud free b01 layer
 #' spplot(navarre.b01.stack*cmask.stack)
 #' }
-modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,overwrite=FALSE,...){
+modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,overwrite=FALSE,verbose=FALSE,...){
   arg <- list(...)
   AppRoot <- defineAppRoot(...)
   modDownloadAtmosphere(startDate=startDate,
@@ -81,19 +88,20 @@ modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,overwrite=FALSE,
                         bFilter=c("Cloud_Mask"),
                         rm.band=c("SPI"),
                         s_srs=CRS("+init=epsg:4326"),
-                        AppRoot=AppRoot
+                        AppRoot=AppRoot,
+                        verbose=verbose
   )
   
   tif.dir<-file.path(AppRoot,"tif")
   modMosaic(src=tif.dir,
             extent = extent,
             gutils = T,
-            out.name = out.name,
-            AppRoot=AppRoot)
+            AppRoot=AppRoot,
+            verbose=verbose)
   
-  tif.images<-list.files(file.path(AppRoot,out.name),recursive = T,full.names = T,pattern = "\\.tif$")
+  tif.images<-list.files(file.path(AppRoot,"outfile"),recursive = T,full.names = T,pattern = "\\.tif$")
   for(i in tif.images){
-    out.file<-file.path(AppRoot,gsub("__","_",basename(i)))
+    out.file<-file.path(AppRoot,out.name,gsub("__","_",basename(i)))
     if((!file.exists(out.file))||overwrite){
       cimg<-stack(i)
       cimg[[5]][!is.na(cimg[[5]])]<-1
@@ -102,6 +110,6 @@ modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,overwrite=FALSE,
       writeRaster(cldmask,out.file,overwrite=overwrite)
     }
   }
-  unlink(file.path(AppRoot,out.name),recursive=TRUE)
+  unlink(file.path(AppRoot,"outfile"),recursive=TRUE)
   message(paste0("Clouds masks saved in:",AppRoot))
 }

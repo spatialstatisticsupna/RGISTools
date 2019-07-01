@@ -18,7 +18,7 @@ modDownload(product, startDate, endDate, username, password,
 
 \item{password}{EarthData password.}
 
-\item{collection}{Modis collection.}
+\item{collection}{Modis collection, by default 6.}
 
 \item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
 
@@ -54,6 +54,7 @@ Therefore, an error may occur when trying to connect with their server during th
 }
 \examples{
 \dontrun{
+# load a spatial polygon object of Navarre
 data(ex.navarre)
 modDownload(product = "MOD09GA",
             startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),

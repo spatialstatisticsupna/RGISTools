@@ -13,7 +13,7 @@ senSearch(username, password, ...)
 
 \item{...}{argument to allow function nestering:
 \itemize{
-  \item \code{product} Sentinel product type.
+  \item \code{product} Sentinel product type.  Ex. "S2MSI1C", "S2MSI2A", "S2MSI2Ap", ... 
   \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
   \item \code{endDate} ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
   \item \code{extent} location as projecte file with extention.
@@ -27,14 +27,13 @@ the point or region of interest in longitude/latitude format.
 }}
 }
 \description{
-\code{senSearch} searches Sentinel products on ESA powered api called \href{http://scihub.copernicus.eu}{Scihub}.
+\code{senSearch} searches Sentinel-2 products on ESA powered api called \href{http://scihub.copernicus.eu}{Scihub}.
 }
 \details{
-Provides the urls for downloading the images from ESA’s \href{http://scihub.copernicus.eu}{Scihub} API. The images are
+Provides the urls for downloading the images from ESA's \href{http://scihub.copernicus.eu}{Scihub} API. The images are
 searched within a range of dates and a region of interest. Dates have to be
 provided as a date class object. The region of interest should be provided as a
-spatial class object with an "\code{EPSG:4326}" coordinate projection. ESA’s API only returns
-as much as 100 entries.
+spatial class object with an "\code{EPSG:4326}" coordinate projection. 
 Credentials from ESA’s SciHub are needed to use this function.
 \href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 

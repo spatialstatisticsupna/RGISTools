@@ -1,7 +1,7 @@
 #' Sinchronizes Landsat-7 meta data file for image search.
 #'
 #' \code{\link{ls7LoadMetadata}} loads a data frame called "\code{.LS7MD}"
-#'  with the names of the Landsat-7 images and their metadata.The metadata provides
+#'  with the names of the Landsat-7 images and their metadata. The metadata provides
 #'  auxiliary information regarding Landsat-7 images repository such as image quality, acquisition
 #'  data, cloud cover, etc. You can find a description of the metadata at
 #'  \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{bulk-metadata-service}.

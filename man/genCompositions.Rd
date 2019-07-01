@@ -45,16 +45,16 @@ data("ex.ndvi.navarre")
 genPlotGIS(ex.ndvi.navarre)
 # the first composite image is made with images 1, 2 and 3, 
 # and the second composite image is made with images 4, 5 and 6
-composite.NDVI.a <- genCompositions(ex.ndvi.navarre,
+composite.NDVI.a <- genCompositions(rstack = ex.ndvi.navarre,
                                     n = 3,
                                     fun = max)
 genPlotGIS(composite.NDVI.a)
 # when by.days=TRUE, the first composite image is made with images 1, 2 and 3, 
 # the second with image 4, and the third with images 5 and 6.
-composite.NDVI.3a <- genCompositions(ex.ndvi.navarre,
-                                    n = 3,
-                                    by.days = TRUE,
-                                    fun = max)
+composite.NDVI.3a <- genCompositions(rstack = ex.ndvi.navarre,
+                                     n = 3,
+                                     by.days = TRUE,
+                                     fun = max)
 # Check that the clouds were removed
 genPlotGIS(composite.NDVI.3a)
 }

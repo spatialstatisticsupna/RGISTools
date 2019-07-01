@@ -13,6 +13,8 @@ getRGISToolsOpt(opt, env = optEnv)
 }
 \description{
 \code{getRGISToolsOpt} gets the current value of an \code{RGISTools} option.
+This function can be used togeder with \code{\link{setRGISToolsOpt}} and 
+\code{\link{showRGISToolsOpt}}.
 }
 \examples{
 # list avaliable options names

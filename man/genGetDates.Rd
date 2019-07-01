@@ -2,12 +2,12 @@
 % Please edit documentation in R/genGetDates.R
 \name{genGetDates}
 \alias{genGetDates}
-\title{Returns the capure date from name}
+\title{Returns the date of the capure from the name of the image}
 \usage{
 genGetDates(str, ...)
 }
 \arguments{
-\item{str}{a \code{character} or  containing the date in julian format "\code{YYYYJJJ}".}
+\item{str}{\code{character} argument containing the date in julian format "\code{YYYYJJJ}".}
 
 \item{...}{argument to allow function nestering.
 \itemize{
@@ -18,7 +18,7 @@ genGetDates(str, ...)
 \code{genGetDates} extracts the date of one or several images when the name of the layer includes julian date in format "\code{YYYYJJJ}".
 }
 \details{
-The function reads a date from a character type variable in year-julian format and returns an R date format variable.
+The function reads a date from a \code{character} class variable in year-julian (\code{YYYYJJJ}) format and returns an R date class variable.
 }
 \examples{
 img <- matrix(1:16, ncol = 4, byrow = TRUE)

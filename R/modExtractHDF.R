@@ -1,8 +1,8 @@
-#' Converts an .hdf file into a set of .tif files
+#' Converts an HDF file into a set of GTiff files
 #'
-#' \code{modExtractHDF} converts the original Modis format (.hdf) into a file
-#' format loadable by R (.tif). The function extracts all image layers and crops the
-#' area of interest (if needed).
+#' \code{modExtractHDF} converts the original Modis image format (HDF) into a file
+#' format loadable by R (GTiff). The function extracts all image layers and crops the
+#' area of interest (if needed). This function requires the proper installation of GDAL library.
 #'
 #' HDF files cannot be directly loaded into R. The function \code{\link{modExtractHDF}}
 #' borrows \code{gdalwarp} and \code{gdal_translate} functions from the \code{gdalUtils} package.
@@ -11,7 +11,7 @@
 #' for further details about these functions. Further details about the \code{gdalUtils} functions
 #' in \code{gdalUtils} package manual.
 #'
-#' @param filesHDF  the full path of the .hdf files to be converted.
+#' @param filesHDF  the full path where the HDF files are stored.
 #' @param shp  the shape file of the area of interest.
 #' @param bFilter a vector containing the names of the bands to extract.
 #' @param rm.band a vector containing the names of the bands to not extract.
@@ -23,6 +23,7 @@
 #' }
 #' @examples
 #' \dontrun{
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' img.list <- modSearch(product = "MOD11A1",
 #'                       startDate = as.Date("01-01-2011", "%d-%m-%Y"),

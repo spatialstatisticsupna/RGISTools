@@ -15,7 +15,7 @@
 #' 'var' are avaliable functions. Custom functions can be also
 #' implemented \code{var} are acceptable functions.
 #' @param getStack logical argument. If \code{TRUE}, returns the 
-#' time-series of images as a \code{RasterStack}, otherwise as Hard Drive Device (HDD).
+#' time-series of images as a \code{RasterStack}, otherwise the images are saved in the Hard Drive Devide (HDD).
 #' @param overwrite logical argument. If \code{TRUE} overwrites the 
 #' existing images with the same name.
 #' @param ... argument to allow function nestering

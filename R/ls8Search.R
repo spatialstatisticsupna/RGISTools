@@ -40,12 +40,12 @@
 #'  \itemize{
 #'   \item \code{pathrow} a list of vectors defining the path and row number for the region of interest according
 #' to the \href{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/}{Worldwide Reference System}
-#' This argument is mandatory if extent is not defined.
+#' This argument is mandatory if \code{extent} is not defined.
 #'   \item \code{lonlat} this argument is optional. A vector or a polygon with the coordinates of
 #' the point or region of interest in longitude/latitude format.
 #'   \item \code{extent} this argument is optional. \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or \code{SpatialPoints*}
 #' object are acceptable formats as long as are longitude/latitude format.
-#' This argument is mandatory if pathrow is not defined.
+#' This argument is mandatory if \code{pathrow} is not defined.
 #'   \item \code{AppRoot} the root directory where meta data file will be saved.
 #'   \item all column names in .LS8MD data frame for filter results.
 #' }
@@ -59,6 +59,7 @@
 #'                         browseAvaliable = "Y")
 #'
 #' # search by projected file must be in lat long projection
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' search.res <- ls8Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),

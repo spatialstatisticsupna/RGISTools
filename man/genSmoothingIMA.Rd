@@ -9,18 +9,18 @@ genSmoothingIMA(imgTS, Img2Fill = NULL, aFilter = c(0.05, 0.95),
   snow.mode = FALSE, predictSE = FALSE, out.name = "outname", ...)
 }
 \arguments{
-\item{imgTS}{the time series of images to be filled in \code{RasterStack} format 
+\item{imgTS}{\code{RasterStack} class argument containing the time series of images to be filled
 with the name of the layers containing the date in julian format (\code{YYYYJJJ}).}
 
-\item{Img2Fill}{a vector defining the images to be filled.}
+\item{Img2Fill}{\code{vector} class argument defining the images to be filled.}
 
-\item{aFilter}{two component vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).}
+\item{aFilter}{\code{vector} class argument with two component defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).}
 
-\item{fact}{an aggregation factor of the anomalies before the interpolation.}
+\item{fact}{\code{numeric} argument with an aggregation factor of the anomalies before the interpolation.}
 
-\item{nDays}{number of previous and subsequent days used to define the neighborhood of the target images.}
+\item{nDays}{\code{numeric} argument with the number of previous and subsequent days used to define the neighborhood}
 
-\item{nYears}{number of years used to define the neighborhood of the target images.}
+\item{nYears}{\code{numeric} argument with the number of the number of previous and subsequent years used to define the neighborhood.}
 
 \item{fun}{function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.}
 
@@ -41,7 +41,7 @@ with the name of the layers containing the date in julian format (\code{YYYYJJJ}
 \code{RasterStack} object with the smoothed time series.
 }
 \description{
-\code{genSmoothingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly (IMA)
+\code{genSmoothingIMA} is the implementation of a spatio temporal method called Image Mean Anomaly (IMA)
 for gap filling \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{

@@ -2,13 +2,13 @@
 % Please edit documentation in R/modExtractHDF.R
 \name{modExtractHDF}
 \alias{modExtractHDF}
-\title{Converts an .hdf file into a set of .tif files}
+\title{Converts an HDF file into a set of GTiff files}
 \usage{
 modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
   verbose = FALSE, bFilter = NULL, rm.band = NULL, ...)
 }
 \arguments{
-\item{filesHDF}{the full path of the .hdf files to be converted.}
+\item{filesHDF}{the full path where the HDF files are stored.}
 
 \item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 
@@ -26,9 +26,9 @@ modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
 }}
 }
 \description{
-\code{modExtractHDF} converts the original Modis format (.hdf) into a file
-format loadable by R (.tif). The function extracts all image layers and crops the
-area of interest (if needed).
+\code{modExtractHDF} converts the original Modis image format (HDF) into a file
+format loadable by R (GTiff). The function extracts all image layers and crops the
+area of interest (if needed). This function requires the proper installation of GDAL library.
 }
 \details{
 HDF files cannot be directly loaded into R. The function \code{\link{modExtractHDF}}
@@ -40,6 +40,7 @@ in \code{gdalUtils} package manual.
 }
 \examples{
 \dontrun{
+# load a spatial polygon object of Navarre
 data(ex.navarre)
 img.list <- modSearch(product = "MOD11A1",
                       startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),

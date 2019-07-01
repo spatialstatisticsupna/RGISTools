@@ -57,6 +57,8 @@ assign("SEN3BANDS",NULL, env=optEnv)
 #' Changes the default value of an RGISTools configuration variable
 #'
 #' \code{setRGISToolsOpt} changes the default value of an \code{RGISTools} option.
+#' This function can be used togeder with \code{\link{showRGISToolsOpt}} and 
+#' \code{\link{getRGISToolsOpt}}.
 #'
 #' @param opt the name of the option to change in character format
 #' @param value the new value of selected option
@@ -78,6 +80,8 @@ setRGISToolsOpt <- function(opt,value,env=optEnv) {
 #' Gets the current value of an RGISTools configuration variable
 #'
 #' \code{getRGISToolsOpt} gets the current value of an \code{RGISTools} option.
+#' This function can be used togeder with \code{\link{setRGISToolsOpt}} and 
+#' \code{\link{showRGISToolsOpt}}.
 #'
 #' @param opt the name of the option to get.
 #' @param env the environment where the \code{RGISTools} option are saved.
@@ -98,6 +102,8 @@ getRGISToolsOpt <- function(opt,env=optEnv) {
 #' Prints the name of all RGISTools configuration variables
 #' 
 #' \code{showRGISToolsOpt} prints the name of all options in \code{RGISTools} package.
+#' This function can be used togeder with \code{\link{setRGISToolsOpt}} and 
+#' \code{\link{getRGISToolsOpt}}.
 #'
 #' @param env the environment where the \code{RGISTools} option are saved.
 #' @examples

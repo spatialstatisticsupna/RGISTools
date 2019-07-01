@@ -17,7 +17,7 @@
 #' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param username EarthData username.
 #' @param password EarthData password.
-#' @param collection Modis collection.
+#' @param collection Modis collection, by default 6.
 #' @param extract.tif logical argument. If \code{TRUE} extracts as tif image format all the layers in a hdf image.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param ... argument for function nestering:
@@ -36,6 +36,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' modDownload(product = "MOD09GA",
 #'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),

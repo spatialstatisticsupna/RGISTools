@@ -1,7 +1,7 @@
 Type: Package
 Package: RGISTools
 Title: Tools for Downloading, Processing, and Smoothing Time Series of Satellite Images From Landsat, Modis, and Sentinel
-Version: 0.9.2
+Version: 0.9.5
 Author: U Pérez - Goya [aut, cre] <unai.perez@unavarra.es>,
         A F Militino [aut] <militino@unavarra.es>,
         M D Ugarte [aut] <lola@unavarra.es>,

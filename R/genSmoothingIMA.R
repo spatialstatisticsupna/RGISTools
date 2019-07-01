@@ -1,6 +1,6 @@
 #' Fills the gaps in a time series of satellite images
 #'
-#' \code{genSmoothingIMA} is the implementation of a spatio-temporal method called Image Mean Anomaly (IMA)
+#' \code{genSmoothingIMA} is the implementation of a spatio temporal method called Image Mean Anomaly (IMA)
 #' for gap filling \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
@@ -13,13 +13,13 @@
 #'
 #' @references \insertRef{militino2019interpolation}{RGISTools}
 #'
-#' @param imgTS the time series of images to be filled in \code{RasterStack} format 
+#' @param imgTS \code{RasterStack} class argument containing the time series of images to be filled
 #' with the name of the layers containing the date in julian format (\code{YYYYJJJ}).
-#' @param Img2Fill a vector defining the images to be filled.
-#' @param aFilter two component vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
-#' @param fact an aggregation factor of the anomalies before the interpolation.
-#' @param nDays number of previous and subsequent days used to define the neighborhood of the target images.
-#' @param nYears number of years used to define the neighborhood of the target images.
+#' @param Img2Fill \code{vector} class argument defining the images to be filled.
+#' @param aFilter \code{vector} class argument with two component defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
+#' @param fact \code{numeric} argument with an aggregation factor of the anomalies before the interpolation.
+#' @param nDays \code{numeric} argument with the number of previous and subsequent days used to define the neighborhood
+#' @param nYears \code{numeric} argument with the number of the number of previous and subsequent years used to define the neighborhood.
 #' @param fun function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.
 #' @param snow.mode logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.
 #' @param predictSE logical argument. If \code{TRUE} the filling process will calculate the standard error instead of the prediction.

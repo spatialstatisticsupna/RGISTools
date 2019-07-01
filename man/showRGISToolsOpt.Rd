@@ -11,6 +11,8 @@ showRGISToolsOpt(env = optEnv)
 }
 \description{
 \code{showRGISToolsOpt} prints the name of all options in \code{RGISTools} package.
+This function can be used togeder with \code{\link{setRGISToolsOpt}} and 
+\code{\link{getRGISToolsOpt}}.
 }
 \examples{
 showRGISToolsOpt()

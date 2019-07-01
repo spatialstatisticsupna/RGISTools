@@ -4,7 +4,7 @@
 #'
 #' This is a helper function used by other functions in this package.
 #'
-#' @param r the raster stack to be filtered.
+#' @param r the \code{RasterStack} to be filtered.
 #' @param ... argument to allow function nestering.
 #' \itemize{
 #'   \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
@@ -21,7 +21,7 @@
 #' print(names(r))
 #' genGetDates(names(r))
 #' # example of filtering the raster stack
-#' r2 <- genFilterStack(r,
+#' r2 <- genFilterStack(r = r,
 #'                      startDate = as.Date("2018-02-02", "%Y-%m-%d"),
 #'                      endDate = as.Date("2018-02-04", "%Y-%m-%d"))
 #' # print the names and the number of layers of the filtered stack

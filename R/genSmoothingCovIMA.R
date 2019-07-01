@@ -3,29 +3,30 @@
 #' \code{genSmoothingCovIMA} runs the IMA (\link{genSmoothingIMA}) smoothing method with covariates 
 #' \insertCite{militino2019interpolation}{RGISTools}.
 #'
-#' The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
+#' The smoothing method decomposed the time series of images into the mean images and the anomaly images. The procedure applies
 #' the smoothing algorithm over the anomaly images. The procedure smoothed the anomaly using covariates to
 #' smooth the outliers in the anomaly. \insertCite{militino2019interpolation}{RGISTools}.
 #'
-#' This function provides a set of arguments to configure the run of the precedure, such as the images to fill (\code{Img2Process}),
+#' This function provides a set of arguments to configure the run of the procedure, such as the images to fill (\code{Img2Process}),
 #' the number of periods or years in the definition of the spatio temporal neighbourhoood, or the size of the
 #' aggregation. All these particularities are explained in the publication.
 #'
 #' @references \insertRef{militino2018improving}{RGISTools}
 #'
-#' @param rStack a \code{RasterStack} containing a time series of satellite images.
-#' @param cStack a \code{RasterStack} containing a time series of covariates.
-#' @param Img2Process a vector defining the images to smooth.
-#' @param nDays number of previous and subsequent days used to define the neighborhood
-#' @param nYears number of years used to define the neighborhood.
-#' @param aFilter a vector with the lower and upper extreme values for filtering the anomalies. Ex. c(0.05,0.95).
-#' @param fun a function used to calculate the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.
+#' @param rStack \code{RasterStack} class argument containing a time series of satellite images.
+#' @param cStack \code{RasterStack} class argument containing a time series of covariates.
+#' @param Img2Process \code{vector} class argument defining the images to smoothed.
+#' @param nDays \code{numeric} argument with the number of previous and subsequent days used to define the neighborhood
+#' @param nYears \code{numeric} argument with the number of the number of previous and subsequent years used to define the neighborhood.
+#' @param aFilter \code{vector} with the lower and upper extreme values for filtering the anomalies. Ex. c(0.05,0.95).
+#' @param fun function used to calculate the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.
+#'  default value \code{mean}.
 #' @param snow.mode logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.
-#' @param fact an aggregation factor to be used to reduce the anomalies before smoothing.
-#' @param out.name the name of the images if the result is written in the HDD.
+#' @param fact \code{numeric} argument with an aggregation factor of the anomalies before the interpolation.
+#' @param out.name the name of the images if the result is written in the Hard Device Drive (HDD).
 #' @param ... argument to allow function nestering.
 #' \itemize{
-#'   \item \code{AppRoot} the path where the images will be saved in tif format.
+#'   \item \code{AppRoot} the path where the images will be saved in GTiff format.
 #' }
 #'
 #' @examples

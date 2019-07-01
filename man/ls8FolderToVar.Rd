@@ -15,7 +15,7 @@ All functions created in RGISTools starting with
 implemented \code{var} are acceptable functions.}
 
 \item{getStack}{logical argument. If \code{TRUE}, returns the 
-time-series of images as a \code{RasterStack}, otherwise as Hard Drive Device (HDD).}
+time-series of images as a \code{RasterStack}, otherwise the images are saved in the Hard Drive Devide (HDD).}
 
 \item{overwrite}{logical argument. If \code{TRUE} overwrites the 
 existing images with the same name.}

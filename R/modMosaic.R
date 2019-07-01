@@ -4,7 +4,7 @@
 #'
 #' The function mosaics the tiles of satellite images in the \code{src} folder.
 #' The function uses the folder resulting from the \code{\link{modExtractHDF}} function.
-#' The folder may contain multiple tiles as tif files, for one or several dates
+#' The folder may contain multiple tiles as GTiff files, for one or several dates
 #' and one or several bands. When only one band has to be mosaicked, the name of
 #' the band can be provided through the argument \code{bandFilter}. The name of the band
 #' should be defined as a character string beginning with the letter b and a two-digit
@@ -18,7 +18,7 @@
 #' provided by the argument \code{out.name}. If no name is provided,
 #' by default the output file is named as ‘outfile’.
 #'
-#' @param src the path of the folder with the Modis images in tif format.
+#' @param src the path of the folder with the Modis images in GTiff format.
 #' @param out.name the name of the region, if is not defined "outfile" will be assigned.
 #' @param extent \code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
 #' \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.
@@ -50,7 +50,7 @@
 #'             extract.tif = TRUE,
 #'             collection = 6,
 #'             extent = ex.navarre)
-#' # assign the folder with the Modis untared images
+#' # assign the folder with the Modis extracted images
 #' src <- file.path(src, "MOD09GA")
 #' tif.src <- file.path(src, "tif")
 #' # mosaic the Modis images

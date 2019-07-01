@@ -7,10 +7,10 @@
 lsRemoveMetadata()
 }
 \description{
-\code{lsRemoveMetadata} removes metadata from R enviroment.
+\code{lsRemoveMetadata} removes Landsat-7 and/or Landsat-8 (\code{.LS7MD}/\code{.LS8MD}) metadata from R enviroment.
 }
 \details{
-If the metadata file has been loaded by any Landsat search function or using load
+If the metadata file has been loaded by any Landsat search function or load
 metadata function, \code{lsRemoveMetadata} removes both dataframes \code{.LS8MD} and/or \code{.LS7MD}.
 }
 \examples{

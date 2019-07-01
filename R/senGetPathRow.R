@@ -1,9 +1,9 @@
 #' Returns the tile of Sentinel-2 images "TTTSSS" string format
 #'
-#' \code{senGetTile} reads the official name of a Sentinel image and returns its assigned tile. 
+#' \code{senGetTile} reads the official name of a Sentinel-2 image and returns its assigned tile. 
 #' \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/news/-/asset_publisher/Ac0d/content/sentinel-2-level-1c-product-tiling-grid-released}{Get more Sentinel tile detalis here}.
 #'
-#' @param str the full path or official image name of the Sentinel image from which the tile is extracted.
+#' @param str the full path or official image name of the Sentinel-2 image from which the tile is extracted.
 #'
 #' @return an string with the path and row of the image in "\code{TTTSSS}" format.
 #'

@@ -1,14 +1,14 @@
 #' Returns the capturing date of a Landsat-7 or Landsat-8 images
 #'
 #' \code{lsGetDates} extracts the capturing date of one or several Landsat images,
-#' given their file paths or names. The function returns a date class object.
+#' given their file paths or names. The function returns a date class.
 #'
 #'  The function works with names or file paths having either of the two file extensions,
 #'  \code{.tar.gz} or \code{.tif} files. The function accepts more than on file path or file names.
 #'  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
 #'  If another format is required, it can be modified through the argument \code{date.format}.
 #'
-#' @param str a string or a list of strings defining the file path(s) or file name(s).
+#' @param str \code{character} class or a \code{vector} class containing the file path(s) or file name(s).
 #' @param ... argument to allow function nestering:
 #' \itemize{
 #'   \item \code{date.format} modify the format of the date being returned.
@@ -39,14 +39,14 @@ lsGetDates<-function(str,...){
 #' Returns the capturing date of Sentinel image
 #'
 #' \code{senGetDates} extracts the capturing date of one or several Sentinel
-#' images, given their file paths or names. The function returns a date class object.
+#' images, given their file paths or names. The function returns a date class.
 #'
 #' The function works with names or file paths having either of the two file extensions,
 #'  \code{.jp2} or \code{.tif} files. The function accepts more than on file path or file names.
 #'  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
 #'  If another format is required, it can be modified through the argument \code{date.format}.
 #'
-#' @param str a string or a list of strings defining the file path(s) or file name(s).
+#' @param str \code{character} class or a \code{vector} class containing the file path(s) or file name(s).
 #' @param ... argument to allow function nestering:
 #' \itemize{
 #'   \item \code{date.format} modify the format of the date being returned.
@@ -92,14 +92,14 @@ senGetDates<-function(str,...){
 #' Returns the capturing date of Modis image
 #'
 #' \code{modGetDates} extracts the capturing date of one or several Modis
-#' images, given their file paths or names. The function returns a date class object.
+#' images, given their file paths or names. The function returns a date class.
 #'
 #' The function works with names or file paths having either of the two file extensions,
-#'  \code{.hdf} or \code{.tif} files. The function accepts more than on file path or file names.
+#'  \code{HDF} or \code{GTiff} files. The function accepts more than on file path or file names.
 #'  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
 #'  If another format is required, it can be modified through the argument \code{date.format}.
 #'
-#' @param str a string or a list of strings defining the file path(s) or file name(s).
+#' @param str \code{character} class or a \code{vector} class containing the file path(s) or file name(s).
 #' @param ... argument to allow function nestering:
 #' \itemize{
 #'   \item \code{date.format} modify the format of the date being returned.
@@ -113,7 +113,7 @@ senGetDates<-function(str,...){
 #' # example of a list of the full file paths of Modis images, mixing .hdf and .tif files
 #' imgsPaths<-list('MYD13A2.A2013297.h17v04.006.2015269230726.hdf',
 #'                 'MYD13A2.A2013313.h17v04.006.2015271071143.tif')
-#' modGetDates(imgsPaths)
+#' modGetDates(imgsPaths, date.format = "%Y%j")
 modGetDates<-function(str,...){
   arg<-list(...)
   if("date.format"%in%names(arg)){

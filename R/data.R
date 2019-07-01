@@ -15,7 +15,7 @@ NULL
 
 #' NDVI of the tile containing Navarre in Spain
 #'
-#' Geographically projected \code{RasterBrick} object with the NDVI values for the region of Navarre.
+#' Geographically projected \code{RasterBrick} object with the Normalized Difference Vegetation Index (NDVI) values for the region of Navarre.
 #'
 #' @format The \code{RasterBrick} contains 6 time-periods:
 #' \describe{

@@ -15,6 +15,8 @@ setRGISToolsOpt(opt, value, env = optEnv)
 }
 \description{
 \code{setRGISToolsOpt} changes the default value of an \code{RGISTools} option.
+This function can be used togeder with \code{\link{showRGISToolsOpt}} and 
+\code{\link{getRGISToolsOpt}}.
 }
 \examples{
 # list avaliable options names

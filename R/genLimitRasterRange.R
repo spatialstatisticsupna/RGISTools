@@ -9,7 +9,7 @@
 #' @param mn minimun value in the \code{raster}.
 #' @param rm.values logical argument. If \code{FALSE} \code{mx} and  \code{mn} values are assigned to the 
 #'   higher values than \code{mx} and lower values than \code{mn} respectively. If \code{TRUE}, values out of 
-#'   \code{mn}-\code{mx} are removed.
+#'   \code{mn}-\code{mx} are removed, and \code{NA} assigned.
 #'
 #' @examples
 #' # generate random images

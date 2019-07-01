@@ -42,8 +42,9 @@ senDownSearch(searchres, username = NULL, password = NULL,
 }
 \examples{
 \dontrun{
-# Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
+# load a spatial polygon object of Navarre
 data(ex.navarre)
+# Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
 searchres <- senSearch(startDate = as.Date("2018-07-29","\%Y-\%m-\%d"),
                        endDate = as.Date("2018-08-06","\%Y-\%m-\%d"),
                        platform = "Sentinel-2",

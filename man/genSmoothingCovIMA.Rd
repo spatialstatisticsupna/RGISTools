@@ -9,29 +9,30 @@ genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, fun = mean,
   aFilter = c(), snow.mode = FALSE, ...)
 }
 \arguments{
-\item{rStack}{a \code{RasterStack} containing a time series of satellite images.}
+\item{rStack}{\code{RasterStack} class argument containing a time series of satellite images.}
 
-\item{cStack}{a \code{RasterStack} containing a time series of covariates.}
+\item{cStack}{\code{RasterStack} class argument containing a time series of covariates.}
 
-\item{Img2Process}{a vector defining the images to smooth.}
+\item{Img2Process}{\code{vector} class argument defining the images to smoothed.}
 
-\item{fun}{a function used to calculate the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.}
+\item{fun}{function used to calculate the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.
+default value \code{mean}.}
 
-\item{nDays}{number of previous and subsequent days used to define the neighborhood}
+\item{nDays}{\code{numeric} argument with the number of previous and subsequent days used to define the neighborhood}
 
-\item{nYears}{number of years used to define the neighborhood.}
+\item{nYears}{\code{numeric} argument with the number of the number of previous and subsequent years used to define the neighborhood.}
 
-\item{fact}{an aggregation factor to be used to reduce the anomalies before smoothing.}
+\item{fact}{\code{numeric} argument with an aggregation factor of the anomalies before the interpolation.}
 
-\item{out.name}{the name of the images if the result is written in the HDD.}
+\item{out.name}{the name of the images if the result is written in the Hard Device Drive (HDD).}
 
-\item{aFilter}{a vector with the lower and upper extreme values for filtering the anomalies. Ex. c(0.05,0.95).}
+\item{aFilter}{\code{vector} with the lower and upper extreme values for filtering the anomalies. Ex. c(0.05,0.95).}
 
 \item{snow.mode}{logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.}
 
 \item{...}{argument to allow function nestering.
 \itemize{
-  \item \code{AppRoot} the path where the images will be saved in tif format.
+  \item \code{AppRoot} the path where the images will be saved in GTiff format.
 }}
 }
 \description{
@@ -39,11 +40,11 @@ genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{
-The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
+The smoothing method decomposed the time series of images into the mean images and the anomaly images. The procedure applies
 the smoothing algorithm over the anomaly images. The procedure smoothed the anomaly using covariates to
 smooth the outliers in the anomaly. \insertCite{militino2019interpolation}{RGISTools}.
 
-This function provides a set of arguments to configure the run of the precedure, such as the images to fill (\code{Img2Process}),
+This function provides a set of arguments to configure the run of the procedure, such as the images to fill (\code{Img2Process}),
 the number of periods or years in the definition of the spatio temporal neighbourhoood, or the size of the
 aggregation. All these particularities are explained in the publication.
 }

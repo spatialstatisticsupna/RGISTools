@@ -10,6 +10,6 @@
   \item{size}{each layer contains 113 rows and 105 columns}.
 }}
 \description{
-Geographically projected \code{RasterBrick} object with the NDVI values for the region of Navarre.
+Geographically projected \code{RasterBrick} object with the Normalized Difference Vegetation Index (NDVI) values for the region of Navarre.
 }
 \keyword{data}

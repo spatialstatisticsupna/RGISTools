@@ -24,6 +24,7 @@ The preview is downloaded from Landsat’s website. Please, be aware that only s
 }
 \examples{
 \dontrun{
+# load a spatial polygon object of Navarre
 data(ex.navarre)
 # Retrieve jpg images covering Navarre region between 2011 and 2013
 search.res <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),

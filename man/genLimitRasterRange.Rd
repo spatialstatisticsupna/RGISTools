@@ -15,7 +15,7 @@ genLimitRasterRange(r, mx = NULL, mn = NULL, rm.values = FALSE)
 
 \item{rm.values}{logical argument. If \code{FALSE} \code{mx} and  \code{mn} values are assigned to the 
 higher values than \code{mx} and lower values than \code{mn} respectively. If \code{TRUE}, values out of 
-\code{mn}-\code{mx} are removed.}
+\code{mn}-\code{mx} are removed, and \code{NA} assigned.}
 }
 \description{
 \code{genLimitRasterRange} limits the maximum and the minimum values of a raster image to a given range.

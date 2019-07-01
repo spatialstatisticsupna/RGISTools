@@ -7,7 +7,7 @@
 senGetDates(str, ...)
 }
 \arguments{
-\item{str}{a string or a list of strings defining the file path(s) or file name(s).}
+\item{str}{\code{character} class or a \code{vector} class containing the file path(s) or file name(s).}
 
 \item{...}{argument to allow function nestering:
 \itemize{
@@ -16,7 +16,7 @@ senGetDates(str, ...)
 }
 \description{
 \code{senGetDates} extracts the capturing date of one or several Sentinel
-images, given their file paths or names. The function returns a date class object.
+images, given their file paths or names. The function returns a date class.
 }
 \details{
 The function works with names or file paths having either of the two file extensions,

@@ -7,10 +7,10 @@
 #' The function requires the definition of \code{src} and \code{fun} arguments. The argument \code{src}
 #' specifies the path to the output folder with the multispectral images, where a new folder with the 
 #' name of the product is created.
-#' This function works with the path to the folder containing the tif layers derived from any \code{MOD09} product, or 
+#' This function works with the path to the folder containing the GTiff layers derived from any \code{MOD09} product, or 
 #' the path to the folder with the result of  \code{\link{modMosaic}}.
 #' The \code{fun} argument is a function with
-#' the calculation of the index based on spectral bands. There are some pre-programmed
+#' the calculation of an index based on the spectral bands. There are some pre-programmed
 #' indixes in \code{RGISTools}. Functions with the pre-programmed indexes start with var
 #' (\code{\link{varNDVI}}, \code{\link{varEVI}}). The user can define its own functions.
 #'
@@ -18,7 +18,7 @@
 #' @param fun is a function defined for computing indexes.
 #' All the functions starting with the ´var´ prefix are available 
 #' functions. Customized functions can also be implemented.
-#' @param getStack logical argument. If \code{TRUE}, returns the time-series as a \code{RasterStack}, otherwise the result 
+#' @param getStack logical argument. If \code{TRUE}, returns the time series as a \code{RasterStack}, otherwise the result 
 #' is saved in the Hard Drive Device (HDD).
 #' @param overwrite logical argument. If \code{TRUE}, it overwrites the existing images with the same name.
 #' @param ... argument to allow function nestering:

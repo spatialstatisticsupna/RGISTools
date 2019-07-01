@@ -1,8 +1,9 @@
 #' Imports time series of images and saves as RData
 #'
-#' \code{genSaveTSRData} imports the time series of (tif) satellite images into R from a folder, creating an RData.
+#' \code{genSaveTSRData} imports the time series of (GTiff) satellite images into R from a folder, 
+#' and creating an RData for future data loading.
 #'
-#' The function reads all the images inside the folder specified in \code{src}. The images must be .tif files.
+#' The function reads all the images inside the folder specified in \code{src}. The images must be GTiff files.
 #'  The \code{src} can take the path created by other functions of this package, such as \code{\link{senMosaic}},
 #'  \code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are imported into R to build a \code{RasterStack} that
 #'  is loaded into the global environment. The name of the \code{RasterStack} is specified
@@ -12,8 +13,8 @@
 #' @param ts.name the name of the variable containing the time series in R.
 #' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param dextent creates the \code{RasterStack} from different extent tif images.
-#' @param recursive logical argument. If \code{TRUE} reads folders recursively.
+#' @param dextent creates the \code{RasterStack} to the maximun extent from different extent GTiff images.
+#' @param recursive logical argument. If \code{TRUE} reads folders recursively, searching for images in GTiff image format.
 #' @param ... argument to allow function nestering.
 #' \itemize{
 #'   \item \code{AppRoot} the path where the RData will be saved.
@@ -21,7 +22,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' # load georeferenced polygon of Navarre as example
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # set the download folder
 #' s.start <- Sys.time()
@@ -33,15 +34,14 @@
 #'             username = "username",
 #'             password = "password",
 #'             AppRoot = src,
-#'             hdfdir = "hdf",
-#'             tiffdir = "tif",
+#'             extract.tif = TRUE,
 #'             collection = 6,
 #'             extent = ex.navarre)
-#' # set tif folder where hdf will be imported
+#' # set folder path where MOD09GA images will be saved
 #' src1 <- file.path(src,"MOD09GA")
 #' # set the tif folder path
 #' tif.src <- file.path(src1,"tif")
-#' #mosaic and cut navarre region
+#' # mosaic and cut navarre region
 #' modMosaic(tif.src,
 #'           AppRoot = src1,
 #'           out.name = "Navarre",

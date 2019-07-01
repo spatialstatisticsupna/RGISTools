@@ -4,7 +4,8 @@
 #'
 #' The function shows a preview of an image resulting from a search in Modis imagery metadata.
 #' A search with \code{\link{modSearch}} has to be done before proceeding with the preview.
-#' The preview is downloaded from Modis website. Please, be aware that only some images have this feature.
+#' The previewed images is downloaded from Modis website. Please, be aware that only not all 
+#' the captures have this feature.
 #'
 #'
 #' @param searchres a vector with the results from a search of Modis images provided by the functions modSearch with \code{resType="browseurl"} argument.
@@ -13,6 +14,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # Retrieve jpg images covering Navarre region between 2011 and 2013
 #' searchres <- modSearch(product = "MOD09GA",
@@ -21,6 +23,7 @@
 #'                       collection = 6,
 #'                       resType = "browseurl",
 #'                       extent = ex.navarre)
+#'                       
 #' modPreview(searchres, 1)
 #' modPreview(searchres, 1, size = 600)
 #' }

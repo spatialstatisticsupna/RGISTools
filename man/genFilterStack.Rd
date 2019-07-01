@@ -7,7 +7,7 @@
 genFilterStack(r, ...)
 }
 \arguments{
-\item{r}{the raster stack to be filtered.}
+\item{r}{the \code{RasterStack} to be filtered.}
 
 \item{...}{argument to allow function nestering.
 \itemize{
@@ -32,7 +32,7 @@ names(r) <- paste0("RandomImage_201803", 1:6)
 print(names(r))
 genGetDates(names(r))
 # example of filtering the raster stack
-r2 <- genFilterStack(r,
+r2 <- genFilterStack(r = r,
                      startDate = as.Date("2018-02-02", "\%Y-\%m-\%d"),
                      endDate = as.Date("2018-02-04", "\%Y-\%m-\%d"))
 # print the names and the number of layers of the filtered stack

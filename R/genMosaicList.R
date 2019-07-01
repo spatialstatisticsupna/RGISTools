@@ -3,10 +3,11 @@
 #' \code{genMosaicList} makes a single mosaic from a list of raster images.
 #'
 #' This is a helper function used by other functions in this package. It combines
-#' a list of raster images with different geolocation. If the images overlap,
-#'  the application selects the maximum value by default.
+#' a list of \code{raster} images with different geolocation. If the images overlap,
+#'  the function runs \code{fun} to calculate the value, otherwise
+#'  selects the maximum value by default.
 #'
-#' @param imageList list of raster images.
+#' @param imageList \code{list} class argument composed by \code{raster} layers.
 #' @param fun the function applied to overlapping pixels.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #'

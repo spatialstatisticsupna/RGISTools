@@ -14,8 +14,8 @@ senFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
 All functions in the package starting with three characters.
 'var' are acceptable functions. Custom functions can be also implemented.}
 
-\item{getStack}{logical argument. If \code{TRUE}, returns the time-series as a 
-raster or otherwise the images are saved in the Hard Drive Devide (HDD).}
+\item{getStack}{logical argument. If \code{TRUE}, returns the time series as a 
+\code{RasterStack} or otherwise the images are saved in the Hard Drive Devide (HDD).}
 
 \item{overwrite}{logical argument. If \code{TRUE} 
 overwrites the existing images with the same name.}
@@ -35,7 +35,7 @@ the resolution (10m, 20m and 60m) are calculated.}
 \code{senFolderToVar} calculates an index using the bands from Sentinel-2 multispectral
 images. The images are specified by a path to the storing folder
 (resulting from the \code{\link{senMosaic}} function). The function returns a
-\code{rasterStack} with the time-series of the indexes.
+\code{RasterStack} with the time-series of the indexes.
 }
 \details{
 The function requires the definition of src and fun arguments. The argument \code{src}
@@ -43,7 +43,7 @@ The function requires the definition of src and fun arguments. The argument \cod
  images. It can be easily defined as the path resulting from \code{\link{senMosaic}}.
  The fun argument is a function with the calculation of the index based
  on spectral bands. There are some pre-programmed indexes in \code{RGISTools}.
- Functions with the pre-programmed indices start with var (\code{\link{varNDVI}}, \code{\link{varEVI}}).
+ Functions with the pre-programmed indexes start with var (\code{\link{varNDVI}}, \code{\link{varEVI}}).
  The user can define its own functions.
 }
 \examples{
@@ -52,7 +52,7 @@ The function requires the definition of src and fun arguments. The argument \cod
 data(ex.navarre)
 # assign the main output directory
 src <- "Path_for_downloading_folder"
-# download Sentinel images
+# download Sentinel-2 images
 senDownload(startDate = as.Date("2018210","\%Y\%j"),
             endDate = as.Date("2018218","\%Y\%j"),
             platform = "Sentinel-2",
@@ -62,9 +62,9 @@ senDownload(startDate = as.Date("2018210","\%Y\%j"),
             username = "username",
             password = "password",
             AppRoot = src)
-# assign the folder with the Sentinel unzipped images
+# assign the folder with the Sentinel-2 unzipped images
 src.unzip <- file.path(src, "unzip")
-# mosaic the Sentinel images
+# mosaic the Sentinel-2 images
 senMosaic(src.unzip,
           AppRoot = src,
           gutils = TRUE,

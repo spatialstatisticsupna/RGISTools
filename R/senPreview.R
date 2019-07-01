@@ -9,14 +9,15 @@
 #' Credentials from ESA’s SciHub are needed to use this function.
 #' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 #'
-#' @param searchres a data frame with the results from a search of Landsat images provided by the function \code{\link{senSearch}}.
+#' @param searchres \code{data.frame} class argument with the results from a search of Landsat images provided by the function \code{\link{senSearch}}.
 #' @param username Scihub username.
 #' @param password Scihub password.
-#' @param n a number with the row corresponding to the image of interest in the search data frame.
-#' @param size a number specifying the size of the preview to be displayed. The number determines pixels number.
+#' @param n \code{numeric} argument with the row corresponding to the image of interest in the search data frame.
+#' @param size \code{numeric} argument with the number specifying the size of the preview to be displayed. The number determines pixels number.
 #'
 #' @examples
 #' \dontrun{
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # perform the search query
 #' searchres <- senSearch(startDate = as.Date("2018210","%Y%j"),

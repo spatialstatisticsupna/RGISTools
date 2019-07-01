@@ -7,7 +7,7 @@
 modGetDates(str, ...)
 }
 \arguments{
-\item{str}{a string or a list of strings defining the file path(s) or file name(s).}
+\item{str}{\code{character} class or a \code{vector} class containing the file path(s) or file name(s).}
 
 \item{...}{argument to allow function nestering:
 \itemize{
@@ -16,11 +16,11 @@ modGetDates(str, ...)
 }
 \description{
 \code{modGetDates} extracts the capturing date of one or several Modis
-images, given their file paths or names. The function returns a date class object.
+images, given their file paths or names. The function returns a date class.
 }
 \details{
 The function works with names or file paths having either of the two file extensions,
- \code{.hdf} or \code{.tif} files. The function accepts more than on file path or file names.
+ \code{HDF} or \code{GTiff} files. The function accepts more than on file path or file names.
  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
  If another format is required, it can be modified through the argument \code{date.format}.
 }
@@ -32,5 +32,5 @@ modGetDates(imgPath)
 # example of a list of the full file paths of Modis images, mixing .hdf and .tif files
 imgsPaths<-list('MYD13A2.A2013297.h17v04.006.2015269230726.hdf',
                 'MYD13A2.A2013313.h17v04.006.2015271071143.tif')
-modGetDates(imgsPaths)
+modGetDates(imgsPaths, date.format = "\%Y\%j")
 }

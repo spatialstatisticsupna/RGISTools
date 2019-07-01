@@ -16,9 +16,12 @@
 #'
 #' @examples
 #' \dontrun{
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' src <- "Path_for_downloading_folder"
 #' 
+#' # Search and download the images from Landsat-8 comprised between
+#' # 01-01-2018 and 20-01-2018 for the region of Navarre
 #' lsDownload(satellite = "ls8",
 #'            username = "username",
 #'            password = "password",
@@ -27,10 +30,14 @@
 #'            extent = ex.navarre,
 #'            untar = TRUE,
 #'            AppRoot = src)
+#'            
+#' # generate the path where the GTiff images are located
 #' src.untar <- file.path(src,"Landsat8","untar")
+#' # calculate the cloud mask from QC layer
 #' lsCloudMask(src=src.untar,
 #'             overwrite=TRUE)
 #'             
+#' # generate the path where the mosacked images will be saved
 #' src.ls8 <- dirname(src.untar)
 #' lsMosaic(src = src.untar,
 #'          AppRoot = src.ls8,
@@ -40,7 +47,9 @@
 #'          gutils = TRUE, # using gdalUtils
 #'          overwrite = TRUE) # overwrite
 #'          
+#' # generate the path where mosaicked images are located
 #' src.navarre <- file.path(src,"Landsat8","Navarre")
+#' # load the B1 layer and calculated CLD layer
 #' tiles.path <- list.files(src.navarre,
 #'                          full.names = TRUE,
 #'                          recursive = TRUE,
@@ -49,7 +58,9 @@
 #' b1.tiles <- tiles.path[grepl("B1.tif",tiles.path)]
 #' cloud.tiles.ras <- stack(cloud.tiles)
 #' b1.tiles.ras <- stack(b1.tiles)
-#' b1.cloud.free <- b1.tiles.ras*cloud.tiles.ras
+#' 
+#' # calculate cloud free b1 layers
+#' b1.cloud.free <- b1.tiles.ras * cloud.tiles.ras
 #' spplot(b1.cloud.free)
 #' }
 lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){

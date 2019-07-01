@@ -9,7 +9,7 @@ genPlotGIS(r, region = NULL, ...)
 \arguments{
 \item{r}{\code{Raster}* class variable with the image or image stack to be plotted.}
 
-\item{region}{a \code{polygon} class variable defining the area of interest.}
+\item{region}{\code{polygon} class variable defining the area of interest.}
 
 \item{...}{argument to allow function nestering.
 \itemize{
@@ -19,11 +19,11 @@ genPlotGIS(r, region = NULL, ...)
 }}
 }
 \description{
-This function displays satellite images with usual GIS information, 
-such as the scale, the north arrow, and the region of interest.
+This function displays satellite images with the usual Geographic Information System (GIS) style, 
+such as adding the scale, the north arrow, and the borderline of the region of interest.
 }
 \details{
-The function plots any raster type class as, \code{raster}, \code{RasterStack} or \code{RasterBrick}.
+The function plots any \code{raster} type class as, \code{raster}, \code{RasterStack} or \code{RasterBrick}.
 Accepts all parameter used by the function \code{spplot}.
 The function \code{genPlotGIS} adds a north arrow and a polygon with the area of interest.
 If necessary, the projection of the polygon is transformed to match the projection of the raster.
@@ -31,7 +31,9 @@ The projection of the map can be changed by adding the \code{proj} argument. The
 located by default in relative positions. Their positions can be modified with the \code{compOpt} paragram.
 }
 \examples{
+# load the ndvi object of Navarre
 data(ex.ndvi.navarre)
+# load a spatial polygon object of Navarre
 data(ex.navarre)
 
 # Shows a panel of 4 maps, one per date. The region of interest is shown in the last map

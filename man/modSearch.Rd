@@ -49,6 +49,7 @@ may occur when trying to connect with their server during this day of the week.
 }
 \examples{
 \dontrun{
+# load a spatial polygon object of Navarre
 data(ex.navarre)
 # Searching Modis MYD13A2 images between 2011 and 2013 by longitude/latitude
 using a polygon class variable

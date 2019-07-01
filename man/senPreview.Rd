@@ -7,15 +7,15 @@
 senPreview(searchres, username, password, n, size = NULL)
 }
 \arguments{
-\item{searchres}{a data frame with the results from a search of Landsat images provided by the function \code{\link{senSearch}}.}
+\item{searchres}{\code{data.frame} class argument with the results from a search of Landsat images provided by the function \code{\link{senSearch}}.}
 
 \item{username}{Scihub username.}
 
 \item{password}{Scihub password.}
 
-\item{n}{a number with the row corresponding to the image of interest in the search data frame.}
+\item{n}{\code{numeric} argument with the row corresponding to the image of interest in the search data frame.}
 
-\item{size}{a number specifying the size of the preview to be displayed. The number determines pixels number.}
+\item{size}{\code{numeric} argument with the number specifying the size of the preview to be displayed. The number determines pixels number.}
 }
 \description{
 \code{senPreview} shows a preview of the \code{n} image from a set of \code{searchres}.
@@ -30,6 +30,7 @@ Credentials from ESA’s SciHub are needed to use this function.
 }
 \examples{
 \dontrun{
+# load a spatial polygon object of Navarre
 data(ex.navarre)
 # perform the search query
 searchres <- senSearch(startDate = as.Date("2018210","\%Y\%j"),

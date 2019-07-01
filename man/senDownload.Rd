@@ -11,9 +11,11 @@ senDownload(username, password, verbose = FALSE, ...)
 
 \item{password}{Scihub platform password.}
 
+\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+
 \item{...}{argument to allow function nestering
 \itemize{
-  \item \code{product} Sentinel product type.
+  \item \code{product} Sentinel product type. Ex. "S2MSI1C", "S2MSI2A", "S2MSI2Ap", ... 
   \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
   \item \code{endDate} ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
   \item \code{extent} location as project file with extention.
@@ -39,9 +41,10 @@ of unzipping the images.
 }
 \examples{
 \dontrun{
+# load a spatial polygon object of Navarre
+data(ex.navarre)
 # Download S2MSI1C products sensed by Sentinel - 2 
 # satellite between the julian dates 210 and 218, 2018
-data(ex.navarre)
 src <- "Path_for_downloading_folder"
 senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             endDate = as.Date("2018218", "\%Y\%j"),

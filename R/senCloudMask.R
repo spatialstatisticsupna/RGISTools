@@ -2,9 +2,10 @@
 #' 
 #' \code{senCloudMask} creates clouds layers using \code{CLDPROB} band from \code{S2MSI2A} product.
 #'
-#' @param src the path to the folder where the \code{S2MSI2A} product are stored. 
+#' @param src the path to the folder where the \code{S2MSI2A} images are stored. 
 #' @param img.res character vector argument. Defines the resolution used to create the cloud mask. ex c("10m", "20m", "30m").
-#' @param sensitivity numeric argument. defines how sensitive is the method detecting the clouds. 0
+#' @param sensitivity numeric argument. defines how sensitive is the method detecting the clouds. The
+#' valid range is 0-100. By default 50.
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param ... argument to allow function nestering:
 #' \itemize{
@@ -13,9 +14,10 @@
 #'
 #' @examples
 #' \dontrun{
+#' # load a spatial polygon object of Navarre
+#' data(ex.navarre)
 #' # Download S2MSI1C products sensed by Sentinel - 2 
 #' # satellite between the julian dates 210 and 218, 2018
-#' data(ex.navarre)
 #' src <- "Path_for_downloading_folder"
 #' senDownload(startDate = as.Date("2018210", "%Y%j"),
 #'             endDate = as.Date("2018218", "%Y%j"),
@@ -26,21 +28,26 @@
 #'             username = "username",
 #'             password = "password",
 #'             AppRoot = src)
+#' # define Sentinel-2 path to the unzip folder
 #' src.sen2 <- file.path(src, "Sentinel-2")
-#' 
 #' src.unzip <- file.path(src.sen2, "unzip")
+#' # mosaic the Sentinel-2 images
 #' senMosaic(src.unzip,
 #'           AppRoot = src,
 #'           gutils = TRUE,
 #'           out.name = "Navarre")
 #'           
+#' # calculate the cloud mask
 #' src.navarre <- file.path(src.sen2, "Navarre")
 #' senCloudMask(src = src.navarre,
 #'              img.res = "60m",
 #'              overwrite = TRUE,
 #'              sensitivity=98)
+#'              
+#' # define Sentinel-2 cloud mask path
 #' src.cloud <- file.path(src.sen2, "CloudMask")
 #' 
+#' # select B02 images of 60 meters
 #' tiles.navarre <- list.files(src.navarre,
 #'                             full.names = TRUE,
 #'                             recursive = TRUE,
@@ -48,14 +55,17 @@
 #' b2.tiles <- tiles.navarre[grepl("B02",tiles.navarre)]
 #' b2.tiles <- b2.tiles[grepl("60m",b2.tiles)]
 #' 
+#' # select cloud mask of 60 meters
 #' cloud.tiles <- list.files(src.cloud,
 #'                           full.names = TRUE,
 #'                           pattern = "\\.tif$")
 #' cloud.tiles <- cloud.tiles[grepl("60m",cloud.tiles)]
 #' 
+#' # remove the cloud mask from b02 tiles
 #' b2.tiles.stack <- stack(b2.tiles)
 #' cloud.tiles.stack <- stack(cloud.tiles)
 #' b2.cloud.free <- b2.tiles.stack*cloud.tiles.stack
+#' # plot b2 cloud free layers
 #' spplot(b2.cloud.free)
 #' }
 senCloudMask<-function(src,img.res,sensitivity=50,overwrite=FALSE,...){
@@ -90,7 +100,7 @@ senCloudMask<-function(src,img.res,sensitivity=50,overwrite=FALSE,...){
 
       writeRaster(ras.cloud,out.img,overwrite=overwrite)
     }else{
-      messate(paste0("Cloud mask of date ",genGetDates(basename(id))," already exists."))
+      message(paste0("Cloud mask of date ",genGetDates(basename(id))," already exists."))
     }
   }
 }
