@@ -171,21 +171,14 @@ lsMosaic<-function(src,
             nodata<-0
           }
           if(verbose){message(paste0("Nodata to ",nodata))}
-          if(any(grepl("_T1_",typechunks))){
-            gindex<-which(grepl("_T1_",typechunks))[1]
-            if(verbose){message(paste0("gdalwarp_index to ",gindex))}
-          }else{
-            gindex<-1
-            message(paste0("Tier 1 image not detected gdalwarp_index to ",gindex))
-          }
           if(is.null(extent)){
             mosaic_rasters(typechunks,
                            dst_dataset=out.file.path,
                            srcnodata=nodata,
                            vrtnodata=nodata,
-                           gdalwarp_index=gindex,
                            overwrite=overwrite,
-                           verbose = verbose)
+                           verbose = verbose,
+                           allow_projection_difference=T)
           }else{
             ext<-extent(extent)
             temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",gsub(".tif","",dtype[dt]),"_temp.tif"))
@@ -193,9 +186,9 @@ lsMosaic<-function(src,
                            dst_dataset=temp,
                            srcnodata=nodata,
                            vrtnodata=nodata,
-                           gdalwarp_index=gindex,
                            overwrite=TRUE,
-                           verbose = verbose)
+                           verbose = verbose,
+                           allow_projection_difference=T)
             gdalwarp(srcfile=temp,
                      dstfile=out.file.path,
                      te=c(ext@xmin,ext@ymin,ext@xmax,ext@ymax),

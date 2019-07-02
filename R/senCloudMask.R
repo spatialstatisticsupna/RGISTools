@@ -3,7 +3,7 @@
 #' \code{senCloudMask} creates clouds layers using \code{CLDPROB} band from \code{S2MSI2A} product.
 #'
 #' @param src the path to the folder where the \code{S2MSI2A} images are stored. 
-#' @param img.res character vector argument. Defines the resolution used to create the cloud mask. ex c("10m", "20m", "30m").
+#' @param img.res character vector argument. Defines the resolution used to create the cloud mask. Ex "20m" or "30m".
 #' @param sensitivity numeric argument. defines how sensitive is the method detecting the clouds. The
 #' valid range is 0-100. By default 50.
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.

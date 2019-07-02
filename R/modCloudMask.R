@@ -78,7 +78,7 @@
 #' # plot the cloud free b01 layer
 #' spplot(navarre.b01.stack*cmask.stack)
 #' }
-modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,overwrite=FALSE,verbose=FALSE,...){
+modCloudMask<-function(startDate,endDate,extent,out.name="outname",raw.rm=FALSE,overwrite=FALSE,verbose=FALSE,...){
   arg <- list(...)
   AppRoot <- defineAppRoot(...)
   modDownloadAtmosphere(startDate=startDate,
@@ -100,6 +100,7 @@ modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,overwrite=FALSE,
             verbose=verbose)
   
   tif.images<-list.files(file.path(AppRoot,"outfile"),recursive = T,full.names = T,pattern = "\\.tif$")
+  dir.create(file.path(AppRoot,out.name),recursive=T,showWarnings = verbose)
   for(i in tif.images){
     out.file<-file.path(AppRoot,out.name,gsub("__","_",basename(i)))
     if((!file.exists(out.file))||overwrite){
@@ -110,6 +111,6 @@ modCloudMask<-function(startDate,endDate,extent,out.name,raw.rm,overwrite=FALSE,
       writeRaster(cldmask,out.file,overwrite=overwrite)
     }
   }
-  unlink(file.path(AppRoot,"outfile"),recursive=TRUE)
+  if(raw.rm){unlink(file.path(AppRoot,"outfile"),recursive=TRUE)}
   message(paste0("Clouds masks saved in:",AppRoot))
 }

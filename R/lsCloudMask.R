@@ -6,7 +6,7 @@
 #'
 #' @param src the path to the folder where the Landsat multispectral captures are stored. 
 #' @param sensitivity numeric argument. Defines how sensitive is the method detecting the clouds. 0-8000 are
-#' valid values.
+#' valid values. By default, the best value for Landsat 8 images assigned 2800. For Landsat-7 images use 600.
 #' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
 #' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
 #' @param ... argument to allow function nestering:
@@ -66,17 +66,19 @@
 lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
-  imgdir.list<-list.dirs(src)[-1]
-
+  imgdir.list<-list.dirs(src,recursive=FALSE)[-1]
+  if(verbose){message(paste0("Identifies folders:  \n",imgdir.list))}
   for(id in imgdir.list){
     #id<-imgdir.list[2]
     tif.list<-list.files(id,pattern = "\\.tif$",full.names = T,ignore.case = T)
     qc<-getRGISToolsOpt("LS8BANDS")["quality"]
-    qcmask<-tif.list[grepl(qc,tif.list)]
+    qcmask<-tif.list[grepl(qc,tif.list,ignore.case = T)]
+    if(verbose){message(paste0("QC mask name:  \n",qcmask))}
     if(length(qcmask)==0){
       message(paste0("No cloud mask found for date ",genGetDates(basename(id))))
       next
     }
+    
     out.img<-gsub(paste0(qc,".TIF"),"CLD.TIF",qcmask,ignore.case = T)
     
     if(!file.exists(out.img)||overwrite){
@@ -88,8 +90,9 @@ lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
         message(paste0("Minimun: ",mn))
       }
       ras.cloud[ras.cloud<=mn]<-0
+      ras.cloud[ras.cloud<1]<-0
       ras.cloud[ras.cloud>=sensitivity]<-0
-      ras.cloud[ras.cloud>1]<-1
+      ras.cloud[ras.cloud!=0]<-1
       
       NAvalue(ras.cloud)<-0
       writeRaster(ras.cloud,out.img,overwrite=overwrite)
