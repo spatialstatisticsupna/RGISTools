@@ -85,7 +85,7 @@ genSmoothingCovIMA <- function (rStack,
   # days in rStack
   days<-genGetDates(names(rStack))
   oday<-order(days)
-
+  if(all(is.na(days))){stop("The name of the layers has to include the date and it must be in julian days (%Y%j) .")}
   # ensure the images order
   rStack<-raster::subset(rStack,oday)
 

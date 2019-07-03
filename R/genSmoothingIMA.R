@@ -78,6 +78,7 @@ genSmoothingIMA<-function(imgTS,
     Img2Fill<-aux
   }
   alldates<-genGetDates(names(imgTS))
+  if(all(is.na(alldates))){stop("The name of the layers has to include the date and it must be in julian days (%Y%j) .")}
   fillstack<-raster()
   for(i in Img2Fill){
     # get target date
