@@ -2,7 +2,7 @@
 % Please edit documentation in R/genLimitRasterRange.R
 \name{genLimitRasterRange}
 \alias{genLimitRasterRange}
-\title{Limits the maximum and the minimum values of a raster image}
+\title{Limit the maximum and the minimum values of a raster image}
 \usage{
 genLimitRasterRange(r, mx = NULL, mn = NULL, rm.values = FALSE)
 }

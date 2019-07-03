@@ -1,15 +1,15 @@
-#' Sinchronizes Landsat-7 meta data file for image search.
+#' Sinchronize Landsat-7 meta data file for image search.
 #'
 #' \code{\link{ls7LoadMetadata}} loads a data frame called "\code{.LS7MD}"
 #'  with the names of the Landsat-7 images and their metadata. The metadata provides
-#'  auxiliary information regarding Landsat-7 images repository such as image quality, acquisition
+#'  auxiliary information regarding Landsat-7 repository, such as image quality, acquisition
 #'  data, cloud cover, etc. You can find a description of the metadata at
 #'  \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{bulk-metadata-service}.
 #'
 #' All captures done by Landsat-7 are cataloged in a unique csv file. The size of the file
 #' might be larger than 360MB. Therefore, the process of downloading and importing into R may take several
-#' minutes (around 15 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device). The function creates an
-#' RData file with the metadata csv. Thus, every time \code{\link{ls7LoadMetadata}} is called,
+#' minutes (15 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device roughly). The function creates an
+#' RData file with the csv metadata. Thus, every time \code{\link{ls7LoadMetadata}} is called,
 #' this function loads the existing RData in the Approot. This is intended to reduce the loading
 #' time of metadata in the future.
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/lsGetPathRow.R
 \name{lsGetPathRow}
 \alias{lsGetPathRow}
-\title{Returns the pathrow of Landsat tile in "\code{hXXvYY}" string format}
+\title{Return the pathrow of Landsat tile in "\code{hXXvYY}" string format}
 \usage{
 lsGetPathRow(str)
 }
@@ -16,7 +16,7 @@ an string with the path and row of the image in "\code{ppprrr}" format.
 \code{lsGetPathRow} reads the name of a Lansat 7 or 8 image and returns the path and row.
 }
 \examples{
-#example of getting date from Landsat-8 image name
+# example of getting date from Landsat-8 image name
 str <- c("LE72000302011066ASN00",
          "LE72000302011066ASN00")
 pr <- lsGetPathRow(str)

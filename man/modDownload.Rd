@@ -2,7 +2,7 @@
 % Please edit documentation in R/modDownload.R
 \name{modDownload}
 \alias{modDownload}
-\title{Search and downloads Modis images in structured folder}
+\title{Search and download Modis images in structured folder}
 \usage{
 modDownload(product, startDate, endDate, username, password,
   collection = 6, verbose = FALSE, extract.tif = FALSE, ...)
@@ -20,9 +20,9 @@ modDownload(product, startDate, endDate, username, password,
 
 \item{collection}{Modis collection, by default 6.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
-\item{extract.tif}{logical argument. If \code{TRUE} extracts as tif image format all the layers in a hdf image.}
+\item{extract.tif}{logical argument. If \code{TRUE}, extracts as tif image format all the layers in a hdf image.}
 
 \item{...}{argument for function nestering:
 \itemize{
@@ -33,9 +33,9 @@ This argument is mandatory if polygon or extent is not defined.
   \code{SpatialPoints*} object are acceptable formats as long as coordinates 
   are in longitude/latitude format. This argument is mandatory if \code{polygon} 
   or \code{lonlat} is not defined.
-  \item \code{polygon} A list of vectors defining the points of the polygon in longitude/latitude format
+  \item \code{polygon} A list of vectors defining the points of the polygon in longitude/latitude format.
 This argument is mandatory if \code{lonlat} or extent is not defined.
-  \item \code{AppRoot} the directory to save the resulting time series
+  \item \code{AppRoot} the directory to save the output time series.
 }}
 }
 \description{

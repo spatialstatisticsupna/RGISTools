@@ -2,7 +2,7 @@
 % Please edit documentation in R/senFolderToVar.R
 \name{senFolderToVar}
 \alias{senFolderToVar}
-\title{Computes derived variables from Sentinel-2 multispectral bands}
+\title{Compute derived variables from Sentinel-2 multispectral bands}
 \usage{
 senFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
   verbose = FALSE, resbands = c("10m", "20m", "60m"), ...)
@@ -12,19 +12,19 @@ senFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
 
 \item{fun}{is a function defined by the package for computing indexes.
 All functions in the package starting with three characters.
-'var' are acceptable functions. Custom functions can be also implemented.}
+'var' are acceptable functions. Custom functions can also be implemented.}
 
 \item{getStack}{logical argument. If \code{TRUE}, returns the time series as a 
 \code{RasterStack} or otherwise the images are saved in the Hard Drive Devide (HDD).}
 
-\item{overwrite}{logical argument. If \code{TRUE} 
+\item{overwrite}{logical argument. If \code{TRUE}, 
 overwrites the existing images with the same name.}
 
-\item{verbose}{logical argument. If \code{TRUE} the 
+\item{verbose}{logical argument. If \code{TRUE}, the 
 function prints running stages and warnings.}
 
 \item{resbands}{using Sentinel \code{S2MSI2A} products specifies the resolution of the output images. By default all 
-the resolution (10m, 20m and 60m) are calculated.}
+the resolutions (10m, 20m and 60m) are used.}
 
 \item{...}{argument to allow function nestering:
 \itemize{
@@ -35,13 +35,13 @@ the resolution (10m, 20m and 60m) are calculated.}
 \code{senFolderToVar} calculates an index using the bands from Sentinel-2 multispectral
 images. The images are specified by a path to the storing folder
 (resulting from the \code{\link{senMosaic}} function). The function returns a
-\code{RasterStack} with the time-series of the indexes.
+\code{RasterStack} with the index time series.
 }
 \details{
 The function requires the definition of src and fun arguments. The argument \code{src}
  contains the path to the folder with the multispectral
- images. It can be easily defined as the path resulting from \code{\link{senMosaic}}.
- The fun argument is a function with the calculation of the index based
+ images. It can be easily defined as the path comming from \code{\link{senMosaic}}.
+ The \code{fun} argument calculates the index based
  on spectral bands. There are some pre-programmed indexes in \code{RGISTools}.
  Functions with the pre-programmed indexes start with var (\code{\link{varNDVI}}, \code{\link{varEVI}}).
  The user can define its own functions.

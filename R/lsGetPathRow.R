@@ -1,4 +1,4 @@
-#' Returns the pathrow of Landsat tile in "\code{hXXvYY}" string format
+#' Return the pathrow of Landsat tile in "\code{hXXvYY}" string format
 #'
 #' \code{lsGetPathRow} reads the name of a Lansat 7 or 8 image and returns the path and row.
 #'
@@ -7,7 +7,7 @@
 #' @return an string with the path and row of the image in "\code{ppprrr}" format.
 #'
 #' @examples
-#' #example of getting date from Landsat-8 image name
+#' # example of getting date from Landsat-8 image name
 #' str <- c("LE72000302011066ASN00",
 #'          "LE72000302011066ASN00")
 #' pr <- lsGetPathRow(str)

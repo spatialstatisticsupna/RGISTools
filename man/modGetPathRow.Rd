@@ -2,7 +2,7 @@
 % Please edit documentation in R/modGetPathRow.R
 \name{modGetPathRow}
 \alias{modGetPathRow}
-\title{Returns the pathrow of Modis tile in "hXXvYY" string format}
+\title{Return the pathrow of Modis tile in "hXXvYY" string format}
 \usage{
 modGetPathRow(str)
 }

@@ -1,10 +1,10 @@
-#' Mosaics a list of raster images
+#' Mosaic a list of raster images
 #'
 #' \code{genMosaicList} makes a single mosaic from a list of raster images.
 #'
 #' This is a helper function used by other functions in this package. It combines
 #' a list of \code{raster} images with different geolocation. If the images overlap,
-#'  the function runs \code{fun} to calculate the value, otherwise
+#'  the function runs function (\code{fun}) to calculate the value, otherwise
 #'  selects the maximum value by default.
 #'
 #' @param imageList \code{list} class argument composed by \code{raster} layers.

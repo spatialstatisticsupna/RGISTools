@@ -2,7 +2,7 @@
 % Please edit documentation in R/genMosaicList.R
 \name{genMosaicList}
 \alias{genMosaicList}
-\title{Mosaics a list of raster images}
+\title{Mosaic a list of raster images}
 \usage{
 genMosaicList(imageList, fun = "max", verbose = TRUE)
 }
@@ -19,7 +19,7 @@ genMosaicList(imageList, fun = "max", verbose = TRUE)
 \details{
 This is a helper function used by other functions in this package. It combines
 a list of \code{raster} images with different geolocation. If the images overlap,
- the function runs \code{fun} to calculate the value, otherwise
+ the function runs function (\code{fun}) to calculate the value, otherwise
  selects the maximum value by default.
 }
 \examples{

@@ -1,8 +1,8 @@
-#' Creates clouds layers for Landsat images
+#' Create clouds layers for Landsat images
 #' 
 #' \code{lsCloudMask} creates layers of clouds derived from \code{BQA} band from Landsat-7 or Landsat-8 captures. 
 #' The function run over untar images downloaded by \code{\link{lsDownSearch}} or \code{\link{lsDownload}}, and 
-#' creates a new band designated with the label \code{CLD}.
+#' creates a new band named \code{CLD}.
 #'
 #' @param src the path to the folder where the Landsat multispectral captures are stored. 
 #' @param sensitivity numeric argument. Defines how sensitive is the method detecting the clouds. 0-8000 are

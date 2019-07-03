@@ -1,8 +1,8 @@
-#' Converts an HDF file into a set of GTiff files
+#' Convert an HDF file into a set of GTiff files
 #'
 #' \code{modExtractHDF} converts the original Modis image format (HDF) into a file
 #' format loadable by R (GTiff). The function extracts all image layers and crops the
-#' area of interest (if needed). This function requires the proper installation of GDAL library.
+#' area of interest (if needed). This function requires the correct installation of GDAL library.
 #'
 #' HDF files cannot be directly loaded into R. The function \code{\link{modExtractHDF}}
 #' borrows \code{gdalwarp} and \code{gdal_translate} functions from the \code{gdalUtils} package.
@@ -65,7 +65,7 @@ modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=
         
 
         for(i in bds){
-          if(!file.exists(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"))||overwrite){
+          if((!file.exists(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif")))||overwrite){
             print(paste0("Extract band ",i))
             if("s_srs"%in%names(arg)){
               gdal_translate(fileHDF,

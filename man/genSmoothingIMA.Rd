@@ -2,7 +2,7 @@
 % Please edit documentation in R/genSmoothingIMA.R
 \name{genSmoothingIMA}
 \alias{genSmoothingIMA}
-\title{Fills the gaps in a time series of satellite images}
+\title{Fill the gaps in a time series of satellite images}
 \usage{
 genSmoothingIMA(imgTS, Img2Fill = NULL, aFilter = c(0.05, 0.95),
   fact = 5, nDays = 3, nYears = 1, fun = mean, factSE = 8,
@@ -18,9 +18,9 @@ with the name of the layers containing the date in julian format (\code{YYYYJJJ}
 
 \item{fact}{\code{numeric} argument with an aggregation factor of the anomalies before the interpolation.}
 
-\item{nDays}{\code{numeric} argument with the number of previous and subsequent days used to define the neighborhood}
+\item{nDays}{\code{numeric} argument with the number of previous and subsequent days used for defining the neighborhood}
 
-\item{nYears}{\code{numeric} argument with the number of the number of previous and subsequent years used to define the neighborhood.}
+\item{nYears}{\code{numeric} argument with the number of previous and subsequent years used for defining the neighborhood.}
 
 \item{fun}{function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.}
 
@@ -28,13 +28,11 @@ with the name of the layers containing the date in julian format (\code{YYYYJJJ}
 
 \item{snow.mode}{logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.}
 
-\item{predictSE}{logical argument. If \code{TRUE} the filling process will calculate the standard error instead of the prediction.}
-
 \item{out.name}{the name of the output images.}
 
-\item{...}{argument to allow function nestering.
+\item{...}{argument for function nestering.
 \itemize{
-  \item \code{AppRoot} if a path is assigned its save the filled time series of images in this location.
+  \item \code{AppRoot} the path where the filled time series of images will be saved in \code{GTiff} format.
 }}
 }
 \value{
@@ -45,7 +43,7 @@ with the name of the layers containing the date in julian format (\code{YYYYJJJ}
 for gap filling \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{
-The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
+The time series of images are decomposed into time series of the mean images and time series of the anomaly images. The procedure applies
 the smoothing algorithm over the anomaly images.
 
 The arguments configure the smoothing procedure:

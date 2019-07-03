@@ -2,7 +2,7 @@
 % Please edit documentation in R/senGetPathRow.R
 \name{senGetTile}
 \alias{senGetTile}
-\title{Returns the tile of Sentinel-2 images "TTTSSS" string format}
+\title{Return the tile of Sentinel-2 images "TTTSSS" string format}
 \usage{
 senGetTile(str)
 }

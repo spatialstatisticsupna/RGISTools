@@ -7,15 +7,15 @@
 varNDWI(green, nir)
 }
 \arguments{
-\item{green}{the green band of the capture in \code{raster} format}
+\item{green}{the green band of the capture in \code{raster} format.}
 
-\item{nir}{the swir1 band of the capture in \code{raster} format}
+\item{nir}{the swir1 band of the capture in \code{raster} format.}
 }
 \value{
-NDWI in \code{raster} format
+NDWI in \code{raster} format.
 }
 \description{
-\code{varNDWI} computes the NDWI index from green and nir bands.
+\code{varNDWI} Calculate the NDWI index from green and nir bands.
 }
 \details{
 The Normalized Difference Water Index (NDWI) is a ratio between bands of the spectrum 
@@ -25,7 +25,7 @@ This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }
 \examples{
-# dir path of cropped and cutted Modis image in the region of navarre as example
+# dir path of cropped and cutted Modis image in the region of Navarre as example
 img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 # list all tif files
 img.files <- list.files(img.dir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)

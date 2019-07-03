@@ -1,4 +1,4 @@
-#' Search and downloads Modis images in structured folder
+#' Search and download Modis images in structured folder
 #'
 #' \code{modDownload} searches and downloads the Modis products on the 
 #' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} to find images 
@@ -18,8 +18,8 @@
 #' @param username EarthData username.
 #' @param password EarthData password.
 #' @param collection Modis collection, by default 6.
-#' @param extract.tif logical argument. If \code{TRUE} extracts as tif image format all the layers in a hdf image.
-#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param extract.tif logical argument. If \code{TRUE}, extracts as tif image format all the layers in a hdf image.
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{lonlat} A vector or a polygon with the coordinates of
@@ -29,9 +29,9 @@
 #'   \code{SpatialPoints*} object are acceptable formats as long as coordinates 
 #'   are in longitude/latitude format. This argument is mandatory if \code{polygon} 
 #'   or \code{lonlat} is not defined.
-#'   \item \code{polygon} A list of vectors defining the points of the polygon in longitude/latitude format
+#'   \item \code{polygon} A list of vectors defining the points of the polygon in longitude/latitude format.
 #' This argument is mandatory if \code{lonlat} or extent is not defined.
-#'   \item \code{AppRoot} the directory to save the resulting time series
+#'   \item \code{AppRoot} the directory to save the output time series.
 #' }
 #'
 #' @examples

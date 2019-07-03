@@ -1,4 +1,4 @@
-#' Calculates the modified soil-adjusted vegetation index (MSAVI2) from raster bands
+#' Calculate the modified soil-adjusted vegetation index (MSAVI2) from raster bands
 #'
 #' \code{varMSAVI2} computes the the MSAVI index from nir and red bands.
 #'
@@ -15,7 +15,7 @@
 #' @return MSAVI2 in \code{raster} format.
 #'
 #' @examples
-#' # dir path of cropped and cutted Modis image in the region of navarre as example
+#' # dir path of cropped and cutted Modis image in the region of Navarre as example
 #' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)

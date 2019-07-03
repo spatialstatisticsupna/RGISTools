@@ -2,7 +2,7 @@
 % Please edit documentation in R/ls8LoadMetadata.R
 \name{ls8LoadMetadata}
 \alias{ls8LoadMetadata}
-\title{Sinchronizes Landsat-8 meta data file, for image search}
+\title{Sinchronize Landsat-8 meta data file, for image search}
 \usage{
 ls8LoadMetadata(update = FALSE, verbose = TRUE,
   omit.question = FALSE, ...)
@@ -20,7 +20,7 @@ ls8LoadMetadata(update = FALSE, verbose = TRUE,
 }}
 }
 \description{
-\code{ls8LoadMetadata} downloads the csv format file of Metadata and loads a hidden data frame called .LS8MD into R.The metadata provides
+\code{ls8LoadMetadata} downloads the csv format file of metadata and loads a hidden data frame called .LS8MD into R.The metadata provides
  auxiliary information regarding Landsat-8 images repository such as image quality, acquisition
  data, cloud cover, etc. You can find a description of the metadata at
  \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{bulk-metadata-service}.

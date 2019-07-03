@@ -2,7 +2,7 @@
 % Please edit documentation in R/genPlotGIS.R
 \name{genPlotGIS}
 \alias{genPlotGIS}
-\title{Plots satellite images with a proper GIS format}
+\title{Plot satellite images with a proper GIS format}
 \usage{
 genPlotGIS(r, region = NULL, ...)
 }
@@ -11,7 +11,7 @@ genPlotGIS(r, region = NULL, ...)
 
 \item{region}{\code{polygon} class variable defining the area of interest.}
 
-\item{...}{argument to allow function nestering.
+\item{...}{argument for function nestering.
 \itemize{
   \item \code{compOpt} list to fit the size and the location of the GIS components as the arrow and the scales.
   \item \code{proj} defines the projection for the plot.
@@ -24,8 +24,8 @@ such as adding the scale, the north arrow, and the borderline of the region of i
 }
 \details{
 The function plots any \code{raster} type class as, \code{raster}, \code{RasterStack} or \code{RasterBrick}.
-Accepts all parameter used by the function \code{spplot}.
-The function \code{genPlotGIS} adds a north arrow and a polygon with the area of interest.
+It accepts all the parameter used in the \code{spplot} function.
+The function \code{genPlotGIS} adds a north arrow and a polygon in the area of interest.
 If necessary, the projection of the polygon is transformed to match the projection of the raster.
 The projection of the map can be changed by adding the \code{proj} argument. The arrow and scale bar are
 located by default in relative positions. Their positions can be modified with the \code{compOpt} paragram.

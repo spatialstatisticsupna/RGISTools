@@ -1,4 +1,4 @@
-#' Searches Sentinel images using ESA’s SciHub API
+#' Search Sentinel images using ESA's SciHub API
 #'
 #' \code{senSearch} searches Sentinel-2 products on ESA powered api called \href{http://scihub.copernicus.eu}{Scihub}.
 #'

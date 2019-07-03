@@ -2,7 +2,7 @@
 % Please edit documentation in R/genMissionGetDates.R
 \name{modGetDates}
 \alias{modGetDates}
-\title{Returns the capturing date of Modis image}
+\title{Return the capturing date of Modis image}
 \usage{
 modGetDates(str, ...)
 }
@@ -11,7 +11,7 @@ modGetDates(str, ...)
 
 \item{...}{argument to allow function nestering:
 \itemize{
-  \item \code{date.format} modify the format of the date being returned.
+  \item \code{format} modifies the format of the date.
 }}
 }
 \description{
@@ -22,7 +22,7 @@ images, given their file paths or names. The function returns a date class.
 The function works with names or file paths having either of the two file extensions,
  \code{HDF} or \code{GTiff} files. The function accepts more than on file path or file names.
  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
- If another format is required, it can be modified through the argument \code{date.format}.
+ If another format is required, it can be modified through the argument \code{format}.
 }
 \examples{
 # example of getting date from Sentinel2 image name
@@ -32,5 +32,5 @@ modGetDates(imgPath)
 # example of a list of the full file paths of Modis images, mixing .hdf and .tif files
 imgsPaths<-list('MYD13A2.A2013297.h17v04.006.2015269230726.hdf',
                 'MYD13A2.A2013313.h17v04.006.2015271071143.tif')
-modGetDates(imgsPaths, date.format = "\%Y\%j")
+modGetDates(imgsPaths, format = "\%Y\%j")
 }

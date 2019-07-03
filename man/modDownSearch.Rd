@@ -2,7 +2,7 @@
 % Please edit documentation in R/modDownSearch.R
 \name{modDownSearch}
 \alias{modDownSearch}
-\title{Downloads Modis images from search function response}
+\title{Download Modis images from search function response}
 \usage{
 modDownSearch(searchres, username = NULL, password = NULL,
   overwrite = FALSE, ...)

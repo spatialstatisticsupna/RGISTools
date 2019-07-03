@@ -2,7 +2,7 @@
 % Please edit documentation in R/lsMosaic.R
 \name{lsMosaic}
 \alias{lsMosaic}
-\title{Mosaics a set of Landsat images}
+\title{Mosaic a set of Landsat images}
 \usage{
 lsMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
   gutils = FALSE, overwrite = FALSE, ...)
@@ -13,14 +13,14 @@ lsMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
 \item{extent}{\code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
 \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.}
 
-\item{out.name}{the name of the region, if is not defined "outfile" will be assigned.}
+\item{out.name}{the name of the region, otherwise "outfile" is assigned.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
-\item{gutils}{logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking. The mosacking 
+\item{gutils}{logical argument. If \code{TRUE}, the function uses GDAL utilities for mosaicking. The mosacking 
 process is faster using \code{gutils} but requires the proper install of \code{gdalUtils} library.}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
 \item{...}{argument for function nestering accepts:
  \itemize{

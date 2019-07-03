@@ -2,7 +2,7 @@
 % Please edit documentation in R/modFolderToVar.R
 \name{modFolderToVar}
 \alias{modFolderToVar}
-\title{Computes derived variables from Modis multispectral bands}
+\title{Compute derived variables from Modis multispectral bands}
 \usage{
 modFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
 }
@@ -10,7 +10,7 @@ modFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
 \item{src}{path to the input folder with the Modis multispectral images.}
 
 \item{fun}{is a function defined for computing indexes.
-All the functions starting with the ´var´ prefix are available 
+All the functions starting with the "var" prefix are available 
 functions. Customized functions can also be implemented.}
 
 \item{getStack}{logical argument. If \code{TRUE}, returns the time series as a \code{RasterStack}, otherwise the result 
@@ -26,7 +26,7 @@ is saved in the Hard Drive Device (HDD).}
 \description{
 \code{\link{modFolderToVar}} calculates an index using the bands from Modis multispectral images.
 The images are specified by a path to the storing folder (resulting from the \code{\link{modMosaic}} function).
-The function returns a \code{RasterStack} with the time series of the indexes.
+The function returns a \code{RasterStack} with the index time series.
 }
 \details{
 The function requires the definition of \code{src} and \code{fun} arguments. The argument \code{src}

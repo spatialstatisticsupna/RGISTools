@@ -1,4 +1,4 @@
-#' Calculates normalized difference moisture (water) index (NDMI)
+#' Calculate normalized difference moisture (water) index (NDMI)
 #'
 #' \code{varNDMI} computes the NDMI index from nir and swir1 bands.
 #'
@@ -9,13 +9,13 @@
 #'
 #' @references \insertRef{gao1995normalized}{RGISTools}
 #'
-#' @param nir the nir band of the capture in \code{raster} format
-#' @param swir1 the swir1 band of the capture in \code{raster} format
+#' @param nir the nir band of the capture in \code{raster} format.
+#' @param swir1 the swir1 band of the capture in \code{raster} format.
 #'
-#' @return NDMI in \code{raster} format
+#' @return NDMI in \code{raster} format.
 #'
 #' @examples
-#' # dir path of cropped and cutted Modis image in the region of navarre as example
+#' # dir path of cropped and cutted Modis image in the region of Navarre as example
 #' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)

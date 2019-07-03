@@ -2,7 +2,7 @@
 % Please edit documentation in R/ls8Search.R
 \name{ls8Search}
 \alias{ls8Search}
-\title{Search Landsat-8 time-series images list}
+\title{Search Landsat-8 time series list of images}
 \usage{
 ls8Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 }
@@ -30,7 +30,7 @@ This argument is mandatory if \code{pathrow} is not defined.
 }}
 }
 \description{
-\code{ls8Search} searches the Landsat-8 image repository to find those which are relevant for
+\code{ls8Search} searches the Landsat-8 image repository to find available images for
 a particular location and date interval. The function returns the search result as a data frame
 with the names of the images and their metadata.
 }
@@ -70,7 +70,7 @@ search.res <- ls8Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         pathrow = list(c(200, 31), c(200, 30)),
                         browseAvaliable = "Y")
 
-# search by projected file must be in lat long projection
+# search by projected file must be in long/lat projection
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 search.res <- ls8Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),

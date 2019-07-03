@@ -1,4 +1,4 @@
-#' Calculates the normalized difference vegetation index (NDVI) from raster bands
+#' Calculate the normalized difference vegetation index (NDVI) from raster bands
 #'
 #' \code{varNDVI} computes the the NDVI index from nir and red bands.
 #'
@@ -10,13 +10,13 @@
 #'
 #' @references \insertRef{rouse1972monitoring}{RGISTools}
 #'
-#' @param red the red band of the capture in \code{raster} format
-#' @param nir the nir band of the capture in \code{raster} format
+#' @param red the red band of the capture in \code{raster} format.
+#' @param nir the nir band of the capture in \code{raster} format.
 #'
-#' @return NDVI in \code{raster} format
+#' @return NDVI in \code{raster} format.
 #'
 #' @examples
-#' # dir path of cropped and cutted Modis image in the region of navarre as example
+#' # dir path of cropped and cutted Modis image in the region of Navarre as example
 #' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)

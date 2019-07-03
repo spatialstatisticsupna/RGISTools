@@ -1,6 +1,6 @@
 #' Calculates normalized difference water index (NDWI)
 #'
-#' \code{varNDWI} computes the NDWI index from green and nir bands.
+#' \code{varNDWI} Calculate the NDWI index from green and nir bands.
 #'
 #' The Normalized Difference Water Index (NDWI) is a ratio between bands of the spectrum 
 #' that was developed to detect open water areas and minimize the influence of the soil 
@@ -10,13 +10,13 @@
 #'
 #' @references \insertRef{mcfeeters1996use}{RGISTools}
 #'
-#' @param green the green band of the capture in \code{raster} format
-#' @param nir the swir1 band of the capture in \code{raster} format
+#' @param green the green band of the capture in \code{raster} format.
+#' @param nir the swir1 band of the capture in \code{raster} format.
 #'
-#' @return NDWI in \code{raster} format
+#' @return NDWI in \code{raster} format.
 #'
 #' @examples
-#' # dir path of cropped and cutted Modis image in the region of navarre as example
+#' # dir path of cropped and cutted Modis image in the region of Navarre as example
 #' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)

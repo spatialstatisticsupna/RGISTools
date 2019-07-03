@@ -1,9 +1,9 @@
-#' Fills the gaps in a time series of satellite images
+#' Fill the gaps in a time series of satellite images
 #'
 #' \code{genSmoothingIMA} is the implementation of a spatio temporal method called Image Mean Anomaly (IMA)
 #' for gap filling \insertCite{militino2019interpolation}{RGISTools}.
 #'
-#' The time series of images are decomposed into the mean images and the anomaly images. The procedure applies
+#' The time series of images are decomposed into time series of the mean images and time series of the anomaly images. The procedure applies
 #' the smoothing algorithm over the anomaly images.
 #'
 #' The arguments configure the smoothing procedure:
@@ -18,15 +18,15 @@
 #' @param Img2Fill \code{vector} class argument defining the images to be filled.
 #' @param aFilter \code{vector} class argument with two component defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
 #' @param fact \code{numeric} argument with an aggregation factor of the anomalies before the interpolation.
-#' @param nDays \code{numeric} argument with the number of previous and subsequent days used to define the neighborhood
-#' @param nYears \code{numeric} argument with the number of the number of previous and subsequent years used to define the neighborhood.
+#' @param nDays \code{numeric} argument with the number of previous and subsequent days used for defining the neighborhood
+#' @param nYears \code{numeric} argument with the number of previous and subsequent years used for defining the neighborhood.
 #' @param fun function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.
 #' @param snow.mode logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.
 #' @param factSE the fact used in the standard error prediction to reduce the processing time.
 #' @param out.name the name of the output images.
-#' @param ... argument to allow function nestering.
+#' @param ... argument for function nestering.
 #' \itemize{
-#'   \item \code{AppRoot} if a path is assigned its save the filled time series of images in this location.
+#'   \item \code{AppRoot} the path where the filled time series of images will be saved in \code{GTiff} format.
 #' }
 #' 
 #' @return \code{RasterStack} object with the smoothed time series.

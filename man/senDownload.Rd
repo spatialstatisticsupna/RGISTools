@@ -2,7 +2,7 @@
 % Please edit documentation in R/senDownload.R
 \name{senDownload}
 \alias{senDownload}
-\title{Searchs and downloads Sentinel images}
+\title{Search and download Sentinel images}
 \usage{
 senDownload(username, password, verbose = FALSE, ...)
 }
@@ -11,26 +11,27 @@ senDownload(username, password, verbose = FALSE, ...)
 
 \item{password}{Scihub platform password.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
 \item{...}{argument to allow function nestering
 \itemize{
   \item \code{product} Sentinel product type. Ex. "S2MSI1C", "S2MSI2A", "S2MSI2Ap", ... 
   \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
   \item \code{endDate} ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-  \item \code{extent} location as project file with extention.
+  \item \code{extent} \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or 
+  \code{SpatialPoints*} object of the region of interest in longitude/latitude coordinate system.
   \item \code{platform} platform name of the Sentinel mission (Sentinel-1, Sentinel-2,...).
   \item \code{nattempts} the number of attempts that the function has to carry out
-   an image in case the file becomes corrupted.
-  \item \code{unzip} logical argument. If \code{TRUE} unzips the images.
+   an image in case of corrupted files.
+  \item \code{unzip} logical argument. If \code{TRUE}, unzips the images.
   \item \code{error.log} error log file name.
-  \item \code{verbose} logical argument. If \code{TRUE} the function prints running stages and warnings.
+  \item \code{verbose} logical argument. If \code{TRUE}, the function prints running stages and warnings.
   \item \code{AppRoot} the directory where the images will be saved.
 }}
 }
 \description{
 \code{senDownload} combines both \code{\link{senSearch}} and \code{\link{senDownSearch}} functions for searching and downloading. 
-It is recommended for creating long time series in an automated way.
+It is recommended for creating long time series of images in an automated way.
 }
 \details{
 This function accepts all the arguments in \code{\link{senSearch}} function and automatically downloads

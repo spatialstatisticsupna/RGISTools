@@ -2,7 +2,7 @@
 % Please edit documentation in R/senSearch.R
 \name{senSearch}
 \alias{senSearch}
-\title{Searches Sentinel images using ESA’s SciHub API}
+\title{Search Sentinel images using ESA's SciHub API}
 \usage{
 senSearch(username, password, ...)
 }

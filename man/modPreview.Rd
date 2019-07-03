@@ -2,7 +2,7 @@
 % Please edit documentation in R/modPreview.R
 \name{modPreview}
 \alias{modPreview}
-\title{Allows a preview in R of Modis satellite images}
+\title{Preview of Modis satellite images}
 \usage{
 modPreview(searchres, n, size = NULL)
 }
@@ -14,12 +14,11 @@ modPreview(searchres, n, size = NULL)
 \item{size}{a number specifying the size of the preview to be displayed, in pixels.}
 }
 \description{
-\code{modPreview} shows a preview of the n image from a set of search results.
+\code{modPreview} shows a preview of the \code{n}-th image from a set of search results.
 }
 \details{
-The function shows a preview of an image resulting from a search in Modis imagery metadata.
-A search with \code{\link{modSearch}} has to be done before proceeding with the preview.
-The previewed images is downloaded from Modis website. Please, be aware that only not all 
+The function shows a preview of the \code{n}-th from \code{\link{modSearch}} function.
+The previewed image is downloaded from Modis website. Please, be aware that not all 
 the captures have this feature.
 }
 \examples{

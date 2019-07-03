@@ -2,7 +2,7 @@
 % Please edit documentation in R/ls7Search.R
 \name{ls7Search}
 \alias{ls7Search}
-\title{Search Landsat-7 time-series images list}
+\title{Search Landsat-7 time series list of images}
 \usage{
 ls7Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 }
@@ -25,12 +25,12 @@ the point or region of interest in longitude/latitude format.
   \item \code{extent} this argument is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
 object are acceptable formats as long as are longitude/latitude format.
 This argument is mandatory if \code{pathrow} is not defined.
-  \item \code{AppRoot} the root directory where meta data file will be saved.
+  \item \code{AppRoot} the root directory where metadata file will be saved.
   \item all column names in .LS7MD data frame for filter results.
 }}
 }
 \description{
-\code{ls7Search} searches the Landsat-7 image repository to find those which are relevant for
+\code{ls7Search} searches the Landsat-7 image repository to find available images for
 a particular location and date interval. The function returns the search result as a data frame
 with the names of the images and their metadata.
 }
@@ -70,13 +70,13 @@ search.res <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         pathrow = list(c(200,31),c(200,30)),
                         browseAvaliable = "Y")
                   
-# search by a point in longitude/latitude
+# search by longitude/latitude
 search.res <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                         lonlat = c(-1.64323,42.81687),
                         browseAvaliable = "Y")
                   
-# search by projected file must be in lat long projection
+# search by projected file must be in long/lat projection
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 search.res <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),

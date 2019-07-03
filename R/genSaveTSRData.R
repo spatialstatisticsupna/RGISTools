@@ -1,7 +1,7 @@
-#' Imports time series of images and saves as RData
+#' Import time series of images and saves as RData
 #'
 #' \code{genSaveTSRData} imports the time series of (GTiff) satellite images into R from a folder, 
-#' and creating an RData for future data loading.
+#' for creating an RData.
 #'
 #' The function reads all the images inside the folder specified in \code{src}. The images must be GTiff files.
 #'  The \code{src} can take the path created by other functions of this package, such as \code{\link{senMosaic}},
@@ -15,7 +15,7 @@
 #' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param dextent creates the \code{RasterStack} to the maximun extent from different extent GTiff images.
 #' @param recursive logical argument. If \code{TRUE} reads folders recursively, searching for images in GTiff image format.
-#' @param ... argument to allow function nestering.
+#' @param ... argument for function nestering.
 #' \itemize{
 #'   \item \code{AppRoot} the path where the RData will be saved.
 #' }

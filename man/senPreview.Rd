@@ -2,7 +2,7 @@
 % Please edit documentation in R/senPreview.R
 \name{senPreview}
 \alias{senPreview}
-\title{Allows a preview in R of Sentinel satellite images}
+\title{Preview of Sentinel-2 satellite images}
 \usage{
 senPreview(searchres, username, password, n, size = NULL)
 }
@@ -15,14 +15,15 @@ senPreview(searchres, username, password, n, size = NULL)
 
 \item{n}{\code{numeric} argument with the row corresponding to the image of interest in the search data frame.}
 
-\item{size}{\code{numeric} argument with the number specifying the size of the preview to be displayed. The number determines pixels number.}
+\item{size}{\code{numeric} argument with the number specifying the size of the preview to be displayed. 
+It corresponds to the number of pixels.}
 }
 \description{
-\code{senPreview} shows a preview of the \code{n} image from a set of \code{searchres}.
+\code{senPreview} shows a preview of the \code{n}-th image from a set of \code{searchres}.
 }
 \details{
-The functions shows a preview of an image resulting from a search in Scihub platform.
-A search with \code{\link{senSearch}} has to be done before proceeding with the preview.
+The functions shows a preview of the \code{n}-th image coming from the \code{\link{senSearch}} 
+function.
 The preview is downloaded from Scihub website, and the crediantials are needed.
 Please, be aware that only some images have this feature.
 Credentials from ESA’s SciHub are needed to use this function.

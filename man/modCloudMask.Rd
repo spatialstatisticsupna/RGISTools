@@ -2,10 +2,10 @@
 % Please edit documentation in R/modCloudMask.R
 \name{modCloudMask}
 \alias{modCloudMask}
-\title{Creates clouds layers for Modis images}
+\title{Create layers of clouds for Modis images}
 \usage{
-modCloudMask(startDate, endDate, extent, out.name, raw.rm,
-  overwrite = FALSE, verbose = FALSE, ...)
+modCloudMask(startDate, endDate, extent, out.name = "outname",
+  raw.rm = FALSE, overwrite = FALSE, verbose = FALSE, ...)
 }
 \arguments{
 \item{startDate}{starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}

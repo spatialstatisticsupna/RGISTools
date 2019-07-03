@@ -18,7 +18,7 @@ modSearch(product, startDate, endDate, collection = 6, resType = "url",
 
 \item{resType}{response type of the query (\code{browseurl} or \code{url}), by default the url where the images are located.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
 \item{...}{argument to allow function nestering:
 \itemize{
@@ -27,17 +27,17 @@ the point or region of interest in longitude/latitude format.
 This argument is mandatory if polygon or extent is not defined.
   \item \code{extent} \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or \code{SpatialPoints*} object are acceptable formats
 as long as coordinates are in longitude/latitude format.
-This argument is mandatory if polygon or lonlat is not defined.
-  \item \code{polygon} a list of vectors defining the points of the polygon in longitude/latitude format
-This argument is mandatory if lonlat or extent is not defined.
-  \item \code{AppRoot} the directory to save the resulting time series.
+This argument is mandatory if \code{polygon} or \code{lonlat} is not defined.
+  \item \code{polygon} a list of vectors defining the points of the polygon in longitude/latitude format.
+This argument is mandatory if \code{lonlat} or \code{extent} is not defined.
+  \item \code{AppRoot} the directory to save the output time series.
 }}
 }
 \description{
 \code{modSearch} searches the Modis products on the  
 \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} to 
- find the avaliable for a particular location and date interval.
-The function returns the search result as an array of urls with the relevant images.
+ find the avaliable images for a particular location and date interval.
+The outut is an array of urls with the relevant images.
 }
 \details{
 \code{modSearch} \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} (CMR) powered api.
@@ -49,7 +49,7 @@ may occur when trying to connect with their server during this day of the week.
 }
 \examples{
 \dontrun{
-# load a spatial polygon object of Navarre
+# load a spatial polygon object of Navarre in longitude/latitude coordinates
 data(ex.navarre)
 # Searching Modis MYD13A2 images between 2011 and 2013 by longitude/latitude
 using a polygon class variable

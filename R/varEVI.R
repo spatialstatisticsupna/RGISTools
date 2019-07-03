@@ -1,4 +1,4 @@
-#' Calculates the enhanced vegetation index (EVI) from raster bands
+#' Calculate the enhanced vegetation index (EVI) from raster bands
 #'
 #' \code{varEVI} computes the EVI index from blue, nir and red bands.
 #'
@@ -16,7 +16,7 @@
 #' @return EVI in \code{raster} format.
 #'
 #' @examples
-#' # dir path of cropped and cutted Modis image in the region of navarre as example
+#' # dir path of cropped and cutted Modis image in the region of Navarre as example
 #' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir, pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)

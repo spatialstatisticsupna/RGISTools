@@ -1,8 +1,8 @@
-#' Computes derived variables from Modis multispectral bands
+#' Compute derived variables from Modis multispectral bands
 #'
 #' \code{\link{modFolderToVar}} calculates an index using the bands from Modis multispectral images.
 #' The images are specified by a path to the storing folder (resulting from the \code{\link{modMosaic}} function).
-#' The function returns a \code{RasterStack} with the time series of the indexes.
+#' The function returns a \code{RasterStack} with the index time series.
 #'
 #' The function requires the definition of \code{src} and \code{fun} arguments. The argument \code{src}
 #' specifies the path to the output folder with the multispectral images, where a new folder with the 
@@ -16,7 +16,7 @@
 #'
 #' @param src path to the input folder with the Modis multispectral images.
 #' @param fun is a function defined for computing indexes.
-#' All the functions starting with the ´var´ prefix are available 
+#' All the functions starting with the "var" prefix are available 
 #' functions. Customized functions can also be implemented.
 #' @param getStack logical argument. If \code{TRUE}, returns the time series as a \code{RasterStack}, otherwise the result 
 #' is saved in the Hard Drive Device (HDD).

@@ -2,7 +2,7 @@
 % Please edit documentation in R/senGetPathRow.R
 \name{senGetOrbit}
 \alias{senGetOrbit}
-\title{Returns the relative orbit of the Sentinel-2 satellite}
+\title{Return the relative orbit of the Sentinel-2 satellite}
 \usage{
 senGetOrbit(str)
 }

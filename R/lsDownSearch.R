@@ -1,16 +1,16 @@
-#' Downloads a time series of satellite images from Landsat 7-8
+#' Download a time series of satellite images from Landsat 7-8
 #'
 #' \code{\link{lsDownSearch}} downloads the list of images provided by \code{\link{ls7Search}} and \code{\link{ls8Search}} functions.
 #' The images are saved as ‘GTiff’ files in the \code{AppRoot} directory.
 #'
-#' This function is used for download Landsat images. Uses the data frame result from  any landsat
-#' search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}) and download all images in data frame.
+#' This function is used for downloading Landsat images. It downloads all the list of images 
+#' provided in the output data frame of the search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}).
 #' Image download requires USGS login account. \href{https://ers.cr.usgs.gov/register/}{Get your credentials}.
 #'
-#' The image files from the USGS EROS web service are compressed as ‘.tar.gz’ files. lsDownSearch decompresses the
+#' The image files from the USGS EROS web service are compressed as ‘.tar.gz’ files. \code{\link{lsDownSearch}} decompresses the
 #' images and obtains the corresponding ‘.tif’ files. The ‘.tif’ files are saved in the
-#' \code{AppRoot} directory. When \code{untarDir} is defined the function untars the images in this folder.
-#' This replicates the images in compresses version as 'tar.gz' and uncompresses version. To save space in the disk
+#' \code{AppRoot} directory. When \code{untar} is defined the function untars the images in "untar" folder.
+#' This replicates the images in compresses version as 'tar.gz' and uncompresses version in "untar" folder. To save space in the disk
 #' \code{raw.rm = TRUE} can be defined, and \code{\link{lsDownSearch}} will remove the ‘tar.gz’ files.
 #' If \code{raw.rm = FALSE}, the original files remain, which might be useful to have access to the original files
 #' in the future and avoid further downloads. By default, \code{\link{lsDownSearch}} saves the images in (...), in the \code{AppRoot}
@@ -35,13 +35,13 @@
 #' #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # Search and download the images from Landsat-8 comprised between
-#' # 2011 and 2013 for the region of Navarre
+#' # 2011 and 2013 in the region of Navarre
 #' search.res <- ls8Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                         extent = ex.navarre,
 #'                         browseAvaliable = "Y")
 #'
-#' #download 1 image
+#' # download 1 image
 #' lsDownSearch(searchres = search.res[1,], 
 #'              username = "user", 
 #'              password = "pass", 
@@ -61,12 +61,12 @@
 #'              raw.rm = TRUE)
 #'
 #' # Search and download the images from Landsat-7 comprised between
-#' # 2011 and 2013 for the region of Navarre
+#' # 2011 and 2013 in the region of Navarre
 #' search.res <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                         extent = ex.navarre,
 #'                         browseAvaliable = "Y")
-#' #download 1 image
+#' # download 1 image
 #' lsDownSearch(searchres = search.res[1,], 
 #'              username = "user", 
 #'              password = "pass", 

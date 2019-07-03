@@ -11,6 +11,7 @@
 }}
 \description{
 Geographically projected \code{RasterStack} with the DEM values for
-the region of Navarre, to use as example in \code{genSmoothingCovIMA}.
+the region of Navarre, for using as example in \code{genSmoothingCovIMA}. \code{RasterStack} 
+projection: \code{+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs}.
 }
 \keyword{data}

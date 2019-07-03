@@ -2,7 +2,7 @@
 % Please edit documentation in R/RGISToolsOpts.R
 \name{setRGISToolsOpt}
 \alias{setRGISToolsOpt}
-\title{Changes the default value of an RGISTools configuration variable}
+\title{Change the default value of an RGISTools configuration variable}
 \usage{
 setRGISToolsOpt(opt, value, env = optEnv)
 }
@@ -15,7 +15,7 @@ setRGISToolsOpt(opt, value, env = optEnv)
 }
 \description{
 \code{setRGISToolsOpt} changes the default value of an \code{RGISTools} option.
-This function can be used togeder with \code{\link{showRGISToolsOpt}} and 
+This function can be jointly used with \code{\link{showRGISToolsOpt}} and 
 \code{\link{getRGISToolsOpt}}.
 }
 \examples{

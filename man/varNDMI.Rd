@@ -2,17 +2,17 @@
 % Please edit documentation in R/varNDMI.R
 \name{varNDMI}
 \alias{varNDMI}
-\title{Calculates normalized difference moisture (water) index (NDMI)}
+\title{Calculate normalized difference moisture (water) index (NDMI)}
 \usage{
 varNDMI(nir, swir1)
 }
 \arguments{
-\item{nir}{the nir band of the capture in \code{raster} format}
+\item{nir}{the nir band of the capture in \code{raster} format.}
 
-\item{swir1}{the swir1 band of the capture in \code{raster} format}
+\item{swir1}{the swir1 band of the capture in \code{raster} format.}
 }
 \value{
-NDMI in \code{raster} format
+NDMI in \code{raster} format.
 }
 \description{
 \code{varNDMI} computes the NDMI index from nir and swir1 bands.
@@ -24,7 +24,7 @@ This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }
 \examples{
-# dir path of cropped and cutted Modis image in the region of navarre as example
+# dir path of cropped and cutted Modis image in the region of Navarre as example
 img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 # list all tif files
 img.files <- list.files(img.dir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)

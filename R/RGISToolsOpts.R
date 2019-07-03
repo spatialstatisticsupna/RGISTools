@@ -54,10 +54,10 @@ assign("SEN1BANDS",NULL, env=optEnv)
 assign("SEN2BANDS",c(bluecoastal='B01',blue='B02',green='B03',red='B04',vegrededge="B05",vegrededge1="B06",vegrededge2="B07",nir='B08',narrownir='B8A',watervapour="B09",cirrus="B10",swir1='B11',swir2='B12',cloud='CLD',snow='SNW',rgb="TCI",preview='PVI',watervap='WVP'), env=optEnv)
 assign("SEN3BANDS",NULL, env=optEnv)
 
-#' Changes the default value of an RGISTools configuration variable
+#' Change the default value of an RGISTools configuration variable
 #'
 #' \code{setRGISToolsOpt} changes the default value of an \code{RGISTools} option.
-#' This function can be used togeder with \code{\link{showRGISToolsOpt}} and 
+#' This function can be jointly used with \code{\link{showRGISToolsOpt}} and 
 #' \code{\link{getRGISToolsOpt}}.
 #'
 #' @param opt the name of the option to change in character format
@@ -77,10 +77,10 @@ setRGISToolsOpt <- function(opt,value,env=optEnv) {
   assign(opt, value, envir=env)
 }
 
-#' Gets the current value of an RGISTools configuration variable
+#' Get the current value of an RGISTools configuration variable
 #'
 #' \code{getRGISToolsOpt} gets the current value of an \code{RGISTools} option.
-#' This function can be used togeder with \code{\link{setRGISToolsOpt}} and 
+#' This function can be jointly used with \code{\link{setRGISToolsOpt}} and 
 #' \code{\link{showRGISToolsOpt}}.
 #'
 #' @param opt the name of the option to get.
@@ -99,10 +99,10 @@ getRGISToolsOpt <- function(opt,env=optEnv) {
   return(get(opt, envir=env))
 }
 
-#' Prints the name of all RGISTools configuration variables
+#' Print the name of all RGISTools configuration variables
 #' 
 #' \code{showRGISToolsOpt} prints the name of all options in \code{RGISTools} package.
-#' This function can be used togeder with \code{\link{setRGISToolsOpt}} and 
+#' This function can be jointly used with \code{\link{setRGISToolsOpt}} and 
 #' \code{\link{getRGISToolsOpt}}.
 #'
 #' @param env the environment where the \code{RGISTools} option are saved.

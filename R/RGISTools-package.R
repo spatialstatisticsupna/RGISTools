@@ -17,13 +17,13 @@
 #'   \item \code{ls7} identifies Landsat 7 functions.
 #'   \item \code{ls8} identifies Landsat 8 functions.
 #'   \item \code{ls} identifies both Landsat 7 and 8 functions.
-#'   \item \code{gen} identifies function to use with any of the three platforms.
-#'   \item \code{var} identifies function to calculate variables with any of the three platforms.
+#'   \item \code{gen} identifies function for being used in any of the three platforms.
+#'   \item \code{var} identifies function for deriving variables in any of the three platforms.
 #' }
 #' 
 #' Below is a list of the most important functions grouped by running order for creating a time series of
-#' images for each satellite considered in the package.
-#' Each satellite group of functions considers all the procedure including searching, previewing, 
+#' images for each satellite.
+#' These functions include searching, previewing, 
 #' downloading, mosaicking, extracting variables, composing, and filling-smoothing.
 #' @section I. Landsat time series functions:
 #' Landsat mission releases images comming from two satellites, Landsat-7 and Landsat-8. Each satellite needs its own 
@@ -32,61 +32,61 @@
 #' 
 #' \subsection{Landsat-7}{
 #' \tabular{ll}{
-#'   \code{ \link{ls7LoadMetadata}}\tab Load Landsat-7 meta data file for image search \cr
-#'   \code{\link{ls7Search}} \tab Search Landsat-7 time-series images list \cr
-#'   \code{\link{lsPreview}} \tab Preview in R Landsat satellite images \cr
-#'   \code{\link{lsDownSearch}} \tab Download a time series of satellite images from Landsat\cr
-#'   \code{\link{lsCloudMask}} \tab Create clouds layers for Landsat images \cr
-#'   \code{\link{lsMosaic}} \tab Mosaic Landsat time series of images \cr
-#'   \code{\link{ls7FolderToVar}} \tab Compute derived variables from Landsat-7 multispectral bands \cr
-#'   \code{\link{lsCloudMask}} \tab Create clouds layers for Landsat images \cr
-#'   \code{\link{genSaveTSRData}} \tab Import into R the processed time series of images \cr
+#'   \code{ \link{ls7LoadMetadata}}\tab Loads Landsat-7 meta data file for image searching \cr
+#'   \code{\link{ls7Search}} \tab Searchs Landsat-7 time-series images list \cr
+#'   \code{\link{lsPreview}} \tab Previews in R Landsat satellite images \cr
+#'   \code{\link{lsDownSearch}} \tab Downloads a time series of satellite images from Landsat\cr
+#'   \code{\link{lsCloudMask}} \tab Creates clouds layers for Landsat images \cr
+#'   \code{\link{lsMosaic}} \tab Mosaics Landsat time series of images \cr
+#'   \code{\link{ls7FolderToVar}} \tab Computes derived variables from Landsat-7 multispectral bands \cr
+#'   \code{\link{lsCloudMask}} \tab Creates clouds layers for Landsat images \cr
+#'   \code{\link{genSaveTSRData}} \tab Imports into R the processed time series of images \cr
 #'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
 #'   }
 #' }
 #' \subsection{Landsat-8}{
 #' \tabular{ll}{
-#'   \code{ \link{ls8LoadMetadata}}\tab Load Landsat-8 meta data file for image search \cr
-#'   \code{\link{ls8Search}} \tab Search Landsat-8 time-series images list \cr
-#'   \code{\link{lsPreview}} \tab Preview in R Landsat satellite images \cr
-#'   \code{\link{lsDownSearch}} \tab Download a time series of satellite images from Landsat\cr
-#'   \code{\link{lsCloudMask}} \tab Create clouds layers for Landsat images \cr
-#'   \code{\link{lsMosaic}} \tab  Mosaic Landsat time series of images\cr
-#'   \code{\link{ls8FolderToVar}} \tab Compute derived variables from Landsat-8 multispectral bands\cr
-#'   \code{\link{genSaveTSRData}} \tab Import into R the processed time series of images \cr
+#'   \code{ \link{ls8LoadMetadata}}\tab Loads Landsat-8 meta data file for image searching \cr
+#'   \code{\link{ls8Search}} \tab Searchs Landsat-8 time-series images list \cr
+#'   \code{\link{lsPreview}} \tab Previews in R Landsat satellite images \cr
+#'   \code{\link{lsDownSearch}} \tab Downloads a time series of satellite images from Landsat\cr
+#'   \code{\link{lsCloudMask}} \tab Creates clouds layers for Landsat images \cr
+#'   \code{\link{lsMosaic}} \tab  Mosaics Landsat time series of images\cr
+#'   \code{\link{ls8FolderToVar}} \tab Computes derived variables from Landsat-8 multispectral bands\cr
+#'   \code{\link{genSaveTSRData}} \tab Imports into R the processed time series of images \cr
 #'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
 #'   }
 #' }
 #' 
 #' @section II. Modis time series functions:
-#' Terra and Aqua satellite have onboard more than one sensor. These functions allows to download all land products from Terra
-#' and Aqua satellites but the processing is focused on the multispectral images.
-#' The download of any Modis product requires the credentianls from EarthData to access the NASA’s web data service. 
+#' Terra and Aqua satellite have onboard more than one sensor. These functions allow to download all land products from Terra
+#' and Aqua satellites, but the processing is focused on the multispectral images.
+#' For downloading any Modis product requires the credentianls from EarthData to access the NASA’s web data service. 
 #' \href{https://urs.earthdata.nasa.gov/users/new}{Get your credentials}.
 #' \tabular{ll}{
-#'   \code{ \link{modSearch}} \tab Search Modis time-series images list \cr
-#'   \code{\link{modPreview}} \tab Preview in R Modis satellite images\cr
-#'   \code{\link{modDownSearch}} \tab Download a Modis time series of satellite images\cr
-#'   \code{\link{modMosaic}} \tab Mosaic Modis time series of images \cr
-#'   \code{\link{modFolderToVar}} \tab Compute derived variables from Modis multispectral bands\cr
-#'   \code{\link{modCloudMask}} \tab Create clouds layers for Modis images \cr
-#'   \code{\link{genSaveTSRData}} \tab Import into R the processed time series of images \cr
+#'   \code{ \link{modSearch}} \tab Searchs Modis time-series images list \cr
+#'   \code{\link{modPreview}} \tab Previews in R Modis satellite images\cr
+#'   \code{\link{modDownSearch}} \tab Downloads a Modis time series of satellite images\cr
+#'   \code{\link{modMosaic}} \tab Mosaics Modis time series of images \cr
+#'   \code{\link{modFolderToVar}} \tab Computes derived variables from Modis multispectral bands\cr
+#'   \code{\link{modCloudMask}} \tab Creates clouds layers for Modis images \cr
+#'   \code{\link{genSaveTSRData}} \tab Imports into R the processed time series of images \cr
 #'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
 #'   }
 #' 
 #' @section III. Sentinel time series functions:
 #' Sentinel satellite program includes 5 different satellite types. These functions allows to download all the products 
-#' from SciHub platform, ut the processing is focused on the Sentinel-2 multispectral images. 
-#' The download of any Sentinel product requires the credentianls from ESA’s SciHub data service.
+#' from SciHub platform, but the processing is focused on the Sentinel-2 multispectral images. 
+#' Downloading any Sentinel product requires the credentianls from ESA’s SciHub data service.
 #' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 #' \tabular{ll}{
-#'   \code{ \link{senSearch}} \tab Search Sentinel time-series images list\cr
-#'   \code{\link{senPreview}} \tab Preview in R Sentinel satellite images\cr
-#'   \code{\link{senDownSearch}} \tab Download a Sentinel time series of satellite images\cr
-#'   \code{\link{senMosaic}} \tab Mosaic Sentinel time series of images \cr
-#'   \code{\link{senCloudMask}} \tab Create clouds layers for Sentinel images \cr
-#'   \code{\link{senFolderToVar}} \tab Compute derived variables from Sentinel-2 multispectral bands\cr
-#'   \code{\link{genSaveTSRData}} \tab Import into R the processed time series of images\cr
+#'   \code{ \link{senSearch}} \tab Searchs Sentinel time-series images list\cr
+#'   \code{\link{senPreview}} \tab Previews in R Sentinel satellite images\cr
+#'   \code{\link{senDownSearch}} \tab Downloads a Sentinel time series of satellite images\cr
+#'   \code{\link{senMosaic}} \tab Mosaics Sentinel time series of images \cr
+#'   \code{\link{senCloudMask}} \tab Creates clouds layers for Sentinel images \cr
+#'   \code{\link{senFolderToVar}} \tab Computes derived variables from Sentinel-2 multispectral bands\cr
+#'   \code{\link{genSaveTSRData}} \tab Creates an RData with the processed time series of images\cr
 #'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
 #'   }
 #' 
@@ -94,26 +94,26 @@
 #' In addition to satellite downloading and processing functions, the package provides some general functions to easy the data
 #' manage.
 #' \tabular{ll}{
-#'   \code{ \link{genCompositions}} \tab Create image compositions from a time series of satellite images\cr
-#'   \code{\link{genSmoothingIMA}} \tab Fill the gaps in a time series of satellite images\cr
-#'   \code{\link{genSmoothingCovIMA}} \tab Smooth outliers in a time series of satellite images using covariates\cr
-#'   \code{\link{genPlotGIS}} \tab Plot satellite images with a proper GIS format\cr
-#'   \code{\link{genGetDates}} \tab Get a date from the name of a raster layer\cr
+#'   \code{ \link{genCompositions}} \tab Creates image compositions from a time series of satellite images\cr
+#'   \code{\link{genSmoothingIMA}} \tab Fills the gaps in a time series of satellite images\cr
+#'   \code{\link{genSmoothingCovIMA}} \tab Smooths outliers in a time series of satellite images using covariates\cr
+#'   \code{\link{genPlotGIS}} \tab Plots satellite images with a proper GIS format\cr
+#'   \code{\link{genGetDates}} \tab Gets a date from the name of a raster layer\cr
 #'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
 #'   }
 #' 
 #' @section V. Variable functions:
 #' Many variables can be derived from multispectral images, the most common variables are preprogramed with the 'var' prefix.
 #' \tabular{ll}{
-#'   \code{ \link{varEVI}}\tab Calculate the enhanced vegetation index (EVI) from multispectral bands\cr
-#'   \code{\link{varMSAVI2}} \tab Calculate the modified soil-adjusted vegetation index (MSAVI2) from multispectral bands\cr
-#'   \code{\link{varNBR}} \tab Calculate the normalized burn ratio (NBR) from multispectral bands\cr
-#'   \code{\link{varNBR2}} \tab Calculate the normalized burn ratio 2 (NBR2) from multispectral bands\cr
-#'   \code{\link{varNDMI}} \tab Calculate the normalized difference moisture index (NDMI) from multispectral bands\cr
-#'   \code{\link{varNDVI}} \tab Calculate the normalized difference vegetation index (NDVI) from multispectral bands\cr
-#'   \code{\link{varNDWI}} \tab  Calculate the normalized difference water index (NDWI) from multispectral bands\cr
-#'   \code{\link{varRGB}} \tab  Calculate an RGB image from 3 spectral bands from multispectral bands\cr
-#'   \code{\link{varSAVI}} \tab  Calculate the soil-adjusted vegetation index (SAVI) from multispectral bands\cr
+#'   \code{ \link{varEVI}}\tab Calculates the enhanced vegetation index (EVI) from multispectral bands\cr
+#'   \code{\link{varMSAVI2}} \tab Calculates the modified soil-adjusted vegetation index (MSAVI2) from multispectral bands\cr
+#'   \code{\link{varNBR}} \tab Calculates the normalized burn ratio (NBR) from multispectral bands\cr
+#'   \code{\link{varNBR2}} \tab Calculates the normalized burn ratio 2 (NBR2) from multispectral bands\cr
+#'   \code{\link{varNDMI}} \tab Calculates the normalized difference moisture index (NDMI) from multispectral bands\cr
+#'   \code{\link{varNDVI}} \tab Calculates the normalized difference vegetation index (NDVI) from multispectral bands\cr
+#'   \code{\link{varNDWI}} \tab  Calculates the normalized difference water index (NDWI) from multispectral bands\cr
+#'   \code{\link{varRGB}} \tab  Calculates an RGB image from 3 spectral bands from multispectral bands\cr
+#'   \code{\link{varSAVI}} \tab  Calculates the soil-adjusted vegetation index (SAVI) from multispectral bands\cr
 #'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
 #' }
 #' 

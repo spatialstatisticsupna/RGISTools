@@ -2,7 +2,7 @@
 % Please edit documentation in R/senDownSearch.R
 \name{senDownSearch}
 \alias{senDownSearch}
-\title{Downloads Sentinel images from search function}
+\title{Download Sentinel images from search function}
 \usage{
 senDownSearch(searchres, username = NULL, password = NULL,
   error.log = "Sentinel_error.log", nattempts = NULL, unzip = FALSE,
@@ -17,15 +17,15 @@ senDownSearch(searchres, username = NULL, password = NULL,
 
 \item{error.log}{the name of the error log.}
 
-\item{nattempts}{the number of attempts that the function has to carry out to download an image in case the file becomes corrupted.}
+\item{nattempts}{the number of attempts that the function has to carry out to download an image in case of corrupted files.}
 
-\item{unzip}{logical argument. If \code{TRUE} unzips the images.}
+\item{unzip}{logical argument. If \code{TRUE}, unzips the images.}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
-\item{...}{argument to allow function nestering.
+\item{...}{argument for function nestering.
 \itemize{
-  \item \code{AppRoot} the directory to save the resulting time series.
+  \item \code{AppRoot} the directory to save the output time series.
 }}
 }
 \description{

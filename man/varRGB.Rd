@@ -2,7 +2,7 @@
 % Please edit documentation in R/varRGB.R
 \name{varRGB}
 \alias{varRGB}
-\title{Generates an RGB image from 3 spectral bands}
+\title{Generate an RGB image from 3 spectral bands}
 \usage{
 varRGB(red, green, blue, q.range = c(), rPath = NULL, cutline = NULL)
 }
@@ -29,7 +29,7 @@ Bands may contain reflectance outliers which cause the image to look dark. Use t
 argument to remove the outliers and get a better-looking image.
 }
 \examples{
-# dir path of cropped and cutted Modis image in the region of navarre as example
+# dir path of cropped and cutted Modis image in the region of Navarre as example
 img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 # list all tif files
 img.files <- list.files(img.dir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)

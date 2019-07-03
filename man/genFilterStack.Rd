@@ -2,14 +2,14 @@
 % Please edit documentation in R/genFilterStack.R
 \name{genFilterStack}
 \alias{genFilterStack}
-\title{Subsets a raster stack given a range of dates}
+\title{Subset a RasterStack given a range of dates}
 \usage{
 genFilterStack(r, ...)
 }
 \arguments{
 \item{r}{the \code{RasterStack} to be filtered.}
 
-\item{...}{argument to allow function nestering.
+\item{...}{argument for function nestering.
 \itemize{
   \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
   \item \code{endDate} ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.

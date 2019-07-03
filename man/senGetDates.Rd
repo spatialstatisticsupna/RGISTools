@@ -2,7 +2,7 @@
 % Please edit documentation in R/genMissionGetDates.R
 \name{senGetDates}
 \alias{senGetDates}
-\title{Returns the capturing date of Sentinel image}
+\title{Return the capturing date of Sentinel image}
 \usage{
 senGetDates(str, ...)
 }
@@ -11,7 +11,7 @@ senGetDates(str, ...)
 
 \item{...}{argument to allow function nestering:
 \itemize{
-  \item \code{date.format} modify the format of the date being returned.
+  \item \code{format} modifies the format of the date.
 }}
 }
 \description{
@@ -22,7 +22,7 @@ images, given their file paths or names. The function returns a date class.
 The function works with names or file paths having either of the two file extensions,
  \code{.jp2} or \code{.tif} files. The function accepts more than on file path or file names.
  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
- If another format is required, it can be modified through the argument \code{date.format}.
+ If another format is required, it can be modified through the argument \code{format}.
 }
 \examples{
 # example of getting date from Sentinel2 image name
@@ -31,6 +31,6 @@ str <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
 dt <- senGetDates(str)
 print(dt)
 print(format(dt,"\%Y\%j"))
-senGetDates(str, date.format = "\%Y\%j")
+senGetDates(str, format = "\%Y\%j")
 
 }

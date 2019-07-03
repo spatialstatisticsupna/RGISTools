@@ -2,7 +2,7 @@
 % Please edit documentation in R/lsCloudMask.R
 \name{lsCloudMask}
 \alias{lsCloudMask}
-\title{Creates clouds layers for Landsat images}
+\title{Create clouds layers for Landsat images}
 \usage{
 lsCloudMask(src, sensitivity = 2800, overwrite = FALSE, verbose = F,
   ...)
@@ -11,7 +11,7 @@ lsCloudMask(src, sensitivity = 2800, overwrite = FALSE, verbose = F,
 \item{src}{the path to the folder where the Landsat multispectral captures are stored.}
 
 \item{sensitivity}{numeric argument. Defines how sensitive is the method detecting the clouds. 0-8000 are
-valid values.}
+valid values. By default, the best value for Landsat 8 images assigned 2800. For Landsat-7 images use 600.}
 
 \item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
 
@@ -25,7 +25,7 @@ valid values.}
 \description{
 \code{lsCloudMask} creates layers of clouds derived from \code{BQA} band from Landsat-7 or Landsat-8 captures. 
 The function run over untar images downloaded by \code{\link{lsDownSearch}} or \code{\link{lsDownload}}, and 
-creates a new band designated with the label \code{CLD}.
+creates a new band named \code{CLD}.
 }
 \examples{
 \dontrun{

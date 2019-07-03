@@ -1,4 +1,4 @@
-#' Computes derived variables from Landsat-8 multispectral bands
+#' Compute derived variables from Landsat-8 multispectral bands
 #'
 #' \code{ls8FolderToVar} calculates an index using the bands from Landsat-8 multispectral
 #' images. The images are specified by a path to the storing folder (resulting from

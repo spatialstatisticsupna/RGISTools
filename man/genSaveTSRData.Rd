@@ -2,7 +2,7 @@
 % Please edit documentation in R/genSaveTSRData.R
 \name{genSaveTSRData}
 \alias{genSaveTSRData}
-\title{Imports time series of images and saves as RData}
+\title{Import time series of images and saves as RData}
 \usage{
 genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
   endDate = NULL, dextent = FALSE, recursive = FALSE, ...)
@@ -20,14 +20,14 @@ genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
 
 \item{recursive}{logical argument. If \code{TRUE} reads folders recursively, searching for images in GTiff image format.}
 
-\item{...}{argument to allow function nestering.
+\item{...}{argument for function nestering.
 \itemize{
   \item \code{AppRoot} the path where the RData will be saved.
 }}
 }
 \description{
 \code{genSaveTSRData} imports the time series of (GTiff) satellite images into R from a folder, 
-and creating an RData for future data loading.
+for creating an RData.
 }
 \details{
 The function reads all the images inside the folder specified in \code{src}. The images must be GTiff files.

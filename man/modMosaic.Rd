@@ -2,7 +2,7 @@
 % Please edit documentation in R/modMosaic.R
 \name{modMosaic}
 \alias{modMosaic}
-\title{Mosaics a set of Modis images}
+\title{Mosaic a set of Modis images}
 \usage{
 modMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
   gutils = FALSE, overwrite = FALSE, ...)
@@ -13,43 +13,43 @@ modMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
 \item{extent}{\code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
 \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.}
 
-\item{out.name}{the name of the region, if is not defined "outfile" will be assigned.}
+\item{out.name}{the name of the region, otherwise "outfile" is assigned.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
-\item{gutils}{logical argument. If \code{TRUE} the function uses GDAL utilities for mosaicking. The mosacking 
-process is faster using \code{gutils} but requires the proper install of \code{gdalUtils} library.}
+\item{gutils}{logical argument. If \code{TRUE}, the function uses GDAL utilities for mosaicking. The mosacking 
+process is faster using \code{gutils} but requires the corrent install of \code{gdalUtils} library.}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
 \item{...}{argument for function nestering accepts:
  \itemize{
   \item \code{pathrow} a list with the path and row numbers for the region of interest.
   \item \code{bandFilter} a vector with the name of the image bands to be mosaicked.
-If it is not supplied, the function is applied to all the bands available in \code{src}.
+If it is not supplied, the function is applied to all the available bands in \code{src}.
   \item \code{dayFilter} a vector containing the days in date format to filter the days wanted.
   \item \code{AppRoot} the directory to save the mosaicked images.
 }}
 }
 \description{
-\code{\link{modMosaic}} merges the tiles of Modis covering a region of interest returns a single image for each date.
+\code{\link{modMosaic}} merges the tiles of Modis covering a region of interest. There is only one output image by date.
 }
 \details{
 The function mosaics the tiles of satellite images in the \code{src} folder.
-The function uses the folder resulting from the \code{\link{modExtractHDF}} function.
+The function uses the output folder from the \code{\link{modExtractHDF}} function.
 The folder may contain multiple tiles as GTiff files, for one or several dates
 and one or several bands. When only one band has to be mosaicked, the name of
 the band can be provided through the argument \code{bandFilter}. The name of the band
 should be defined as a character string beginning with the letter b and a two-digit
-band number (e.g. ‘b01’). Similarly, when only a subset of dates has to be mosaicked,
+band number (e.g. 'b01'). Similarly, when only a subset of dates has to be mosaicked,
 the date(s) should be provided through the argument \code{dayFilter}. The dates must be
 provided as date objects. Once the images are mosaicked, they are cropped using
 the extent defined by \code{\link{extent}} (optional). The extent can be defined in any
 projection format. The function \code{\link{modMosaic}} automatically reprojects the extent
-to match the projection of the image. The resulting images will be placed in
-the \code{AppRoot} directory. The output files are named after region of interest
+to match the projection of the image. The resulting images are placed in
+the \code{AppRoot} directory. The output files are named with the region of interest
 provided by the argument \code{out.name}. If no name is provided,
-by default the output file is named as ‘outfile’.
+'outfile' is the name.
 }
 \examples{
 \dontrun{

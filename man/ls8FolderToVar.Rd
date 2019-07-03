@@ -2,7 +2,7 @@
 % Please edit documentation in R/ls8FolderToVar.R
 \name{ls8FolderToVar}
 \alias{ls8FolderToVar}
-\title{Computes derived variables from Landsat-8 multispectral bands}
+\title{Compute derived variables from Landsat-8 multispectral bands}
 \usage{
 ls8FolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
 }

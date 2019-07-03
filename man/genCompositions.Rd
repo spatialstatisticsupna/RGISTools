@@ -2,7 +2,7 @@
 % Please edit documentation in R/genCompositions.R
 \name{genCompositions}
 \alias{genCompositions}
-\title{Creates image compositions from a time series of satellite images}
+\title{Create image compositions from a time series of satellite images}
 \usage{
 genCompositions(rstack, n, fun, by.days = FALSE, ...)
 }
@@ -19,7 +19,7 @@ If \code{TRUE}, \code{n} indicates the maximun number of aggregated images betwe
 the first and the last day of the time series, through different years. 
 The aggregation requires at least one available image.}
 
-\item{...}{argument to allow function nestering.
+\item{...}{argument for function nestering.
 \itemize{
   \item \code{AppRoot} the path where the images will be saved in tif image format.
 }}
@@ -32,7 +32,7 @@ This function supports temporal aggregations by specifying \code{fun} argument.
 The maximun number of aggregated images is defined using the \code{n} argument. The output image is 
 named with the first image of the aggregation.
 
-\code{genCompositions} reduce the number of images, improving their quality,
+\code{genCompositions} reduces the number of images, improving their quality,
 since clouds and potential outliers are removed. Clouds and outliers usually appear with
 very low values. For example, the maximun value compostion (\code{MVC}) builds composites using the
 maximum pixel value over a period of time. Write \code{fun = max} to use the

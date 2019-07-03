@@ -1,4 +1,4 @@
-#' Generates an RGB image from 3 spectral bands
+#' Generate an RGB image from 3 spectral bands
 #'
 #' \code{varRGB} creates RGB \code{RasterStack} scaling the range of the images to 0-255 color range.
 #'
@@ -15,7 +15,7 @@
 #' @param cutline \code{SpatialPolygonsDataFrame} for cutting the image by a region.
 #'
 #' @examples
-#' # dir path of cropped and cutted Modis image in the region of navarre as example
+#' # dir path of cropped and cutted Modis image in the region of Navarre as example
 #' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)

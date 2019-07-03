@@ -2,8 +2,8 @@
 #'
 #' \code{modSearch} searches the Modis products on the  
 #' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} to 
-#'  find the avaliable for a particular location and date interval.
-#' The function returns the search result as an array of urls with the relevant images.
+#'  find the avaliable images for a particular location and date interval.
+#' The outut is an array of urls with the relevant images.
 #'
 #' \code{modSearch} \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} (CMR) powered api.
 #' The catalogue of  Modis products with their short names and other
@@ -17,7 +17,7 @@
 #' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param collection Modis collection.
 #' @param resType response type of the query (\code{browseurl} or \code{url}), by default the url where the images are located.
-#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 # @param pathrow A list of vectors defining the path and row number for the region of interest according
 # to the Sinusoidal Tile Grid (\url{https://modis-land.gsfc.nasa.gov/MODLAND_grid.html})
 # This argument is mandatory if extent is not defined.
@@ -28,14 +28,14 @@
 #' This argument is mandatory if polygon or extent is not defined.
 #'   \item \code{extent} \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or \code{SpatialPoints*} object are acceptable formats
 #' as long as coordinates are in longitude/latitude format.
-#' This argument is mandatory if polygon or lonlat is not defined.
-#'   \item \code{polygon} a list of vectors defining the points of the polygon in longitude/latitude format
-#' This argument is mandatory if lonlat or extent is not defined.
-#'   \item \code{AppRoot} the directory to save the resulting time series.
+#' This argument is mandatory if \code{polygon} or \code{lonlat} is not defined.
+#'   \item \code{polygon} a list of vectors defining the points of the polygon in longitude/latitude format.
+#' This argument is mandatory if \code{lonlat} or \code{extent} is not defined.
+#'   \item \code{AppRoot} the directory to save the output time series.
 #' }
 #' @examples
 #' \dontrun{
-#' # load a spatial polygon object of Navarre
+#' # load a spatial polygon object of Navarre in longitude/latitude coordinates
 #' data(ex.navarre)
 #' # Searching Modis MYD13A2 images between 2011 and 2013 by longitude/latitude
 #' using a polygon class variable

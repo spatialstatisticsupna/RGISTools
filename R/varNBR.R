@@ -1,4 +1,4 @@
-#' Calculates normalized burn ratio (NBR)
+#' Calculate normalized burn ratio (NBR)
 #'
 #' \code{varNBR} computes the NBR index from nir and swir2 bands.
 #'
@@ -15,7 +15,7 @@
 #' @return NBR in \code{raster} format
 #'
 #' @examples
-#' # dir path of cropped and cutted Modis image in the region of navarre as example
+#' # dir path of cropped and cutted Modis image in the region of Navarre as example
 #' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all tif files
 #' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)

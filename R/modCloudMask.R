@@ -1,4 +1,4 @@
-#' Creates clouds layers for Modis images
+#' Create layers of clouds for Modis images
 #' 
 #' \code{modCloudMask} creates layers of clouds derived from \code{MOD35_L2} products. 
 #' 

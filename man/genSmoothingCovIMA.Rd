@@ -2,7 +2,7 @@
 % Please edit documentation in R/genSmoothingCovIMA.R
 \name{genSmoothingCovIMA}
 \alias{genSmoothingCovIMA}
-\title{Uses covariates for smoothing outliers in a time series of satellite images}
+\title{Use covariates for smoothing outliers in a time series of satellite images}
 \usage{
 genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, fun = mean,
   nDays = 3, nYears = 1, fact = 5, out.name = "out",
@@ -15,24 +15,24 @@ genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 
 \item{Img2Process}{\code{vector} class argument defining the images to smoothed.}
 
-\item{fun}{function used to calculate the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.
-default value \code{mean}.}
+\item{fun}{function used for calculating the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.
+\code{mean} is the default.}
 
-\item{nDays}{\code{numeric} argument with the number of previous and subsequent days used to define the neighborhood}
+\item{nDays}{\code{numeric} argument with the number of previous and subsequent days used for defining the neighborhood}
 
-\item{nYears}{\code{numeric} argument with the number of the number of previous and subsequent years used to define the neighborhood.}
+\item{nYears}{\code{numeric} argument with the number of previous and subsequent years used for defining the neighborhood.}
 
 \item{fact}{\code{numeric} argument with an aggregation factor of the anomalies before the interpolation.}
 
-\item{out.name}{the name of the images if the result is written in the Hard Device Drive (HDD).}
+\item{out.name}{the prefix name of the images if the result is written in the Hard Device Drive (HDD).}
 
 \item{aFilter}{\code{vector} with the lower and upper extreme values for filtering the anomalies. Ex. c(0.05,0.95).}
 
 \item{snow.mode}{logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.}
 
-\item{...}{argument to allow function nestering.
+\item{...}{argument for function nestering.
 \itemize{
-  \item \code{AppRoot} the path where the images will be saved in GTiff format.
+  \item \code{AppRoot} the path where the images will be saved in \code{GTiff} format.
 }}
 }
 \description{
@@ -40,13 +40,12 @@ default value \code{mean}.}
 \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{
-The smoothing method decomposed the time series of images into the mean images and the anomaly images. The procedure applies
-the smoothing algorithm over the anomaly images. The procedure smoothed the anomaly using covariates to
-smooth the outliers in the anomaly. \insertCite{militino2019interpolation}{RGISTools}.
+This method decomposes the time series of images into the mean images and the anomaly images. The procedure applies
+the smoothing algorithm with covariates over a series of anomaly images. \insertCite{militino2019interpolation}{RGISTools}.
 
-This function provides a set of arguments to configure the run of the procedure, such as the images to fill (\code{Img2Process}),
+This function depends of arguments, such as the images to fill (\code{Img2Process}),
 the number of periods or years in the definition of the spatio temporal neighbourhoood, or the size of the
-aggregation. All these particularities are explained in the publication.
+aggregation.
 }
 \examples{
 set.seed(0)

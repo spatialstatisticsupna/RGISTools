@@ -1,7 +1,8 @@
 #' Time series of Digital Elevation Model (DEM) for the region of Navarre in Spain
 #'
 #' Geographically projected \code{RasterStack} with the DEM values for
-#' the region of Navarre, to use as example in \code{genSmoothingCovIMA}.
+#' the region of Navarre, for using as example in \code{genSmoothingCovIMA}. \code{RasterStack} 
+#' projection: \code{+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs}.
 #'
 #' @format The \code{RasterStack} contains 6 time-periods, with the same DEM:
 #' \describe{
@@ -27,7 +28,7 @@ NULL
 #' @keywords data
 NULL
 
-#' Geographically projected spatial polygon of Navarre in Spain to use in examples
+#' Geographically projected spatial polygon of Navarre in Spain to be used in examples
 #'
 #' \code{SpatialPolygonsDataFrame} containing the region of Navarre projected in longitude/latitude.
 #' @name ex.navarre

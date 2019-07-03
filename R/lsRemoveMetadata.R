@@ -1,4 +1,4 @@
-#' Removes from R environment LS7 and LS8 metadata files
+#' Remove from R environment LS7 and LS8 metadata files
 #'
 #' \code{lsRemoveMetadata} removes Landsat-7 and/or Landsat-8 (\code{.LS7MD}/\code{.LS8MD}) metadata from R enviroment.
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/modExtractHDF.R
 \name{modExtractHDF}
 \alias{modExtractHDF}
-\title{Converts an HDF file into a set of GTiff files}
+\title{Convert an HDF file into a set of GTiff files}
 \usage{
 modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
   verbose = FALSE, bFilter = NULL, rm.band = NULL, ...)
@@ -28,7 +28,7 @@ modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
 \description{
 \code{modExtractHDF} converts the original Modis image format (HDF) into a file
 format loadable by R (GTiff). The function extracts all image layers and crops the
-area of interest (if needed). This function requires the proper installation of GDAL library.
+area of interest (if needed). This function requires the correct installation of GDAL library.
 }
 \details{
 HDF files cannot be directly loaded into R. The function \code{\link{modExtractHDF}}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/varNBR.R
 \name{varNBR}
 \alias{varNBR}
-\title{Calculates normalized burn ratio (NBR)}
+\title{Calculate normalized burn ratio (NBR)}
 \usage{
 varNBR(nir, swir2)
 }
@@ -24,7 +24,7 @@ This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }
 \examples{
-# dir path of cropped and cutted Modis image in the region of navarre as example
+# dir path of cropped and cutted Modis image in the region of Navarre as example
 img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 # list all tif files
 img.files <- list.files(img.dir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)

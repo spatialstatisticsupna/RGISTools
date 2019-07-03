@@ -1,4 +1,4 @@
-#' Returns the pathrow of Modis tile in "hXXvYY" string format
+#' Return the pathrow of Modis tile in "hXXvYY" string format
 #'
 #' \code{\link{modGetPathRow}} reads the official name of a Modis image and returns the path and row data
 #' as Modis name convention of horizontal and vertical "\code{hXXvYY}".

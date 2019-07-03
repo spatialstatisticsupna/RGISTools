@@ -18,11 +18,11 @@ lsDownload(satellite, startDate, endDate, username, password,
 
 \item{password}{login credentials to access the USGS EROS web service.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
-\item{untar}{logical argument. If \code{TRUE} untars downloaded images.}
+\item{untar}{logical argument. If \code{TRUE}, untars downloaded images.}
 
-\item{raw.rm}{logical argument. If \code{TRUE} removes the raw images.}
+\item{raw.rm}{logical argument. If \code{TRUE}, removes the raw images.}
 
 \item{...}{argument for function nestering accepts:
  \itemize{
@@ -36,7 +36,7 @@ function arguments.
 The images are saved as ‘.tiff’ files in the \code{AppRoot} directory.
 }
 \details{
-This function is used for searching and downloading landsat images. The function uses landsat
+This function is used for searching and downloading Landsat images. The function uses landsat
 search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}) depending on the \code{satellite} argument,
 and then, calls \code{\link{lsDownload}} function with the response of the search.
 Image download requires USGS login account. \href{https://ers.cr.usgs.gov/register/}{Get your credentials}.
@@ -56,7 +56,7 @@ directory. To change this setting, provide \code{AppRoot = "the full path as an 
 data(ex.navarre)
 
 # Search and download the images from Landsat-8 comprised between
-# 01-01-2018 and 20-01-2018 for the region of Navarre
+# 01-01-2018 and 20-01-2018 in the region of Navarre
 lsDownload(satellite = "ls8",
            username = "username",
            password = "password",

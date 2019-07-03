@@ -1,14 +1,14 @@
-#' Computes derived variables from Sentinel-2 multispectral bands
+#' Compute derived variables from Sentinel-2 multispectral bands
 #'
 #' \code{senFolderToVar} calculates an index using the bands from Sentinel-2 multispectral
 #' images. The images are specified by a path to the storing folder
 #' (resulting from the \code{\link{senMosaic}} function). The function returns a
-#' \code{RasterStack} with the time-series of the indexes.
+#' \code{RasterStack} with the index time series.
 #'
 #' The function requires the definition of src and fun arguments. The argument \code{src}
 #'  contains the path to the folder with the multispectral
-#'  images. It can be easily defined as the path resulting from \code{\link{senMosaic}}.
-#'  The fun argument is a function with the calculation of the index based
+#'  images. It can be easily defined as the path comming from \code{\link{senMosaic}}.
+#'  The \code{fun} argument calculates the index based
 #'  on spectral bands. There are some pre-programmed indexes in \code{RGISTools}.
 #'  Functions with the pre-programmed indexes start with var (\code{\link{varNDVI}}, \code{\link{varEVI}}).
 #'  The user can define its own functions.
@@ -16,15 +16,15 @@
 #' @param src path to the folder with the Sentinel multispectral images.
 #' @param fun is a function defined by the package for computing indexes.
 #' All functions in the package starting with three characters.
-#' 'var' are acceptable functions. Custom functions can be also implemented.
+#' 'var' are acceptable functions. Custom functions can also be implemented.
 #' @param getStack logical argument. If \code{TRUE}, returns the time series as a 
 #' \code{RasterStack} or otherwise the images are saved in the Hard Drive Devide (HDD).
-#' @param overwrite logical argument. If \code{TRUE} 
+#' @param overwrite logical argument. If \code{TRUE}, 
 #' overwrites the existing images with the same name.
-#' @param verbose logical argument. If \code{TRUE} the 
+#' @param verbose logical argument. If \code{TRUE}, the 
 #' function prints running stages and warnings.
 #' @param resbands using Sentinel \code{S2MSI2A} products specifies the resolution of the output images. By default all 
-#' the resolution (10m, 20m and 60m) are calculated.
+#' the resolutions (10m, 20m and 60m) are used.
 #' @param ... argument to allow function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} the directory of the resulting time series.

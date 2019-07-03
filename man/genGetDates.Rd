@@ -2,14 +2,14 @@
 % Please edit documentation in R/genGetDates.R
 \name{genGetDates}
 \alias{genGetDates}
-\title{Returns the date of the capure from the name of the image}
+\title{Return the date of the capure from the name of the image}
 \usage{
 genGetDates(str, ...)
 }
 \arguments{
 \item{str}{\code{character} argument containing the date in julian format "\code{YYYYJJJ}".}
 
-\item{...}{argument to allow function nestering.
+\item{...}{argument for function nestering.
 \itemize{
   \item \code{date.format} modify the format of the date being returned.
 }}

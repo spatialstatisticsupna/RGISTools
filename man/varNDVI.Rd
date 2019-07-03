@@ -2,17 +2,17 @@
 % Please edit documentation in R/varNDVI.R
 \name{varNDVI}
 \alias{varNDVI}
-\title{Calculates the normalized difference vegetation index (NDVI) from raster bands}
+\title{Calculate the normalized difference vegetation index (NDVI) from raster bands}
 \usage{
 varNDVI(red, nir)
 }
 \arguments{
-\item{red}{the red band of the capture in \code{raster} format}
+\item{red}{the red band of the capture in \code{raster} format.}
 
-\item{nir}{the nir band of the capture in \code{raster} format}
+\item{nir}{the nir band of the capture in \code{raster} format.}
 }
 \value{
-NDVI in \code{raster} format
+NDVI in \code{raster} format.
 }
 \description{
 \code{varNDVI} computes the the NDVI index from nir and red bands.
@@ -25,7 +25,7 @@ This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }
 \examples{
-# dir path of cropped and cutted Modis image in the region of navarre as example
+# dir path of cropped and cutted Modis image in the region of Navarre as example
 img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 # list all tif files
 img.files <- list.files(img.dir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)
