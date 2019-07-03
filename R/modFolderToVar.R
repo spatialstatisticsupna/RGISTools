@@ -82,28 +82,33 @@ modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     modbands<-getRGISToolsOpt("MOD09BANDS")
     mod.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
-    funString<-"result<-fun("
-    for(arg in formalArgs(fun)){
-      band<-modbands[names(modbands)%in%arg]
-      if(length(band)==0)
-        next
-      eval(parse( text=paste0(arg,"<-raster('",mod.img[grepl(tolower(band),mod.img)],"')") ))
-      funString<-paste0(funString,arg,"=",arg,",")
-    }
-    funString<-paste0(substr(funString,1,nchar(funString)-1),")")
-    eval(parse(text=funString))
-    if(getStack){
-      if(is.null(rstack)){
-        names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
-        rstack<-result
+    out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
+    if(getStack|(!file.exists(out.file.name))){
+      funString<-"result<-fun("
+      for(arg in formalArgs(fun)){
+        band<-modbands[names(modbands)%in%arg]
+        if(length(band)==0)
+          next
+        eval(parse( text=paste0(arg,"<-raster('",mod.img[grepl(tolower(band),mod.img)],"')") ))
+        funString<-paste0(funString,arg,"=",arg,",")
+      }
+      funString<-paste0(substr(funString,1,nchar(funString)-1),")")
+      eval(parse(text=funString))
+      if(getStack){
+        if(is.null(rstack)){
+          names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
+          rstack<-result
+        }else{
+          result<-extend(result,rstack)
+          names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
+          rstack<-extend(rstack,result)
+          rstack<-addLayer(rstack,result)
+        }
       }else{
-        result<-extend(result,rstack)
-        names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
-        rstack<-extend(rstack,result)
-        rstack<-addLayer(rstack,result)
+        writeRaster(result,out.file.name,overwrite=overwrite)
       }
     }else{
-      writeRaster(result,paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"),overwrite=overwrite)
+      message(paste0("File exists!\nFile: ",out.file.name))
     }
   }
   if(getStack){
