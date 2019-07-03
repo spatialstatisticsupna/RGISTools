@@ -39,7 +39,8 @@
 #' names(searchres)
 #' searchres.R094 <- searchres[grepl("R094", names(searchres))]
 #' names(searchres.R094)
-#'
+#' # list the dates in searchres
+#' senGetDates(names(searchres.R094),format="%Y%J")
 #' src = "Patch_for_downloading_folder"
 #' # Sentinel download function
 #' senDownSearch(searchres = searchres.R094,

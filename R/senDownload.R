@@ -44,6 +44,7 @@
 #'             username = "username",
 #'             password = "password",
 #'             AppRoot = src)
+#'             
 #' src.sen <- file.path(src, "Sentinel-2")
 #' src.sen.unzip <- file.path(src.sen, "unzip")
 #'                   

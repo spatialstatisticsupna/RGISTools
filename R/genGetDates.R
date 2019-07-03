@@ -16,7 +16,7 @@
 #' names(r) <- c("RandomImage_2018034")
 #'
 #' spplot(r)
-#' genGetDates(names(r))
+#' genGetDates(names(r), format = "%Y%j")
 #'
 genGetDates<-function(str, ...){
   arg<-list(...)
