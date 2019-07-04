@@ -11,7 +11,7 @@ genMosaicList(imageList, fun = "max", verbose = TRUE)
 
 \item{fun}{the function applied to overlapping pixels.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 }
 \description{
 \code{genMosaicList} makes a single mosaic from a list of raster images.

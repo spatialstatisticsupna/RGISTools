@@ -18,7 +18,7 @@ genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
 
 \item{dextent}{creates the \code{RasterStack} to the maximun extent from different extent GTiff images.}
 
-\item{recursive}{logical argument. If \code{TRUE} reads folders recursively, searching for images in GTiff image format.}
+\item{recursive}{logical argument. If \code{TRUE}, reads folders recursively, searching for images in GTiff image format.}
 
 \item{...}{argument for function nestering.
 \itemize{

@@ -17,7 +17,7 @@ implemented.}
 \item{getStack}{logical argument. If \code{TRUE}, returns the time-series as a 
 \code{RasterStack}, otherwise the images are saved in the Hard Drive Devide (HDD).}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
 \item{...}{argument for function nestering.
 \itemize{

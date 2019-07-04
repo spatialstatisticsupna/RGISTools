@@ -18,7 +18,7 @@ is saved in the Hard Drive Device (HDD).}
 
 \item{overwrite}{logical argument. If \code{TRUE}, it overwrites the existing images with the same name.}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
 \itemize{
   \item \code{AppRoot} directory of the output time series.
 }}
@@ -36,7 +36,7 @@ This function works with the path to the folder containing the GTiff layers deri
 the path to the folder with the result of  \code{\link{modMosaic}}.
 The \code{fun} argument is a function with
 the calculation of an index based on the spectral bands. There are some pre-programmed
-indixes in \code{RGISTools}. Functions with the pre-programmed indexes start with var
+indixes in \code{RGISTools}. Functions with the pre-programmed indexes start with var prefix
 (\code{\link{varNDVI}}, \code{\link{varEVI}}). The user can define its own functions.
 }
 \examples{

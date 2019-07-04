@@ -10,7 +10,8 @@ senGetOrbit(str)
 \item{str}{the full path or official image name of the Sentinel image from which the relative orbit is extracted.}
 }
 \value{
-an string with the relative orbit of the image in
+an string with the relative orbit of the image in "NXXXX_RYYY" or "RYYY" format, 
+depending on the version of name convention.
 }
 \description{
 \code{senGetOrbit} reads the official name of a Sentinel image and returns relative orbit. Get relative orbit information \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/satellite-description/orbit}{here}.

@@ -14,10 +14,10 @@
 #'   \code{SpatialPoints*} object are acceptable formats as long as coordinates 
 #'   are in longitude/latitude format. This argument is mandatory if \code{polygon} 
 #'   or \code{lonlat} is not defined.
-#' @param raw.rm logical argument. If \code{TRUE} region images are removed.
-#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
-#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
-#' @param ... argument to allow function nestering:
+#' @param raw.rm logical argument. If \code{TRUE}, region images are removed.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} the directory where the extracted images should be located
 #' }
@@ -28,7 +28,7 @@
 #' data(ex.navarre)
 #' src <- "Path_for_downloading_folder"
 #' 
-#' # Search and download the images from Modis comprised between
+#' # Search and download the images from Modis between
 #' # 01-01-2018 and 03-01-2018 for the region of Navarre
 #' modDownload(product = "MOD09GA",
 #'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),

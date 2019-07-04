@@ -2,11 +2,11 @@
 #'
 #' \code{ls8FolderToVar} calculates an index using the bands from Landsat-8 multispectral
 #' images. The images are specified by a path to the storing folder (resulting from
-#' the \code{\link{lsMosaic}} function). The function returns a \code{RasterStack} with the time-series of the indexes.
+#' the \code{\link{lsMosaic}} function). The function returns a \code{RasterStack} with the index time series.
 #'
 #' The function requires to define \code{src} and \code{fun} input attributes. \code{src} defines the path to
 #' the result of \code{\link{lsMosaic}}, with all bands of Landsat-8 for a region of interest. \code{fun} defines
-#' the variable of interest using any of the functions in the packages starting with \code{var} (\code{\link{varNDVI}},
+#' the variable of interest using any of the functions in the packages starting with \code{var} prefix (\code{\link{varNDVI}},
 #'  \code{\link{varEVI}}, ...)
 #'
 #' @param src path to the folder with the Landsat multispectral image.
@@ -16,9 +16,9 @@
 #' implemented \code{var} are acceptable functions.
 #' @param getStack logical argument. If \code{TRUE}, returns the 
 #' time-series of images as a \code{RasterStack}, otherwise the images are saved in the Hard Drive Devide (HDD).
-#' @param overwrite logical argument. If \code{TRUE} overwrites the 
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the 
 #' existing images with the same name.
-#' @param ... argument to allow function nestering
+#' @param ... argument for function nestering
 #' \itemize{
 #'   \item \code{AppRoot} the directory of the resulting time series
 #' }

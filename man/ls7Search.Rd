@@ -11,15 +11,15 @@ ls7Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 
 \item{endDate}{ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
-\item{precise}{logical argument. If \code{TRUE} the search is done tile by tile (slower).}
+\item{precise}{logical argument. If \code{TRUE}, the search is done tile by tile (slower).}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
  \itemize{
   \item \code{pathrow} a list of vectors defining the path and row number for the region of interest according
 to the \href{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/}{Worldwide Reference System}.
-This argument is mandatory if \code{extent} is not defined.
+This argument is mandatory if \code{extent} is not defined. Ex. \code{c(-1.64323,42.81687)}.
   \item \code{lonlat} this argument is optional. A vector with the coordinates of
 the point or region of interest in longitude/latitude format.
   \item \code{extent} this argument is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
@@ -53,7 +53,7 @@ From the user point of view, the easiest way to search a time series of Landsat-
 \code{lonlat} and \code{polygon} arguments. These methods do not require to know in advance the path and rows of the images.
 These method uses spatial objects to define the region of interest, and needs to be
 "\code{+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs}”. The argument \code{extent} accepts any R object being defined
-by a spatial extent. The argument \code{lonlat} only accepts an R vector with one coordinate in the form of
+by a spatial extent. The argument \code{lonlat} only accepts an R vector with a point in the form of
 longitude/latitude (ex. \code{c(-1.64323,42.81687)}).
 The argument \code{Polygon}, accepts \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} objects.
 

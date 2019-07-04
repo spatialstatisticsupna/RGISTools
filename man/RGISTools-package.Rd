@@ -8,9 +8,9 @@
 This package aims for downloading, processing, and smoothing time series of satellite images from 
 Landsat, Modis, and Sentinel satellite programs in a uniform and standardized way. The functions of 
 RGISTools automatically convert the original formats into GTiff files, which can be loaded into R. 
-The processing functions of RGISTools includes tile mosaicking, cropping, cloud masking, and extracting the variables 
-of interest. When multiple tiles matches the region of interest, RGISTools combines them to generate a 
-single image and crops the area of interest to save memory, and computing time. All images available 
+The processing functions of RGISTools includes tile mosaicking, cropping, cloud masking, and deriving new variables 
+of interest. When multiple tiles matching the region of interest, RGISTools combines them to generate a 
+single image, and crops the area of interest to save memory, and computing time. All images available 
 in a range of dates are then stacked to produce time series of satellite images for a particular area. 
 Images may have clouds or measurement errors that limit their use in subsequent analyses. Hence, the 
 package includes a set of functions for removing clouds, gap filling, and smoothing. Due to the wide 
@@ -30,7 +30,7 @@ into 7 categories, which are identified by the first 3 characters of the functio
 Below is a list of the most important functions grouped by running order for creating a time series of
 images for each satellite.
 These functions include searching, previewing, 
-downloading, mosaicking, extracting variables, composing, and filling-smoothing.
+downloading, mosaicking, deriving new variables, composing, cloud masking, and filling-smoothing.
 }
 \section{I. Landsat time series functions}{
 
@@ -69,9 +69,9 @@ download and processing workflow. The download of any Landsat images requires a 
 
 \section{II. Modis time series functions}{
 
-Terra and Aqua satellite have onboard more than one sensor. These functions allow to download all land products from Terra
+Terra and Aqua satellite have onboard more than one sensor. These functions downloads all land products from Terra
 and Aqua satellites, but the processing is focused on the multispectral images.
-For downloading any Modis product requires the credentianls from EarthData to access the NASA’s web data service. 
+For downloading any Modis product we need the credentianls from EarthData to access the NASA’s web data service. 
 \href{https://urs.earthdata.nasa.gov/users/new}{Get your credentials}.
 \tabular{ll}{
   \code{ \link{modSearch}} \tab Searchs Modis time-series images list \cr
@@ -87,9 +87,9 @@ For downloading any Modis product requires the credentianls from EarthData to ac
 
 \section{III. Sentinel time series functions}{
 
-Sentinel satellite program includes 5 different satellite types. These functions allows to download all the products 
+Sentinel satellite program includes 5 different satellite types. These functions downloads all the products 
 from SciHub platform, but the processing is focused on the Sentinel-2 multispectral images. 
-Downloading any Sentinel product requires the credentianls from ESA’s SciHub data service.
+Downloading any Sentinel product requires the credentianls from ESA's SciHub data service.
 \href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
 \tabular{ll}{
   \code{ \link{senSearch}} \tab Searchs Sentinel time-series images list\cr
@@ -105,8 +105,8 @@ Downloading any Sentinel product requires the credentianls from ESA’s SciHub d
 
 \section{IV. Important general functions}{
 
-In addition to satellite downloading and processing functions, the package provides some general functions to easy the data
-manage.
+In addition to satellite downloading and processing functions, the package provides 
+some general functions for an easy data manage.
 \tabular{ll}{
   \code{ \link{genCompositions}} \tab Creates image compositions from a time series of satellite images\cr
   \code{\link{genSmoothingIMA}} \tab Fills the gaps in a time series of satellite images\cr
@@ -119,7 +119,7 @@ manage.
 
 \section{V. Variable functions}{
 
-Many variables can be derived from multispectral images, the most common variables are preprogramed with the 'var' prefix.
+New variables can be derived from multispectral images, the most common variables are preprogramed with the 'var' prefix.
 \tabular{ll}{
   \code{ \link{varEVI}}\tab Calculates the enhanced vegetation index (EVI) from multispectral bands\cr
   \code{\link{varMSAVI2}} \tab Calculates the modified soil-adjusted vegetation index (MSAVI2) from multispectral bands\cr

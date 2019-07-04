@@ -15,9 +15,9 @@
 #' @param shp  the shape file of the area of interest.
 #' @param bFilter a vector containing the names of the bands to extract.
 #' @param rm.band a vector containing the names of the bands to not extract.
-#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
-#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
-#' @param ... argument to allow function nestering:
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} the directory where the extracted images should be located
 #' }

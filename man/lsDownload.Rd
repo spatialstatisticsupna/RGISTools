@@ -55,7 +55,7 @@ directory. To change this setting, provide \code{AppRoot = "the full path as an 
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 
-# Search and download the images from Landsat-8 comprised between
+# Search and download the images from Landsat-8 between
 # 01-01-2018 and 20-01-2018 in the region of Navarre
 lsDownload(satellite = "ls8",
            username = "username",

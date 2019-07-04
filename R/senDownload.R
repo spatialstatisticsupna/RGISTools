@@ -12,7 +12,7 @@
 #' @param username Scihub platform username.
 #' @param password Scihub platform password.
 #' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
-#' @param ... argument to allow function nestering
+#' @param ... argument forfunction nestering
 #' \itemize{
 #'   \item \code{product} Sentinel product type. Ex. "S2MSI1C", "S2MSI2A", "S2MSI2Ap", ... 
 #'   \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.

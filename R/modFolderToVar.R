@@ -11,7 +11,7 @@
 #' the path to the folder with the result of  \code{\link{modMosaic}}.
 #' The \code{fun} argument is a function with
 #' the calculation of an index based on the spectral bands. There are some pre-programmed
-#' indixes in \code{RGISTools}. Functions with the pre-programmed indexes start with var
+#' indixes in \code{RGISTools}. Functions with the pre-programmed indexes start with var prefix
 #' (\code{\link{varNDVI}}, \code{\link{varEVI}}). The user can define its own functions.
 #'
 #' @param src path to the input folder with the Modis multispectral images.
@@ -21,7 +21,7 @@
 #' @param getStack logical argument. If \code{TRUE}, returns the time series as a \code{RasterStack}, otherwise the result 
 #' is saved in the Hard Drive Device (HDD).
 #' @param overwrite logical argument. If \code{TRUE}, it overwrites the existing images with the same name.
-#' @param ... argument to allow function nestering:
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} directory of the output time series.
 #' }

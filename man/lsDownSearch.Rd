@@ -17,13 +17,13 @@ lsDownSearch(searchres, username = NULL, password = NULL,
 
 \item{cookies.file}{File path for saving the cookies that are used in the download process.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
-\item{raw.rm}{logical argument. If \code{TRUE} removes the raw images.}
+\item{raw.rm}{logical argument. If \code{TRUE}, removes the raw images.}
 
-\item{untar}{logical argument. If \code{TRUE} untars downloaded images.}
+\item{untar}{logical argument. If \code{TRUE}, untars downloaded images.}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
 \item{...}{argument for function nestering accepts:
 \itemize{
@@ -52,7 +52,7 @@ directory. To change this setting, provide \code{AppRoot = "the full path as an 
 \dontrun{
 #' # load a spatial polygon object of Navarre
 data(ex.navarre)
-# Search and download the images from Landsat-8 comprised between
+# Search and download the images from Landsat-8 between
 # 2011 and 2013 in the region of Navarre
 search.res <- ls8Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
@@ -78,7 +78,7 @@ lsDownSearch(searchres = search.res,
              untar = TRUE, 
              raw.rm = TRUE)
 
-# Search and download the images from Landsat-7 comprised between
+# Search and download the images from Landsat-7 between
 # 2011 and 2013 in the region of Navarre
 search.res <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),

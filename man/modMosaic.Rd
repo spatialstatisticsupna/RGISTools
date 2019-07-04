@@ -27,7 +27,7 @@ process is faster using \code{gutils} but requires the corrent install of \code{
   \item \code{pathrow} a list with the path and row numbers for the region of interest.
   \item \code{bandFilter} a vector with the name of the image bands to be mosaicked.
 If it is not supplied, the function is applied to all the available bands in \code{src}.
-  \item \code{dayFilter} a vector containing the days in date format to filter the days wanted.
+  \item \code{dayFilter} a vector containing the days in date format to filter the requiered days.
   \item \code{AppRoot} the directory to save the mosaicked images.
 }}
 }

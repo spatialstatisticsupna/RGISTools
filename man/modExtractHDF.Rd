@@ -10,17 +10,17 @@ modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
 \arguments{
 \item{filesHDF}{the full path where the HDF files are stored.}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
 \item{shp}{the shape file of the area of interest.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
 \item{bFilter}{a vector containing the names of the bands to extract.}
 
 \item{rm.band}{a vector containing the names of the bands to not extract.}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
 \itemize{
   \item \code{AppRoot} the directory where the extracted images should be located
 }}

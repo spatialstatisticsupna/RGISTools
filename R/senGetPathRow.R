@@ -41,7 +41,8 @@ senGetTile<-function(str){
 #'
 #' @param str the full path or official image name of the Sentinel image from which the relative orbit is extracted.
 #'
-#' @return an string with the relative orbit of the image in 
+#' @return an string with the relative orbit of the image in "NXXXX_RYYY" or "RYYY" format, 
+#' depending on the version of name convention.
 #'
 #' @examples
 #' #example of getting date from Sentinel2 image name

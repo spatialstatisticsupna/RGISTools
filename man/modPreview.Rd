@@ -7,7 +7,8 @@
 modPreview(searchres, n, size = NULL)
 }
 \arguments{
-\item{searchres}{a vector with the results from a search of Modis images provided by the functions modSearch with \code{resType="browseurl"} argument.}
+\item{searchres}{a vector with the results from a search of Modis images provided by 
+the functions \code{\link{modSearch}} with \code{resType="browseurl"} argument.}
 
 \item{n}{the number of the image of interest in the search vector.}
 

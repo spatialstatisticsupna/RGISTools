@@ -13,8 +13,8 @@
 #' @param searchres the output of the \code{\link{modSearch}} function.
 #' @param username login credentials to access the NASA’s EarthData web service.
 #' @param password  login credentials to access the NASA’s EarthData web service.
-#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
-#' @param ... argument to allow function nestering:
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} root directory where the images will be saved.
 #' }

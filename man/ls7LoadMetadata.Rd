@@ -8,13 +8,13 @@ ls7LoadMetadata(update = FALSE, verbose = TRUE, omit.question = TRUE,
   ...)
 }
 \arguments{
-\item{update}{logical argument. If \code{TRUE} updates the metadata file.}
+\item{update}{logical argument. If \code{TRUE}, updates the metadata file.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
-\item{omit.question}{logical argument. If \code{TRUE} omits the question for ensuring the loading of the metadata file.}
+\item{omit.question}{logical argument. If \code{TRUE}, omits the question for ensuring the loading of the metadata file.}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
 \itemize{
   \item \code{AppRoot} the directory where the metadata will be saved.
 }}

@@ -19,13 +19,13 @@ or \code{lonlat} is not defined.}
 
 \item{out.name}{the name of the region.}
 
-\item{raw.rm}{logical argument. If \code{TRUE} region images are removed.}
+\item{raw.rm}{logical argument. If \code{TRUE}, region images are removed.}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
 \itemize{
   \item \code{AppRoot} the directory where the extracted images should be located
 }}
@@ -45,7 +45,7 @@ This function requires \code{gdalUtils} properly installed.
 data(ex.navarre)
 src <- "Path_for_downloading_folder"
 
-# Search and download the images from Modis comprised between
+# Search and download the images from Modis between
 # 01-01-2018 and 03-01-2018 for the region of Navarre
 modDownload(product = "MOD09GA",
             startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),

@@ -7,7 +7,7 @@
 #' @param sensitivity numeric argument. It defines how sensitive is the method detecting the clouds. The
 #' valid range is 0-100. By default 50.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
-#' @param ... argument to allow function nestering:
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} the directory where the extracted images should be located.
 #' }

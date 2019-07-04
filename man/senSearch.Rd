@@ -11,7 +11,7 @@ senSearch(username, password, ...)
 
 \item{password}{Scihub password.}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
 \itemize{
   \item \code{product} Sentinel product type.  Ex. "S2MSI1C", "S2MSI2A", "S2MSI2Ap", ... 
   \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
@@ -21,7 +21,7 @@ senSearch(username, password, ...)
 the point or region of interest in longitude/latitude format.
   \item \code{platform} platform name of the Sentinel mission (Sentinel-1, Sentinel-2,...).
   \item \code{qformat} format of response
-  \item \code{verbose} logical argument. If \code{TRUE} the function prints running stages and warnings.
+  \item \code{verbose} logical argument. If \code{TRUE}, the function prints running stages and warnings.
   \item \code{error.log} the name of the error log file.
   \item \code{AppRoot} the directory where the images will be saved.
 }}

@@ -20,10 +20,10 @@
 #' @param username login credentials to access the USGS EROS web service.
 #' @param password login credentials to access the USGS EROS web service.
 #' @param cookies.file  File path for saving the cookies that are used in the download process.
-#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
-#' @param raw.rm logical argument. If \code{TRUE} removes the raw images.
-#' @param untar logical argument. If \code{TRUE} untars downloaded images.
-#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
+#' @param raw.rm logical argument. If \code{TRUE}, removes the raw images.
+#' @param untar logical argument. If \code{TRUE}, untars downloaded images.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
 #' @param ... argument for function nestering accepts:
 #' \itemize{
 #'   \item \code{AppRoot} the directory to save the downloaded images.
@@ -34,7 +34,7 @@
 #' \dontrun{
 #' #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' # Search and download the images from Landsat-8 comprised between
+#' # Search and download the images from Landsat-8 between
 #' # 2011 and 2013 in the region of Navarre
 #' search.res <- ls8Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
@@ -60,7 +60,7 @@
 #'              untar = TRUE, 
 #'              raw.rm = TRUE)
 #'
-#' # Search and download the images from Landsat-7 comprised between
+#' # Search and download the images from Landsat-7 between
 #' # 2011 and 2013 in the region of Navarre
 #' search.res <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),

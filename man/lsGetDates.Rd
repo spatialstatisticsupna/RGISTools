@@ -9,7 +9,7 @@ lsGetDates(str, ...)
 \arguments{
 \item{str}{\code{character} class or a \code{vector} class containing the file path(s) or file name(s).}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
 \itemize{
   \item \code{format} modifies the format of the date.
 }}

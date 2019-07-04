@@ -2,11 +2,11 @@
 #'
 #' \code{modSearch} searches the Modis products on the  
 #' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} to 
-#'  find the avaliable images for a particular location and date interval.
+#'  find the available images for a particular location and date interval.
 #' The outut is an array of urls with the relevant images.
 #'
 #' \code{modSearch} \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} (CMR) powered api.
-#' The catalogue of  Modis products with their short names and other
+#' The catalogue of Modis products with their short names and other
 #' information can be found at: \href{https://modis.gsfc.nasa.gov/data/dataprod/}{Modis data product info}.
 #' For further information on collections, please visit \href{https://modis-atmos.gsfc.nasa.gov/collections/overview}{Modis website}.
 #' By the time the \code{RGISTools} package is released, NASA carries out the maintenance of the Modis website on Wednesdays. Therefore, an error
@@ -21,7 +21,7 @@
 # @param pathrow A list of vectors defining the path and row number for the region of interest according
 # to the Sinusoidal Tile Grid (\url{https://modis-land.gsfc.nasa.gov/MODLAND_grid.html})
 # This argument is mandatory if extent is not defined.
-#' @param ... argument to allow function nestering:
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{lonlat} a vector or a polygon with the coordinates of
 #' the point or region of interest in longitude/latitude format.
@@ -29,7 +29,7 @@
 #'   \item \code{extent} \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or \code{SpatialPoints*} object are acceptable formats
 #' as long as coordinates are in longitude/latitude format.
 #' This argument is mandatory if \code{polygon} or \code{lonlat} is not defined.
-#'   \item \code{polygon} a list of vectors defining the points of the polygon in longitude/latitude format.
+#'   \item \code{polygon} a list of vectors defining the points of the polygon in longitude/latitude coordinates.
 #' This argument is mandatory if \code{lonlat} or \code{extent} is not defined.
 #'   \item \code{AppRoot} the directory to save the output time series.
 #' }

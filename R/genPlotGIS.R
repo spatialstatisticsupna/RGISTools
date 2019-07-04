@@ -57,7 +57,7 @@
 #'            scaleRelativeX = 0.1,
 #'            scaleRelativeY = 0.1,
 #'            scaleRelativeSize = 0.15,
-#'            #scale text relatives 0-1
+#'            # scale text relatives 0-1
 #'            scaleLabelRelativeX = 0.1,
 #'            scaleLabelRelativeY = 0.2,
 #'            scaleLabelSize = 5000

@@ -11,15 +11,15 @@ ls8Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 
 \item{endDate}{ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
-\item{precise}{logical argument. If \code{TRUE} the search is donw tile by tile (slower).}
+\item{precise}{logical argument. If \code{TRUE}, the search is donw tile by tile (slower).}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
  \itemize{
   \item \code{pathrow} a list of vectors defining the path and row number for the region of interest according
 to the \href{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/}{Worldwide Reference System}
-This argument is mandatory if \code{extent} is not defined.
+This argument is mandatory if \code{extent} is not defined. Ex. \code{c(-1.64323,42.81687)}.
   \item \code{lonlat} this argument is optional. A vector or a polygon with the coordinates of
 the point or region of interest in longitude/latitude format.
   \item \code{extent} this argument is optional. \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or \code{SpatialPoints*}

@@ -9,7 +9,7 @@
 #'  If another format is required, it can be modified through the argument \code{format}.
 #'
 #' @param str \code{character} class or a \code{vector} class containing the file path(s) or file name(s).
-#' @param ... argument to allow function nestering:
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{format} modifies the format of the date.
 #' }
@@ -47,7 +47,7 @@ lsGetDates<-function(str,...){
 #'  If another format is required, it can be modified through the argument \code{format}.
 #'
 #' @param str \code{character} class or a \code{vector} class containing the file path(s) or file name(s).
-#' @param ... argument to allow function nestering:
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{format} modifies the format of the date.
 #' }
@@ -100,7 +100,7 @@ senGetDates<-function(str,...){
 #'  If another format is required, it can be modified through the argument \code{format}.
 #'
 #' @param str \code{character} class or a \code{vector} class containing the file path(s) or file name(s).
-#' @param ... argument to allow function nestering:
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{format} modifies the format of the date.
 #' }

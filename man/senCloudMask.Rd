@@ -16,7 +16,7 @@ valid range is 0-100. By default 50.}
 
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
 \itemize{
   \item \code{AppRoot} the directory where the extracted images should be located.
 }}

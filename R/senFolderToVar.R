@@ -25,7 +25,7 @@
 #' function prints running stages and warnings.
 #' @param resbands using Sentinel \code{S2MSI2A} products specifies the resolution of the output images. By default all 
 #' the resolutions (10m, 20m and 60m) are used.
-#' @param ... argument to allow function nestering:
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} the directory of the resulting time series.
 #' }

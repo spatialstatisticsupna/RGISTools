@@ -9,7 +9,7 @@
 #'
 #' @param imageList \code{list} class argument composed by \code{raster} layers.
 #' @param fun the function applied to overlapping pixels.
-#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #'
 #' @examples
 #' # create simulated rasters

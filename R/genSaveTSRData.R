@@ -14,7 +14,7 @@
 #' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param dextent creates the \code{RasterStack} to the maximun extent from different extent GTiff images.
-#' @param recursive logical argument. If \code{TRUE} reads folders recursively, searching for images in GTiff image format.
+#' @param recursive logical argument. If \code{TRUE}, reads folders recursively, searching for images in GTiff image format.
 #' @param ... argument for function nestering.
 #' \itemize{
 #'   \item \code{AppRoot} the path where the RData will be saved.

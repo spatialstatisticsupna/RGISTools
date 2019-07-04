@@ -14,9 +14,9 @@ modDownSearch(searchres, username = NULL, password = NULL,
 
 \item{password}{login credentials to access the NASA’s EarthData web service.}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
 \itemize{
   \item \code{AppRoot} root directory where the images will be saved.
 }}

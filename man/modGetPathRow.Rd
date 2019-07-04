@@ -7,7 +7,7 @@
 modGetPathRow(str)
 }
 \arguments{
-\item{str}{the full path or official image name of the Modis image from which the path and row is extracted.}
+\item{str}{the full path or official image name of the Modis image from which the path and row is retrieved.}
 }
 \value{
 an string with the path and row of the image in "\code{hXXvYY}" format.

@@ -13,7 +13,7 @@ genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 
 \item{cStack}{\code{RasterStack} class argument containing a time series of covariates.}
 
-\item{Img2Process}{\code{vector} class argument defining the images to smoothed.}
+\item{Img2Process}{\code{vector} class argument defining the images to be smoothed.}
 
 \item{fun}{function used for calculating the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.
 \code{mean} is the default.}
@@ -28,7 +28,7 @@ genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 
 \item{aFilter}{\code{vector} with the lower and upper extreme values for filtering the anomalies. Ex. c(0.05,0.95).}
 
-\item{snow.mode}{logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.}
+\item{snow.mode}{logical argument. If \code{TRUE}, the filling process will be parallelized by \code{raster} package.}
 
 \item{...}{argument for function nestering.
 \itemize{
@@ -40,10 +40,10 @@ genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, fun = mean,
 \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{
-This method decomposes the time series of images into the mean images and the anomaly images. The procedure applies
+This method decomposes the time series of the images into the series of the mean images and the series of the anomaly images. The procedure applies
 the smoothing algorithm with covariates over a series of anomaly images. \insertCite{militino2019interpolation}{RGISTools}.
 
-This function depends of arguments, such as the images to fill (\code{Img2Process}),
+This function depends of several arguments, such as the images to fill (\code{Img2Process}),
 the number of periods or years in the definition of the spatio temporal neighbourhoood, or the size of the
 aggregation.
 }

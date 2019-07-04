@@ -17,7 +17,7 @@
 #' implemented.
 #' @param getStack logical argument. If \code{TRUE}, returns the time-series as a 
 #' \code{RasterStack}, otherwise the images are saved in the Hard Drive Devide (HDD).
-#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
 #' @param ... argument for function nestering.
 #' \itemize{
 #'   \item \code{AppRoot} the directory of the resulting time series.

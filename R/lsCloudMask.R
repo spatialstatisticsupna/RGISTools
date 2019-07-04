@@ -7,9 +7,9 @@
 #' @param src the path to the folder where the Landsat multispectral captures are stored. 
 #' @param sensitivity numeric argument. Defines how sensitive is the method detecting the clouds. 0-8000 are
 #' valid values. By default, the best value for Landsat 8 images assigned 2800. For Landsat-7 images use 600.
-#' @param overwrite logical argument. If \code{TRUE} overwrites the existing images with the same name.
-#' @param verbose logical argument. If \code{TRUE} the function prints running stages and warnings.
-#' @param ... argument to allow function nestering:
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
+#' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} the directory where the extracted images should be located
 #' }
@@ -20,7 +20,7 @@
 #' data(ex.navarre)
 #' src <- "Path_for_downloading_folder"
 #' 
-#' # Search and download the images from Landsat-8 comprised between
+#' # Search and download the images from Landsat-8 between
 #' # 01-01-2018 and 20-01-2018 for the region of Navarre
 #' lsDownload(satellite = "ls8",
 #'            username = "username",
@@ -49,7 +49,7 @@
 #'          
 #' # generate the path where mosaicked images are located
 #' src.navarre <- file.path(src,"Landsat8","Navarre")
-#' # load the B1 layer and calculated CLD layer
+#' # load the B1 layer and calculate the CLD layer
 #' tiles.path <- list.files(src.navarre,
 #'                          full.names = TRUE,
 #'                          recursive = TRUE,

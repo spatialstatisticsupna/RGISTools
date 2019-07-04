@@ -13,11 +13,11 @@ lsCloudMask(src, sensitivity = 2800, overwrite = FALSE, verbose = F,
 \item{sensitivity}{numeric argument. Defines how sensitive is the method detecting the clouds. 0-8000 are
 valid values. By default, the best value for Landsat 8 images assigned 2800. For Landsat-7 images use 600.}
 
-\item{overwrite}{logical argument. If \code{TRUE} overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
-\item{verbose}{logical argument. If \code{TRUE} the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
-\item{...}{argument to allow function nestering:
+\item{...}{argument for function nestering:
 \itemize{
   \item \code{AppRoot} the directory where the extracted images should be located
 }}
@@ -33,7 +33,7 @@ creates a new band named \code{CLD}.
 data(ex.navarre)
 src <- "Path_for_downloading_folder"
 
-# Search and download the images from Landsat-8 comprised between
+# Search and download the images from Landsat-8 between
 # 01-01-2018 and 20-01-2018 for the region of Navarre
 lsDownload(satellite = "ls8",
            username = "username",
@@ -62,7 +62,7 @@ lsMosaic(src = src.untar,
          
 # generate the path where mosaicked images are located
 src.navarre <- file.path(src,"Landsat8","Navarre")
-# load the B1 layer and calculated CLD layer
+# load the B1 layer and calculate the CLD layer
 tiles.path <- list.files(src.navarre,
                          full.names = TRUE,
                          recursive = TRUE,

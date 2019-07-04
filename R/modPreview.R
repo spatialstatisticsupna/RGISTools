@@ -7,7 +7,8 @@
 #' the captures have this feature.
 #'
 #'
-#' @param searchres a vector with the results from a search of Modis images provided by the functions modSearch with \code{resType="browseurl"} argument.
+#' @param searchres a vector with the results from a search of Modis images provided by 
+#' the functions \code{\link{modSearch}} with \code{resType="browseurl"} argument.
 #' @param n the number of the image of interest in the search vector.
 #' @param size a number specifying the size of the preview to be displayed, in pixels.
 #'

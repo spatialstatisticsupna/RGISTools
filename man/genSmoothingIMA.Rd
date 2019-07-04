@@ -26,7 +26,7 @@ with the name of the layers containing the date in julian format (\code{YYYYJJJ}
 
 \item{factSE}{the fact used in the standard error prediction to reduce the processing time.}
 
-\item{snow.mode}{logical argument. If \code{TRUE} the filling process will be parallelized by \code{raster} package.}
+\item{snow.mode}{logical argument. If \code{TRUE}, the filling process will be parallelized by \code{raster} package.}
 
 \item{out.name}{the name of the output images.}
 
