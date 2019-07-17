@@ -118,7 +118,10 @@ lsMosaic<-function(src,
       stopifnot(length(dayImg)>0)
     }
 
-    flist<-list.files(dayImg,recursive=T,full.names=T,pattern="\\.TIF$",ignore.case = T)
+    flist<-list.files(dayImg,recursive=T,
+                      full.names=T,
+                      pattern="\\.tif$",
+                      ignore.case = T)
     #filter the images by data type
     if("bandFilter"%in%names(arg)){
       flist<-flist[Reduce("|", lapply(arg$bandFilter,grepl,flist))]

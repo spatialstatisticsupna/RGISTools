@@ -78,8 +78,10 @@ lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
       message(paste0("No cloud mask found for date ",genGetDates(basename(id))))
       next
     }
+
+    out.img<-gsub(paste0(qc,".TIF"),"CLD.TIF",qcmask,ignore.case =T)
+
     
-    out.img<-gsub(paste0(qc,".TIF"),"CLD.TIF",qcmask,ignore.case = T)
     
     if(!file.exists(out.img)||overwrite){
       message("Creating cloud mask for tile ",dirname(qcmask))
@@ -96,6 +98,9 @@ lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
       
       NAvalue(ras.cloud)<-0
       writeRaster(ras.cloud,out.img,overwrite=overwrite)
+      if(grepl(".TIF",out.img)){
+        file.rename(gsub(".tif",".TIF",out.img),out.img)
+      }
       rm(ras.cloud)
     }else{
       message(paste0("Cloud mask of date ",genGetDates(basename(id))," already exists."))
