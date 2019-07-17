@@ -66,7 +66,7 @@
 lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
-  imgdir.list<-list.dirs(src,recursive=FALSE)[-1]
+  imgdir.list<-list.dirs(src,recursive=FALSE)
   if(verbose){message(paste0("Identifies folders:  \n",imgdir.list))}
   for(id in imgdir.list){
     #id<-imgdir.list[2]
@@ -81,8 +81,6 @@ lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
 
     out.img<-gsub(paste0(qc,".TIF"),"CLD.TIF",qcmask,ignore.case =T)
 
-    
-    
     if(!file.exists(out.img)||overwrite){
       message("Creating cloud mask for tile ",dirname(qcmask))
       

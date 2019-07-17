@@ -78,7 +78,7 @@ senCloudMask<-function(src,img.res,sensitivity=50,overwrite=FALSE,...){
   # 
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
-  imgdir.list<-list.dirs(src)[-1]
+  imgdir.list<-list.dirs(src,recursive=FALSE)
   AppRoot<-file.path(AppRoot,"CloudMask")
   dir.create(AppRoot,showWarnings = F,recursive = T)
   for(id in imgdir.list){
