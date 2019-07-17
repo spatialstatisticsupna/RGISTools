@@ -43,11 +43,11 @@ ls7LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=TRUE,...){
   AppRoot<-defineAppRoot(...)
 
   #meta data directory and metadata file
-  mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS7META.dir"))
+  mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS7DownloadDir"),getRGISToolsOpt("LS7META.dir"))
   if(!file.exists(mdRawdir)){
     dir.create(mdRawdir,recursive=T)
   }
-  mdRdata<-file.path(mdRawdir,getRGISToolsOpt("LS7META.rdata"))
+  mdRdata<-file.path(mdRawdir,getRGISToolsOpt("LS7DownloadDir"),getRGISToolsOpt("LS7META.rdata"))
   mdRawURL<-getRGISToolsOpt("LS7META.csv")
 
   if(is.na(file.info(mdRdata)$ctime)|
