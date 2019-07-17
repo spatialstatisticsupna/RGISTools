@@ -47,9 +47,9 @@ ls7LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=TRUE,...){
   if(!file.exists(mdRawdir)){
     dir.create(mdRawdir,recursive=T)
   }
-  mdRdata<-file.path(mdRawdir,getRGISToolsOpt("LS7DownloadDir"),getRGISToolsOpt("LS7META.rdata"))
+  mdRdata<-file.path(mdRawdir,getRGISToolsOpt("LS7META.rdata"))
   mdRawURL<-getRGISToolsOpt("LS7META.csv")
-
+  if(verbose){message(paste0("Metadata folder ",mdRdata))}
   if(is.na(file.info(mdRdata)$ctime)|
      update){
     message("MetaData Rdata not found or out of date! \nThis task may take few minutes.")
