@@ -19,6 +19,10 @@ assign("LS7META.dir","MetaData", env=optEnv)
 assign("LS7META.rdata","LS7MD.RData", env=optEnv)
 assign("LS7META.var",".LS7MD", env=optEnv)
 assign("LS7DownloadDir","Landsat7", env=optEnv)
+# Landsat lvl2
+assign("LS.ESPA.API","https://espa.cr.usgs.gov", env=optEnv)
+assign("LS.ESPA.API.v","/api/v1", env=optEnv)
+assign("LS.ESPA.Request","RGISTools request", env=optEnv)
 
 # Modis options
 assign("MODINVENTORY.url","https://lpdaacsvc.cr.usgs.gov/services/inventory", env=optEnv)

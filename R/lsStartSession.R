@@ -1,6 +1,6 @@
 startUSGSsession<-function(username,
                            password,
-                           cookies.file="cookies.txt",
+                           cookies.file=NULL,
                            verbose=F){
   c.handle = new_handle()
   handle_setopt(c.handle,

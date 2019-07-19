@@ -22,6 +22,8 @@
 #' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param username login credentials to access the USGS EROS web service.
 #' @param password login credentials to access the USGS EROS web service.
+#' @param lvl flag to specify Landsat product level wanted. Default value, 1.
+#' @param products character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.
 #' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param raw.rm logical argument. If \code{TRUE}, removes the raw images.
 #' @param untar logical argument. If \code{TRUE}, untars downloaded images.
@@ -54,6 +56,8 @@ lsDownload<-function(satellite,
                      endDate,
                      username,
                      password,
+                     lvl=1,
+                     product=c("sr","source_metadata"),
                      verbose=FALSE,
                      untar=TRUE,
                      raw.rm=FALSE,
@@ -78,5 +82,13 @@ lsDownload<-function(satellite,
     message("Search result:")
     message(searchres)
   }
-  lsDownSearch(searchres=searchres,username=username,password=password,untar=untar,raw.rm=raw.rm,AppRoot=AppRoot,...)
+  lsDownSearch(searchres=searchres,
+               username=username,
+               password=password,
+               untar=untar,
+               raw.rm=raw.rm,
+               AppRoot=AppRoot,
+               lvl=lvl,
+               product=products,
+               ...)
 }

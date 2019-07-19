@@ -8,10 +8,12 @@ export(genCompositions,genSmoothingCovIMA,genFilterStack,
        modGetPathRow,modMosaic,modPreview,modDownSearch,modSearch,setRGISToolsOpt,
        getRGISToolsOpt,showRGISToolsOpt,senDownload,senDownSearch,senGetTile,senGetOrbit,
        senFolderToVar,senSearch,senMosaic,senPreview,varEVI,varMSAVI2,varNBR,
-       varNBR2,varNDMI,varNDVI,varNDWI,varRGB,varSAVI,lsCloudMask,senCloudMask,modCloudMask)
+       varNBR2,varNDMI,varNDVI,varNDWI,varRGB,varSAVI,lsCloudMask,senCloudMask,modCloudMask,
+       lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders)
 import("raster","curl", "rjson","rvest", "urltools","tools",
        "fields", "gdalUtils", "magick")
 importFrom("methods", "formalArgs")
+importFrom("httr","POST","authenticate")
 importFrom("sp","bbox","layout.scale.bar","layout.north.arrow",
            "proj4string","spplot","Polygons","Polygon",
            "SpatialPolygons","CRS","spTransform")

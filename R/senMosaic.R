@@ -129,7 +129,8 @@ senMosaic<-function(src,
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
     dir.create(AppRoot,recursive = T,showWarnings = verbose)
     for(dt in 1:length(dtype)){
-      if(!file.exists(file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif")))||overwrite){
+      out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif"))
+      if((!file.exists(out.file.path))|overwrite){
         typechunks<-flist[grepl(dtype[dt],flist)]
         if(!gutils){
           #mosaic with native R libraries
@@ -155,26 +156,25 @@ senMosaic<-function(src,
               extent<-spTransform(extent,crs(img))
             img<-crop(img,extent)
           }
-          writeRaster(img,file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif")),overwrite=overwrite)
+          writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
           #mosaic with gdalutils no support cutline
           message(paste0("Merging band ",dtype[dt]))
           if(is.null(extent)){
             mosaic_rasters(typechunks,
-                           dst_dataset=file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif")),
+                           dst_dataset=out.file.path,
                            srcnodata=0,
                            vrtnodata=0,
                            overwrite=overwrite)
           }else{
             ext<-extent(extent)
-            temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],"_temp.tif"))
             mosaic_rasters(typechunks,
-                           dst_dataset=temp,
+                           dst_dataset=gsub(".tif","_temp.tif",out.file.path),
                            srcnodata=0,
                            vrtnodata=0,
                            overwrite=TRUE)
             gdalwarp(srcfile=temp,
-                     dstfile=file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif")),
+                     dstfile=out.file.path,
                      te=c(ext@xmin,ext@ymin,ext@xmax,ext@ymax),
                      te_srs=proj4string(extent),
                      overwrite=overwrite)

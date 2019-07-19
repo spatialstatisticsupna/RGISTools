@@ -19,6 +19,8 @@
 #' @param searchres the results from \code{ls7Search} or \code{ls8Search}.
 #' @param username login credentials to access the USGS EROS web service.
 #' @param password login credentials to access the USGS EROS web service.
+#' @param lvl flag to specify Landsat product level wanted. Default value, 1.
+#' @param products character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.
 #' @param cookies.file  File path for saving the cookies that are used in the download process.
 #' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param raw.rm logical argument. If \code{TRUE}, removes the raw images.
@@ -103,11 +105,13 @@
 lsDownSearch<-function(searchres,
                        username=NULL,
                        password=NULL,
-                       cookies.file="lscookies.txt",
+                       lvl=1,
+                       products=c("sr","source_metadata"),
                        verbose=FALSE,
                        raw.rm=FALSE,
                        untar=FALSE,
                        overwrite=FALSE,
+                       n.attempts=5,
                        ...){
   stopifnot(class(searchres)=="data.frame")
   if(is.null(username)|is.null(password)){
@@ -129,38 +133,49 @@ lsDownSearch<-function(searchres,
     dir.create(downPath,recursive=T)
   }
 
-  #start usgs session
-  handler<-startUSGSsession(username,password,cookies.file,verbose)
-  if(verbose)
-    print("USGS session started, downloading images...")
-  for(scene in searchres$sceneID){
-    if(!file.exists(paste0(downPath,"/",scene,".tar.gz"))){
-      if(grepl("LC8",searchres[1,]$sceneID)){
-        .ls8DownloadUSGS(scene,downPath,handler,verbose=verbose,overwrite=overwrite)
-      }else if(grepl("LE7",searchres[1,]$sceneID)){
-        .ls7DownloadUSGS(scene,downPath,handler,verbose=verbose,overwrite=overwrite)
-      }
-    }
-    #Unzip in downDir when available
-    if(untar){
-      print(paste0("Untar ",scene," file."))
-      untarDir<-file.path(AppRoot,downDir,"untar",scene)
-      if(overwrite){
-        file.remove(untarDir,showWarnings=FALSE,recursive=TRUE)
-      }
-      dir.create(untarDir,recursive=T,showWarnings=FALSE)
-      untar(paste0(downPath,"/",scene,".tar.gz"),exdir=untarDir)
-      #Flag is true, so remove compressed files
-      if(raw.rm){
-        file.remove(paste0(downPath,"/",scene,".tar.gz"))
-      }
-    }
+  if(lvl==1){
+    message("Starting Landsat level 1 download process...")
+    lsEarthExplorerdownload(searchres=searchres,
+                            username=username,
+                            password=password,
+                            cookies.file=NULL,
+                            downDir=downDir,
+                            AppRoot=AppRoot,
+                            downPath=downPath,
+                            verbose=verbose,
+                            untar=untar,
+                            overwrite=overwrite)
+  }else if(lvl==2){
+    message("Starting Landsat level 2 download process...")
+    lsEspaOrderImages(search.res=searchres,
+                      username=username,
+                      password=password,
+                      product=products,
+                      verbose=verbose)
+    message("Ordering images on ESPA platform...")
+    c.handle<-lsEspaCreateConnection(username=username,password=password)
+    images.order<-lsEspaGetOrderImages(c.handle=c.handle)
+    message("Cheking the order status and starting the download process.")
+    lsEspaDownloadOrders(images.order=images.order,
+                         c.handle=c.handle,
+                         verbose=verbose,
+                         n.attempts=n.attempts,
+                         untar=untar,
+                         overwrite=overwrite,
+                         AppRoot=downPath)
+    close(c.handle)
+  }else{
+    stop("Landsat level not identified, check 'lvl'. Valid values 1 or 2.")
   }
-
   if(untar){
     message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",untarDir))
   }else{
     message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",downPath))
   }
-
 }
+
+
+
+
+
+
