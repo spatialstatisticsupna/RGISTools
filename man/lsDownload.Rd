@@ -4,8 +4,9 @@
 \alias{lsDownload}
 \title{Search and downloads a time series of satellite images from Landsat 7-8}
 \usage{
-lsDownload(satellite, startDate, endDate, username, password,
-  verbose = FALSE, untar = TRUE, raw.rm = FALSE, ...)
+lsDownload(satellite, startDate, endDate, username, password, lvl = 1,
+  product = c("sr", "source_metadata"), verbose = FALSE,
+  untar = TRUE, raw.rm = FALSE, ...)
 }
 \arguments{
 \item{satellite}{string containing the type of satellite for downloading (\code{"ls7"} or \code{"ls8"}).}
@@ -17,6 +18,8 @@ lsDownload(satellite, startDate, endDate, username, password,
 \item{username}{login credentials to access the USGS EROS web service.}
 
 \item{password}{login credentials to access the USGS EROS web service.}
+
+\item{lvl}{flag to specify Landsat product level wanted. Default value, 1.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
@@ -30,6 +33,8 @@ lsDownload(satellite, startDate, endDate, username, password,
 function arguments.
   \item \code{AppRoot} the directory to save the downloaded images.
 }}
+
+\item{products}{character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.}
 }
 \description{
 \code{lsDownSearch} downloads the list of images provided by \code{ls7Search} and \code{ls8Search} functions.

@@ -4,9 +4,10 @@
 \alias{lsDownSearch}
 \title{Download a time series of satellite images from Landsat 7-8}
 \usage{
-lsDownSearch(searchres, username = NULL, password = NULL,
-  cookies.file = "lscookies.txt", verbose = FALSE, raw.rm = FALSE,
-  untar = FALSE, overwrite = FALSE, ...)
+lsDownSearch(searchres, username = NULL, password = NULL, lvl = 1,
+  products = c("sr", "source_metadata"), verbose = FALSE,
+  raw.rm = FALSE, untar = FALSE, overwrite = FALSE, n.attempts = 5,
+  ...)
 }
 \arguments{
 \item{searchres}{the results from \code{ls7Search} or \code{ls8Search}.}
@@ -15,7 +16,9 @@ lsDownSearch(searchres, username = NULL, password = NULL,
 
 \item{password}{login credentials to access the USGS EROS web service.}
 
-\item{cookies.file}{File path for saving the cookies that are used in the download process.}
+\item{lvl}{flag to specify Landsat product level wanted. Default value, 1.}
+
+\item{products}{character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
@@ -29,6 +32,8 @@ lsDownSearch(searchres, username = NULL, password = NULL,
 \itemize{
   \item \code{AppRoot} the directory to save the downloaded images.
 }}
+
+\item{cookies.file}{File path for saving the cookies that are used in the download process.}
 }
 \description{
 \code{\link{lsDownSearch}} downloads the list of images provided by \code{\link{ls7Search}} and \code{\link{ls8Search}} functions.
