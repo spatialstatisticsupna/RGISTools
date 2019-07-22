@@ -7,7 +7,7 @@
 #' @return
 #'
 #' @examples
-lsEspaGetOrderImages<-function(username=NULL,password=NULL,c.handle=NULL){
+lsEspaGetOrderImages<-function(username=NULL,password=NULL,c.handle=NULL,order.list=NULL,verbose=TRUE){
   if(is.null(c.handle)){
     if(is.null(username)|is.null(username)){
       stop("c.handle or username and password are null.")
@@ -17,7 +17,8 @@ lsEspaGetOrderImages<-function(username=NULL,password=NULL,c.handle=NULL){
       c.handle<-lsEspaCreateConnection(username,password)
     }
   }
-  order.list<-lsEspaGetOrders(c.handle=c.handle)
+  if(is.null(order.list))
+    order.list<-lsEspaGetOrders(c.handle=c.handle)
   img.list<-list()
   for(ol in order.list){
     r <- curl_fetch_memory(paste0(getRGISToolsOpt("LS.ESPA.API"),getRGISToolsOpt("LS.ESPA.API.v"),"/order/",ol), c.handle)
@@ -27,7 +28,7 @@ lsEspaGetOrderImages<-function(username=NULL,password=NULL,c.handle=NULL){
       img.list[[ol]]<-list(OrderedImages=unname(all.response[grepl("inputs",names(all.response))]),
                            Status=json_data$status)
     }else{
-      message(paste0(ol," is not an RGISTools request, not adding for downloading..."))
+      if(verbose)message(paste0(ol," is not an RGISTools request, not adding for downloading..."))
     }
   }
   return(img.list)

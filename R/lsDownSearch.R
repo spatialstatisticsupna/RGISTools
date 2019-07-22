@@ -177,5 +177,3 @@ lsDownSearch<-function(searchres,
 
 
 
-
-

@@ -34,26 +34,29 @@ lsEspaDownloadOrders<-function(images.order,
   }
   orders<-names(images.order)
   
-  while(TRUE){
-    for(norder in 1:length(images.order)){
-      if(images.order[[norder]]$Status=="complete"){
-        #call to recursive function
-        images.order=lsDownEspa(orders=orders,
-                                norder=norder,
-                                images.order=images.order,
-                                c.handle=c.handle,
-                                AppRoot=AppRoot,
-                                verbose=verbose,
-                                n.attempts=n.attempts,
-                                untar=untar,
-                                overwrite=overwrite)
+  if(length(orders)>0){
+    while(TRUE){
+      for(norder in 1:length(images.order)){
+        if(images.order[[norder]]$Status=="complete"){
+          #call to recursive function
+          images.order=lsDownEspa(orders=orders,
+                                  norder=norder,
+                                  images.order=images.order,
+                                  c.handle=c.handle,
+                                  AppRoot=AppRoot,
+                                  verbose=verbose,
+                                  n.attempts=n.attempts,
+                                  untar=untar,
+                                  overwrite=overwrite)
+        }
       }
+      if(all(!unname(unlist(lapply(images.order,function(x)return(x$Status))))%in%c("ordered","processing","complete"))){
+        return(message(paste0("Images downloaded in: \n",AppRoot)))
+      }
+      message("Looking for processed images...")
+      images.order<-lsEspaUpdateOrders(images=images.order,c.handle=c.handle,verbose=verbose)
     }
-    if(all(!unname(unlist(lapply(images.order,function(x)return(x$Status))))%in%c("ordered","processing","complete"))){
-      return(message(paste0("Images downloaded in: \n",AppRoot)))
-    }
-    images.order<-lsEspaUpdateOrders(images=images.order,c.handle=c.handle)
-  }
+  }else{message("There is no valid orders for downloading.")}
 }
 
 

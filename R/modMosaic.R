@@ -125,6 +125,7 @@ modMosaic<-function(src,
       out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt]))
       if((!file.exists(out.file.path))|overwrite){
         typechunks<-flist[grepl(dtype[dt],flist)]
+        if(length(typechunks)==0)next
         if(!gutils){
           #mosaic with native R libraries
           typechunks<-lapply(typechunks,raster)

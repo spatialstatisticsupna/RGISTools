@@ -78,7 +78,7 @@ lsMosaic<-function(src,
   #read all folder names to get all the days
   imgFolders<-list.files(src,full.names = T)
   #remove folders
-  imgFolders<-imgFolders[nchar(basename(imgFolders))==21]
+  #imgFolders<-imgFolders[nchar(basename(imgFolders))==21]
 
   dates<-unique(lsGetDates(imgFolders))
   bpath<-file.path(AppRoot,out.name)
@@ -88,17 +88,27 @@ lsMosaic<-function(src,
     dates<-dates[dates%in%arg$dayFilter]
   }
   #definition of bands names
-  if(any(grepl("LE7",imgFolders))){
+  if(any(grepl("LE",imgFolders))){
     message("Landsat-7 images detected!")
     dtype<-paste0(getRGISToolsOpt("LS7BANDS"),".tif")
     qcband<-getRGISToolsOpt("LS7BANDS")["quality"]
-  }else if(any(grepl("LC8",imgFolders))){
+  }else if(any(grepl("LC",imgFolders))){
     message("Landsat-8 images detected!")
     dtype<-paste0(getRGISToolsOpt("LS8BANDS"),".tif")
     qcband<-getRGISToolsOpt("LS8BANDS")["quality"]
   }else{
     stop("Satellite not supported for Day mosaicing.")
   }
+  
+  #manage level 2 bands
+  if(nchar(basename(imgFolders[1]))!=21){
+    message("Level-2 images detected!")
+    dtype<-gsub("B","band",dtype)
+    dtype<-c(dtype[-which(dtype%in%"bandQA.tif")],"pixel_qa.tif","radsat_qa.tif","sr_aerosol.tif")
+    qcband<-c("pixel_qa.tif","radsat_qa.tif","sr_aerosol.tif")
+    lvl2=TRUE
+  }
+  
 
   for(d in 1:length(dates)){
     #filter the images to one day
@@ -137,14 +147,20 @@ lsMosaic<-function(src,
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
     dir.create(AppRoot,recursive = T,showWarnings = verbose)
     for(dt in 1:length(dtype)){
-      out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt]))
+      if(lvl2){bname<-gsub("band","B",dtype[dt])}
+      out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",bname))
+      if(verbose){message(paste0("Out file: ",out.file.path))}
+      
       if((!file.exists(out.file.path))|overwrite){
         typechunks<-flist[grepl(dtype[dt], flist, ignore.case = TRUE)]
+        if(length(typechunks)==0)next
         if(!gutils){
           #mosaic with native R libraries
           typechunks<-lapply(typechunks,raster)
+          typechunks<-lapply(typechunks,readAll)
           tryCatch(
             {
+              if(verbose){message("Mosaicking images...")}
               img <- genMosaicList(typechunks,verbose)
             },
             error=function(cond) {
@@ -169,12 +185,16 @@ lsMosaic<-function(src,
           writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
           #mosaic with gdalutils no supporting cutline
-          if(grepl(qcband,dtype[dt])){
+          if(any(grepl(dtype[dt],qcband))){
             nodata<-1
           }else{
             nodata<-0
           }
-          if(verbose){message(paste0("Nodata to ",nodata))}
+          if(verbose){
+            message(paste0("Nodata to ",nodata))
+            message(paste0("Chunks ",typechunks))
+          }
+          
           if(is.null(extent)){
             mosaic_rasters(typechunks,
                            dst_dataset=out.file.path,

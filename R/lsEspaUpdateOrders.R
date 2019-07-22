@@ -8,7 +8,7 @@
 #' @return
 #'
 #' @examples
-lsEspaUpdateOrders<-function(images,username=NULL,password=NULL,c.handle=NULL){
+lsEspaUpdateOrders<-function(images,username=NULL,password=NULL,c.handle=NULL,verbose=FALSE){
   if(is.null(c.handle)){
     if(is.null(username)|is.null(username)){
       stop("c.handle or username and password are null.")
@@ -21,7 +21,7 @@ lsEspaUpdateOrders<-function(images,username=NULL,password=NULL,c.handle=NULL){
   new.orders<-lsEspaGetOrders(c.handle=c.handle)
   new.orders<-new.orders[!new.orders%in%names(images)]
   if(length(new.orders)>0){
-    new.images<-lsEspaGetOrderImages(new.orders,c.handle)
+    new.images<-lsEspaGetOrderImages(order.list=new.orders,c.handle=c.handle,verbose=verbose)
     images<-append(images,new.images)
   }
   for(order in 1:length(images)){

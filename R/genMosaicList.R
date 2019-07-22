@@ -28,6 +28,7 @@ genMosaicList <-function(imageList, fun="max",verbose=TRUE){
     names(imageList) <- NULL
     imageList$fun<-fun
     imageList$tolerance<-0.000005
+    imageList$na.rm <- TRUE
     mosaic <- do.call(mosaic, imageList)
     return(mosaic)
   }else{
