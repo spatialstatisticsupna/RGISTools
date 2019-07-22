@@ -124,6 +124,7 @@ lsMosaic<-function(src,
                       ignore.case = T)
     #filter the images by data type
     if("bandFilter"%in%names(arg)){
+      arg$bandFilter<-paste0(arg$bandFilter,"\\.tif")
       flist<-flist[Reduce("|", lapply(arg$bandFilter,grepl,flist))]
       dtype<-dtype[Reduce("|", lapply(arg$bandFilter,grepl,dtype))]
     }

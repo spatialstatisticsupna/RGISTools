@@ -21,7 +21,7 @@ lsEspaUpdateOrders<-function(images,username=NULL,password=NULL,c.handle=NULL){
   new.orders<-lsEspaGetOrders(c.handle=c.handle)
   new.orders<-new.orders[!new.orders%in%names(images)]
   if(length(new.orders)>0){
-    new.images<-lsEspaGetOrderImages(new.orders,c.handles)
+    new.images<-lsEspaGetOrderImages(new.orders,c.handle)
     images<-append(images,new.images)
   }
   for(order in 1:length(images)){

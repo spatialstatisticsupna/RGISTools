@@ -23,9 +23,21 @@ lsEspaOrderImages<-function(search.res,username,password,product=c("sr","source_
     if(verbose){message(paste0("ESPA response json: \n",html.text))}
     json_data <- rjson::fromJSON(paste(html.text, collapse=""))
     if(verbose){message(paste0("ESPA response r obj: \n",json_data))}
-    if(any(!(product%in%json_data[[1]]$products))){
-      product<-product[product%in%json_data[[1]]$products]
-      if(length(product)==0){stop("Defined products are not available.")}
+    
+    json_data2<-unlist(json_data,recursive=T)
+    products<-json_data2[grepl("products",names(json_data2))]
+    if(length(products)==0){
+      warning(paste0("Defined products are not available for image ",ids))
+      warning(paste0("Products ",paste(json_data2,collapse = ", ")))
+      next
+    }
+    if(any(!(product%in%products))){
+      product<-product[product%in%products]
+      if(length(product)==0){
+        warning(paste0("Defined products are not available for image ",ids))
+        warning(paste0("Products ",paste(json_data2,collapse = ", ")))
+        next
+      }
     }
     if(grepl("maintenance",html.text,ignore.case=TRUE))
       stop("System is currently unavailable due to maintenance.")

@@ -39,13 +39,13 @@
 #'  \itemize{
 #'   \item \code{pathrow} a list of vectors defining the path and row number for the region of interest according
 #' to the \href{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/}{Worldwide Reference System}.
-#' This argument is mandatory if \code{extent} is not defined. Ex. \code{c(-1.64323,42.81687)}.
+#' This argument is mandatory if \code{extent} is not defined. Ex. \code{list(c(200,31),c(200,30))}.
 #'   \item \code{lonlat} this argument is optional. A vector with the coordinates of
-#' the point or region of interest in longitude/latitude format.
+#' the point or region of interest in longitude/latitude format. Ex. \code{c(-1.64323,42.81687)}.
 #'   \item \code{extent} this argument is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
 #' object are acceptable formats as long as are longitude/latitude format.
 #' This argument is mandatory if \code{pathrow} is not defined.
-#'   \item \code{AppRoot} the root directory where metadata file will be saved.
+#'   \item \code{AppRoot} this option specifies the downloading/searching directory of the metadata file. 
 #'   \item all column names in .LS7MD data frame for filter results.
 #' }
 #'
@@ -162,6 +162,8 @@ ls7Search<-function(startDate,endDate,verbose=FALSE,precise=FALSE,...){
   arg<-arg[names(arg)[which(!names(arg)%in%c("pathrow","extent"))]]
   if(length(arg)>0)
     LS7MD<-genFilterDF(LS7MD,verbose=verbose,...)
+
+  LS7MD<-LS7MD[!duplicated(LS7MD[,c('sceneID')]),]
   return(LS7MD)
 }
 

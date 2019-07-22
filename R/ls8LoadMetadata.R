@@ -17,7 +17,7 @@
 #' @param omit.question logical argument. If \code{TRUE}, omits the question for ensuring the loading of the metadata file.
 #' @param ... argument for function nestering
 #' \itemize{
-#'   \item \code{AppRoot} the directory where the metadata will be saved.
+#'   \item \code{AppRoot} this option specifies the downloading/searching directory of the metadata file. 
 #' }
 #'
 #' @examples
