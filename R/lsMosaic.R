@@ -187,8 +187,11 @@ lsMosaic<-function(src,
           #mosaic with gdalutils no supporting cutline
           if(any(grepl(dtype[dt],qcband))){
             nodata<-1
+          }else if(lvl2){
+            nodata<--9999
           }else{
             nodata<-0
+            
           }
           if(verbose){
             message(paste0("Nodata to ",nodata))

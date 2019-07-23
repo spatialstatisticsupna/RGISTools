@@ -51,7 +51,7 @@ lsEspaDownloadOrders<-function(images.order,
         }
       }
       if(all(!unname(unlist(lapply(images.order,function(x)return(x$Status))))%in%c("ordered","processing","complete"))){
-        return(message(paste0("Images downloaded in: \n",AppRoot)))
+        return(NULL)
       }
       message("Looking for processed images...")
       images.order<-lsEspaUpdateOrders(images=images.order,c.handle=c.handle,verbose=verbose)

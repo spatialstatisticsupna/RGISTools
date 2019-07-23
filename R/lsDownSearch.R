@@ -163,7 +163,6 @@ lsDownSearch<-function(searchres,
                          untar=untar,
                          overwrite=overwrite,
                          AppRoot=downPath)
-    close(c.handle)
   }else{
     stop("Landsat level not identified, check 'lvl'. Valid values 1 or 2.")
   }
