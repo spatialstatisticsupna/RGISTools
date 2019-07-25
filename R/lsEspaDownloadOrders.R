@@ -86,8 +86,8 @@ lsDownEspa<-function(orders,norder,c.handle,AppRoot,images.order,n.attempts,verb
     if(genCheckMD5(out.file.name,toupper(md.file[1]))){
       images.order[[norder]]$Status<-"Downloaded"
       #if untar=TRUE untar file from out.file.name to untar directory
-      if(untar){
-        untar.dir<-file.path(dirname(dirname(out.file.name)),"untar",gsub(".tar.gz","",basename(out.file.name)))
+      untar.dir<-file.path(dirname(dirname(out.file.name)),"untar",gsub(".tar.gz","",basename(out.file.name)))
+      if((untar&!file.exists(untar.dir))|(untar&overwrite)){
         dir.create(untar.dir,showWarnings = FALSE)
         untar(out.file.name,exdir=untar.dir)
       }

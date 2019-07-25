@@ -12,9 +12,9 @@ lsEarthExplorerdownload<-function(searchres,username,password,cookies.file,untar
       }
     }
     #Unzip in downDir when available
-    if(untar){
+    untarDir<-file.path(AppRoot,downDir,"untar",scene)
+    if((untar&!file.exists(untarDir))|(untar&overwrite)){
       print(paste0("Untar ",scene," file."))
-      untarDir<-file.path(AppRoot,downDir,"untar",scene)
       if(overwrite){
         file.remove(untarDir,showWarnings=FALSE,recursive=TRUE)
       }
