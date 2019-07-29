@@ -168,6 +168,7 @@ lsDownSearch<-function(searchres,
     stop("Landsat level not identified, check 'lvl'. Valid values 1 or 2.")
   }
   if(untar){
+    untarDir<-file.path(AppRoot,downDir,"untar")
     message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",untarDir))
   }else{
     message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",downPath))
