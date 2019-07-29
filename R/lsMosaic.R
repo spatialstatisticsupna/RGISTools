@@ -52,7 +52,7 @@
 #'            untar = TRUE,
 #'            AppRoot = src)
 #' # assign the folder with the Landsat-8 untared images
-#' tif.src <- file.path(src, "untar")
+#' tif.src <- file.path(src, "Landsat8","untar")
 #' # mosaic the Landsat-8 images
 #' lsMosaic(tif.src,
 #'          AppRoot = src,
@@ -79,7 +79,7 @@ lsMosaic<-function(src,
   imgFolders<-list.files(src,full.names = T)
   #remove folders
   #imgFolders<-imgFolders[nchar(basename(imgFolders))==21]
-
+  if(length(imgFolders)==0)stop(paste0("There is no images in ",src," path."))
   dates<-unique(lsGetDates(imgFolders))
   bpath<-file.path(AppRoot,out.name)
 

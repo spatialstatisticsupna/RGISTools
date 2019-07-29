@@ -87,6 +87,7 @@ senMosaic<-function(src,
 
   #read all folder names to get all the days
   imgFolders<-list.files(src,full.names = T)
+  if(length(imgFolders)==0)stop(paste0("There is no images in ",src," path."))
   dates<-unique(senGetDates(imgFolders))
   bpath<-file.path(AppRoot,out.name)
 

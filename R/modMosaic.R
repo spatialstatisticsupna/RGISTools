@@ -75,7 +75,7 @@ modMosaic<-function(src,
   imgFolders<-list.files(src,full.names = T)
   #remove folders
   #imgFolders<-imgFolders[nchar(basename(imgFolders))==41]
-
+  if(length(imgFolders)==0)stop(paste0("There is no images in ",src," path."))
   dates<-unique(modGetDates(imgFolders))
   bpath<-file.path(AppRoot,out.name)
 
