@@ -1,4 +1,4 @@
-lsEarthExplorerdownload<-function(searchres,username,password,cookies.file,untar,downDir,AppRoot,downPath,verbose,overwrite){
+lsEarthExplorerdownload<-function(searchres,username,password,cookies.file,untar,raw.rm,downDir,AppRoot,downPath,verbose,overwrite){
   #start usgs session
   handler<-startUSGSsession(username,password,cookies.file,verbose)
   if(verbose)

@@ -5,7 +5,7 @@
 \title{Title}
 \usage{
 lsEspaUpdateOrders(images, username = NULL, password = NULL,
-  c.handle = NULL)
+  c.handle = NULL, verbose = FALSE)
 }
 \arguments{
 \item{images}{}

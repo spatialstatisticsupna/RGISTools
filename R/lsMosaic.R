@@ -107,6 +107,8 @@ lsMosaic<-function(src,
     dtype<-c(dtype[-which(dtype%in%"bandQA.tif")],"pixel_qa.tif","radsat_qa.tif","sr_aerosol.tif")
     qcband<-c("pixel_qa.tif","radsat_qa.tif","sr_aerosol.tif")
     lvl2=TRUE
+  }else{
+    lvl2=FALSE
   }
   
 
@@ -147,7 +149,11 @@ lsMosaic<-function(src,
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
     dir.create(AppRoot,recursive = T,showWarnings = verbose)
     for(dt in 1:length(dtype)){
-      if(lvl2){bname<-gsub("band","B",dtype[dt])}
+      if(lvl2){
+        bname<-gsub("band","B",dtype[dt])
+      }else{
+        bname<-dtype[dt]
+      }
       out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",bname))
       if(verbose){message(paste0("Out file: ",out.file.path))}
       

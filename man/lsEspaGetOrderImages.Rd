@@ -5,7 +5,7 @@
 \title{Title}
 \usage{
 lsEspaGetOrderImages(username = NULL, password = NULL,
-  c.handle = NULL)
+  c.handle = NULL, order.list = NULL, verbose = TRUE)
 }
 \arguments{
 \item{username}{}

@@ -144,6 +144,7 @@ lsDownSearch<-function(searchres,
                             downPath=downPath,
                             verbose=verbose,
                             untar=untar,
+                            raw.rm=raw.rm,
                             overwrite=overwrite)
   }else if(lvl==2){
     message("Starting Landsat level 2 download process...")

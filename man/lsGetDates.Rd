@@ -19,20 +19,20 @@ lsGetDates(str, ...)
 given their file paths or names. The function returns a date class.
 }
 \details{
-The function works with names or file paths having either of the two file extensions,
- \code{.tar.gz} or \code{.tif} files. The function accepts more than on file path or file names.
+The function works with names or file paths having \code{.tar.gz} file extensions.
+  The function accepts more than on file path.
  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
  If another format is required, it can be modified through the argument \code{format}.
 }
 \examples{
 # example of getting the date from the name of a Landsat-8 image
-str <- "LC82000312017010LGN01_B1.TIF"
+str <- "LC82000312017010LGN01.tar.gz"
 dt <- lsGetDates(str)
 print(dt)
 print(format(df, "\%Y\%j"))
 
 # example of getting the date from the name of a Landsat-7 and 8 image
-str <- c("LE72330822017009ASN01", "LC82000312017010LGN01_B1.TIF")
+str <- c("LE72330822017009ASN01")
 dt <- lsGetDates(str)
 print(dt)
 
