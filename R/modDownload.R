@@ -90,7 +90,7 @@ modDownload<-function(product,
     modDownSearch(s,username,password,AppRoot=downdir)
     if(extract.tif){
       if(verbose){message(paste0("Extracting ",file.path(downdir,basename(s))," to dir ",tiffdir))}
-      modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose)
+      modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose,...)
     }
   }
   message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",tiffdir))

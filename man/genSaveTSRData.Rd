@@ -73,6 +73,10 @@ modFolderToVar(src2,
 src3 <- file.path(dirname(src2),"NDVI")
 # create the Rdata
 genSaveTSRData(src3, ts.name = "ModisNDVI", AppRoot = src)
+# remove values out of 0-1 range
+ModisNDVI.lim <- genLimitRasterRasterRange(ModisNDVI, mn = 0, mx = 1)
+# plot the ndvi images
+spplot(ModisNDVI.lim)
 s.end <- Sys.time()
 s.end - s.start
 }

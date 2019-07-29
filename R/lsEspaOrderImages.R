@@ -1,21 +1,49 @@
-#' Title
-#'
-#' @param search.res 
-#' @param username 
-#' @param password 
-#' @param product 
-#' @param verbose 
-#'
-#' @return
+#' Make a request to ESPA for pre-processing Landsat images
+#' 
+#' \code{lsEspaOrder}Images makes a request to the EROS Centre Science Processing Architecture (ESPA) 
+#' to further process Level-1 Landsat scenes.
+#' 
+#' Landsat Level-1 images are pre-processed on demand by the EROS Centre Science Processing Architecture (ESPA). 
+#' An order is placed to ESPA with the Level-1 images that must be pre-processed (“search.res”) and the required 
+#' final product (“product”). The products are identified by the following short-names: 
+#' \itemize{
+#'   \item \code{toa}: for top of atmosphere reflectance.
+#'   \item \code{bt}: for brightness temperature (Thermal band TOA processing).
+#'   \item \code{sr}: for surface reflectance.
+#'   \item \code{sr_ndvi}: the Normalized Difference Vegetation Index from surface reflectance imagery.
+#'   \item \code{sr_evi}: the Enhanced Vegetation Index from surface reflectance imagery.
+#'   \item \code{sr_savi}: the Soil Adjusted Vegetation Index from surface reflectance imagery.
+#'   \item \code{sr_msavi}: the Modified Soil Adjusted Vegetation Index from surface reflectance imagery.
+#'   \item \code{sr_ndmi}: the Normalized Difference Moisture Index from surface reflectance imagery.
+#'   \item \code{sr_nbr}: the Normalized Burn Ratio from surface reflectance imagery.
+#'   \item \code{sr_nbr2}: : the Normalized Burn Ratio 2 Index from surface reflectance imagery.
+#'   \item \code{prixel_qa}: for the pixel quality assurance.
+#' }
+#' 
+#' @param searchres the results from \code{\link{ls7Search}} or \code{\link{ls8Search}}. 
+#' @param username login credentials to access the USGS EROS web service.
+#' @param password login credentials to access the USGS EROS web service.
+#' @param product the acronym of the requested product (see the details).
+#' @param verbose logical argument. If TRUE, the function prints running stages and warnings.
 #'
 #' @examples
-lsEspaOrderImages<-function(search.res,username,password,product=c("sr","source_metadata"),verbose=FALSE){
+#' # Search Landsat 7 level-1
+#' search.res <- ls7Search(startDate = as.Date("01-01-2017", "%d-%m-%Y"),
+#'                         endDate = as.Date("07-01-2017", "%d-%m-%Y"),
+#'                         lonlat = c(-1.64323, 42.81687))
+#' # Request to ESPA the prepocessing of level-1 images to get the surface reflectance
+#' order <- lsEspaOrderImages(search.res = search.res,
+#'                            username = "username", 
+#'                            password = "password", 
+#'                            product = 'sr',
+#'                            verbose = FALSE)
+lsEspaOrderImages<-function(searchres,username,password,product=c("sr","source_metadata"),verbose=FALSE){
 
   # prepare the connetion
   c.handle = lsEspaCreateConnection(username,password)
   # 1 request per image
 
-  for(ids in search.res$LANDSAT_PRODUCT_ID){
+  for(ids in searchres$LANDSAT_PRODUCT_ID){
     url.products = paste0(getRGISToolsOpt("LS.ESPA.API"),getRGISToolsOpt("LS.ESPA.API.v"),'/available-products/', ids)
     if(verbose){message(paste0("Product url: \n",url.products))}
     req<-curl(url.products,handle = c.handle)

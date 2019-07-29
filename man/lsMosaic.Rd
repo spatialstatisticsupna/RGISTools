@@ -68,14 +68,15 @@ lsDownload(satellite = "ls8",
            untar = TRUE,
            AppRoot = src)
 # assign the folder with the Landsat-8 untared images
-tif.src <- file.path(src, "untar")
+ls8.src <- file.path(src, "Landsat8")
+tif.src <- file.path(ls8.src,"untar")
 # mosaic the Landsat-8 images
-lsMosaic(tif.src,
-         AppRoot = src,
+lsMosaic(src = tif.src,
+         AppRoot = ls8.src,
          out.name = "Navarre")
 
-lsMosaic(tif.src,
-         AppRoot = src,
+lsMosaic(src = tif.src,
+         AppRoot = ls8.src,
          out.name = "Navarre",
          extent = ex.navarre,
          gutils = TRUE, # using gdalUtils

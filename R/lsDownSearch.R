@@ -36,12 +36,15 @@
 #' \dontrun{
 #' #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
+#' 
+#' src <- "Path_for_downloading_folder"
 #' # Search and download the images from Landsat-8 between
 #' # 2011 and 2013 in the region of Navarre
-#' search.res <- ls8Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
-#'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
+#' search.res <- ls8Search(startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'                         endDate = as.Date("20-01-2018", "%d-%m-%Y"),
 #'                         extent = ex.navarre,
-#'                         browseAvaliable = "Y")
+#'                         browseAvaliable = "Y",
+#'                         AppRoot = src)
 #'
 #' # download 1 image
 #' lsDownSearch(searchres = search.res[1,], 
@@ -50,7 +53,7 @@
 #'              untar = TRUE, 
 #'              raw.rm = TRUE)
 #' # download 10 images
-#' lsDownSearch(searchres = search.res[1:10,], 
+#' lsDownSearch(searchres = search.res[1:4,], 
 #'              username = "user", 
 #'              password = "pass", 
 #'              untar = TRUE, 
@@ -64,28 +67,33 @@
 #'
 #' # Search and download the images from Landsat-7 between
 #' # 2011 and 2013 in the region of Navarre
-#' search.res <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
-#'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
+#' src <- "Path_for_downloading_folder"
+#' search.res <- ls7Search(startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'                         endDate = as.Date("20-01-2018", "%d-%m-%Y"),
 #'                         extent = ex.navarre,
-#'                         browseAvaliable = "Y")
+#'                         browseAvaliable = "Y",
+#'                         AppRoot=src)
 #' # download 1 image
 #' lsDownSearch(searchres = search.res[1,], 
 #'              username = "user", 
 #'              password = "pass", 
 #'              untar = TRUE, 
-#'              raw.rm = TRUE)
+#'              raw.rm = TRUE,
+#'              AppRoot=src)
 #' # download 10 images
 #' lsDownSearch(searchres = search.res[1:10,], 
 #'              username = "user", 
 #'              password = "pass", 
 #'              untar = TRUE, 
-#'              raw.rm = TRUE)
+#'              raw.rm = TRUE,
+#'              AppRoot=src)
 #' # download all the images
 #' lsDownSearch(searchres = search.res, 
 #'              username = "user", 
 #'              password = "pass", 
 #'              untar = TRUE, 
-#'              raw.rm = TRUE)
+#'              raw.rm = TRUE,
+#'              AppRoot=src)
 #' 
 #' # removes metadata data frame to free memory
 #' lsRemoveMetadata()
@@ -148,7 +156,7 @@ lsDownSearch<-function(searchres,
                             overwrite=overwrite)
   }else if(lvl==2){
     message("Starting Landsat level 2 download process...")
-    lsEspaOrderImages(search.res=searchres,
+    lsEspaOrderImages(searchres=searchres,
                       username=username,
                       password=password,
                       product=products,
@@ -157,7 +165,7 @@ lsDownSearch<-function(searchres,
     c.handle<-lsEspaCreateConnection(username=username,password=password)
     images.order<-lsEspaGetOrderImages(c.handle=c.handle)
     message("Cheking the order status and starting the download process.")
-    lsEspaDownloadOrders(images.order=images.order,
+    lsEspaDownloadOrders(orders=images.order,
                          c.handle=c.handle,
                          verbose=verbose,
                          n.attempts=n.attempts,

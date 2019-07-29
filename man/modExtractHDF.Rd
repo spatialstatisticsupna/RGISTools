@@ -27,8 +27,8 @@ modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
 }
 \description{
 \code{modExtractHDF} converts the original Modis image format (HDF) into a file
-format loadable by R (GTiff). The function extracts all image layers and crops the
-area of interest (if needed). This function requires the correct installation of GDAL library.
+format loadable by R (GTiff). The function extracts all image layers. 
+This function requires the correct installation of GDAL library.
 }
 \details{
 HDF files cannot be directly loaded into R. The function \code{\link{modExtractHDF}}
@@ -42,18 +42,29 @@ in \code{gdalUtils} package manual.
 \dontrun{
 # load a spatial polygon object of Navarre
 data(ex.navarre)
+
+src<-"Path_for_downloading_folder"
 img.list <- modSearch(product = "MOD11A1",
                       startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                       endDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                       collection = 6,
                       extent = ex.navarre)
+                      
 # download first image of image list
-modDownSearch(img.list, "username", "password")
+modDownSearch(searchres = img.list, 
+              username = "username", 
+              password = "password",
+              AppRoot = src)
+
+src.hdf<-file.path(src,"MOD09GA","hdf")
+src.tif<-file.path(src,"MOD09GA","tif")
+
 # Extract one layer from downloaded image
-hdf.files <- list.files("./", 
+hdf.files <- list.files(src.hdf, 
                         full.names = TRUE, 
                         pattern = "\\\\.hdf$")
 first.hdf.file <- hdf.files[1]
-modExtractHDF(first.hdf.file)
+modExtractHDF(filesHDF = first.hdf.file,
+              AppRoot = src.tif)
 }
 }

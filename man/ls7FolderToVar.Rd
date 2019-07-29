@@ -52,7 +52,7 @@ lsDownload(satellite = "ls7",
            untar = TRUE,
            AppRoot = src)
 # assign the folder with the Landsat-7 untared images 
-tif.src <- file.path(src, "untar")
+tif.src <- file.path(src,"Landsat7", "untar")
 # mosaic the Landsat7 images
 lsMosaic(tif.src,
          AppRoot = src,
