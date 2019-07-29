@@ -78,6 +78,7 @@ modDownload<-function(product,
   if(verbose){
     print(search.res)
   }
+  AppRoot<-file.path(AppRoot,"Modis")
   downdir<-file.path(AppRoot,product,"hdf")
   tiffdir<-file.path(AppRoot,product,"tif")
   if(extract.tif)
