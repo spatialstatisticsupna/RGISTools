@@ -32,6 +32,7 @@
 #'   \item \code{polygon} A list of vectors defining the points of the polygon in longitude/latitude format.
 #' This argument is mandatory if \code{lonlat} or extent is not defined.
 #'   \item \code{AppRoot} the directory to save the output time series.
+#'   \item Any argument in \code{\link{modExtractHDF}} function. Ex. \code{bFilter="b01_1"}.
 #' }
 #'
 #' @examples

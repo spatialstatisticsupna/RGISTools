@@ -25,7 +25,7 @@ This function is part of a group of functions used to pre-process Landsat Level 
 The pre-processing is carried out by ESPA on demand. \code{\link{lsEspaGetOrderImages}} 
 takes the identification (ID) number of the request carried out by \code{\link{lsEspaOrderImages}}. 
 This ID is used to follow up the processing status with \code{\link{lsEspaUpdateOrder}}. All the 
-status messages and their interpretation can be found in the ESPA API \href{User Guide}{https://landsat.usgs.gov/sites/default/files/documents/espa_odi_userguide.pdf}.
+status messages and their interpretation can be found in the ESPA API \href{https://landsat.usgs.gov/sites/default/files/documents/espa_odi_userguide.pdf}{User Guide}.
 }
 \examples{
 # Search Landsat 7 level-1

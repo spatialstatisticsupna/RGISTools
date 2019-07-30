@@ -2,8 +2,8 @@
 #' 
 #' \code{modCloudMask} creates layers of clouds derived from \code{MOD35_L2} products. 
 #' 
-#' This function, downloads and processes the \code{MOD35_L2} products to create clouds 
-#' mask composed by \code{NA}s and \code{1}. The resulting cloud mask layers need to be
+#' This function, downloads and processes the \code{MOD35_L2} products to create cloud 
+#' masks composed of \code{NA}'s and \code{1}'s. The resulting cloud mask layers need to be
 #' reprojected because resolution and projection differences with other modis products.
 #' This function requires \code{gdalUtils} properly installed.
 #'

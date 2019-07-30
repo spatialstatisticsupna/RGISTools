@@ -63,13 +63,13 @@ modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=
         names<-gsub('.*":','',bands.names)
         names<-gsub(':','_',names)
         if(!is.null(bFilter)){
-          exname<-names[Reduce("|", lapply(bFilter,grepl,names))]
+          exname<-names[Reduce("|", lapply(bFilter,grepl,names,ignore.case = TRUE))]
           bds<-which(names%in%exname)
         }else{
           bds<-1:length(names)
         }
         if(!is.null(rm.band)){
-          n.exname<-names[Reduce("|", lapply(rm.band,grepl,names))]
+          n.exname<-names[Reduce("|", lapply(rm.band,grepl,names,ignore.case = TRUE))]
           bds.2<-which(names%in%n.exname)
           bds<-bds[!bds%in%bds.2]
         }
