@@ -72,22 +72,22 @@ lsEspaDownloadOrders<-function(orders,
       c.handle<-lsEspaCreateConnection(username,password)
     }
   }
-  orders<-names(orders)
+  orders.name<-names(orders)
   
   if(length(orders)>0){
     while(TRUE){
       for(norder in 1:length(orders)){
         if(orders[[norder]]$Status=="complete"){
           #call to recursive function
-          orders=lsDownEspa(orders=orders,
+          orders=lsDownEspa(orders=orders.name,
                             norder=norder,
                             images.order=orders,
                             c.handle=c.handle,
                             AppRoot=AppRoot,
-                                  verbose=verbose,
-                                  n.attempts=n.attempts,
-                                  untar=untar,
-                                  overwrite=overwrite)
+                            verbose=verbose,
+                            n.attempts=n.attempts,
+                            untar=untar,
+                            overwrite=overwrite)
         }
       }
       if(all(!unname(unlist(lapply(orders,function(x)return(x$Status))))%in%c("ordered","processing","complete"))){

@@ -48,11 +48,11 @@
 #' src.sen <- file.path(src, "Sentinel-2")
 #' src.sen.unzip <- file.path(src.sen, "unzip")
 #'                   
-#' files<-list.files(src.unzip,
-#'                   pattern = "\\TCI.jp2$",
-#'                   full.names = TRUE,
-#'                   recursive = TRUE)
-#' rgb<-stack(files[1])
+#' files <- list.files(src.unzip,
+#'                     pattern = "\\TCI.jp2$",
+#'                     full.names = TRUE,
+#'                     recursive = TRUE)
+#' rgb <- stack(files[1])
 #' plotRGB(rgb)
 #' }
 senDownload<-function(username,
