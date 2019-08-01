@@ -60,8 +60,8 @@
 #'
 #' # The cloud mask may have different extent, resolution...  
 #' src.cloud.navarre <- file.path(src.cloud,"Navarre")
-#' cmask <- list.files(src.cloud, full.names = TRUE, pattern = "\\.tif$")
-#' cmask.ras <- lapply(cmask, raster) 
+#' cmask <- list.files(src.cloud.navarre, full.names = TRUE, pattern = "\\.tif$")
+#' cmask.ras <- lapply(cmask, raster)
 #' 
 #' navarre.path <- file.path(src.tiles, "Navarre")
 #' navarre.img <- list.files(navarre.path,
