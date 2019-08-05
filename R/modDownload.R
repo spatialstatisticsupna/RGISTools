@@ -90,28 +90,43 @@ modDownload<-function(product,
   dir.create(downdir,recursive = T,showWarnings = F)
   for(s in search.res){
     #print(basename(s))
-    tryCatch(
-      {
-        modDownSearch(s,username,password,AppRoot=downdir)
-        if(extract.tif){
-          if(verbose){message(paste0("Extracting ",file.path(downdir,basename(s))," to dir ",tiffdir))}
-          modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose,...)
-        }
-      },
-      error=function(cond) {
-        if(natps<=nattempts){
-          message("Error downloading the images, trying again...")
-          modDownSearch(s,username,password,AppRoot=downdir)
-          if(extract.tif){
-            if(verbose){message(paste0("Extracting ",file.path(downdir,basename(s))," to dir ",tiffdir))}
-            modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose,...)
-          }
-          natps=0
-        }else{
-          message(paste0("No way for downloading ",basename(s), " image, skipping..."))
-          natps=0
-        }
-      })
+    recursiveModDownload(s=s,
+                         username=username,
+                         password=password,
+                         downdir=downdir,
+                         tiffdir=tiffdir,
+                         verbose=verbose,
+                         nattempts=nattempts,
+                         natps=0,
+                         ...)
   }
   message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",tiffdir))
+}
+
+
+recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,nattempts,natps,...){
+  tryCatch(
+    {
+      modDownSearch(s,username,password,AppRoot=downdir)
+      if(extract.tif){
+        if(verbose){message(paste0("Extracting ",file.path(downdir,basename(s))," to dir ",tiffdir))}
+        modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose,...)
+      }
+    },
+    error=function(cond) {
+      if(natps<nattempts){
+        message("Error downloading the images, trying again...")
+        recursiveModDownload(s=s,
+                             username=username,
+                             password=password,
+                             downdir=downdir,
+                             tiffdir=tiffdir,
+                             verbose=verbose,
+                             nattempts=nattempts,
+                             natps=natps+1,
+                             ...)
+      }else{
+        message(paste0("No way for downloading ",basename(s), " image, skipping..."))
+      }
+    })
 }
