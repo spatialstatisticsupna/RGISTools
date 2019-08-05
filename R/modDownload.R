@@ -17,6 +17,7 @@
 #' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
 #' @param username EarthData username.
 #' @param password EarthData password.
+#' @param nattempts the number of attempts that the function has to carry out
 #' @param collection Modis collection, by default 6.
 #' @param extract.tif logical argument. If \code{TRUE}, extracts as tif image format all the layers in a hdf image.
 #' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
@@ -66,6 +67,7 @@ modDownload<-function(product,
                      username,
                      password,
                      collection=6,
+                     nattempts=5,
                      verbose=FALSE,
                      extract.tif=FALSE,
                      ...){
@@ -84,15 +86,32 @@ modDownload<-function(product,
   tiffdir<-file.path(AppRoot,product,"tif")
   if(extract.tif)
     dir.create(tiffdir,recursive=T,showWarnings = F)
-  
+  natps<-0
   dir.create(downdir,recursive = T,showWarnings = F)
   for(s in search.res){
-    print(basename(s))
-    modDownSearch(s,username,password,AppRoot=downdir)
-    if(extract.tif){
-      if(verbose){message(paste0("Extracting ",file.path(downdir,basename(s))," to dir ",tiffdir))}
-      modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose,...)
-    }
+    #print(basename(s))
+    tryCatch(
+      {
+        modDownSearch(s,username,password,AppRoot=downdir)
+        if(extract.tif){
+          if(verbose){message(paste0("Extracting ",file.path(downdir,basename(s))," to dir ",tiffdir))}
+          modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose,...)
+        }
+      },
+      error=function(cond) {
+        if(natps<=nattempts){
+          message("Error downloading the images, trying again...")
+          modDownSearch(s,username,password,AppRoot=downdir)
+          if(extract.tif){
+            if(verbose){message(paste0("Extracting ",file.path(downdir,basename(s))," to dir ",tiffdir))}
+            modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose,...)
+          }
+          natps=0
+        }else{
+          message(paste0("No way for downloading ",basename(s), " image, skipping..."))
+          natps=0
+        }
+      })
   }
   message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",tiffdir))
 }
