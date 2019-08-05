@@ -40,16 +40,18 @@
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
+#' src <- "Path_for_downloading_folder"
 #' modDownload(product = "MOD09GA",
 #'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'             endDate = as.Date("03-01-2018", "%d-%m-%Y"),
 #'             username = "username",
 #'             password = "password",
-#'             AppRoot = "Path_for_downloading_folder",
+#'             AppRoot = src,
 #'             extract.tif = TRUE,
 #'             collection = 6,
 #'             extent = ex.navarre)
-#' files <- list.files("./Path_for_downloading_folder/tif",
+#' tif.src <- file.path(src,"Modis","tif")
+#' files <- list.files(tif.src,
 #'                     pattern = "\\.tif$",
 #'                     full.names = TRUE,
 #'                     recursive = TRUE)[1,4,3]
@@ -105,7 +107,7 @@ modDownload<-function(product,
 }
 
 
-recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,nattempts,extract.tif=extract.tif,natps,...){
+recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,nattempts,extract.tif,natps,...){
   tryCatch(
     {
       modDownSearch(s,username,password,AppRoot=downdir)
@@ -126,6 +128,7 @@ recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,natte
                              tiffdir=tiffdir,
                              verbose=verbose,
                              nattempts=nattempts,
+                             extract.tif=extract.tif,
                              natps=natps+1,
                              ...)
       }else{
