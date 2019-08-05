@@ -96,6 +96,7 @@ modDownload<-function(product,
                          downdir=downdir,
                          tiffdir=tiffdir,
                          verbose=verbose,
+                         extract.tif=extract.tif,
                          nattempts=nattempts,
                          natps=0,
                          ...)
@@ -104,7 +105,7 @@ modDownload<-function(product,
 }
 
 
-recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,nattempts,natps,...){
+recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,nattempts,extract.tif=extract.tif,natps,...){
   tryCatch(
     {
       modDownSearch(s,username,password,AppRoot=downdir)
