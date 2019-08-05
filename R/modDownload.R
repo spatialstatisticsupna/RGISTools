@@ -114,6 +114,7 @@ recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,natte
       }
     },
     error=function(cond) {
+      file.remove(file.path(downdir,basename(s)))
       if(natps<nattempts){
         message("Error downloading the images, trying again...")
         recursiveModDownload(s=s,
