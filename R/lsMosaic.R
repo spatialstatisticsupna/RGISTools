@@ -139,6 +139,8 @@ lsMosaic<-function(src,
     if("bandFilter"%in%names(arg)){
       arg$bandFilter<-paste0(arg$bandFilter,"\\.tif")
       flist<-flist[Reduce("|", lapply(arg$bandFilter,grepl,flist))]
+      print(dtype)
+      print(arg$bandFilter)
       dtype<-dtype[Reduce("|", lapply(arg$bandFilter,grepl,dtype))]
     }
 
