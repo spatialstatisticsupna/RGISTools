@@ -42,7 +42,12 @@ ls8LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=FALSE,...){
   AppRoot<-defineAppRoot(...)
 
   #meta data directory and metadata file
-  mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS8DownloadDir"),getRGISToolsOpt("LS8META.dir"))
+  #meta data directory and metadata file
+  if("AppRoot"%in%names(arg)){
+    mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS8META.dir"))
+  }else{
+    mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS8DownloadDir"),getRGISToolsOpt("LS8META.dir"))
+  }
   if(!file.exists(mdRawdir)){
     dir.create(mdRawdir,recursive=T)
   }
