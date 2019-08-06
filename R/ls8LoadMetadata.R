@@ -38,7 +38,7 @@
 ls8LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=FALSE,...){
   stopifnot(class(update)=="logical")
   #define AppRoot
-
+  arg<-list(...)
   AppRoot<-defineAppRoot(...)
 
   #meta data directory and metadata file
