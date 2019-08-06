@@ -27,10 +27,12 @@
 #'
 #' @examples
 #' 
+#' src <- "Path_for_downloading_folder"
 #' # Search Landsat 7 level-1
 #' search.res <- ls7Search(startDate = as.Date("01-01-2017", "%d-%m-%Y"),
 #'                         endDate = as.Date("15-01-2017", "%d-%m-%Y"),
-#'                         lonlat = c(-1.64323, 42.81687))
+#'                         lonlat = c(-1.64323, 42.81687),
+#'                         AppRoot = src)
 #' # Request to ESPA the prepocessing of level-1 images to get the surface reflectance
 #' order <- lsEspaOrderImages(search.res = search.res,
 #'                            username = "username", 
@@ -45,7 +47,7 @@
 #'                              username = "username", 
 #'                              password = "password")
 #' # Saving directory
-#' dir.ESPA <- './ESPA'
+#' dir.ESPA <- file.path(src,"Landsat7","ESPA")
 #' dir.create(dir.ESPA)
 #' # Download when status says: complete
 #' lsEspaDownloadOrders(images.order = orders,

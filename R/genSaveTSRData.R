@@ -38,7 +38,7 @@
 #'             collection = 6,
 #'             extent = ex.navarre)
 #' # set folder path where MOD09GA images will be saved
-#' src1 <- file.path(src,"MOD09GA")
+#' src1 <- file.path(src,"Modis","MOD09GA")
 #' # set the tif folder path
 #' tif.src <- file.path(src1,"tif")
 #' # mosaic and cut navarre region
@@ -56,9 +56,9 @@
 #' # change src TS_sample
 #' src3 <- file.path(dirname(src2),"NDVI")
 #' # create the Rdata
-#' genSaveTSRData(src3, ts.name = "ModisNDVI", AppRoot = src)
+#' genSaveTSRData(src3, ts.name = "ModisNDVI", AppRoot = src1)
 #' # remove values out of 0-1 range
-#' ModisNDVI.lim <- genLimitRasterRasterRange(ModisNDVI, mn = 0, mx = 1)
+#' ModisNDVI.lim <- genLimitRasterRange(ModisNDVI, mn = 0, mx = 1)
 #' # plot the ndvi images
 #' spplot(ModisNDVI.lim)
 #' s.end <- Sys.time()

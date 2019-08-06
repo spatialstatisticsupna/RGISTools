@@ -42,24 +42,24 @@
 #'             extract.tif = TRUE, 
 #'             collection = 6,
 #'             extent = ex.navarre)
-#' # assign src1 as the outut folder for ModMosaic
-#' src1 <- file.path(src, "MOD09GA") # output directory
-#' tif.src <- file.path(src1, "tif") # input directory
+#' # assign src.mod as the outut folder for ModMosaic
+#' src.mod <- file.path(src, "MOD09GA") # output directory
+#' src.tif <- file.path(src.mod, "tif") # input directory
 #' # mosaic the Modis images
-#' modMosaic(tif.src,
-#'           AppRoot = src1,
+#' modMosaic(src.tif,
+#'           AppRoot = src.mod,
 #'           out.name = "Navarre")
 #' # assign src as the path to mosaicked folder
-#' src2 <- file.path(src1, "Navarre")
+#' src.navarre <- file.path(src.mod, "Navarre")
 #' # generate NDVI images of Navarre
-#' src3 <- file.path(src1, "Variables")
-#' dir.create(src3)
-#' modFolderToVar(src2,
+#' src.variables <- file.path(src.mod, "Variables")
+#' dir.create(src.variables)
+#' modFolderToVar(src.navarre,
 #'                fun = varEVI,
-#'                AppRoot = src3,
+#'                AppRoot = src.variables,
 #'                overwrite = T)
 #' # import tif mosaicked images to R environment
-#' flist <- list.files(file.path(src3,"EVI"),
+#' flist <- list.files(file.path(src.variables,"EVI"),
 #'                     pattern = "\\.tif$",
 #'                     full.names = TRUE,
 #'                     recursive = TRUE)

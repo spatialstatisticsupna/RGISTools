@@ -41,7 +41,7 @@
 #' names(searchres.R094)
 #' # list the dates in searchres
 #' senGetDates(names(searchres.R094),format="%Y%J")
-#' src = "Patch_for_downloading_folder"
+#' src = file.path("Path_for_downloading_folder","Sentinel-2")
 #' # Sentinel download function
 #' senDownSearch(searchres = searchres.R094,
 #'               username = "username",
@@ -75,10 +75,11 @@ senDownSearch<-function(searchres,
     unzipFolder<-file.path(AppRoot,"/unzip")
     dir.create(unzipFolder,recursive=T,showWarnings = FALSE)
   }
-
-  for(i in 1:length(searchres)){
+  n.imgs<-length(searchres)
+  for(i in 1:n.imgs){
     url<-searchres[i]
     file.name<-names(url)
+    message(paste0("Downloading image ",file.name,"(",i,"/",n.imgs,")"))
     tryCatch({
       c.handle = new_handle()
       handle_setopt(c.handle,

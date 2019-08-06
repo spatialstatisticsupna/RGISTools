@@ -41,7 +41,7 @@
 #'             extent = ex.navarre)
 #'             
 #' # assign src1 as the outut folder for ModMosaic
-#' src.tiles <- file.path(src, "MOD09GA")
+#' src.tiles <- file.path(src, "Modis", "MOD09GA")
 #' tif.src.tiles <- file.path(src.tiles, "tif")
 #' # mosaic the Modis images
 #' modMosaic(tif.src.tiles, # the input folder 
@@ -51,13 +51,14 @@
 #'           extent = ex.navarre)
 #'           
 #' # assign src as the path to cloud folder      
-#' src.cloud <- file.path(src,"CloudMasks")
+#' 
 #' modCloudMask(startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'              endDate = as.Date("04-01-2018", "%d-%m-%Y"),
 #'              extent = ex.navarre,
-#'              AppRoot = src.cloud,
+#'              AppRoot = src,
 #'              out.name = "Navarre")
-#'
+#'              
+#' src.cloud <- file.path(src, "Modis","CloudMasks")
 #' # The cloud mask may have different extent, resolution...  
 #' src.cloud.navarre <- file.path(src.cloud,"Navarre")
 #' cmask <- list.files(src.cloud.navarre, full.names = TRUE, pattern = "\\.tif$")
@@ -81,6 +82,7 @@
 modCloudMask<-function(startDate,endDate,extent,out.name="outname",raw.rm=FALSE,overwrite=FALSE,verbose=FALSE,...){
   arg <- list(...)
   AppRoot <- defineAppRoot(...)
+  AppRoot <- file.path(AppRoot,"Modis","CloudMask")
   modDownloadAtmosphere(startDate=startDate,
                         endDate=endDate,
                         extent=extent,

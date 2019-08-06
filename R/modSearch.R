@@ -61,8 +61,7 @@ modSearch<-function(product,startDate,endDate,collection=6,resType="url",verbose
   arg=list(...)
   if(any(names(arg)%in%c("pathrow"))){
     stopifnot(class(arg$pathrow)=="list")
-    #TODO
-    stop("pathrow search not supported yet")
+    stop("pathrow search not supported for Modis Search")
   }else if("lonlat"%in%names(arg)){
     stopifnot(class(arg$lonlat)=="numeric")
     stopifnot(length(arg$lonlat)==2)

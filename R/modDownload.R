@@ -50,16 +50,16 @@
 #'             extract.tif = TRUE,
 #'             collection = 6,
 #'             extent = ex.navarre)
-#' tif.src <- file.path(src,"Modis","tif")
+#' tif.src <- file.path(src,"Modis","MOD09GA","tif")
 #' files <- list.files(tif.src,
 #'                     pattern = "\\.tif$",
 #'                     full.names = TRUE,
-#'                     recursive = TRUE)[1,4,3]
+#'                     recursive = TRUE)[c(16,19,18)]
 #' files.stack <- stack(files)
 #' qrange <- c(0.001, 0.999)
-#' imagen <- varRGB(files.stack.raster[[1]], 
-#'                  files.stack.raster[[2]],
-#'                  files.stack.raster[[3]],
+#' imagen <- varRGB(files.stack[[1]], 
+#'                  files.stack[[2]],
+#'                  files.stack[[3]],
 #'                  qrange)
 #' plotRGB(imagen)
 #'}
@@ -76,10 +76,10 @@ modDownload<-function(product,
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
   search.res<-modSearch(product=product,
-                    startDate=startDate,
-                    endDate=endDate,
-                    collection=collection,
-                    ...)
+                        startDate=startDate,
+                        endDate=endDate,
+                        collection=collection,
+                        ...)
   if(verbose){
     print(search.res)
   }

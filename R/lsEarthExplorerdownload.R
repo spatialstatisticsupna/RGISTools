@@ -10,6 +10,8 @@ lsEarthExplorerdownload<-function(searchres,username,password,cookies.file,untar
       }else if(grepl("LE7",searchres[1,]$sceneID)){
         .ls7DownloadUSGS(scene,downPath,handler,verbose=verbose,overwrite=overwrite)
       }
+    }else{
+      message(paste0(scene," file already exists! Not downloading."))
     }
     #Unzip in downDir when available
     untarDir<-file.path(AppRoot,downDir,"untar",scene)

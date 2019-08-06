@@ -52,7 +52,7 @@
 #'              password = "pass", 
 #'              untar = TRUE, 
 #'              raw.rm = TRUE)
-#' # download 10 images
+#' # download 4 images
 #' lsDownSearch(searchres = search.res[1:4,], 
 #'              username = "user", 
 #'              password = "pass", 
@@ -80,8 +80,8 @@
 #'              untar = TRUE, 
 #'              raw.rm = TRUE,
 #'              AppRoot=src)
-#' # download 10 images
-#' lsDownSearch(searchres = search.res[1:10,], 
+#' # download 4 images
+#' lsDownSearch(searchres = search.res[1:4,], 
 #'              username = "user", 
 #'              password = "pass", 
 #'              untar = TRUE, 
@@ -98,15 +98,17 @@
 #' # removes metadata data frame to free memory
 #' lsRemoveMetadata()
 #' 
-#' files <- list.files("./", 
+#' # select Landsat7 rgb bands
+#' src.ls7 <- file.path(src,"Landsat7")
+#' files <- list.files(src.ls7, 
 #'                     pattern = "\\.TIF$", 
 #'                     full.names = TRUE, 
-#'                     recursive = TRUE)[6,5,4]
+#'                     recursive = TRUE)[c(6,5,4)]
 #' files.stack <- stack(files)
 #' qrange <- c(0.001, 0.999)
-#' imagen <- varRGB(files.stack.raster[[1]], 
-#'                  files.stack.raster[[2]],
-#'                  files.stack.raster[[3]],
+#' imagen <- varRGB(files.stack[[1]], 
+#'                  files.stack[[2]],
+#'                  files.stack[[3]],
 #'                  qrange)
 #' plotRGB(imagen)
 #' }

@@ -18,7 +18,7 @@
 #' \code{password} are not defined.
 #'
 #' @examples
-#' # Search Landsat 7 level-1
+#' # Search Landsat 7 level-2
 #' search.res <- ls7Search(startDate = as.Date("01-01-2017", "%d-%m-%Y"),
 #'                         endDate = as.Date("15-01-2017", "%d-%m-%Y"),
 #'                         lonlat = c(-1.64323, 42.81687))

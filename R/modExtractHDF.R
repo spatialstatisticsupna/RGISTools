@@ -27,23 +27,26 @@
 #' data(ex.navarre)
 #' 
 #' src<-"Path_for_downloading_folder"
+#' src.mod <- file.path(src, "Modis","MOD11A1")
+#' src.mod.hdf <- file.path(src.mod, "hdf")
 #' img.list <- modSearch(product = "MOD11A1",
 #'                       startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                       endDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                       collection = 6,
-#'                       extent = ex.navarre)
+#'                       extent = ex.navarre,
+#'                       AppRoot = src.mod.hdf)
 #'                       
 #' # download first image of image list
+#' src.mod <- file.path(src, "MOD11A1")
 #' modDownSearch(searchres = img.list, 
 #'               username = "username", 
 #'               password = "password",
-#'               AppRoot = src)
+#'               AppRoot = src.mod.hdf)
 #' 
-#' src.hdf<-file.path(src,"MOD09GA","hdf")
-#' src.tif<-file.path(src,"MOD09GA","tif")
+#' src.tif<-file.path(src.mod,"tif")
 #' 
 #' # Extract one layer from downloaded image
-#' hdf.files <- list.files(src.hdf, 
+#' hdf.files <- list.files(src.mod.hdf, 
 #'                         full.names = TRUE, 
 #'                         pattern = "\\.hdf$")
 #' first.hdf.file <- hdf.files[1]

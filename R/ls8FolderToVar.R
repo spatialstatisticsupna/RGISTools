@@ -35,7 +35,7 @@
 #'            password = "password",
 #'            startDate = as.Date("01-01-2018","%d-%m-%Y"),
 #'            endDate = as.Date("20-01-2018","%d-%m-%Y"),
-#'            extent = ex.navarre,
+#'            pathrow = list(c(200, 31), c(200, 30)),
 #'            untar = TRUE,
 #'            AppRoot = src)
 #' # assign the folder with the Landsat-8 untared images
@@ -45,6 +45,7 @@
 #' lsMosaic(tif.src,
 #'          AppRoot = src.ls8,
 #'          out.name = "Navarre",
+#'          extent = ex.navarre,
 #'          gutils = TRUE)
 #' # assign src as the path to mosaiced folder
 #' src2 <- file.path(src.ls8, "Navarre")
@@ -54,15 +55,15 @@
 #' ls8FolderToVar(src2,
 #'                fun = varNDVI,
 #'                AppRoot = src3,
-#'                overwrite = T)
+#'                overwrite = TRUE)
 #'                
 #' flist <- list.files(file.path(src3,"NDVI"),
 #'                     pattern = "\\.tif$",
 #'                     full.names = TRUE,
 #'                     recursive = TRUE)
 #' 
-#' files.raster <- stack(flist)
-#' spplot(files)
+#' files.raster <- stack(flist, quick = TRUE)
+#' spplot(files.raster)
 #' }
 ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
   AppRoot=defineAppRoot(...)

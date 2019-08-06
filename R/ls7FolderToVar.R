@@ -45,6 +45,7 @@
 #' lsMosaic(tif.src,
 #'          AppRoot = src.ls7,
 #'          out.name = "Navarre",
+#'          extent = ex.navarre,
 #'          gutils = TRUE)
 #' # assign src as the path to mosaicked folder
 #' src2 <- file.path(src.ls7, "Navarre")
