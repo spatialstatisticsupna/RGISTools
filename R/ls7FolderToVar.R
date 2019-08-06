@@ -39,22 +39,24 @@
 #'            untar = TRUE,
 #'            AppRoot = src)
 #' # assign the folder with the Landsat-7 untared images 
-#' tif.src <- file.path(src,"Landsat7", "untar")
+#' src.ls7 <-file.path(src,"Landsat7")
+#' tif.src <- file.path(src.ls7, "untar")
 #' # mosaic the Landsat7 images
 #' lsMosaic(tif.src,
-#'          AppRoot = src,
-#'          out.name = "Navarre")
+#'          AppRoot = src.ls7,
+#'          out.name = "Navarre",
+#'          gutils = TRUE)
 #' # assign src as the path to mosaicked folder
-#' src2 <- file.path(src, "Navarre")
+#' src2 <- file.path(src.ls7, "Navarre")
 #' # generate NDVI images of Navarre
-#' src3 <- file.path(src1, "Navarre_Variables")
+#' src3 <- file.path(src.ls7, "Navarre_Variables")
 #' dir.create(src3)
 #' ls7FolderToVar(src2,
 #'                fun = varNDVI,
 #'                AppRoot = src3,
 #'                overwrite = T)
 #'                
-#' flist <- list.files(file.path(src3,"EVI"),
+#' flist <- list.files(file.path(src3,"NDVI"),
 #'                     pattern = "\\.tif$",
 #'                     full.names = TRUE,
 #'                     recursive = TRUE)
@@ -79,7 +81,7 @@ ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
     ls7bands<-getRGISToolsOpt("LS7BANDS")
     ls.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
     out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
-    if(getStack|(!file.exists(out.file.name))){
+    if(overwrite|(!file.exists(out.file.name))){
       funString<-"result<-fun("
       for(arg in formalArgs(fun)){
         band<-ls7bands[names(ls7bands)%in%arg]

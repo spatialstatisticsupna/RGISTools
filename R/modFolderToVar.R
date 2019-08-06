@@ -83,7 +83,7 @@ modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
     modbands<-getRGISToolsOpt("MOD09BANDS")
     mod.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
     out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
-    if(getStack|(!file.exists(out.file.name))){
+    if(overwrite|(!file.exists(out.file.name))){
       funString<-"result<-fun("
       for(arg in formalArgs(fun)){
         band<-modbands[names(modbands)%in%arg]

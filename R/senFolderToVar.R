@@ -96,7 +96,7 @@ senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,re
     
     for(resb in resbands){
       out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),resb,".tif")
-      if(getStack|(!file.exists(out.file.name))){
+      if(overwrite|(!file.exists(out.file.name))){
         funString<-"result<-fun("
         for(arg in formalArgs(fun)){
           band<-senbands[names(senbands)%in%arg]
