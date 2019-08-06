@@ -27,18 +27,18 @@
 #'            password = "password",
 #'            startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'            endDate = as.Date("20-01-2018", "%d-%m-%Y"),
-#'            extent = ex.navarre,
+#'            pathrow = list(c(200, 31), c(200, 30)),
 #'            untar = TRUE,
 #'            AppRoot = src)
 #'            
 #' # generate the path where the GTiff images are located
-#' src.untar <- file.path(src,"Landsat8","untar")
+#' src.ls8 <- file.path(src,"Landsat8")
+#' src.untar <- file.path(src.ls8,"untar")
 #' # calculate the cloud mask from QC layer
 #' lsCloudMask(src=src.untar,
 #'             overwrite=TRUE)
 #'             
 #' # generate the path where the mosacked images will be saved
-#' src.ls8 <- dirname(src.untar)
 #' lsMosaic(src = src.untar,
 #'          AppRoot = src.ls8,
 #'          out.name = "Navarre",
