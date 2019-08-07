@@ -28,8 +28,8 @@
 #' # creates a MetaData folder and downloads the csv on working directory
 #' ls7LoadMetadata()
 #'
-#' # creates a MetaData folder and downloads the csv on "Path_for_metadata" directory
-#' ls7LoadMetadata(AppRoot = "Path_for_metadata")
+#' # creates a MetaData folder and downloads the csv on "Path_for_downloading_folder" directory
+#' ls7LoadMetadata(AppRoot = "Path_for_downloading_folder")
 #'
 #' # Force renew existing meta data csv
 #' ls7LoadMetadata(update = TRUE)

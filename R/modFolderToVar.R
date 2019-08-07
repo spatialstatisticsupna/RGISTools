@@ -43,7 +43,7 @@
 #'             collection = 6,
 #'             extent = ex.navarre)
 #' # assign src.mod as the outut folder for ModMosaic
-#' src.mod <- file.path(src, "MOD09GA") # output directory
+#' src.mod <- file.path(src, "Modis", "MOD09GA") # output directory
 #' src.tif <- file.path(src.mod, "tif") # input directory
 #' # mosaic the Modis images
 #' modMosaic(src.tif,

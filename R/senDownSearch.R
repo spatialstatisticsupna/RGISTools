@@ -79,19 +79,22 @@ senDownSearch<-function(searchres,
   for(i in 1:n.imgs){
     url<-searchres[i]
     file.name<-names(url)
-    message(paste0("Downloading image ",file.name,"(",i,"/",n.imgs,")"))
     tryCatch({
-      c.handle = new_handle()
-      handle_setopt(c.handle,
-                    referer=getRGISToolsOpt("SCIHUBHUSURL"),
-                    useragent = getRGISToolsOpt("USERAGENT"),
-                    followlocation = TRUE ,
-                    autoreferer = TRUE ,
-                    username=username,
-                    password=password)
-      image.url<-URLencode(url)
       downPath<-file.path(downFolder,paste0(file.name,".zip"))
-      curl_download(image.url, destfile=downPath,handle = c.handle)
+      if((!file.exists(downPath))|overwrite){
+        message(paste0("Downloading image ",file.name," (",i,"/",n.imgs,")"))
+        c.handle = new_handle()
+        handle_setopt(c.handle,
+                      referer=getRGISToolsOpt("SCIHUBHUSURL"),
+                      useragent = getRGISToolsOpt("USERAGENT"),
+                      followlocation = TRUE ,
+                      autoreferer = TRUE ,
+                      username=username,
+                      password=password)
+        image.url<-URLencode(url)
+        
+        curl_download(image.url, destfile=downPath,handle = c.handle)
+      }
 
       #md5 check
       md5.url<-paste0(gsub("$value","",url,fixed = TRUE),"Checksum/Value/$value")

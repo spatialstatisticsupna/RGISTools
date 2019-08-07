@@ -37,7 +37,7 @@
 #'                       AppRoot = src.mod.hdf)
 #'                       
 #' # download first image of image list
-#' src.mod <- file.path(src, "MOD11A1")
+#' src.mod <- file.path(src, "Modis", "MOD11A1")
 #' modDownSearch(searchres = img.list, 
 #'               username = "username", 
 #'               password = "password",

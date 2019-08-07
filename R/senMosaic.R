@@ -170,8 +170,9 @@ senMosaic<-function(src,
                            overwrite=overwrite)
           }else{
             ext<-extent(extent)
+            temp<-gsub(".tif","_temp.tif",out.file.path)
             mosaic_rasters(typechunks,
-                           dst_dataset=gsub(".tif","_temp.tif",out.file.path),
+                           dst_dataset=temp,
                            srcnodata=0,
                            vrtnodata=0,
                            overwrite=TRUE)

@@ -38,7 +38,7 @@
 #' # load a spatial polygon object of Navarre in longitude/latitude coordinates
 #' data(ex.navarre)
 #' # Searching Modis MYD13A2 images between 2011 and 2013 by longitude/latitude
-#' using a polygon class variable
+#' # using a polygon class variable
 #' img.list <- modSearch(product = "MYD13A2",
 #'                       startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                       endDate = as.Date("31-12-2013", "%d-%m-%Y"),

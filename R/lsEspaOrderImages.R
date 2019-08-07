@@ -20,13 +20,14 @@
 #'   \item \code{prixel_qa}: for the pixel quality assurance.
 #' }
 #' 
-#' @param searchres the results from \code{\link{ls7Search}} or \code{\link{ls8Search}}. 
+#' @param search.res the results from \code{\link{ls7Search}} or \code{\link{ls8Search}}. 
 #' @param username login credentials to access the USGS EROS web service.
 #' @param password login credentials to access the USGS EROS web service.
 #' @param product the acronym of the requested product (see the details).
 #' @param verbose logical argument. If TRUE, the function prints running stages and warnings.
 #'
 #' @examples
+#' \dontrun{
 #' # Search Landsat 7 level-1
 #' search.res <- ls7Search(startDate = as.Date("01-01-2017", "%d-%m-%Y"),
 #'                         endDate = as.Date("07-01-2017", "%d-%m-%Y"),
@@ -37,13 +38,14 @@
 #'                            password = "password", 
 #'                            product = 'sr',
 #'                            verbose = FALSE)
-lsEspaOrderImages<-function(searchres,username,password,product=c("sr","source_metadata"),verbose=FALSE){
+#' }
+lsEspaOrderImages<-function(search.res,username,password,product=c("sr","source_metadata"),verbose=FALSE){
 
   # prepare the connetion
   c.handle = lsEspaCreateConnection(username,password)
   # 1 request per image
 
-  for(ids in searchres$LANDSAT_PRODUCT_ID){
+  for(ids in search.res$LANDSAT_PRODUCT_ID){
     url.products = paste0(getRGISToolsOpt("LS.ESPA.API"),getRGISToolsOpt("LS.ESPA.API.v"),'/available-products/', ids)
     if(verbose){message(paste0("Product url: \n",url.products))}
     req<-curl(url.products,handle = c.handle)

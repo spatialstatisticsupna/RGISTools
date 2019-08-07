@@ -23,7 +23,7 @@
 #' @param username login credentials to access the USGS EROS web service.
 #' @param password login credentials to access the USGS EROS web service.
 #' @param lvl flag to specify Landsat product level wanted. Default value, 1.
-#' @param products character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.
+#' @param product character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.
 #' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param raw.rm logical argument. If \code{TRUE}, removes the raw images.
 #' @param untar logical argument. If \code{TRUE}, untars downloaded images.
@@ -91,6 +91,6 @@ lsDownload<-function(satellite,
                raw.rm=raw.rm,
                AppRoot=AppRoot,
                lvl=lvl,
-               product=products,
+               product=product,
                ...)
 }

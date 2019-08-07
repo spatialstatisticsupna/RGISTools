@@ -18,6 +18,7 @@
 #' \code{password} are not defined.
 #'
 #' @examples
+#' \dontrun{
 #' # Search Landsat 7 level-2
 #' search.res <- ls7Search(startDate = as.Date("01-01-2017", "%d-%m-%Y"),
 #'                         endDate = as.Date("15-01-2017", "%d-%m-%Y"),
@@ -35,6 +36,7 @@
 #' lsEspaUpdateOrders(orders = orders,
 #'                    username = "username", 
 #'                    password = "password")
+#' }
 lsEspaUpdateOrders<-function(orders,username=NULL,password=NULL,c.handle=NULL,verbose=FALSE){
   if(is.null(c.handle)){
     if(is.null(username)|is.null(username)){

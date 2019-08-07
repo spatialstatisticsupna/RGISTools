@@ -26,7 +26,7 @@
 #' }
 #'
 #' @examples
-#' 
+#' \dontrun{
 #' src <- "Path_for_downloading_folder"
 #' # Search Landsat 7 level-1
 #' search.res <- ls7Search(startDate = as.Date("01-01-2017", "%d-%m-%Y"),
@@ -55,6 +55,7 @@
 #'                      password = "password",
 #'                     untar = TRUE,
 #'                     AppRoot = dir.ESPA)
+#'}
 lsEspaDownloadOrders<-function(orders,
                                username=NULL,
                                password=NULL,

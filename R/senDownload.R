@@ -73,6 +73,7 @@ senDownload<-function(username,
   senURL<-senSearch(username=username,
                     password=password,
                     ...)
+  
   if(verbose){
     message("Urls before filters.")
     message(paste(names(senURL),collapse="\n"))
@@ -85,10 +86,8 @@ senDownload<-function(username,
     senURL<-senURL[Reduce("|",lapply(arg$senbox,grepl,names(senURL)))]
   }
 
-  if(verbose){
-    message("Urls for downloading")
-    message(paste(names(senURL),collapse="\n"))
-  }
+  message(paste0(length(senURL)," tiles found! Starting the download process..."))
+  
   if(length(senURL)==0){stop("There are not images for downloading.")}
   senDownSearch(searchres=senURL,
                 username=username,

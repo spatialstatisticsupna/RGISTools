@@ -158,7 +158,7 @@ lsDownSearch<-function(searchres,
                             overwrite=overwrite)
   }else if(lvl==2){
     message("Starting Landsat level 2 download process...")
-    lsEspaOrderImages(searchres=searchres,
+    lsEspaOrderImages(search.res=searchres,
                       username=username,
                       password=password,
                       product=products,
