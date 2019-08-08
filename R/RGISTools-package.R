@@ -1,14 +1,17 @@
 #' RGISTools: Tools for Downloading, Smoothing, and Processing Time-Series of Satellite Images
 #'
-#' This package aims for downloading, processing, and smoothing time series of satellite images from 
-#' Landsat, Modis, and Sentinel satellite programs in a uniform and standardized way. The functions of 
-#' RGISTools automatically convert the original formats into GTiff files, which can be loaded into R. 
-#' The processing functions of RGISTools includes tile mosaicking, cropping, cloud masking, and deriving new variables 
-#' of interest. When multiple tiles matching the region of interest, RGISTools combines them to generate a 
-#' single image, and crops the area of interest to save memory, and computing time. All images available 
-#' in a range of dates are then stacked to produce time series of satellite images for a particular area. 
-#' Images may have clouds or measurement errors that limit their use in subsequent analyses. Hence, the 
-#' package includes a set of functions for removing clouds, gap filling, and smoothing. Due to the wide 
+#' This package enables to download, customize, and process time-series of satellite images from Landsat,
+#'  Modis and Sentinel in a standardized way. Some functions download and convert automatically the 
+#'  platform-specific file formats into GTiff, so they can be loaded in R. The customization functions 
+#'  support tile mosaicking, cropping, cloud masking and deriving new variables of interest, such as the 
+#'  NDVI, EVI, etc. Tile mosaicking is required when the region of interest extends over several tiles,
+#'   so they can be combined into a single image. Cropping involves removing the pixels outside 
+#'   the region of interest, making any analysis more computationally and memory efficient. Cloud 
+#'   masking eliminates cloud reflectance that would otherwise be erroneously attributed to land 
+#'   surface features. Cloud removal and (measurement or processing) errors trigger data gaps and 
+#'   outliers, decreasing the quality and quantity of measurements. Hence, the package includes a 
+#'   set of function for filling and smoothing the satellite imagery. The combination of functions 
+#'   in RGISTools results in a stack of images ready-to-use.  Due to the wide 
 #' variety of procedures and sources of information being handled in RGISTools, the functions are divided 
 #' into 7 categories, which are identified by the first 3 characters of the function names; 
 #' \enumerate{
