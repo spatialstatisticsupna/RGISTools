@@ -24,7 +24,7 @@
 #' searchres <- senSearch(startDate = as.Date("2018210","%Y%j"),
 #'                        endDate = as.Date("2018218","%Y%j"),
 #'                        platform = "Sentinel-2",
-#'                        intersects = ex.navarre,
+#'                        extent = ex.navarre,
 #'                        product = "S2MSI1C",
 #'                        username = "username",
 #'                        password = "password")

@@ -94,7 +94,6 @@ senDownload<-function(username,
                 password=password,
                 AppRoot=AppRoot,
                 unzip=TRUE,
-                overwrite=TRUE,
                 ...)
 }
 

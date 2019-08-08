@@ -33,9 +33,9 @@
 #'
 #' # Force renew existing meta data csv
 #' ls7LoadMetadata(update = TRUE)
-#' # if .LS8MD is already loaded you can see print its data
+#' # if .LS7MD is already loaded you can see print its data
 #' ls(all.names = TRUE)
-#' head(.LS8MD)
+#' head(.LS7MD)
 #' }
 ls7LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=TRUE,...){
   stopifnot(class(update)=="logical")

@@ -29,7 +29,7 @@ The function works with names or file paths having \code{.tar.gz} file extension
 str <- "LC82000312017010LGN01.tar.gz"
 dt <- lsGetDates(str)
 print(dt)
-print(format(df, "\%Y\%j"))
+print(format(dt, "\%Y\%j"))
 
 # example of getting the date from the name of a Landsat-7 and 8 image
 str <- c("LE72330822017009ASN01")

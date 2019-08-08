@@ -5,7 +5,8 @@
 \title{Search and download Modis images in structured folder}
 \usage{
 modDownload(product, startDate, endDate, username, password,
-  collection = 6, verbose = FALSE, extract.tif = FALSE, ...)
+  collection = 6, nattempts = 5, verbose = FALSE,
+  extract.tif = FALSE, ...)
 }
 \arguments{
 \item{product}{a \code{character} argument with the name of Modis product type.}
@@ -19,6 +20,8 @@ modDownload(product, startDate, endDate, username, password,
 \item{password}{EarthData password.}
 
 \item{collection}{Modis collection, by default 6.}
+
+\item{nattempts}{the number of attempts that the function has to carry out}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
@@ -36,6 +39,7 @@ This argument is mandatory if polygon or extent is not defined.
   \item \code{polygon} A list of vectors defining the points of the polygon in longitude/latitude format.
 This argument is mandatory if \code{lonlat} or extent is not defined.
   \item \code{AppRoot} the directory to save the output time series.
+  \item Any argument in \code{\link{modExtractHDF}} function. Ex. \code{bFilter="b01_1"}.
 }}
 }
 \description{
@@ -56,24 +60,26 @@ Therefore, an error may occur when trying to connect with their server during th
 \dontrun{
 # load a spatial polygon object of Navarre
 data(ex.navarre)
+src <- "Path_for_downloading_folder"
 modDownload(product = "MOD09GA",
             startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
             endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
             username = "username",
             password = "password",
-            AppRoot = "Path_for_downloading_folder",
+            AppRoot = src,
             extract.tif = TRUE,
             collection = 6,
             extent = ex.navarre)
-files <- list.files("./Path_for_downloading_folder/tif",
+tif.src <- file.path(src,"Modis","MOD09GA","tif")
+files <- list.files(tif.src,
                     pattern = "\\\\.tif$",
                     full.names = TRUE,
-                    recursive = TRUE)[1,4,3]
+                    recursive = TRUE)[c(16,19,18)]
 files.stack <- stack(files)
 qrange <- c(0.001, 0.999)
-imagen <- varRGB(files.stack.raster[[1]], 
-                 files.stack.raster[[2]],
-                 files.stack.raster[[3]],
+imagen <- varRGB(files.stack[[1]], 
+                 files.stack[[2]],
+                 files.stack[[3]],
                  qrange)
 plotRGB(imagen)
 }

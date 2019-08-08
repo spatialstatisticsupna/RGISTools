@@ -4,7 +4,8 @@
 \alias{ls7FolderToVar}
 \title{Compute derived variables from Landsat-7 multispectral bands}
 \usage{
-ls7FolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
+ls7FolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
+  verbose = FALSE, ...)
 }
 \arguments{
 \item{src}{\code{character} class argument containing the path to the folder with the Landsat multispectral image.}
@@ -18,6 +19,8 @@ implemented.}
 \code{RasterStack}, otherwise the images are saved in the Hard Drive Devide (HDD).}
 
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
 \item{...}{argument for function nestering.
 \itemize{
@@ -52,27 +55,29 @@ lsDownload(satellite = "ls7",
            untar = TRUE,
            AppRoot = src)
 # assign the folder with the Landsat-7 untared images 
-tif.src <- file.path(src,"Landsat7", "untar")
+src.ls7 <-file.path(src,"Landsat7")
+tif.src <- file.path(src.ls7, "untar")
 # mosaic the Landsat7 images
 lsMosaic(tif.src,
-         AppRoot = src,
-         out.name = "Navarre")
+         AppRoot = src.ls7,
+         out.name = "Navarre",
+         extent = ex.navarre,
+         gutils = TRUE)
 # assign src as the path to mosaicked folder
-src2 <- file.path(src, "Navarre")
+src2 <- file.path(src.ls7, "Navarre")
 # generate NDVI images of Navarre
-src3 <- file.path(src1, "Navarre_Variables")
+src3 <- file.path(src.ls7, "Navarre_Variables")
 dir.create(src3)
 ls7FolderToVar(src2,
                fun = varNDVI,
                AppRoot = src3,
                overwrite = T)
                
-flist <- list.files(file.path(src3,"EVI"),
+flist <- list.files(file.path(src3,"NDVI"),
                     pattern = "\\\\.tif$",
                     full.names = TRUE,
                     recursive = TRUE)
-
-files.raster <- stack(flist)
-spplot(files.raster)
+ras <- raster(flist[1])
+spplot(ras)
 }
 }

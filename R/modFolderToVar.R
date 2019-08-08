@@ -21,6 +21,7 @@
 #' @param getStack logical argument. If \code{TRUE}, returns the time series as a \code{RasterStack}, otherwise the result 
 #' is saved in the Hard Drive Device (HDD).
 #' @param overwrite logical argument. If \code{TRUE}, it overwrites the existing images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param ... argument for function nestering:
 #' \itemize{
 #'   \item \code{AppRoot} directory of the output time series.
@@ -54,9 +55,10 @@
 #' # generate NDVI images of Navarre
 #' src.variables <- file.path(src.mod, "Variables")
 #' dir.create(src.variables)
-#' modFolderToVar(src.navarre,
+#' modFolderToVar(src = src.navarre,
 #'                fun = varEVI,
-#'                AppRoot = src.variables,
+#'                scfun = getRGISToolsOpt("MOD09SCL"),
+#'                AppRoot = src.variables, verbose=T,
 #'                overwrite = T)
 #' # import tif mosaicked images to R environment
 #' flist <- list.files(file.path(src.variables,"EVI"),
@@ -64,11 +66,12 @@
 #'                     full.names = TRUE,
 #'                     recursive = TRUE)
 #' 
-#' files.raster <-stack(flist)
-#' spplot(files.raster,at=seq(-1,2.5))
+#' files.raster <- lapply(flist,raster)
+#' spplot(files.raster[[1]],at=seq(-1,2.5))
 #' }
-modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
+modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
   AppRoot=defineAppRoot(...)
+  function.arg<-list(...)
   vartype<-gsub("var","",as.character(match.call()[c("fun")]))
   if(!getStack){
     AppRoot<-file.path(AppRoot,vartype)
@@ -85,14 +88,25 @@ modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
     out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
     if(overwrite|(!file.exists(out.file.name))){
       funString<-"result<-fun("
-      for(arg in formalArgs(fun)){
+      #band load and asignation
+      funargs<-formalArgs(fun)
+      for(arg in funargs){
         band<-modbands[names(modbands)%in%arg]
         if(length(band)==0)
           next
         eval(parse( text=paste0(arg,"<-raster('",mod.img[grepl(tolower(band),mod.img)],"')") ))
         funString<-paste0(funString,arg,"=",arg,",")
       }
+      # arguments asignation
+      arguments<-as.list(match.call())
+      arguments<-arguments[names(arguments)%in%funargs&
+                           (!names(arguments)%in%names(modbands))]
+      for(arg in names(arguments)){
+        funString<-paste0(funString,arg,"=function.arg$",arg,",")
+      }
+      # complete the function
       funString<-paste0(substr(funString,1,nchar(funString)-1),")")
+      if(verbose){print(paste0("Function for evaluation: \n",funString))}
       eval(parse(text=funString))
       if(getStack){
         if(is.null(rstack)){

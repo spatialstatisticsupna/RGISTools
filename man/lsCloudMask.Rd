@@ -40,18 +40,18 @@ lsDownload(satellite = "ls8",
            password = "password",
            startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
            endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
-           extent = ex.navarre,
+           pathrow = list(c(200, 31), c(200, 30)),
            untar = TRUE,
            AppRoot = src)
            
 # generate the path where the GTiff images are located
-src.untar <- file.path(src,"Landsat8","untar")
+src.ls8 <- file.path(src,"Landsat8")
+src.untar <- file.path(src.ls8,"untar")
 # calculate the cloud mask from QC layer
 lsCloudMask(src=src.untar,
             overwrite=TRUE)
             
 # generate the path where the mosacked images will be saved
-src.ls8 <- dirname(src.untar)
 lsMosaic(src = src.untar,
          AppRoot = src.ls8,
          out.name = "Navarre",
@@ -69,11 +69,11 @@ tiles.path <- list.files(src.navarre,
                          pattern = "\\\\.tif$")
 cloud.tiles <- tiles.path[grepl("CLD",tiles.path)]
 b1.tiles <- tiles.path[grepl("B1.tif",tiles.path)]
-cloud.tiles.ras <- stack(cloud.tiles)
-b1.tiles.ras <- stack(b1.tiles)
+cloud.tiles.ras <- lapply(cloud.tiles,raster)
+b1.tiles.ras <- lapply(b1.tiles,raster)
 
 # calculate cloud free b1 layers
-b1.cloud.free <- b1.tiles.ras * cloud.tiles.ras
+b1.cloud.free <- b1.tiles.ras[[1]] * cloud.tiles.ras[[1]]
 spplot(b1.cloud.free)
 }
 }

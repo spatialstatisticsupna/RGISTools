@@ -4,7 +4,7 @@
 \alias{varSAVI}
 \title{Calculates soil-adjusted vegetation index (SAVI) from raster bands}
 \usage{
-varSAVI(red, nir, L = 0.5)
+varSAVI(red, nir, L = 0.5, scfun = function(r) {     r })
 }
 \arguments{
 \item{red}{the red band of the capture in \code{raster} format.}
@@ -37,7 +37,7 @@ getRGISToolsOpt("MOD09BANDS")
 red <- raster(img.files[1])
 nir <- raster(img.files[2])
 # calculate the ndwi image
-savi <- varSAVI(red,nir)
+savi <- varSAVI(red,nir,scfun=getRGISToolsOpt("MOD09SCL"))
 # plot the image
 spplot(savi,col.regions=rev(topo.colors(20)))
 }

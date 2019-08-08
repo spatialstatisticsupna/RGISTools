@@ -5,8 +5,8 @@
 \title{Download a time series of satellite images from Landsat 7-8}
 \usage{
 lsDownSearch(searchres, username = NULL, password = NULL, lvl = 1,
-  products = c("sr", "source_metadata"), verbose = FALSE,
-  raw.rm = FALSE, untar = FALSE, overwrite = FALSE, n.attempts = 5,
+  product = c("sr", "source_metadata"), verbose = FALSE,
+  raw.rm = FALSE, untar = FALSE, overwrite = FALSE, nattempts = 5,
   ...)
 }
 \arguments{
@@ -18,7 +18,7 @@ lsDownSearch(searchres, username = NULL, password = NULL, lvl = 1,
 
 \item{lvl}{flag to specify Landsat product level wanted. Default value, 1.}
 
-\item{products}{character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.}
+\item{product}{character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
@@ -28,12 +28,12 @@ lsDownSearch(searchres, username = NULL, password = NULL, lvl = 1,
 
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
 
+\item{nattempts}{the number of attempts that the function has to carry out to download an image in case of corrupted files.}
+
 \item{...}{argument for function nestering accepts:
 \itemize{
   \item \code{AppRoot} the directory to save the downloaded images.
 }}
-
-\item{cookies.file}{File path for saving the cookies that are used in the download process.}
 }
 \description{
 \code{\link{lsDownSearch}} downloads the list of images provided by \code{\link{ls7Search}} and \code{\link{ls8Search}} functions.
@@ -71,20 +71,17 @@ search.res <- ls8Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
 lsDownSearch(searchres = search.res[1,], 
              username = "user", 
              password = "pass", 
-             untar = TRUE, 
-             raw.rm = TRUE)
-# download 10 images
+             untar = TRUE)
+# download 4 images
 lsDownSearch(searchres = search.res[1:4,], 
              username = "user", 
              password = "pass", 
-             untar = TRUE, 
-             raw.rm = TRUE)
+             untar = TRUE)
 # download all the images
 lsDownSearch(searchres = search.res, 
              username = "user", 
              password = "pass", 
-             untar = TRUE, 
-             raw.rm = TRUE)
+             untar = TRUE)
 
 # Search and download the images from Landsat-7 between
 # 2011 and 2013 in the region of Navarre
@@ -98,36 +95,35 @@ search.res <- ls7Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
 lsDownSearch(searchres = search.res[1,], 
              username = "user", 
              password = "pass", 
-             untar = TRUE, 
-             raw.rm = TRUE,
+             untar = TRUE,
              AppRoot=src)
-# download 10 images
-lsDownSearch(searchres = search.res[1:10,], 
+# download 4 images
+lsDownSearch(searchres = search.res[1:4,], 
              username = "user", 
              password = "pass", 
              untar = TRUE, 
-             raw.rm = TRUE,
              AppRoot=src)
 # download all the images
 lsDownSearch(searchres = search.res, 
              username = "user", 
              password = "pass", 
              untar = TRUE, 
-             raw.rm = TRUE,
              AppRoot=src)
 
 # removes metadata data frame to free memory
 lsRemoveMetadata()
 
-files <- list.files("./", 
+# select Landsat7 rgb bands
+src.ls7 <- file.path(src,"Landsat7")
+files <- list.files(src.ls7, 
                     pattern = "\\\\.TIF$", 
                     full.names = TRUE, 
-                    recursive = TRUE)[6,5,4]
+                    recursive = TRUE)[c(6,5,4)]
 files.stack <- stack(files)
 qrange <- c(0.001, 0.999)
-imagen <- varRGB(files.stack.raster[[1]], 
-                 files.stack.raster[[2]],
-                 files.stack.raster[[3]],
+imagen <- varRGB(files.stack[[1]], 
+                 files.stack[[2]],
+                 files.stack[[3]],
                  qrange)
 plotRGB(imagen)
 }

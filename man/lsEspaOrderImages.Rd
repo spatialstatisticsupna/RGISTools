@@ -4,11 +4,11 @@
 \alias{lsEspaOrderImages}
 \title{Make a request to ESPA for pre-processing Landsat images}
 \usage{
-lsEspaOrderImages(searchres, username, password, product = c("sr",
+lsEspaOrderImages(search.res, username, password, product = c("sr",
   "source_metadata"), verbose = FALSE)
 }
 \arguments{
-\item{searchres}{the results from \code{\link{ls7Search}} or \code{\link{ls8Search}}.}
+\item{search.res}{the results from \code{\link{ls7Search}} or \code{\link{ls8Search}}.}
 
 \item{username}{login credentials to access the USGS EROS web service.}
 
@@ -41,6 +41,7 @@ final product (“product”). The products are identified by the following shor
 }
 }
 \examples{
+\dontrun{
 # Search Landsat 7 level-1
 search.res <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
                         endDate = as.Date("07-01-2017", "\%d-\%m-\%Y"),
@@ -51,4 +52,5 @@ order <- lsEspaOrderImages(search.res = search.res,
                            password = "password", 
                            product = 'sr',
                            verbose = FALSE)
+}
 }

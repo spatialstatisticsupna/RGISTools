@@ -4,7 +4,7 @@
 \alias{varEVI}
 \title{Calculate the enhanced vegetation index (EVI) from raster bands}
 \usage{
-varEVI(blue, red, nir)
+varEVI(blue, red, nir, scfun = function(r) {     r })
 }
 \arguments{
 \item{blue}{the blue band of the capture in \code{raster} format.}
@@ -32,15 +32,19 @@ img.dir <- system.file("ExNavarreVar", package = "RGISTools")
 img.files <- list.files(img.dir, pattern = "\\\\.tif$", recursive = TRUE, full.names = TRUE)
 # print Modis 09 bands
 getRGISToolsOpt("MOD09BANDS")
+scale.factor <- 0.0001
 
 # select the red, blue and nir bands
-red <- raster(img.files[1])
-blue <- raster(img.files[3])
-nir <- raster(img.files[2])
-# calculate the evi image
-evi <- varEVI(blue, red, nir)
+red <- raster(img.files[1]) * scale.factor
+blue <- raster(img.files[3]) * scale.factor
+nir <- raster(img.files[2]) * scale.factor
+# calculate the evi without scale
+evi.1 <- varEVI(blue, red, nir)
+# calculate the evi scaling 0-1
+evi.2 <- varEVI(blue, red, nir,scfun=getRGISToolsOpt("MOD09SCL"))
+evi.12 <- stack(evi.1,evi.2)
 # plot the image
-spplot(evi,col.regions=rev(terrain.colors(20)))
+spplot(evi.12,col.regions=rev(terrain.colors(20)),at = c(seq(0,1,0.05)))
 }
 \references{
 \insertRef{huete2002overview}{RGISTools}

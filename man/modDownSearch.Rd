@@ -44,8 +44,17 @@ mList <- modSearch(product = "MYD13A2",
                    extent = ex.navarre)
 head(mList)
 # download first image in mList
-modDownSearch(mList[1], "user", "pass")
+src <- "Path_for_downloading_folder"
+src.mod <- file.path(src,"Modis","MYD13A2")
+src.mod.hdf <- file.path(src.mod,"hdf")
+modDownSearch(mList[1], 
+              username = "user", 
+              password = "pass",
+              AppRoot = src.mod.hdf)
 # download all images in mList
-modDownSearch(mList, "user", "pass")
+modDownSearch(mList, 
+              username = "user", 
+              password = "pass",
+              AppRoot = src.mod.hdf)
 }
 }

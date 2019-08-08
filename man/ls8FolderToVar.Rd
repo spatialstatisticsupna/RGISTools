@@ -4,7 +4,8 @@
 \alias{ls8FolderToVar}
 \title{Compute derived variables from Landsat-8 multispectral bands}
 \usage{
-ls8FolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
+ls8FolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
+  verbose = FALSE, ...)
 }
 \arguments{
 \item{src}{path to the folder with the Landsat multispectral image.}
@@ -19,6 +20,8 @@ time-series of images as a \code{RasterStack}, otherwise the images are saved in
 
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the 
 existing images with the same name.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
 \item{...}{argument for function nestering
 \itemize{
@@ -47,32 +50,35 @@ lsDownload(satellite = "ls8",
            username = "username",
            password = "password",
            startDate = as.Date("01-01-2018","\%d-\%m-\%Y"),
-           endDate = as.Date("20-01-2018","\%d-\%m-\%Y"),
-           extent = ex.navarre,
+           endDate = as.Date("18-01-2018","\%d-\%m-\%Y"),
+           pathrow = list(c(200, 31), c(200, 30)),
            untar = TRUE,
            AppRoot = src)
 # assign the folder with the Landsat-8 untared images
-tif.src <- file.path(src, "untar")
+src.ls8 <-file.path(src,"Landsat8")
+tif.src <- file.path(src.ls8, "untar")
 # mosaic the Landsat-8 images
-lsMosaic(tif.src,
-         AppRoot = src,
-         out.name = "Navarre")
+lsMosaic(src = tif.src,
+         AppRoot = src.ls8,
+         out.name = "Navarre",
+         extent = ex.navarre,
+         gutils = TRUE)
 # assign src as the path to mosaiced folder
-src2 <- file.path(src, "Navarre")
+src2 <- file.path(src.ls8, "Navarre")
 # generate NDVI images of Navarre
-src3 <- file.path(src1, "Navarre_Variables")
+src3 <- file.path(src.ls8, "Navarre_Variables2")
 dir.create(src3)
 ls8FolderToVar(src2,
                fun = varNDVI,
                AppRoot = src3,
-               overwrite = T)
+               overwrite = TRUE)
                
-flist <- list.files(file.path(src3,"EVI"),
+flist <- list.files(file.path(src3,"NDVI"),
                     pattern = "\\\\.tif$",
                     full.names = TRUE,
                     recursive = TRUE)
 
-files.raster <- stack(flist)
-spplot(files)
+file.raster <- raster(flist[1])
+spplot(files.raster)
 }
 }

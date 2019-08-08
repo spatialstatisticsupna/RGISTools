@@ -22,6 +22,7 @@
 #' @param nYears \code{numeric} argument with the number of previous and subsequent years used for defining the neighborhood.
 #' @param fun function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.
 #' @param snow.mode logical argument. If \code{TRUE}, the filling process will be parallelized by \code{raster} package.
+#' @param predictSE calculate the standard error instead the prediction.
 #' @param factSE the fact used in the standard error prediction to reduce the processing time.
 #' @param out.name the name of the output images.
 #' @param ... argument for function nestering.

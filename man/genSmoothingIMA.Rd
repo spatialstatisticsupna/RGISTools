@@ -28,6 +28,8 @@ with the name of the layers containing the date in julian format (\code{YYYYJJJ}
 
 \item{snow.mode}{logical argument. If \code{TRUE}, the filling process will be parallelized by \code{raster} package.}
 
+\item{predictSE}{calculate the standard error instead the prediction.}
+
 \item{out.name}{the name of the output images.}
 
 \item{...}{argument for function nestering.

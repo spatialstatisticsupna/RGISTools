@@ -18,6 +18,7 @@
 #' time-series of images as a \code{RasterStack}, otherwise the images are saved in the Hard Drive Devide (HDD).
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the 
 #' existing images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param ... argument for function nestering
 #' \itemize{
 #'   \item \code{AppRoot} the directory of the resulting time series
@@ -34,7 +35,7 @@
 #'            username = "username",
 #'            password = "password",
 #'            startDate = as.Date("01-01-2018","%d-%m-%Y"),
-#'            endDate = as.Date("20-01-2018","%d-%m-%Y"),
+#'            endDate = as.Date("18-01-2018","%d-%m-%Y"),
 #'            pathrow = list(c(200, 31), c(200, 30)),
 #'            untar = TRUE,
 #'            AppRoot = src)
@@ -42,7 +43,7 @@
 #' src.ls8 <-file.path(src,"Landsat8")
 #' tif.src <- file.path(src.ls8, "untar")
 #' # mosaic the Landsat-8 images
-#' lsMosaic(tif.src,
+#' lsMosaic(src = tif.src,
 #'          AppRoot = src.ls8,
 #'          out.name = "Navarre",
 #'          extent = ex.navarre,
@@ -50,7 +51,7 @@
 #' # assign src as the path to mosaiced folder
 #' src2 <- file.path(src.ls8, "Navarre")
 #' # generate NDVI images of Navarre
-#' src3 <- file.path(src.ls8, "Navarre_Variables")
+#' src3 <- file.path(src.ls8, "Navarre_Variables2")
 #' dir.create(src3)
 #' ls8FolderToVar(src2,
 #'                fun = varNDVI,
@@ -62,11 +63,12 @@
 #'                     full.names = TRUE,
 #'                     recursive = TRUE)
 #' 
-#' files.raster <- stack(flist, quick = TRUE)
+#' file.raster <- raster(flist[1])
 #' spplot(files.raster)
 #' }
-ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
+ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
   AppRoot=defineAppRoot(...)
+  function.arg<-list(...)
   vartype<-gsub("var","",as.character(match.call()[c("fun")]))
   if(!getStack){
     AppRoot<-file.path(AppRoot,vartype)
@@ -83,14 +85,25 @@ ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
     out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
     if(overwrite|(!file.exists(out.file.name))){
       funString<-"result<-fun("
-      for(arg in formalArgs(fun)){
+      #band load and asignation
+      funargs<-formalArgs(fun)
+      for(arg in funargs){
         band<-ls8bands[names(ls8bands)%in%arg]
         if(length(band)==0)
           next
         eval(parse( text=paste0(arg,"<-raster('",ls.img[grepl(band,ls.img)],"')") ))
         funString<-paste0(funString,arg,"=",arg,",")
       }
+      # arguments asignation
+      arguments<-as.list(match.call())
+      arguments<-arguments[names(arguments)%in%funargs&
+                             (!names(arguments)%in%names(ls8bands))]
+      for(arg in names(arguments)){
+        funString<-paste0(funString,arg,"=function.arg$",arg,",")
+      }
+      # complete the function
       funString<-paste0(substr(funString,1,nchar(funString)-1),")")
+      if(verbose){print(paste0("Function for evaluation: \n",funString))}
       eval(parse(text=funString))
       if(getStack){
         if(is.null(rstack)){

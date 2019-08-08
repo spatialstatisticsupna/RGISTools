@@ -5,7 +5,7 @@
 \title{Download Sentinel images from search function}
 \usage{
 senDownSearch(searchres, username = NULL, password = NULL,
-  error.log = "Sentinel_error.log", nattempts = NULL, unzip = FALSE,
+  error.log = "Sentinel_error.log", nattempts = 5, unzip = FALSE,
   overwrite = FALSE, ...)
 }
 \arguments{
@@ -58,8 +58,8 @@ names(searchres)
 searchres.R094 <- searchres[grepl("R094", names(searchres))]
 names(searchres.R094)
 # list the dates in searchres
-senGetDates(names(searchres.R094),format="\%Y\%J")
-src = "Patch_for_downloading_folder"
+senGetDates(names(searchres.R094),format="\%Y\%j")
+src = file.path("Path_for_downloading_folder","Sentinel-2")
 # Sentinel download function
 senDownSearch(searchres = searchres.R094,
               username = "username",

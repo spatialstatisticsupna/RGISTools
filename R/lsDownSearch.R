@@ -20,11 +20,11 @@
 #' @param username login credentials to access the USGS EROS web service.
 #' @param password login credentials to access the USGS EROS web service.
 #' @param lvl flag to specify Landsat product level wanted. Default value, 1.
-#' @param products character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.
-#' @param cookies.file  File path for saving the cookies that are used in the download process.
+#' @param product character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.
 #' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param raw.rm logical argument. If \code{TRUE}, removes the raw images.
 #' @param untar logical argument. If \code{TRUE}, untars downloaded images.
+#' @param nattempts the number of attempts that the function has to carry out to download an image in case of corrupted files.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
 #' @param ... argument for function nestering accepts:
 #' \itemize{
@@ -50,20 +50,17 @@
 #' lsDownSearch(searchres = search.res[1,], 
 #'              username = "user", 
 #'              password = "pass", 
-#'              untar = TRUE, 
-#'              raw.rm = TRUE)
+#'              untar = TRUE)
 #' # download 4 images
 #' lsDownSearch(searchres = search.res[1:4,], 
 #'              username = "user", 
 #'              password = "pass", 
-#'              untar = TRUE, 
-#'              raw.rm = TRUE)
+#'              untar = TRUE)
 #' # download all the images
 #' lsDownSearch(searchres = search.res, 
 #'              username = "user", 
 #'              password = "pass", 
-#'              untar = TRUE, 
-#'              raw.rm = TRUE)
+#'              untar = TRUE)
 #'
 #' # Search and download the images from Landsat-7 between
 #' # 2011 and 2013 in the region of Navarre
@@ -77,22 +74,19 @@
 #' lsDownSearch(searchres = search.res[1,], 
 #'              username = "user", 
 #'              password = "pass", 
-#'              untar = TRUE, 
-#'              raw.rm = TRUE,
+#'              untar = TRUE,
 #'              AppRoot=src)
 #' # download 4 images
 #' lsDownSearch(searchres = search.res[1:4,], 
 #'              username = "user", 
 #'              password = "pass", 
 #'              untar = TRUE, 
-#'              raw.rm = TRUE,
 #'              AppRoot=src)
 #' # download all the images
 #' lsDownSearch(searchres = search.res, 
 #'              username = "user", 
 #'              password = "pass", 
 #'              untar = TRUE, 
-#'              raw.rm = TRUE,
 #'              AppRoot=src)
 #' 
 #' # removes metadata data frame to free memory
@@ -116,12 +110,12 @@ lsDownSearch<-function(searchres,
                        username=NULL,
                        password=NULL,
                        lvl=1,
-                       products=c("sr","source_metadata"),
+                       product=c("sr","source_metadata"),
                        verbose=FALSE,
                        raw.rm=FALSE,
                        untar=FALSE,
                        overwrite=FALSE,
-                       n.attempts=5,
+                       nattempts=5,
                        ...){
   stopifnot(class(searchres)=="data.frame")
   if(is.null(username)|is.null(password)){
@@ -161,7 +155,7 @@ lsDownSearch<-function(searchres,
     lsEspaOrderImages(search.res=searchres,
                       username=username,
                       password=password,
-                      product=products,
+                      product=product,
                       verbose=verbose)
     message("Ordering images on ESPA platform...")
     c.handle<-lsEspaCreateConnection(username=username,password=password)
@@ -170,7 +164,7 @@ lsDownSearch<-function(searchres,
     lsEspaDownloadOrders(orders=images.order,
                          c.handle=c.handle,
                          verbose=verbose,
-                         n.attempts=n.attempts,
+                         nattempts=nattempts,
                          untar=untar,
                          overwrite=overwrite,
                          AppRoot=downPath)

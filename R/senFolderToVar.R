@@ -47,19 +47,21 @@
 #'             password = "password",
 #'             AppRoot = src)
 #' # assign the folder with the Sentinel-2 unzipped images
-#' src.unzip <- file.path(src, "unzip")
+#' src.sen <- file.path(src,"Sentinel-2")
+#' src.unzip <- file.path(src.sen, "unzip")
 #' # mosaic the Sentinel-2 images
 #' senMosaic(src.unzip,
-#'           AppRoot = src,
+#'           AppRoot = src.sen,
 #'           gutils = TRUE,
 #'           out.name = "Navarre")
 #' # assign src as the path to mosaicked folder
-#' src2 <- file.path(src, "Navarre")
-#' src3 <- file.path(src, "Navarre_Variables")
+#' src2 <- file.path(src.sen, "Navarre")
+#' src3 <- file.path(src.sen, "Navarre_Variables")
 #' dir.create(src3)
 #' # generate EVI images of Navarre
 #' senFolderToVar(src2,
 #'                fun = varEVI,
+#'                resbands = c("60m"),
 #'                AppRoot = src3)
 #'                
 #' flist <- list.files(file.path(src3,"EVI"),
@@ -67,11 +69,12 @@
 #'                     full.names = TRUE,
 #'                     recursive = TRUE)
 #' 
-#' files.raster <- stack(flist)
-#' spplot(files)
+#' files.raster <- lapply(flist, raster)
+#' spplot(files[[1]])
 #' }
 senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,resbands=c("10m","20m","60m"),...){
   AppRoot=defineAppRoot(...)
+  function.arg<-list(...)
   vartype<-gsub("var","",as.character(match.call()[c("fun")]))
 
   AppRoot<-file.path(AppRoot,vartype)
@@ -98,7 +101,9 @@ senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,re
       out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),resb,".tif")
       if(overwrite|(!file.exists(out.file.name))){
         funString<-"result<-fun("
-        for(arg in formalArgs(fun)){
+        #band load and asignation
+        funargs<-formalArgs(fun)
+        for(arg in funargs){
           band<-senbands[names(senbands)%in%arg]
           if(length(band)==0)
             next
@@ -111,6 +116,14 @@ senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,re
           eval(parse( text=paste0(arg,"<-raster('",l.img,"')") ))
           funString<-paste0(funString,arg,"=",arg,",")
         }
+        # arguments asignation
+        arguments<-as.list(match.call())
+        arguments<-arguments[names(arguments)%in%funargs&
+                               (!names(arguments)%in%names(senbands))]
+        for(arg in names(arguments)){
+          funString<-paste0(funString,arg,"=function.arg$",arg,",")
+        }
+        # complete the function
         funString<-paste0(substr(funString,1,nchar(funString)-1),")")
         if(verbose){message(paste0("Running function ",funString,"..."))}
         eval(parse(text=funString))

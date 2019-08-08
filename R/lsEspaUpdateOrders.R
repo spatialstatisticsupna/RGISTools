@@ -4,18 +4,19 @@
 #' Architecture (ESPA) to pre-process Landsat Level-1 images
 #' 
 #' This function is part of a group of functions used to pre-process Landsat Level 1 images. 
-#' The pre-processing is carried out by ESPA on demand. \code{\link{lsEspaUpadateOrders}} uses 
+#' The pre-processing is carried out by ESPA on demand. \code{lsEspaUpdateOrders} uses 
 #' the ID numbers gathered by \code{\link{lsEspaGetOrderImages}} regarding previous order 
 #' requests to check the processing status. The function has to be run repeatedly 
 #' until the status message says, “complete”. All the status messages and their 
 #' interpretation can be found in the ESPA API \href{https://landsat.usgs.gov/sites/default/files/documents/espa_odi_userguide.pdf}{User Guide}.
 #' 
-#' @param images a list of the requested images as returned by \code{\link{lsEspaGetOrderImages}}.
+#' @param orders a list of the requested orders as returned by \code{\link{lsEspaGetOrderImages}}.
 #' @param username login credentials to access the USGS EROS web service.
 #' @param password login credentials to access the USGS EROS web service.
 #' @param c.handle curl handler created with \code{curl} package containing the connection 
 #' with password and username defined. This argument is mandatory if \code{username} and
 #' \code{password} are not defined.
+#' @param verbose logical argument. If TRUE, the function prints running stages and warnings.
 #'
 #' @examples
 #' \dontrun{

@@ -58,6 +58,11 @@ assign("SEN1BANDS",NULL, env=optEnv)
 assign("SEN2BANDS",c(bluecoastal='B01',blue='B02',green='B03',red='B04',vegrededge="B05",vegrededge1="B06",vegrededge2="B07",nir='B08',narrownir='B8A',watervapour="B09",cirrus="B10",swir1='B11',swir2='B12',cloud='CLD',snow='SNW',rgb="TCI",preview='PVI',watervap='WVP'), env=optEnv)
 assign("SEN3BANDS",NULL, env=optEnv)
 
+
+#scale functions
+assign("MOD09SCL",function(r,sc=1/16000){((r+100)*sc)}, env=optEnv)
+
+
 #' Change the default value of an RGISTools configuration variable
 #'
 #' \code{setRGISToolsOpt} changes the default value of an \code{RGISTools} option.

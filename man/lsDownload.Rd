@@ -21,6 +21,8 @@ lsDownload(satellite, startDate, endDate, username, password, lvl = 1,
 
 \item{lvl}{flag to specify Landsat product level wanted. Default value, 1.}
 
+\item{product}{character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.}
+
 \item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
 \item{untar}{logical argument. If \code{TRUE}, untars downloaded images.}
@@ -33,8 +35,6 @@ lsDownload(satellite, startDate, endDate, username, password, lvl = 1,
 function arguments.
   \item \code{AppRoot} the directory to save the downloaded images.
 }}
-
-\item{products}{character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.}
 }
 \description{
 \code{lsDownSearch} downloads the list of images provided by \code{ls7Search} and \code{ls8Search} functions.
@@ -60,6 +60,7 @@ directory. To change this setting, provide \code{AppRoot = "the full path as an 
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 
+src <- "Path_for_downloading_folder"
 # Search and download the images from Landsat-8 between
 # 01-01-2018 and 20-01-2018 in the region of Navarre
 lsDownload(satellite = "ls8",
@@ -67,7 +68,8 @@ lsDownload(satellite = "ls8",
            password = "password",
            startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
            endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
-           extent = ex.navarre)
+           extent = ex.navarre,
+           AppRoot = src)
            
 # remove metadata data frame to free memory
 lsRemoveMetadata()

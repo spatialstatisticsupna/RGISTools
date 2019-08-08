@@ -15,6 +15,10 @@ lsEspaGetOrderImages(username = NULL, password = NULL,
 \item{c.handle}{curl handler created with \code{curl} package containing the connection 
 with password and username defined. This argument is mandatory if \code{username} and
 \code{password} are not defined.}
+
+\item{order.list}{the list of orders to check its status}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 }
 \description{
 \code{lsEspaGetOrderImages} Obtains the ID number and the status of the request 
@@ -22,17 +26,18 @@ from the EROS Centre Science Processing Architecture (ESPA)
 }
 \details{
 This function is part of a group of functions used to pre-process Landsat Level 1 images. 
-The pre-processing is carried out by ESPA on demand. \code{\link{lsEspaGetOrderImages}} 
+The pre-processing is carried out by ESPA on demand. \code{lsEspaGetOrderImages} 
 takes the identification (ID) number of the request carried out by \code{\link{lsEspaOrderImages}}. 
-This ID is used to follow up the processing status with \code{\link{lsEspaUpdateOrder}}. All the 
-status messages and their interpretation can be found in the ESPA API \href{https://landsat.usgs.gov/sites/default/files/documents/espa_odi_userguide.pdf}{User Guide}.
+This ID is used to follow up the processing status with \code{\link{lsEspaUpdateOrders}}. All the 
+status messages and their interpretation can be found in the ESPA API \href{User Guide}{https://landsat.usgs.gov/sites/default/files/documents/espa_odi_userguide.pdf}.
 }
 \examples{
-# Search Landsat 7 level-1
+\dontrun{
+# Search Landsat 7 level-2
 search.res <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
                         endDate = as.Date("07-01-2017", "\%d-\%m-\%Y"),
                         lonlat = c(-1.64323, 42.81687))
-# Request to ESPA the pre-pocessing of level-1 images to get the surface reflectance
+# Request to ESPA the pre-pocessing of level-2 images to get the surface reflectance
 order <- lsEspaOrderImages(search.res = search.res,
                            username = "username", 
                            password = "password", 
@@ -41,5 +46,5 @@ order <- lsEspaOrderImages(search.res = search.res,
 # Get an ID for our request
 lsEspaGetOrderImages(username = "username", 
                      password = "password")
-
+}
 }

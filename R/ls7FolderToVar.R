@@ -18,6 +18,7 @@
 #' @param getStack logical argument. If \code{TRUE}, returns the time-series as a 
 #' \code{RasterStack}, otherwise the images are saved in the Hard Drive Devide (HDD).
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param ... argument for function nestering.
 #' \itemize{
 #'   \item \code{AppRoot} the directory of the resulting time series.
@@ -61,12 +62,12 @@
 #'                     pattern = "\\.tif$",
 #'                     full.names = TRUE,
 #'                     recursive = TRUE)
-#' 
-#' files.raster <- stack(flist)
-#' spplot(files.raster)
+#' ras <- raster(flist[1])
+#' spplot(ras)
 #' }
-ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
+ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
   AppRoot=defineAppRoot(...)
+  function.arg<-list(...)
   vartype<-gsub("var","",as.character(match.call()[c("fun")]))
   if(!getStack){
     AppRoot<-file.path(AppRoot,vartype)
@@ -84,14 +85,25 @@ ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,...){
     out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
     if(overwrite|(!file.exists(out.file.name))){
       funString<-"result<-fun("
-      for(arg in formalArgs(fun)){
+      #band load and asignation
+      funargs<-formalArgs(fun)
+      for(arg in funargs){
         band<-ls7bands[names(ls7bands)%in%arg]
         if(length(band)==0)
           next
         eval(parse( text=paste0(arg,"<-raster('",ls.img[grepl(band,ls.img)],"')") ))
         funString<-paste0(funString,arg,"=",arg,",")
       }
+      # arguments asignation
+      arguments<-as.list(match.call())
+      arguments<-arguments[names(arguments)%in%funargs&
+                             (!names(arguments)%in%names(ls7bands))]
+      for(arg in names(arguments)){
+        funString<-paste0(funString,arg,"=function.arg$",arg,",")
+      }
+      # complete the function
       funString<-paste0(substr(funString,1,nchar(funString)-1),")")
+      if(verbose){print(paste0("Function for evaluation: \n",funString))}
       eval(parse(text=funString))
       if(getStack){
         if(is.null(rstack)){

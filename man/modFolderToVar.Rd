@@ -4,7 +4,8 @@
 \alias{modFolderToVar}
 \title{Compute derived variables from Modis multispectral bands}
 \usage{
-modFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE, ...)
+modFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
+  verbose = FALSE, ...)
 }
 \arguments{
 \item{src}{path to the input folder with the Modis multispectral images.}
@@ -17,6 +18,8 @@ functions. Customized functions can also be implemented.}
 is saved in the Hard Drive Device (HDD).}
 
 \item{overwrite}{logical argument. If \code{TRUE}, it overwrites the existing images with the same name.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
 
 \item{...}{argument for function nestering:
 \itemize{
@@ -55,29 +58,30 @@ modDownload(product = "MOD09GA",
             extract.tif = TRUE, 
             collection = 6,
             extent = ex.navarre)
-# assign src1 as the outut folder for ModMosaic
-src1 <- file.path(src, "MOD09GA") # output directory
-tif.src <- file.path(src1, "tif") # input directory
+# assign src.mod as the outut folder for ModMosaic
+src.mod <- file.path(src, "Modis", "MOD09GA") # output directory
+src.tif <- file.path(src.mod, "tif") # input directory
 # mosaic the Modis images
-modMosaic(tif.src,
-          AppRoot = src1,
+modMosaic(src.tif,
+          AppRoot = src.mod,
           out.name = "Navarre")
 # assign src as the path to mosaicked folder
-src2 <- file.path(src1, "Navarre")
+src.navarre <- file.path(src.mod, "Navarre")
 # generate NDVI images of Navarre
-src3 <- file.path(src1, "Variables")
-dir.create(src3)
-modFolderToVar(src2,
+src.variables <- file.path(src.mod, "Variables")
+dir.create(src.variables)
+modFolderToVar(src = src.navarre,
                fun = varEVI,
-               AppRoot = src3,
+               scfun = getRGISToolsOpt("MOD09SCL"),
+               AppRoot = src.variables, verbose=T,
                overwrite = T)
 # import tif mosaicked images to R environment
-flist <- list.files(file.path(src3,"EVI"),
+flist <- list.files(file.path(src.variables,"EVI"),
                     pattern = "\\\\.tif$",
                     full.names = TRUE,
                     recursive = TRUE)
 
-files.raster <-stack(flist)
-spplot(files.raster,at=seq(-1,2.5))
+files.raster <- lapply(flist,raster)
+spplot(files.raster[[1]],at=seq(-1,2.5))
 }
 }

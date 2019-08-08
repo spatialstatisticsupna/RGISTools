@@ -50,7 +50,7 @@
 #' dir.ESPA <- file.path(src,"Landsat7","ESPA")
 #' dir.create(dir.ESPA)
 #' # Download when status says: complete
-#' lsEspaDownloadOrders(images.order = orders,
+#' lsEspaDownloadOrders(orders = orders,
 #'                      username = "username", 
 #'                      password = "password",
 #'                     untar = TRUE,

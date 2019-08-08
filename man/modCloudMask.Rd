@@ -34,8 +34,8 @@ or \code{lonlat} is not defined.}
 \code{modCloudMask} creates layers of clouds derived from \code{MOD35_L2} products.
 }
 \details{
-This function, downloads and processes the \code{MOD35_L2} products to create clouds 
-mask composed by \code{NA}s and \code{1}. The resulting cloud mask layers need to be
+This function, downloads and processes the \code{MOD35_L2} products to create cloud 
+masks composed of \code{NA}'s and \code{1}'s. The resulting cloud mask layers need to be
 reprojected because resolution and projection differences with other modis products.
 This function requires \code{gdalUtils} properly installed.
 }
@@ -58,7 +58,8 @@ modDownload(product = "MOD09GA",
             extent = ex.navarre)
             
 # assign src1 as the outut folder for ModMosaic
-src.tiles <- file.path(src, "MOD09GA")
+src.mod <- file.path(src, "Modis")
+src.tiles <- file.path(src.mod, "MOD09GA")
 tif.src.tiles <- file.path(src.tiles, "tif")
 # mosaic the Modis images
 modMosaic(tif.src.tiles, # the input folder 
@@ -68,17 +69,18 @@ modMosaic(tif.src.tiles, # the input folder
           extent = ex.navarre)
           
 # assign src as the path to cloud folder      
-src.cloud <- file.path(src,"CloudMasks")
+
 modCloudMask(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
              endDate = as.Date("04-01-2018", "\%d-\%m-\%Y"),
              extent = ex.navarre,
-             AppRoot = src.cloud,
+             AppRoot = src,
              out.name = "Navarre")
-
+             
+src.cloud <- file.path(src.mod,"CloudMask")
 # The cloud mask may have different extent, resolution...  
 src.cloud.navarre <- file.path(src.cloud,"Navarre")
-cmask <- list.files(src.cloud, full.names = TRUE, pattern = "\\\\.tif$")
-cmask.ras <- lapply(cmask, raster) 
+cmask <- list.files(src.cloud.navarre, full.names = TRUE, pattern = "\\\\.tif$")
+cmask.ras <- lapply(cmask, raster)
 
 navarre.path <- file.path(src.tiles, "Navarre")
 navarre.img <- list.files(navarre.path,
@@ -87,7 +89,8 @@ navarre.img <- list.files(navarre.path,
                           pattern = "\\\\.tif$")
 # select b01
 navarre.img <- navarre.img[grepl("b01_1",navarre.img)]
-navarre.b01.stack <- stack(navarre.img)
+navarre.b01.ras <- lapply(navarre.img,raster)
+navarre.b01.stack <- stack(lapply(navarre.b01.ras, projectRaster, navarre.b01.ras[[1]]))
 
 # reproject cloud mask to navarre.b01.stack projection
 cmask.stack <- stack(lapply(cmask.ras, projectRaster, navarre.b01.stack))

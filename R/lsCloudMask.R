@@ -56,11 +56,11 @@
 #'                          pattern = "\\.tif$")
 #' cloud.tiles <- tiles.path[grepl("CLD",tiles.path)]
 #' b1.tiles <- tiles.path[grepl("B1.tif",tiles.path)]
-#' cloud.tiles.ras <- stack(cloud.tiles)
-#' b1.tiles.ras <- stack(b1.tiles)
+#' cloud.tiles.ras <- lapply(cloud.tiles,raster)
+#' b1.tiles.ras <- lapply(b1.tiles,raster)
 #' 
 #' # calculate cloud free b1 layers
-#' b1.cloud.free <- b1.tiles.ras * cloud.tiles.ras
+#' b1.cloud.free <- b1.tiles.ras[[1]] * cloud.tiles.ras[[1]]
 #' spplot(b1.cloud.free)
 #' }
 lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){

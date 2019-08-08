@@ -41,7 +41,8 @@
 #'             extent = ex.navarre)
 #'             
 #' # assign src1 as the outut folder for ModMosaic
-#' src.tiles <- file.path(src, "Modis", "MOD09GA")
+#' src.mod <- file.path(src, "Modis")
+#' src.tiles <- file.path(src.mod, "MOD09GA")
 #' tif.src.tiles <- file.path(src.tiles, "tif")
 #' # mosaic the Modis images
 #' modMosaic(tif.src.tiles, # the input folder 
@@ -58,7 +59,7 @@
 #'              AppRoot = src,
 #'              out.name = "Navarre")
 #'              
-#' src.cloud <- file.path(src, "Modis","CloudMasks")
+#' src.cloud <- file.path(src.mod,"CloudMask")
 #' # The cloud mask may have different extent, resolution...  
 #' src.cloud.navarre <- file.path(src.cloud,"Navarre")
 #' cmask <- list.files(src.cloud.navarre, full.names = TRUE, pattern = "\\.tif$")
@@ -71,7 +72,8 @@
 #'                           pattern = "\\.tif$")
 #' # select b01
 #' navarre.img <- navarre.img[grepl("b01_1",navarre.img)]
-#' navarre.b01.stack <- stack(navarre.img)
+#' navarre.b01.ras <- lapply(navarre.img,raster)
+#' navarre.b01.stack <- stack(lapply(navarre.b01.ras, projectRaster, navarre.b01.ras[[1]]))
 #' 
 #' # reproject cloud mask to navarre.b01.stack projection
 #' cmask.stack <- stack(lapply(cmask.ras, projectRaster, navarre.b01.stack))

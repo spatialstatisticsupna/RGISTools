@@ -68,11 +68,11 @@ modDownload(product = "MOD09GA",
             collection = 6,
             extent = ex.navarre)
 # assign the folder with the Modis extracted images
-src <- file.path(src, "MOD09GA")
-tif.src <- file.path(src, "tif")
+src.mod <- file.path(src, "Modis", "MOD09GA")
+tif.src <- file.path(src.mod, "tif")
 # mosaic the Modis images
 modMosaic(tif.src,
-          AppRoot = src,
+          AppRoot = src.mod,
           out.name = "Navarre",
           gutils = TRUE,
           overwrite = TRUE,

@@ -37,8 +37,8 @@ this function loads the existing RData in the \code{AppRoot}.
 # creates a MetaData folder and downloads the csv on working directory
 ls8LoadMetadata()
 
-# creates a MetaData folder and downloads the csv on "Path_for_metadata" directory
-ls8LoadMetadata(AppRoot = "Path_for_metadata")
+# creates a MetaData folder and downloads the csv on "Path_for_downloading_folder" directory
+ls8LoadMetadata(AppRoot = "Path_for_downloading_folder")
 
 # Force renew existing meta data csv
 ls8LoadMetadata(update = TRUE)

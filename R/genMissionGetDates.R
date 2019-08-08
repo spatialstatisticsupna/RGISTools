@@ -28,7 +28,9 @@
 #'
 lsGetDates<-function(str,...){
   arg<-list(...)
-  sizes<-sapply(basename(str),nchar)
+  bname<-basename(str)
+  str<-gsub("\\..*","",bname)
+  sizes<-sapply(str,nchar)
   sday<-c()
   for(s in 1:length(sizes)){
     if(sizes[s]==21){#new name convention

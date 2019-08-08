@@ -45,35 +45,27 @@
 #' senDownload(startDate = as.Date("2018210", "%Y%j"),
 #'             endDate = as.Date("2018218", "%Y%j"),
 #'             platform = "Sentinel-2",
-#'             intersects = ex.navarre,
+#'             extent = ex.navarre,
 #'             product = "S2MSI1C",
 #'             pathrow = c("R094"),
 #'             username = "username",
 #'             password = "password",
 #'             AppRoot = src)
 #' # assign the folder with the Sentinel unzipped images
-#' src.unzip <- file.path(src, "unzip")
+#' src.sen <- file.path(src, "Sentinel-2")
+#' src.unzip <- file.path(src.sen, "unzip")
 #' # mosaic the Sentinel images
 #' senMosaic(src.unzip,
-#'           AppRoot = src,
+#'           AppRoot = src.sen,
 #'           gutils = TRUE,
 #'           out.name = "Navarre")
 #' 
 #' # Load and plot a sentinel image
-#' files <- list.files(src, pattern = "\\.tif$", full.names = TRUE ,recursive = TRUE)
+#' files <- list.files(src.sen, pattern = "\\.tif$", full.names = TRUE ,recursive = TRUE)
 #' # print Sentinel-2 bands
 #' getRGISToolsOpt("SEN2BANDS")
-#' files.stack <- stack(files[c(4,3,2)])
-#' range <- c(0.05,0.95)
-#' 
-#' ex.navarre.utm <- spTransform(ex.navarre, CRS = crs(files.stack[[1]]))
-#' imagen.rec <- crop(files.stack, ex.navarre.utm)
-#' imagen.rec1 <- mask(imagen.rec, ex.navarre.utm)
-#' imagen <- varRGB(imagen.rec1[[1]], 
-#'                  imagen.rec1[[2]], 
-#'                  imagen.rec1[[3]], 
-#'                  q.range = range)
-#' plotRGB(imagen)
+#' file.rgb <- stack(files[grepl("TCI",files)][1])
+#' plotRGB(file.rgb)
 #' }
 senMosaic<-function(src,
                     extent=NULL,

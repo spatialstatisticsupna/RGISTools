@@ -27,10 +27,12 @@
 #' red <- raster(img.files[1])
 #' nir <- raster(img.files[2])
 #' # calculate the ndwi image
-#' savi <- varSAVI(red,nir)
+#' savi <- varSAVI(red,nir,scfun=getRGISToolsOpt("MOD09SCL"))
 #' # plot the image
 #' spplot(savi,col.regions=rev(topo.colors(20)))
-varSAVI<-function(red,nir,L=0.5){
+varSAVI<-function(red,nir,L=0.5,scfun=function(r){r}){
+  red=scfun(red)
+  nir=scfun(nir)
   savi<-((nir-red)/(nir+red+L))*(1+L)
   return(savi)
 }

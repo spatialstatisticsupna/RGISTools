@@ -63,19 +63,21 @@ senDownload(startDate = as.Date("2018210","\%Y\%j"),
             password = "password",
             AppRoot = src)
 # assign the folder with the Sentinel-2 unzipped images
-src.unzip <- file.path(src, "unzip")
+src.sen <- file.path(src,"Sentinel-2")
+src.unzip <- file.path(src.sen, "unzip")
 # mosaic the Sentinel-2 images
 senMosaic(src.unzip,
-          AppRoot = src,
+          AppRoot = src.sen,
           gutils = TRUE,
           out.name = "Navarre")
 # assign src as the path to mosaicked folder
-src2 <- file.path(src, "Navarre")
-src3 <- file.path(src, "Navarre_Variables")
+src2 <- file.path(src.sen, "Navarre")
+src3 <- file.path(src.sen, "Navarre_Variables")
 dir.create(src3)
 # generate EVI images of Navarre
 senFolderToVar(src2,
                fun = varEVI,
+               resbands = c("60m"),
                AppRoot = src3)
                
 flist <- list.files(file.path(src3,"EVI"),
@@ -83,7 +85,7 @@ flist <- list.files(file.path(src3,"EVI"),
                     full.names = TRUE,
                     recursive = TRUE)
 
-files.raster <- stack(flist)
-spplot(files)
+files.raster <- lapply(flist, raster)
+spplot(files[[1]])
 }
 }

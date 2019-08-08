@@ -40,7 +40,7 @@
 #' searchres.R094 <- searchres[grepl("R094", names(searchres))]
 #' names(searchres.R094)
 #' # list the dates in searchres
-#' senGetDates(names(searchres.R094),format="%Y%J")
+#' senGetDates(names(searchres.R094),format="%Y%j")
 #' src = file.path("Path_for_downloading_folder","Sentinel-2")
 #' # Sentinel download function
 #' senDownSearch(searchres = searchres.R094,
@@ -60,11 +60,15 @@ senDownSearch<-function(searchres,
                         username=NULL,
                         password=NULL,
                         error.log = "Sentinel_error.log",
-                        nattempts = NULL,
+                        nattempts = 5,
                         unzip=FALSE,
                         overwrite=FALSE,
                         ...){
   arg<-list(...)
+  if(nattempts==0){
+    message(paste0("Error downloading ",names(searchres)))
+    return(NULL)
+  }
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")
   }
@@ -76,6 +80,14 @@ senDownSearch<-function(searchres,
     dir.create(unzipFolder,recursive=T,showWarnings = FALSE)
   }
   n.imgs<-length(searchres)
+  c.handle = new_handle()
+  handle_setopt(c.handle,
+                referer=getRGISToolsOpt("SCIHUBHUSURL"),
+                useragent = getRGISToolsOpt("USERAGENT"),
+                followlocation = TRUE ,
+                autoreferer = TRUE ,
+                username=username,
+                password=password)
   for(i in 1:n.imgs){
     url<-searchres[i]
     file.name<-names(url)
@@ -83,14 +95,6 @@ senDownSearch<-function(searchres,
       downPath<-file.path(downFolder,paste0(file.name,".zip"))
       if((!file.exists(downPath))|overwrite){
         message(paste0("Downloading image ",file.name," (",i,"/",n.imgs,")"))
-        c.handle = new_handle()
-        handle_setopt(c.handle,
-                      referer=getRGISToolsOpt("SCIHUBHUSURL"),
-                      useragent = getRGISToolsOpt("USERAGENT"),
-                      followlocation = TRUE ,
-                      autoreferer = TRUE ,
-                      username=username,
-                      password=password)
         image.url<-URLencode(url)
         
         curl_download(image.url, destfile=downPath,handle = c.handle)
@@ -110,10 +114,17 @@ senDownSearch<-function(searchres,
           Sys.sleep(10)
         }
       }
-      if(!genCheckMD5(downPath,oficial.md5=md5.text)){
+      if(!genCheckMD5(downPath,oficial.md5=md5.text,...)){
         cat(paste0("Error cheking ",file.name," file md5: ",md5.text),file=error.log,sep="\n",append = T)
         file.remove(downPath)
-        senDownSearch(username,password,url,file.path,file.name,error.log,AppRoot=AppRoot,nattempts +1)
+        senDownSearch(username=username,
+                      password=password,
+                      searchres=searchres[i],
+                      unzip=unzip,
+                      overwrite = overwrite,
+                      error.log=error.log,
+                      nattempts=nattempts -1,
+                      ...)
       }else{
         print(paste0("OK: cheking ",file.name," file md5."))
         if(unzip){
@@ -125,10 +136,17 @@ senDownSearch<-function(searchres,
       }
     }, error = function(e) {
       print(paste0("ERROR:",e))
-      close(file)
-      cat(file.name,file=error.log,sep="\n",append = TRUE)
+      #close(file)
+      #cat(file.name,file=error.log,sep="\n",append = TRUE)
       file.remove(downPath)
-      senDownSearch(username,password,url,file.path,error.log,AppRoot=AppRoot,nattempts +1)
+      senDownSearch(username=username,
+                    password=password,
+                    searchres=searchres[i],
+                    unzip=unzip,
+                    overwrite = overwrite,
+                    error.log=error.log,
+                    nattempts=nattempts -1,
+                    ...)
     }, finally = {
     })
   }
@@ -138,4 +156,5 @@ senDownSearch<-function(searchres,
   }else{
     message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",downFolder))
   }
+  rm(c.handle)
 }

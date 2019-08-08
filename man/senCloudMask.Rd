@@ -45,7 +45,7 @@ src.sen2 <- file.path(src, "Sentinel-2")
 src.unzip <- file.path(src.sen2, "unzip")
 # mosaic the Sentinel-2 images
 senMosaic(src.unzip,
-          AppRoot = src,
+          AppRoot = src.sen2,
           gutils = TRUE,
           out.name = "Navarre")
           
@@ -54,7 +54,8 @@ src.navarre <- file.path(src.sen2, "Navarre")
 senCloudMask(src = src.navarre,
              img.res = "60m",
              overwrite = TRUE,
-             sensitivity=98)
+             sensitivity = 98,
+             AppRoot = src.sen2)
              
 # define Sentinel-2 cloud mask path
 src.cloud <- file.path(src.sen2, "CloudMask")
