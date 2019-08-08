@@ -65,6 +65,7 @@
 #' 
 #' file.raster <- raster(flist[1])
 #' spplot(files.raster)
+#' 
 #' }
 ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
   AppRoot=defineAppRoot(...)
