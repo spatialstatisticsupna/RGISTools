@@ -552,7 +552,8 @@ to the start of each source file to most effectively state the exclusion of warr
 and each file should have at least the “copyright” line and a pointer to
 where the full notice is found.
 
-    RGISTools: Tools for Downloading and Processing Time-Series of Satellite Images
+    RGISTools: Tools for Downloading, Customizing, and Processing Time Series of 
+    Satellite Images from Landsat, MODIS, and Sentinel.
     Copyright (C) 2019 U Pérez - Goya; A F Militino; M D Ugarte; M Montesino
 
     This program is free software: you can redistribute it and/or modify
