@@ -1,5 +1,5 @@
 # RGISTools
-Tools for Downloading, Processing, and Smoothing Time Series of Satellite Images From Landsat, Modis, and Sentinel.
+Tools for Downloading, Customizing, and Processing Time Series of Satellite Images from Landsat, MODIS, and Sentinel.
 
 ## Table of contents
 
@@ -10,93 +10,121 @@ Tools for Downloading, Processing, and Smoothing Time Series of Satellite Images
 
 
 # The package
-This package aims for downloading, processing, and smoothing time series of satellite images from 
-Landsat, Modis and Sentinel satellite programs in a uniform and standardized way. The functions of 
-RGISTools automatically convert the original formats into .tif files, which can be loaded into R. 
-The processing functions of RGISTools include tile mosaicking, cropping, and extracting the variables 
-of interest. When multiple tile match the region of interest, RGISTools combines them to generate a 
-single image and crops the area of interest to save memory and computing time. All images available 
-in a range of dates are then stacked to produce time series of satellite images for a particular area. 
-Images may have clouds or measurement errors that limit their use in subsequent analyses. Hence, the 
-package includes a set of functions for removing clouds, gap filling and smoothing. Due to the wide 
-variety of procedures and sources of information being handled in RGISTools, the functions are divided 
-into 7 categories, which are identified by the first 3 characters of the function names; 
+This package enables you to download, customize, and process time-series of
+satellite images from Landsat, MODIS and Sentinel in a standardized way. Some
+functions download and convert automatically the platform-specific file formats
+into GTiff, so they can be loaded in R. The customization functions support tile
+mosaicking, cropping, cloud masking and deriving new variables of interest,
+such as the NDVI, EVI, etc. Tile mosaicking is required when the region of
+interest extends over several tiles, so they can be combined into a single
+image. Cropping involves removing the pixels outside the region of interest,
+making any analysis more computationally and memory efficient. Cloud masking
+eliminates cloud reflectance that would otherwise be erroneously attributed
+to land surface features. Cloud removal and (measurement or processing) errors
+trigger data gaps and outliers, decreasing the quality and quantity of 
+measurements. Hence, the package includes a set of function for filling and
+smoothing the satellite imagery. The combination of functions in RGISTools
+results in a stack of satellite images ready-to-use. Due to the wide variety
+of procedures and sources of information being handled in RGISTools, the
+functions are divided into 7 categories, which are identified by the first 3
+characters of the function names; 
 
-1. ```mod``` for Modis Terra and Aqua satellite images.
-2. ```sen``` for Sentinel images.
-3. ```ls7``` for Landsat 7 images.
-4. ```ls8``` for Landsat 8 images.
-5. ```ls``` for both Landsat 7 and 8 images.
-6. ```gen``` for any of the three platforms.
-7. ```var``` for any of the three platforms.
+1. ```mod``` identifies Modis Terra and Aqua satellite functions.
+2. ```sen``` identifies Sentinel functions.
+3. ```ls7``` identifies Landsat 7 functions.
+4. ```ls8``` identifies Landsat 8 functions.
+5. ```ls``` identifies both Landsat 7 and 8 functions.
+6. ```gen``` identifies function for being used in any of the three platforms.
+7. ```var``` identifies function for deriving variables in any of the three platforms.
 
-Below is a list of the most important functions grouped by running order for creating a time series of
-images for each satellite considered by the package.
-Each satellite group of functions considers all the procedure including searching, previewing, 
-downloading, mosaicking, extracting variables, composing, and filling-smoothing.
+Below, there is a list of the most important functions grouped by platform,
+and listed in operational order. These functions include searching, previewing,
+downloading, mosaicking, deriving new variables, compositing, cloud masking
+and filling/smoothing satellite imagery.
 
-## I. Landsat time series functions
-Landsat mission releases images comming from two satellites, Landsat-7 and Landsat-8. Each satellite needs its own 
-download and processing workflow. The download of any Landsat images requires a USGS login account. 
-[Get your credentials](https://ers.cr.usgs.gov/register/).
+## I. Landsat functions
+The Landsat program is currently releasing imagery captured by two satellites;
+the Landsat-7 and Lansat-8. Both satellites are treated separately in coding
+terms due to discrepancies in their spectral coverages and data formats. To
+download Landsat imagery with the following functions, a USGS's EarthExplorer
+account is required. Please, register [here](https://ers.cr.usgs.gov/register/).
 
 ### Landsat-7
 
-* ```ls7LoadMetadata``` To load Landsat-7 meta data file for image search .
-* ```ls7Search``` To search Landsat-7 time-series images list .
-* ```lsPreview``` To preview in R Landsat satellite images .
-* ```lsDownSearch``` To download a time series of satellite images from Landsat.
-* ```lsMosaic``` To mosaic Landsat time series of images .
-* ```ls7FolderToVar``` To compute derived variables from Landsat-7 multispectral bands .
-* ```genSaveTSRData``` To import into R the processed time series of images .
+* ```ls7LoadMetadata``` Loads the Landsat-7 metadata file .
+* ```ls7Search``` Seeks a time series of Landsat-7 images .
+* ```lsPreview``` Previews Landsat satellite images .
+* ```lsDownSearch``` Downloads a time series of Landsat images .
+* ```lsMosaic``` Mosaics Landsat images  .
+* ```ls7FolderToVar``` Computes new variables from Landsat-7 multispectral images .
+* ```lsCloudMask``` Creates cloud masks for Landsat images .
+* ```genSaveTSRData``` Saves a time series of images .
 
 ### Landsat-8
-* ```ls8LoadMetadata``` To load Landsat-8 meta data file for image search .
-* ```ls8Search``` To search Landsat-8 time-series images list .
-* ```lsPreview``` To preview in R Landsat satellite images .
-* ```lsDownSearch``` To download a time series of satellite images from Landsat.
-* ```lsMosaic```  To mosaic Landsat time series of images.
-* ```ls8FolderToVar``` To compute derived variables from Landsat-8 multispectral bands.
-* ```genSaveTSRData``` To import into R the processed time series of images .
+* ```ls8LoadMetadata``` Loads the Landsat-7 metadata file .
+* ```ls8Search``` Seeks a time series of Landsat-7 images .
+* ```lsPreview``` Previews Landsat satellite images .
+* ```lsDownSearch``` Downloads a time series of Landsat images .
+* ```lsMosaic``` Mosaics Landsat images  .
+* ```ls8FolderToVar``` Computes new variables from Landsat-7 multispectral images .
+* ```lsCloudMask``` Creates cloud masks for Landsat images .
+* ```genSaveTSRData``` Saves a time series of images .
 
-## II. Modis time series functions
-The download of any Modis product requires the credentianls from EarthData to access the NASA’s web data service. 
-[Get your credentials](https://urs.earthdata.nasa.gov/users/new).
-* ```modSearch``` To search Modis time-series images list .
-* ```modPreview``` To preview in R Modis satellite images.
-* ```modDownSearch``` To download a Modis time series of satellite images.
-* ```modMosaic``` To mosaic Modis time series of images .
-* ```modFolderToVar``` To compute derived variables from Modis multispectral bands.
-* ```genSaveTSRData``` To import into R the processed time series of images .
+## II. MODIS functions
+Functions in RGISTools download all land products from Terra and Aqua 
+satellites, but the processing focuses on the multispectral images. Be aware
+that an EarthData account is required to use NASA's web service so, please,
+register [here](https://urs.earthdata.nasa.gov/users/new).
 
-## III. Sentinel time series functions
-The download of any Sentinel product requires the credentianls from ESA’s SciHub data service.
-[Get your credentials](https://scihub.copernicus.eu/dhus/#/self-registration).
-* ```senSearch``` To search Sentinel time-series images list.
-* ```senPreview``` To preview in R Sentinel satellite images.
-* ```senDownSearch``` To download a Sentinel time series of satellite images.
-* ```senMosaic``` To mosaic Sentinel time series of images .
-* ```senFolderToVar``` To compute derived variables from Sentinel-2 multispectral bands.
-* ```genSaveTSRData``` To import into R the processed time series of images.
+* ```modSearch``` Seeks a time series of MODIS images .
+* ```modPreview``` Previews MODIS satellite images .
+* ```modDownSearch``` Downloads a time series of MODIS images .
+* ```modMosaic``` Mosaics MODIS images .
+* ```modFolderToVar``` Computes new variables from MODIS multispectral images .
+* ```modCloudMask``` Creates cloud masks for MODIS images .
+* ```genSaveTSRData``` Saves a time series of images .
+
+## III. Sentinel functions
+Sentinel archives provide a wide variety of products based on a 5-satellite
+constellation. The functions to download Sentinel images can cope with any
+product available in ESA's SciHub web service. However, image processing is
+focused on Sentinel-2 multispectal images. SciHub credentials are required to
+download Sentinel imagery and can be obtained 
+[here](https://scihub.copernicus.eu/dhus/#/self-registration).
+
+* ```senSearch``` Seeks a time series of Sentinel images .
+* ```senPreview``` Previews Sentinel images .
+* ```senDownSearch``` Downloads a time series of Sentinel images .
+* ```senMosaic```  Mosaics Sentinel images .
+* ```senCloudMask```  Creates cloud masks for Sentinel images .
+* ```senFolderToVar``` Computes new variables from Sentinel-2 multispectral images .
+* ```genSaveTSRData``` Saves a time series of images .
 
 ## IV. Important general functions
-* ```genCompositions``` To create image compositions from a time series of satellite images.
-* ```genSmoothingIMA``` To fill the gaps in a time series of satellite images.
-* ```genSmoothingCovIMA``` To smooth outliers in a time series of satellite images using covariates.
-* ```genPlotGIS``` To plot satellite images with a proper GIS format.
-* ```genGetDates``` To get a date from the name of a raster layer.
+In addition to functions above, the package provides some general functions
+for a better data handling:
+
+* ```genCompositions``` Creates image compositions from a time series of satellite images .
+* ```genSmoothingIMA``` Fills the gaps and smooths outliers in a time series of satellite images .
+* ```genSmoothingCovIMA``` Fills the gaps and smooths outliers in a time series of satellite images using covariates.
+* ```genPlotGIS```  Plots satellite images with a proper GIS format .
+* ```genGetDates``` Gets the capturing date of an image from the name of a raster layer .
 
 
-## V. Variable functions
-* ```varEVI``` To calculate the enhanced vegetation index (EVI) from multispectral bands.
-* ```varMSAVI2``` To calculate the modified soil-adjusted vegetation index (MSAVI2) from multispectral bands.
-* ```varNBR``` To calculate the normalized burn ratio (NBR) from multispectral bands.
-* ```varNBR2``` To calculate the normalized burn ratio 2 (NBR2) from multispectral bands.
-* ```varNDMI``` To calculate the normalized difference moisture index (NDMI) from multispectral bands.
-* ```varNDVI``` To calculate the normalized difference vegetation index (NDVI) from multispectral bands.
-* ```varNDWI```  To calculate the normalized difference water index (NDWI) from multispectral bands.
-* ```varRGB```  To calculate an RGB image from 3 spectral bands from multispectral bands.
-* ```varSAVI```  To calculate the soil-adjusted vegetation index (SAVI) from multispectral bands.
+## V. Remote sensing variables 
+New variables can be derived from multispectral images. The most common
+variables in the scientific literature are pre-programmed in RGISTools. They
+can be identified by the prefix "var".
+
+* ```varEVI``` Calculates the enhanced vegetation index (EVI) .
+* ```varMSAVI2``` Calculates the modified soil-adjusted vegetation index (MSAVI2) .
+* ```varNBR``` Calculates the normalized burn ratio (NBR) .
+* ```varNBR2``` Calculates the normalized burn ratio 2 (NBR2) .
+* ```varNDMI``` Calculates the normalized difference moisture index (NDMI) .
+* ```varNDVI``` Calculates the normalized difference vegetation index (NDVI) .
+* ```varNDWI```  Calculates the normalized difference water index (NDWI) .
+* ```varRGB```  Calculates an RGB image from 3 spectral bands .
+* ```varSAVI```  Calculates the soil-adjusted vegetation index (SAVI) .
 
 
 # Installation

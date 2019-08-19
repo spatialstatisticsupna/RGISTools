@@ -121,7 +121,7 @@
 #' @section V. Remote sensing variables:
 #' New variables can be derived from multispectral images. The most common
 #' variables in the scientific literature are pre-programmed in RGISTools. They
-#' can be identified by the prefix “var”.
+#' can be identified by the prefix "var".
 #' 
 #' \tabular{ll}{
 #'   \code{ \link{varEVI}}\tab Calculates the enhanced vegetation index (EVI) \cr
