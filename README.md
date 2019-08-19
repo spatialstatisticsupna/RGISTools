@@ -3,7 +3,7 @@ Tools for Downloading, Customizing, and Processing Time Series of Satellite Imag
 
 ## Table of contents
 
-- [Introduction](#introduction)
+- [Introduction](#the-package)
 - [Installation](#installation)
 - [Credentials for downloading satellite images](#credentials-for-downloading-satellite-images)
 - [Copyright and license](#copyright-and-license)
@@ -153,4 +153,4 @@ Credentials [EarthData](https://ers.cr.usgs.gov/register/)
 Credentials [SciHub](https://scihub.copernicus.eu/dhus/#/self-registration) 
 
 ## Copyright and license
-Licensed under the GPL-3 License. [Full license here](/blob/master/LICENSE.md).
+Licensed under the GPL-3 License. [Full license here](/LICENSE.md).
