@@ -51,24 +51,24 @@ account is required. Please, register [here](https://ers.cr.usgs.gov/register/).
 
 ### Landsat-7
 
-* ```ls7LoadMetadata``` Loads the Landsat-7 metadata file .
-* ```ls7Search``` Seeks a time series of Landsat-7 images .
-* ```lsPreview``` Previews Landsat satellite images .
-* ```lsDownSearch``` Downloads a time series of Landsat images .
-* ```lsMosaic``` Mosaics Landsat images  .
-* ```ls7FolderToVar``` Computes new variables from Landsat-7 multispectral images .
-* ```lsCloudMask``` Creates cloud masks for Landsat images .
-* ```genSaveTSRData``` Saves a time series of images .
+* ```ls7LoadMetadata``` Loads the Landsat-7 metadata file.
+* ```ls7Search``` Seeks a time series of Landsat-7 images.
+* ```lsPreview``` Previews Landsat satellite images.
+* ```lsDownSearch``` Downloads a time series of Landsat images.
+* ```lsMosaic``` Mosaics Landsat images.
+* ```ls7FolderToVar``` Computes new variables from Landsat-7 multispectral images.
+* ```lsCloudMask``` Creates cloud masks for Landsat images.
+* ```genSaveTSRData``` Saves a time series of images.
 
 ### Landsat-8
-* ```ls8LoadMetadata``` Loads the Landsat-7 metadata file .
-* ```ls8Search``` Seeks a time series of Landsat-7 images .
-* ```lsPreview``` Previews Landsat satellite images .
-* ```lsDownSearch``` Downloads a time series of Landsat images .
-* ```lsMosaic``` Mosaics Landsat images  .
-* ```ls8FolderToVar``` Computes new variables from Landsat-7 multispectral images .
-* ```lsCloudMask``` Creates cloud masks for Landsat images .
-* ```genSaveTSRData``` Saves a time series of images .
+* ```ls8LoadMetadata``` Loads the Landsat-7 metadata file.
+* ```ls8Search``` Seeks a time series of Landsat-7 images.
+* ```lsPreview``` Previews Landsat satellite images.
+* ```lsDownSearch``` Downloads a time series of Landsat images.
+* ```lsMosaic``` Mosaics Landsat images.
+* ```ls8FolderToVar``` Computes new variables from Landsat-7 multispectral images.
+* ```lsCloudMask``` Creates cloud masks for Landsat images.
+* ```genSaveTSRData``` Saves a time series of images.
 
 ## II. MODIS functions
 Functions in RGISTools download all land products from Terra and Aqua 
@@ -76,13 +76,13 @@ satellites, but the processing focuses on the multispectral images. Be aware
 that an EarthData account is required to use NASA's web service so, please,
 register [here](https://urs.earthdata.nasa.gov/users/new).
 
-* ```modSearch``` Seeks a time series of MODIS images .
-* ```modPreview``` Previews MODIS satellite images .
-* ```modDownSearch``` Downloads a time series of MODIS images .
-* ```modMosaic``` Mosaics MODIS images .
-* ```modFolderToVar``` Computes new variables from MODIS multispectral images .
-* ```modCloudMask``` Creates cloud masks for MODIS images .
-* ```genSaveTSRData``` Saves a time series of images .
+* ```modSearch``` Seeks a time series of MODIS images.
+* ```modPreview``` Previews MODIS satellite images.
+* ```modDownSearch``` Downloads a time series of MODIS images.
+* ```modMosaic``` Mosaics MODIS images.
+* ```modFolderToVar``` Computes new variables from MODIS multispectral images.
+* ```modCloudMask``` Creates cloud masks for MODIS images.
+* ```genSaveTSRData``` Saves a time series of images.
 
 ## III. Sentinel functions
 Sentinel archives provide a wide variety of products based on a 5-satellite
@@ -92,23 +92,23 @@ focused on Sentinel-2 multispectal images. SciHub credentials are required to
 download Sentinel imagery and can be obtained 
 [here](https://scihub.copernicus.eu/dhus/#/self-registration).
 
-* ```senSearch``` Seeks a time series of Sentinel images .
-* ```senPreview``` Previews Sentinel images .
-* ```senDownSearch``` Downloads a time series of Sentinel images .
-* ```senMosaic```  Mosaics Sentinel images .
-* ```senCloudMask```  Creates cloud masks for Sentinel images .
-* ```senFolderToVar``` Computes new variables from Sentinel-2 multispectral images .
-* ```genSaveTSRData``` Saves a time series of images .
+* ```senSearch``` Seeks a time series of Sentinel images.
+* ```senPreview``` Previews Sentinel images.
+* ```senDownSearch``` Downloads a time series of Sentinel images.
+* ```senMosaic```  Mosaics Sentinel images.
+* ```senCloudMask```  Creates cloud masks for Sentinel images.
+* ```senFolderToVar``` Computes new variables from Sentinel-2 multispectral images.
+* ```genSaveTSRData``` Saves a time series of images.
 
 ## IV. Important general functions
 In addition to functions above, the package provides some general functions
 for a better data handling:
 
-* ```genCompositions``` Creates image compositions from a time series of satellite images .
-* ```genSmoothingIMA``` Fills the gaps and smooths outliers in a time series of satellite images .
+* ```genCompositions``` Creates image compositions from a time series of satellite images.
+* ```genSmoothingIMA``` Fills the gaps and smooths outliers in a time series of satellite images.
 * ```genSmoothingCovIMA``` Fills the gaps and smooths outliers in a time series of satellite images using covariates.
-* ```genPlotGIS```  Plots satellite images with a proper GIS format .
-* ```genGetDates``` Gets the capturing date of an image from the name of a raster layer .
+* ```genPlotGIS```  Plots satellite images with a proper GIS format.
+* ```genGetDates``` Gets the capturing date of an image from the name of a raster layer.
 
 
 ## V. Remote sensing variables 
@@ -116,15 +116,15 @@ New variables can be derived from multispectral images. The most common
 variables in the scientific literature are pre-programmed in RGISTools. They
 can be identified by the prefix "var".
 
-* ```varEVI``` Calculates the enhanced vegetation index (EVI) .
-* ```varMSAVI2``` Calculates the modified soil-adjusted vegetation index (MSAVI2) .
-* ```varNBR``` Calculates the normalized burn ratio (NBR) .
-* ```varNBR2``` Calculates the normalized burn ratio 2 (NBR2) .
-* ```varNDMI``` Calculates the normalized difference moisture index (NDMI) .
-* ```varNDVI``` Calculates the normalized difference vegetation index (NDVI) .
-* ```varNDWI```  Calculates the normalized difference water index (NDWI) .
-* ```varRGB```  Calculates an RGB image from 3 spectral bands .
-* ```varSAVI```  Calculates the soil-adjusted vegetation index (SAVI) .
+* ```varEVI``` Calculates the enhanced vegetation index (EVI).
+* ```varMSAVI2``` Calculates the modified soil-adjusted vegetation index (MSAVI2).
+* ```varNBR``` Calculates the normalized burn ratio (NBR).
+* ```varNBR2``` Calculates the normalized burn ratio 2 (NBR2).
+* ```varNDMI``` Calculates the normalized difference moisture index (NDMI).
+* ```varNDVI``` Calculates the normalized difference vegetation index (NDVI).
+* ```varNDWI```  Calculates the normalized difference water index (NDWI).
+* ```varRGB```  Calculates an RGB image from 3 spectral bands.
+* ```varSAVI```  Calculates the soil-adjusted vegetation index (SAVI).
 
 
 # Installation
