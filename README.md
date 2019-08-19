@@ -3,7 +3,7 @@ Tools for Downloading, Customizing, and Processing Time Series of Satellite Imag
 
 ## Table of contents
 
-- [Introduction](#the-package)
+- [The package](#the-package)
 - [Installation](#installation)
 - [Credentials for downloading satellite images](#credentials-for-downloading-satellite-images)
 - [Copyright and license](#copyright-and-license)
