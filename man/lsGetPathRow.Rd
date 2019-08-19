@@ -2,18 +2,20 @@
 % Please edit documentation in R/lsGetPathRow.R
 \name{lsGetPathRow}
 \alias{lsGetPathRow}
-\title{Return the pathrow of Landsat tile in "\code{hXXvYY}" string format}
+\title{Return the pathrow of a tile of Landsat-7 or Landsat-8 images}
 \usage{
 lsGetPathRow(str)
 }
 \arguments{
-\item{str}{the full path or name of the Lansat 7 or 8 image from which the path and row will be extracted.}
+\item{str}{path to the folder with the Landsat-7 or 
+Landsat-8 multispectral images.}
 }
 \value{
-an string with the path and row of the image in "\code{ppprrr}" format.
+a string with the path and row in "\code{ppprrr}" format.
 }
 \description{
-\code{lsGetPathRow} reads the name of a Lansat 7 or 8 image and returns the path and row.
+\code{lsGetPathRow} reads the official name of a Landsat-7 or Landsat-8 image
+and returns the path and row of its tile.
 }
 \examples{
 # example of getting date from Landsat-8 image name

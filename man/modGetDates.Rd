@@ -2,34 +2,36 @@
 % Please edit documentation in R/genMissionGetDates.R
 \name{modGetDates}
 \alias{modGetDates}
-\title{Return the capturing date of Modis image}
+\title{Return the capturing dates of MODIS images}
 \usage{
 modGetDates(str, ...)
 }
 \arguments{
-\item{str}{\code{character} class or a \code{vector} class containing the file path(s) or file name(s).}
+\item{str}{the full path(s) or official name(s) of MODIS
+images from which the capturing date is retrieved.}
 
-\item{...}{argument for function nestering:
+\item{...}{arguments for nested functions:
 \itemize{
-  \item \code{format} modifies the format of the date.
+  \item \code{format} the format of the date being returned.
 }}
 }
 \description{
-\code{modGetDates} extracts the capturing date of one or several Modis
-images, given their file paths or names. The function returns a date class.
+\code{modGetDates} reads the official name of MODIS images and returns its
+capturing date, as \code{Date} class object.
 }
 \details{
-The function works with names or file paths having either of the two file extensions,
- \code{HDF} or \code{GTiff} files. The function accepts more than on file path or file names.
- If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
- If another format is required, it can be modified through the argument \code{format}.
+The function works with file names (or their paths) regardless of their
+extension. The function accepts more than on file path, which can be passed
+as a \code{list} of \code{characters}. Dates are returned as 
+`\code{YYYY-mm-dd}' by default. If another format is required, it can be
+modified through the argument \code{format}.
 }
 \examples{
-# example of getting date from Sentinel2 image name
+# getting the capturing date from the name of a MODIS image
 imgPath <- 'MYD13A2.A2016361.h17v04.006.2017285133407.hdf'
 modGetDates(imgPath)
 
-# example of a list of the full file paths of Modis images, mixing .hdf and .tif files
+# a list of the full file paths of MODIS images, mixing .hdf and .tif files
 imgsPaths<-list('MYD13A2.A2013297.h17v04.006.2015269230726.hdf',
                 'MYD13A2.A2013313.h17v04.006.2015271071143.tif')
 modGetDates(imgsPaths, format = "\%Y\%j")

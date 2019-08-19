@@ -1,22 +1,27 @@
-#' Plot satellite images with a proper GIS format
+#' Plot satellite images with a GIS format
 #'
-#' This function displays satellite images with the usual Geographic Information System (GIS) style, 
-#' such as adding the scale, the north arrow, and the borderline of the region of interest.
+#' This function displays satellite images with the usual format in Geographic
+#' Information Systems (GIS), i.e., adding a scale, north arrow, and the border
+#' of the region of interest (optional).
 #'
-#' The function plots any \code{raster} type class as, \code{raster}, \code{RasterStack} or \code{RasterBrick}.
-#' It accepts all the parameter used in the \code{spplot} function.
-#' The function \code{genPlotGIS} adds a north arrow and a polygon in the area of interest.
-#' If necessary, the projection of the polygon is transformed to match the projection of the raster.
-#' The projection of the map can be changed by adding the \code{proj} argument. The arrow and scale bar are
-#' located by default in relative positions. Their positions can be modified with the \code{compOpt} paragram.
+#' This is a wrapper function of \code{spplot} and hence displays any 
+#' \code{Raster*} object and accepts all of its parameters. The function adds a
+#' scale, a north arrow and a polygon in the area of interest. If necessary, the
+#' function automatically reprojects the polygon to match the projection of the
+#' raster. The projection of the map can be changed by modifying the \code{proj}
+#' argument. The position in the graph of the arrow and scale bar is measured in
+#' relative distances (0-1) to the lower left corner of the graph. Their 
+#' positions can be modified with the argument \code{compOpt}.
 #'
-#' @param r \code{Raster}* class variable with the image or image stack to be plotted.
-#' @param region \code{polygon} class variable defining the area of interest.
-#' @param ... argument for function nestering.
+#' @param r a \code{Raster*} class object with the image or image stack to be plotted.
+#' @param region a \code{Polygon} class object defining the area of interest.
+#' @param ... argument for nested functions:
 #' \itemize{
-#'   \item \code{compOpt} list to fit the size and the location of the GIS components as the arrow and the scales.
-#'   \item \code{proj} defines the projection for the plot.
-#'   \item any argument accepted by the \code{spplot} function.
+#'   \item \code{compOpt} list to fit the size and the location of the GIS 
+#'   components as the arrow and the scales.
+#'   \item \code{proj} a \code{CRS} class object defining the coordinate 
+#'   reference system of the plot.
+#'   \item \code{...} any argument accepted by the \code{spplot} function.
 #' }
 #'
 #' @examples
@@ -25,7 +30,8 @@
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #'
-#' # Shows a panel of 4 maps, one per date. The region of interest is shown in the last map
+#' # show a panel of 4 maps, one per date
+#' # the region of interest is shown in the last map
 #' genPlotGIS(r = ex.ndvi.navarre[[1:4]],
 #'            region = ex.navarre,
 #'            which = c(4), # show region only in the 4th image
@@ -33,7 +39,7 @@
 #' )
 #'
 #' \dontrun{
-#' # Plotting the land surface temperature of the first date available in 2011 in Navarre
+#' # plot the land surface temperature of the first date available in 2011 in Navarre
 #' # using color palette
 #' library('RColorBrewer')
 #' my.palette <- rev(brewer.pal(n = 9, name = "YlOrRd"))

@@ -62,47 +62,46 @@ assign("SEN3BANDS",NULL, env=optEnv)
 #scale functions
 assign("MOD09SCL",function(r,sc=1/16000){((r+100)*sc)}, env=optEnv)
 
-
-#' Change the default value of an RGISTools configuration variable
+#' Change the default value of an RGISTools option
 #'
-#' \code{setRGISToolsOpt} changes the default value of an \code{RGISTools} option.
-#' This function can be jointly used with \code{\link{showRGISToolsOpt}} and 
-#' \code{\link{getRGISToolsOpt}}.
+#' \code{setRGISToolsOpt} changes the default value of an \code{RGISTools} 
+#' configuration variable. This function can be jointly used with 
+#' \code{\link{showRGISToolsOpt}} and \code{\link{getRGISToolsOpt}}.
 #'
-#' @param opt the name of the option to change in character format
-#' @param value the new value of selected option
-#' @param env the environment where the \code{RGISTools} option are saved
+#' @param opt the name of the option to be change in \code{character} format.
+#' @param value the new value of the selected option.
+#' @param env the environment where the \code{RGISTools} option is saved.
 #'
 #' @examples
 #' # list avaliable options names
 #' showRGISToolsOpt()
-#' # list the url where the landsat-7 metadata is located
+#' # list the URL where the Landsat-7 metadata is located
 #' getRGISToolsOpt("LS7META.dir")
-#' # change the url where the landsat-7 metadata is located
+#' # change the URL where the Landsat-7 metadata is located
 #' setRGISToolsOpt("LS7META.dir", "NewMTDir")
-#' # list the url where the landsat-7 metadata is located
+#' # list the URL where the Landsat-7 metadata is located
 #' getRGISToolsOpt("LS7META.dir")
 setRGISToolsOpt <- function(opt,value,env=optEnv) {
   assign(opt, value, envir=env)
 }
 
-#' Get the current value of an RGISTools configuration variable
+#' Get the default value of an RGISTools option
 #'
-#' \code{getRGISToolsOpt} gets the current value of an \code{RGISTools} option.
-#' This function can be jointly used with \code{\link{setRGISToolsOpt}} and 
-#' \code{\link{showRGISToolsOpt}}.
+#' \code{getRGISToolsOpt} gets the current value of an \code{RGISTools} 
+#' configuration variable. This function can be jointly used with
+#' \code{\link{setRGISToolsOpt}} and \code{\link{showRGISToolsOpt}}.
 #'
-#' @param opt the name of the option to get.
+#' @param opt the name of the \code{RGISTools} setting to be returned.
 #' @param env the environment where the \code{RGISTools} option are saved.
 #'
 #' @examples
 #' # list avaliable options names
 #' showRGISToolsOpt()
-#' # list the assignation of Sentinel bands
+#' # list the Sentinel-2 bands
 #' getRGISToolsOpt("SEN2BANDS")
-#' # list the assignation of Landsat-8 bands
+#' # list the Landsat-8 bands
 #' getRGISToolsOpt("LS8BANDS")
-#' # list the assignation of Modis 09 bands
+#' # list the MODIS09 bands
 #' getRGISToolsOpt("MOD09BANDS")
 getRGISToolsOpt <- function(opt,env=optEnv) {
   return(get(opt, envir=env))

@@ -1,36 +1,47 @@
-#' Fill the gaps in a time series of satellite images
+#' Fill data gaps and smooth outliers in a time series of satellite images
+#' 
+#' \code{genSmoothingIMA} is the implementation of a spatio temporal method 
+#' called Image Mean Anomaly (IMA) for gap filling and smoothing satellite
+#' data \insertCite{militino2019interpolation}{RGISTools}.
 #'
-#' \code{genSmoothingIMA} is the implementation of a spatio temporal method called Image Mean Anomaly (IMA)
-#' for gap filling \insertCite{militino2019interpolation}{RGISTools}.
-#'
-#' The time series of images are decomposed into time series of the mean images and time series of the anomaly images. The procedure applies
-#' the smoothing algorithm over the anomaly images.
-#'
-#' The arguments configure the smoothing procedure:
-#' \code{Img2Fill} identifies the images to fill, \code{nDays} and \code{nYears} defines
-#' the spatio temporal neighbourhoood of the target images considered, and \code{fact} sets the 
-#' level of spatial aggregation \insertCite{militino2019interpolation}{RGISTools}.
+#' This filling/smoothing method was developed by 
+#' \insertCite{militino2019interpolation;textual}{RGISTools}. This technique decomposes
+#' a time series of images into a new series of mean and anomaly images. The
+#' procedure applies the smoothing algorithm over the anomaly images. The 
+#' procedure requires a proper definition of a temporal neighbourhood for the
+#' target image and aggregation factor. For further details, see 
+#' \insertCite{militino2019interpolation;textual}{RGISTools}.
 #'
 #' @references \insertRef{militino2019interpolation}{RGISTools}
 #'
-#' @param imgTS \code{RasterStack} class argument containing the time series of images to be filled
-#' with the name of the layers containing the date in julian format (\code{YYYYJJJ}).
-#' @param Img2Fill \code{vector} class argument defining the images to be filled.
-#' @param aFilter \code{vector} class argument with two component defining the quantiles to filter the anomaly. Ex. c(0.05,0.95).
-#' @param fact \code{numeric} argument with an aggregation factor of the anomalies before the interpolation.
-#' @param nDays \code{numeric} argument with the number of previous and subsequent days used for defining the neighborhood
-#' @param nYears \code{numeric} argument with the number of previous and subsequent years used for defining the neighborhood.
-#' @param fun function used aggregating the anomalies, \code{mean}, \code{median} are acceptable functions.
-#' @param snow.mode logical argument. If \code{TRUE}, the filling process will be parallelized by \code{raster} package.
+#' @param imgTS a \code{RasterStack} class argument containing a time series of
+#' satellite images. Layer names should contain the date of the image in
+#' "\code{YYYYJJJ}" format.
+#' @param Img2Fill a \code{vector} class argument defining the images to be 
+#' filled/smoothed.
+#' @param nDays a \code{numeric} argument with the number of previous and 
+#' subsequent days that define the temporal neighborhood.
+#' @param nYears a \code{numeric} argument with the number of previous and 
+#' subsequent years that define the temporal neighborhood.
+#' @param aFilter a \code{vector} with the lower and upper quantiles that define
+#' the outliers of the anomalies. Ex. c(0.05,0.95).
+#' @param fact a \code{numeric} argument with an aggregation factor of the 
+#' anomalies before the interpolation.
+#' @param fun a \code{function} used to aggregate the image of anomalies. Both
+#' \code{mean} (default) or \code{median} are acceptted.
+#' @param snow.mode logical argument. If \code{TRUE}, the filling process will
+#' be parallelized using the \code{raster} package.
 #' @param predictSE calculate the standard error instead the prediction.
-#' @param factSE the fact used in the standard error prediction to reduce the processing time.
-#' @param out.name the name of the output images.
-#' @param ... argument for function nestering.
+#' @param factSE the \code{fact} used in the standard error prediction.
+#' @param out.name the name of the folder containing the smoothed/filled images
+#' when saved in the Hard Disk Device (HDD). 
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the path where the filled time series of images will be saved in \code{GTiff} format.
+#'   \item \code{AppRoot} the path where the filled/smoothed time series of
+#'   images will be saved in GTiff format.
 #' }
 #' 
-#' @return \code{RasterStack} object with the smoothed time series.
+#' @return \code{RasterStack} object with the filled/smoothed time series.
 #' 
 #' 
 #' @examples
@@ -39,10 +50,10 @@
 #' # the 2 images to be filled and the neighbourhood
 #' genPlotGIS(ex.ndvi.navarre)
 #'
-#' # Filled images
+#' # filled images
 #' ndvi.filled <- genSmoothingIMA(ex.ndvi.navarre,
 #'                                Img2Fill = c(1,2))
-#' # Show the filled images
+#' # show the filled images
 #' genPlotGIS(ndvi.filled)
 #' # plot comparison of the cloud and the filled images
 #' ndvi.comp <- stack(ex.ndvi.navarre[[1]], ndvi.filled[[1]],
@@ -50,14 +61,14 @@
 #' genPlotGIS(ndvi.comp, layout=c(2, 2))
 genSmoothingIMA<-function(imgTS,
                           Img2Fill = NULL,
-                          aFilter = c(.05,.95),
-                          fact = 5,
                           nDays = 3,
                           nYears=1,
+                          fact = 5,
                           fun=mean,
+                          aFilter = c(.05,.95),
                           factSE=8,
-                          snow.mode=FALSE,
                           predictSE=FALSE,
+                          snow.mode=FALSE,
                           out.name="outname",
                           ...){
   args<-list(...)

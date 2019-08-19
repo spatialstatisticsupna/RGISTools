@@ -1,38 +1,41 @@
-#' Sinchronize Landsat-7 meta data file for image search.
+#' Load or update the Landsat-7 metadata file
 #'
-#' \code{\link{ls7LoadMetadata}} loads a data frame called "\code{.LS7MD}"
-#'  with the names of the Landsat-7 images and their metadata. The metadata provides
-#'  auxiliary information regarding Landsat-7 repository, such as image quality, acquisition
-#'  data, cloud cover, etc. You can find a description of the metadata at
-#'  \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{bulk-metadata-service}.
+#' \code{ls7LoadMetadata} loads a \code{data.frame} called "\code{.LS7MD}"
+#' with the names of the Landsat-7 images and their metadata. The metadata provides
+#' auxiliary information, such as image quality, acquisition date, cloud cover,
+#' etc. You can find a description of the metadata on the
+#' \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{USGS's website}.
 #'
-#' All captures done by Landsat-7 are cataloged in a unique csv file. The size of the file
-#' might be larger than 360MB. Therefore, the process of downloading and importing into R may take several
-#' minutes (15 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device roughly). The function creates an
-#' RData file with the csv metadata. Thus, every time \code{\link{ls7LoadMetadata}} is called,
-#' this function loads the existing RData in the Approot. This is intended to reduce the loading
-#' time of metadata in the future.
-#'
-#'
+#' All captures done by Landsat-7 are catalogued and documented in a unique csv
+#' file. The size of the file could be larger than 360MB. The function downloads
+#' and imports the metadata into R, which may take several minutes (roughly 15
+#' minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device). The 
+#' function creates an RData file with the csv metadata. Thus, every time
+#' \code{ls7LoadMetadata} is called, this function loads the existing RData from
+#' the \code{AppRoot} directory, which aims to reduce the loading time of the 
+#' metadata in the future.
 #'
 #' @param update logical argument. If \code{TRUE}, updates the metadata file.
-#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
-#' @param omit.question logical argument. If \code{TRUE}, omits the question for ensuring the loading of the metadata file.
-#' @param ... argument for function nestering:
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param omit.question logical argument. If \code{TRUE}, the question about 
+#' loading the metadata is omitted.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} this option specifies the downloading/searching directory of the metadata file. 
+#'   \item \code{AppRoot} the directory where the metadata file should be located. 
 #' }
 #'
 #' @examples
 #' \dontrun{
-#' # creates a MetaData folder and downloads the csv on working directory
+#' # creates a MetaData folder in the current working directory and downloads the file there
 #' ls7LoadMetadata()
 #'
-#' # creates a MetaData folder and downloads the csv on "Path_for_downloading_folder" directory
+#' # creates a MetaData folder and downloads the csv in the "Path_for_downloading_folder" directory
 #' ls7LoadMetadata(AppRoot = "Path_for_downloading_folder")
 #'
-#' # Force renew existing meta data csv
+#' # update the metadata file
 #' ls7LoadMetadata(update = TRUE)
+#' 
 #' # if .LS7MD is already loaded you can see print its data
 #' ls(all.names = TRUE)
 #' head(.LS7MD)

@@ -8,46 +8,51 @@ lsEspaUpdateOrders(orders, username = NULL, password = NULL,
   c.handle = NULL, verbose = FALSE)
 }
 \arguments{
-\item{orders}{a list of the requested orders as returned by \code{\link{lsEspaGetOrderImages}}.}
+\item{orders}{a list of the requested orders as returned by
+\code{\link{lsEspaGetOrderImages}}.}
 
-\item{username}{login credentials to access the USGS EROS web service.}
+\item{username}{USGS's EarthExplorer username.}
 
-\item{password}{login credentials to access the USGS EROS web service.}
+\item{password}{USGS's EarthExplorer password.}
 
-\item{c.handle}{curl handler created with \code{curl} package containing the connection 
-with password and username defined. This argument is mandatory if \code{username} and
-\code{password} are not defined.}
+\item{c.handle}{a curl handler created with the package \code{curl} to
+stablish a connection with a preset password and username. This argument
+is mandatory if \code{username} and \code{password} are not defined.}
 
-\item{verbose}{logical argument. If TRUE, the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the
+running steps and warnings.}
 }
 \description{
-\code{lsEspaUpdateOrders} checks the current status of a request made to EROS Centre Science Processing 
-Architecture (ESPA) to pre-process Landsat Level-1 images
+\code{lsEspaUpdateOrders} checks the current status of a request made to EROS
+Centre Science Processing Architecture (ESPA) to pre-process Landsat level-1
+images
 }
 \details{
-This function is part of a group of functions used to pre-process Landsat Level 1 images. 
-The pre-processing is carried out by ESPA on demand. \code{lsEspaUpdateOrders} uses 
-the ID numbers gathered by \code{\link{lsEspaGetOrderImages}} regarding previous order 
-requests to check the processing status. The function has to be run repeatedly 
-until the status message says, “complete”. All the status messages and their 
-interpretation can be found in the ESPA API \href{https://landsat.usgs.gov/sites/default/files/documents/espa_odi_userguide.pdf}{User Guide}.
+This function is part of a group of functions used to pre-process Landsat
+level 1 images. The pre-processing is carried out by ESPA on demand. 
+\code{lsEspaUpdateOrders} uses the ID numbers gathered by 
+\code{\link{lsEspaGetOrderImages}} regarding previous order requests
+to check the processing status. The function has to be run repeatedly 
+until the status message states “complete”. All the status messages and their 
+interpretation can be found in the ESPA's API 
+\href{https://www.usgs.gov/media/files/eros-science-processing-architecture-demand-interface-user-guide}{User Guide}.
 }
 \examples{
 \dontrun{
-# Search Landsat 7 level-2
+# search Landsat 7 level-1
 search.res <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
                         endDate = as.Date("15-01-2017", "\%d-\%m-\%Y"),
                         lonlat = c(-1.64323, 42.81687))
-# Request to ESPA the prepocessing of level-1 images to get the surface reflectance
+# request to ESPA the prepocessing of level-1 images to get the surface reflectance
 orders <- lsEspaOrderImages(search.res = search.res,
                             username = "username", 
                             password = "password", 
                             product = 'sr',
                             verbose = FALSE)
-# Get an ID for our request
+# get an ID for our request
 orders <- lsEspaGetOrderImages(username = "username", 
                                password = "password")
-# Follow up the status of the request
+# follow up the status of the request
 lsEspaUpdateOrders(orders = orders,
                    username = "username", 
                    password = "password")

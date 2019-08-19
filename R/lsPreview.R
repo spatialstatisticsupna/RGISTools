@@ -1,29 +1,33 @@
-#' Allow a preview in R of Landsat satellite images
+#' Preview Landsat-7 or Landsat-8 satellite images
 #'
-#' \code{lsPreview} shows a preview of the \code{n}-th image from a set of search results
-#'  \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{bulk-metadata-service}.
+#' \code{lsPreview} shows a preview of the \code{n}-th image from a set of 
+#' search results.
 #'
-#' The function shows a preview of the \code{n}-th output image from a search in Landsat imagery metadata.
-#' A search with \code{\link{ls7Search}} or \code{\link{ls8Search}} has to be done before proceeding with the preview.
-#' The preview is downloaded from Landsat’s website. Please, be aware that only some images have this feature.
+#' The function shows a preview of the \code{n}-th output image from a search
+#' in the Landsat archives (\code{\link{ls7Search}} or \code{\link{ls8Search}}),
+#' with \code{browseAvailable = "Y"}). The preview is downloaded from 
+#' \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{USGS Bulk Metadata Service}.
+#' Please, be aware that only some images may have a preview.
 #'
-#'
-#' @param searchres a data frame with  the results from a search of Landsat images provided by the functions \code{\link{ls7Search}} or \code{\link{ls8Search}}.
-#' @param n a number of the image of interest in the search data frame.
-#' @param size a number specifying the size of the preview to be displayed, in pixels.
+#' @param searchres a \code{data.frame} with the results from 
+#' \code{\link{ls7Search}} or \code{\link{ls8Search}}.
+#' @param n a \code{numeric} argument identifying the location of the image in
+#' \code{searchres}.
+#' @param size a \code{numeric} argument specifying the size of the preview to
+#' be displayed, in pixels.
 #'
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' # Retrieve jpg images covering Navarre region between 2011 and 2013
+#' # retrieve jpg images covering Navarre between 2011 and 2013
 #' search.res <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                         extent = ex.navarre,
 #'                         precise = TRUE,
 #'                         browseAvaliable = "Y")
 #' lsPreview(search.res, 1)
-#' # Filter the images with less than 1% pixels covered by clouds
+#' # filter the images with less than 1% pixels covered by clouds
 #' search_cloudFree = subset(search.res, search.res$cloudCover < 1)
 #' lsPreview(search_cloudFree, 1)
 #' lsPreview(search_cloudFree, 2)

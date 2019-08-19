@@ -7,39 +7,40 @@
 genCompositions(rstack, n, fun, by.days = FALSE, ...)
 }
 \arguments{
-\item{rstack}{a \code{RasterStack} where every layer is named with any name containing the date
-captured in julian format as "\code{YYYYJJJ}".}
+\item{rstack}{a \code{RasterStack}, where layer names contain the capturing
+date of an image in "\code{YYYYJJJ}" format.}
 
 \item{n}{number of images combined in the aggregation.}
 
-\item{fun}{the function used to create the composite, such as \code{max}, \code{min}, \code{mean}, ...}
+\item{fun}{the function used to create the composite, such as \code{max},
+\code{min}, \code{mean}, ...}
 
-\item{by.days}{logical argument. If \code{FALSE}, \code{n} indicates the number of consecutive images of the aggregation.
-If \code{TRUE}, \code{n} indicates the maximun number of aggregated images between 
-the first and the last day of the time series, through different years. 
-The aggregation requires at least one available image.}
+\item{by.days}{logical argument. If \code{FALSE}, \code{n} indicates the 
+number of consucutive images being aggregated. If \code{TRUE}, the function
+aggregates the imagery within every \code{n} days. The aggregation requires
+at least one image avaiable.}
 
-\item{...}{argument for function nestering.
+\item{...}{arguments for nested functions:
 \itemize{
-  \item \code{AppRoot} the path where the images will be saved in tif image format.
+  \item \code{AppRoot} the path where the images will be saved in the
+  GTiff format.
 }}
 }
 \description{
-\code{genCompositions} combines satellite images over a series of images to create composite images.
+\code{genCompositions} combines a series of satellite images to create compositions.
 }
 \details{
-This function supports temporal aggregations by specifying \code{fun} argument.
-The maximun number of aggregated images is defined using the \code{n} argument. The output image is 
-named with the first image of the aggregation.
+The layer of the composite image takes its name from the first image used in
+the composition.
 
-\code{genCompositions} reduces the number of images, improving their quality,
-since clouds and potential outliers are removed. Clouds and outliers usually appear with
-very low values. For example, the maximun value compostion (\code{MVC}) builds composites using the
-maximum pixel value over a period of time. Write \code{fun = max} to use the
-\code{MVC} technique. Other functions are also supported.
+\code{genCompositions} reduces the number of images but improves the total
+quality of the time-series by removing cloulds and outliers. One widespread
+compositing technique is the maximum value composition (MVC). This technique
+allocates in each pixel of the composite the maximum value (fun = max) that
+the pixel reaches during a time period (\code{n}, \code{by.days = TRUE}).
 }
 \examples{
-# loading NDVI images of the Navarre tile
+# loading NDVI images of Navarre
 data("ex.ndvi.navarre")
 # Ploting the images: clouds are found
 genPlotGIS(ex.ndvi.navarre)

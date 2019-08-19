@@ -2,61 +2,66 @@
 % Please edit documentation in R/lsMosaic.R
 \name{lsMosaic}
 \alias{lsMosaic}
-\title{Mosaic a set of Landsat images}
+\title{Mosaic a set of Landsat-7 or Landsat-8 images}
 \usage{
 lsMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
   gutils = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
-\item{src}{the path of the folder with the Landsat images in tif format.}
+\item{src}{the path to the folder with the Landsat-7 or Landsa-8 images in
+GTiff format.}
 
-\item{extent}{\code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
-\code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.}
+\item{extent}{an \code{axtent}, \code{Raster*}, or \code{Spatial*} object
+representing the region of interest.}
 
-\item{out.name}{the name of the region, otherwise "outfile" is assigned.}
+\item{out.name}{the name of the folder that stores the outputs. By default,
+“outfile” is assigned.}
 
-\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the
+running steps and warnings.}
 
-\item{gutils}{logical argument. If \code{TRUE}, the function uses GDAL utilities for mosaicking. The mosacking 
-process is faster using \code{gutils} but requires the proper install of \code{gdalUtils} library.}
+\item{gutils}{logical argument. If \code{TRUE}, the function uses GDAL
+utilities for mosaicking.}
 
-\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
+images with the same name.}
 
-\item{...}{argument for function nestering accepts:
+\item{...}{arguments for nested functions:
  \itemize{
-  \item \code{pathrow} a list with the path and row numbers for the region of interest.
-  \item \code{bandFilter} a vector with the name of the image bands to be mosaicked.
-If it is not supplied, the function is applied to all the bands available in \code{src}.
-  \item \code{dayFilter} a vector containing the days in date format to filter the days wanted.
+  \item \code{pathrow} a list of vectors with the path and row numbers of
+  the tiles concerning the region of interest.
+  \item \code{bandFilter} a vector with the bands to be mosaicked. If not
+  supplied, all bands are mosaicked.
+  \item \code{dayFilter} a vector with the capturing dates being considered
+  for mosaicking. If not supplied, all dates are mosaicked.
   \item \code{AppRoot} the directory to save the mosaicked images.
 }}
 }
 \description{
-\code{lsMosaic} merges the tiles of Landsat images covering a region of interest and returns a single image for each date
+\code{lsMosaic} merges the Landsat-7 or Landsat-8 imagery that covers a 
+region of interest on the same dates.
 }
 \details{
-The function mosaics the tiles of satellite images in the \code{src} folder.
-The function uses the folder resulting from the \code{lsDownload} function.
-The folder may contain multiple tiles as tif files, for one or several
-dates and one or several bands. When only one band has to be mosaicked,
-the name of the band can be provided through the argument \code{bandFilter}. The
-name of the band should be defined as a character string beginning with the
-letter b and a two-digit band number (e.g. ‘b01’). Similarly, when only a
-subset of dates has to be mosaicked, the date(s) should be provided through
-the argument \code{dayFilter}. The dates must be provided as date objects. Once the
-images are mosaicked, they are cropped using the extent defined by
-\code{extent} (optional). The extent can be defined in any projection
-format. The function \code{lsMosaic} automatically reprojects the extent to
-match the projection of the image. The resulting images will be placed
-in the \code{AppRoot} directory. The output files are named after region of
-interest provided by the argument \code{out.name}. If no name is provided, by
-default the output file is named as ‘outfile’.
+The function mosaics the imagery in the \code{src} folder. The folder can
+hold GTiff images from several tiles, dates and bands. When only a subset
+of bands or dates has to be mosaicked, the band names or dates should be
+provided through the argument \code{bandFilter} or \code{dateFilter}. Band
+names are defined by the letter “b” and the two-digit band number
+(e.g., ‘b01’). The dates must be provided as a \code{Date} class object.
+Once mosaicked, the images can be cropped to fit the extent (optional).
+The extent can be defined in any coordinate reference system, since
+\code{lsMosaic} automatically reprojects the extent to match the projection
+of the image. The outputs are placed in the \code{AppRoot} directory, under
+the folder named as \code{out.name}. If no name is provided, the folder is
+named “outfile”. To use \code{gutils = TRUE}, a proper installation of GDAL
+and the \code{gdalUtils} library is required. This method is faster than
+native R functions.
 }
 \examples{
 \dontrun{
 # load a spatial polygon object of Navarre
 data(ex.navarre)
-# assign the main output directory
+# main output directory
 src <- "Path_for_downloading_folder"
 # download Landsat-8 images
 lsDownload(satellite = "ls8",
@@ -67,7 +72,7 @@ lsDownload(satellite = "ls8",
            extent = ex.navarre,
            untar = TRUE,
            AppRoot = src)
-# assign the folder with the Landsat-8 untared images
+# folder with the Landsat-8 untared images
 ls8.src <- file.path(src, "Landsat8")
 tif.src <- file.path(ls8.src,"untar")
 # mosaic the Landsat-8 images

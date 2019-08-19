@@ -2,31 +2,35 @@
 % Please edit documentation in R/modPreview.R
 \name{modPreview}
 \alias{modPreview}
-\title{Preview of Modis satellite images}
+\title{Preview MODIS satellite images}
 \usage{
 modPreview(searchres, n, size = NULL)
 }
 \arguments{
-\item{searchres}{a vector with the results from a search of Modis images provided by 
-the functions \code{\link{modSearch}} with \code{resType="browseurl"} argument.}
+\item{searchres}{a vector with the results from \code{\link{modSearch}}.}
 
-\item{n}{the number of the image of interest in the search vector.}
+\item{n}{a \code{numeric} argument identifying the location of the image in
+\code{searchres}.}
 
-\item{size}{a number specifying the size of the preview to be displayed, in pixels.}
+\item{size}{a \code{numeric} argument specifying the size of the preview to
+be displayed, in pixels.}
 }
 \description{
-\code{modPreview} shows a preview of the \code{n}-th image from a set of search results.
+\code{modPreview} shows a preview of the \code{n}-th image from a set of 
+search results.
 }
 \details{
-The function shows a preview of the \code{n}-th from \code{\link{modSearch}} function.
-The previewed image is downloaded from Modis website. Please, be aware that not all 
-the captures have this feature.
+The function shows a preview of the \code{n}-th output image from a search
+in the MODIS archives (\code{\link{modSearch}}), with 
+\code{resType = "browseurl"}). The preview is downloaded from the
+\href{https://earthdata.nasa.gov}{EarthData Platform}.
+Please, be aware that only some images may have a preview.
 }
 \examples{
 \dontrun{
 # load a spatial polygon object of Navarre
 data(ex.navarre)
-# Retrieve jpg images covering Navarre region between 2011 and 2013
+# retrieve jpg images covering Navarre region between 2011 and 2013
 searchres <- modSearch(product = "MOD09GA",
                       startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                       endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),

@@ -1,17 +1,26 @@
-#' Create clouds layers for Landsat images
+#' Create cloud masks for Landsat images
 #' 
-#' \code{lsCloudMask} creates layers of clouds derived from \code{BQA} band from Landsat-7 or Landsat-8 captures. 
-#' The function run over untar images downloaded by \code{\link{lsDownSearch}} or \code{\link{lsDownload}}, and 
-#' creates a new band named \code{CLD}.
+#' \code{lsCloudMask} creates a cloud mask derived from the band for quality
+#' assurance (BQA) from Landsat-7 or Landsat-8 time series. The function is
+#' applied to untarred images, such as those resulting from 
+#' \code{\link{lsDownSearch}} or \code{\link{lsDownload}}. The result is a new
+#' image band, called CLD, that is saved as separate GTiffs.
+#' 
+#' The valid range for the \code{sensitivity} threshold is 0-8000. By defualt,
+#' the argument is set to 2800. We recommend 600 and 2800 for Landsat-7 and
+#' Landsat-8 respectively.
 #'
-#' @param src the path to the folder where the Landsat multispectral captures are stored. 
-#' @param sensitivity numeric argument. Defines how sensitive is the method detecting the clouds. 0-8000 are
-#' valid values. By default, the best value for Landsat 8 images assigned 2800. For Landsat-7 images use 600.
-#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
-#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
-#' @param ... argument for function nestering:
+#' @param src the path to the folder with the untarred images from Landsat-7 or
+#' Landsat-8.
+#' @param sensitivity \code{numeric} argument. Defines the sensitivity of the
+#' cloud detection method.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
+#' images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the
+#' running steps and warnings.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the directory where the extracted images should be located
+#'   \item \code{AppRoot} the directory where cloud masks are saved.
 #' }
 #'
 #' @examples
@@ -20,7 +29,7 @@
 #' data(ex.navarre)
 #' src <- "Path_for_downloading_folder"
 #' 
-#' # Search and download the images from Landsat-8 between
+#' # search and download images from Landsat-8 between
 #' # 01-01-2018 and 20-01-2018 for the region of Navarre
 #' lsDownload(satellite = "ls8",
 #'            username = "username",
@@ -31,14 +40,14 @@
 #'            untar = TRUE,
 #'            AppRoot = src)
 #'            
-#' # generate the path where the GTiff images are located
+#' # define the path where the GTiff images are located
 #' src.ls8 <- file.path(src,"Landsat8")
 #' src.untar <- file.path(src.ls8,"untar")
 #' # calculate the cloud mask from QC layer
 #' lsCloudMask(src=src.untar,
 #'             overwrite=TRUE)
 #'             
-#' # generate the path where the mosacked images will be saved
+#' # mosaic and crop the imagery
 #' lsMosaic(src = src.untar,
 #'          AppRoot = src.ls8,
 #'          out.name = "Navarre",

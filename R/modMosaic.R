@@ -1,46 +1,51 @@
-#' Mosaic a set of Modis images
+#' Mosaic a set of MODIS images
 #'
-#' \code{\link{modMosaic}} merges the tiles of Modis covering a region of interest. There is only one output image by date.
+#' \code{modMosaic} merges the MODIS imagery that covers a 
+#' region of interest on the same dates.
 #'
-#' The function mosaics the tiles of satellite images in the \code{src} folder.
-#' The function uses the output folder from the \code{\link{modExtractHDF}} function.
-#' The folder may contain multiple tiles as GTiff files, for one or several dates
-#' and one or several bands. When only one band has to be mosaicked, the name of
-#' the band can be provided through the argument \code{bandFilter}. The name of the band
-#' should be defined as a character string beginning with the letter b and a two-digit
-#' band number (e.g. 'b01'). Similarly, when only a subset of dates has to be mosaicked,
-#' the date(s) should be provided through the argument \code{dayFilter}. The dates must be
-#' provided as date objects. Once the images are mosaicked, they are cropped using
-#' the extent defined by \code{\link{extent}} (optional). The extent can be defined in any
-#' projection format. The function \code{\link{modMosaic}} automatically reprojects the extent
-#' to match the projection of the image. The resulting images are placed in
-#' the \code{AppRoot} directory. The output files are named with the region of interest
-#' provided by the argument \code{out.name}. If no name is provided,
-#' 'outfile' is the name.
+#' The function mosaics the imagery in the \code{src} folder. The folder can
+#' hold GTiff images from several tiles, dates and bands. When only a subset
+#' of bands or dates has to be mosaicked, the band names or dates should be
+#' provided through the argument \code{bandFilter} or \code{dayFilter}. Band
+#' names are defined by the letter “b” and the two-digit band number (e.g., 
+#' ‘b01’). The dates must be provided as a \code{Date} class object. Once
+#' mosaicked, the images can be cropped to fit the \code{extent} (optional).
+#' The \code{extent} can be defined in any coordinate reference system, since
+#' \code{modMosaic} automatically reproject the extent to match the projection
+#' of the image. The outputs will be placed in the \code{AppRoot} directory,
+#' under the folder named as \code{out.name}. If no name is provided, the 
+#' folder is named “outfile”. To use \code{gutils = TRUE}, a proper installation
+#' of GDAL is required. This method is faster than the native R functions.
 #'
-#' @param src the path of the folder with the Modis images in GTiff format.
-#' @param out.name the name of the region, otherwise "outfile" is assigned.
-#' @param extent \code{Extent}, \code{raster}, \code{RasterStack}, \code{RasterBrick}, 
-#' \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} object representing the region of interest.
-#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
-#' @param gutils logical argument. If \code{TRUE}, the function uses GDAL utilities for mosaicking. The mosacking 
-#' process is faster using \code{gutils} but requires the corrent install of \code{gdalUtils} library.
-#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
-#' @param ... argument for function nestering accepts:
+#'
+#' @param src the path of the folder with the MODIS images in GTiff format.
+#' @param out.name  the name of the folder that stores the outputs. By default,
+#' “outfile” is assigned.
+#' @param extent an \code{extent}, \code{Raster*}, or \code{Spatial*} object
+#' representing the region of interest.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing 
+#' images with the same name.
+#' @param gutils logical argument. If \code{TRUE}, the function uses GDAL 
+#' utilities for mosaicking.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param ... arguments for nested functions:
 #'  \itemize{
-#'   \item \code{pathrow} a list with the path and row numbers for the region of interest.
-#'   \item \code{bandFilter} a vector with the name of the image bands to be mosaicked.
-#' If it is not supplied, the function is applied to all the available bands in \code{src}.
-#'   \item \code{dayFilter} a vector containing the days in date format to filter the requiered days.
-#'   \item \code{AppRoot} the directory to save the mosaicked images.
+#'   \item \code{pathrow} a \code{list} of vectors with the path and row numbers
+#'   of the tiles concerning the region of interest.
+#'   \item \code{bandFilter} a vector with the bands to be mosaicked. If not
+#'   supplied, all bands are mosaicked.
+#'   \item \code{dayFilter} a vector with the capturing dates being considered
+#'   for mosaicking. If not supplied, all dates are mosaicked.
+#'   \item \code{AppRoot} the directory where the mosaicked images are saved.
 #' }
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' # assign the main output directory
+#' # main output directory
 #' src <- "Path_for_downloading_folder"
-#' # download Modis images
+#' # download MODIS images
 #' modDownload(product = "MOD09GA",
 #'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'             endDate = as.Date("03-01-2018", "%d-%m-%Y"),
@@ -50,10 +55,10 @@
 #'             extract.tif = TRUE,
 #'             collection = 6,
 #'             extent = ex.navarre)
-#' # assign the folder with the Modis extracted images
+#' # folder with the MODIS images extracted 
 #' src.mod <- file.path(src, "Modis", "MOD09GA")
 #' tif.src <- file.path(src.mod, "tif")
-#' # mosaic the Modis images
+#' # mosaic the MODIS images
 #' modMosaic(tif.src,
 #'           AppRoot = src.mod,
 #'           out.name = "Navarre",

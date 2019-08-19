@@ -2,58 +2,65 @@
 % Please edit documentation in R/lsDownload.R
 \name{lsDownload}
 \alias{lsDownload}
-\title{Search and downloads a time series of satellite images from Landsat 7-8}
+\title{Search and download Landsat-7 or Landsat-8 images}
 \usage{
 lsDownload(satellite, startDate, endDate, username, password, lvl = 1,
   product = c("sr", "source_metadata"), verbose = FALSE,
   untar = TRUE, raw.rm = FALSE, ...)
 }
 \arguments{
-\item{satellite}{string containing the type of satellite for downloading (\code{"ls7"} or \code{"ls8"}).}
+\item{satellite}{string containing the type of satellite 
+(\code{"ls7"} or \code{"ls8"}).}
 
-\item{startDate}{starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{startDate}{a \code{Date} class object with the starting date of the 
+study period.}
 
-\item{endDate}{ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{endDate}{a \code{Date} class object with the ending date of the 
+study period.}
 
-\item{username}{login credentials to access the USGS EROS web service.}
+\item{username}{USGS’s EarthExplorer username.}
 
-\item{password}{login credentials to access the USGS EROS web service.}
+\item{password}{USGS’s EarthExplorer password.}
 
-\item{lvl}{flag to specify Landsat product level wanted. Default value, 1.}
+\item{lvl}{a number specifying the processing level. Default value, 1.}
 
-\item{product}{character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.}
+\item{product}{\code{character} vector with the requested Level-2 products.
+By default \code{c("sr", "source_metadata")}.}
 
-\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the
+running steps and warnings.}
 
 \item{untar}{logical argument. If \code{TRUE}, untars downloaded images.}
 
 \item{raw.rm}{logical argument. If \code{TRUE}, removes the raw images.}
 
-\item{...}{argument for function nestering accepts:
+\item{...}{argumetns for nested functions:
  \itemize{
-  \item any argument for function nestering including all \code{\link{ls8Search}/\link{ls7Search}} or \code{\link{lsDownSearch}}
-function arguments.
-  \item \code{AppRoot} the directory to save the downloaded images.
+  \item any argument for \code{\link{ls8Search}}/\code{\link{ls7Search}} or 
+  \code{\link{lsDownSearch}}.
+  \item \code{AppRoot} the download directory.
 }}
 }
 \description{
-\code{lsDownSearch} downloads the list of images provided by \code{ls7Search} and \code{ls8Search} functions.
-The images are saved as ‘.tiff’ files in the \code{AppRoot} directory.
+\code{lsDonwload} seeks and downloads Landsat-7 or Landsat-8 images
+concerning a particular location and time interval from the 
+\href{https://earthexplorer.usgs.gov/}{EarthExplorer repository}.
+Images are saved as GTiff files in the \code{AppRoot} directory.
 }
 \details{
-This function is used for searching and downloading Landsat images. The function uses landsat
-search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}) depending on the \code{satellite} argument,
-and then, calls \code{\link{lsDownload}} function with the response of the search.
-Image download requires USGS login account. \href{https://ers.cr.usgs.gov/register/}{Get your credentials}.
+\code{lsDonwload} is a wrapper function of \code{\link{ls7Search}}, 
+\code{\link{ls8Search}}, and \code{\link{lsDownSearch}} to search and
+download images in a single step. The function requires USGS's EarthExplorer
+credentials, which can be obtained
+\href{https://ers.cr.usgs.gov/register/}{here}.
 
-The image files from the USGS EROS web service are compressed as ‘.tar.gz’ files. \code{\link{lsDownload}} decompresses the
-images and obtains the corresponding ‘.tif’ files. The ‘.tif’ files are saved in the
-\code{AppRoot} directory. When \code{untarDir} is defined the function untars the images in this folder.
-This replicates the images in compresses version as tar.gz and uncompresses version. To save space in the disk
-\code{raw.rm = T} can be defined, and \code{\link{lsDownload}} will remove the ‘tar.gz’ files.
-If \code{raw.rm = F}, the original files remain, which might be useful to have access to the original files
-in the future and avoid further downloads. By default, \code{\link{lsDownload}} saves the images in (...), in the \code{AppRoot}
-directory. To change this setting, provide \code{AppRoot = "the full path as an argument"}.
+The files from EarthExplorer are compressed as ‘tar.gz’. \code{lsDonwload}
+decompresses the images and obtains the corresponding GTiffs. The GTiffs are
+saved in the \code{AppRoot} directory. To change this option, provide 
+\code{AppRoot = “full path”}. When the \code{untarDir} argument is defined,
+the function untars the imagery in this location. Image decompression
+duplicates the information due to the presence of both, compressed and 
+decompressed images. Set \code{raw.rm = TRUE} to remove the former ones.
 }
 \examples{
 \dontrun{
@@ -61,8 +68,8 @@ directory. To change this setting, provide \code{AppRoot = "the full path as an 
 data(ex.navarre)
 
 src <- "Path_for_downloading_folder"
-# Search and download the images from Landsat-8 between
-# 01-01-2018 and 20-01-2018 in the region of Navarre
+# search and download the images from Landsat-8 between
+# 01-01-2018 and 20-01-2018 for the region of Navarre
 lsDownload(satellite = "ls8",
            username = "username",
            password = "password",
@@ -71,7 +78,7 @@ lsDownload(satellite = "ls8",
            extent = ex.navarre,
            AppRoot = src)
            
-# remove metadata data frame to free memory
+# remove metadata to free memory space
 lsRemoveMetadata()
 }
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/genSaveTSRData.R
 \name{genSaveTSRData}
 \alias{genSaveTSRData}
-\title{Import time series of images and saves as RData}
+\title{Saves a time series of images as an RData}
 \usage{
 genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
   endDate = NULL, dextent = FALSE, recursive = FALSE, ...)
@@ -10,31 +10,37 @@ genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
 \arguments{
 \item{src}{path to the folder where the time series of images is located.}
 
-\item{ts.name}{the name of the variable containing the time series in R.}
+\item{ts.name}{the name of the \code{RasterStack} in the RData.}
 
-\item{startDate}{starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{startDate}{a \code{Date} class object with the starting date of the
+study period.}
 
-\item{endDate}{ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{endDate}{a \code{Date} class object with the ending date of the study
+period.}
 
-\item{dextent}{creates the \code{RasterStack} to the maximun extent from different extent GTiff images.}
+\item{dextent}{a logical argument. If \code{TRUE}, the function expands the
+extent of the \code{RasterStack} to embrace the extents of all GTiff images.}
 
-\item{recursive}{logical argument. If \code{TRUE}, reads folders recursively, searching for images in GTiff image format.}
+\item{recursive}{logical argument. If \code{TRUE}, reads folders recursively,
+searching for GTiff images.}
 
-\item{...}{argument for function nestering.
+\item{...}{arguments for nested functions:
 \itemize{
-  \item \code{AppRoot} the path where the RData will be saved.
+  \item \code{AppRoot} the path where the RData is saved.
 }}
 }
 \description{
-\code{genSaveTSRData} imports the time series of (GTiff) satellite images into R from a folder, 
-for creating an RData.
+\code{genSaveTSRData} imports a time series of images from a folder (GTiff
+ format), builds a \code{RasterStack} and saves it in an RData.
 }
 \details{
-The function reads all the images inside the folder specified in \code{src}. The images must be GTiff files.
- The \code{src} can take the path created by other functions of this package, such as \code{\link{senMosaic}},
- \code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are imported into R to build a \code{RasterStack} that
- is loaded into the global environment. The name of the \code{RasterStack} is specified
- in \code{ts.name}. The \code{RasterStack} is saved into an RData file in the \code{AppRoot} directory.
+The function reads all the images inside the folder specified in \code{src}.
+Images files must be GTiffs. The \code{src} can take the path created by
+other functions of this package, such as \code{\link{senMosaic}},
+\code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are
+imported into R to build a \code{RasterStack} in the global environment. The
+name of the \code{RasterStack} is specified in \code{ts.name}. The
+\code{RasterStack} is saved in an RData file in the \code{AppRoot} directory.
 }
 \examples{
 \dontrun{

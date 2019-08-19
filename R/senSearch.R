@@ -1,32 +1,41 @@
-#' Search Sentinel images using ESA's SciHub API
+#' Search Sentinel images
 #'
-#' \code{senSearch} searches Sentinel-2 products on ESA powered api called \href{http://scihub.copernicus.eu}{Scihub}.
+#' \code{senSearch} seeks Sentinel images through ESA's powered API,
+#' called \href{http://scihub.copernicus.eu}{SciHub}, that concern a particular
+#' location and date interval. The function returns an \code{array} with
+#' the names of the images and their URLs.
 #'
-#' Provides the urls for downloading the images from ESA's \href{http://scihub.copernicus.eu}{Scihub} API. The images are
-#' searched within a range of dates and a region of interest. Dates have to be
-#' provided as a date class object. The region of interest should be provided as a
-#' spatial class object with an "\code{EPSG:4326}" coordinate projection. 
-#' Credentials from ESA’s SciHub are needed to use this function.
-#' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
-#'
-#' For further information on ESA’s missions and data products, please visit
-#' \href{https://sentinel.esa.int/web/sentinel/missions}{Sentinel mission web page}.
-#'
-#' @param username Scihub username.
-#' @param password Scihub password.
-#' @param ... argument for function nestering:
+#' \code{senSearch} uses the
+#' \href{http://scihub.copernicus.eu}{ESA's powered API} (SciHub).The catalogue
+#' of Sentinel-2 products can be found
+#' \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/data-products}{here}.
+#' Images are searched within a range of dates and a region of interest. Dates
+#' must be provided as a \code{Date} class object. Credentials from ESA’s SciHub
+#' are needed and they can be obtained 
+#' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
+#' 
+#' @param username ESA’s SciHub username.
+#' @param password ESA’s SciHub password.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{product} Sentinel product type.  Ex. "S2MSI1C", "S2MSI2A", "S2MSI2Ap", ... 
-#'   \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#'   \item \code{endDate} ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#'   \item \code{extent} location as projecte file with extention.
-#'   \item \code{lonlat} a vector or a polygon with the coordinates of
-#' the point or region of interest in longitude/latitude format.
-#'   \item \code{platform} platform name of the Sentinel mission (Sentinel-1, Sentinel-2,...).
-#'   \item \code{qformat} format of response
-#'   \item \code{verbose} logical argument. If \code{TRUE}, the function prints running stages and warnings.
+#'   \item \code{product} the type of Sentinel product.  Ex. "S2MSI1C",
+#'   "S2MSI2A", "S2MSI2Ap", ...
+#'   \item \code{startDate} a \code{Date} class object with the starting date of
+#'   the study period.
+#'   \item \code{endDate} a \code{Date} class object with the ending date of
+#'    the study period.
+#'   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
+#'   object representing the region of interest with longitude/latitude
+#'   coordinates.
+#'   \item \code{lonlat} a vector with the longitude/latitude
+#'   coordinates of the point of interest.
+#'   \item \code{platform} the name of the Sentinel mission (Sentinel-1, 
+#'   Sentinel-2, ...).
+#'   \item \code{qformat} the format of the response.
+#'   \item \code{verbose} logical argument. If \code{TRUE}, the function prints
+#'   the running steps and warnings.
 #'   \item \code{error.log} the name of the error log file.
-#'   \item \code{AppRoot} the directory where the images will be saved.
+#'   \item \code{AppRoot} the directory where the images are saved.
 #' }
 #' @examples
 #' \dontrun{

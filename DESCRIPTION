@@ -1,13 +1,13 @@
 Type: Package
 Package: RGISTools
-Title: Tools for Downloading, Processing, and Smoothing Time Series of Satellite Images from Landsat, Modis, and Sentinel
+Title: Tools for Downloading, Customizing, and Processing Time Series of Satellite Images from Landsat, MODIS, and Sentinel
 Version: 0.9.5
 Author: U Pérez - Goya [aut, cre] <unai.perez@unavarra.es>,
+        M Montesino - SanMartin [aut] <manuel.montesino@unavarra.es>
         A F Militino [aut] <militino@unavarra.es>,
         M D Ugarte [aut] <lola@unavarra.es>,
-        M Montesino - SanMartin [aut] <manuel.montesino@unavarra.es>
 Maintainer: U Perez - Goya <unai.perez@unavarra.es>
-Description: Downloading, processing, and smoothing time series of satellite images in a region of interest. RGISTools functions allow a unified access to multispectral images from Landsat, Modis and Sentinel repositories. RGISTools  also offers capabilities for processing satellite images, including tile mosaicking, cropping, cloud masking, and deriving new variables of interest. Finally, the package implements the genSmoothingIMA and genSmoothingCovIMA functions for gap-filling time series of images.
+Description: Downloading, customizing, and processing time series of satellite images for a region of interest. RGISTools functions allow a unified access to multispectral images from Landsat, MODIS and Sentinel repositories. RGISTools also offers capabilities for customizing satellite images, such as tile mosaicking and image cropping. Finally the package implements processing methods, such as cloud masking, deriving new variables, and gap-filling/smoothing time series of images.
 Depends: R (>= 3.5.0), raster, gdalUtils, sp
 Imports: Rdpack, XML, xml2, utils, fields, magick, urltools, rjson, rvest, tools,  methods, curl, httr 
 RdMacros: Rdpack

@@ -8,45 +8,57 @@ lsEspaOrderImages(search.res, username, password, product = c("sr",
   "source_metadata"), verbose = FALSE)
 }
 \arguments{
-\item{search.res}{the results from \code{\link{ls7Search}} or \code{\link{ls8Search}}.}
+\item{search.res}{the results from \code{\link{ls7Search}} or
+\code{\link{ls8Search}}.}
 
-\item{username}{login credentials to access the USGS EROS web service.}
+\item{username}{USGS's EarthExplorer username.}
 
-\item{password}{login credentials to access the USGS EROS web service.}
+\item{password}{USGS's EarthExplorer password.}
 
 \item{product}{the acronym of the requested product (see the details).}
 
-\item{verbose}{logical argument. If TRUE, the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the
+running steps and warnings.}
 }
 \description{
-\code{lsEspaOrder}Images makes a request to the EROS Centre Science Processing Architecture (ESPA) 
-to further process Level-1 Landsat scenes.
+\code{lsEspaOrder} makes a request to the EROS Centre Science Processing
+Architecture (ESPA) to further process level-1 Landsat scenes.
 }
 \details{
-Landsat Level-1 images are pre-processed on demand by the EROS Centre Science Processing Architecture (ESPA). 
-An order is placed to ESPA with the Level-1 images that must be pre-processed (“search.res”) and the required 
-final product (“product”). The products are identified by the following short-names: 
+Landsat Level-1 images are pre-processed on demand by the EROS Centre Science
+Processing Architecture (ESPA). An order is placed to ESPA with the level-1
+images that must be pre-processed (\code{search.res} and the requested 
+final product (\code{product}). The products are identified by the following
+short-names: 
 \itemize{
   \item \code{toa}: for top of atmosphere reflectance.
-  \item \code{bt}: for brightness temperature (Thermal band TOA processing).
+  \item \code{bt}: for brightness temperature (thermal band TOA processing).
   \item \code{sr}: for surface reflectance.
-  \item \code{sr_ndvi}: the Normalized Difference Vegetation Index from surface reflectance imagery.
-  \item \code{sr_evi}: the Enhanced Vegetation Index from surface reflectance imagery.
-  \item \code{sr_savi}: the Soil Adjusted Vegetation Index from surface reflectance imagery.
-  \item \code{sr_msavi}: the Modified Soil Adjusted Vegetation Index from surface reflectance imagery.
-  \item \code{sr_ndmi}: the Normalized Difference Moisture Index from surface reflectance imagery.
-  \item \code{sr_nbr}: the Normalized Burn Ratio from surface reflectance imagery.
-  \item \code{sr_nbr2}: : the Normalized Burn Ratio 2 Index from surface reflectance imagery.
-  \item \code{prixel_qa}: for the pixel quality assurance.
+  \item \code{sr_ndvi}: the normalized difference vegetation index from
+  surface reflectance imagery.
+  \item \code{sr_evi}: the enhanced vegetation index from surface
+  reflectance imagery.
+  \item \code{sr_savi}: the soil adjusted vegetation index from surface
+  reflectance imagery.
+  \item \code{sr_msavi}: the modified soil adjusted vegetation index from
+  surface reflectance imagery.
+  \item \code{sr_ndmi}: the normalized difference moisture index from surface
+  reflectance imagery.
+  \item \code{sr_nbr}: the normalized burn ratio from surface reflectance
+  imagery.
+  \item \code{sr_nbr2}: the normalized burn ratio 2 index from surface
+  reflectance imagery.
+  \item \code{prixel_qa}: for pixel quality assurance.
 }
 }
 \examples{
 \dontrun{
-# Search Landsat 7 level-1
+# search Landsat 7 level-1
 search.res <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
                         endDate = as.Date("07-01-2017", "\%d-\%m-\%Y"),
                         lonlat = c(-1.64323, 42.81687))
-# Request to ESPA the prepocessing of level-1 images to get the surface reflectance
+# request to ESPA the pre-pocessing of level-1 images 
+# to get the surface reflectance
 order <- lsEspaOrderImages(search.res = search.res,
                            username = "username", 
                            password = "password", 

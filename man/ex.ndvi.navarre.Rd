@@ -3,13 +3,17 @@
 \docType{data}
 \name{ex.ndvi.navarre}
 \alias{ex.ndvi.navarre}
-\title{NDVI of the tile containing Navarre in Spain}
-\format{The \code{RasterBrick} contains 6 time-periods:
+\title{A time series of NDVI of Navarre (Spain)}
+\format{The \code{RasterBrick} contains 6 images, from the 2nd to the 4th of
+August in 2017 and 2018. The \code{RasterBrick} coordinates are in the
+Sinusoidal projection:
+
 \describe{
-  \item{name}{the name of each layer contains the date of the period in julian format as "\code{YYYYJJJ}"}.
+  \item{name}{layer names contain the date of the image in the format "\code{YYYYJJJ}"}.
   \item{size}{each layer contains 113 rows and 105 columns}.
 }}
 \description{
-Geographically projected \code{RasterBrick} object of the Normalized Difference Vegetation Index (NDVI) in Navarre.
+Geographically projected \code{RasterBrick} object of the Normalized 
+Difference Vegetation Index (NDVI) of Navarre.
 }
 \keyword{data}

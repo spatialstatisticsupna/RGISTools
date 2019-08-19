@@ -2,22 +2,23 @@
 % Please edit documentation in R/modGetPathRow.R
 \name{modGetPathRow}
 \alias{modGetPathRow}
-\title{Return the pathrow of Modis tile in "hXXvYY" string format}
+\title{Return the pathrow of a tile of MODIS images}
 \usage{
 modGetPathRow(str)
 }
 \arguments{
-\item{str}{the full path or official image name of the Modis image from which the path and row is retrieved.}
+\item{str}{the full path(s) or official name(s) of the MODIS images from
+which the tile's path and row numbers are retrieved.}
 }
 \value{
-an string with the path and row of the image in "\code{hXXvYY}" format.
+a string with the path and row in "\code{hXXvYY}" format.
 }
 \description{
-\code{\link{modGetPathRow}} reads the official name of a Modis image and returns the path and row data
-as Modis name convention of horizontal and vertical "\code{hXXvYY}".
+\code{modGetPathRow} reads the official name of a MODIS image and returns the
+tile's path and row number, in 'hXXvYY' format (MODIS naming convention).
 }
 \examples{
-# example of getting date from Landsat-8 image name
+# getting the path and row number of the tile of a Landsat-8 image
 str <- "MYD09GA.A2003136.h17v04.005.2008324054225"
 pr <- modGetPathRow(str)
 print(pr)

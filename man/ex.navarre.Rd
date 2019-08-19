@@ -3,8 +3,9 @@
 \docType{data}
 \name{ex.navarre}
 \alias{ex.navarre}
-\title{Geographically projected spatial polygon of Navarre in Spain to be used in examples}
+\title{A spatial polygon with the border of Navarre (Spain)}
 \description{
-\code{SpatialPolygonsDataFrame} containing the region of Navarre projected in longitude/latitude.
+\code{SpatialPolygonsDataFrame} representing the border of Navarre with
+coordinates in the longitude/latitude format.
 }
 \keyword{data}

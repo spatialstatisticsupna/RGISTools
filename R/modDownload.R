@@ -1,39 +1,50 @@
-#' Search and download Modis images in structured folder
+#' Search and download MODIS images
 #'
-#' \code{modDownload} searches and downloads the Modis products on the 
-#' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} to find images 
-#' within a particular location and date interval.
+#' \code{modDownload} seeks and downloads MODIS images concerning a particular
+#' location and time interval from the EarthExplorer repository. Images are
+#' saved as GTiff files in the \code{AppRoot} directory.
 #'
-#' \code{modDownload} uses \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository} (CMR) 
-#' powered api to search satellite all ground products releses by NASA. The catalogue of Modis ground products with their 
-#' short names and other information can be found at: \href{https://modis.gsfc.nasa.gov/data/dataprod/}{Modis data product info}.
-#' For further information on collections, please visit \href{https://modis-atmos.gsfc.nasa.gov/collections/overview}{Modis website}.
-#' By the time the \code{RGISTools} package is released, NASA carries out the maintenance of the Modis website on Wednesdays. 
-#' Therefore, an error may occur when trying to connect with their server during this day of the week.
-#' \href{https://urs.earthdata.nasa.gov/users/new}{Get your credentials}.
+#' \code{modDownload} uses the 
+#' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA’s Common Metadata Repository}
+#' to search and the
+#' \href{https://earthdata.nasa.gov/}{EarthData web service}
+#' to download the imagery. The catalogue of MODIS products can be found
+#' \href{https://modis.gsfc.nasa.gov/data/dataprod/}{here}.
+#' The catalogue shows detailed information about the products and their short
+#' names. By the time RGISTools is released, NASA carries out the maintenance
+#' of its website on Wednesdays, which may cause an error when connecting to
+#' their server. You can get your EarthData credentials
+#' \href{https://urs.earthdata.nasa.gov/users/new}{here}.
 #'
-#' @param product a \code{character} argument with the name of Modis product type.
-#' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param username EarthData username.
-#' @param password EarthData password.
-#' @param nattempts the number of attempts that the function has to carry out
-#' @param collection Modis collection, by default 6.
-#' @param extract.tif logical argument. If \code{TRUE}, extracts as tif image format all the layers in a hdf image.
+#' @param product a \code{character} argument with the short name of the MODIS
+#' product.
+#' @param startDate a \code{Date} class object with the starting date of the 
+#' study period.
+#' @param endDate a \code{Date} class object with the ending date of the 
+#' study period.
+#' @param username NASA's EarthData username.
+#' @param password NASA's EarthData password.
+#' @param nattempts the number of attempts to download an image in case it
+#' becomes corrupted.
+#' @param collection MODIS collection, by default 6.
+#' @param extract.tif logical argument. If \code{TRUE}, extracts all the layers
+#' from hdf files and saves them as GTiff.
 #' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
-#' @param ... argument for function nestering:
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{lonlat} A vector or a polygon with the coordinates of
-#' the point or region of interest in longitude/latitude format.
-#' This argument is mandatory if polygon or extent is not defined.
-#'   \item \code{extent} \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or 
-#'   \code{SpatialPoints*} object are acceptable formats as long as coordinates 
-#'   are in longitude/latitude format. This argument is mandatory if \code{polygon} 
-#'   or \code{lonlat} is not defined.
-#'   \item \code{polygon} A list of vectors defining the points of the polygon in longitude/latitude format.
-#' This argument is mandatory if \code{lonlat} or extent is not defined.
-#'   \item \code{AppRoot} the directory to save the output time series.
-#'   \item Any argument in \code{\link{modExtractHDF}} function. Ex. \code{bFilter="b01_1"}.
+#'   \item \code{lonlat} a vector with the longitude/latitude
+#'   coordinates of the point of interest. This argument is mandatory if
+#'   \code{polygon} or \code{extent} are not defined.
+#'   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
+#'   object representing the region of interest with longitude/latitude
+#'   coordinates. This argument is mandatory if \code{polygon} or \code{lonlat}
+#'   are not defined.
+#'   \item \code{polygon} A list of vectors defining the points of a polygon in
+#'   longitude/latitude format. This argument is mandatory if \code{lonlat} or
+#'   \code{extent} are not defined.
+#'   \item \code{AppRoot} the directory to save the outcoming time series.
+#'   \item Any argument in \code{\link{modExtractHDF}} function. Ex.
+#'   \code{bFilter="b01_1"}.
 #' }
 #'
 #' @examples

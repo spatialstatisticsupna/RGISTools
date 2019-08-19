@@ -2,26 +2,29 @@
 % Please edit documentation in R/genLimitRasterRange.R
 \name{genLimitRasterRange}
 \alias{genLimitRasterRange}
-\title{Limit the maximum and the minimum values of a raster image}
+\title{Limit the maximum and the minimum values of a raster}
 \usage{
 genLimitRasterRange(r, mx = NULL, mn = NULL, rm.values = FALSE)
 }
 \arguments{
-\item{r}{\code{Raster}* type object.}
+\item{r}{\code{Raster*} type object.}
 
-\item{mx}{maximun value in the \code{raster}.}
+\item{mx}{maximun value in the \code{Raster*}.}
 
-\item{mn}{minimun value in the \code{raster}.}
+\item{mn}{minimun value in the \code{Raster*}.}
 
-\item{rm.values}{logical argument. If \code{FALSE} \code{mx} and  \code{mn} values are assigned to the 
-higher values than \code{mx} and lower values than \code{mn} respectively. If \code{TRUE}, values out of 
-\code{mn}-\code{mx} are removed, and \code{NA} assigned.}
+\item{rm.values}{logical argument. If \code{FALSE}, the \code{mx} and 
+\code{mn} values are assigned to the pixels above or below the \code{mx}
+\code{mn} thresholds respectively. If \code{TRUE}, values outside the 
+\code{mn} - \code{mx} range are replaced by \code{NA}.}
 }
 \description{
-\code{genLimitRasterRange} limits the maximum and the minimum values of a raster image to a given range.
+\code{genLimitRasterRange} limits the maximum and the minimum values of a
+\code{Raster*} class object to a given range.
 }
 \details{
-This is a generic function to limit the maximun and the minimun values in a \code{raster} image.
+This is a generic function to limit the maximun and the minimun values in a
+\code{Raster*} object.
 }
 \examples{
 # generate random images
