@@ -1,32 +1,36 @@
-#' Calculates soil-adjusted vegetation index (SAVI) from raster bands
+#' Calculates soil-adjusted vegetation index (SAVI)
 #'
-#' \code{varSAVI} Calculate the SAVI index from red and nir bands.
+#' \code{varSAVI} Calculate the SAVI index from the red and NIR bands.
 #'
-#' The Soil Adjusted Vegetation Index (SAVI) is a vegetation index engineered to remove 
+#' The soil adjusted vegetation index (SAVI) is an indicator engineered to remove 
 #' the influence of the soil background effect \insertCite{huete1988soil}{RGISTools}.  
-#' This function is used within
-#' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
+#' This function is used within \code{\link{ls7FolderToVar}}, 
+#' \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and
+#' \code{\link{senFolderToVar}}.
 #'
 #' @references \insertRef{huete1988soil}{RGISTools}
 #'
-#' @param red the red band of the capture in \code{raster} format.
-#' @param nir the nir band of the capture in \code{raster} format.
-#' @param L value of 0.5 in reflectance space was found to minimize soil brightness variations.
+#' @param red a \code{raster} with the red band of the capture.
+#' @param nir a \code{raster} with the NIR band of the capture.
+#' @param L a constant to remove soil background effect. A value of 0.5 is
+#' recommended in the literature.
+#' @param scfun a function to re-scale the original pixel values into 
+#' reflectance (0-1).
 #'
-#' @return SAVI in \code{raster} format
+#' @return A SAVI image in \code{raster} format.
 #'
 #' @examples
-#' # dir path of cropped and cutted Modis image in the region of Navarre as example
+#' # path to the cropped and cutted MODIS images for the region of Navarre
 #' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
-#' # list all tif files
+#' # list all the tif files
 #' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)
-#' # print Modis 09 bands
+#' # print the MOD09 bands
 #' getRGISToolsOpt("MOD09BANDS")
 #' 
-#' # select the red and nir bands
+#' # select the red and NIR bands
 #' red <- raster(img.files[1])
 #' nir <- raster(img.files[2])
-#' # calculate the ndwi image
+#' # calculate the SAVI image
 #' savi <- varSAVI(red,nir,scfun=getRGISToolsOpt("MOD09SCL"))
 #' # plot the image
 #' spplot(savi,col.regions=rev(topo.colors(20)))

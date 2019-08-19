@@ -1,31 +1,32 @@
 #' Calculate normalized burn ratio 2 (NBR2)
 #'
-#' \code{varNBR2} computes the NBR2 index from swir1 and swir2 bands.
+#' \code{varNBR2} computes the NBR2 index from SWIR1 and SWIR2 bands.
 #'
-#' The Normalized Burn Ratio 2 (NRB) is an index to identify burned areas. 
-#' In contrast to NBR highlight the sensitivity to water in vegetation \insertCite{lutes2006firemon}{RGISTools}.
-#' This function is used within
-#' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
+#' The normalized burn ratio 2 (NRB) is an index to identify burned areas. 
+#' In contrast to NBR, NRB2 highlights the sensitivity to water in vegetation
+#' \insertCite{lutes2006firemon}{RGISTools}. This function is used within
+#' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}},
+#' \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 #'
 #' @references \insertRef{lutes2006firemon}{RGISTools}
 #'
-#' @param swir1 the nir band of the capture in \code{raster} format
-#' @param swir2 the swir2 band of the capture in \code{raster} format
+#' @param swir1 a \code{raster} with the the SWIR1 band of the capture.
+#' @param swir2 a \code{raster} with the the SWIR2 band of the capture.
 #'
-#' @return NBR2 in \code{raster} format
+#' @return A NBR2 image in \code{raster} format.
 #'
 #' @examples
-#' # dir path of cropped and cutted Modis image in the region of Navarre as example
+#' # path to the cropped and cutted MODIS images for the region of Navarre
 #' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
-#' # list all tif files
+#' # list all the tif files
 #' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)
-#' # print Modis 09 bands
+#' # print the MOD09 bands
 #' getRGISToolsOpt("MOD09BANDS")
 #' 
-#' # select the swir1 and swir2 bands
+#' # select the SWIR1 and SWIR2 bands
 #' swir1 <- raster(img.files[6])
 #' swir2 <- raster(img.files[7])
-#' # calculate the nbr2 image
+#' # calculate the NBR2 image
 #' nbr2 <- varNBR2(swir1,swir2)
 #' # plot the image
 #' spplot(nbr2,col.regions=rev(heat.colors(20)))

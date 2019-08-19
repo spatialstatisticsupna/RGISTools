@@ -7,20 +7,21 @@
 genMosaicList(imageList, fun = "max", verbose = TRUE)
 }
 \arguments{
-\item{imageList}{\code{list} class argument composed by \code{raster} layers.}
+\item{imageList}{\code{list} of \code{RasterLayers}.}
 
-\item{fun}{the function applied to overlapping pixels.}
+\item{fun}{the function being applied to pixels that overlap.}
 
-\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
+running steps and warnings.}
 }
 \description{
 \code{genMosaicList} makes a single mosaic from a list of raster images.
 }
 \details{
 This is a helper function used by other functions in this package. It combines
-a list of \code{raster} images with different geolocation. If the images overlap,
- the function runs function (\code{fun}) to calculate the value, otherwise
- selects the maximum value by default.
+a list of \code{raster} images with different geolocations. If images overlap,
+the function applies \code{fun} to calculate the new values for the 
+overlapping pixels. If not specified, \code{fun = max}.
 }
 \examples{
 # create simulated rasters

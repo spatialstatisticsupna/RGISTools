@@ -1,13 +1,15 @@
-#' Return the date of the capure from the name of the image
+#' Return the capturing date from the name of a raster layer
 #'
-#' \code{genGetDates} extracts the date of one or several images when the name of the layer includes julian date in format "\code{YYYYJJJ}".
+#' \code{genGetDates} extracts the date of one or several images when the name
+#' of the layer includes the date in the "\code{YYYYJJJ}" format.
 #'
-#' The function reads a date from a \code{character} class variable in year-julian (\code{YYYYJJJ}) format and returns an R date class variable.
+#' The function reads a date from a \code{character} class object in year-julian
+#' ("\code{YYYYJJJ}") format and returns a \code{Date} class object.
 #'
 #' @param str \code{character} argument containing the date in julian format "\code{YYYYJJJ}".
-#' @param ... argument for function nestering.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{date.format} modify the format of the date being returned.
+#'   \item \code{format} the format of the date being returned.
 #' }
 #'
 #' @examples

@@ -2,27 +2,27 @@
 % Please edit documentation in R/RGISToolsOpts.R
 \name{getRGISToolsOpt}
 \alias{getRGISToolsOpt}
-\title{Get the current value of an RGISTools configuration variable}
+\title{Get the default value of an RGISTools option}
 \usage{
 getRGISToolsOpt(opt, env = optEnv)
 }
 \arguments{
-\item{opt}{the name of the option to get.}
+\item{opt}{the name of the \code{RGISTools} setting to be returned.}
 
 \item{env}{the environment where the \code{RGISTools} option are saved.}
 }
 \description{
-\code{getRGISToolsOpt} gets the current value of an \code{RGISTools} option.
-This function can be jointly used with \code{\link{setRGISToolsOpt}} and 
-\code{\link{showRGISToolsOpt}}.
+\code{getRGISToolsOpt} gets the current value of an \code{RGISTools} 
+configuration variable. This function can be jointly used with
+\code{\link{setRGISToolsOpt}} and \code{\link{showRGISToolsOpt}}.
 }
 \examples{
 # list avaliable options names
 showRGISToolsOpt()
-# list the assignation of Sentinel bands
+# list the Sentinel-2 bands
 getRGISToolsOpt("SEN2BANDS")
-# list the assignation of Landsat-8 bands
+# list the Landsat-8 bands
 getRGISToolsOpt("LS8BANDS")
-# list the assignation of Modis 09 bands
+# list the MODIS09 bands
 getRGISToolsOpt("MOD09BANDS")
 }

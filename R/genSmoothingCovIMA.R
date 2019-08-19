@@ -1,31 +1,44 @@
-#' Use covariates for smoothing outliers in a time series of satellite images
+#' Fill data gaps and smooth outliers in a time series of satellite images using
+#' covariates
 #'
-#' \code{genSmoothingCovIMA} runs the IMA (\link{genSmoothingIMA}) smoothing method with covariates 
-#' \insertCite{militino2019interpolation}{RGISTools}.
+#' \code{genSmoothingCovIMA} runs the Image Mean Anomaly (IMA) algorithm
+#' with covariates \insertCite{militino2018improving}{RGISTools}.
 #'
-#' This method decomposes the time series of the images into the series of the mean images and the series of the anomaly images. The procedure applies
-#' the smoothing algorithm with covariates over a series of anomaly images. \insertCite{militino2019interpolation}{RGISTools}.
-#'
-#' This function depends of several arguments, such as the images to fill (\code{Img2Process}),
-#' the number of periods or years in the definition of the spatio temporal neighbourhoood, or the size of the
-#' aggregation.
+#' This filling/smoothing method was developed by 
+#' \insertCite{militino2018improving;textual}{RGISTools}. This technique 
+#' decomposes a time series of images into a new series of mean and anomaly 
+#' images. The procedure applies the filling/smoothing algorithm with covariates
+#' over the anomaly images. The procedure requires a proper definition of a
+#' temporal neighbourhood for the target image and aggregation factor. For
+#' further details, see \insertCite{militino2018improving;textual}{RGISTools}.
 #'
 #' @references \insertRef{militino2018improving}{RGISTools}
 #'
-#' @param rStack \code{RasterStack} class argument containing a time series of satellite images.
-#' @param cStack \code{RasterStack} class argument containing a time series of covariates.
-#' @param Img2Process \code{vector} class argument defining the images to be smoothed.
-#' @param nDays \code{numeric} argument with the number of previous and subsequent days used for defining the neighborhood
-#' @param nYears \code{numeric} argument with the number of previous and subsequent years used for defining the neighborhood.
-#' @param aFilter \code{vector} with the lower and upper extreme values for filtering the anomalies. Ex. c(0.05,0.95).
-#' @param fun function used for calculating the aggregated image. Both the \code{mean} or \code{median} functions are acceptable.
-#'  \code{mean} is the default.
-#' @param snow.mode logical argument. If \code{TRUE}, the filling process will be parallelized by \code{raster} package.
-#' @param fact \code{numeric} argument with an aggregation factor of the anomalies before the interpolation.
-#' @param out.name the prefix name of the images if the result is written in the Hard Device Drive (HDD).
-#' @param ... argument for function nestering.
+#' @param rStack a \code{RasterStack} class argument containing a time series of
+#' satellite images. Layer names should contain the date of the image in
+#'  "\code{YYYYJJJ}" format.
+#' @param cStack a \code{RasterStack} class argument containing a time series of
+#' covariates.
+#' @param Img2Process a \code{vector} class argument defining the images to be
+#' filled/smoothed.
+#' @param nDays a \code{numeric} argument with the number of previous and 
+#' subsequent days that define the temporal neighborhood.
+#' @param nYears a \code{numeric} argument with the number of previous and
+#' subsequent years that define the temporal neighborhood.
+#' @param aFilter a \code{vector} with the lower and upper quantiles that define
+#' the outliers of the anomalies. Ex. c(0.05,0.95).
+#' @param fact a \code{numeric} argument with an aggregation factor of the
+#' anomalies carried out before the interpolation.
+#' @param fun a \code{function} used to aggregate the image of anomalies. Both
+#' \code{mean}(default) or \code{median} are acceptted.
+#' @param snow.mode logical argument. If \code{TRUE}, the filling process will
+#' be parallelized using the \code{raster} package.
+#' @param out.name the name of the folder containing the filled/smoothed images
+#' when saved in the Hard Disk Drive (HDD).
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the path where the images will be saved in \code{GTiff} format.
+#'   \item \code{AppRoot} the path where the filled/smoothed time series of 
+#'   images are saved in GTiff format.
 #' }
 #'
 #' @examples
@@ -48,7 +61,7 @@
 #' }
 #' genPlotGIS(ex.ndvi.navarre)
 #'
-#' # smoothing the image using dem as covariate
+#' # smoothing the image using the DEM as covariate
 #' smth.ndvi <- genSmoothingCovIMA(rStack = ex.ndvi.navarre,
 #'                                 cStack = ex.dem.navarre,
 #'                                 Img2Process = c(2,5))
@@ -61,13 +74,13 @@
 genSmoothingCovIMA <- function (rStack,
                              cStack,
                              Img2Process=NULL,
-                             fun=mean,
                              nDays=3,
                              nYears=1,
                              fact=5,
-                             out.name="out",
-                             aFilter=c(),
+                             fun=mean,
+                             aFilter=c(.05,.95),
                              snow.mode=FALSE,
+                             out.name="out",
                              ...)
 {
   arg<-list(...)

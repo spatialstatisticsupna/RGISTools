@@ -2,22 +2,28 @@
 % Please edit documentation in R/senGetPathRow.R
 \name{senGetTile}
 \alias{senGetTile}
-\title{Return the tile of Sentinel-2 images "TTTSSS" string format}
+\title{Return the pathrow of a tile from Sentinel-2 images}
 \usage{
 senGetTile(str)
 }
 \arguments{
-\item{str}{the full path or official image name of the Sentinel-2 image from which the tile is extracted.}
+\item{str}{the full path(s) or official name(s) of the Sentinel-2 images from
+which the tile's path and row numbers are retrieved.}
 }
 \value{
-an string with the path and row of the image in "\code{TTTSSS}" format.
+a string with the path and row in "\code{TTTSSS}" format.
 }
 \description{
-\code{senGetTile} reads the official name of a Sentinel-2 image and returns its assigned tile. 
-\href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/news/-/asset_publisher/Ac0d/content/sentinel-2-level-1c-product-tiling-grid-released}{Get more Sentinel tile detalis here}.
+\code{senGetTile} reads the official name of a Sentinel-2 image and returns 
+the tile's path and row number, in "\code{TTTSSS}" format (Sentinel naming
+convention).
+}
+\details{
+Find more details about the Sentinel tiling system 
+\href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/news/-/asset_publisher/Ac0d/content/sentinel-2-level-1c-product-tiling-grid-released}{here}.
 }
 \examples{
-#example of getting date from Sentinel2 image name
+# getting path and row numbers from a couple of Sentinel-2 images
 str <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
          "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
 pr <- senGetTile(str)

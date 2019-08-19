@@ -9,66 +9,72 @@ lsEspaDownloadOrders(orders, username = NULL, password = NULL,
   n.attempts = 5, untar = FALSE, ...)
 }
 \arguments{
-\item{orders}{a list of the requested images as returned by \code{\link{lsEspaGetOrderImages}}.}
+\item{orders}{a list of the requested images as returned by
+\code{\link{lsEspaGetOrderImages}}.}
 
-\item{username}{login credentials to access the USGS EROS web service.}
+\item{username}{USGS's EarthExplorer username.}
 
-\item{password}{login credentials to access the USGS EROS web service.}
+\item{password}{USGS's EarthExplorer password.}
 
-\item{c.handle}{curl handler created with \code{curl} package containing the connection 
-with password and username defined. This argument is mandatory if \code{username} and
-\code{password} are not defined.}
+\item{c.handle}{a curl handler created with the package \code{curl} to stablish
+a connection with a preset password and username. This argument is mandatory
+if \code{username} and \code{password} are not defined.}
 
-\item{verbose}{logical argument. If TRUE, the function prints running stages and warnings.}
+\item{verbose}{logical argument. If TRUE, the function prints the running 
+steps and warnings.}
 
-\item{overwrite}{logical argument. If TRUE, overwrites the existing images with the same name.}
+\item{overwrite}{logical argument. If TRUE, overwrites the existing images
+with the same name.}
 
-\item{n.attempts}{the number of attempts that the function has to carry out to download an image in case of corrupted files.}
+\item{n.attempts}{the number of attempts to download an image in case it
+becomes corrupted files.}
 
-\item{untar}{logical argument. If TRUE, untars downloaded images.}
+\item{untar}{logical argument. If TRUE, untars the downloaded images.}
 
-\item{...}{argument for function nestering accepts:
+\item{...}{argument for nested functions:
  \itemize{
-  \item \code{AppRoot} the directory to save the downloaded images.
+  \item \code{AppRoot} the download directory.
 }}
 }
 \description{
-\code{lsEspaDownloadOrders} Downloads a set of images processed by the EROS Centre Science Processing 
-Architecture (ESPA) through its API.
+\code{lsEspaDownloadOrders} downloads a set of images processed by the EROS
+Centre Science Processing Architecture (ESPA) through its API.
 }
 \details{
-This function is part of a group of functions used to pre-process Landsat Level 1 images. 
-The pre-processing is carried out by ESPA on demand. \code{\link{lsEspaDownloadOrders}}
-downloads the images whose processing was completed according to \code{\link{lsEspaUpdateOrders}}. 
-The function downloads and saves the imagery under the AppRoot directory. The function 
-automatically creates two folders, called "raw" and "untar", to save the compressed and 
-decompressed images respectively. The imagery is only decompressed when \code{untar = TRUE}.
+This function is part of a group of functions used to pre-process Landsat
+level-1 images. The pre-processing is carried out by ESPA on demand. 
+\code{\link{lsEspaDownloadOrders}} downloads the images whose processing was
+completed according to \code{\link{lsEspaUpdateOrders}}. The function 
+downloads and saves the imagery under the \code{AppRoot} directory. The
+function automatically creates two folders, called "raw" and "untar", to 
+save the compressed and decompressed images respectively. The imagery is only
+decompressed when \code{untar = TRUE}.
 }
 \examples{
 \dontrun{
 src <- "Path_for_downloading_folder"
-# Search Landsat 7 level-1
+# search Landsat-7 level-1
 search.res <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
                         endDate = as.Date("15-01-2017", "\%d-\%m-\%Y"),
                         lonlat = c(-1.64323, 42.81687),
                         AppRoot = src)
-# Request to ESPA the prepocessing of level-1 images to get the surface reflectance
+# request to ESPA the prepocessing of level-1 images to get the surface reflectance
 order <- lsEspaOrderImages(search.res = search.res,
                            username = "username", 
                            password = "password", 
                            product = 'sr',
                            verbose = FALSE)
-# Get an ID for our request
+# get an ID for our request
 orders <- lsEspaGetOrderImages(username = "username", 
                                password = "password")
-# Follow up the status of the request
+# follow up the status of the request
 orders <- lsEspaUpdateOrders(orders = orders,
                              username = "username", 
                              password = "password")
-# Saving directory
+# saving directory
 dir.ESPA <- file.path(src,"Landsat7","ESPA")
 dir.create(dir.ESPA)
-# Download when status says: complete
+# download when status says: complete
 lsEspaDownloadOrders(orders = orders,
                      username = "username", 
                      password = "password",

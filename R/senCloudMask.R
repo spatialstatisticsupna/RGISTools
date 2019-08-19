@@ -1,23 +1,29 @@
-#' Create layers of clouds for sentinel-2 images
+#' Create cloud masks for Sentinel-2 images
 #' 
-#' \code{senCloudMask} creates layers of clouds using \code{CLDPROB} band from \code{S2MSI2A} product.
+#' \code{senCloudMask} creates cloud masks derived from the cloud probability
+#' band \code{CLDPROB} band from the \code{S2MSI2A} product.
 #'
-#' @param src the path to the folder where the \code{S2MSI2A} images are stored. 
-#' @param img.res character vector argument. Defines the resolution used to create the cloud mask. Ex "20m" or "30m".
-#' @param sensitivity numeric argument. It defines how sensitive is the method detecting the clouds. The
-#' valid range is 0-100. By default 50.
-#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
-#' @param ... argument for function nestering:
+#' The valid threshold range for \code{sensitivity} is 0-100. By default,
+#' the argument is set to 50.
+#' 
+#' @param src the path to the folder with the \code{S2MSI2A} images. 
+#' @param img.res a \code{character} vector argument. Defines the band resolution
+#' used to create the cloud mask. Ex "20m" or "30m".
+#' @param sensitivity a \code{numeric} argument. Defines the sensitivity of the
+#' cloud detection method.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
+#' images with the same name.
+#' @param ... argument for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the directory where the extracted images should be located.
+#'   \item \code{AppRoot} the directory where the cloud masks are saved.
 #' }
 #'
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' # Download S2MSI1C products sensed by Sentinel - 2 
-#' # satellite between the julian dates 210 and 218, 2018
+#' # Download S2MSI1C products sensed by Sentinel-2 
+#' # between the julian days 210 and 218, 2018
 #' src <- "Path_for_downloading_folder"
 #' senDownload(startDate = as.Date("2018210", "%Y%j"),
 #'             endDate = as.Date("2018218", "%Y%j"),
@@ -28,7 +34,8 @@
 #'             username = "username",
 #'             password = "password",
 #'             AppRoot = src)
-#' # define Sentinel-2 path to the unzip folder
+#' # define the paths to the Sentinle-2 images and the
+#' # folder with the unzipped images
 #' src.sen2 <- file.path(src, "Sentinel-2")
 #' src.unzip <- file.path(src.sen2, "unzip")
 #' # mosaic the Sentinel-2 images
@@ -45,7 +52,7 @@
 #'              sensitivity = 98,
 #'              AppRoot = src.sen2)
 #'              
-#' # define Sentinel-2 cloud mask path
+#' # define the path for the Sentinel-2 cloud mask
 #' src.cloud <- file.path(src.sen2, "CloudMask")
 #' 
 #' # select B02 images of 60 meters
@@ -56,7 +63,7 @@
 #' b2.tiles <- tiles.navarre[grepl("B02",tiles.navarre)]
 #' b2.tiles <- b2.tiles[grepl("60m",b2.tiles)]
 #' 
-#' # select cloud mask of 60 meters
+#' # generate a 60-meter resolution cloud mask 
 #' cloud.tiles <- list.files(src.cloud,
 #'                           full.names = TRUE,
 #'                           pattern = "\\.tif$")

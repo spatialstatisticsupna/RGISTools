@@ -1,12 +1,17 @@
-#' Time series of Digital Elevation Model (DEM) for the region of Navarre in Spain
+#' A Digital Elevation Model (DEM) of the region of Navarre (Spain)
 #'
-#' Geographically projected \code{RasterStack} with the DEM values for
-#' the region of Navarre, for using as example in \code{genSmoothingCovIMA}. \code{RasterStack} 
-#' projection: \code{+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs}.
+#' Geographically projected \code{RasterStack} with the DEM of the region of
+#' Navarre (Spain). The DEM was obtained from the
+#' \href{http://centrodedescargas.cnig.es/CentroDescargas/locale?request_locale=en#}{National Center for Geographic Information}
+#' of Spain. The DEM is used as a covariable in the Image Mean Anomaly (IMA)
+#' algorithm (\code{\link{genSmoothingCovIMA}}).
 #'
-#' @format The \code{RasterStack} contains 6 time-periods, with the same DEM:
+#' @format The \code{RasterStack} contains 6 layers with the same DEM, one for
+#' every image in the time series of the \code{\link{genSmoothingCovIMA}} example.
+#' The \code{RasterStack} coordinates are in the Sinusoidal projection:
+#' 
 #' \describe{
-#'   \item{name}{each layer is named with the date of the period in julian format as "\code{YYYYJJJ}"}.
+#'   \item{name}{layer names contain the capturing date of the corresponding image in the format "\code{YYYYJJJ}"}.
 #'   \item{size}{113 rows by 105 columns and 6 layers}.
 #' }
 #' @name ex.dem.navarre
@@ -14,13 +19,17 @@
 #' @keywords data
 NULL
 
-#' NDVI of the tile containing Navarre in Spain
+#' A time series of NDVI of Navarre (Spain)
 #'
-#' Geographically projected \code{RasterBrick} object of the Normalized Difference Vegetation Index (NDVI) in Navarre.
+#' Geographically projected \code{RasterBrick} object of the Normalized 
+#' Difference Vegetation Index (NDVI) of Navarre.
 #'
-#' @format The \code{RasterBrick} contains 6 time-periods:
+#' @format The \code{RasterBrick} contains 6 images, from the 2nd to the 4th of
+#' August in 2017 and 2018. The \code{RasterBrick} coordinates are in the
+#' Sinusoidal projection:
+#' 
 #' \describe{
-#'   \item{name}{the name of each layer contains the date of the period in julian format as "\code{YYYYJJJ}"}.
+#'   \item{name}{layer names contain the date of the image in the format "\code{YYYYJJJ}"}.
 #'   \item{size}{each layer contains 113 rows and 105 columns}.
 #' }
 #' @name ex.ndvi.navarre
@@ -28,9 +37,10 @@ NULL
 #' @keywords data
 NULL
 
-#' Geographically projected spatial polygon of Navarre in Spain to be used in examples
+#' A spatial polygon with the border of Navarre (Spain)
 #'
-#' \code{SpatialPolygonsDataFrame} containing the region of Navarre projected in longitude/latitude.
+#' \code{SpatialPolygonsDataFrame} representing the border of Navarre with
+#' coordinates in the longitude/latitude format.
 #' @name ex.navarre
 #' @docType data
 #' @keywords data

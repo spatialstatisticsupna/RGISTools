@@ -1,25 +1,28 @@
 #' Convert an HDF file into a set of GTiff files
 #'
-#' \code{modExtractHDF} converts the original Modis image format (HDF) into a file
-#' format loadable by R (GTiff). The function extracts all image layers. 
-#' This function requires the correct installation of GDAL library.
+#' \code{modExtractHDF} converts the original format of MODIS images (HDF) into
+#' GTiffs (one file for each layer). 
 #'
-#' HDF files cannot be directly loaded into R. The function \code{\link{modExtractHDF}}
-#' borrows \code{gdalwarp} and \code{gdal_translate} functions from the \code{gdalUtils} package.
-#' These functions are used to convert the '.hdf' files into '.tif' files. The '.tif'
-#' files can be loaded in R using the \code{raster} package. Go to \code{\link{modSearch}} and \code{\link{modDownload}}
-#' for further details about these functions. Further details about the \code{gdalUtils} functions
-#' in \code{gdalUtils} package manual.
+#' HDF files cannot be directly loaded into R, so they must be converted into
+#' GTiffs. To acomplish this task, the function \code{modExtractHDF}
+#' borrows the \code{gdalwarp} and \code{gdal_translate} functions from the 
+#' \code{gdalUtils} package. Further details about these functions can be found
+#' in the corresponding package manual. GDAL and \code{gdalUtils} must be properly
+#' installed to use \code{modExtractHDF}. GTiffs can be loaded in R using the
+#' \code{raster} package.
 #'
-#' @param filesHDF  the full path where the HDF files are stored.
+#' @param filesHDF  the full path where the HDF files are located.
 #' @param shp  the shape file of the area of interest.
 #' @param bFilter a vector containing the names of the bands to extract.
-#' @param rm.band a vector containing the names of the bands to not extract.
-#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
-#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
-#' @param ... argument for function nestering:
+#' @param rm.band a vector containing the names of the bands excluded from the
+#' extraction.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
+#' images with the same name.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the directory where the extracted images should be located
+#'   \item \code{AppRoot} the directory where the extracted images are saved.
 #' }
 #' @examples
 #' \dontrun{
@@ -36,7 +39,7 @@
 #'                       extent = ex.navarre,
 #'                       AppRoot = src.mod.hdf)
 #'                       
-#' # download first image of image list
+#' # download the images of the list
 #' src.mod <- file.path(src, "Modis", "MOD11A1")
 #' modDownSearch(searchres = img.list, 
 #'               username = "username", 
@@ -45,7 +48,7 @@
 #' 
 #' src.tif<-file.path(src.mod,"tif")
 #' 
-#' # Extract one layer from downloaded image
+#' # extract the first image
 #' hdf.files <- list.files(src.mod.hdf, 
 #'                         full.names = TRUE, 
 #'                         pattern = "\\.hdf$")

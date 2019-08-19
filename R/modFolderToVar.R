@@ -1,39 +1,40 @@
-#' Compute derived variables from Modis multispectral bands
+#' Compute a remote sensing index from a time series of MODIS images
 #'
-#' \code{\link{modFolderToVar}} calculates an index using the bands from Modis multispectral images.
-#' The images are specified by a path to the storing folder (resulting from the \code{\link{modMosaic}} function).
-#' The function returns a \code{RasterStack} with the index time series.
+#' \code{modFolderToVar} computes a remote sensing index from the spectral bands
+#' of a time series of MODIS images. The images are specified by the path to
+#' the folder that stores the imagery (resulting from the \code{\link{modMosaic}} 
+#' function). The function returns a \code{RasterStack} with a time series of 
+#' images with the index.
 #'
-#' The function requires the definition of \code{src} and \code{fun} arguments. The argument \code{src}
-#' specifies the path to the output folder with the multispectral images, where a new folder with the 
-#' name of the product is created.
-#' This function works with the path to the folder containing the GTiff layers derived from any \code{MOD09} product, or 
-#' the path to the folder with the result of  \code{\link{modMosaic}}.
-#' The \code{fun} argument is a function with
-#' the calculation of an index based on the spectral bands. There are some pre-programmed
-#' indixes in \code{RGISTools}. Functions with the pre-programmed indexes start with var prefix
-#' (\code{\link{varNDVI}}, \code{\link{varEVI}}). The user can define its own functions.
+#' The function requires the definition of the \code{src} and \code{fun} 
+#' arguments. The \code{src} is usually the path resulting from 
+#' \code{\link{modMosaic}}. The \code{fun} argument can be any function from
+#' this package beginning with “var” (\code{\link{varNDVI}}, \code{\link{varEVI}},
+#' etc.). Custom functions can also be implemented. If \code{fun = varRGB}, then
+#' the argument \code{getStack} must be equal to \code{FALSE} and the RGB
+#' images must be imported afterwards.
 #'
-#' @param src path to the input folder with the Modis multispectral images.
-#' @param fun is a function defined for computing indexes.
-#' All the functions starting with the "var" prefix are available 
-#' functions. Customized functions can also be implemented.
-#' @param getStack logical argument. If \code{TRUE}, returns the time series as a \code{RasterStack}, otherwise the result 
-#' is saved in the Hard Drive Device (HDD).
-#' @param overwrite logical argument. If \code{TRUE}, it overwrites the existing images with the same name.
-#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
-#' @param ... argument for function nestering:
+#' @param src path to the folder with the MODIS multispectral images.
+#' @param fun is a \code{function} that computes the remote sensing index.
+#' @param getStack logical argument. If \code{TRUE}, returns the time series of
+#' images as a \code{RasterStack}, otherwise the images are saved in the Hard
+#' Drive Device (HDD).
+#' @param overwrite logical argument. If \code{TRUE}, it overwrites the existing
+#' images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} directory of the output time series.
+#'   \item \code{AppRoot} the directory of the outcoming time series.
 #' }
 #'
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' # assign the main output directory
+#' # main output directory
 #' src <- "Path_for_downloading_folder"
-#' # download Modis images
+#' # download MOD09 images
 #' modDownload(product = "MOD09GA",
 #'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'             endDate = as.Date("03-01-2018", "%d-%m-%Y"),
@@ -43,14 +44,14 @@
 #'             extract.tif = TRUE, 
 #'             collection = 6,
 #'             extent = ex.navarre)
-#' # assign src.mod as the outut folder for ModMosaic
+#' # assign src.mod as the output folder from modMosaic
 #' src.mod <- file.path(src, "Modis", "MOD09GA") # output directory
 #' src.tif <- file.path(src.mod, "tif") # input directory
-#' # mosaic the Modis images
+#' # mosaic the MODIS images
 #' modMosaic(src.tif,
 #'           AppRoot = src.mod,
 #'           out.name = "Navarre")
-#' # assign src as the path to mosaicked folder
+#' # path to the folder with the mosaicked images
 #' src.navarre <- file.path(src.mod, "Navarre")
 #' # generate NDVI images of Navarre
 #' src.variables <- file.path(src.mod, "Variables")
@@ -60,7 +61,7 @@
 #'                scfun = getRGISToolsOpt("MOD09SCL"),
 #'                AppRoot = src.variables, verbose=T,
 #'                overwrite = T)
-#' # import tif mosaicked images to R environment
+#' # import mosaicked images (.tif) to the environment in R
 #' flist <- list.files(file.path(src.variables,"EVI"),
 #'                     pattern = "\\.tif$",
 #'                     full.names = TRUE,

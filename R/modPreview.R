@@ -1,22 +1,25 @@
-#' Preview of Modis satellite images
+#' Preview MODIS satellite images
 #'
-#' \code{modPreview} shows a preview of the \code{n}-th image from a set of search results.
+#' \code{modPreview} shows a preview of the \code{n}-th image from a set of 
+#' search results.
 #'
-#' The function shows a preview of the \code{n}-th from \code{\link{modSearch}} function.
-#' The previewed image is downloaded from Modis website. Please, be aware that not all 
-#' the captures have this feature.
+#' The function shows a preview of the \code{n}-th output image from a search
+#' in the MODIS archives (\code{\link{modSearch}}), with 
+#' \code{resType = "browseurl"}). The preview is downloaded from the
+#' \href{https://earthdata.nasa.gov}{EarthData Platform}.
+#' Please, be aware that only some images may have a preview.
 #'
-#'
-#' @param searchres a vector with the results from a search of Modis images provided by 
-#' the functions \code{\link{modSearch}} with \code{resType="browseurl"} argument.
-#' @param n the number of the image of interest in the search vector.
-#' @param size a number specifying the size of the preview to be displayed, in pixels.
+#' @param searchres a vector with the results from \code{\link{modSearch}}.
+#' @param n a \code{numeric} argument identifying the location of the image in
+#' \code{searchres}.
+#' @param size a \code{numeric} argument specifying the size of the preview to
+#' be displayed, in pixels.
 #'
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' # Retrieve jpg images covering Navarre region between 2011 and 2013
+#' # retrieve jpg images covering Navarre region between 2011 and 2013
 #' searchres <- modSearch(product = "MOD09GA",
 #'                       startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                       endDate = as.Date("31-12-2013", "%d-%m-%Y"),

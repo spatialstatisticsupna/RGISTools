@@ -2,81 +2,80 @@
 % Please edit documentation in R/ls7Search.R
 \name{ls7Search}
 \alias{ls7Search}
-\title{Search Landsat-7 time series list of images}
+\title{Search Landsat-7 images}
 \usage{
 ls7Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
 }
 \arguments{
-\item{startDate}{starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{startDate}{a \code{Date} class object with the starting date of the 
+study period.}
 
-\item{endDate}{ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.}
+\item{endDate}{a \code{Date} class object with the ending date of the 
+study period.}
 
-\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
+running steps and warnings.}
 
-\item{precise}{logical argument. If \code{TRUE}, the search is done tile by tile (slower).}
+\item{precise}{logical argument. If \code{TRUE}, conducts a thorough search,
+tile by tile (slower).}
 
-\item{...}{argument for function nestering:
+\item{...}{arguments for nested functions:
  \itemize{
-  \item \code{pathrow} a list of vectors defining the path and row number for the region of interest according
-to the \href{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/}{Worldwide Reference System}.
-This argument is mandatory if \code{extent} is not defined. Ex. \code{list(c(200,31),c(200,30))}.
-  \item \code{lonlat} this argument is optional. A vector with the coordinates of
-the point or region of interest in longitude/latitude format. Ex. \code{c(-1.64323,42.81687)}.
-  \item \code{extent} this argument is optional. Extent, Raster*, SpatialPolygons*, SpatialLines* or SpatialPoints*
-object are acceptable formats as long as are longitude/latitude format.
-This argument is mandatory if \code{pathrow} is not defined.
-  \item \code{AppRoot} this option specifies the downloading/searching directory of the metadata file. 
-  \item all column names in .LS7MD data frame for filter results.
+  \item \code{pathrow} a list of vectors with the path and row numbers of
+  the tiles concerning the region of interest. This argument is mandatory
+  if \code{extent} or \code{lonlat} are not provided. Ex. 
+  \code{list(c(200,31),c(200,30))}.
+  \item \code{lonlat} a vector with the longitude/latitude
+  coordinates of the point of interest. Ex. \code{c(-1.64323,42.81687)}.
+  \item \code{extent} an \code{extent}, \code{Raster*}, or 
+  \code{Spatial}* object representing the region of interest with 
+  longitude/latitude coordinates. This argument is mandatory if 
+  \code{pathrow} or \code{lonlat} are not defined.
+  \item \code{AppRoot} directory of the metadata file. 
+  \item column names in the .LS7MD \code{data.frame} and their values.
 }}
 }
 \description{
-\code{ls7Search} searches the Landsat-7 image repository to find available images for
-a particular location and date interval. The function returns the search result as a data frame
-with the names of the images and their metadata.
+\code{ls7Search} seeks Landsat-7 images in the Landsat repository concerning
+a particular location and date interval. The function returns a 
+\code{data.frame} with the names of the images and their metadata.
 }
 \details{
-\code{ls7Search} is a stand-alone function. If the metadata for the time and region of interest has been
-downloaded before, \code{ls7Search} will use this metadata by default. In case the metadata has not
-been yet downloaded, \code{ls7Search} will make the call for you.
+\code{ls7Search} seeks images in the metadata file. If the metadata was
+downloaded before to the current directory, \code{ls7Search} will use this
+metadata by default. In case the metadata was not downloaded before, 
+\code{ls7Search} will make that call for you.
 
-The search is done by defining a time interval and a location. The arguments \code{startDate}
-and \code{endDate} defines the time interval. These are mandatory arguments. The function defines the spatial location
-using at least one of the following arguments: \code{pathrow}, \code{extent}, \code{lonlat}, and \code{polygon}. 
-When more than one of these argument are defined,
-the function will work with the first evaluated method, otherwise, the function shows an error message.
+Landsat images are organized by tiles, which have a unique path and row
+numbers according to the
+\href{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/}{Worldide Reference System}.
+The fastest way to search an image in the metadata file is by path and row
+(\code{pathrow}). This method requires to know in advance the path and row
+number of the tile that is relevant for your region of interest. From the
+user's standpoint, the simplest way to search a time series of Landsat-7
+images is by \code{extent}, \code{lonlat} or \code{polygon}, since they do 
+not require any prior knowledge about the tiles.
 
-Landsat images are catalogued spatially using a unique path and row. The fastest way to search an image
-in the metadata file is filtering by its path and row. This search method requires previous knowledge on
-the path and row relevant for your region of interest.
-
-From the user point of view, the easiest way to search a time series of Landsat-7 is using the extent,
-\code{lonlat} and \code{polygon} arguments. These methods do not require to know in advance the path and rows of the images.
-These method uses spatial objects to define the region of interest, and needs to be
-"\code{+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs}”. The argument \code{extent} accepts any R object being defined
-by a spatial extent. The argument \code{lonlat} only accepts an R vector with a point in the form of
-longitude/latitude (ex. \code{c(-1.64323,42.81687)}).
-The argument \code{Polygon}, accepts \code{SpatialPolygon} or \code{SpatialPolygonDataFrame} objects.
-
-In addition, the search function enables further filtering. The function can filter
-the results by any column name in the metadata file, using the column name as an argument. For example, to
-filter the images that can be previewed, the user has to find the images with “Y” in the browseAvaliable column.
-This can be achieved by adding \code{browseAvaliable=”Y”} as a function argument.
+The function can screen the results by any other attribute in the metadata.
+For instance, to filter the imagery with an available preview, the 
+\code{browseAvaliable=”Y”} must be added as an argument of the function
+(see the examples).
 }
 \examples{
 \dontrun{
-# search by known row and path
+# search by path and row numbers of a tile
 search.res <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                         pathrow = list(c(200,31),c(200,30)),
                         browseAvaliable = "Y")
                   
-# search by longitude/latitude
+# search by point coordinates (long/lat coordinates)
 search.res <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                         lonlat = c(-1.64323,42.81687),
                         browseAvaliable = "Y")
                   
-# search by projected file must be in long/lat projection
+# search by extent (long/lat coordinates)
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 search.res <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
@@ -85,13 +84,13 @@ search.res <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         precise = TRUE,
                         browseAvaliable = "Y")
 
-# search by projected file fast
+# search by extent (fast mode)
 search.res <- ls7Search(startDate = as.Date("01-01-2011","\%d-\%m-\%Y"),
                         endDate = as.Date("31-12-2013","\%d-\%m-\%Y"),
                         extent = ex.navarre,
                         precise = FALSE,
                         browseAvaliable = "Y")
-# remove metadata data frame to free memory
+# remove metadata to free memory space
 lsRemoveMetadata()
 }
 }

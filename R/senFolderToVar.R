@@ -1,40 +1,41 @@
-#' Compute derived variables from Sentinel-2 multispectral bands
+#' Compute a remote sensing index from a time series of Sentinel-2 images
 #'
-#' \code{senFolderToVar} calculates an index using the bands from Sentinel-2 multispectral
-#' images. The images are specified by a path to the storing folder
-#' (resulting from the \code{\link{senMosaic}} function). The function returns a
-#' \code{RasterStack} with the index time series.
-#'
-#' The function requires the definition of src and fun arguments. The argument \code{src}
-#'  contains the path to the folder with the multispectral
-#'  images. It can be easily defined as the path comming from \code{\link{senMosaic}}.
-#'  The \code{fun} argument calculates the index based
-#'  on spectral bands. There are some pre-programmed indexes in \code{RGISTools}.
-#'  Functions with the pre-programmed indexes start with var (\code{\link{varNDVI}}, \code{\link{varEVI}}).
-#'  The user can define its own functions.
-#'
-#' @param src path to the folder with the Sentinel multispectral images.
-#' @param fun is a function defined by the package for computing indexes.
-#' All functions in the package starting with three characters.
-#' 'var' are acceptable functions. Custom functions can also be implemented.
-#' @param getStack logical argument. If \code{TRUE}, returns the time series as a 
-#' \code{RasterStack} or otherwise the images are saved in the Hard Drive Devide (HDD).
-#' @param overwrite logical argument. If \code{TRUE}, 
-#' overwrites the existing images with the same name.
-#' @param verbose logical argument. If \code{TRUE}, the 
-#' function prints running stages and warnings.
-#' @param resbands using Sentinel \code{S2MSI2A} products specifies the resolution of the output images. By default all 
-#' the resolutions (10m, 20m and 60m) are used.
-#' @param ... argument for function nestering:
+#' \code{senFolderToVar} computes a remote sensing index from the spectral bands
+#' of a time series of Sentinel-2 images. The images are specified by the path to
+#' the folder that stores the imagery (resulting from the \code{\link{senMosaic}} 
+#' function). The function returns a \code{RasterStack} with a time series of 
+#' images with the index.
+#' 
+#' The function requires the definition of the \code{src} and \code{fun} 
+#' arguments. The \code{src} is usually the path resulting from 
+#' \code{\link{senMosaic}}. The \code{fun} argument can be any function from
+#' this package beginning with “var” (\code{\link{varNDVI}}, 
+#' \code{\link{varEVI}}, etc.). Custom functions can also be implemented.
+#' If \code{fun = varRGB}, then the argument \code{getStack} must be equal to
+#' \code{FALSE} and the RGB images must be imported afterwards.
+#' 
+#' @param src the path to the folder with the Sentinel-2 multispectral images.
+#' @param fun a \code{function} that computes the remote sensing index.
+#' @param getStack logical argument. If \code{TRUE}, returns the time series of
+#' images as a \code{RasterStack}, otherwise the images are saved in the Hard
+#' Drive Device (HDD).
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
+#' images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param resbands the resolution of the image being used to compute index,
+#' when the imagery comes from the Senintel-2 S2MSI2A product. By default,
+#' all resolutions (10m, 20m, and 60m) are used.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the directory of the resulting time series.
+#'   \item \code{AppRoot} directory where the outcoming time series is saved.
 #' }
 #'
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' # assign the main output directory
+#' # main output directory
 #' src <- "Path_for_downloading_folder"
 #' # download Sentinel-2 images
 #' senDownload(startDate = as.Date("2018210","%Y%j"),
@@ -46,7 +47,7 @@
 #'             username = "username",
 #'             password = "password",
 #'             AppRoot = src)
-#' # assign the folder with the Sentinel-2 unzipped images
+#' # folder with the unzipped images from Sentinel-2
 #' src.sen <- file.path(src,"Sentinel-2")
 #' src.unzip <- file.path(src.sen, "unzip")
 #' # mosaic the Sentinel-2 images
@@ -54,7 +55,7 @@
 #'           AppRoot = src.sen,
 #'           gutils = TRUE,
 #'           out.name = "Navarre")
-#' # assign src as the path to mosaicked folder
+#' # path to the folder with the mosaicked images
 #' src2 <- file.path(src.sen, "Navarre")
 #' src3 <- file.path(src.sen, "Navarre_Variables")
 #' dir.create(src3)

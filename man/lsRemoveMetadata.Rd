@@ -2,20 +2,23 @@
 % Please edit documentation in R/lsRemoveMetadata.R
 \name{lsRemoveMetadata}
 \alias{lsRemoveMetadata}
-\title{Remove from R environment LS7 and LS8 metadata files}
+\title{Remove the Landsat-7 or Lansat-8 metadata from the environment}
 \usage{
 lsRemoveMetadata()
 }
 \description{
-\code{lsRemoveMetadata} removes Landsat-7 and/or Landsat-8 (\code{.LS7MD}/\code{.LS8MD}) metadata from R enviroment.
+\code{lsRemoveMetadata} removes Landsat-7 and/or Landsat-8 (\code{.LS7MD}/
+\code{.LS8MD}) metadata from the environment in R.
 }
 \details{
-If the metadata file has been loaded by any Landsat search function or load
-metadata function, \code{lsRemoveMetadata} removes both dataframes \code{.LS8MD} and/or \code{.LS7MD}.
+The metadata file is loaded in R with \code{\link{ls7Search}}, 
+\code{\link{ls8Search}} and \code{\link{lsDownload}}. \code{lsRemoveMetadata}
+removes the metadata and frees up valuable RAM.
 }
 \examples{
 \dontrun{
-# creates a MetaData folder and downloads the csv on working directory
+# creates a MetaData folder and downloads the csv file
+# in the current working directory
 ls8LoadMetadata()
 lsRemoveMetadata()
 }

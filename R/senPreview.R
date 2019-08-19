@@ -1,20 +1,21 @@
-#' Preview of Sentinel-2 satellite images
+#' Preview Sentinel-2 satellite images
 #'
-#' \code{senPreview} shows a preview of the \code{n}-th image from a set of \code{searchres}.
+#' \code{senPreview} shows a preview of the \code{n}-th image from a set of
+#' search results.
 #'
-#' The functions shows a preview of the \code{n}-th image coming from the \code{\link{senSearch}} 
-#' function.
-#' The preview is downloaded from Scihub website, and the crediantials are needed.
-#' Please, be aware that only some images have this feature.
-#' Credentials from ESA’s SciHub are needed to use this function.
-#' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
+#' The function shows a preview of the \code{n}-th output image from a search
+#' in Sentinel archives (\code{\link{modSearch}}). The preview is downloaded from
+#' SciHub's website. Please, be aware that only some images may have a preview.
+#' Credentials from an ESA’s SciHub account are needed, which can be obtained 
+#' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 #'
-#' @param searchres \code{data.frame} class argument with the results from a search of Landsat images provided by the function \code{\link{senSearch}}.
-#' @param username Scihub username.
-#' @param password Scihub password.
-#' @param n \code{numeric} argument with the row corresponding to the image of interest in the search data frame.
-#' @param size \code{numeric} argument with the number specifying the size of the preview to be displayed. 
-#' It corresponds to the number of pixels.
+#' @param searchres a vector with the results from \code{\link{senSearch}}.
+#' @param username ESA’s SciHub username.
+#' @param password ESA’s SciHub password.
+#' @param n a \code{numeric} argument identifying the row of the image in
+#' \code{searchres}.
+#' @param size a \code{numeric} argument specifying the size of the preview to
+#' be displayed, in pixels.
 #'
 #' @examples
 #' \dontrun{
@@ -28,11 +29,11 @@
 #'                        product = "S2MSI1C",
 #'                        username = "username",
 #'                        password = "password")
-#' # Preview some images
+#' # preview some images
 #' senPreview(searchres, 3, username = "username", password = "password")
 #' senPreview(searchres, 1, username = "username", password = "password", 600)
 #' 
-#' # Checking downloads dates in different formats
+#' # show the dates in julian days
 #' senGetDates(names(searchres),format="%Y%j")
 #' }
 senPreview<-function(searchres,username,password,n,size=NULL){

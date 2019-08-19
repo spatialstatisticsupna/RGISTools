@@ -1,25 +1,30 @@
-#' Create layers of clouds for Modis images
+#' Create cloud masks for MODIS images
 #' 
-#' \code{modCloudMask} creates layers of clouds derived from \code{MOD35_L2} products. 
+#' \code{modCloudMask} creates cloud masks derived from the \code{MOD35_L2} 
+#' product.
 #' 
-#' This function, downloads and processes the \code{MOD35_L2} products to create cloud 
-#' masks composed of \code{NA}'s and \code{1}'s. The resulting cloud mask layers need to be
-#' reprojected because resolution and projection differences with other modis products.
-#' This function requires \code{gdalUtils} properly installed.
+#' This function, downloads and processes the \code{MOD35_L2} products to create
+#' cloud masks composed of \code{NA}'s (cloud) and \code{1}'s (clear). The
+#' resulting cloud mask layers need to be reprojected because resolution and
+#' projection differences with other MODIS products. This function requires
+#' GDAL and the \code{gdalUtils} library properly installed.
 #'
-#' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param out.name the name of the region.
-#' @param extent \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or 
-#'   \code{SpatialPoints*} object are acceptable formats as long as coordinates 
-#'   are in longitude/latitude format. This argument is mandatory if \code{polygon} 
-#'   or \code{lonlat} is not defined.
-#' @param raw.rm logical argument. If \code{TRUE}, region images are removed.
-#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
-#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
-#' @param ... argument for function nestering:
+#' @param startDate a \code{Date} class object with the starting date of the 
+#' study period.
+#' @param endDate a \code{Date} class object with the ending date of the 
+#' study period.
+#' @param out.name he name of the folder that stores the outputs. By default,
+#' “outfile” is assigned.
+#' @param extent An \code{extent}, \code{Raster*}, or \code{Spatial*} object
+#' representing the region of interest with longitude/latitude coordinates.
+#' @param raw.rm logical argument. If \code{TRUE}, raw images are removed.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
+#' images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the directory where the extracted images should be located
+#'   \item \code{AppRoot} the directory where cloud masks are saved.
 #' }
 #'
 #' @examples
@@ -28,7 +33,7 @@
 #' data(ex.navarre)
 #' src <- "Path_for_downloading_folder"
 #' 
-#' # Search and download the images from Modis between
+#' # search and download images from MODIS between
 #' # 01-01-2018 and 03-01-2018 for the region of Navarre
 #' modDownload(product = "MOD09GA",
 #'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
@@ -40,19 +45,18 @@
 #'             collection = 6,
 #'             extent = ex.navarre)
 #'             
-#' # assign src1 as the outut folder for ModMosaic
+#' # assign src1 as the output folder for modMosaic
 #' src.mod <- file.path(src, "Modis")
 #' src.tiles <- file.path(src.mod, "MOD09GA")
 #' tif.src.tiles <- file.path(src.tiles, "tif")
-#' # mosaic the Modis images
+#' # mosaic the MODIS images
 #' modMosaic(tif.src.tiles, # the input folder 
 #'           AppRoot = src.tiles, # the output folder 
 #'           out.name = "Navarre", # creates Navarre folder in AppRoot
 #'           gutils = TRUE,
 #'           extent = ex.navarre)
 #'           
-#' # assign src as the path to cloud folder      
-#' 
+#' # generate the cloud masks      
 #' modCloudMask(startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'              endDate = as.Date("04-01-2018", "%d-%m-%Y"),
 #'              extent = ex.navarre,
@@ -60,7 +64,7 @@
 #'              out.name = "Navarre")
 #'              
 #' src.cloud <- file.path(src.mod,"CloudMask")
-#' # The cloud mask may have different extent, resolution...  
+#' # the cloud mask may have different extent, resolution...  
 #' src.cloud.navarre <- file.path(src.cloud,"Navarre")
 #' cmask <- list.files(src.cloud.navarre, full.names = TRUE, pattern = "\\.tif$")
 #' cmask.ras <- lapply(cmask, raster)
@@ -75,7 +79,7 @@
 #' navarre.b01.ras <- lapply(navarre.img,raster)
 #' navarre.b01.stack <- stack(lapply(navarre.b01.ras, projectRaster, navarre.b01.ras[[1]]))
 #' 
-#' # reproject cloud mask to navarre.b01.stack projection
+#' # reproject the cloud mask to the projection of navarre.b01.stack
 #' cmask.stack <- stack(lapply(cmask.ras, projectRaster, navarre.b01.stack))
 #' 
 #' # plot the cloud free b01 layer

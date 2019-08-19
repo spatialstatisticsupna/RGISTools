@@ -1,23 +1,29 @@
-#' Import time series of images and saves as RData
+#' Saves a time series of images as an RData
 #'
-#' \code{genSaveTSRData} imports the time series of (GTiff) satellite images into R from a folder, 
-#' for creating an RData.
+#' \code{genSaveTSRData} imports a time series of images from a folder (GTiff
+#'  format), builds a \code{RasterStack} and saves it in an RData.
 #'
-#' The function reads all the images inside the folder specified in \code{src}. The images must be GTiff files.
-#'  The \code{src} can take the path created by other functions of this package, such as \code{\link{senMosaic}},
-#'  \code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are imported into R to build a \code{RasterStack} that
-#'  is loaded into the global environment. The name of the \code{RasterStack} is specified
-#'  in \code{ts.name}. The \code{RasterStack} is saved into an RData file in the \code{AppRoot} directory.
+#' The function reads all the images inside the folder specified in \code{src}.
+#' Images files must be GTiffs. The \code{src} can take the path created by
+#' other functions of this package, such as \code{\link{senMosaic}},
+#' \code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are
+#' imported into R to build a \code{RasterStack} in the global environment. The
+#' name of the \code{RasterStack} is specified in \code{ts.name}. The
+#' \code{RasterStack} is saved in an RData file in the \code{AppRoot} directory.
 #'
 #' @param src path to the folder where the time series of images is located.
-#' @param ts.name the name of the variable containing the time series in R.
-#' @param startDate starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param endDate ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-#' @param dextent creates the \code{RasterStack} to the maximun extent from different extent GTiff images.
-#' @param recursive logical argument. If \code{TRUE}, reads folders recursively, searching for images in GTiff image format.
-#' @param ... argument for function nestering.
+#' @param ts.name the name of the \code{RasterStack} in the RData.
+#' @param startDate a \code{Date} class object with the starting date of the
+#' study period.
+#' @param endDate a \code{Date} class object with the ending date of the study
+#' period.
+#' @param dextent a logical argument. If \code{TRUE}, the function expands the
+#' extent of the \code{RasterStack} to embrace the extents of all GTiff images.
+#' @param recursive logical argument. If \code{TRUE}, reads folders recursively,
+#' searching for GTiff images.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the path where the RData will be saved.
+#'   \item \code{AppRoot} the path where the RData is saved.
 #' }
 #'
 #' @examples

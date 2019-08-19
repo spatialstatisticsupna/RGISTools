@@ -7,45 +7,51 @@
 senDownload(username, password, verbose = FALSE, ...)
 }
 \arguments{
-\item{username}{Scihub platform username.}
+\item{username}{ESA’s SciHub username.}
 
-\item{password}{Scihub platform password.}
+\item{password}{ESA’s SciHub password.}
 
-\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
+running steps and warnings.}
 
-\item{...}{argument forfunction nestering
+\item{...}{arguments for nested functions:
 \itemize{
-  \item \code{product} Sentinel product type. Ex. "S2MSI1C", "S2MSI2A", "S2MSI2Ap", ... 
-  \item \code{startDate} starting date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-  \item \code{endDate} ending date of the image time series in \code{Date} class. For instance, using any format from \code{as.Date} function.
-  \item \code{extent} \code{Extent}, \code{Raster*}, \code{SpatialPolygons*}, \code{SpatialLines*} or 
-  \code{SpatialPoints*} object of the region of interest in longitude/latitude coordinate system.
-  \item \code{platform} platform name of the Sentinel mission (Sentinel-1, Sentinel-2,...).
-  \item \code{nattempts} the number of attempts that the function has to carry out
-   an image in case of corrupted files.
+  \item \code{product} the type of Sentinel product. Ex. "S2MSI1C",
+  "S2MSI2A", "S2MSI2Ap", ... 
+  \item \code{startDate} a \code{Date} class object with the starting date of
+  the study period.
+  \item \code{endDate} a \code{Date} class object with the ending date of
+   the study period.
+  \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
+  object representing the region of interest with longitude/latitude
+  coordinates.
+  \item \code{platform} the name of the Sentinel mission (Sentinel-1, 
+  Sentinel-2, ...).
+  \item \code{nattempts} the number of attempts to download an image in case
+  it becomes corrupted.
   \item \code{unzip} logical argument. If \code{TRUE}, unzips the images.
-  \item \code{error.log} error log file name.
-  \item \code{verbose} logical argument. If \code{TRUE}, the function prints running stages and warnings.
-  \item \code{AppRoot} the directory where the images will be saved.
+  \item \code{error.log} name of the error log file.
+  \item \code{verbose} logical argument. If \code{TRUE}, the function prints
+  the running steps and warnings.
+  \item \code{AppRoot} the directory where the images are saved.
 }}
 }
 \description{
-\code{senDownload} combines both \code{\link{senSearch}} and \code{\link{senDownSearch}} functions for searching and downloading. 
-It is recommended for creating long time series of images in an automated way.
+\code{senDownload} seeks and downloads Sentinel images concerning a
+particular location and time interval from SciHub's repository.
 }
 \details{
-This function accepts all the arguments in \code{\link{senSearch}} function and automatically downloads
-images matching with the search query. The function creates a folder hierarchy, and gives the possibility
-of unzipping the images.
-\code{senDownload} requires the credentials to access the ESA’s SciHub data service.
-\href{https://scihub.copernicus.eu/dhus/#/self-registration}{Get your credentials}.
+\code{senDonwload} is a wrapper function of \code{\link{senSearch}} and 
+\code{\link{senDownSearch}} to search and download images in a single step.
+The function requires ESA’s SciHub credentials, which can be obtained
+\href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 }
 \examples{
 \dontrun{
 # load a spatial polygon object of Navarre
 data(ex.navarre)
-# Download S2MSI1C products sensed by Sentinel - 2 
-# satellite between the julian dates 210 and 218, 2018
+# Download S2MSI1C products sensed by Sentinel-2 
+# between the julian dates 210 and 218, 2018
 src <- "Path_for_downloading_folder"
 senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             endDate = as.Date("2018218", "\%Y\%j"),

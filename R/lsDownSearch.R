@@ -1,44 +1,51 @@
-#' Download a time series of satellite images from Landsat 7-8
+#' Download Landsat-7 or Landsat-8 images from a search list
 #'
-#' \code{\link{lsDownSearch}} downloads the list of images provided by \code{\link{ls7Search}} and \code{\link{ls8Search}} functions.
-#' The images are saved as ‘GTiff’ files in the \code{AppRoot} directory.
+#' \code{lsDownSearch} downloads the results from \code{\link{ls7Search}} and
+#' \code{\link{ls8Search}} functions. The images are saved as GTiff files in the
+#' \code{AppRoot} directory.
 #'
-#' This function is used for downloading Landsat images. It downloads all the list of images 
-#' provided in the output data frame of the search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}).
-#' Image download requires USGS login account. \href{https://ers.cr.usgs.gov/register/}{Get your credentials}.
-#'
-#' The image files from the USGS EROS web service are compressed as ‘.tar.gz’ files. \code{\link{lsDownSearch}} decompresses the
-#' images and obtains the corresponding ‘.tif’ files. The ‘.tif’ files are saved in the
-#' \code{AppRoot} directory. When \code{untar} is defined the function untars the images in "untar" folder.
-#' This replicates the images in compresses version as 'tar.gz' and uncompresses version in "untar" folder. To save space in the disk
-#' \code{raw.rm = TRUE} can be defined, and \code{\link{lsDownSearch}} will remove the ‘tar.gz’ files.
-#' If \code{raw.rm = FALSE}, the original files remain, which might be useful to have access to the original files
-#' in the future and avoid further downloads. By default, \code{\link{lsDownSearch}} saves the images in (...), in the \code{AppRoot}
-#' directory. To change this setting, provide \code{AppRoot = "the full path as an argument"}.
-#'
-#' @param searchres the results from \code{ls7Search} or \code{ls8Search}.
-#' @param username login credentials to access the USGS EROS web service.
-#' @param password login credentials to access the USGS EROS web service.
-#' @param lvl flag to specify Landsat product level wanted. Default value, 1.
-#' @param product character vector with the avaliable products for Landsat level 2. By default \code{c("sr","source_metadata")}.
-#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
+#' \code{lsDonwSearch} downloads the list of URLs provided by \link{ls7Search}
+#' or \link{ls8Search} as a \code{data.frame}. The function requires an USGS's
+#' EarthExplorer account, which can be obtained 
+#' \href{https://ers.cr.usgs.gov/register/}{here}.
+#' 
+#' The files from EarthExplorer are compressed as ‘tar.gz’. \code{lsDownSearch}
+#' decompresses the images and obtains the corresponding GTiffs. The GTiff files
+#' are saved in the \code{AppRoot} directory. To change this option, provide
+#' \code{AppRoot = “full path”}. When \code{untar = TRUE}, the function
+#' decompresses the imagery. Image decompression duplicates the information
+#' due to the presence of both, compressed and decompressed images. Set 
+#' \code{raw.rm = TRUE} to remove former ones.
+#' 
+#' @param searchres the results from \code{\link{ls7Search}} or 
+#' \code{\link{ls8Search}}.
+#' @param username USGS's EarthExplorer username.
+#' @param password USGS's EarthExplorer password.
+#' @param lvl a number specifying the processing level. Default value, 1.
+#' @param product \code{character} vector with the requested Level-2 products.
+#' By default \code{c("sr","source_metadata")}.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
 #' @param raw.rm logical argument. If \code{TRUE}, removes the raw images.
 #' @param untar logical argument. If \code{TRUE}, untars downloaded images.
-#' @param nattempts the number of attempts that the function has to carry out to download an image in case of corrupted files.
-#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing images with the same name.
-#' @param ... argument for function nestering accepts:
+#' @param nattempts the number of attempts to download an image in case it
+#' becomes corrupted.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
+#' images with the same name.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the directory to save the downloaded images.
+#'   \item \code{AppRoot} the download directory.
 #' }
 #'
 #'
 #' @examples
 #' \dontrun{
-#' #' # load a spatial polygon object of Navarre
+#' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' 
 #' src <- "Path_for_downloading_folder"
-#' # Search and download the images from Landsat-8 between
+#' 
+#' # search and download the images from Landsat-8 between
 #' # 2011 and 2013 in the region of Navarre
 #' search.res <- ls8Search(startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'                         endDate = as.Date("20-01-2018", "%d-%m-%Y"),
@@ -62,7 +69,7 @@
 #'              password = "pass", 
 #'              untar = TRUE)
 #'
-#' # Search and download the images from Landsat-7 between
+#' # search and download the images from Landsat-7 between
 #' # 2011 and 2013 in the region of Navarre
 #' src <- "Path_for_downloading_folder"
 #' search.res <- ls7Search(startDate = as.Date("01-01-2018", "%d-%m-%Y"),
@@ -89,10 +96,10 @@
 #'              untar = TRUE, 
 #'              AppRoot=src)
 #' 
-#' # removes metadata data frame to free memory
+#' # removes the metadata to free memory space
 #' lsRemoveMetadata()
 #' 
-#' # select Landsat7 rgb bands
+#' # select Landsat-7 RGB bands
 #' src.ls7 <- file.path(src,"Landsat7")
 #' files <- list.files(src.ls7, 
 #'                     pattern = "\\.TIF$", 
