@@ -1,6 +1,6 @@
-#' Mosaic a set of Sentinel images
+#' Mosaic a set of Sentinel-2 images
 #'
-#' \code{senMosaic} merges the Sentinel imagery that covers a region of interest
+#' \code{senMosaic} merges the Sentinel-2 imagery that covers a region of interest
 #' on the same dates.
 #'
 #' The function mosaics the imagery in the \code{src} folder. The folder can

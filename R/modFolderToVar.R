@@ -1,4 +1,5 @@
-#' Compute a remote sensing index from a time series of MODIS images
+#' Compute a remote sensing index from a time series of MODIS multispectral 
+#' images
 #'
 #' \code{modFolderToVar} computes a remote sensing index from the spectral bands
 #' of a time series of MODIS images. The images are specified by the path to

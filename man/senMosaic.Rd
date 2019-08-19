@@ -2,7 +2,7 @@
 % Please edit documentation in R/senMosaic.R
 \name{senMosaic}
 \alias{senMosaic}
-\title{Mosaic a set of Sentinel images}
+\title{Mosaic a set of Sentinel-2 images}
 \usage{
 senMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
   gutils = FALSE, overwrite = FALSE, ...)
@@ -37,7 +37,7 @@ images with the same name.}
 }}
 }
 \description{
-\code{senMosaic} merges the Sentinel imagery that covers a region of interest
+\code{senMosaic} merges the Sentinel-2 imagery that covers a region of interest
 on the same dates.
 }
 \details{

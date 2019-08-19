@@ -10,7 +10,7 @@ Tools for Downloading, Customizing, and Processing Time Series of Satellite Imag
 
 
 # The package
-This package enables you to download, customize, and process time-series of
+This package enables you to download, customize, and process time series of
 satellite images from Landsat, MODIS and Sentinel in a standardized way. Some
 functions download and convert automatically the platform-specific file formats
 into GTiff, so they can be loaded in R. The customization functions support tile

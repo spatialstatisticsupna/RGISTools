@@ -51,9 +51,9 @@ lsGetDates<-function(str,...){
 }
 
 
-#' Return the capturing dates of Sentinel images
+#' Return the capturing dates of Sentinel-2 images
 #'
-#' \code{senGetDates} reads the official name of a Sentinel image and returns
+#' \code{senGetDates} reads the official name of a Sentinel-2 image and returns
 #' the capturing date, as a \code{Date} class object.
 #'
 #' The function works with file names (or their paths) regardless of their

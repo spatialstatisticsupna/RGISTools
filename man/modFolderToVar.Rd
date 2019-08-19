@@ -2,7 +2,8 @@
 % Please edit documentation in R/modFolderToVar.R
 \name{modFolderToVar}
 \alias{modFolderToVar}
-\title{Compute a remote sensing index from a time series of MODIS images}
+\title{Compute a remote sensing index from a time series of MODIS multispectral 
+images}
 \usage{
 modFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
   verbose = FALSE, ...)

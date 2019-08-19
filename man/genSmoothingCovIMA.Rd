@@ -57,8 +57,7 @@ This filling/smoothing method was developed by
 decomposes a time series of images into a new series of mean and anomaly 
 images. The procedure applies the filling/smoothing algorithm with covariates
 over the anomaly images. The procedure requires a proper definition of a
-temporal neighbourhood for the target image and aggregation factor. For
-further details, see \insertCite{militino2018improving;textual}{RGISTools}.
+temporal neighbourhood for the target image and aggregation factor.
 }
 \examples{
 set.seed(0)

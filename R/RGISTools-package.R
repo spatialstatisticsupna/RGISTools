@@ -1,24 +1,24 @@
 #' RGISTools: Tools for Downloading, Customizing, and Processing Time Series of
 #' Satellite Images
 #'
-#' This package enables you to download, customize, and process time-series of
-#' satellite images from Landsat, MODIS and Sentinel in a standardized way. Some
-#' functions download and convert automatically the platform-specific file formats
-#' into GTiff, so they can be loaded in R. The customization functions support tile
-#' mosaicking, cropping, cloud masking and deriving new variables of interest,
-#' such as the NDVI, EVI, etc. Tile mosaicking is required when the region of
-#' interest extends over several tiles, so they can be combined into a single
-#' image. Cropping involves removing the pixels outside the region of interest,
-#' making any analysis more computationally and memory efficient. Cloud masking
-#' eliminates cloud reflectance that would otherwise be erroneously attributed
-#' to land surface features. Cloud removal and (measurement or processing) errors
-#' trigger data gaps and outliers, decreasing the quality and quantity of 
-#' measurements. Hence, the package includes a set of function for filling and
-#' smoothing the satellite imagery. The combination of functions in RGISTools
-#' results in a stack of satellite images ready-to-use. Due to the wide variety
-#' of procedures and sources of information being handled in RGISTools, the
-#' functions are divided into 7 categories, which are identified by the first 3
-#' characters of the function names; 
+#' This package enables you downloading, customizing, and processing time series
+#' of satellite images from Landsat, MODIS and Sentinel in a standardized way.
+#' Some functions download and convert automatically the platform-specific file
+#' formats into GTiff, so they can be loaded in R. The customization functions 
+#' support tile mosaicking, cropping, cloud masking and deriving new variables 
+#' of interest, such as the NDVI, EVI, etc. Tile mosaicking is required when the
+#' region of interest extends over several tiles, so they can be combined into a
+#' single image. Cropping involves removing the pixels outside the region of 
+#' interest, making any analysis more computationally and memory efficient. Cloud
+#' masking eliminates cloud reflectance that would otherwise be erroneously 
+#' attributed to land surface features. Cloud removal and (measurement or 
+#' processing) errors trigger data gaps and outliers, decreasing the quality and
+#' quantity of measurements. Hence, the package includes a set of function for
+#' filling and smoothing the satellite imagery. The combination of functions in
+#' RGISTools results in a stack of satellite images ready-to-use. Due to the wide
+#' variety of procedures and sources of information being handled in RGISTools,
+#' the functions are divided into 7 categories, which are identified by the 
+#' first 3 characters of the function names; 
 #' \enumerate{
 #'   \item \code{mod} identifies Modis Terra and Aqua satellite functions.
 #'   \item \code{sen} identifies Sentinel functions.
@@ -79,7 +79,7 @@
 #'   \code{ \link{modSearch}} \tab Seeks a time series of MODIS images \cr
 #'   \code{\link{modPreview}} \tab Previews MODIS satellite images \cr
 #'   \code{\link{modDownSearch}} \tab Downloads a time series of MODIS images \cr
-#'   \code{\link{modMosaic}} \tab Mosaics MODIS images \cr
+#'   \code{\link{modMosaic}} \tab Mosaics MODIS images from the land products \cr
 #'   \code{\link{modFolderToVar}} \tab Computes new variables from MODIS multispectral images \cr
 #'   \code{\link{modCloudMask}} \tab Creates cloud masks for MODIS images \cr
 #'   \code{\link{genSaveTSRData}} \tab Saves a time series of images \cr
@@ -98,8 +98,8 @@
 #'   \code{ \link{senSearch}} \tab Seeks a time series of Sentinel images \cr
 #'   \code{\link{senPreview}} \tab Previews Sentinel images \cr
 #'   \code{\link{senDownSearch}} \tab Downloads a time series of Sentinel images \cr
-#'   \code{\link{senMosaic}} \tab Mosaics Sentinel images \cr
-#'   \code{\link{senCloudMask}} \tab Creates cloud masks for Sentinel images \cr
+#'   \code{\link{senMosaic}} \tab Mosaics Sentinel-2 images \cr
+#'   \code{\link{senCloudMask}} \tab Creates cloud masks for Sentinel-2 images \cr
 #'   \code{\link{senFolderToVar}} \tab Computes new variables from Sentinel-2 multispectral images \cr
 #'   \code{\link{genSaveTSRData}} \tab Saves a time series of images\cr
 #'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  

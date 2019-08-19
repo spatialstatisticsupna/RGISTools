@@ -61,8 +61,7 @@ This filling/smoothing method was developed by
 a time series of images into a new series of mean and anomaly images. The
 procedure applies the smoothing algorithm over the anomaly images. The 
 procedure requires a proper definition of a temporal neighbourhood for the
-target image and aggregation factor. For further details, see 
-\insertCite{militino2019interpolation;textual}{RGISTools}.
+target image and aggregation factor.
 }
 \examples{
 # load an example of NDVI time series in Navarre

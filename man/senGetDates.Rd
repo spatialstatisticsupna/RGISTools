@@ -2,7 +2,7 @@
 % Please edit documentation in R/genMissionGetDates.R
 \name{senGetDates}
 \alias{senGetDates}
-\title{Return the capturing dates of Sentinel images}
+\title{Return the capturing dates of Sentinel-2 images}
 \usage{
 senGetDates(str, ...)
 }
@@ -16,7 +16,7 @@ images from which the capturing date is retrieved.}
 }}
 }
 \description{
-\code{senGetDates} reads the official name of a Sentinel image and returns
+\code{senGetDates} reads the official name of a Sentinel-2 image and returns
 the capturing date, as a \code{Date} class object.
 }
 \details{
