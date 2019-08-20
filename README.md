@@ -140,9 +140,19 @@ library(devtools)
 # Install RGISTools from GitHub repositoy
 install_github("spatialstatisticsupna/RGISTools")
 ```
+## Dependencies for linux
+The package depends on some R packages that in Linux requires the installation of some libraries before the installation in R. Here you have the command to install all the applications from repository for Debian/Ubuntu and RedHat/Fedora.
+### Debian/Ubuntu
+```
+sudo apt update
+sudo apt install r-cran-rcpp gdal-bin libgdal-dev libproj-dev libssl libssl-dev xml2 libxml2-dev libmagick++-dev
+```
+### RedHat/Fedora
+```
+sudo dnf install gdal gdal_devel proj_devel xml2 libxml2_devel libcurl_devel openssl_devel ImageMagick-c++_devel
+```
 
 # Credentials for downloading satellite images
-
 ### Modis
 Credentials [EarthData](https://ers.cr.usgs.gov/register/) 
 
