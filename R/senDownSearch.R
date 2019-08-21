@@ -127,6 +127,7 @@ senDownSearch<-function(searchres,
                       unzip=unzip,
                       overwrite = overwrite,
                       nattempts=nattempts -1,
+                      AppRoot = AppRoot,
                       ...)
       }else{
         message(paste0("OK: cheking ",file.name," file md5."))
@@ -146,6 +147,7 @@ senDownSearch<-function(searchres,
                     unzip=unzip,
                     overwrite = overwrite,
                     nattempts=nattempts -1,
+                    AppRoot = AppRoot,
                     ...)
     }, finally = {
     })
