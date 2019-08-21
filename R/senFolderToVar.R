@@ -12,7 +12,7 @@
 #' this package beginning with “var” (\code{\link{varNDVI}}, 
 #' \code{\link{varEVI}}, etc.). Custom functions can also be implemented.
 #' If \code{fun = varRGB}, then the argument \code{getStack} must be equal to
-#' \code{FALSE} and the RGB images must be imported afterwards.
+#' \code{FALSE} and the red-green-blue (RGB) images must be imported afterwards.
 #' 
 #' @param src the path to the folder with the Sentinel-2 multispectral images.
 #' @param AppRoot directory where the outcoming time series is saved.
@@ -25,8 +25,8 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.
 #' @param resbands the resolution of the image being used to compute index,
-#' when the imagery comes from the Senintel-2 S2MSI2A product. By default,
-#' all resolutions (10m, 20m, and 60m) are used.
+#' when the imagery comes from the Senintel-2 "\code{S2MSI2A}" product. By 
+#' default, all resolutions (10m, 20m, and 60m) are used.
 #' @param ... arguments for nested functions:
 #'
 #' @examples

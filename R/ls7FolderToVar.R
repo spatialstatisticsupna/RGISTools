@@ -24,6 +24,10 @@
 #' running steps and warnings.
 #' @param ... arguments for nested functions.
 #'
+#' @return this function does not return anything, unless \code{getStack = TRUE}
+#' and then it returns a \code{RasterStack} with the time series of with the
+#' index. 
+#'
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre

@@ -1,6 +1,7 @@
 #' Calculates normalized difference water index (NDWI)
 #'
-#' \code{varNDWI} Calculate the NDWI index from the green and NIR bands.
+#' \code{varNDWI} Calculate the normalized difference water index (NDWI) from
+#' the green and near-infrared (NIR) bands.
 #'
 #' The normalized difference water index (NDWI) is a ratio between the green
 #' and near-infrared bands of the spectrum that was developed to detect open

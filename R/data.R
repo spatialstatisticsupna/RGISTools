@@ -1,7 +1,7 @@
 #' A Digital Elevation Model (DEM) of the region of Navarre (Spain)
 #'
-#' Geographically projected \code{RasterStack} with the DEM of the region of
-#' Navarre (Spain). The DEM was obtained from the
+#' Geographically projected \code{RasterStack} with the digital elevation model
+#'(DEM) of the region of Navarre (Spain). The DEM was obtained from the
 #' \href{http://centrodedescargas.cnig.es/CentroDescargas/locale?request_locale=en#}{National Center for Geographic Information}
 #' of Spain. The DEM is used as a covariable in the Image Mean Anomaly (IMA)
 #' algorithm (\code{\link{genSmoothingCovIMA}}).
@@ -21,8 +21,8 @@ NULL
 
 #' A time series of NDVI of Navarre (Spain)
 #'
-#' Geographically projected \code{RasterBrick} object of the Normalized 
-#' Difference Vegetation Index (NDVI) of Navarre.
+#' Geographically projected \code{RasterBrick} object of the normalized 
+#' difference vegetation index (NDVI) of Navarre.
 #'
 #' @format The \code{RasterBrick} contains 6 images, from the 2nd to the 4th of
 #' August in 2017 and 2018. The \code{RasterBrick} coordinates are in the

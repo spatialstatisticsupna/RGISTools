@@ -18,9 +18,9 @@ study period.}
 \item{endDate}{a \code{Date} class object with the ending date of the 
 study period.}
 
-\item{username}{USGS’s EarthExplorer username.}
+\item{username}{USGS’s `EarthExplorer' username.}
 
-\item{password}{USGS’s EarthExplorer password.}
+\item{password}{USGS’s `EarthExplorer' password.}
 
 \item{AppRoot}{the download directory.}
 
@@ -45,17 +45,17 @@ running steps and warnings.}
 \description{
 \code{lsDonwload} seeks and downloads Landsat-7 or Landsat-8 images
 concerning a particular location and time interval from the 
-\href{https://earthexplorer.usgs.gov/}{EarthExplorer repository}.
+\href{https://earthexplorer.usgs.gov/}{`EarthExplorer' repository}.
 Images are saved as GTiff files in the \code{AppRoot} directory.
 }
 \details{
 \code{lsDonwload} is a wrapper function of \code{\link{ls7Search}}, 
 \code{\link{ls8Search}}, and \code{\link{lsDownSearch}} to search and
-download images in a single step. The function requires USGS's EarthExplorer
+download images in a single step. The function requires USGS's `EarthExplorer'
 credentials, which can be obtained
 \href{https://ers.cr.usgs.gov/register/}{here}.
 
-The files from EarthExplorer are compressed as ‘tar.gz’. \code{lsDonwload}
+The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDonwload}
 decompresses the images and obtains the corresponding GTiffs. The GTiffs are
 saved in the \code{AppRoot} directory. To change this option, provide 
 \code{AppRoot = “full path”}. When the \code{untarDir} argument is defined,

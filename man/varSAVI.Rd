@@ -21,7 +21,8 @@ reflectance (0-1).}
 A SAVI image in \code{raster} format.
 }
 \description{
-\code{varSAVI} Calculate the SAVI index from the red and NIR bands.
+\code{varSAVI} Calculate the soil-adjusted vegetation index (SAVI) from the
+red and near-infrared (NIR) bands.
 }
 \details{
 The soil adjusted vegetation index (SAVI) is an indicator engineered to remove 

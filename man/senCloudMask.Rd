@@ -8,7 +8,7 @@ senCloudMask(src, AppRoot, img.res, sensitivity = 50,
   overwrite = FALSE, ...)
 }
 \arguments{
-\item{src}{the path to the folder with the \code{S2MSI2A} images.}
+\item{src}{the path to the folder with the "\code{S2MSI2A}" images.}
 
 \item{AppRoot}{the directory where the cloud masks are saved.}
 
@@ -21,11 +21,11 @@ cloud detection method.}
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
 images with the same name.}
 
-\item{...}{argument for nested functions:}
+\item{...}{arguments for nested functions:}
 }
 \description{
 \code{senCloudMask} creates cloud masks derived from the cloud probability
-band \code{CLDPROB} band from the \code{S2MSI2A} product.
+band (\code{CLDPROB}) band from the "\code{S2MSI2A}" product.
 }
 \details{
 The valid threshold range for \code{sensitivity} is 0-100. By default,

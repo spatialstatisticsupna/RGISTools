@@ -1,17 +1,17 @@
 #' Plot satellite images with a GIS format
 #'
-#' This function displays satellite images with the usual format in Geographic
-#' Information Systems (GIS), i.e., adding a scale, north arrow, and the border
+#' This function displays satellite images with the usual format in geographic
+#' information systems (GIS), i.e., adding a scale, north arrow, and the border
 #' of the region of interest (optional).
 #'
 #' This is a wrapper function of \code{spplot} and hence displays any 
 #' \code{Raster*} object and accepts all of its parameters. The function adds a
 #' scale, a north arrow and a polygon in the area of interest. If necessary, the
 #' function automatically reprojects the polygon to match the projection of the
-#' raster. The projection of the map can be changed by modifying the \code{proj}
-#' argument. The position in the graph of the arrow and scale bar is measured in
-#' relative distances (0-1) to the lower left corner of the graph. Their 
-#' positions can be modified with the argument \code{compOpt}.
+#' \code{raster}. The projection of the map can be changed by modifying the 
+#' \code{proj} argument. The position in the graph of the arrow and scale bar
+#' is measured in relative distances (0-1) to the lower left corner of the
+#' graph. Their positions can be modified with the argument \code{compOpt}.
 #'
 #' @param r a \code{Raster*} class object with the image or image stack to be plotted.
 #' @param region a \code{Polygon} class object defining the area of interest.
@@ -23,6 +23,8 @@
 #'   reference system of the plot.
 #'   \item \code{...} any argument accepted by the \code{spplot} function.
 #' }
+#'
+#' @return this function does not return anything.
 #'
 #' @examples
 #' # load the ndvi object of Navarre

@@ -1,11 +1,11 @@
 Type: Package
 Package: RGISTools
-Title: Tools for Downloading, Customizing, and Processing Time Series of Satellite Images from Landsat, MODIS, and Sentinel
+Title: Tools for handling multiplatform satellite images.
 Version: 0.9.5
 Author: U Pérez - Goya [aut, cre] <unai.perez@unavarra.es>,
-        M Montesino - SanMartin [aut] <manuel.montesino@unavarra.es>
         A F Militino [aut] <militino@unavarra.es>,
         M D Ugarte [aut] <lola@unavarra.es>,
+        M Montesino - SanMartin [aut] <manuel.montesino@unavarra.es>
 Maintainer: U Perez - Goya <unai.perez@unavarra.es>
 Description: Downloading, customizing, and processing time series of satellite images for a region of interest. 'RGISTools' functions allow a unified access to multispectral images from Landsat, MODIS and Sentinel repositories. 'RGISTools' also offers capabilities for customizing satellite images, such as tile mosaicking and image cropping. Finally the package implements processing methods, such as cloud masking, deriving new variables, and gap-filling/smoothing time series of images.
 Depends: R (>= 3.5.0), raster, gdalUtils, sp

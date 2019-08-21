@@ -11,8 +11,8 @@
 #' \code{\link{lsMosaic}}.The \code{fun} argument can be any function from this
 #' package beginning with “var” (\code{\link{varNDVI}}, \code{\link{varEVI}},
 #' etc.). Custom functions can also be implemented. If \code{fun = varRGB}, 
-#' then the argument \code{getStack} must be equal to \code{FALSE} and the RGB
-#' images must be imported afterwards.
+#' then the argument \code{getStack} must be equal to \code{FALSE} and the 
+#' red-green-blue (RGB) images must be imported afterwards.
 #' 
 #' @param src path to the folder with the Landsat-8 multispectral image.
 #' @param fun is a function that computes the remote sensing index.
@@ -25,6 +25,10 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.
 #' @param ... arguments for nested functions:
+#'
+#' @return this function does not return anything, unless \code{getStack = TRUE}
+#' and then it returns a \code{RasterStack} with the time series of with the
+#' index.
 #'
 #' @examples
 #' \dontrun{

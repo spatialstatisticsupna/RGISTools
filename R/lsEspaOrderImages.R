@@ -31,8 +31,8 @@
 #' 
 #' @param search.res the results from \code{\link{ls7Search}} or
 #' \code{\link{ls8Search}}. 
-#' @param username USGS's EarthExplorer username.
-#' @param password USGS's EarthExplorer password.
+#' @param username USGS's `EarthExplorer' username.
+#' @param password USGS's `EarthExplorer' password.
 #' @param product the acronym of the requested product (see the details).
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.

@@ -40,8 +40,9 @@ running steps and warnings.}
 \description{
 \code{modSearch} seeks MODIS images in the 
 \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository}
-concerning a particular location and date interval. The function returns an 
-\code{array} with the names of the images and their URLs.
+(CMR) concerning a particular location and date interval. The function returns an 
+\code{character} vector with the names of the images and their uniform resource
+locators (URLs)
 }
 \details{
 \code{modSearch} uses the
@@ -49,9 +50,9 @@ concerning a particular location and date interval. The function returns an
 Repository} (CMR) powered API. The catalogue of MODIS products can be found
 \href{https://modis.gsfc.nasa.gov/data/dataprod/}{here}.
 The catalogue shows the product short names and provides detailed information
-about the product. By the time RGISTools is released, NASA carries out the
+about the product. By the time `RGISTools' is released, NASA carries out the
 maintenance of its website on Wednesdays, which may cause an error when
-connecting to their server. You can get your EarthData credentials
+connecting to their server. You can get your `EarthData' credentials
 \href{https://urs.earthdata.nasa.gov/users/new}{here}.
 
 The function can be used to retrieve the web address of the preview 

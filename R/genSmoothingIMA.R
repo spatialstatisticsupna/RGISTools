@@ -1,7 +1,7 @@
 #' Fill data gaps and smooth outliers in a time series of satellite images
 #' 
 #' \code{genSmoothingIMA} is the implementation of a spatio temporal method 
-#' called Image Mean Anomaly (IMA) for gap filling and smoothing satellite
+#' called image mean anomaly (IMA) for gap filling and smoothing satellite
 #' data \insertCite{militino2019interpolation}{RGISTools}.
 #'
 #' This filling/smoothing method was developed by 
@@ -29,7 +29,7 @@
 #' @param fun a \code{function} used to aggregate the image of anomalies. Both
 #' \code{mean} (default) or \code{median} are acceptted.
 #' @param snow.mode logical argument. If \code{TRUE}, the filling process will
-#' be parallelized using the \code{raster} package.
+#' be parallelized using the `\code{raster}' package.
 #' @param predictSE calculate the standard error instead the prediction.
 #' @param factSE the \code{fact} used in the standard error prediction.
 #' @param out.name the name of the folder containing the smoothed/filled images
@@ -40,7 +40,7 @@
 #'   images will be saved in GTiff format.
 #' }
 #' 
-#' @return \code{RasterStack} object with the filled/smoothed time series.
+#' @return a \code{RasterStack} with the filled/smoothed images.
 #' 
 #' 
 #' @examples

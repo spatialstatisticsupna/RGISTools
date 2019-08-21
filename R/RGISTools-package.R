@@ -1,10 +1,9 @@
-#' RGISTools: Tools for Downloading, Customizing, and Processing Time Series of
-#' Satellite Images
+#' `RGISTools': Tools for handling multiplatform satellite images.
 #'
 #' This package enables you downloading, customizing, and processing time series
 #' of satellite images from Landsat, MODIS and Sentinel in a standardized way.
 #' Some functions download and convert automatically the platform-specific file
-#' formats into GTiff, so they can be loaded in R. The customization functions 
+#' formats into GTiff, so they can be loaded in `R'. The customization functions 
 #' support tile mosaicking, cropping, cloud masking and deriving new variables 
 #' of interest, such as the normalized difference vegetation index (NDVI),
 #' enhanced vegetation index (EVI), etc. Tile mosaicking is required when the
@@ -16,9 +15,9 @@
 #' processing) errors trigger data gaps and outliers, decreasing the quality and
 #' quantity of measurements. Hence, the package includes a set of function for
 #' filling and smoothing the satellite imagery. The combination of functions in
-#' RGISTools' results in a stack of satellite images ready-to-use. Due to the
+#' `RGISTools' results in a stack of satellite images ready-to-use. Due to the
 #' wide variety of procedures and sources of information being handled in 
-#' RGISTools', the functions are divided into 7 categories, which are 
+#' `RGISTools', the functions are divided into 7 categories, which are 
 #' identified by the first 3 characters of the function names; 
 #' \enumerate{
 #'   \item \code{mod} identifies MODIS Terra and Aqua satellite functions.
@@ -39,7 +38,7 @@
 #' The Landsat program is currently releasing imagery captured by two satellites;
 #' the Landsat-7 and Lansat-8. Both satellites are treated separately in coding
 #' terms due to discrepancies in their spectral coverage and data formats. To
-#' download Landsat imagery with the following functions, a USGS's 'EarthExplorer'
+#' download Landsat imagery with the following functions, a USGS's `EarthExplorer'
 #' account is required. Please, register \href{https://ers.cr.usgs.gov/register/}{here}.
 #' 
 #' \subsection{Landsat-7}{
@@ -70,9 +69,9 @@
 #' }
 #' 
 #' @section II. MODIS functions:
-#' Functions in 'RGISTools' download all land products from Terra and Aqua 
+#' Functions in `RGISTools' download all land products from Terra and Aqua 
 #' satellites, but the processing focuses on the multispectral images. Be aware
-#' that an 'EarthData' account is required to use NASA's web service so, please,
+#' that an `EarthData' account is required to use NASA's web service so, please,
 #' register \href{https://urs.earthdata.nasa.gov/users/new}{here}.
 #' 
 #' \tabular{ll}{
@@ -89,8 +88,8 @@
 #' @section III. Sentinel functions:
 #' Sentinel archives provide a wide variety of products based on a 5-satellite
 #' constellation. The functions to download Sentinel images can cope with any
-#' product available in ESA's 'SciHub' web service. However, image processing is
-#' focused on Sentinel-2 multispectal images. 'SciHub' credentials are required to
+#' product available in ESA's `SciHub' web service. However, image processing is
+#' focused on Sentinel-2 multispectal images. `SciHub' credentials are required to
 #' download Sentinel imagery and can be obtained 
 #' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 #' 
@@ -114,13 +113,13 @@
 #'   \code{\link{genSmoothingIMA}} \tab Fills the gaps and smooths outliers in a time series of satellite images \cr
 #'   \code{\link{genSmoothingCovIMA}} \tab Fills the gaps and smooths outliers in a time series of satellite images using covariates \cr
 #'   \code{\link{genPlotGIS}} \tab Plots satellite images with a proper GIS format \cr
-#'   \code{\link{genGetDates}} \tab Gets the capturing date of an image from the name of a raster layer \cr
+#'   \code{\link{genGetDates}} \tab Gets the capturing date of an image from the name of a \code{RasterLayer} \cr
 #'   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
 #'   }
 #' 
 #' @section V. Remote sensing variables:
 #' New variables can be derived from multispectral images. The most common
-#' variables in the scientific literature are pre-programmed in 'RGISTools'.
+#' variables in the scientific literature are pre-programmed in `RGISTools'.
 #' They can be identified by the prefix "var".
 #' 
 #' \tabular{ll}{

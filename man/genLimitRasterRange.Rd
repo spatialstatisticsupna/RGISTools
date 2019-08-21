@@ -14,7 +14,7 @@ genLimitRasterRange(r, mx = NULL, mn = NULL, rm.values = FALSE)
 \item{mn}{minimun value in the \code{Raster*}.}
 
 \item{rm.values}{logical argument. If \code{FALSE}, the \code{mx} and 
-\code{mn} values are assigned to the pixels above or below the \code{mx}
+\code{mn} values are assigned to the pixels above or below the \code{mx} and 
 \code{mn} thresholds respectively. If \code{TRUE}, values outside the 
 \code{mn} - \code{mx} range are replaced by \code{NA}.}
 }

@@ -1,19 +1,19 @@
 #' Search and download MODIS images
 #'
 #' \code{modDownload} seeks and downloads MODIS images concerning a particular
-#' location and time interval from the EarthExplorer repository. Images are
+#' location and time interval from the `EarthData' repository. Images are
 #' saved as GTiff files in the \code{AppRoot} directory.
 #'
 #' \code{modDownload} uses the 
 #' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA’s Common Metadata Repository}
 #' to search and the
-#' \href{https://earthdata.nasa.gov/}{EarthData web service}
+#' \href{https://earthdata.nasa.gov/}{`EarthData' web service}
 #' to download the imagery. The catalogue of MODIS products can be found
 #' \href{https://modis.gsfc.nasa.gov/data/dataprod/}{here}.
 #' The catalogue shows detailed information about the products and their short
-#' names. By the time RGISTools is released, NASA carries out the maintenance
+#' names. By the time `RGISTools' is released, NASA carries out the maintenance
 #' of its website on Wednesdays, which may cause an error when connecting to
-#' their server. You can get your EarthData credentials
+#' their server. You can get your `EarthData' credentials
 #' \href{https://urs.earthdata.nasa.gov/users/new}{here}.
 #'
 #' @param product a \code{character} argument with the short name of the MODIS
@@ -22,8 +22,8 @@
 #' study period.
 #' @param endDate a \code{Date} class object with the ending date of the 
 #' study period.
-#' @param username NASA's EarthData username.
-#' @param password NASA's EarthData password.
+#' @param username NASA's `EarthData' username.
+#' @param password NASA's `EarthData' password.
 #' @param AppRoot the directory to save the outcoming time series.
 #' @param nattempts the number of attempts to download an image in case it
 #' becomes corrupted.

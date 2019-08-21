@@ -64,13 +64,15 @@ assign("MOD09SCL",function(r,sc=1/16000){((r+100)*sc)}, env=optEnv)
 
 #' Change the default value of an RGISTools option
 #'
-#' \code{setRGISToolsOpt} changes the default value of an \code{RGISTools} 
+#' \code{setRGISToolsOpt} changes the default value of an `\code{RGISTools}' 
 #' configuration variable. This function can be jointly used with 
 #' \code{\link{showRGISToolsOpt}} and \code{\link{getRGISToolsOpt}}.
 #'
 #' @param opt the name of the option to be change in \code{character} format.
 #' @param value the new value of the selected option.
-#' @param env the environment where the \code{RGISTools} option is saved.
+#' @param env the environment where the `\code{RGISTools}' option is saved.
+#'
+#' @return this function does not return anything.
 #'
 #' @examples
 #' # list avaliable options names
@@ -87,12 +89,14 @@ setRGISToolsOpt <- function(opt,value,env=optEnv) {
 
 #' Get the default value of an RGISTools option
 #'
-#' \code{getRGISToolsOpt} gets the current value of an \code{RGISTools} 
+#' \code{getRGISToolsOpt} gets the current value of an `\code{RGISTools}' 
 #' configuration variable. This function can be jointly used with
 #' \code{\link{setRGISToolsOpt}} and \code{\link{showRGISToolsOpt}}.
 #'
-#' @param opt the name of the \code{RGISTools} setting to be returned.
-#' @param env the environment where the \code{RGISTools} option are saved.
+#' @param opt the name of the `\code{RGISTools}' setting to be returned.
+#' @param env the environment where the `\code{RGISTools}' option are saved.
+#'
+#' @return an option of `RGISTools’ configuration variable.
 #'
 #' @examples
 #' # list avaliable options names
@@ -109,11 +113,14 @@ getRGISToolsOpt <- function(opt,env=optEnv) {
 
 #' Print the name of all RGISTools configuration variables
 #' 
-#' \code{showRGISToolsOpt} prints the name of all options in \code{RGISTools} package.
+#' \code{showRGISToolsOpt} prints the name of all options in `\code{RGISTools}' package.
 #' This function can be jointly used with \code{\link{setRGISToolsOpt}} and 
 #' \code{\link{getRGISToolsOpt}}.
 #'
-#' @param env the environment where the \code{RGISTools} option are saved.
+#' @param env the environment where the `\code{RGISTools}' option are saved.
+#' 
+#' @return a \code{character} vector with the names of the configuration variables.
+#' 
 #' @examples
 #' showRGISToolsOpt()
 showRGISToolsOpt<-function(env=optEnv){

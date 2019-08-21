@@ -15,7 +15,7 @@ lsEspaUpdateOrders(orders, username = NULL, password = NULL,
 
 \item{password}{USGS's EarthExplorer password.}
 
-\item{c.handle}{a curl handler created with the package \code{curl} to
+\item{c.handle}{a curl handler created with the package `\code{curl}' to
 stablish a connection with a preset password and username. This argument
 is mandatory if \code{username} and \code{password} are not defined.}
 

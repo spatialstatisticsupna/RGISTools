@@ -12,6 +12,8 @@
 #'   \item \code{format} the format of the date being returned.
 #' }
 #'
+#' @return a \code{Date} class object with the date of the image.
+#'
 #' @examples
 #' img <- matrix(1:16, ncol = 4, byrow = TRUE)
 #' r <- raster(img)

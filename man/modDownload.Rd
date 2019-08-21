@@ -18,9 +18,9 @@ study period.}
 \item{endDate}{a \code{Date} class object with the ending date of the 
 study period.}
 
-\item{username}{NASA's EarthData username.}
+\item{username}{NASA's `EarthData' username.}
 
-\item{password}{NASA's EarthData password.}
+\item{password}{NASA's `EarthData' password.}
 
 \item{AppRoot}{the directory to save the outcoming time series.}
 
@@ -52,20 +52,20 @@ from hdf files and saves them as GTiff.}
 }
 \description{
 \code{modDownload} seeks and downloads MODIS images concerning a particular
-location and time interval from the EarthExplorer repository. Images are
+location and time interval from the `EarthData' repository. Images are
 saved as GTiff files in the \code{AppRoot} directory.
 }
 \details{
 \code{modDownload} uses the 
 \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA’s Common Metadata Repository}
 to search and the
-\href{https://earthdata.nasa.gov/}{EarthData web service}
+\href{https://earthdata.nasa.gov/}{`EarthData' web service}
 to download the imagery. The catalogue of MODIS products can be found
 \href{https://modis.gsfc.nasa.gov/data/dataprod/}{here}.
 The catalogue shows detailed information about the products and their short
-names. By the time RGISTools is released, NASA carries out the maintenance
+names. By the time `RGISTools' is released, NASA carries out the maintenance
 of its website on Wednesdays, which may cause an error when connecting to
-their server. You can get your EarthData credentials
+their server. You can get your `EarthData' credentials
 \href{https://urs.earthdata.nasa.gov/users/new}{here}.
 }
 \examples{

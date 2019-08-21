@@ -7,9 +7,9 @@
 senDownload(username, password, AppRoot, verbose = FALSE, ...)
 }
 \arguments{
-\item{username}{ESA’s SciHub username.}
+\item{username}{ESA’s `SciHub' username.}
 
-\item{password}{ESA’s SciHub password.}
+\item{password}{ESA’s `SciHub' password.}
 
 \item{AppRoot}{the directory where the images are saved.}
 
@@ -27,8 +27,8 @@ running steps and warnings.}
   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
   object representing the region of interest with longitude/latitude
   coordinates.
-  \item \code{platform} the name of the Sentinel mission (Sentinel-1, 
-  Sentinel-2, ...).
+  \item \code{platform} the name of the Sentinel mission ("Sentinel-1", 
+  "Sentinel-2", ...).
   \item \code{nattempts} the number of attempts to download an image in case
   it becomes corrupted.
   \item \code{unzip} logical argument. If \code{TRUE}, unzips the images.
@@ -39,12 +39,12 @@ running steps and warnings.}
 }
 \description{
 \code{senDownload} seeks and downloads Sentinel images concerning a
-particular location and time interval from SciHub's repository.
+particular location and time interval from `SciHub's' repository.
 }
 \details{
 \code{senDonwload} is a wrapper function of \code{\link{senSearch}} and 
 \code{\link{senDownSearch}} to search and download images in a single step.
-The function requires ESA’s SciHub credentials, which can be obtained
+The function requires ESA’s `SciHub' credentials, which can be obtained
 \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 }
 \examples{

@@ -5,13 +5,13 @@
 #'
 #' The function shows a preview of the \code{n}-th output image from a search
 #' in Sentinel archives (\code{\link{modSearch}}). The preview is downloaded from
-#' SciHub's website. Please, be aware that only some images may have a preview.
-#' Credentials from an ESA’s SciHub account are needed, which can be obtained 
+#' `SciHub's' website. Please, be aware that only some images may have a preview.
+#' Credentials from an ESA’s `SciHub' account are needed, which can be obtained 
 #' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 #'
 #' @param searchres a vector with the results from \code{\link{senSearch}}.
-#' @param username ESA’s SciHub username.
-#' @param password ESA’s SciHub password.
+#' @param username ESA’s `SciHub' username.
+#' @param password ESA’s `SciHub' password.
 #' @param n a \code{numeric} argument identifying the row of the image in
 #' \code{searchres}.
 #' @param size a \code{numeric} argument specifying the size of the preview to

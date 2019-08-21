@@ -1,7 +1,7 @@
 #' Gets a first response from ESPA regarding a recent request
 #' 
-#' \code{lsEspaGetOrderImages} obtains the ID number and the status of the request 
-#' from the EROS Centre Science Processing Architecture (ESPA)
+#' \code{lsEspaGetOrderImages} obtains the identification number and the status
+#' of the request from the EROS Centre Science Processing Architecture (ESPA).
 #' 
 #' This function is part of a group of functions used to pre-process Landsat
 #' level-1 images. The pre-processing is carried out by ESPA on demand. 
@@ -11,9 +11,9 @@
 #' status messages and their interpretation can be found in the ESPA's API 
 #' \href{https://www.usgs.gov/media/files/eros-science-processing-architecture-demand-interface-user-guide}{User Guide}.
 #'
-#' @param username USGS's EarthExplorer username.
-#' @param password USGS's EarthExplorer password.
-#' @param c.handle a curl handler created with the package \code{curl} to
+#' @param username USGS's `EarthExplorer' username.
+#' @param password USGS's `EarthExplorer' password.
+#' @param c.handle a curl handler created with the package `\code{curl}' to
 #' stablish a connection with a preset password and username. This argument
 #' is mandatory if \code{username} and \code{password} are not defined.
 #' @param order.list a list of orders from \code{\link{lsEspaOrderImages}}

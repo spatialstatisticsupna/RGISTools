@@ -15,9 +15,9 @@
 #' 
 #' @param orders a list of the requested orders as returned by
 #' \code{\link{lsEspaGetOrderImages}}.
-#' @param username USGS's EarthExplorer username.
-#' @param password USGS's EarthExplorer password.
-#' @param c.handle a curl handler created with the package \code{curl} to
+#' @param username USGS's `EarthExplorer' username.
+#' @param password USGS's `EarthExplorer' password.
+#' @param c.handle a curl handler created with the package `\code{curl}' to
 #' stablish a connection with a preset password and username. This argument
 #' is mandatory if \code{username} and \code{password} are not defined.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
