@@ -74,7 +74,7 @@ orders <- lsEspaUpdateOrders(orders = orders,
                              password = "password")
 # saving directory
 dir.ESPA <- file.path(src,"Landsat7","ESPA")
-dir.create(dir.ESPA)
+dir.create(dir.ESPA, recursive = TRUE)
 # download when status says: complete
 lsEspaDownloadOrders(orders = orders,
                      username = "username", 
