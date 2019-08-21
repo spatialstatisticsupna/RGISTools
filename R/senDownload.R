@@ -10,6 +10,7 @@
 #'
 #' @param username ESA’s SciHub username.
 #' @param password ESA’s SciHub password.
+#' @param AppRoot the directory where the images are saved.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.
 #' @param ... arguments for nested functions:
@@ -31,7 +32,6 @@
 #'   \item \code{error.log} name of the error log file.
 #'   \item \code{verbose} logical argument. If \code{TRUE}, the function prints
 #'   the running steps and warnings.
-#'   \item \code{AppRoot} the directory where the images are saved.
 #' }
 #'
 #' @examples
@@ -64,11 +64,10 @@
 #' }
 senDownload<-function(username,
                       password,
+                      AppRoot,
                       verbose=FALSE,
                       ...){
   arg<-list(...)
-
-  AppRoot<-defineAppRoot(...)
   if("platform"%in%names(arg)){
     AppRoot<-file.path(AppRoot,arg$platform)
   }else if("product"%in%names(arg)){

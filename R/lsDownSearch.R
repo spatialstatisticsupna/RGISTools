@@ -21,6 +21,7 @@
 #' \code{\link{ls8Search}}.
 #' @param username USGS's EarthExplorer username.
 #' @param password USGS's EarthExplorer password.
+#' @param AppRoot the download directory.
 #' @param lvl a number specifying the processing level. Default value, 1.
 #' @param product \code{character} vector with the requested Level-2 products.
 #' By default \code{c("sr","source_metadata")}.
@@ -33,9 +34,6 @@
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param ... arguments for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} the download directory.
-#' }
 #'
 #'
 #' @examples
@@ -118,6 +116,7 @@
 lsDownSearch<-function(searchres,
                        username=NULL,
                        password=NULL,
+                       AppRoot,
                        lvl=1,
                        product=c("sr","source_metadata"),
                        verbose=FALSE,
@@ -131,7 +130,7 @@ lsDownSearch<-function(searchres,
     stop("Username and/or password not defined!")
   }
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
+  AppRoot<-pathWinLx(AppRoot)
   #identify mission
   if(grepl("LC8",searchres[1,]$sceneID)){
     downDir<-getRGISToolsOpt("LS8DownloadDir")
@@ -153,8 +152,8 @@ lsDownSearch<-function(searchres,
                             password=password,
                             cookies.file=NULL,
                             downDir=downDir,
-                            AppRoot=AppRoot,
                             downPath=downPath,
+                            AppRoot=AppRoot,
                             verbose=verbose,
                             untar=untar,
                             raw.rm=raw.rm,

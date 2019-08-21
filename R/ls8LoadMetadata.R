@@ -14,7 +14,8 @@
 #' \code{ls8LoadMetadata} is called, this function loads the existing RData from
 #' the \code{AppRoot} directory, which aims to reduce the loading time of the 
 #' metadata in the future.
-#'
+#' 
+#' @param AppRoot the directory where the metadata file should be located. 
 #' @param update logical argument. If \code{TRUE}, updates the metadata file.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.
@@ -22,30 +23,27 @@
 #' loading the metadata is omitted.
 #' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the directory where the metadata file should be located. 
+#'   
 #' }
 #'
 #' @examples
 #' \dontrun{
-#' # creates a MetaData folder in the current working directory and downloads the file there
-#' ls8LoadMetadata()
 #'
 #' # creates a MetaData folder and downloads the csv in the "Path_for_downloading_folder" directory
-#' ls8LoadMetadata(AppRoot = "Path_for_downloading_folder")
+#' ls8LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"))
 #'
 #' # update the metadata file
-#' ls8LoadMetadata(update = TRUE)
+#' ls8LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"), update = TRUE)
 #' 
 #' # if .LS8MD is already loaded you can see print its data
 #' ls(all.names = TRUE)
 #' head(.LS8MD)
 #' }
-ls8LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=FALSE,...){
+ls8LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=FALSE,...){
   stopifnot(class(update)=="logical")
   #define AppRoot
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
-
+  AppRoot<-pathWinLx(AppRoot)
   #meta data directory and metadata file
   #meta data directory and metadata file
   mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS8DownloadDir"),getRGISToolsOpt("LS8META.dir"))

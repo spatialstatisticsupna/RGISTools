@@ -24,6 +24,7 @@
 #' study period.
 #' @param username NASA's EarthData username.
 #' @param password NASA's EarthData password.
+#' @param AppRoot the directory to save the outcoming time series.
 #' @param nattempts the number of attempts to download an image in case it
 #' becomes corrupted.
 #' @param collection MODIS collection, by default 6.
@@ -42,7 +43,6 @@
 #'   \item \code{polygon} A list of vectors defining the points of a polygon in
 #'   longitude/latitude format. This argument is mandatory if \code{lonlat} or
 #'   \code{extent} are not defined.
-#'   \item \code{AppRoot} the directory to save the outcoming time series.
 #'   \item Any argument in \code{\link{modExtractHDF}} function. Ex.
 #'   \code{bFilter="b01_1"}.
 #' }
@@ -80,20 +80,20 @@ modDownload<-function(product,
                      endDate,
                      username,
                      password,
+                     AppRoot,
                      collection=6,
                      nattempts=5,
                      verbose=FALSE,
                      extract.tif=FALSE,
                      ...){
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
   search.res<-modSearch(product=product,
                         startDate=startDate,
                         endDate=endDate,
                         collection=collection,
                         ...)
   if(verbose){
-    message(search.res)
+    message(paste0(search.res,sep="\n"))
   }
   AppRoot<-file.path(AppRoot,"Modis")
   downdir<-file.path(AppRoot,product,"hdf")
@@ -128,7 +128,7 @@ recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,natte
       }
     },
     error=function(cond) {
-      message(cond)
+      message(paste0(cond,"\n"))
       file.remove(file.path(downdir,basename(s)))
       if(natps<nattempts){
         message("Error downloading the image, trying again...")

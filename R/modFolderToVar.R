@@ -16,6 +16,7 @@
 #' images must be imported afterwards.
 #'
 #' @param src path to the folder with the MODIS multispectral images.
+#' @param AppRoot the directory of the outcoming time series.
 #' @param fun is a \code{function} that computes the remote sensing index.
 #' @param getStack logical argument. If \code{TRUE}, returns the time series of
 #' images as a \code{RasterStack}, otherwise the images are saved in the Hard
@@ -25,9 +26,6 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.
 #' @param ... arguments for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} the directory of the outcoming time series.
-#' }
 #'
 #' @examples
 #' \dontrun{
@@ -72,9 +70,10 @@
 #' files.raster <- lapply(flist,raster)
 #' spplot(files.raster[[1]],at=seq(-1,2.5))
 #' }
-modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
-  AppRoot=defineAppRoot(...)
+modFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
   function.arg<-list(...)
+  src<-pathWinLx(src)
+  AppRoot<-pathWinLx(AppRoot)
   vartype<-gsub("var","",as.character(match.call()[c("fun")]))
   if(!getStack){
     AppRoot<-file.path(AppRoot,vartype)

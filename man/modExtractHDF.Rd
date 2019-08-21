@@ -4,29 +4,28 @@
 \alias{modExtractHDF}
 \title{Convert an HDF file into a set of GTiff files}
 \usage{
-modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
-  verbose = FALSE, bFilter = NULL, rm.band = NULL, ...)
+modExtractHDF(filesHDF, AppRoot, overwrite = FALSE, bFilter = NULL,
+  rm.band = NULL, shp = NULL, verbose = FALSE, ...)
 }
 \arguments{
 \item{filesHDF}{the full path where the HDF files are located.}
 
+\item{AppRoot}{the directory where the extracted images are saved.}
+
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
 images with the same name.}
-
-\item{shp}{the shape file of the area of interest.}
-
-\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
-running steps and warnings.}
 
 \item{bFilter}{a vector containing the names of the bands to extract.}
 
 \item{rm.band}{a vector containing the names of the bands excluded from the
 extraction.}
 
-\item{...}{arguments for nested functions:
-\itemize{
-  \item \code{AppRoot} the directory where the extracted images are saved.
-}}
+\item{shp}{the path to shape file of the area of interest in the hard drive.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
+running steps and warnings.}
+
+\item{...}{arguments for nested functions:}
 }
 \description{
 \code{modExtractHDF} converts the original format of MODIS images (HDF) into

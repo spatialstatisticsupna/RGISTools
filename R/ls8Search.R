@@ -32,6 +32,7 @@
 #' running steps and warnings.
 #' @param precise logical argument. If \code{TRUE}, conducts a thorough search,
 #' tile by tile (slower).
+#' @param AppRoot directory of the metadata file. 
 #' @param ... arguments for nested functions:
 #'  \itemize{
 #'   \item \code{pathrow} a \code{list} of vectors with the path and row numbers
@@ -44,7 +45,6 @@
 #'   \code{Spatial*} object representing the region of interest with 
 #'   longitude/latitude coordinates. This argument is mandatory if 
 #'   \code{pathrow} or \code{lonlat} are not defined.
-#'   \item \code{AppRoot} directory of the metadata file. 
 #'   \item column names in the .LS8MD \code{data.frame} and their values.
 #' }
 #'
@@ -74,14 +74,13 @@
 #' # remove metadata to free memory space
 #' lsRemoveMetadata()
 #' }
-ls8Search<-function(startDate,endDate,verbose=FALSE,precise=FALSE,...){
+ls8Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
   stopifnot(class(startDate)=="Date")
   stopifnot(class(endDate)=="Date")
   if(endDate<as.Date("2011-03-13"))
     stop("There is no Landsat-8 Images before 13-03-2013.")
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
-
+  AppRoot<-pathWinLx(AppRoot)
   if(!ls8IsMetaData()|endDate>as.Date(Sys.time())|getRGISToolsOpt("LS8META.var")%in%ls(all.names=TRUE)){
     message("MetaData not loaded! loading...")
     ls8LoadMetadata(AppRoot=AppRoot,update=FALSE,...)

@@ -12,7 +12,8 @@
 #' \code{raster} package.
 #'
 #' @param filesHDF  the full path where the HDF files are located.
-#' @param shp  the shape file of the area of interest.
+#' @param AppRoot the directory where the extracted images are saved.
+#' @param shp the path to shape file of the area of interest in the hard drive.
 #' @param bFilter a vector containing the names of the bands to extract.
 #' @param rm.band a vector containing the names of the bands excluded from the
 #' extraction.
@@ -21,9 +22,6 @@
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param ... arguments for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} the directory where the extracted images are saved.
-#' }
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
@@ -56,9 +54,10 @@
 #' modExtractHDF(filesHDF = first.hdf.file,
 #'               AppRoot = src.tif)
 #' }
-modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=NULL,rm.band=NULL,...){
+modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NULL,shp=NULL,verbose=FALSE,...){
     arg<-list(...)
-    AppRoot<-defineAppRoot(...)
+    filesHDF<-pathWinLx(filesHDF)
+    AppRoot<-pathWinLx(AppRoot)
     dir.create(AppRoot,showWarnings = verbose)
     for(fileHDF in filesHDF){
       image.name<-gsub(".hdf","",basename(fileHDF))

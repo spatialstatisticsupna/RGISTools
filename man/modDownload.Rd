@@ -4,7 +4,7 @@
 \alias{modDownload}
 \title{Search and download MODIS images}
 \usage{
-modDownload(product, startDate, endDate, username, password,
+modDownload(product, startDate, endDate, username, password, AppRoot,
   collection = 6, nattempts = 5, verbose = FALSE,
   extract.tif = FALSE, ...)
 }
@@ -21,6 +21,8 @@ study period.}
 \item{username}{NASA's EarthData username.}
 
 \item{password}{NASA's EarthData password.}
+
+\item{AppRoot}{the directory to save the outcoming time series.}
 
 \item{collection}{MODIS collection, by default 6.}
 
@@ -44,7 +46,6 @@ from hdf files and saves them as GTiff.}
   \item \code{polygon} A list of vectors defining the points of a polygon in
   longitude/latitude format. This argument is mandatory if \code{lonlat} or
   \code{extent} are not defined.
-  \item \code{AppRoot} the directory to save the outcoming time series.
   \item Any argument in \code{\link{modExtractHDF}} function. Ex.
   \code{bFilter="b01_1"}.
 }}

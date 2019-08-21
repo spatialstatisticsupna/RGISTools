@@ -4,10 +4,12 @@
 \alias{ls8LoadMetadata}
 \title{Load or update the Landsat-8 metadata file}
 \usage{
-ls8LoadMetadata(update = FALSE, verbose = TRUE,
+ls8LoadMetadata(AppRoot, update = FALSE, verbose = TRUE,
   omit.question = FALSE, ...)
 }
 \arguments{
+\item{AppRoot}{the directory where the metadata file should be located.}
+
 \item{update}{logical argument. If \code{TRUE}, updates the metadata file.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
@@ -18,7 +20,7 @@ loading the metadata is omitted.}
 
 \item{...}{arguments for nested functions:
 \itemize{
-  \item \code{AppRoot} the directory where the metadata file should be located. 
+  
 }}
 }
 \description{
@@ -40,14 +42,12 @@ metadata in the future.
 }
 \examples{
 \dontrun{
-# creates a MetaData folder in the current working directory and downloads the file there
-ls8LoadMetadata()
 
 # creates a MetaData folder and downloads the csv in the "Path_for_downloading_folder" directory
-ls8LoadMetadata(AppRoot = "Path_for_downloading_folder")
+ls8LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"))
 
 # update the metadata file
-ls8LoadMetadata(update = TRUE)
+ls8LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"), update = TRUE)
 
 # if .LS8MD is already loaded you can see print its data
 ls(all.names = TRUE)

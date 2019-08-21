@@ -47,7 +47,6 @@
 #' genPlotGIS(composite.NDVI.3a)
 genCompositions<-function(rstack,n,fun,by.days=FALSE,...){
   args<-list(...)
-  AppRoot<-defineAppRoot(...)
   if(by.days){
     # Create compositions using dates
     dates<-genGetDates(names(rstack))
@@ -69,7 +68,7 @@ genCompositions<-function(rstack,n,fun,by.days=FALSE,...){
     names(comp)<-paste0(names(rstack)[seq(1,n.ped,n)[unique(idx)]],"_Comp_",n)
   }
   if("AppRoot"%in%names(args)){
-    writeRaster(comp,filename=paste0(AppRoot,"/",names(comp),".tif"),bylayer=TRUE)
+    writeRaster(comp,filename=paste0(pathWinLx(args$AppRoot),"/",names(comp),".tif"),bylayer=TRUE)
   }else{
     return(comp)
   }

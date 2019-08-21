@@ -83,7 +83,6 @@ genSmoothingCovIMA <- function (rStack,
                              ...)
 {
   arg<-list(...)
-  AppRoot<-defineAppRoot()
   # rStack<-target.2011.2013
   # cStack<-target.covs.2011.2013
   #chequea que los datos de entrada tengan el formato correcto
@@ -136,8 +135,11 @@ genSmoothingCovIMA <- function (rStack,
     Img2Process<-aux
   }
 
-  if(!file.exists(AppRoot))
-    dir.create(AppRoot,recursive=TRUE)
+  if("AppRoot"%in%names(args)){
+    args$AppRoot<-pathWinLx(args$AppRoot)
+    dir.create(args$AppRoot,recursive=TRUE,showWarnings = FALSE)
+  }
+    
 
 
 
@@ -209,8 +211,7 @@ genSmoothingCovIMA <- function (rStack,
     target.prediction<-target.prediction+meanImage
     # write filled images
     if("AppRoot"%in%names(args)){
-      dir.create(args$writeRaster,showWarnings = FALSE,recursive = TRUE)
-      writeRaster(target.prediction,paste0(AppRoot,"/",out.name,"_",format(target.date,"%Y%j"),".tif"))
+      writeRaster(target.prediction,paste0(args$AppRoot,"/",out.name,"_",format(target.date,"%Y%j"),".tif"))
     }else{
       fillstack<-addLayer(fillstack,target.prediction)
     }

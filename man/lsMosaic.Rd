@@ -4,12 +4,14 @@
 \alias{lsMosaic}
 \title{Mosaic a set of Landsat-7 or Landsat-8 images}
 \usage{
-lsMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
-  gutils = FALSE, overwrite = FALSE, ...)
+lsMosaic(src, AppRoot, extent = NULL, out.name = "outfile",
+  verbose = FALSE, gutils = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
 \item{src}{the path to the folder with the Landsat-7 or Landsa-8 images in
 GTiff format.}
+
+\item{AppRoot}{the directory to save the mosaicked images.}
 
 \item{extent}{an \code{axtent}, \code{Raster*}, or \code{Spatial*} object
 representing the region of interest.}
@@ -34,7 +36,6 @@ images with the same name.}
   supplied, all bands are mosaicked.
   \item \code{dayFilter} a vector with the capturing dates being considered
   for mosaicking. If not supplied, all dates are mosaicked.
-  \item \code{AppRoot} the directory to save the mosaicked images.
 }}
 }
 \description{

@@ -4,10 +4,13 @@
 \alias{senCloudMask}
 \title{Create cloud masks for Sentinel-2 images}
 \usage{
-senCloudMask(src, img.res, sensitivity = 50, overwrite = FALSE, ...)
+senCloudMask(src, AppRoot, img.res, sensitivity = 50,
+  overwrite = FALSE, ...)
 }
 \arguments{
 \item{src}{the path to the folder with the \code{S2MSI2A} images.}
+
+\item{AppRoot}{the directory where the cloud masks are saved.}
 
 \item{img.res}{a \code{character} vector argument. Defines the band resolution
 used to create the cloud mask. Ex "20m" or "30m".}
@@ -18,10 +21,7 @@ cloud detection method.}
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
 images with the same name.}
 
-\item{...}{argument for nested functions:
-\itemize{
-  \item \code{AppRoot} the directory where the cloud masks are saved.
-}}
+\item{...}{argument for nested functions:}
 }
 \description{
 \code{senCloudMask} creates cloud masks derived from the cloud probability

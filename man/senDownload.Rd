@@ -4,12 +4,14 @@
 \alias{senDownload}
 \title{Search and download Sentinel images}
 \usage{
-senDownload(username, password, verbose = FALSE, ...)
+senDownload(username, password, AppRoot, verbose = FALSE, ...)
 }
 \arguments{
 \item{username}{ESA’s SciHub username.}
 
 \item{password}{ESA’s SciHub password.}
+
+\item{AppRoot}{the directory where the images are saved.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
@@ -33,7 +35,6 @@ running steps and warnings.}
   \item \code{error.log} name of the error log file.
   \item \code{verbose} logical argument. If \code{TRUE}, the function prints
   the running steps and warnings.
-  \item \code{AppRoot} the directory where the images are saved.
 }}
 }
 \description{

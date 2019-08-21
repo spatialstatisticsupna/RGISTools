@@ -16,6 +16,7 @@
 #' \code{\link{lsEspaGetOrderImages}}.
 #' @param username USGS's EarthExplorer username.
 #' @param password USGS's EarthExplorer password.
+#' @param AppRoot the download directory.
 #' @param c.handle a curl handler created with the package \code{curl} to stablish
 #' a connection with a preset password and username. This argument is mandatory
 #' if \code{username} and \code{password} are not defined.
@@ -26,10 +27,7 @@
 #' @param overwrite logical argument. If TRUE, overwrites the existing images
 #' with the same name.
 #' @param untar logical argument. If TRUE, untars the downloaded images.
-#' @param ... argument for nested functions:
-#'  \itemize{
-#'   \item \code{AppRoot} the download directory.
-#' }
+#' @param ... argument for nested functions
 #'
 #' @examples
 #' \dontrun{
@@ -64,6 +62,7 @@
 #'                     AppRoot = dir.ESPA)
 #'}
 lsEspaDownloadOrders<-function(orders,
+                               AppRoot,
                                username=NULL,
                                password=NULL,
                                c.handle=NULL,
@@ -72,7 +71,6 @@ lsEspaDownloadOrders<-function(orders,
                                n.attempts=5,
                                untar=FALSE,
                                ...){
-  AppRoot<-defineAppRoot(...)
   if(is.null(c.handle)){
     if(is.null(username)|is.null(username)){
       stop("c.handle or username and password are null.")
@@ -82,6 +80,7 @@ lsEspaDownloadOrders<-function(orders,
       c.handle<-lsEspaCreateConnection(username,password)
     }
   }
+  AppRoot<-pathWinLx(AppRoot)
   orders.name<-names(orders)
   
   if(length(orders)>0){

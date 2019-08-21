@@ -4,10 +4,12 @@
 \alias{ls7LoadMetadata}
 \title{Load or update the Landsat-7 metadata file}
 \usage{
-ls7LoadMetadata(update = FALSE, verbose = TRUE, omit.question = TRUE,
-  ...)
+ls7LoadMetadata(AppRoot, update = FALSE, verbose = TRUE,
+  omit.question = TRUE, ...)
 }
 \arguments{
+\item{AppRoot}{the directory where the metadata file should be located.}
+
 \item{update}{logical argument. If \code{TRUE}, updates the metadata file.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
@@ -16,10 +18,7 @@ running steps and warnings.}
 \item{omit.question}{logical argument. If \code{TRUE}, the question about 
 loading the metadata is omitted.}
 
-\item{...}{arguments for nested functions:
-\itemize{
-  \item \code{AppRoot} the directory where the metadata file should be located. 
-}}
+\item{...}{arguments for nested functions:}
 }
 \description{
 \code{ls7LoadMetadata} loads a \code{data.frame} called "\code{.LS7MD}"
@@ -40,14 +39,11 @@ metadata in the future.
 }
 \examples{
 \dontrun{
-# creates a MetaData folder in the current working directory and downloads the file there
-ls7LoadMetadata()
-
 # creates a MetaData folder and downloads the csv in the "Path_for_downloading_folder" directory
-ls7LoadMetadata(AppRoot = "Path_for_downloading_folder")
+ls7LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"))
 
 # update the metadata file
-ls7LoadMetadata(update = TRUE)
+ls7LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"), update = TRUE)
 
 # if .LS7MD is already loaded you can see print its data
 ls(all.names = TRUE)

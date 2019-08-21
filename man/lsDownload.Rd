@@ -4,8 +4,8 @@
 \alias{lsDownload}
 \title{Search and download Landsat-7 or Landsat-8 images}
 \usage{
-lsDownload(satellite, startDate, endDate, username, password, lvl = 1,
-  product = c("sr", "source_metadata"), verbose = FALSE,
+lsDownload(satellite, startDate, endDate, username, password, AppRoot,
+  lvl = 1, product = c("sr", "source_metadata"), verbose = FALSE,
   untar = TRUE, raw.rm = FALSE, ...)
 }
 \arguments{
@@ -21,6 +21,8 @@ study period.}
 \item{username}{USGS’s EarthExplorer username.}
 
 \item{password}{USGS’s EarthExplorer password.}
+
+\item{AppRoot}{the download directory.}
 
 \item{lvl}{a number specifying the processing level. Default value, 1.}
 
@@ -38,7 +40,6 @@ running steps and warnings.}
  \itemize{
   \item any argument for \code{\link{ls8Search}}/\code{\link{ls7Search}} or 
   \code{\link{lsDownSearch}}.
-  \item \code{AppRoot} the download directory.
 }}
 }
 \description{

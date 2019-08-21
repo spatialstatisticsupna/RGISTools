@@ -4,7 +4,7 @@
 \alias{modCloudMask}
 \title{Create cloud masks for MODIS images}
 \usage{
-modCloudMask(startDate, endDate, extent, out.name = "outname",
+modCloudMask(startDate, endDate, AppRoot, extent, out.name = "outname",
   raw.rm = FALSE, overwrite = FALSE, verbose = FALSE, ...)
 }
 \arguments{
@@ -13,6 +13,8 @@ study period.}
 
 \item{endDate}{a \code{Date} class object with the ending date of the 
 study period.}
+
+\item{AppRoot}{the directory where cloud masks are saved.}
 
 \item{extent}{An \code{extent}, \code{Raster*}, or \code{Spatial*} object
 representing the region of interest with longitude/latitude coordinates.}
@@ -28,10 +30,7 @@ images with the same name.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
 
-\item{...}{arguments for nested functions:
-\itemize{
-  \item \code{AppRoot} the directory where cloud masks are saved.
-}}
+\item{...}{arguments for nested functions:}
 }
 \description{
 \code{modCloudMask} creates cloud masks derived from the \code{MOD35_L2} 

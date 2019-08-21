@@ -5,11 +5,13 @@
 \title{Compute a remote sensing index from a time series of MODIS multispectral 
 images}
 \usage{
-modFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
+modFolderToVar(src, AppRoot, fun, getStack = FALSE, overwrite = FALSE,
   verbose = FALSE, ...)
 }
 \arguments{
 \item{src}{path to the folder with the MODIS multispectral images.}
+
+\item{AppRoot}{the directory of the outcoming time series.}
 
 \item{fun}{is a \code{function} that computes the remote sensing index.}
 
@@ -23,10 +25,7 @@ images with the same name.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
 
-\item{...}{arguments for nested functions:
-\itemize{
-  \item \code{AppRoot} the directory of the outcoming time series.
-}}
+\item{...}{arguments for nested functions:}
 }
 \description{
 \code{modFolderToVar} computes a remote sensing index from the spectral bands

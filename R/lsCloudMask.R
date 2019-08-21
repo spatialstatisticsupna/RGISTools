@@ -12,6 +12,7 @@
 #'
 #' @param src the path to the folder with the untarred images from Landsat-7 or
 #' Landsat-8.
+#' @param AppRoot the directory where cloud masks are saved.
 #' @param sensitivity \code{numeric} argument. Defines the sensitivity of the
 #' cloud detection method.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
@@ -20,7 +21,7 @@
 #' running steps and warnings.
 #' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the directory where cloud masks are saved.
+
 #' }
 #'
 #' @examples
@@ -73,10 +74,12 @@
 #' b1.cloud.free <- b1.tiles.ras[[1]] * cloud.tiles.ras[[1]]
 #' spplot(b1.cloud.free)
 #' }
-lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=FALSE,...){
+lsCloudMask<-function(src,AppRoot,sensitivity=2800,overwrite=FALSE,verbose=FALSE,...){
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
+  src<-pathWinLx(src)
+  AppRoot<-pathWinLx(AppRoot)
   imgdir.list<-list.dirs(src,recursive=FALSE)
+  
   if(verbose){message(paste0("Identifies folders:  \n",imgdir.list))}
   for(id in imgdir.list){
     #id<-imgdir.list[2]

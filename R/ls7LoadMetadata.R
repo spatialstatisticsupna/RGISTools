@@ -20,31 +20,25 @@
 #' running steps and warnings.
 #' @param omit.question logical argument. If \code{TRUE}, the question about 
 #' loading the metadata is omitted.
+#' @param AppRoot the directory where the metadata file should be located. 
 #' @param ... arguments for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} the directory where the metadata file should be located. 
-#' }
 #'
 #' @examples
 #' \dontrun{
-#' # creates a MetaData folder in the current working directory and downloads the file there
-#' ls7LoadMetadata()
-#'
 #' # creates a MetaData folder and downloads the csv in the "Path_for_downloading_folder" directory
-#' ls7LoadMetadata(AppRoot = "Path_for_downloading_folder")
+#' ls7LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"))
 #'
 #' # update the metadata file
-#' ls7LoadMetadata(update = TRUE)
+#' ls7LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"), update = TRUE)
 #' 
 #' # if .LS7MD is already loaded you can see print its data
 #' ls(all.names = TRUE)
 #' head(.LS7MD)
 #' }
-ls7LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=TRUE,...){
+ls7LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=TRUE,...){
   stopifnot(class(update)=="logical")
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
-
+  AppRoot<-pathWinLx(AppRoot)
   #meta data directory and metadata file
   mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS7DownloadDir"),getRGISToolsOpt("LS7META.dir"))
   

@@ -16,16 +16,13 @@
 #' @param searchres the output from the \code{\link{senSearch}} function.
 #' @param username ESA’s SciHub username.
 #' @param password ESA’s SciHub password.
+#' @param AppRoot the directory where the outcoming time series are saved.
 #' @param unzip logical argument. If \code{TRUE}, unzips the images.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param nattempts the number of attempts to download an image in case it
 #' becomes corrupted.
 #' @param ... arguments for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} the directory where the outcoming time series are
-#'   saved.
-#' }
 #'
 #' @examples
 #' \dontrun{
@@ -63,6 +60,7 @@
 #' plotRGB(rgb)
 #' }
 senDownSearch<-function(searchres,
+                        AppRoot,
                         username=NULL,
                         password=NULL,
                         nattempts = 5,
@@ -70,6 +68,7 @@ senDownSearch<-function(searchres,
                         overwrite=FALSE,
                         ...){
   arg<-list(...)
+  AppRoot<-pathWinLx(AppRoot)
   if(nattempts==0){
     message(paste0("Error downloading ",names(searchres)))
     return(NULL)
@@ -77,7 +76,6 @@ senDownSearch<-function(searchres,
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")
   }
-  AppRoot<-defineAppRoot(...)
   downFolder<-file.path(AppRoot,"/raw")
   dir.create(downFolder,recursive=TRUE,showWarnings = FALSE)
   if(unzip){

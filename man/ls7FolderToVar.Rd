@@ -4,13 +4,15 @@
 \alias{ls7FolderToVar}
 \title{Compute a remote sensing index from a time series of Landsat-7 images}
 \usage{
-ls7FolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
+ls7FolderToVar(src, fun, AppRoot, getStack = FALSE, overwrite = FALSE,
   verbose = FALSE, ...)
 }
 \arguments{
 \item{src}{the path to the folder with the Landsat-7 multispectral imagery.}
 
 \item{fun}{a \code{function} that computes the remote sensing index.}
+
+\item{AppRoot}{the directory of the outcoming time series.}
 
 \item{getStack}{logical argument. If \code{TRUE}, returns the time series 
 as a \code{RasterStack}, otherwise the images are saved in the Hard Drive
@@ -24,7 +26,7 @@ running steps and warnings.}
 
 \item{...}{arguments for nested functions:
 \itemize{
-  \item \code{AppRoot} the directory of the outcoming time series.
+  \item 
 }}
 }
 \description{

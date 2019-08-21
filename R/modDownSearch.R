@@ -16,12 +16,10 @@
 #' @param searchres the output from the \code{\link{modSearch}} function.
 #' @param username NASA’s EarthData username.
 #' @param password NASA’s EarthData password.
+#' @param AppRoot the directory where the images will be saved.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param ... argument for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} the directory where the images will be saved.
-#' }
 #'
 #' @examples
 #' \dontrun{
@@ -48,12 +46,12 @@
 #'               password = "pass",
 #'               AppRoot = src.mod.hdf)
 #' }
-modDownSearch<-function(searchres ,username = NULL,password = NULL,overwrite=FALSE,...){
+modDownSearch<-function(searchres, AppRoot, username = NULL,password = NULL,overwrite=FALSE,...){
   arg<-list(...)
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")
   }
-  AppRoot<-defineAppRoot(...)
+  AppRoot<-pathWinLx(AppRoot)
   dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
   for(l in searchres){
     if(file.exists(paste0(AppRoot,"/",basename(l)))&&overwrite){

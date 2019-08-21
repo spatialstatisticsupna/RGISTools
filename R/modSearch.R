@@ -43,7 +43,6 @@
 #'   \item \code{polygon} a list of vectors defining the points of a polygon
 #'   with longitude/latitude coordinates. This argument is mandatory if
 #'   \code{lonlat} or \code{extent} are not defined.
-#'   \item \code{AppRoot} the directory to save the outcoming time series.
 #' }
 #' @examples
 #' \dontrun{

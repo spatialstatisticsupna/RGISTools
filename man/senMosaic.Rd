@@ -4,11 +4,13 @@
 \alias{senMosaic}
 \title{Mosaic a set of Sentinel-2 images}
 \usage{
-senMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
-  gutils = FALSE, overwrite = FALSE, ...)
+senMosaic(src, AppRoot, extent = NULL, out.name = "outfile",
+  verbose = FALSE, gutils = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
 \item{src}{the path of the folder with the Sentinel images in GTiff format.}
+
+\item{AppRoot}{the directory to save the mosaicked images.}
 
 \item{extent}{an \code{extent}, \code{Raster*}, or \code{Spatial*} object
 representing the region of interest.}
@@ -33,7 +35,6 @@ images with the same name.}
   supplied, all bands are mosaicked.
   \item \code{dayFilter} a vector with the capturing dates being considered
   for mosaicking. If not supplied, all dates are mosaicked.
-  \item \code{AppRoot} the directory to save the mosaicked images.
 }}
 }
 \description{

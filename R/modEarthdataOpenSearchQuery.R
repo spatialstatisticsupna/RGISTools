@@ -48,15 +48,16 @@ earthdataOpenSearchQuery<-function(startDate,
 
 
 modDownloadAtmosphere<-function(startDate,
-                                     endDate,
-                                     extent,
-                                     product,#MOD35_L2
-                                     collection=NULL,
-                                     verbose=FALSE,
-                                     overwrite=FALSE,
-                                     ...){
+                                endDate,
+                                extent,
+                                AppRoot,
+                                product,#MOD35_L2
+                                collection=NULL,
+                                verbose=FALSE,
+                                overwrite=FALSE,
+                                ...){
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
+  AppRoot<-pathWinLx(AppRoot)
   #create the earthdata search query
   #startDate=as.Date("2017208","%Y%j");endDate=as.Date("2017218","%Y%j");extent=ex.navarre;
   loc<-earthdataOpenSearchQuery(startDate,endDate,extent,product=product)

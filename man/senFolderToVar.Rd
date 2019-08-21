@@ -4,11 +4,13 @@
 \alias{senFolderToVar}
 \title{Compute a remote sensing index from a time series of Sentinel-2 images}
 \usage{
-senFolderToVar(src, fun, getStack = FALSE, overwrite = FALSE,
+senFolderToVar(src, AppRoot, fun, getStack = FALSE, overwrite = FALSE,
   verbose = FALSE, resbands = c("10m", "20m", "60m"), ...)
 }
 \arguments{
 \item{src}{the path to the folder with the Sentinel-2 multispectral images.}
+
+\item{AppRoot}{directory where the outcoming time series is saved.}
 
 \item{fun}{a \code{function} that computes the remote sensing index.}
 
@@ -26,10 +28,7 @@ running steps and warnings.}
 when the imagery comes from the Senintel-2 S2MSI2A product. By default,
 all resolutions (10m, 20m, and 60m) are used.}
 
-\item{...}{arguments for nested functions:
-\itemize{
-  \item \code{AppRoot} directory where the outcoming time series is saved.
-}}
+\item{...}{arguments for nested functions:}
 }
 \description{
 \code{senFolderToVar} computes a remote sensing index from the spectral bands

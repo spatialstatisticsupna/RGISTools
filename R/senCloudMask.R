@@ -7,6 +7,7 @@
 #' the argument is set to 50.
 #' 
 #' @param src the path to the folder with the \code{S2MSI2A} images. 
+#' @param AppRoot the directory where the cloud masks are saved.
 #' @param img.res a \code{character} vector argument. Defines the band resolution
 #' used to create the cloud mask. Ex "20m" or "30m".
 #' @param sensitivity a \code{numeric} argument. Defines the sensitivity of the
@@ -14,9 +15,6 @@
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param ... argument for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} the directory where the cloud masks are saved.
-#' }
 #'
 #' @examples
 #' \dontrun{
@@ -77,16 +75,17 @@
 #' # plot b2 cloud free layers
 #' spplot(b2.cloud.free)
 #' }
-senCloudMask<-function(src,img.res,sensitivity=50,overwrite=FALSE,...){
+senCloudMask<-function(src,AppRoot,img.res,sensitivity=50,overwrite=FALSE,...){
   # src<-"D:/Downscaling/Sentinel2_L2/Navarre"/2017209
   # AppRoot<-"D:/Downscaling/Sentinel2_L2"
   # library(RGISTools)
   # getRGISToolsOpt("SEN2BANDS")
   # sensitivity 0-100
   # img.res 10m, 20m o 30m img.res<-"20m"
-  # 
+  
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
+  src<-pathWinLx(src)
+  AppRoot<-pathWinLx(AppRoot)
   imgdir.list<-list.dirs(src,recursive=FALSE)
   AppRoot<-file.path(AppRoot,"CloudMask")
   dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)

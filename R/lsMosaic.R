@@ -22,6 +22,7 @@
 #'  GTiff format.
 #' @param out.name the name of the folder that stores the outputs. By default,
 #' “outfile” is assigned.
+#' @param AppRoot the directory to save the mosaicked images.
 #' @param extent an \code{axtent}, \code{Raster*}, or \code{Spatial*} object
 #' representing the region of interest.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
@@ -38,7 +39,6 @@
 #'   supplied, all bands are mosaicked.
 #'   \item \code{dayFilter} a vector with the capturing dates being considered
 #'   for mosaicking. If not supplied, all dates are mosaicked.
-#'   \item \code{AppRoot} the directory to save the mosaicked images.
 #' }
 #' @examples
 #' \dontrun{
@@ -72,6 +72,7 @@
 #'          overwrite = TRUE) # overwrite
 #' }
 lsMosaic<-function(src,
+                   AppRoot,
                    extent=NULL,
                    out.name="outfile",
                    verbose=FALSE,
@@ -79,8 +80,8 @@ lsMosaic<-function(src,
                    overwrite=FALSE,
                    ...){
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
-
+  src<-pathWinLx(src)
+  AppRoot<-pathWinLx(AppRoot)
   #read all folder names to get all the days
   imgFolders<-list.files(src,full.names = TRUE)
   #remove folders

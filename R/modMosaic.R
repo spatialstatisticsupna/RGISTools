@@ -19,6 +19,7 @@
 #'
 #'
 #' @param src the path of the folder with the MODIS images in GTiff format.
+#' @param AppRoot the directory where the mosaicked images are saved.
 #' @param out.name  the name of the folder that stores the outputs. By default,
 #' “outfile” is assigned.
 #' @param extent an \code{extent}, \code{Raster*}, or \code{Spatial*} object
@@ -37,7 +38,6 @@
 #'   supplied, all bands are mosaicked.
 #'   \item \code{dayFilter} a vector with the capturing dates being considered
 #'   for mosaicking. If not supplied, all dates are mosaicked.
-#'   \item \code{AppRoot} the directory where the mosaicked images are saved.
 #' }
 #' @examples
 #' \dontrun{
@@ -68,6 +68,7 @@
 #'           extent = ex.navarre)
 #' }
 modMosaic<-function(src,
+                    AppRoot,
                     extent = NULL,
                     out.name = "outfile",
                     verbose = FALSE,
@@ -75,8 +76,8 @@ modMosaic<-function(src,
                     overwrite = FALSE,
                     ...){
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
-
+  src<-pathWinLx(src)
+  AppRoot<-pathWinLx(AppRoot)
   #read all folder names to get all the days
   imgFolders<-list.files(src,full.names = TRUE)
   #remove folders

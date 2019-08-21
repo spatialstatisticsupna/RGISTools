@@ -4,11 +4,14 @@
 \alias{genSaveTSRData}
 \title{Saves a time series of images as an RData}
 \usage{
-genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
-  endDate = NULL, dextent = FALSE, recursive = FALSE, ...)
+genSaveTSRData(src, AppRoot = NULL, ts.name = "TS.Name",
+  startDate = NULL, endDate = NULL, dextent = FALSE,
+  recursive = FALSE)
 }
 \arguments{
 \item{src}{path to the folder where the time series of images is located.}
+
+\item{AppRoot}{the path where the RData is saved.}
 
 \item{ts.name}{the name of the \code{RasterStack} in the RData.}
 
@@ -23,11 +26,6 @@ extent of the \code{RasterStack} to embrace the extents of all GTiff images.}
 
 \item{recursive}{logical argument. If \code{TRUE}, reads folders recursively,
 searching for GTiff images.}
-
-\item{...}{arguments for nested functions:
-\itemize{
-  \item \code{AppRoot} the path where the RData is saved.
-}}
 }
 \description{
 \code{genSaveTSRData} imports a time series of images from a folder (GTiff

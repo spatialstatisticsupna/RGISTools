@@ -4,11 +4,13 @@
 \alias{modMosaic}
 \title{Mosaic a set of MODIS images}
 \usage{
-modMosaic(src, extent = NULL, out.name = "outfile", verbose = FALSE,
-  gutils = FALSE, overwrite = FALSE, ...)
+modMosaic(src, AppRoot, extent = NULL, out.name = "outfile",
+  verbose = FALSE, gutils = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
 \item{src}{the path of the folder with the MODIS images in GTiff format.}
+
+\item{AppRoot}{the directory where the mosaicked images are saved.}
 
 \item{extent}{an \code{extent}, \code{Raster*}, or \code{Spatial*} object
 representing the region of interest.}
@@ -33,7 +35,6 @@ images with the same name.}
   supplied, all bands are mosaicked.
   \item \code{dayFilter} a vector with the capturing dates being considered
   for mosaicking. If not supplied, all dates are mosaicked.
-  \item \code{AppRoot} the directory where the mosaicked images are saved.
 }}
 }
 \description{

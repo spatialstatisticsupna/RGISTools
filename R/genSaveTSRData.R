@@ -21,10 +21,7 @@
 #' extent of the \code{RasterStack} to embrace the extents of all GTiff images.
 #' @param recursive logical argument. If \code{TRUE}, reads folders recursively,
 #' searching for GTiff images.
-#' @param ... arguments for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} the path where the RData is saved.
-#' }
+#' @param AppRoot the path where the RData is saved.
 #'
 #' @examples
 #' \dontrun{
@@ -71,8 +68,10 @@
 #' s.end <- Sys.time()
 #' s.end - s.start
 #' }
-genSaveTSRData<-function(src,ts.name="TS.Name",startDate=NULL,endDate=NULL,dextent=FALSE,recursive=FALSE,...){
-  AppRoot=defineAppRoot(...)
+genSaveTSRData<-function(src,AppRoot=NULL,ts.name="TS.Name",startDate=NULL,endDate=NULL,dextent=FALSE,recursive=FALSE){
+  src<-pathWinLx(src)
+  if(!is.null(AppRoot)){AppRoot<-pathWinLx(AppRoot)}
+  
   flist<-list.files(src,full.names = TRUE,pattern="\\.tif$",recursive=recursive)
   allDates<-genGetDates(flist)
   if(!is.null(startDate)){
@@ -102,8 +101,12 @@ genSaveTSRData<-function(src,ts.name="TS.Name",startDate=NULL,endDate=NULL,dexte
   }
  
   
-  
-  save(list=c(ts.name), file = paste0(AppRoot,"/",ts.name,".RData"))
-  eval(parse(text=paste0(ts.name,"<<-",ts.name) ))
-  message(paste0("The time series of images in ",src," have been saved as RData.\nYou can find the RDAta in: ",paste0(AppRoot,"/",ts.name,".RData")))
+  if(!is.null(AppRoot)){
+    save(list=c(ts.name), file = paste0(AppRoot,"/",ts.name,".RData"))
+    eval(parse(text=paste0(ts.name,"<<-",ts.name) ))
+    message(paste0("The time series of images in ",src," have been saved as RData.\nYou can find the RDAta in: ",paste0(AppRoot,"/",ts.name,".RData")))
+  }else{
+    eval(parse(text=paste0(ts.name,"<<-",ts.name) ))
+    message("The time series of images has been loaded to gloval environment")
+  }
 }

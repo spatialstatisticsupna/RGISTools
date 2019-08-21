@@ -25,6 +25,7 @@
 #' study period.
 #' @param endDate a \code{Date} class object with the ending date of the 
 #' study period.
+#' @param AppRoot the download directory.
 #' @param username USGS’s EarthExplorer username.
 #' @param password USGS’s EarthExplorer password.
 #' @param lvl a number specifying the processing level. Default value, 1.
@@ -38,7 +39,6 @@
 #'  \itemize{
 #'   \item any argument for \code{\link{ls8Search}}/\code{\link{ls7Search}} or 
 #'   \code{\link{lsDownSearch}}.
-#'   \item \code{AppRoot} the download directory.
 #' }
 #'
 #' @examples
@@ -66,27 +66,29 @@ lsDownload<-function(satellite,
                      endDate,
                      username,
                      password,
+                     AppRoot,
                      lvl=1,
                      product=c("sr","source_metadata"),
                      verbose=FALSE,
                      untar=TRUE,
                      raw.rm=FALSE,
                      ...){
-  AppRoot<-defineAppRoot(...)
   if(tolower(satellite)=="ls7"){
     message("Searching Landsat-7 image time series.")
     searchres=ls7Search(startDate=startDate,
                         endDate=endDate,
                         verbose=verbose,
+                        AppRoot=AppRoot,
                         ...)
   }else if (tolower(satellite)=="ls8"){
     message("Searching Landsat-8 image time series.")
     searchres=ls8Search(startDate=startDate,
                         endDate=endDate,
                         verbose=verbose,
+                        AppRoot=AppRoot,
                         ...)
   }else{
-    stop("Satellite not supported. Perform the search with the argument satellite as ls7 or ls8.")
+    stop("Satellite not supported. Perform the search with the argument satellite as 'ls7' or 'ls8'.")
   }
   if(verbose){
     message("Search result:")

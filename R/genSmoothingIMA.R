@@ -71,13 +71,13 @@ genSmoothingIMA<-function(imgTS,
                           out.name="outname",
                           ...){
   args<-list(...)
-  AppRoot<-defineAppRoot()
   stime<-Sys.time()
   if(snow.mode){
     beginCluster()
   }
   if("AppRoot"%in%names(args)){
-    dir.create(paste0(AppRoot,"/",out.name),showWarnings = TRUE,recursive = TRUE)
+    args$AppRoot<-pathWinLx(args$AppRoot)
+    dir.create(paste0(args$AppRoot,"/",out.name),showWarnings = TRUE,recursive = TRUE)
   }
   # select images to predict
   if(is.null(Img2Fill)){
@@ -143,9 +143,10 @@ genSmoothingIMA<-function(imgTS,
 
     # write filled images
     if("AppRoot"%in%names(args)){
-      writeRaster(target.prediction,paste0(AppRoot,"/",out.name,"/",format(target.date,"%Y%j"),".tif"))
+      writeRaster(target.prediction,paste0(args$AppRoot,"/",out.name,"/",format(target.date,"%Y%j"),".tif"))
+    }else{
+      fillstack<-addLayer(fillstack,target.prediction)
     }
-    fillstack<-addLayer(fillstack,target.prediction)
   }
   if(snow.mode){
     endCluster()

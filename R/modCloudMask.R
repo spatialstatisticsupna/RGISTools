@@ -13,6 +13,7 @@
 #' study period.
 #' @param endDate a \code{Date} class object with the ending date of the 
 #' study period.
+#' @param AppRoot the directory where cloud masks are saved.
 #' @param out.name he name of the folder that stores the outputs. By default,
 #' “outfile” is assigned.
 #' @param extent An \code{extent}, \code{Raster*}, or \code{Spatial*} object
@@ -23,9 +24,6 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.
 #' @param ... arguments for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} the directory where cloud masks are saved.
-#' }
 #'
 #' @examples
 #' \dontrun{
@@ -86,9 +84,9 @@
 #' # plot the cloud free b01 layer
 #' spplot(navarre.b01.stack*cmask.stack)
 #' }
-modCloudMask<-function(startDate,endDate,extent,out.name="outname",raw.rm=FALSE,overwrite=FALSE,verbose=FALSE,...){
+modCloudMask<-function(startDate,endDate,AppRoot,extent,out.name="outname",raw.rm=FALSE,overwrite=FALSE,verbose=FALSE,...){
   arg <- list(...)
-  AppRoot <- defineAppRoot(...)
+  AppRoot<-pathWinLx(AppRoot)
   AppRoot <- file.path(AppRoot,"Modis","CloudMask")
   modDownloadAtmosphere(startDate=startDate,
                         endDate=endDate,

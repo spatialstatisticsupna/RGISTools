@@ -4,7 +4,8 @@
 \alias{ls7Search}
 \title{Search Landsat-7 images}
 \usage{
-ls7Search(startDate, endDate, verbose = FALSE, precise = FALSE, ...)
+ls7Search(startDate, endDate, AppRoot, verbose = FALSE,
+  precise = FALSE, ...)
 }
 \arguments{
 \item{startDate}{a \code{Date} class object with the starting date of the 
@@ -12,6 +13,8 @@ study period.}
 
 \item{endDate}{a \code{Date} class object with the ending date of the 
 study period.}
+
+\item{AppRoot}{directory of the metadata file.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
@@ -31,7 +34,7 @@ tile by tile (slower).}
   \code{Spatial}* object representing the region of interest with 
   longitude/latitude coordinates. This argument is mandatory if 
   \code{pathrow} or \code{lonlat} are not defined.
-  \item \code{AppRoot} directory of the metadata file. 
+  
   \item column names in the .LS7MD \code{data.frame} and their values.
 }}
 }

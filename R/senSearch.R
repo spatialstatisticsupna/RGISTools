@@ -35,7 +35,6 @@
 #'   \item \code{verbose} logical argument. If \code{TRUE}, the function prints
 #'   the running steps and warnings.
 #'   \item \code{error.log} the name of the error log file.
-#'   \item \code{AppRoot} the directory where the images are saved.
 #' }
 #' @examples
 #' \dontrun{

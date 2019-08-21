@@ -4,13 +4,15 @@
 \alias{lsEspaDownloadOrders}
 \title{Downloads the images that have been pre-processed by ESPA}
 \usage{
-lsEspaDownloadOrders(orders, username = NULL, password = NULL,
+lsEspaDownloadOrders(orders, AppRoot, username = NULL, password = NULL,
   c.handle = NULL, verbose = FALSE, overwrite = FALSE,
   n.attempts = 5, untar = FALSE, ...)
 }
 \arguments{
 \item{orders}{a list of the requested images as returned by
 \code{\link{lsEspaGetOrderImages}}.}
+
+\item{AppRoot}{the download directory.}
 
 \item{username}{USGS's EarthExplorer username.}
 
@@ -31,10 +33,7 @@ becomes corrupted files.}
 
 \item{untar}{logical argument. If TRUE, untars the downloaded images.}
 
-\item{...}{argument for nested functions:
- \itemize{
-  \item \code{AppRoot} the download directory.
-}}
+\item{...}{argument for nested functions}
 }
 \description{
 \code{lsEspaDownloadOrders} downloads a set of images processed by the EROS

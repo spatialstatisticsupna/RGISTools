@@ -14,6 +14,7 @@
 #'
 #' @param src the path to the folder with the Landsat-7 multispectral imagery.
 #' @param fun a \code{function} that computes the remote sensing index.
+#' @param AppRoot the directory of the outcoming time series.
 #' @param getStack logical argument. If \code{TRUE}, returns the time series 
 #' as a \code{RasterStack}, otherwise the images are saved in the Hard Drive
 #' Device (HDD).
@@ -23,7 +24,7 @@
 #' running steps and warnings.
 #' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the directory of the outcoming time series.
+#'   \item 
 #' }
 #'
 #' @examples
@@ -68,8 +69,9 @@
 #' ras <- raster(flist[1])
 #' spplot(ras)
 #' }
-ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
-  AppRoot=defineAppRoot(...)
+ls7FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
+  src<-pathWinLx(src)
+  AppRoot<-pathWinLx(AppRoot)
   function.arg<-list(...)
   vartype<-gsub("var","",as.character(match.call()[c("fun")]))
   if(!getStack){

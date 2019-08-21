@@ -4,8 +4,8 @@
 \alias{lsDownSearch}
 \title{Download Landsat-7 or Landsat-8 images from a search list}
 \usage{
-lsDownSearch(searchres, username = NULL, password = NULL, lvl = 1,
-  product = c("sr", "source_metadata"), verbose = FALSE,
+lsDownSearch(searchres, username = NULL, password = NULL, AppRoot,
+  lvl = 1, product = c("sr", "source_metadata"), verbose = FALSE,
   raw.rm = FALSE, untar = FALSE, overwrite = FALSE, nattempts = 5,
   ...)
 }
@@ -16,6 +16,8 @@ lsDownSearch(searchres, username = NULL, password = NULL, lvl = 1,
 \item{username}{USGS's EarthExplorer username.}
 
 \item{password}{USGS's EarthExplorer password.}
+
+\item{AppRoot}{the download directory.}
 
 \item{lvl}{a number specifying the processing level. Default value, 1.}
 
@@ -35,10 +37,7 @@ images with the same name.}
 \item{nattempts}{the number of attempts to download an image in case it
 becomes corrupted.}
 
-\item{...}{arguments for nested functions:
-\itemize{
-  \item \code{AppRoot} the download directory.
-}}
+\item{...}{arguments for nested functions:}
 }
 \description{
 \code{lsDownSearch} downloads the results from \code{\link{ls7Search}} and

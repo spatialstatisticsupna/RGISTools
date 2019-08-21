@@ -32,6 +32,7 @@
 #' running steps and warnings.
 #' @param precise logical argument. If \code{TRUE}, conducts a thorough search,
 #' tile by tile (slower).
+#' @param AppRoot directory of the metadata file. 
 #' @param ... arguments for nested functions:
 #'  \itemize{
 #'   \item \code{pathrow} a list of vectors with the path and row numbers of
@@ -44,7 +45,7 @@
 #'   \code{Spatial}* object representing the region of interest with 
 #'   longitude/latitude coordinates. This argument is mandatory if 
 #'   \code{pathrow} or \code{lonlat} are not defined.
-#'   \item \code{AppRoot} directory of the metadata file. 
+#'   
 #'   \item column names in the .LS7MD \code{data.frame} and their values.
 #' }
 #'
@@ -80,12 +81,12 @@
 #' # remove metadata to free memory space
 #' lsRemoveMetadata()
 #' }
-ls7Search<-function(startDate,endDate,verbose=FALSE,precise=FALSE,...){
+ls7Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
   stopifnot(class(startDate)=="Date")
   stopifnot(class(endDate)=="Date")
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
-
+  
+  AppRoot<-pathWinLx(AppRoot)
   if(!ls7IsMetaData()|endDate>as.Date(Sys.time())|getRGISToolsOpt("LS7META.var")%in%ls(all.names=TRUE)){
     message("MetaData not loaded! loading...")
     ls7LoadMetadata(AppRoot=AppRoot,update=FALSE,...)

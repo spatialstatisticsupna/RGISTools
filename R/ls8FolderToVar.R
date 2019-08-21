@@ -16,6 +16,7 @@
 #' 
 #' @param src path to the folder with the Landsat-8 multispectral image.
 #' @param fun is a function that computes the remote sensing index.
+#' @param AppRoot the directory of the outcoming time series.
 #' @param getStack logical argument. If \code{TRUE}, returns the time series of
 #' images as a \code{RasterStack}, otherwise the images are saved in the Hard
 #' Drive Device (HDD).
@@ -24,9 +25,6 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.
 #' @param ... arguments for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} the directory of the outcoming time series.
-#' }
 #'
 #' @examples
 #' \dontrun{
@@ -71,10 +69,12 @@
 #' file.raster <- raster(flist[1])
 #' spplot(files.raster)
 #' }
-ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
-  AppRoot=defineAppRoot(...)
+ls8FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
   function.arg<-list(...)
   vartype<-gsub("var","",as.character(match.call()[c("fun")]))
+  src<-pathWinLx(src)
+  AppRoot<-pathWinLx(AppRoot)
+  
   if(!getStack){
     AppRoot<-file.path(AppRoot,vartype)
     dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)

@@ -15,6 +15,7 @@
 #' \code{FALSE} and the RGB images must be imported afterwards.
 #' 
 #' @param src the path to the folder with the Sentinel-2 multispectral images.
+#' @param AppRoot directory where the outcoming time series is saved.
 #' @param fun a \code{function} that computes the remote sensing index.
 #' @param getStack logical argument. If \code{TRUE}, returns the time series of
 #' images as a \code{RasterStack}, otherwise the images are saved in the Hard
@@ -27,9 +28,6 @@
 #' when the imagery comes from the Senintel-2 S2MSI2A product. By default,
 #' all resolutions (10m, 20m, and 60m) are used.
 #' @param ... arguments for nested functions:
-#' \itemize{
-#'   \item \code{AppRoot} directory where the outcoming time series is saved.
-#' }
 #'
 #' @examples
 #' \dontrun{
@@ -74,11 +72,11 @@
 #' files.raster <- lapply(flist, raster)
 #' spplot(files[[1]])
 #' }
-senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,resbands=c("10m","20m","60m"),...){
-  AppRoot=defineAppRoot(...)
+senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,resbands=c("10m","20m","60m"),...){
   function.arg<-list(...)
   vartype<-gsub("var","",as.character(match.call()[c("fun")]))
-
+  src<-pathWinLx(src)
+  AppRoot<-pathWinLx(AppRoot)
   AppRoot<-file.path(AppRoot,vartype)
   dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
   if(verbose){message(paste0("var type: ",vartype))}
