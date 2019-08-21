@@ -1,12 +1,12 @@
 #' Create cloud masks for Sentinel-2 images
 #' 
 #' \code{senCloudMask} creates cloud masks derived from the cloud probability
-#' band \code{CLDPROB} band from the \code{S2MSI2A} product.
+#' band (\code{CLDPROB}) band from the "\code{S2MSI2A}" product.
 #'
 #' The valid threshold range for \code{sensitivity} is 0-100. By default,
 #' the argument is set to 50.
 #' 
-#' @param src the path to the folder with the \code{S2MSI2A} images. 
+#' @param src the path to the folder with the "\code{S2MSI2A}" images. 
 #' @param AppRoot the directory where the cloud masks are saved.
 #' @param img.res a \code{character} vector argument. Defines the band resolution
 #' used to create the cloud mask. Ex "20m" or "30m".
@@ -14,7 +14,7 @@
 #' cloud detection method.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
-#' @param ... argument for nested functions:
+#' @param ... arguments for nested functions:
 #'
 #' @examples
 #' \dontrun{

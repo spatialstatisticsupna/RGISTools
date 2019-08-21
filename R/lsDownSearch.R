@@ -6,10 +6,10 @@
 #'
 #' \code{lsDonwSearch} downloads the list of URLs provided by \link{ls7Search}
 #' or \link{ls8Search} as a \code{data.frame}. The function requires an USGS's
-#' EarthExplorer account, which can be obtained 
+#' `EarthExplorer' account, which can be obtained 
 #' \href{https://ers.cr.usgs.gov/register/}{here}.
 #' 
-#' The files from EarthExplorer are compressed as ‘tar.gz’. \code{lsDownSearch}
+#' The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDownSearch}
 #' decompresses the images and obtains the corresponding GTiffs. The GTiff files
 #' are saved in the \code{AppRoot} directory. To change this option, provide
 #' \code{AppRoot = “full path”}. When \code{untar = TRUE}, the function
@@ -19,8 +19,8 @@
 #' 
 #' @param searchres the results from \code{\link{ls7Search}} or 
 #' \code{\link{ls8Search}}.
-#' @param username USGS's EarthExplorer username.
-#' @param password USGS's EarthExplorer password.
+#' @param username USGS's `EarthExplorer' username.
+#' @param password USGS's `EarthExplorer' password.
 #' @param AppRoot the download directory.
 #' @param lvl a number specifying the processing level. Default value, 1.
 #' @param product \code{character} vector with the requested Level-2 products.

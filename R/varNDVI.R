@@ -1,6 +1,7 @@
 #' Calculate the normalized difference vegetation index (NDVI)
 #'
-#' \code{varNDVI} computes the the NDVI index from the red an NIR bands.
+#' \code{varNDVI} computes the normalized difference vegetation index (NDVI)
+#' from the red an near-infrared (NIR) bands.
 #'
 #' The normalized difference vegetation index (NDVI) is the most widely used 
 #' index for monitoring vegetation dynamics. The NDVI reflex vegetation vigour

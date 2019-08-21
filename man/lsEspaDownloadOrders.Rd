@@ -14,11 +14,11 @@ lsEspaDownloadOrders(orders, AppRoot, username = NULL, password = NULL,
 
 \item{AppRoot}{the download directory.}
 
-\item{username}{USGS's EarthExplorer username.}
+\item{username}{USGS's `EarthExplorer' username.}
 
-\item{password}{USGS's EarthExplorer password.}
+\item{password}{USGS's `EarthExplorer' password.}
 
-\item{c.handle}{a curl handler created with the package \code{curl} to stablish
+\item{c.handle}{a curl handler created with the package `\code{curl}' to stablish
 a connection with a preset password and username. This argument is mandatory
 if \code{username} and \code{password} are not defined.}
 
@@ -37,7 +37,8 @@ becomes corrupted files.}
 }
 \description{
 \code{lsEspaDownloadOrders} downloads a set of images processed by the EROS
-Centre Science Processing Architecture (ESPA) through its API.
+Centre Science Processing Architecture (ESPA) through its application
+programming interface (API).
 }
 \details{
 This function is part of a group of functions used to pre-process Landsat

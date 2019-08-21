@@ -13,9 +13,9 @@ lsDownSearch(searchres, username = NULL, password = NULL, AppRoot,
 \item{searchres}{the results from \code{\link{ls7Search}} or 
 \code{\link{ls8Search}}.}
 
-\item{username}{USGS's EarthExplorer username.}
+\item{username}{USGS's `EarthExplorer' username.}
 
-\item{password}{USGS's EarthExplorer password.}
+\item{password}{USGS's `EarthExplorer' password.}
 
 \item{AppRoot}{the download directory.}
 
@@ -47,10 +47,10 @@ becomes corrupted.}
 \details{
 \code{lsDonwSearch} downloads the list of URLs provided by \link{ls7Search}
 or \link{ls8Search} as a \code{data.frame}. The function requires an USGS's
-EarthExplorer account, which can be obtained 
+`EarthExplorer' account, which can be obtained 
 \href{https://ers.cr.usgs.gov/register/}{here}.
 
-The files from EarthExplorer are compressed as ‘tar.gz’. \code{lsDownSearch}
+The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDownSearch}
 decompresses the images and obtains the corresponding GTiffs. The GTiff files
 are saved in the \code{AppRoot} directory. To change this option, provide
 \code{AppRoot = “full path”}. When \code{untar = TRUE}, the function

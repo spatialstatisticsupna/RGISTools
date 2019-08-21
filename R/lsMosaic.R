@@ -14,9 +14,9 @@
 #' \code{lsMosaic} automatically reprojects the extent to match the projection
 #' of the image. The outputs are placed in the \code{AppRoot} directory, under
 #' the folder named as \code{out.name}. If no name is provided, the folder is
-#' named “outfile”. To use \code{gutils = TRUE}, a proper installation of GDAL
-#' and the \code{gdalUtils} library is required. This method is faster than
-#' native R functions.
+#' named “outfile”. To use `\code{gutils = TRUE}', a proper installation of `GDAL'
+#' and the `\code{gdalUtils}' library is required. This method is faster than
+#' native `R' functions.
 #'
 #' @param src the path to the folder with the Landsat-7 or Landsa-8 images in
 #'  GTiff format.
@@ -27,7 +27,7 @@
 #' representing the region of interest.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
-#' @param gutils logical argument. If \code{TRUE}, the function uses GDAL
+#' @param gutils logical argument. If \code{TRUE}, the function uses `GDAL'
 #' utilities for mosaicking.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.

@@ -42,12 +42,14 @@
 #'   \item \code{lonlat} a vector with the longitude/latitude
 #'   coordinates of the point of interest. Ex. \code{c(-1.64323,42.81687)}.
 #'   \item \code{extent} an \code{extent}, \code{Raster*}, or 
-#'   \code{Spatial}* object representing the region of interest with 
+#'   \code{Spatial*} object representing the region of interest with 
 #'   longitude/latitude coordinates. This argument is mandatory if 
 #'   \code{pathrow} or \code{lonlat} are not defined.
 #'   
 #'   \item column names in the .LS7MD \code{data.frame} and their values.
 #' }
+#'
+#' @return a \code{data.frame} with the name of the images and their metadata.
 #'
 #' @examples
 #' \dontrun{

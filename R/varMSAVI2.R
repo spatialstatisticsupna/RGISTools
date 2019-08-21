@@ -1,6 +1,7 @@
 #' Calculate the modified soil-adjusted vegetation index (MSAVI2)
 #'
-#' \code{varMSAVI2} computes the the MSAVI index from the NIR and red bands.
+#' \code{varMSAVI2} computes the modified soil-adjusted vegetation index 2
+#' (MSAVI2) from the near-infrared (NIR) and red bands.
 #'
 #' The modified soil adjusted vegetation index 2 (MSAVI2) is a vegetation 
 #' indicator that removes the effect from background variations

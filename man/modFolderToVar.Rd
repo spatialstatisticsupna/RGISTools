@@ -40,8 +40,8 @@ arguments. The \code{src} is usually the path resulting from
 \code{\link{modMosaic}}. The \code{fun} argument can be any function from
 this package beginning with “var” (\code{\link{varNDVI}}, \code{\link{varEVI}},
 etc.). Custom functions can also be implemented. If \code{fun = varRGB}, then
-the argument \code{getStack} must be equal to \code{FALSE} and the RGB
-images must be imported afterwards.
+the argument \code{getStack} must be equal to \code{FALSE} and the 
+red-gree-blue (RGB) images must be imported afterwards.
 }
 \examples{
 \dontrun{

@@ -1,13 +1,13 @@
 #' Create cloud masks for MODIS images
 #' 
-#' \code{modCloudMask} creates cloud masks derived from the \code{MOD35_L2} 
+#' \code{modCloudMask} creates cloud masks derived from the "\code{MOD35_L2}" 
 #' product.
 #' 
-#' This function, downloads and processes the \code{MOD35_L2} products to create
+#' This function, downloads and processes the "\code{MOD35_L2}" products to create
 #' cloud masks composed of \code{NA}'s (cloud) and \code{1}'s (clear). The
 #' resulting cloud mask layers need to be reprojected because resolution and
 #' projection differences with other MODIS products. This function requires
-#' GDAL and the \code{gdalUtils} library properly installed.
+#' `GDAL' and the `\code{gdalUtils}' library properly installed.
 #'
 #' @param startDate a \code{Date} class object with the starting date of the 
 #' study period.

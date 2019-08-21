@@ -2,16 +2,16 @@
 #'
 #' \code{lsDonwload} seeks and downloads Landsat-7 or Landsat-8 images
 #' concerning a particular location and time interval from the 
-#' \href{https://earthexplorer.usgs.gov/}{EarthExplorer repository}.
+#' \href{https://earthexplorer.usgs.gov/}{`EarthExplorer' repository}.
 #' Images are saved as GTiff files in the \code{AppRoot} directory.
 #'
 #' \code{lsDonwload} is a wrapper function of \code{\link{ls7Search}}, 
 #' \code{\link{ls8Search}}, and \code{\link{lsDownSearch}} to search and
-#' download images in a single step. The function requires USGS's EarthExplorer
+#' download images in a single step. The function requires USGS's `EarthExplorer'
 #' credentials, which can be obtained
 #' \href{https://ers.cr.usgs.gov/register/}{here}.
 #' 
-#' The files from EarthExplorer are compressed as ‘tar.gz’. \code{lsDonwload}
+#' The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDonwload}
 #' decompresses the images and obtains the corresponding GTiffs. The GTiffs are
 #' saved in the \code{AppRoot} directory. To change this option, provide 
 #' \code{AppRoot = “full path”}. When the \code{untarDir} argument is defined,
@@ -26,8 +26,8 @@
 #' @param endDate a \code{Date} class object with the ending date of the 
 #' study period.
 #' @param AppRoot the download directory.
-#' @param username USGS’s EarthExplorer username.
-#' @param password USGS’s EarthExplorer password.
+#' @param username USGS’s `EarthExplorer' username.
+#' @param password USGS’s `EarthExplorer' password.
 #' @param lvl a number specifying the processing level. Default value, 1.
 #' @param product \code{character} vector with the requested Level-2 products.
 #' By default \code{c("sr", "source_metadata")}.
@@ -40,6 +40,10 @@
 #'   \item any argument for \code{\link{ls8Search}}/\code{\link{ls7Search}} or 
 #'   \code{\link{lsDownSearch}}.
 #' }
+#'
+#' @return this function does not return anything. It saves the imagery as
+#' `tar.gz’ (and GTiff files) in a folder called `raw’ (`untar’) in the
+#'  \code{AppRoot} directory.
 #'
 #' @examples
 #' \dontrun{

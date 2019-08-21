@@ -12,8 +12,8 @@
 #' \code{\link{modMosaic}}. The \code{fun} argument can be any function from
 #' this package beginning with “var” (\code{\link{varNDVI}}, \code{\link{varEVI}},
 #' etc.). Custom functions can also be implemented. If \code{fun = varRGB}, then
-#' the argument \code{getStack} must be equal to \code{FALSE} and the RGB
-#' images must be imported afterwards.
+#' the argument \code{getStack} must be equal to \code{FALSE} and the 
+#' red-gree-blue (RGB) images must be imported afterwards.
 #'
 #' @param src path to the folder with the MODIS multispectral images.
 #' @param AppRoot the directory of the outcoming time series.
@@ -61,7 +61,7 @@
 #'                scfun = getRGISToolsOpt("MOD09SCL"),
 #'                AppRoot = src.variables,
 #'                overwrite = TRUE)
-#' # import mosaicked images (.tif) to the environment in R
+#' # import mosaicked images (.tif) to the environment in `R'
 #' flist <- list.files(file.path(src.variables,"EVI"),
 #'                     pattern = "\\.tif$",
 #'                     full.names = TRUE,

@@ -1,5 +1,5 @@
 # RGISTools
-Tools for Downloading, Customizing, and Processing Time Series of Satellite Images from Landsat, MODIS, and Sentinel.
+Tools for handling multiplatform satellite images.
 
 ## Table of contents
 

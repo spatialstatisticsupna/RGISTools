@@ -30,7 +30,7 @@ etc. You can find a description of the metadata on the
 \details{
 All captures done by Landsat-7 are catalogued and documented in a unique csv
 file. The size of the file could be larger than 360MB. The function downloads
-and imports the metadata into R, which may take several minutes (roughly 15
+and imports the metadata into `R', which may take several minutes (roughly 15
 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device). The 
 function creates an RData file with the csv metadata. Thus, every time
 \code{ls7LoadMetadata} is called, this function loads the existing RData from

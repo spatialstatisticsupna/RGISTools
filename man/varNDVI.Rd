@@ -15,7 +15,8 @@ varNDVI(red, nir)
 A NDVI image in \code{raster} format.
 }
 \description{
-\code{varNDVI} computes the the NDVI index from the red an NIR bands.
+\code{varNDVI} computes the normalized difference vegetation index (NDVI)
+from the red an near-infrared (NIR) bands.
 }
 \details{
 The normalized difference vegetation index (NDVI) is the most widely used 

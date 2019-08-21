@@ -15,7 +15,7 @@
 #' of the image. The outputs will be placed in the \code{AppRoot} directory,
 #' under the folder named as \code{out.name}. If no name is provided, the 
 #' folder is named “outfile”. To use \code{gutils = TRUE}, a proper installation
-#' of GDAL is required. This method is faster than the native R functions.
+#' of `GDAL' is required. This method is faster than the native `R' functions.
 #'
 #' @param src the path of the folder with the Sentinel images in GTiff format.
 #' @param AppRoot the directory to save the mosaicked images.
@@ -25,7 +25,7 @@
 #' representing the region of interest.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
-#' @param gutils logical argument. If \code{TRUE}, the function uses GDAL 
+#' @param gutils logical argument. If \code{TRUE}, the function uses `GDAL' 
 #' utilities for mosaicking.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.

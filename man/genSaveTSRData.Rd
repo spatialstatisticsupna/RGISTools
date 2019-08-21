@@ -36,7 +36,7 @@ The function reads all the images inside the folder specified in \code{src}.
 Images files must be GTiffs. The \code{src} can take the path created by
 other functions of this package, such as \code{\link{senMosaic}},
 \code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are
-imported into R to build a \code{RasterStack} in the global environment. The
+imported into `R' to build a \code{RasterStack} in the global environment. The
 name of the \code{RasterStack} is specified in \code{ts.name}. The
 \code{RasterStack} is saved in an RData file in the \code{AppRoot} directory.
 }

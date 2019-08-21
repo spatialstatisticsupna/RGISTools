@@ -11,10 +11,10 @@ setRGISToolsOpt(opt, value, env = optEnv)
 
 \item{value}{the new value of the selected option.}
 
-\item{env}{the environment where the \code{RGISTools} option is saved.}
+\item{env}{the environment where the `\code{RGISTools}' option is saved.}
 }
 \description{
-\code{setRGISToolsOpt} changes the default value of an \code{RGISTools} 
+\code{setRGISToolsOpt} changes the default value of an `\code{RGISTools}' 
 configuration variable. This function can be jointly used with 
 \code{\link{showRGISToolsOpt}} and \code{\link{getRGISToolsOpt}}.
 }

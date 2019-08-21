@@ -13,8 +13,8 @@ The \code{RasterStack} coordinates are in the Sinusoidal projection:
   \item{size}{113 rows by 105 columns and 6 layers}.
 }}
 \description{
-Geographically projected \code{RasterStack} with the DEM of the region of
-Navarre (Spain). The DEM was obtained from the
+Geographically projected \code{RasterStack} with the digital elevation model
+(DEM) of the region of Navarre (Spain). The DEM was obtained from the
 \href{http://centrodedescargas.cnig.es/CentroDescargas/locale?request_locale=en#}{National Center for Geographic Information}
 of Spain. The DEM is used as a covariable in the Image Mean Anomaly (IMA)
 algorithm (\code{\link{genSmoothingCovIMA}}).

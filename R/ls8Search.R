@@ -48,6 +48,8 @@
 #'   \item column names in the .LS8MD \code{data.frame} and their values.
 #' }
 #'
+#' @return a \code{data.frame} with the name of the images and their metadata.
+#'
 #' @examples
 #' \dontrun{
 #' # search by path and row numbers of a tile

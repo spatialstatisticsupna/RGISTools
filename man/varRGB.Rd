@@ -22,8 +22,8 @@ being considered.}
 region of interest.}
 }
 \description{
-\code{varRGB} creates RGB \code{RasterStack} scaling the pixel values to 
-0-255 color range.
+\code{varRGB} creates red-green-blue (RGB) \code{RasterStack} images by
+scaling the pixel values to 0-255 color range.
 }
 \details{
 The function rescales the original reflectance values to a range of 0-255.

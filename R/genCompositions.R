@@ -25,6 +25,8 @@
 #'   \item \code{AppRoot} the path where the images will be saved in the
 #'   GTiff format.
 #' }
+#' 
+#' @return a \code{RasterStack} with the time series of the composite images.
 #'
 #' @examples
 #' # loading NDVI images of Navarre

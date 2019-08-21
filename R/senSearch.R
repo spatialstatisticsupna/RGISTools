@@ -1,21 +1,22 @@
 #' Search Sentinel images
 #'
-#' \code{senSearch} seeks Sentinel images through ESA's powered API,
-#' called \href{http://scihub.copernicus.eu}{SciHub}, that concern a particular
-#' location and date interval. The function returns an \code{array} with
-#' the names of the images and their URLs.
+#' \code{senSearch} seeks Sentinel images through ESA's powered application
+#' programming interface (API), called 
+#' \href{http://scihub.copernicus.eu}{`SciHub'}, that concern a particular
+#' location and date interval. The function returns a \code{data.frame} with
+#' the names of the images and their uniform resource locators (URLs).
 #'
 #' \code{senSearch} uses the
-#' \href{http://scihub.copernicus.eu}{ESA's powered API} (SciHub).The catalogue
+#' \href{http://scihub.copernicus.eu}{ESA's powered API} (`SciHub').The catalogue
 #' of Sentinel-2 products can be found
 #' \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/data-products}{here}.
 #' Images are searched within a range of dates and a region of interest. Dates
-#' must be provided as a \code{Date} class object. Credentials from ESA’s SciHub
+#' must be provided as a \code{Date} class object. Credentials from ESA’s `SciHub'
 #' are needed and they can be obtained 
 #' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 #' 
-#' @param username ESA’s SciHub username.
-#' @param password ESA’s SciHub password.
+#' @param username ESA’s `SciHub' username.
+#' @param password ESA’s `SciHub' password.
 #' @param ... arguments for nested functions:
 #' \itemize{
 #'   \item \code{product} the type of Sentinel product.  Ex. "S2MSI1C",
@@ -29,8 +30,8 @@
 #'   coordinates.
 #'   \item \code{lonlat} a vector with the longitude/latitude
 #'   coordinates of the point of interest.
-#'   \item \code{platform} the name of the Sentinel mission (Sentinel-1, 
-#'   Sentinel-2, ...).
+#'   \item \code{platform} the name of the Sentinel mission ("Sentinel-1", 
+#'   "Sentinel-2", ...).
 #'   \item \code{qformat} the format of the response.
 #'   \item \code{verbose} logical argument. If \code{TRUE}, the function prints
 #'   the running steps and warnings.

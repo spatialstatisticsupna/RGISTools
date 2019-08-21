@@ -1,15 +1,15 @@
 #' Convert an HDF file into a set of GTiff files
 #'
-#' \code{modExtractHDF} converts the original format of MODIS images (HDF) into
-#' GTiffs (one file for each layer). 
+#' \code{modExtractHDF} converts the original format of MODIS images (hierarchical
+#' data format or HDF) into GTiffs (one file for each layer). 
 #'
-#' HDF files cannot be directly loaded into R, so they must be converted into
+#' HDF files cannot be directly loaded into `R', so they must be converted into
 #' GTiffs. To acomplish this task, the function \code{modExtractHDF}
 #' borrows the \code{gdalwarp} and \code{gdal_translate} functions from the 
-#' \code{gdalUtils} package. Further details about these functions can be found
-#' in the corresponding package manual. GDAL and \code{gdalUtils} must be properly
-#' installed to use \code{modExtractHDF}. GTiffs can be loaded in R using the
-#' \code{raster} package.
+#' `\code{gdalUtils}' package. Further details about these functions can be found
+#' in the corresponding package manual. `GDAL' and `\code{gdalUtils}' must be 
+#' properly installed to use \code{modExtractHDF}. GTiffs can be loaded in `R'
+#' using the `\code{raster}' package.
 #'
 #' @param filesHDF  the full path where the HDF files are located.
 #' @param AppRoot the directory where the extracted images are saved.

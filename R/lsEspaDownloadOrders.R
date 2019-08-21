@@ -1,7 +1,8 @@
 #' Downloads the images that have been pre-processed by ESPA
 #' 
 #' \code{lsEspaDownloadOrders} downloads a set of images processed by the EROS
-#' Centre Science Processing Architecture (ESPA) through its API.
+#' Centre Science Processing Architecture (ESPA) through its application
+#' programming interface (API).
 #' 
 #' This function is part of a group of functions used to pre-process Landsat
 #' level-1 images. The pre-processing is carried out by ESPA on demand. 
@@ -14,10 +15,10 @@
 #' 
 #' @param orders a list of the requested images as returned by
 #' \code{\link{lsEspaGetOrderImages}}.
-#' @param username USGS's EarthExplorer username.
-#' @param password USGS's EarthExplorer password.
+#' @param username USGS's `EarthExplorer' username.
+#' @param password USGS's `EarthExplorer' password.
 #' @param AppRoot the download directory.
-#' @param c.handle a curl handler created with the package \code{curl} to stablish
+#' @param c.handle a curl handler created with the package `\code{curl}' to stablish
 #' a connection with a preset password and username. This argument is mandatory
 #' if \code{username} and \code{password} are not defined.
 #' @param verbose logical argument. If TRUE, the function prints the running 

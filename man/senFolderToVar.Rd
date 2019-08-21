@@ -25,8 +25,8 @@ images with the same name.}
 running steps and warnings.}
 
 \item{resbands}{the resolution of the image being used to compute index,
-when the imagery comes from the Senintel-2 S2MSI2A product. By default,
-all resolutions (10m, 20m, and 60m) are used.}
+when the imagery comes from the Senintel-2 "\code{S2MSI2A}" product. By 
+default, all resolutions (10m, 20m, and 60m) are used.}
 
 \item{...}{arguments for nested functions:}
 }
@@ -44,7 +44,7 @@ arguments. The \code{src} is usually the path resulting from
 this package beginning with “var” (\code{\link{varNDVI}}, 
 \code{\link{varEVI}}, etc.). Custom functions can also be implemented.
 If \code{fun = varRGB}, then the argument \code{getStack} must be equal to
-\code{FALSE} and the RGB images must be imported afterwards.
+\code{FALSE} and the red-green-blue (RGB) images must be imported afterwards.
 }
 \examples{
 \dontrun{

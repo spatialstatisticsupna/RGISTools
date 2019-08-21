@@ -15,7 +15,8 @@ varMSAVI2(red, nir)
 A MSAVI2 image in \code{raster} format.
 }
 \description{
-\code{varMSAVI2} computes the the MSAVI index from the NIR and red bands.
+\code{varMSAVI2} computes the modified soil-adjusted vegetation index 2
+(MSAVI2) from the near-infrared (NIR) and red bands.
 }
 \details{
 The modified soil adjusted vegetation index 2 (MSAVI2) is a vegetation 

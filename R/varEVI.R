@@ -1,12 +1,14 @@
 #' Calculate the enhanced vegetation index (EVI)
 #'
-#' \code{varEVI} computes the EVI index from the blue, nir and red bands.
+#' \code{varEVI} computes the enhanced vegetation index (EVI) from the 
+#' blue, near-infrared (NIR) and red bands.
 #'
-#' The Enhanced Vegetation Index (EVI) is a vegetation indicator that improves
+#' The enhanced vegetation index (EVI) is a vegetation indicator that improves
 #' sensitivity towards high biomass densities compared to NDVI 
-#' \insertCite{huete2002overview}{RGISTools}. This function is used within
-#' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, 
-#' \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
+#' \insertCite{huete2002overview}{RGISTools} (See \code{\link{varNDVI}}). This
+#' function is used within \code{\link{ls7FolderToVar}},
+#' \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and
+#' \code{\link{senFolderToVar}}.
 #'
 #' @references \insertRef{huete2002overview}{RGISTools}
 #'

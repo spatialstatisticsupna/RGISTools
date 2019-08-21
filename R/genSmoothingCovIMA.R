@@ -1,7 +1,7 @@
 #' Fill data gaps and smooth outliers in a time series of satellite images using
 #' covariates
 #'
-#' \code{genSmoothingCovIMA} runs the Image Mean Anomaly (IMA) algorithm
+#' \code{genSmoothingCovIMA} runs the image mean anomaly (IMA) algorithm
 #' with covariates \insertCite{militino2018improving}{RGISTools}.
 #'
 #' This filling/smoothing method was developed by 
@@ -31,7 +31,7 @@
 #' @param fun a \code{function} used to aggregate the image of anomalies. Both
 #' \code{mean}(default) or \code{median} are acceptted.
 #' @param snow.mode logical argument. If \code{TRUE}, the filling process will
-#' be parallelized using the \code{raster} package.
+#' be parallelized using the `\code{raster}' package.
 #' @param out.name the name of the folder containing the filled/smoothed images
 #' when saved in the Hard Disk Drive (HDD).
 #' @param ... arguments for nested functions:
@@ -39,6 +39,8 @@
 #'   \item \code{AppRoot} the path where the filled/smoothed time series of 
 #'   images are saved in GTiff format.
 #' }
+#' 
+#' @return a \code{RasterStack} with the filled/smoothed images. 
 #'
 #' @examples
 #' set.seed(0)

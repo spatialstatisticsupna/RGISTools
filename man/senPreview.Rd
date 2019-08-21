@@ -9,9 +9,9 @@ senPreview(searchres, username, password, n, size = NULL)
 \arguments{
 \item{searchres}{a vector with the results from \code{\link{senSearch}}.}
 
-\item{username}{ESA’s SciHub username.}
+\item{username}{ESA’s `SciHub' username.}
 
-\item{password}{ESA’s SciHub password.}
+\item{password}{ESA’s `SciHub' password.}
 
 \item{n}{a \code{numeric} argument identifying the row of the image in
 \code{searchres}.}
@@ -26,8 +26,8 @@ search results.
 \details{
 The function shows a preview of the \code{n}-th output image from a search
 in Sentinel archives (\code{\link{modSearch}}). The preview is downloaded from
-SciHub's website. Please, be aware that only some images may have a preview.
-Credentials from an ESA’s SciHub account are needed, which can be obtained 
+`SciHub's' website. Please, be aware that only some images may have a preview.
+Credentials from an ESA’s `SciHub' account are needed, which can be obtained 
 \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 }
 \examples{

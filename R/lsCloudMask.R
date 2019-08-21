@@ -4,7 +4,7 @@
 #' assurance (BQA) from Landsat-7 or Landsat-8 time series. The function is
 #' applied to untarred images, such as those resulting from 
 #' \code{\link{lsDownSearch}} or \code{\link{lsDownload}}. The result is a new
-#' image band, called CLD, that is saved as separate GTiffs.
+#' image band, called claud (CLD), that is saved as separate GTiffs.
 #' 
 #' The valid range for the \code{sensitivity} threshold is 0-8000. By defualt,
 #' the argument is set to 2800. We recommend 600 and 2800 for Landsat-7 and
@@ -20,6 +20,9 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.
 #' @param ... arguments for nested functions.
+#'
+#' @return this function does not return anything. It creates new GTiff files
+#' for a new cloud band (CLD) inside the folder of every image.
 #'
 #' @examples
 #' \dontrun{

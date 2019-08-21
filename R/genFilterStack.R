@@ -1,6 +1,6 @@
 #' Subset a RasterStack given a range of dates
 #'
-#' \code{genFilterStack} filters the raster layers within a range of dates.
+#' \code{genFilterStack} filters the \code{RasterLayer}s within a range of dates.
 #'
 #' This is a helper function used by other functions in this package.
 #'
@@ -11,6 +11,9 @@
 #'   \item \code{endDate} a \code{Date} class object with the ending date of the study period.
 #'   \item \code{AppRoot} the path where the RData will be saved.
 #' }
+#' 
+#' @return a \code{RasterStack} with images within the specified dates.
+#' 
 #' @examples
 #' # generate random images
 #' img <- matrix(1:16, ncol = 4, byrow = TRUE)

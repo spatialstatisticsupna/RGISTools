@@ -15,7 +15,8 @@ varNDWI(green, nir)
 A NDWI image in \code{raster} format.
 }
 \description{
-\code{varNDWI} Calculate the NDWI index from the green and NIR bands.
+\code{varNDWI} Calculate the normalized difference water index (NDWI) from
+the green and near-infrared (NIR) bands.
 }
 \details{
 The normalized difference water index (NDWI) is a ratio between the green

@@ -11,9 +11,9 @@ lsEspaOrderImages(search.res, username, password, product = c("sr",
 \item{search.res}{the results from \code{\link{ls7Search}} or
 \code{\link{ls8Search}}.}
 
-\item{username}{USGS's EarthExplorer username.}
+\item{username}{USGS's `EarthExplorer' username.}
 
-\item{password}{USGS's EarthExplorer password.}
+\item{password}{USGS's `EarthExplorer' password.}
 
 \item{product}{the acronym of the requested product (see the details).}
 

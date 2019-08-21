@@ -11,6 +11,8 @@
 #' @param fun the function being applied to pixels that overlap.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.
+#' 
+#' @return a \code{raster} with the mosaicked images.
 #'
 #' @examples
 #' # create simulated rasters

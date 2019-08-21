@@ -21,8 +21,8 @@ genPlotGIS(r, region = NULL, ...)
 }}
 }
 \description{
-This function displays satellite images with the usual format in Geographic
-Information Systems (GIS), i.e., adding a scale, north arrow, and the border
+This function displays satellite images with the usual format in geographic
+information systems (GIS), i.e., adding a scale, north arrow, and the border
 of the region of interest (optional).
 }
 \details{

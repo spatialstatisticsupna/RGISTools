@@ -12,7 +12,7 @@ lsEspaGetOrderImages(username = NULL, password = NULL,
 
 \item{password}{USGS's EarthExplorer password.}
 
-\item{c.handle}{a curl handler created with the package \code{curl} to
+\item{c.handle}{a curl handler created with the package `\code{curl}' to
 stablish a connection with a preset password and username. This argument
 is mandatory if \code{username} and \code{password} are not defined.}
 
@@ -22,8 +22,8 @@ is mandatory if \code{username} and \code{password} are not defined.}
 running steps and warnings.}
 }
 \description{
-\code{lsEspaGetOrderImages} obtains the ID number and the status of the request 
-from the EROS Centre Science Processing Architecture (ESPA)
+\code{lsEspaGetOrderImages} obtains the identification number and the status
+of the request from the EROS Centre Science Processing Architecture (ESPA).
 }
 \details{
 This function is part of a group of functions used to pre-process Landsat

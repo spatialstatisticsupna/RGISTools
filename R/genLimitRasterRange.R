@@ -10,9 +10,11 @@
 #' @param mx maximun value in the \code{Raster*}.
 #' @param mn minimun value in the \code{Raster*}.
 #' @param rm.values logical argument. If \code{FALSE}, the \code{mx} and 
-#' \code{mn} values are assigned to the pixels above or below the \code{mx}
+#' \code{mn} values are assigned to the pixels above or below the \code{mx} and 
 #' \code{mn} thresholds respectively. If \code{TRUE}, values outside the 
 #' \code{mn} - \code{mx} range are replaced by \code{NA}.
+#'
+#' @return a \code{Raster*} with values comprised within a range.
 #'
 #' @examples
 #' # generate random images

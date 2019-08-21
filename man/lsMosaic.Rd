@@ -54,9 +54,9 @@ The extent can be defined in any coordinate reference system, since
 \code{lsMosaic} automatically reprojects the extent to match the projection
 of the image. The outputs are placed in the \code{AppRoot} directory, under
 the folder named as \code{out.name}. If no name is provided, the folder is
-named “outfile”. To use \code{gutils = TRUE}, a proper installation of GDAL
-and the \code{gdalUtils} library is required. This method is faster than
-native R functions.
+named “outfile”. To use `\code{gutils = TRUE}', a proper installation of GDAL
+and the `\code{gdalUtils}' library is required. This method is faster than
+native `R' functions.
 }
 \examples{
 \dontrun{

@@ -36,7 +36,7 @@ anomalies carried out before the interpolation.}
 the outliers of the anomalies. Ex. c(0.05,0.95).}
 
 \item{snow.mode}{logical argument. If \code{TRUE}, the filling process will
-be parallelized using the \code{raster} package.}
+be parallelized using the `\code{raster}' package.}
 
 \item{out.name}{the name of the folder containing the filled/smoothed images
 when saved in the Hard Disk Drive (HDD).}
@@ -48,7 +48,7 @@ when saved in the Hard Disk Drive (HDD).}
 }}
 }
 \description{
-\code{genSmoothingCovIMA} runs the Image Mean Anomaly (IMA) algorithm
+\code{genSmoothingCovIMA} runs the image mean anomaly (IMA) algorithm
 with covariates \insertCite{militino2018improving}{RGISTools}.
 }
 \details{

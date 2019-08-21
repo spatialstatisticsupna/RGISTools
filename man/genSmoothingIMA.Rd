@@ -36,7 +36,7 @@ the outliers of the anomalies. Ex. c(0.05,0.95).}
 \item{predictSE}{calculate the standard error instead the prediction.}
 
 \item{snow.mode}{logical argument. If \code{TRUE}, the filling process will
-be parallelized using the \code{raster} package.}
+be parallelized using the `\code{raster}' package.}
 
 \item{out.name}{the name of the folder containing the smoothed/filled images
 when saved in the Hard Disk Device (HDD).}
@@ -52,7 +52,7 @@ when saved in the Hard Disk Device (HDD).}
 }
 \description{
 \code{genSmoothingIMA} is the implementation of a spatio temporal method 
-called Image Mean Anomaly (IMA) for gap filling and smoothing satellite
+called image mean anomaly (IMA) for gap filling and smoothing satellite
 data \insertCite{militino2019interpolation}{RGISTools}.
 }
 \details{

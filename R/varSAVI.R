@@ -1,6 +1,7 @@
 #' Calculates soil-adjusted vegetation index (SAVI)
 #'
-#' \code{varSAVI} Calculate the SAVI index from the red and NIR bands.
+#' \code{varSAVI} Calculate the soil-adjusted vegetation index (SAVI) from the
+#' red and near-infrared (NIR) bands.
 #'
 #' The soil adjusted vegetation index (SAVI) is an indicator engineered to remove 
 #' the influence of the soil background effect \insertCite{huete1988soil}{RGISTools}.  

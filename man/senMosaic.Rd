@@ -21,7 +21,7 @@ representing the region of interest.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
 
-\item{gutils}{logical argument. If \code{TRUE}, the function uses GDAL 
+\item{gutils}{logical argument. If \code{TRUE}, the function uses `GDAL' 
 utilities for mosaicking.}
 
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
@@ -54,7 +54,7 @@ The \code{extent} can be defined in any coordinate reference system, since
 of the image. The outputs will be placed in the \code{AppRoot} directory,
 under the folder named as \code{out.name}. If no name is provided, the 
 folder is named “outfile”. To use \code{gutils = TRUE}, a proper installation
-of GDAL is required. This method is faster than the native R functions.
+of `GDAL' is required. This method is faster than the native `R' functions.
 }
 \examples{
 \dontrun{
