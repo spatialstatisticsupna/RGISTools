@@ -22,9 +22,7 @@ images with the same name.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the
 running steps and warnings.}
 
-\item{...}{arguments for nested functions:
-\itemize{
-}}
+\item{...}{arguments for nested functions.}
 }
 \description{
 \code{lsCloudMask} creates a cloud mask derived from the band for quality

@@ -24,10 +24,7 @@ images with the same name.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the
 running steps and warnings.}
 
-\item{...}{arguments for nested functions:
-\itemize{
-  \item 
-}}
+\item{...}{arguments for nested functions.}
 }
 \description{
 \link{ls7FolderToVar} computes a remote sensing index from the 

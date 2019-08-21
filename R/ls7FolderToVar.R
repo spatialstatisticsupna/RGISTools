@@ -22,10 +22,7 @@
 #' images with the same name.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.
-#' @param ... arguments for nested functions:
-#' \itemize{
-#'   \item 
-#' }
+#' @param ... arguments for nested functions.
 #'
 #' @examples
 #' \dontrun{
