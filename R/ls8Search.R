@@ -51,10 +51,12 @@
 #' @examples
 #' \dontrun{
 #' # search by path and row numbers of a tile
+#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' search.res <- ls8Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                         pathrow = list(c(200, 31), c(200, 30)),
-#'                         browseAvaliable = "Y")
+#'                         browseAvaliable = "Y",
+#'                         AppRoot = src)
 #'
 #' # search by extent (long/lat coordinates)
 #' # load a spatial polygon object of Navarre
@@ -63,14 +65,16 @@
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                         extent = ex.navarre,
 #'                         precise = TRUE,
-#'                         browseAvaliable = "Y")
+#'                         browseAvaliable = "Y",
+#'                         AppRoot = src)
 #'
 #' # search by extent (fast mode)
 #' search.res <- ls8Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                       endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                       extent = ex.navarre,
 #'                       precise = FALSE,
-#'                       browseAvaliable = "Y")
+#'                       browseAvaliable = "Y",
+#'                       AppRoot = src)
 #' # remove metadata to free memory space
 #' lsRemoveMetadata()
 #' }

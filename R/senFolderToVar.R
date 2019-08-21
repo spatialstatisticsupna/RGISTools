@@ -70,7 +70,7 @@
 #'                     recursive = TRUE)
 #' 
 #' files.raster <- lapply(flist, raster)
-#' spplot(files[[1]])
+#' spplot(files.raster[[1]])
 #' }
 senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,resbands=c("10m","20m","60m"),...){
   function.arg<-list(...)

@@ -56,16 +56,19 @@
 #' lsDownSearch(searchres = search.res[1,], 
 #'              username = "user", 
 #'              password = "pass", 
+#'              AppRoot = src,
 #'              untar = TRUE)
 #' # download 4 images
 #' lsDownSearch(searchres = search.res[1:4,], 
 #'              username = "user", 
-#'              password = "pass", 
+#'              password = "pass",
+#'              AppRoot = src, 
 #'              untar = TRUE)
 #' # download all the images
 #' lsDownSearch(searchres = search.res, 
 #'              username = "user", 
-#'              password = "pass", 
+#'              password = "pass",
+#'              AppRoot = src,
 #'              untar = TRUE)
 #'
 #' # search and download the images from Landsat-7 between
@@ -76,25 +79,25 @@
 #'                         endDate = as.Date("20-01-2018", "%d-%m-%Y"),
 #'                         extent = ex.navarre,
 #'                         browseAvaliable = "Y",
-#'                         AppRoot=src)
+#'                         AppRoot = src)
 #' # download 1 image
 #' lsDownSearch(searchres = search.res[1,], 
 #'              username = "user", 
 #'              password = "pass", 
 #'              untar = TRUE,
-#'              AppRoot=src)
+#'              AppRoot = src)
 #' # download 4 images
 #' lsDownSearch(searchres = search.res[1:4,], 
 #'              username = "user", 
 #'              password = "pass", 
 #'              untar = TRUE, 
-#'              AppRoot=src)
+#'              AppRoot = src)
 #' # download all the images
 #' lsDownSearch(searchres = search.res, 
 #'              username = "user", 
 #'              password = "pass", 
 #'              untar = TRUE, 
-#'              AppRoot=src)
+#'              AppRoot = src)
 #' 
 #' # removes the metadata to free memory space
 #' lsRemoveMetadata()

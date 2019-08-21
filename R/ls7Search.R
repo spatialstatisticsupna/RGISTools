@@ -51,17 +51,20 @@
 #'
 #' @examples
 #' \dontrun{
+#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' # search by path and row numbers of a tile
 #' search.res <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                         pathrow = list(c(200,31),c(200,30)),
-#'                         browseAvaliable = "Y")
+#'                         browseAvaliable = "Y",
+#'                         AppRoot = src)
 #'                   
 #' # search by point coordinates (long/lat coordinates)
 #' search.res <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                         lonlat = c(-1.64323,42.81687),
-#'                         browseAvaliable = "Y")
+#'                         browseAvaliable = "Y",
+#'                         AppRoot = src)
 #'                   
 #' # search by extent (long/lat coordinates)
 #' # load a spatial polygon object of Navarre
@@ -70,14 +73,16 @@
 #'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                         extent = ex.navarre,
 #'                         precise = TRUE,
-#'                         browseAvaliable = "Y")
+#'                         browseAvaliable = "Y",
+#'                         AppRoot = src)
 #'
 #' # search by extent (fast mode)
 #' search.res <- ls7Search(startDate = as.Date("01-01-2011","%d-%m-%Y"),
 #'                         endDate = as.Date("31-12-2013","%d-%m-%Y"),
 #'                         extent = ex.navarre,
 #'                         precise = FALSE,
-#'                         browseAvaliable = "Y")
+#'                         browseAvaliable = "Y",
+#'                         AppRoot = src)
 #' # remove metadata to free memory space
 #' lsRemoveMetadata()
 #' }

@@ -67,7 +67,7 @@
 #'                     recursive = TRUE)
 #' 
 #' file.raster <- raster(flist[1])
-#' spplot(files.raster)
+#' spplot(file.raster)
 #' }
 ls8FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
   function.arg<-list(...)

@@ -58,8 +58,8 @@
 #' lsEspaDownloadOrders(orders = orders,
 #'                      username = "username", 
 #'                      password = "password",
-#'                     untar = TRUE,
-#'                     AppRoot = dir.ESPA)
+#'                      untar = TRUE,
+#'                      AppRoot = dir.ESPA)
 #'}
 lsEspaDownloadOrders<-function(orders,
                                AppRoot,

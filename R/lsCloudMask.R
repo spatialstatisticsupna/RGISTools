@@ -44,7 +44,8 @@
 #' src.untar <- file.path(src.ls8,"untar")
 #' # calculate the cloud mask from QC layer
 #' lsCloudMask(src=src.untar,
-#'             overwrite=TRUE)
+#'             overwrite=TRUE,
+#'             AppRoot = src.ls8)
 #'             
 #' # mosaic and crop the imagery
 #' lsMosaic(src = src.untar,

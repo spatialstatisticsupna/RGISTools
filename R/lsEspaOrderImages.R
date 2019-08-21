@@ -39,10 +39,12 @@
 #'
 #' @examples
 #' \dontrun{
+#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' # search Landsat 7 level-1
 #' search.res <- ls7Search(startDate = as.Date("01-01-2017", "%d-%m-%Y"),
 #'                         endDate = as.Date("07-01-2017", "%d-%m-%Y"),
-#'                         lonlat = c(-1.64323, 42.81687))
+#'                         lonlat = c(-1.64323, 42.81687),
+#'                         AppRoot = src)
 #' # request to ESPA the pre-pocessing of level-1 images 
 #' # to get the surface reflectance
 #' order <- lsEspaOrderImages(search.res = search.res,
