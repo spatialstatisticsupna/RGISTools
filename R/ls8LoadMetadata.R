@@ -21,10 +21,7 @@
 #' running steps and warnings.
 #' @param omit.question logical argument. If \code{TRUE}, the question about 
 #' loading the metadata is omitted.
-#' @param ... arguments for nested functions:
-#' \itemize{
-#'   
-#' }
+#' @param ... arguments for nested functions.
 #'
 #' @examples
 #' \dontrun{

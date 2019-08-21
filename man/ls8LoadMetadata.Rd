@@ -18,10 +18,7 @@ running steps and warnings.}
 \item{omit.question}{logical argument. If \code{TRUE}, the question about 
 loading the metadata is omitted.}
 
-\item{...}{arguments for nested functions:
-\itemize{
-  
-}}
+\item{...}{arguments for nested functions.}
 }
 \description{
 \code{ls8LoadMetadata} loads a \code{data.frame} called "\code{.LS8MD}"
