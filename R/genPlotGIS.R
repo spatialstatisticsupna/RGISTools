@@ -91,7 +91,7 @@ genPlotGIS<-function(r,region=NULL,...){
   spplot(r,
          sp.layout=list(list("sp.polygons", region,first = FALSE,lwd=lwd,...),
                         gis.components),
-         scales=list(draw=T),
+         scales=list(draw=TRUE),
          ...
   )
 }

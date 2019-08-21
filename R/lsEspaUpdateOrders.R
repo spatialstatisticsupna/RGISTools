@@ -65,7 +65,7 @@ lsEspaUpdateOrders<-function(orders,username=NULL,password=NULL,c.handle=NULL,ve
                              c.handle)
       json_data<-fromJSON(rawToChar(r$content))
       if(json_data$note==getRGISToolsOpt("LS.ESPA.Request")){
-        all.response<-unlist(json_data,recursive=T)
+        all.response<-unlist(json_data,recursive=TRUE)
         orders[[order]]<-list(OrderedImages=unname(all.response[grepl("inputs",names(all.response))]),
                               Status=json_data$status)
       }

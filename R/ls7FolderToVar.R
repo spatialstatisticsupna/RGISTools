@@ -58,7 +58,7 @@
 #' ls7FolderToVar(src2,
 #'                fun = varNDVI,
 #'                AppRoot = src3,
-#'                overwrite = T)
+#'                overwrite = TRUE)
 #'                
 #' flist <- list.files(file.path(src3,"NDVI"),
 #'                     pattern = "\\.tif$",
@@ -74,7 +74,7 @@ ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,..
   if(!getStack){
     AppRoot<-file.path(AppRoot,vartype)
     dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
-    print(vartype)
+    message(vartype)
   }
 
   ls.list<-list.files(src,full.names = TRUE)
@@ -105,7 +105,7 @@ ls7FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,..
       }
       # complete the function
       funString<-paste0(substr(funString,1,nchar(funString)-1),")")
-      if(verbose){print(paste0("Function for evaluation: \n",funString))}
+      if(verbose){message(paste0("Function for evaluation: \n",funString))}
       eval(parse(text=funString))
       if(getStack){
         if(is.null(rstack)){

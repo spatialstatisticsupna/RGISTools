@@ -83,7 +83,7 @@ senSearch<-function(username,
 
   json <- fromJSON(paste0(html))
   if(arg$verbose)
-    print(paste0("Search Total result: ",json$feed$`opensearch:totalResults`))
+    message(paste0("Search Total result: ",json$feed$`opensearch:totalResults`))
   cont=1
 
   if(as.integer(json$feed$`opensearch:totalResults`)>0){
@@ -91,15 +91,15 @@ senSearch<-function(username,
     imgURL<-c()
     for(i in json$feed$entry){
       if(arg$verbose){
-        print(paste0("Image result ",cont," Name:",i$title))
-        print(paste0("Image result ",cont," Url:",i$link[[1]]$href))#each entry have 3 links: 1-image link, 2-meta data link, 3-quicklook mini image
+        message(paste0("Image result ",cont," Name:",i$title))
+        message(paste0("Image result ",cont," Url:",i$link[[1]]$href))#each entry have 3 links: 1-image link, 2-meta data link, 3-quicklook mini image
       }
       imgNames<-c(imgNames,i$title)
       imgURL<-c(imgURL,i$link[[1]]$href)
       cont<-cont+1
     }
     if(arg$verbose)
-      print(paste0("Results added to the list: ",cont))
+      message(paste0("Results added to the list: ",cont))
   }else{
     message("There is no images in response.")
     return(NULL)
@@ -111,7 +111,7 @@ senSearch<-function(username,
     dt<-senGetDates(imgNames)
     mn.date<-min(dt)
     if(arg$verbose){
-      print(paste0("New end date: ",mn.date))
+      message(paste0("New end date: ",mn.date))
     }
     if(sum(dt==mn.date)==100){
       stop("\nSpatial regions composed by 100 or more tiles are not supported!

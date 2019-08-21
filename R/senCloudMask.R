@@ -88,12 +88,12 @@ senCloudMask<-function(src,img.res,sensitivity=50,overwrite=FALSE,...){
   AppRoot<-defineAppRoot(...)
   imgdir.list<-list.dirs(src,recursive=FALSE)
   AppRoot<-file.path(AppRoot,"CloudMask")
-  dir.create(AppRoot,showWarnings = F,recursive = T)
+  dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
   for(id in imgdir.list){
     out.img<-file.path(AppRoot,paste0(basename(id),"_",img.res,"_CloudMask.tif"))
     if(!file.exists(out.img)|overwrite){
       #id<-imgdir.list[1]
-      tif.list<-list.files(id,pattern = "\\.tif$",full.names = T)
+      tif.list<-list.files(id,pattern = "\\.tif$",full.names = TRUE)
       cloudmask<-tif.list[grepl(getRGISToolsOpt("SEN2BANDS")["cloud"],tif.list)]
       cloudmask<-cloudmask[grepl(img.res,cloudmask)]
       if(length(cloudmask)==0){

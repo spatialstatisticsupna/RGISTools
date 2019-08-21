@@ -137,7 +137,7 @@ genSmoothingCovIMA <- function (rStack,
   }
 
   if(!file.exists(AppRoot))
-    dir.create(AppRoot,recursive=T)
+    dir.create(AppRoot,recursive=TRUE)
 
 
 
@@ -154,7 +154,7 @@ genSmoothingCovIMA <- function (rStack,
 
 
     # calculate mean image
-    meanImage<-raster::calc(neighbours,fun=fun,na.rm=T)
+    meanImage<-raster::calc(neighbours,fun=fun,na.rm=TRUE)
 
     # get target image
     targetImage<-raster::subset(rStack,which(format(genGetDates(names(rStack)),"%Y%j")%in%format(target.date,"%Y%j")))
@@ -171,7 +171,7 @@ genSmoothingCovIMA <- function (rStack,
     names(cov.targetImage)<-cname
 
     # remove extreme values
-    qrm<-raster::quantile(anomaly,aFilter,na.omit=T)
+    qrm<-raster::quantile(anomaly,aFilter,na.omit=TRUE)
     anomaly[anomaly<qrm[1]|anomaly>qrm[2]]<-NA
 
     # reduce the resolution for tps
@@ -209,7 +209,7 @@ genSmoothingCovIMA <- function (rStack,
     target.prediction<-target.prediction+meanImage
     # write filled images
     if("AppRoot"%in%names(args)){
-      dir.create(args$writeRaster,showWarnings = F,recursive = T)
+      dir.create(args$writeRaster,showWarnings = FALSE,recursive = TRUE)
       writeRaster(target.prediction,paste0(AppRoot,"/",out.name,"_",format(target.date,"%Y%j"),".tif"))
     }else{
       fillstack<-addLayer(fillstack,target.prediction)

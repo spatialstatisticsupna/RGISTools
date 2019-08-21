@@ -12,7 +12,7 @@
   if(overwrite){
     file.remove(pth,showWarnings=FALSE)
   }
-  print(paste0("Downloading file in: ",pth))
+  message(paste0("Downloading file in: ",pth))
   if(verbose){message(paste0("download url: ",url))}
   curl_download(url, destfile=pth,handle = usgs.handler)
 }

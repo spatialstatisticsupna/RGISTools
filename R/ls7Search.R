@@ -86,9 +86,9 @@ ls7Search<-function(startDate,endDate,verbose=FALSE,precise=FALSE,...){
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
 
-  if(!ls7IsMetaData()|endDate>as.Date(Sys.time())|getRGISToolsOpt("LS7META.var")%in%ls(all.names=T)){
+  if(!ls7IsMetaData()|endDate>as.Date(Sys.time())|getRGISToolsOpt("LS7META.var")%in%ls(all.names=TRUE)){
     message("MetaData not loaded! loading...")
-    ls7LoadMetadata(AppRoot=AppRoot,update=F,...)
+    ls7LoadMetadata(AppRoot=AppRoot,update=FALSE,...)
   }
    # now it can be found
   #first filter by date

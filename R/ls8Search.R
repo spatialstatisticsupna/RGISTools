@@ -82,9 +82,9 @@ ls8Search<-function(startDate,endDate,verbose=FALSE,precise=FALSE,...){
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
 
-  if(!ls8IsMetaData()|endDate>as.Date(Sys.time())|getRGISToolsOpt("LS8META.var")%in%ls(all.names=T)){
+  if(!ls8IsMetaData()|endDate>as.Date(Sys.time())|getRGISToolsOpt("LS8META.var")%in%ls(all.names=TRUE)){
     message("MetaData not loaded! loading...")
-    ls8LoadMetadata(AppRoot=AppRoot,update=F,...)
+    ls8LoadMetadata(AppRoot=AppRoot,update=FALSE,...)
   }
 
   #first filter by date

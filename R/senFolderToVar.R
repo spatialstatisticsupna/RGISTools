@@ -82,13 +82,13 @@ senFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,re
   dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
   if(verbose){message(paste0("var type: ",vartype))}
   resbands=paste0("_",resbands)
-  sen.list<-list.files(src,full.names = T)
+  sen.list<-list.files(src,full.names = TRUE)
   rstack<-NULL
   result<-NULL
   for(imgfd in sen.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     senbands<-getRGISToolsOpt("SEN2BANDS")
-    sen.img<-list.files(imgfd,full.names = T,pattern = "\\.tif$")
+    sen.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
     
     #check if there are S2MSI2A images
     if(sum(unlist(lapply(resbands,grepl,sen.img)))>0){

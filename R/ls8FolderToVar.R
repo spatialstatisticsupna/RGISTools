@@ -76,16 +76,16 @@ ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,..
   vartype<-gsub("var","",as.character(match.call()[c("fun")]))
   if(!getStack){
     AppRoot<-file.path(AppRoot,vartype)
-    dir.create(AppRoot,showWarnings = F,recursive=T)
-    print(vartype)
+    dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
+    message(vartype)
   }
-  ls.list<-list.files(src,full.names = T)
+  ls.list<-list.files(src,full.names = TRUE)
   rstack<-NULL
   result<-NULL
   for(imgfd in ls.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     ls8bands<-getRGISToolsOpt("LS8BANDS")
-    ls.img<-list.files(imgfd,full.names = T,pattern = "\\.tif$")
+    ls.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
     out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
     if(overwrite|(!file.exists(out.file.name))){
       funString<-"result<-fun("
@@ -107,7 +107,7 @@ ls8FolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,..
       }
       # complete the function
       funString<-paste0(substr(funString,1,nchar(funString)-1),")")
-      if(verbose){print(paste0("Function for evaluation: \n",funString))}
+      if(verbose){message(paste0("Function for evaluation: \n",funString))}
       eval(parse(text=funString))
       if(getStack){
         if(is.null(rstack)){

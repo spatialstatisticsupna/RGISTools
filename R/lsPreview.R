@@ -38,7 +38,7 @@ lsPreview<-function(searchres,n,size=NULL){
   download.file(ser$browseURL,tmp,mode="wb")
   pic<-image_read(tmp)
   pic <- image_resize(pic, size)
-  print(pic)
+  message(pic)
   file.remove(tmp)
-  print(ser[c("acquisitionDate","sceneID","cloudCover","path","row")])
+  message(ser[c("acquisitionDate","sceneID","cloudCover","path","row")])
 }

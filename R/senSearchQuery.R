@@ -7,7 +7,7 @@ senSearchQuery<-function(...){
   #add ingestion date to query
   if("startDate"%in%names(arg)){
     if(arg$verbose)
-      print("Adapting dates.")
+      message("Adapting dates.")
     startDate<-paste0(format(arg$startDate,"%Y-%m-%d"),"T00:00:00.000Z")
     if(is.null(arg$endDate)){
       endDate<-"NOW"
@@ -18,13 +18,13 @@ senSearchQuery<-function(...){
   }
   if("platform"%in%names(arg)){
     if(arg$verbose)
-      print("Adding platform name.")
+      message("Adding platform name.")
     url<-paste0(url," AND platformname:",arg$platform)
   }
   if("extent"%in%names(arg)){
     stopifnot(class(extent(arg$extent))=="Extent")
     if(arg$verbose)
-      print("Adding query extent.")
+      message("Adding query extent.")
     ext<-extent(arg$extent)
     url<-paste0(url," AND footprint:",'"',"intersects(POLYGON((",ext@xmin," ",ext@ymin,","
                 ,ext@xmin," ",ext@ymax,","
@@ -35,7 +35,7 @@ senSearchQuery<-function(...){
   }
   if("lonlat"%in%names(arg)){
     if(arg$verbose){
-      print(print("Adding query intersects"))
+      message(print("Adding query intersects"))
     }
     if(!length(arg$lonlat)==2){
       stop("The intersects argument is not a longitude/latitude valid location.")
@@ -44,13 +44,13 @@ senSearchQuery<-function(...){
   }
   if("product"%in%names(arg)){
     if(arg$verbose){
-      print("Added product type.")
+      message("Added product type.")
     }
     url<-paste0(url," AND producttype:",arg$product)
   }
   if("relativeorbit"%in%names(arg)){
     if(arg$verbose){
-      print("Added relative orbit number type.")
+      message("Added relative orbit number type.")
     }
     url<-paste0(url," AND relativeorbitnumber:",arg$relativeorbit)
   }

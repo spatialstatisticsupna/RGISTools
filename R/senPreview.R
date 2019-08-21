@@ -38,7 +38,7 @@
 #' }
 senPreview<-function(searchres,username,password,n,size=NULL){
   ser<-searchres[n]
-  ser<-gsub('$value',"Products('Quicklook')/$value",ser,	fixed = T)
+  ser<-gsub('$value',"Products('Quicklook')/$value",ser,	fixed = TRUE)
   tmp <- tempfile()
   c.handle = new_handle()
   handle_setopt(c.handle,
@@ -52,7 +52,7 @@ senPreview<-function(searchres,username,password,n,size=NULL){
   curl_download(image.url, destfile=tmp,handle = c.handle)
   pic<-image_read(tmp)
   pic <- image_resize(pic, size)
-  print(pic)
+  message(pic)
   file.remove(tmp)
   message(paste0("Printing the image ",names(ser),"."))
 }

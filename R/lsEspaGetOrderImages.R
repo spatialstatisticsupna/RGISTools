@@ -54,7 +54,7 @@ lsEspaGetOrderImages<-function(username=NULL,password=NULL,c.handle=NULL,order.l
     r <- curl_fetch_memory(paste0(getRGISToolsOpt("LS.ESPA.API"),getRGISToolsOpt("LS.ESPA.API.v"),"/order/",ol), c.handle)
     json_data<-fromJSON(rawToChar(r$content))
     if(json_data$note==getRGISToolsOpt("LS.ESPA.Request")){
-      all.response<-unlist(json_data,recursive=T)
+      all.response<-unlist(json_data,recursive=TRUE)
       img.list[[ol]]<-list(OrderedImages=unname(all.response[grepl("inputs",names(all.response))]),
                            Status=json_data$status)
     }else{

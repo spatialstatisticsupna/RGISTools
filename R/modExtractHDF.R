@@ -62,8 +62,8 @@ modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=
     dir.create(AppRoot,showWarnings = verbose)
     for(fileHDF in filesHDF){
       image.name<-gsub(".hdf","",basename(fileHDF))
-        dir.create(paste0(AppRoot,"/",image.name),recursive = T,showWarnings = verbose)
-        print(paste0("Extracting bands from hdf file of image ",image.name))
+        dir.create(paste0(AppRoot,"/",image.name),recursive = TRUE,showWarnings = verbose)
+        message(paste0("Extracting bands from hdf file of image ",image.name))
         image.data<-gdalinfo(fileHDF)
         bands.names<-image.data[grepl(".*SUBDATASET_.*_NAME.*", image.data)]
         names<-gsub('.*":','',bands.names)
@@ -83,7 +83,7 @@ modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,verbose=FALSE,bFilter=
 
         for(i in bds){
           if((!file.exists(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif")))||overwrite){
-            print(paste0("Extract band ",i))
+            message(paste0("Extract band ",i))
             if("s_srs"%in%names(arg)){
               gdal_translate(fileHDF,
                              paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"),

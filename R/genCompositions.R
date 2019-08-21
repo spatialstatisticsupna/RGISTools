@@ -69,7 +69,7 @@ genCompositions<-function(rstack,n,fun,by.days=FALSE,...){
     names(comp)<-paste0(names(rstack)[seq(1,n.ped,n)[unique(idx)]],"_Comp_",n)
   }
   if("AppRoot"%in%names(args)){
-    writeRaster(comp,filename=paste0(AppRoot,"/",names(comp),".tif"),bylayer=T)
+    writeRaster(comp,filename=paste0(AppRoot,"/",names(comp),".tif"),bylayer=TRUE)
   }else{
     return(comp)
   }

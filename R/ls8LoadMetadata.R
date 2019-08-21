@@ -50,7 +50,7 @@ ls8LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=FALSE,...){
   #meta data directory and metadata file
   mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS8DownloadDir"),getRGISToolsOpt("LS8META.dir"))
   if(!file.exists(mdRawdir)){
-    dir.create(mdRawdir,recursive=T)
+    dir.create(mdRawdir,recursive=TRUE)
   }
   mdRdata<-file.path(mdRawdir,getRGISToolsOpt("LS8META.rdata"))
   mdRawURL<-getRGISToolsOpt("LS8META.csv")
@@ -73,7 +73,7 @@ ls8LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=FALSE,...){
       gzLS8<-gzfile(paste0(mdRawdir,"/",basename(mdRawURL)),'rt')
 
       #up to  minutes of data load
-      .LS8MD<-read.csv(gzLS8,header=T)
+      .LS8MD<-read.csv(gzLS8,header=TRUE)
       close(gzLS8)
       if(verbose)
         message("Processing csv data...")
@@ -96,13 +96,13 @@ ls8LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=FALSE,...){
       stop("Metadata not loaded!")
     }
   }else{
-    print("MetaData Rdata found! loading...")
+    message("MetaData Rdata found! loading...")
     load(mdRdata,envir=globalenv())
   }
 
 }
 
 ls8IsMetaData<-function(){
-  return(getRGISToolsOpt("LS8META.var")%in%ls(all.names = T,envir=globalenv()))
+  return(getRGISToolsOpt("LS8META.var")%in%ls(all.names = TRUE,envir=globalenv()))
 }
 

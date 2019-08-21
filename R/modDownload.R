@@ -92,17 +92,16 @@ modDownload<-function(product,
                         collection=collection,
                         ...)
   if(verbose){
-    print(search.res)
+    message(search.res)
   }
   AppRoot<-file.path(AppRoot,"Modis")
   downdir<-file.path(AppRoot,product,"hdf")
   tiffdir<-file.path(AppRoot,product,"tif")
   if(extract.tif)
-    dir.create(tiffdir,recursive=T,showWarnings = F)
+    dir.create(tiffdir,recursive=TRUE,showWarnings = FALSE)
   natps<-0
-  dir.create(downdir,recursive = T,showWarnings = F)
+  dir.create(downdir,recursive = TRUE,showWarnings = FALSE)
   for(s in search.res){
-    #print(basename(s))
     recursiveModDownload(s=s,
                          username=username,
                          password=password,

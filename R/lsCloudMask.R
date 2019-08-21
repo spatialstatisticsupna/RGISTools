@@ -72,23 +72,23 @@
 #' b1.cloud.free <- b1.tiles.ras[[1]] * cloud.tiles.ras[[1]]
 #' spplot(b1.cloud.free)
 #' }
-lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=F,...){
+lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=FALSE,...){
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
   imgdir.list<-list.dirs(src,recursive=FALSE)
   if(verbose){message(paste0("Identifies folders:  \n",imgdir.list))}
   for(id in imgdir.list){
     #id<-imgdir.list[2]
-    tif.list<-list.files(id,pattern = "\\.tif$",full.names = T,ignore.case = T)
+    tif.list<-list.files(id,pattern = "\\.tif$",full.names = TRUE,ignore.case = TRUE)
     qc<-getRGISToolsOpt("LS8BANDS")["quality"]
-    qcmask<-tif.list[grepl(qc,tif.list,ignore.case = T)]
+    qcmask<-tif.list[grepl(qc,tif.list,ignore.case = TRUE)]
     if(verbose){message(paste0("QC mask name:  \n",qcmask))}
     if(length(qcmask)==0){
       message(paste0("No cloud mask found for date ",genGetDates(basename(id))))
       next
     }
 
-    out.img<-gsub(paste0(qc,".TIF"),"CLD.TIF",qcmask,ignore.case =T)
+    out.img<-gsub(paste0(qc,".TIF"),"CLD.TIF",qcmask,ignore.case =TRUE)
 
     if(!file.exists(out.img)||overwrite){
       message("Creating cloud mask for tile ",dirname(qcmask))

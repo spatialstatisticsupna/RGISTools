@@ -73,13 +73,13 @@ lsDownload<-function(satellite,
                      ...){
   AppRoot<-defineAppRoot(...)
   if(tolower(satellite)=="ls7"){
-    print("Searching Landsat-7 image time series.")
+    message("Searching Landsat-7 image time series.")
     searchres=ls7Search(startDate=startDate,
                         endDate=endDate,
                         verbose=verbose,
                         ...)
   }else if (tolower(satellite)=="ls8"){
-    print("Searching Landsat-8 image time series.")
+    message("Searching Landsat-8 image time series.")
     searchres=ls8Search(startDate=startDate,
                         endDate=endDate,
                         verbose=verbose,

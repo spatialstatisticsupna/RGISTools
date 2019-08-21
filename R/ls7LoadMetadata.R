@@ -49,7 +49,7 @@ ls7LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=TRUE,...){
   mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS7DownloadDir"),getRGISToolsOpt("LS7META.dir"))
   
   if(!file.exists(mdRawdir)){
-    dir.create(mdRawdir,recursive=T)
+    dir.create(mdRawdir,recursive=TRUE)
   }
   mdRdata<-file.path(mdRawdir,getRGISToolsOpt("LS7META.rdata"))
   mdRawURL<-getRGISToolsOpt("LS7META.csv")
@@ -71,7 +71,7 @@ ls7LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=TRUE,...){
       if(verbose)
         message("Reading metadata csv file, this task may take more than 15 minutes...")
       gzLS7<-gzfile(paste0(mdRawdir,"/",basename(mdRawURL)),'rt')
-      .LS7MD<-read.csv(gzLS7,header=T)
+      .LS7MD<-read.csv(gzLS7,header=TRUE)
       close(gzLS7)
 
       if(verbose)
@@ -95,11 +95,11 @@ ls7LoadMetadata<-function(update=FALSE,verbose=TRUE,omit.question=TRUE,...){
       stop("Metadata not loaded!")
     }
   }else{
-    print("MetaData Rdata found! loading...")
+    message("MetaData Rdata found! loading...")
     load(mdRdata,envir=globalenv())
   }
 }
 
 ls7IsMetaData<-function(){
-  return(getRGISToolsOpt("LS7META.var")%in%ls(all.names = T,envir=globalenv()))
+  return(getRGISToolsOpt("LS7META.var")%in%ls(all.names = TRUE,envir=globalenv()))
 }

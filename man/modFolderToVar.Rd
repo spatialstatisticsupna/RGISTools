@@ -75,8 +75,8 @@ dir.create(src.variables)
 modFolderToVar(src = src.navarre,
                fun = varEVI,
                scfun = getRGISToolsOpt("MOD09SCL"),
-               AppRoot = src.variables, verbose=T,
-               overwrite = T)
+               AppRoot = src.variables, verbose=TRUE,
+               overwrite = TRUE)
 # import mosaicked images (.tif) to the environment in R
 flist <- list.files(file.path(src.variables,"EVI"),
                     pattern = "\\\\.tif$",

@@ -16,7 +16,7 @@ earthdataOpenSearchQuery<-function(startDate,
                                    cursor=1,
                                    commit="Search",
                                    clientId="our_html_ui",
-                                   verbose=F){
+                                   verbose=FALSE){
   stopifnot(class(startDate)=="Date")
   stopifnot(class(endDate)=="Date")
   osquery<-paste0(getRGISToolsOpt("EARTHDATA.opensearch"),
@@ -52,8 +52,8 @@ modDownloadAtmosphere<-function(startDate,
                                      extent,
                                      product,#MOD35_L2
                                      collection=NULL,
-                                     verbose=F,
-                                     overwrite=F,
+                                     verbose=FALSE,
+                                     overwrite=FALSE,
                                      ...){
   arg<-list(...)
   AppRoot<-defineAppRoot(...)
@@ -69,7 +69,7 @@ modDownloadAtmosphere<-function(startDate,
   cloudres<-cloudres[grepl(".hdf",cloudres)]
   # define download folder
   hdf.dir<-file.path(AppRoot,"hdf")
-  dir.create(hdf.dir,recursive = T,showWarnings = F)
+  dir.create(hdf.dir,recursive = TRUE,showWarnings = FALSE)
   # Download the images
   for(l in cloudres){
     out.hdf<-paste0(hdf.dir,"/",basename(l))
@@ -84,8 +84,8 @@ modDownloadAtmosphere<-function(startDate,
   close(req)
   # define tif folder
   tif.dir<-file.path(AppRoot,"tif")
-  dir.create(tif.dir,recursive = T,showWarnings = F)
-  hdf.files<-list.files(hdf.dir,recursive = T,full.names = T,pattern = "\\.hdf$")
+  dir.create(tif.dir,recursive = TRUE,showWarnings = FALSE)
+  hdf.files<-list.files(hdf.dir,recursive = TRUE,full.names = TRUE,pattern = "\\.hdf$")
   modExtractHDF(hdf.files,
                 AppRoot=tif.dir,
                 overwrite=overwrite,

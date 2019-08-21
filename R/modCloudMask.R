@@ -103,12 +103,12 @@ modCloudMask<-function(startDate,endDate,extent,out.name="outname",raw.rm=FALSE,
   tif.dir<-file.path(AppRoot,"tif")
   modMosaic(src=tif.dir,
             extent = extent,
-            gutils = T,
+            gutils = TRUE,
             AppRoot=AppRoot,
             verbose=verbose)
   
-  tif.images<-list.files(file.path(AppRoot,"outfile"),recursive = T,full.names = T,pattern = "\\.tif$")
-  dir.create(file.path(AppRoot,out.name),recursive=T,showWarnings = verbose)
+  tif.images<-list.files(file.path(AppRoot,"outfile"),recursive = TRUE,full.names = TRUE,pattern = "\\.tif$")
+  dir.create(file.path(AppRoot,out.name),recursive=TRUE,showWarnings = verbose)
   for(i in tif.images){
     out.file<-file.path(AppRoot,out.name,gsub("__","_",basename(i)))
     if((!file.exists(out.file))||overwrite){

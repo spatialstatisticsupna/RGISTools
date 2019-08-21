@@ -103,7 +103,7 @@ genSmoothingIMA<-function(imgTS,
                                nYears=nYears)
     message(paste0("   - Size of the neighbourhood: ",nlayers(neighbours)))
     # calculate mean image
-    meanImage<-raster::calc(neighbours,fun=fun,na.rm=T)
+    meanImage<-raster::calc(neighbours,fun=fun,na.rm=TRUE)
     # get target image
     targetImage<-raster::subset(imgTS,which(format(genGetDates(names(imgTS)),"%Y%j")%in%format(target.date,"%Y%j")))
     # calculate anomaly

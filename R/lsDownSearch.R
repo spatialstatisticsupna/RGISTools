@@ -141,7 +141,7 @@ lsDownSearch<-function(searchres,
   downPath<-file.path(AppRoot,downDir,"raw")
   #create download folder
   if(!file.exists(downPath)){
-    dir.create(downPath,recursive=T)
+    dir.create(downPath,recursive=TRUE)
   }
 
   if(lvl==1){

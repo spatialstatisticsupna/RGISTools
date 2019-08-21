@@ -60,8 +60,8 @@
 #' modFolderToVar(src = src.navarre,
 #'                fun = varEVI,
 #'                scfun = getRGISToolsOpt("MOD09SCL"),
-#'                AppRoot = src.variables, verbose=T,
-#'                overwrite = T)
+#'                AppRoot = src.variables, verbose=TRUE,
+#'                overwrite = TRUE)
 #' # import mosaicked images (.tif) to the environment in R
 #' flist <- list.files(file.path(src.variables,"EVI"),
 #'                     pattern = "\\.tif$",
@@ -78,7 +78,7 @@ modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,..
   if(!getStack){
     AppRoot<-file.path(AppRoot,vartype)
     dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
-    print(vartype)
+    message(vartype)
   }
   mod.list<-list.files(src,full.names = TRUE)
   result<-NULL
@@ -108,7 +108,7 @@ modFolderToVar<-function(src,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,..
       }
       # complete the function
       funString<-paste0(substr(funString,1,nchar(funString)-1),")")
-      if(verbose){print(paste0("Function for evaluation: \n",funString))}
+      if(verbose){message(paste0("Function for evaluation: \n",funString))}
       eval(parse(text=funString))
       if(getStack){
         if(is.null(rstack)){

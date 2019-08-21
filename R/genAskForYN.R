@@ -1,4 +1,4 @@
-genAskForYN<-function(question,cont=0,n.attempts=5,omit.question=F){
+genAskForYN<-function(question,cont=0,n.attempts=5,omit.question=FALSE){
   str = tolower(readline(question))
   if(omit.question){return(TRUE)}
   if(cont<n.attempts){

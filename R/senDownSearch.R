@@ -21,7 +21,6 @@
 #' images with the same name.
 #' @param nattempts the number of attempts to download an image in case it
 #' becomes corrupted.
-#' @param error.log the name of the error log file.
 #' @param ... arguments for nested functions:
 #' \itemize{
 #'   \item \code{AppRoot} the directory where the outcoming time series are
@@ -66,7 +65,6 @@
 senDownSearch<-function(searchres,
                         username=NULL,
                         password=NULL,
-                        error.log = "Sentinel_error.log",
                         nattempts = 5,
                         unzip=FALSE,
                         overwrite=FALSE,
@@ -81,10 +79,10 @@ senDownSearch<-function(searchres,
   }
   AppRoot<-defineAppRoot(...)
   downFolder<-file.path(AppRoot,"/raw")
-  dir.create(downFolder,recursive=T,showWarnings = FALSE)
+  dir.create(downFolder,recursive=TRUE,showWarnings = FALSE)
   if(unzip){
     unzipFolder<-file.path(AppRoot,"/unzip")
-    dir.create(unzipFolder,recursive=T,showWarnings = FALSE)
+    dir.create(unzipFolder,recursive=TRUE,showWarnings = FALSE)
   }
   n.imgs<-length(searchres)
   c.handle = new_handle()
@@ -109,12 +107,12 @@ senDownSearch<-function(searchres,
 
       #md5 check
       md5.url<-paste0(gsub("$value","",url,fixed = TRUE),"Checksum/Value/$value")
-      print(md5.url)
+      message(md5.url)
       repeat{
         response<-curl(md5.url,handle =c.handle)
         md5.text<-readLines(response)
         if(!grepl("Error",md5.text)){
-          print(paste0("Get md5: ",md5.text))
+          message(paste0("Get md5: ",md5.text))
           break
         }else{
           message("md5 not found! trying again.")
@@ -122,18 +120,17 @@ senDownSearch<-function(searchres,
         }
       }
       if(!genCheckMD5(downPath,oficial.md5=md5.text,...)){
-        cat(paste0("Error cheking ",file.name," file md5: ",md5.text),file=error.log,sep="\n",append = T)
+        message(paste0("Error cheking ",file.name," file md5: ",md5.text))
         file.remove(downPath)
         senDownSearch(username=username,
                       password=password,
                       searchres=searchres[i],
                       unzip=unzip,
                       overwrite = overwrite,
-                      error.log=error.log,
                       nattempts=nattempts -1,
                       ...)
       }else{
-        print(paste0("OK: cheking ",file.name," file md5."))
+        message(paste0("OK: cheking ",file.name," file md5."))
         if(unzip){
           message("Unzipping ", basename(downPath)," file.")
           unzip(zipfile=downPath,
@@ -142,16 +139,13 @@ senDownSearch<-function(searchres,
         }
       }
     }, error = function(e) {
-      print(paste0("ERROR:",e))
-      #close(file)
-      #cat(file.name,file=error.log,sep="\n",append = TRUE)
+      message(paste0("ERROR:",e))
       file.remove(downPath)
       senDownSearch(username=username,
                     password=password,
                     searchres=searchres[i],
                     unzip=unzip,
                     overwrite = overwrite,
-                    error.log=error.log,
                     nattempts=nattempts -1,
                     ...)
     }, finally = {

@@ -2,7 +2,7 @@ lsEarthExplorerdownload<-function(searchres,username,password,cookies.file,untar
   #start usgs session
   handler<-startUSGSsession(username,password,cookies.file,verbose)
   if(verbose)
-    print("USGS session started, downloading images...")
+    message("USGS session started, downloading images...")
   for(scene in searchres$sceneID){
     if(!file.exists(paste0(downPath,"/",scene,".tar.gz"))){
       if(grepl("LC8",searchres[1,]$sceneID)){
@@ -16,11 +16,11 @@ lsEarthExplorerdownload<-function(searchres,username,password,cookies.file,untar
     #Unzip in downDir when available
     untarDir<-file.path(AppRoot,downDir,"untar",scene)
     if((untar&!file.exists(untarDir))|(untar&overwrite)){
-      print(paste0("Untar ",scene," file."))
+      message(paste0("Untar ",scene," file."))
       if(overwrite){
         file.remove(untarDir,showWarnings=FALSE,recursive=TRUE)
       }
-      dir.create(untarDir,recursive=T,showWarnings=FALSE)
+      dir.create(untarDir,recursive=TRUE,showWarnings=FALSE)
       untar(paste0(downPath,"/",scene,".tar.gz"),exdir=untarDir)
       #Flag is true, so remove compressed files
       if(raw.rm){

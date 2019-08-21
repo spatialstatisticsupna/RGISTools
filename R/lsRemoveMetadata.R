@@ -15,7 +15,7 @@
 #' lsRemoveMetadata()
 #' }
 lsRemoveMetadata<-function(){
-  md <- ls(pos = ".GlobalEnv",all.names = T)
+  md <- ls(pos = ".GlobalEnv",all.names = TRUE)
   rm(list = md[grepl(getRGISToolsOpt("LS8META.var"), md)|grepl(getRGISToolsOpt("LS7META.var"), md)], pos = ".GlobalEnv")
   gc()
 }

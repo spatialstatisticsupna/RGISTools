@@ -66,7 +66,7 @@ lsEspaOrderImages<-function(search.res,username,password,product=c("sr","source_
     json_data <- rjson::fromJSON(paste(html.text, collapse=""))
     if(verbose){message(paste0("ESPA response r obj: \n",json_data))}
     
-    json_data2<-unlist(json_data,recursive=T)
+    json_data2<-unlist(json_data,recursive=TRUE)
     products<-json_data2[grepl("products",names(json_data2))]
     if(length(products)==0){
       warning(paste0("Defined products are not available for image ",ids))
@@ -109,7 +109,7 @@ lsEspaOrderImages<-function(search.res,username,password,product=c("sr","source_
                       body = as.character(query))
     if(verbose){message(paste0("ESPA Order: \n",res))}
     #print the response
-    print(data.frame(fromJSON(rawToChar(res$content))))
+    message(data.frame(fromJSON(rawToChar(res$content))))
   }
   if(verbose)message(paste0("Check the orders in ",getRGISToolsOpt("LS.ESPA.API"),getRGISToolsOpt("LS.ESPA.API.v"),"/list-orders"))
 }

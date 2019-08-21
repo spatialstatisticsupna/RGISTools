@@ -5,8 +5,7 @@
 \title{Download Sentinel images from a search list}
 \usage{
 senDownSearch(searchres, username = NULL, password = NULL,
-  error.log = "Sentinel_error.log", nattempts = 5, unzip = FALSE,
-  overwrite = FALSE, ...)
+  nattempts = 5, unzip = FALSE, overwrite = FALSE, ...)
 }
 \arguments{
 \item{searchres}{the output from the \code{\link{senSearch}} function.}
@@ -14,8 +13,6 @@ senDownSearch(searchres, username = NULL, password = NULL,
 \item{username}{ESA’s SciHub username.}
 
 \item{password}{ESA’s SciHub password.}
-
-\item{error.log}{the name of the error log file.}
 
 \item{nattempts}{the number of attempts to download an image in case it
 becomes corrupted.}

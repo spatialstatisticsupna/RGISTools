@@ -73,7 +73,7 @@ dir.create(src3)
 ls7FolderToVar(src2,
                fun = varNDVI,
                AppRoot = src3,
-               overwrite = T)
+               overwrite = TRUE)
                
 flist <- list.files(file.path(src3,"NDVI"),
                     pattern = "\\\\.tif$",

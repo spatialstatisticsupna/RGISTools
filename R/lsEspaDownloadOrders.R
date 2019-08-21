@@ -119,14 +119,14 @@ lsDownEspa<-function(orders,norder,c.handle,AppRoot,images.order,n.attempts,verb
   json_data<-fromJSON(jd)
   if(verbose){message(paste0("ESPA order info: \n",json_data))}
   #durl<-json_data[[1]]$product_dload_url
-  json_data<-unlist(json_data,recursive=T)
+  json_data<-unlist(json_data,recursive=TRUE)
   durl<-json_data[grepl("product_dload_url",names(json_data))]
   if(verbose){message(paste0("Download url: \n",durl))}
   out.file.name<-file.path(AppRoot,basename(durl))
   if(((!file.exists(out.file.name))|overwrite)&n.attempts>0){#check md5
     message(paste0("Downloading ",basename(durl)," image."))
     curl_download(url=durl,destfile=out.file.name,handle =c.handle)
-    md5.url<-unlist(json_data,recursive=T)
+    md5.url<-unlist(json_data,recursive=TRUE)
     md5.url<-md5.url[grepl("cksum_download_url",names(md5.url))]
     rmd5 <- curl_fetch_memory(md5.url, 
                               c.handle)

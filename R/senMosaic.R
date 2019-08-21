@@ -81,7 +81,7 @@ senMosaic<-function(src,
   AppRoot<-defineAppRoot(...)
 
   #read all folder names to get all the days
-  imgFolders<-list.files(src,full.names = T)
+  imgFolders<-list.files(src,full.names = TRUE)
   if(length(imgFolders)==0)stop(paste0("There is no images in ",src," path."))
   dates<-unique(senGetDates(imgFolders))
   bpath<-file.path(AppRoot,out.name)
@@ -109,7 +109,7 @@ senMosaic<-function(src,
       stopifnot(length(dayImg)>0)
     }
 
-    flist<-list.files(dayImg,recursive=T,full.names=T,pattern="\\.jp2$")
+    flist<-list.files(dayImg,recursive=TRUE,full.names=TRUE,pattern="\\.jp2$")
     # filter the images by data type
     if("bandFilter"%in%names(arg)){
       flist<-flist[Reduce("|", lapply(arg$bandFilter,grepl,flist))]
@@ -117,13 +117,13 @@ senMosaic<-function(src,
     dtype<-unique(gsub(".jp2","",gsub(".*\\s*_(\\d{8}T\\d{6})_", "", basename(flist))))
 
     if(gutils){
-      print(paste0("Merging and constraining the extent of the image at ",dates[d]," using gdalUtils library"))
+      message(paste0("Merging and constraining the extent of the image at ",dates[d]," using gdalUtils library"))
     }else{
-      print(paste0("Merging and cutting for day ",dates[d]," using raster library"))
+      message(paste0("Merging and cutting for day ",dates[d]," using raster library"))
     }
 
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
-    dir.create(AppRoot,recursive = T,showWarnings = verbose)
+    dir.create(AppRoot,recursive = TRUE,showWarnings = verbose)
     for(dt in 1:length(dtype)){
       out.file.path<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",dtype[dt],".tif"))
       if((!file.exists(out.file.path))|overwrite){

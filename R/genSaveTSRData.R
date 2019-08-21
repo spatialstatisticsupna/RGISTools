@@ -72,7 +72,7 @@
 #' }
 genSaveTSRData<-function(src,ts.name="TS.Name",startDate=NULL,endDate=NULL,dextent=FALSE,recursive=FALSE,...){
   AppRoot=defineAppRoot(...)
-  flist<-list.files(src,full.names = T,pattern="\\.tif$",recursive=recursive)
+  flist<-list.files(src,full.names = TRUE,pattern="\\.tif$",recursive=recursive)
   allDates<-genGetDates(flist)
   if(!is.null(startDate)){
     flist<-flist[allDates>startDate]

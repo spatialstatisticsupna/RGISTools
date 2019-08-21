@@ -81,7 +81,7 @@ lsMosaic<-function(src,
   AppRoot<-defineAppRoot(...)
 
   #read all folder names to get all the days
-  imgFolders<-list.files(src,full.names = T)
+  imgFolders<-list.files(src,full.names = TRUE)
   #remove folders
   #imgFolders<-imgFolders[nchar(basename(imgFolders))==21]
   if(length(imgFolders)==0)stop(paste0("There is no images in ",src," path."))
@@ -135,25 +135,25 @@ lsMosaic<-function(src,
       stopifnot(length(dayImg)>0)
     }
 
-    flist<-list.files(dayImg,recursive=T,
-                      full.names=T,
+    flist<-list.files(dayImg,recursive=TRUE,
+                      full.names=TRUE,
                       pattern="\\.tif$",
-                      ignore.case = T)
+                      ignore.case = TRUE)
     #filter the images by data type
     if("bandFilter"%in%names(arg)){
       flist<-flist[Reduce("|", lapply(arg$bandFilter,grepl,flist))]
-      print(dtype)
-      print(arg$bandFilter)
+      message(dtype)
+      message(arg$bandFilter)
       dtype<-dtype[Reduce("|", lapply(arg$bandFilter,grepl,dtype))]
     }
 
     if(gutils){
-      print(paste0("Merging and constraining the extent of the image at ",dates[d]," using gdalUtils library"))
+      message(paste0("Merging and constraining the extent of the image at ",dates[d]," using gdalUtils library"))
     }else{
-      print(paste0("Merging and cutting for day ",dates[d]," using raster library"))
+      message(paste0("Merging and cutting for day ",dates[d]," using raster library"))
     }
     AppRoot<-file.path(bpath,format(dates[d],"%Y%j"))
-    dir.create(AppRoot,recursive = T,showWarnings = verbose)
+    dir.create(AppRoot,recursive = TRUE,showWarnings = verbose)
     for(dt in 1:length(dtype)){
       if(lvl2){
         bname<-gsub("band","B",dtype[dt])
@@ -217,7 +217,7 @@ lsMosaic<-function(src,
                            vrtnodata=nodata,
                            overwrite=overwrite,
                            verbose = verbose,
-                           allow_projection_difference=T)
+                           allow_projection_difference=TRUE)
           }else{
             ext<-extent(extent)
             temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",gsub(".tif","",dtype[dt]),"_temp.tif"))
@@ -227,7 +227,7 @@ lsMosaic<-function(src,
                            vrtnodata=nodata,
                            overwrite=TRUE,
                            verbose = verbose,
-                           allow_projection_difference=T)
+                           allow_projection_difference=TRUE)
             gdalwarp(srcfile=temp,
                      dstfile=out.file.path,
                      te=c(ext@xmin,ext@ymin,ext@xmax,ext@ymax),

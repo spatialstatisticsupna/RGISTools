@@ -53,7 +53,7 @@ modDownSearch<-function(searchres ,username = NULL,password = NULL,overwrite=FAL
     stop("Username and/or password not defined!")
   }
   AppRoot<-defineAppRoot(...)
-  dir.create(AppRoot,showWarnings = F,recursive = T)
+  dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
   for(l in searchres){
     if(file.exists(paste0(AppRoot,"/",basename(l)))&&overwrite){
       file.remove(paste0(AppRoot,"/",basename(l)))
@@ -68,7 +68,7 @@ modDownSearch<-function(searchres ,username = NULL,password = NULL,overwrite=FAL
                     autoreferer = TRUE ,
                     username=username,
                     password=password)
-      print(paste0("Downloading ",basename(l)," image."))
+      message(paste0("Downloading ",basename(l)," image."))
       curl_download(l, destfile=paste0(AppRoot,"/",basename(l)),handle = c.handle)
     }else if(overwrite){
       c.handle = new_handle()
@@ -80,7 +80,7 @@ modDownSearch<-function(searchres ,username = NULL,password = NULL,overwrite=FAL
                     username=username,
                     password=password)
       file.remove(paste0(AppRoot,"/",basename(l)))
-      print(paste0("Downloading ",basename(l)," image."))
+      message(paste0("Downloading ",basename(l)," image."))
       curl_download(l, destfile=paste0(AppRoot,"/",basename(l)),handle = c.handle)
     }else{
       message("File already exists.")
