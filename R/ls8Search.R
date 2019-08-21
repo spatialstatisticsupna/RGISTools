@@ -1,10 +1,10 @@
 #' Search Landsat-8 images
 #'
-#' \code{ls8Search} seeks Landsat-8 images in the Landsat repository concerning
+#' \code{ls8Search} searches Landsat-8 images in the Landsat repository concerning
 #' a particular location and date interval. The function returns a 
 #' \code{data.frame} with the names of the images and their metadata.
 #' 
-#' \code{ls8Search} seeks images in the metadata file. If the metadata was
+#' \code{ls8Search} searches images in the metadata file. If the metadata was
 #' downloaded before to the current directory, \code{ls8Search} will use this
 #' metadata by default. In case the metadata was not downloaded yet, 
 #' \code{ls8Search} will make that call for you.

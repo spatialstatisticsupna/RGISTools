@@ -1,6 +1,6 @@
 #' Search MODIS images
 #'
-#' \code{modSearch} seeks MODIS images in the 
+#' \code{modSearch} searches MODIS images in the 
 #' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository}
 #' (CMR) concerning a particular location and date interval. The function returns an 
 #' \code{character} vector with the names of the images and their uniform resource

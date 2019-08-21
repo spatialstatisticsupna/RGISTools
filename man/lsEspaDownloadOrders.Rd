@@ -79,7 +79,7 @@ dir.create(dir.ESPA)
 lsEspaDownloadOrders(orders = orders,
                      username = "username", 
                      password = "password",
-                    untar = TRUE,
-                    AppRoot = dir.ESPA)
+                     untar = TRUE,
+                     AppRoot = dir.ESPA)
 }
 }

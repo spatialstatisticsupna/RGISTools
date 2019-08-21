@@ -27,7 +27,7 @@
 #' @param resbands the resolution of the image being used to compute index,
 #' when the imagery comes from the Senintel-2 "\code{S2MSI2A}" product. By 
 #' default, all resolutions (10m, 20m, and 60m) are used.
-#' @param ... arguments for nested functions:
+#' @param ... arguments for nested functions.
 #'
 #' @examples
 #' \dontrun{

@@ -36,7 +36,7 @@ modPreview<-function(searchres,n,size=NULL){
   download.file(ser,tmp,mode="wb")
   pic<-image_read(tmp)
   pic <- image_resize(pic, size)
-  message(pic)
+  print(pic)
   file.remove(tmp)
   message(paste0("Printing the image ",basename(ser),"."))
 }

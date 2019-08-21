@@ -25,7 +25,7 @@ images with the same name.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
 
-\item{...}{arguments for nested functions:}
+\item{...}{arguments for nested functions.}
 }
 \description{
 \code{modFolderToVar} computes a remote sensing index from the spectral bands
@@ -75,9 +75,9 @@ dir.create(src.variables)
 modFolderToVar(src = src.navarre,
                fun = varEVI,
                scfun = getRGISToolsOpt("MOD09SCL"),
-               AppRoot = src.variables, verbose=TRUE,
+               AppRoot = src.variables,
                overwrite = TRUE)
-# import mosaicked images (.tif) to the environment in R
+# import mosaicked images (.tif) to the environment in `R'
 flist <- list.files(file.path(src.variables,"EVI"),
                     pattern = "\\\\.tif$",
                     full.names = TRUE,

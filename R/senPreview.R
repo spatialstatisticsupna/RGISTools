@@ -50,9 +50,9 @@ senPreview<-function(searchres,username,password,n,size=NULL){
                 password=password)
   image.url<-URLencode(ser)
   curl_download(image.url, destfile=tmp,handle = c.handle)
-  pic<-image_read(tmp)
+  pic <- image_read(tmp)
   pic <- image_resize(pic, size)
-  message(pic)
+  print(pic)
   file.remove(tmp)
   message(paste0("Printing the image ",names(ser),"."))
 }

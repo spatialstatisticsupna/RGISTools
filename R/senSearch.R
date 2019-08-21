@@ -1,6 +1,6 @@
 #' Search Sentinel images
 #'
-#' \code{senSearch} seeks Sentinel images through ESA's powered application
+#' \code{senSearch} searches Sentinel images through ESA's powered application
 #' programming interface (API), called 
 #' \href{http://scihub.copernicus.eu}{`SciHub'}, that concern a particular
 #' location and date interval. The function returns a \code{data.frame} with
@@ -35,7 +35,6 @@
 #'   \item \code{qformat} the format of the response.
 #'   \item \code{verbose} logical argument. If \code{TRUE}, the function prints
 #'   the running steps and warnings.
-#'   \item \code{error.log} the name of the error log file.
 #' }
 #' @examples
 #' \dontrun{

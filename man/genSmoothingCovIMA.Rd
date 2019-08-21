@@ -47,6 +47,9 @@ when saved in the Hard Disk Drive (HDD).}
   images are saved in GTiff format.
 }}
 }
+\value{
+a \code{RasterStack} with the filled/smoothed images.
+}
 \description{
 \code{genSmoothingCovIMA} runs the image mean anomaly (IMA) algorithm
 with covariates \insertCite{militino2018improving}{RGISTools}.

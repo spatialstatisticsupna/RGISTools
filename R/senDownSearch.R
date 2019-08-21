@@ -23,7 +23,7 @@
 #' images with the same name.
 #' @param nattempts the number of attempts to download an image in case it
 #' becomes corrupted.
-#' @param ... arguments for nested functions:
+#' @param ... arguments for nested functions.
 #'
 #' @examples
 #' \dontrun{

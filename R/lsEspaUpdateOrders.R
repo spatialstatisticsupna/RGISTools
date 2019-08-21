@@ -41,9 +41,9 @@
 #' orders <- lsEspaGetOrderImages(username = "username", 
 #'                                password = "password")
 #' # follow up the status of the request
-#' lsEspaUpdateOrders(orders = orders,
-#'                    username = "username", 
-#'                    password = "password")
+#' orders <- lsEspaUpdateOrders(orders = orders,
+#'                              username = "username", 
+#'                              password = "password")
 #' }
 lsEspaUpdateOrders<-function(orders,username=NULL,password=NULL,c.handle=NULL,verbose=FALSE){
   if(is.null(c.handle)){

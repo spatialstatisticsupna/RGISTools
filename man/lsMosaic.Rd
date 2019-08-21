@@ -22,7 +22,7 @@ representing the region of interest.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the
 running steps and warnings.}
 
-\item{gutils}{logical argument. If \code{TRUE}, the function uses GDAL
+\item{gutils}{logical argument. If \code{TRUE}, the function uses `GDAL'
 utilities for mosaicking.}
 
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
@@ -54,7 +54,7 @@ The extent can be defined in any coordinate reference system, since
 \code{lsMosaic} automatically reprojects the extent to match the projection
 of the image. The outputs are placed in the \code{AppRoot} directory, under
 the folder named as \code{out.name}. If no name is provided, the folder is
-named “outfile”. To use `\code{gutils = TRUE}', a proper installation of GDAL
+named “outfile”. To use `\code{gutils = TRUE}', a proper installation of `GDAL'
 and the `\code{gdalUtils}' library is required. This method is faster than
 native `R' functions.
 }

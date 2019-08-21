@@ -24,7 +24,12 @@ images with the same name.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the
 running steps and warnings.}
 
-\item{...}{arguments for nested functions:}
+\item{...}{arguments for nested functions.}
+}
+\value{
+this function does not return anything, unless \code{getStack = TRUE}
+and then it returns a \code{RasterStack} with the time series of with the
+index.
 }
 \description{
 \code{ls8FolderToVar} computes a remote sensing index from the spectral bands
@@ -70,7 +75,7 @@ lsMosaic(src = tif.src,
 # path to the folder with mosaicked images
 src2 <- file.path(src.ls8, "Navarre")
 # generate NDVI images of Navarre
-src3 <- file.path(src.ls8, "Navarre_Variables2")
+src3 <- file.path(src.ls8, "Navarre_Variables")
 dir.create(src3)
 ls8FolderToVar(src2,
                fun = varNDVI,
@@ -83,6 +88,6 @@ flist <- list.files(file.path(src3,"NDVI"),
                     recursive = TRUE)
 
 file.raster <- raster(flist[1])
-spplot(files.raster)
+spplot(file.raster)
 }
 }

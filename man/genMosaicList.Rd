@@ -14,6 +14,9 @@ genMosaicList(imageList, fun = "max", verbose = TRUE)
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
 }
+\value{
+a \code{raster} with the mosaicked images.
+}
 \description{
 \code{genMosaicList} makes a single mosaic from a list of raster images.
 }

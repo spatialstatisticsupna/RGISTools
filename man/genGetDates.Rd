@@ -14,6 +14,9 @@ genGetDates(str, ...)
   \item \code{format} the format of the date being returned.
 }}
 }
+\value{
+a \code{Date} class object with the date of the image.
+}
 \description{
 \code{genGetDates} extracts the date of one or several images when the name
 of the layer includes the date in the "\code{YYYYJJJ}" format.

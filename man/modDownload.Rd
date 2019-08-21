@@ -51,7 +51,7 @@ from hdf files and saves them as GTiff.}
 }}
 }
 \description{
-\code{modDownload} seeks and downloads MODIS images concerning a particular
+\code{modDownload} searches and downloads MODIS images concerning a particular
 location and time interval from the `EarthData' repository. Images are
 saved as GTiff files in the \code{AppRoot} directory.
 }

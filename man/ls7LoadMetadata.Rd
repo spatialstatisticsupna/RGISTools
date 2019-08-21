@@ -18,7 +18,11 @@ running steps and warnings.}
 \item{omit.question}{logical argument. If \code{TRUE}, the question about 
 loading the metadata is omitted.}
 
-\item{...}{arguments for nested functions:}
+\item{...}{arguments for nested functions.}
+}
+\value{
+this function does not return anything, but loads the “.LS7MD” 
+\code{data.frame} on your working directory.
 }
 \description{
 \code{ls7LoadMetadata} loads a \code{data.frame} called "\code{.LS7MD}"

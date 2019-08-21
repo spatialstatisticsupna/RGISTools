@@ -37,7 +37,7 @@ images with the same name.}
 \item{nattempts}{the number of attempts to download an image in case it
 becomes corrupted.}
 
-\item{...}{arguments for nested functions:}
+\item{...}{arguments for nested functions.}
 }
 \description{
 \code{lsDownSearch} downloads the results from \code{\link{ls7Search}} and
@@ -78,16 +78,19 @@ search.res <- ls8Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
 lsDownSearch(searchres = search.res[1,], 
              username = "user", 
              password = "pass", 
+             AppRoot = src,
              untar = TRUE)
 # download 4 images
 lsDownSearch(searchres = search.res[1:4,], 
              username = "user", 
-             password = "pass", 
+             password = "pass",
+             AppRoot = src, 
              untar = TRUE)
 # download all the images
 lsDownSearch(searchres = search.res, 
              username = "user", 
-             password = "pass", 
+             password = "pass",
+             AppRoot = src,
              untar = TRUE)
 
 # search and download the images from Landsat-7 between
@@ -98,25 +101,25 @@ search.res <- ls7Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
                         endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
                         extent = ex.navarre,
                         browseAvaliable = "Y",
-                        AppRoot=src)
+                        AppRoot = src)
 # download 1 image
 lsDownSearch(searchres = search.res[1,], 
              username = "user", 
              password = "pass", 
              untar = TRUE,
-             AppRoot=src)
+             AppRoot = src)
 # download 4 images
 lsDownSearch(searchres = search.res[1:4,], 
              username = "user", 
              password = "pass", 
              untar = TRUE, 
-             AppRoot=src)
+             AppRoot = src)
 # download all the images
 lsDownSearch(searchres = search.res, 
              username = "user", 
              password = "pass", 
              untar = TRUE, 
-             AppRoot=src)
+             AppRoot = src)
 
 # removes the metadata to free memory space
 lsRemoveMetadata()

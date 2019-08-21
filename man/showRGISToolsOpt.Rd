@@ -9,6 +9,9 @@ showRGISToolsOpt(env = optEnv)
 \arguments{
 \item{env}{the environment where the `\code{RGISTools}' option are saved.}
 }
+\value{
+a \code{character} vector with the names of the configuration variables.
+}
 \description{
 \code{showRGISToolsOpt} prints the name of all options in `\code{RGISTools}' package.
 This function can be jointly used with \code{\link{setRGISToolsOpt}} and 

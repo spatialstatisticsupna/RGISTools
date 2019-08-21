@@ -1,4 +1,4 @@
-#' `RGISTools': Tools for handling multiplatform satellite images.
+#' `RGISTools': Tools for Handling Multiplatform Satellite Images
 #'
 #' This package enables you downloading, customizing, and processing time series
 #' of satellite images from Landsat, MODIS and Sentinel in a standardized way.

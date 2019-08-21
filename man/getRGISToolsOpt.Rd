@@ -11,6 +11,9 @@ getRGISToolsOpt(opt, env = optEnv)
 
 \item{env}{the environment where the `\code{RGISTools}' option are saved.}
 }
+\value{
+an option of `RGISTools’ configuration variable.
+}
 \description{
 \code{getRGISToolsOpt} gets the current value of an `\code{RGISTools}' 
 configuration variable. This function can be jointly used with

@@ -25,7 +25,7 @@ extraction.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
 
-\item{...}{arguments for nested functions:}
+\item{...}{arguments for nested functions.}
 }
 \description{
 \code{modExtractHDF} converts the original format of MODIS images (hierarchical

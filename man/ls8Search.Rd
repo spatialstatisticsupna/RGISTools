@@ -37,13 +37,16 @@ tile by tile (slower).}
   \item column names in the .LS8MD \code{data.frame} and their values.
 }}
 }
+\value{
+a \code{data.frame} with the name of the images and their metadata.
+}
 \description{
-\code{ls8Search} seeks Landsat-8 images in the Landsat repository concerning
+\code{ls8Search} searches Landsat-8 images in the Landsat repository concerning
 a particular location and date interval. The function returns a 
 \code{data.frame} with the names of the images and their metadata.
 }
 \details{
-\code{ls8Search} seeks images in the metadata file. If the metadata was
+\code{ls8Search} searches images in the metadata file. If the metadata was
 downloaded before to the current directory, \code{ls8Search} will use this
 metadata by default. In case the metadata was not downloaded yet, 
 \code{ls8Search} will make that call for you.
@@ -66,10 +69,12 @@ For instance, to filter the imagery with an available preview, the
 \examples{
 \dontrun{
 # search by path and row numbers of a tile
+src <- paste0(tempdir(),"/Path_for_downloading_folder")
 search.res <- ls8Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                         pathrow = list(c(200, 31), c(200, 30)),
-                        browseAvaliable = "Y")
+                        browseAvaliable = "Y",
+                        AppRoot = src)
 
 # search by extent (long/lat coordinates)
 # load a spatial polygon object of Navarre
@@ -78,14 +83,16 @@ search.res <- ls8Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                         extent = ex.navarre,
                         precise = TRUE,
-                        browseAvaliable = "Y")
+                        browseAvaliable = "Y",
+                        AppRoot = src)
 
 # search by extent (fast mode)
 search.res <- ls8Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                       endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                       extent = ex.navarre,
                       precise = FALSE,
-                      browseAvaliable = "Y")
+                      browseAvaliable = "Y",
+                      AppRoot = src)
 # remove metadata to free memory space
 lsRemoveMetadata()
 }

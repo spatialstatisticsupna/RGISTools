@@ -26,6 +26,9 @@ at least one image avaiable.}
   GTiff format.
 }}
 }
+\value{
+a \code{RasterStack} with the time series of the composite images.
+}
 \description{
 \code{genCompositions} combines a series of satellite images to create compositions.
 }

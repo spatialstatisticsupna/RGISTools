@@ -27,6 +27,9 @@ extent of the \code{RasterStack} to embrace the extents of all GTiff images.}
 \item{recursive}{logical argument. If \code{TRUE}, reads folders recursively,
 searching for GTiff images.}
 }
+\value{
+this function does not return anything.
+}
 \description{
 \code{genSaveTSRData} imports a time series of images from a folder (GTiff
  format), builds a \code{RasterStack} and saves it in an RData.

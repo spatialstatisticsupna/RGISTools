@@ -26,6 +26,11 @@ running steps and warnings.}
 
 \item{...}{arguments for nested functions.}
 }
+\value{
+this function does not return anything, unless \code{getStack = TRUE}
+and then it returns a \code{RasterStack} with the time series of with the
+index.
+}
 \description{
 \link{ls7FolderToVar} computes a remote sensing index from the 
 spectral bands of a time series of Landsat-7 images. The images are specified

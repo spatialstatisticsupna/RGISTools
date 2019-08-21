@@ -8,9 +8,9 @@ lsEspaGetOrderImages(username = NULL, password = NULL,
   c.handle = NULL, order.list = NULL, verbose = TRUE)
 }
 \arguments{
-\item{username}{USGS's EarthExplorer username.}
+\item{username}{USGS's `EarthExplorer' username.}
 
-\item{password}{USGS's EarthExplorer password.}
+\item{password}{USGS's `EarthExplorer' password.}
 
 \item{c.handle}{a curl handler created with the package `\code{curl}' to
 stablish a connection with a preset password and username. This argument
@@ -36,10 +36,12 @@ status messages and their interpretation can be found in the ESPA's API
 }
 \examples{
 \dontrun{
+src <- paste0(tempdir(),"/Path_for_downloading_folder")
 # search Landsat 7 level-2
 search.res <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
                         endDate = as.Date("07-01-2017", "\%d-\%m-\%Y"),
-                        lonlat = c(-1.64323, 42.81687))
+                        lonlat = c(-1.64323, 42.81687),
+                        AppRoot = src)
 # request to ESPA the pre-pocessing of level-2 images to
 # get the surface reflectance
 order <- lsEspaOrderImages(search.res = search.res,

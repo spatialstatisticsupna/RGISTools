@@ -24,12 +24,16 @@ running steps and warnings.}
 
 \item{...}{arguments for nested functions.}
 }
+\value{
+this function does not return anything. It creates new GTiff files
+for a new cloud band (CLD) inside the folder of every image.
+}
 \description{
 \code{lsCloudMask} creates a cloud mask derived from the band for quality
 assurance (BQA) from Landsat-7 or Landsat-8 time series. The function is
 applied to untarred images, such as those resulting from 
 \code{\link{lsDownSearch}} or \code{\link{lsDownload}}. The result is a new
-image band, called claud (CLD), that is saved as separate GTiffs.
+image band, called cloud (CLD), that is saved as separate GTiffs.
 }
 \details{
 The valid range for the \code{sensitivity} threshold is 0-8000. By defualt,
@@ -59,7 +63,8 @@ src.ls8 <- file.path(src,"Landsat8")
 src.untar <- file.path(src.ls8,"untar")
 # calculate the cloud mask from QC layer
 lsCloudMask(src=src.untar,
-            overwrite=TRUE)
+            overwrite=TRUE,
+            AppRoot = src.ls8)
             
 # mosaic and crop the imagery
 lsMosaic(src = src.untar,

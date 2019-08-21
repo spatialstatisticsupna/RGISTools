@@ -28,7 +28,7 @@ running steps and warnings.}
 when the imagery comes from the Senintel-2 "\code{S2MSI2A}" product. By 
 default, all resolutions (10m, 20m, and 60m) are used.}
 
-\item{...}{arguments for nested functions:}
+\item{...}{arguments for nested functions.}
 }
 \description{
 \code{senFolderToVar} computes a remote sensing index from the spectral bands
@@ -87,6 +87,6 @@ flist <- list.files(file.path(src3,"EVI"),
                     recursive = TRUE)
 
 files.raster <- lapply(flist, raster)
-spplot(files[[1]])
+spplot(files.raster[[1]])
 }
 }

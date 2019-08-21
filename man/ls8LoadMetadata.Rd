@@ -20,6 +20,10 @@ loading the metadata is omitted.}
 
 \item{...}{arguments for nested functions.}
 }
+\value{
+this function does not return anything, but loads the “.LS8MD” 
+\code{data.frame} on your working directory.
+}
 \description{
 \code{ls8LoadMetadata} loads a \code{data.frame} called "\code{.LS8MD}"
 with the names of the Landsat-8 images and their metadata. The metadata provides

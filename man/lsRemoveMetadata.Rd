@@ -19,7 +19,9 @@ removes the metadata and frees up valuable RAM.
 \dontrun{
 # creates a MetaData folder and downloads the csv file
 # in the current working directory
-ls8LoadMetadata()
+src <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(src)
+ls8LoadMetadata(AppRoot = src)
 lsRemoveMetadata()
 }
 }

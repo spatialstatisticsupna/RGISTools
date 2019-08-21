@@ -48,7 +48,7 @@ when saved in the Hard Disk Device (HDD).}
 }}
 }
 \value{
-\code{RasterStack} object with the filled/smoothed time series.
+a \code{RasterStack} with the filled/smoothed images.
 }
 \description{
 \code{genSmoothingIMA} is the implementation of a spatio temporal method 

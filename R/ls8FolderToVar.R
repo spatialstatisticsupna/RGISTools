@@ -24,7 +24,7 @@
 #' images with the same name.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.
-#' @param ... arguments for nested functions:
+#' @param ... arguments for nested functions.
 #'
 #' @return this function does not return anything, unless \code{getStack = TRUE}
 #' and then it returns a \code{RasterStack} with the time series of with the
@@ -58,7 +58,7 @@
 #' # path to the folder with mosaicked images
 #' src2 <- file.path(src.ls8, "Navarre")
 #' # generate NDVI images of Navarre
-#' src3 <- file.path(src.ls8, "Navarre_Variables2")
+#' src3 <- file.path(src.ls8, "Navarre_Variables")
 #' dir.create(src3)
 #' ls8FolderToVar(src2,
 #'                fun = varNDVI,

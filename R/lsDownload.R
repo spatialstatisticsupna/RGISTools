@@ -1,6 +1,6 @@
 #' Search and download Landsat-7 or Landsat-8 images
 #'
-#' \code{lsDonwload} seeks and downloads Landsat-7 or Landsat-8 images
+#' \code{lsDonwload} searches and downloads Landsat-7 or Landsat-8 images
 #' concerning a particular location and time interval from the 
 #' \href{https://earthexplorer.usgs.gov/}{`EarthExplorer' repository}.
 #' Images are saved as GTiff files in the \code{AppRoot} directory.

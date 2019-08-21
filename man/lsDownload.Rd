@@ -42,8 +42,13 @@ running steps and warnings.}
   \code{\link{lsDownSearch}}.
 }}
 }
+\value{
+this function does not return anything. It saves the imagery as
+`tar.gz’ (and GTiff files) in a folder called `raw’ (`untar’) in the
+ \code{AppRoot} directory.
+}
 \description{
-\code{lsDonwload} seeks and downloads Landsat-7 or Landsat-8 images
+\code{lsDonwload} searches and downloads Landsat-7 or Landsat-8 images
 concerning a particular location and time interval from the 
 \href{https://earthexplorer.usgs.gov/}{`EarthExplorer' repository}.
 Images are saved as GTiff files in the \code{AppRoot} directory.

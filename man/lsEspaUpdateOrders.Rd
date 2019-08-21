@@ -11,9 +11,9 @@ lsEspaUpdateOrders(orders, username = NULL, password = NULL,
 \item{orders}{a list of the requested orders as returned by
 \code{\link{lsEspaGetOrderImages}}.}
 
-\item{username}{USGS's EarthExplorer username.}
+\item{username}{USGS's `EarthExplorer' username.}
 
-\item{password}{USGS's EarthExplorer password.}
+\item{password}{USGS's `EarthExplorer' password.}
 
 \item{c.handle}{a curl handler created with the package `\code{curl}' to
 stablish a connection with a preset password and username. This argument
@@ -39,10 +39,12 @@ interpretation can be found in the ESPA's API
 }
 \examples{
 \dontrun{
+src <- paste0(tempdir(),"/Path_for_downloading_folder")
 # search Landsat 7 level-1
 search.res <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
                         endDate = as.Date("15-01-2017", "\%d-\%m-\%Y"),
-                        lonlat = c(-1.64323, 42.81687))
+                        lonlat = c(-1.64323, 42.81687),
+                        AppRoot = src)
 # request to ESPA the prepocessing of level-1 images to get the surface reflectance
 orders <- lsEspaOrderImages(search.res = search.res,
                             username = "username", 
@@ -53,8 +55,8 @@ orders <- lsEspaOrderImages(search.res = search.res,
 orders <- lsEspaGetOrderImages(username = "username", 
                                password = "password")
 # follow up the status of the request
-lsEspaUpdateOrders(orders = orders,
-                   username = "username", 
-                   password = "password")
+orders <- lsEspaUpdateOrders(orders = orders,
+                             username = "username", 
+                             password = "password")
 }
 }

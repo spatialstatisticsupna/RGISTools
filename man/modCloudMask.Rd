@@ -30,7 +30,7 @@ images with the same name.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
 
-\item{...}{arguments for nested functions:}
+\item{...}{arguments for nested functions.}
 }
 \description{
 \code{modCloudMask} creates cloud masks derived from the "\code{MOD35_L2}" 

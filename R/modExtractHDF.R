@@ -21,7 +21,7 @@
 #' running steps and warnings.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
-#' @param ... arguments for nested functions:
+#' @param ... arguments for nested functions.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre

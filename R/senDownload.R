@@ -1,6 +1,6 @@
 #' Search and download Sentinel images
 #'
-#' \code{senDownload} seeks and downloads Sentinel images concerning a
+#' \code{senDownload} searches and downloads Sentinel images concerning a
 #' particular location and time interval from `SciHub's' repository.  
 #' 
 #' \code{senDonwload} is a wrapper function of \code{\link{senSearch}} and 
@@ -29,7 +29,6 @@
 #'   \item \code{nattempts} the number of attempts to download an image in case
 #'   it becomes corrupted.
 #'   \item \code{unzip} logical argument. If \code{TRUE}, unzips the images.
-#'   \item \code{error.log} name of the error log file.
 #'   \item \code{verbose} logical argument. If \code{TRUE}, the function prints
 #'   the running steps and warnings.
 #' }

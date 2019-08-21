@@ -18,6 +18,9 @@ genLimitRasterRange(r, mx = NULL, mn = NULL, rm.values = FALSE)
 \code{mn} thresholds respectively. If \code{TRUE}, values outside the 
 \code{mn} - \code{mx} range are replaced by \code{NA}.}
 }
+\value{
+a \code{Raster*} with values comprised within a range.
+}
 \description{
 \code{genLimitRasterRange} limits the maximum and the minimum values of a
 \code{Raster*} class object to a given range.

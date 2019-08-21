@@ -21,7 +21,7 @@
 #' @param omit.question logical argument. If \code{TRUE}, the question about 
 #' loading the metadata is omitted.
 #' @param AppRoot the directory where the metadata file should be located. 
-#' @param ... arguments for nested functions:
+#' @param ... arguments for nested functions.
 #'
 #' @return this function does not return anything, but loads the “.LS7MD” 
 #' \code{data.frame} on your working directory.

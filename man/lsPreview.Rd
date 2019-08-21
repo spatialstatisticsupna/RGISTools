@@ -31,12 +31,14 @@ Please, be aware that only some images may have a preview.
 \dontrun{
 # load a spatial polygon object of Navarre
 data(ex.navarre)
+src <- paste0(tempdir(),"/Path_for_downloading_folder")
 # retrieve jpg images covering Navarre between 2011 and 2013
 search.res <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                         endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                         extent = ex.navarre,
                         precise = TRUE,
-                        browseAvaliable = "Y")
+                        browseAvaliable = "Y",
+                        AppRoot = src)
 lsPreview(search.res, 1)
 # filter the images with less than 1\% pixels covered by clouds
 search_cloudFree = subset(search.res, search.res$cloudCover < 1)

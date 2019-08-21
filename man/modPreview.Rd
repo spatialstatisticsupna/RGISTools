@@ -23,7 +23,7 @@ search results.
 The function shows a preview of the \code{n}-th output image from a search
 in the MODIS archives (\code{\link{modSearch}}), with 
 \code{resType = "browseurl"}). The preview is downloaded from the
-\href{https://earthdata.nasa.gov}{EarthData Platform}.
+\href{https://earthdata.nasa.gov}{`EarthData' Platform}.
 Please, be aware that only some images may have a preview.
 }
 \examples{

@@ -3,12 +3,12 @@
 \docType{package}
 \name{RGISTools-package}
 \alias{RGISTools-package}
-\title{`RGISTools': Tools for handling multiplatform satellite images.}
+\title{`RGISTools': Tools for Handling Multiplatform Satellite Images}
 \description{
 This package enables you downloading, customizing, and processing time series
 of satellite images from Landsat, MODIS and Sentinel in a standardized way.
 Some functions download and convert automatically the platform-specific file
-formats into GTiff, so they can be loaded in R. The customization functions 
+formats into GTiff, so they can be loaded in `R'. The customization functions 
 support tile mosaicking, cropping, cloud masking and deriving new variables 
 of interest, such as the normalized difference vegetation index (NDVI),
 enhanced vegetation index (EVI), etc. Tile mosaicking is required when the
@@ -126,7 +126,7 @@ for a better data handling:
   \code{\link{genSmoothingIMA}} \tab Fills the gaps and smooths outliers in a time series of satellite images \cr
   \code{\link{genSmoothingCovIMA}} \tab Fills the gaps and smooths outliers in a time series of satellite images using covariates \cr
   \code{\link{genPlotGIS}} \tab Plots satellite images with a proper GIS format \cr
-  \code{\link{genGetDates}} \tab Gets the capturing date of an image from the name of a raster layer \cr
+  \code{\link{genGetDates}} \tab Gets the capturing date of an image from the name of a \code{RasterLayer} \cr
   ----------------------\tab -------------------------------------------------------------------------------------------- \cr  
   }
 }
