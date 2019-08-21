@@ -48,7 +48,8 @@ mList <- modSearch(product = "MYD13A2",
                    extent = ex.navarre)
 head(mList)
 # download the first image in mList
-src <- "Path_for_downloading_folder"
+src <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(src)
 src.mod <- file.path(src,"Modis","MYD13A2")
 src.mod.hdf <- file.path(src.mod,"hdf")
 modDownSearch(mList[1], 

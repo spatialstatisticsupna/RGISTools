@@ -46,7 +46,8 @@
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' 
-#' src <- "Path_for_downloading_folder"
+#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(src)
 #' # search and download the images from Landsat-8 between
 #' # 01-01-2018 and 20-01-2018 for the region of Navarre
 #' lsDownload(satellite = "ls8",

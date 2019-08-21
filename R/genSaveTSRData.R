@@ -32,7 +32,8 @@
 #' data(ex.navarre)
 #' # set the download folder
 #' s.start <- Sys.time()
-#' src <- "Path_for_downloading_folder"
+#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(src)
 #' # download the images
 #' modDownload(product = "MOD09GA",
 #'             startDate = as.Date("30-07-2018", "%d-%m-%Y"),

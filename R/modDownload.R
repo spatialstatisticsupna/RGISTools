@@ -51,7 +51,8 @@
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' src <- "Path_for_downloading_folder"
+#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(src)
 #' modDownload(product = "MOD09GA",
 #'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'             endDate = as.Date("03-01-2018", "%d-%m-%Y"),

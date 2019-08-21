@@ -60,7 +60,8 @@ of GDAL is required. This method is faster than the native R functions.
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 # main output directory
-src <- "Path_for_downloading_folder"
+src <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(src)
 # download MODIS images
 modDownload(product = "MOD09GA",
             startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),

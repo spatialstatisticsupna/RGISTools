@@ -64,7 +64,8 @@ due to the presence of both, compressed and decompressed images. Set
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 
-src <- "Path_for_downloading_folder"
+src <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(src)
 
 # search and download the images from Landsat-8 between
 # 2011 and 2013 in the region of Navarre
@@ -92,7 +93,8 @@ lsDownSearch(searchres = search.res,
 
 # search and download the images from Landsat-7 between
 # 2011 and 2013 in the region of Navarre
-src <- "Path_for_downloading_folder"
+src <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(src)
 search.res <- ls7Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
                         endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
                         extent = ex.navarre,

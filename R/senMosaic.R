@@ -43,7 +43,8 @@
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # main output directory
-#' src <- "Path_for_downloading_folder"
+#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(src)
 #' # download Sentinel-2 images
 #' senDownload(startDate = as.Date("2018210", "%Y%j"),
 #'             endDate = as.Date("2018218", "%Y%j"),
