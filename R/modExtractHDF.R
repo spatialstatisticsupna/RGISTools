@@ -27,7 +27,8 @@
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' 
-#' src<-"Path_for_downloading_folder"
+#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(src)
 #' src.mod <- file.path(src, "Modis","MOD11A1")
 #' src.mod.hdf <- file.path(src.mod, "hdf")
 #' img.list <- modSearch(product = "MOD11A1",

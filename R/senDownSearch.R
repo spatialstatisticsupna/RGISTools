@@ -45,7 +45,7 @@
 #' names(searchres.R094)
 #' # list the dates in searchres
 #' senGetDates(names(searchres.R094),format="%Y%j")
-#' src = file.path("Path_for_downloading_folder","Sentinel-2")
+#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' # donwload the imagery
 #' senDownSearch(searchres = searchres.R094,
 #'               username = "username",
