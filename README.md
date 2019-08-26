@@ -1,5 +1,5 @@
 # RGISTools
-Tools for handling multiplatform satellite images.
+Handling multiplatform satellite images.
 
 ## Table of contents
 
