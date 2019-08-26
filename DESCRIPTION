@@ -1,6 +1,6 @@
 Type: Package
 Package: RGISTools
-Title: Handling multiplatform satellite images.
+Title: Handling Multiplatform Satellite Images
 Version: 0.9.7
 Author: U Pérez - Goya [aut, cre] <unai.perez@unavarra.es>,
         A F Militino [aut] <militino@unavarra.es>,
