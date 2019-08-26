@@ -6,7 +6,7 @@
 #' The function mosaics the imagery in the \code{src} folder. The folder can
 #' hold GTiff images from several tiles, dates and bands. When only a subset
 #' of bands or dates has to be mosaicked, the band names or dates should be
-#' provided through the argument \code{bandFilter} or \code{dayFilter}. Band
+#' provided through the argument \code{bFilter} or \code{dayFilter}. Band
 #' names are defined by the letter “b” and the two-digit band number (e.g., 
 #' ‘b01’). The dates must be provided as a \code{Date} class object. Once
 #' mosaicked, the images can be cropped to fit the \code{extent} (optional).
@@ -33,7 +33,7 @@
 #'  \itemize{
 #'   \item \code{pathrow} a \code{list} of vectors with the path and row numbers
 #'   of the tiles concerning the region of interest.
-#'   \item \code{bandFilter} a vector with the bands to be mosaicked. If not
+#'   \item \code{bFilter} a vector with the bands to be mosaicked. If not
 #'   supplied, all bands are mosaicked.
 #'   \item \code{dayFilter} a vector with the capturing dates being considered
 #'   for mosaicking. If not supplied, all dates are mosaicked.
@@ -113,8 +113,8 @@ senMosaic<-function(src,
 
     flist<-list.files(dayImg,recursive=TRUE,full.names=TRUE,pattern="\\.jp2$")
     # filter the images by data type
-    if("bandFilter"%in%names(arg)){
-      flist<-flist[Reduce("|", lapply(arg$bandFilter,grepl,flist))]
+    if("bFilter"%in%names(arg)){
+      flist<-flist[Reduce("|", lapply(arg$bFilter,grepl,flist))]
     }
     dtype<-unique(gsub(".jp2","",gsub(".*\\s*_(\\d{8}T\\d{6})_", "", basename(flist))))
 

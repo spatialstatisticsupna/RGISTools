@@ -55,7 +55,7 @@
 #'          AppRoot = src.ls8,
 #'          out.name = "Navarre",
 #'          extent = ex.navarre,
-#'          bandFilter = c("CLD"),
+#'          bFilter = c("CLD"),
 #'          gutils = TRUE, # using gdalUtils
 #'          overwrite = TRUE) # overwrite
 #'          
