@@ -147,7 +147,7 @@ lsDownSearch<-function(searchres,
   if(!file.exists(downPath)){
     dir.create(downPath,recursive=TRUE)
   }
-
+  message(paste0("Downloading the images in: ",downPath))
   if(lvl==1){
     message("Starting Landsat level 1 download process...")
     lsEarthExplorerdownload(searchres=searchres,

@@ -54,6 +54,7 @@ modDownSearch<-function(searchres, AppRoot, username = NULL,password = NULL,over
   }
   AppRoot<-pathWinLx(AppRoot)
   dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
+  message(paste0("Downloading the images in: ",AppRoot))
   for(l in searchres){
     if(file.exists(paste0(AppRoot,"/",basename(l)))&&overwrite){
       file.remove(paste0(AppRoot,"/",basename(l)))

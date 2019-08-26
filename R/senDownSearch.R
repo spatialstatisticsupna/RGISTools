@@ -79,6 +79,7 @@ senDownSearch<-function(searchres,
   }
   downFolder<-file.path(AppRoot,"/raw")
   dir.create(downFolder,recursive=TRUE,showWarnings = FALSE)
+  message(paste0("Downloading the images in: ",downFolder))
   if(unzip){
     unzipFolder<-file.path(AppRoot,"/unzip")
     dir.create(unzipFolder,recursive=TRUE,showWarnings = FALSE)
