@@ -7,7 +7,7 @@ Author: U Pérez - Goya [aut, cre] <unai.perez@unavarra.es>,
         M D Ugarte [aut] <lola@unavarra.es>,
         M Montesino - SanMartin [aut] <manuel.montesino@unavarra.es>
 Maintainer: U Perez - Goya <unai.perez@unavarra.es>
-Description: Downloading, customizing, and processing time series of satellite images for a region of interest. 'RGISTools' functions allow a unified access to multispectral images from Landsat, MODIS and Sentinel repositories. 'RGISTools' also offers capabilities for customizing satellite images, such as tile mosaicking and image cropping. Finally, 'RGISTools' covers the processing, including cloud masking, deriving new variables, and gap-filling/smoothing time series of images (see Militino et al., 2018 <doi:10.3390/rs10030398> and Militino et al., 2019 <doi:10.1109/TGRS.2019.2904193>).
+Description: Downloading, customizing, and processing time series of satellite images for a region of interest. 'RGISTools' functions allow a unified access to multispectral images from Landsat, MODIS and Sentinel repositories. 'RGISTools' also offers capabilities for customizing satellite images, such as tile mosaicking and image cropping. Finally, 'RGISTools' covers the processing, including cloud masking, deriving new variables, and gap-filling/smoothing time series of images (Militino et al., 2018 <doi:10.3390/rs10030398> and Militino et al., 2019 <doi:10.1109/TGRS.2019.2904193>).
 Depends: R (>= 3.5.0), raster, gdalUtils, sp
 Imports: Rdpack, XML, xml2, utils, fields, magick, urltools, rjson, rvest, tools,  methods, curl, httr 
 RdMacros: Rdpack
