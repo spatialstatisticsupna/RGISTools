@@ -12,6 +12,7 @@ assign("LS8META.dir","MetaData", env=optEnv)
 assign("LS8META.rdata","LS8MD.RData", env=optEnv)
 assign("LS8META.var",".LS8MD", env=optEnv)
 assign("LS8DownloadDir","Landsat8", env=optEnv)
+assign("LS8METADATA", NULL, env=optEnv)
 
 # Landsat-7 options
 assign("LS7META.csv", "https://landsat.usgs.gov/landsat/metadata_service/bulk_metadata_files/LANDSAT_ETM_C1.csv.gz", env=optEnv)
@@ -19,6 +20,8 @@ assign("LS7META.dir","MetaData", env=optEnv)
 assign("LS7META.rdata","LS7MD.RData", env=optEnv)
 assign("LS7META.var",".LS7MD", env=optEnv)
 assign("LS7DownloadDir","Landsat7", env=optEnv)
+assign("LS7METADATA", NULL, env=optEnv)
+
 # Landsat lvl2
 assign("LS.ESPA.API","https://espa.cr.usgs.gov", env=optEnv)
 assign("LS.ESPA.API.v","/api/v1", env=optEnv)
