@@ -7,7 +7,7 @@
 #' Images files must be GTiffs. The \code{src} can take the path created by
 #' other functions of this package, such as \code{\link{senMosaic}},
 #' \code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are
-#' imported into `R' to build a \code{RasterStack} in the global environment. The
+#' imported into `R' to build a \code{RasterStack}. The
 #' name of the \code{RasterStack} is specified in \code{ts.name}. The
 #' \code{RasterStack} is saved in an RData file in the \code{AppRoot} directory.
 #'
@@ -23,7 +23,7 @@
 #' searching for GTiff images.
 #' @param AppRoot the path where the RData is saved.
 #'
-#' @return this function does not return anything.
+#' @return if \code{AppRoot} is not asigned a \code{RasterStack} with the time series in src folder.
 #'
 #' @examples
 #' \dontrun{
@@ -105,10 +105,8 @@ genSaveTSRData<-function(src,AppRoot=NULL,ts.name="TS.Name",startDate=NULL,endDa
   
   if(!is.null(AppRoot)){
     save(list=c(ts.name), file = paste0(AppRoot,"/",ts.name,".RData"))
-    eval(parse(text=paste0(ts.name,"<<-",ts.name) ))
     message(paste0("The time series of images in ",src," have been saved as RData.\nYou can find the RDAta in: ",paste0(AppRoot,"/",ts.name,".RData")))
   }else{
-    eval(parse(text=paste0(ts.name,"<<-",ts.name) ))
-    message("The time series of images has been loaded to gloval environment")
+    return(rstack)
   }
 }
