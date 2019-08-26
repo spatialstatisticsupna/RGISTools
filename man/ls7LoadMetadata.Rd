@@ -22,7 +22,7 @@ loading the metadata is omitted.}
 }
 \value{
 this function does not return anything, but loads the “.LS7MD” 
-\code{data.frame} on your working directory.
+\code{data.frame} on the `RGISTools' package.
 }
 \description{
 \code{ls7LoadMetadata} loads a \code{data.frame} called "\code{.LS7MD}"
@@ -49,8 +49,8 @@ ls7LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"))
 # update the metadata file
 ls7LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"), update = TRUE)
 
-# if .LS7MD is already loaded you can see print its data
-ls(all.names = TRUE)
-head(.LS7MD)
+# get metadata data frame 
+LS7MD <- getRGISToolsOpt("LS7METADATA")
+head(LS7MD)
 }
 }

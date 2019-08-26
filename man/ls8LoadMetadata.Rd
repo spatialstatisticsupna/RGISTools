@@ -22,7 +22,7 @@ loading the metadata is omitted.}
 }
 \value{
 this function does not return anything, but loads the “.LS8MD” 
-\code{data.frame} on your working directory.
+\code{data.frame} on the `RGISTools' package.
 }
 \description{
 \code{ls8LoadMetadata} loads a \code{data.frame} called "\code{.LS8MD}"
@@ -50,8 +50,8 @@ ls8LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"))
 # update the metadata file
 ls8LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"), update = TRUE)
 
-# if .LS8MD is already loaded you can see print its data
-ls(all.names = TRUE)
-head(.LS8MD)
+# get metadata data frame 
+LS8MD <- getRGISToolsOpt("LS8METADATA")
+head(LS8MD)
 }
 }

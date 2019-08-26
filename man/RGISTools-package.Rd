@@ -3,7 +3,7 @@
 \docType{package}
 \name{RGISTools-package}
 \alias{RGISTools-package}
-\title{`RGISTools': Tools for Handling Multiplatform Satellite Images}
+\title{`RGISTools': Handling multiplatform satellite images.}
 \description{
 This package enables you downloading, customizing, and processing time series
 of satellite images from Landsat, MODIS and Sentinel in a standardized way.

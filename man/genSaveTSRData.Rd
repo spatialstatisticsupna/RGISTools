@@ -28,7 +28,7 @@ extent of the \code{RasterStack} to embrace the extents of all GTiff images.}
 searching for GTiff images.}
 }
 \value{
-this function does not return anything.
+if \code{AppRoot} is not asigned a \code{RasterStack} with the time series in src folder.
 }
 \description{
 \code{genSaveTSRData} imports a time series of images from a folder (GTiff
@@ -39,7 +39,7 @@ The function reads all the images inside the folder specified in \code{src}.
 Images files must be GTiffs. The \code{src} can take the path created by
 other functions of this package, such as \code{\link{senMosaic}},
 \code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are
-imported into `R' to build a \code{RasterStack} in the global environment. The
+imported into `R' to build a \code{RasterStack}. The
 name of the \code{RasterStack} is specified in \code{ts.name}. The
 \code{RasterStack} is saved in an RData file in the \code{AppRoot} directory.
 }
