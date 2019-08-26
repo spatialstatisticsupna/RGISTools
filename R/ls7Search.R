@@ -94,15 +94,14 @@ ls7Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
   arg<-list(...)
   
   AppRoot<-pathWinLx(AppRoot)
-  if(!ls7IsMetaData()|endDate>as.Date(Sys.time())|getRGISToolsOpt("LS7META.var")%in%ls(all.names=TRUE)){
+  if(!ls7IsMetaData()){
     message("MetaData not loaded! loading...")
     ls7LoadMetadata(AppRoot=AppRoot,update=FALSE,...)
   }
-   # now it can be found
-  #first filter by date
-  LS7MD<-get(getRGISToolsOpt("LS7META.var"), envir=globalenv())[as.Date(get(getRGISToolsOpt("LS7META.var"), envir=globalenv())$acquisitionDate)>=startDate&
-                                                                as.Date(get(getRGISToolsOpt("LS7META.var"), envir=globalenv())$acquisitionDate)<=endDate,]
-
+  LS7MD<-getRGISToolsOpt("LS7METADATA")
+  LS7MD<-LS7MD[as.Date(LS7MD$acquisitionDate)>=startDate&
+               as.Date(LS7MD$acquisitionDate)<=endDate,]
+  
   #filter by position
   #pathrow list(c(path1,row1),c(path2,row2)...)
   #extent in latlog

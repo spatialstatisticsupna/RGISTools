@@ -24,7 +24,7 @@
 #' @param ... arguments for nested functions.
 #'
 #' @return this function does not return anything, but loads the “.LS7MD” 
-#' \code{data.frame} on your working directory.
+#' \code{data.frame} on the `RGISTools' package.
 #'
 #' @examples
 #' \dontrun{
@@ -34,9 +34,9 @@
 #' # update the metadata file
 #' ls7LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"), update = TRUE)
 #' 
-#' # if .LS7MD is already loaded you can see print its data
-#' ls(all.names = TRUE)
-#' head(.LS7MD)
+#' # get metadata data frame 
+#' LS7MD <- getRGISToolsOpt("LS7METADATA")
+#' head(LS7MD)
 #' }
 ls7LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=TRUE,...){
   stopifnot(class(update)=="logical")
@@ -83,8 +83,8 @@ ls7LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=TRUE,.
       .LS7MD$cartURL<-as.character(.LS7MD$cartURL)
 
       save(file = mdRdata,list=c(getRGISToolsOpt("LS7META.var")))
-      #assign(getRGISToolsOpt("LS7META.var"), .LS7MD,envir = globalenv())#as global variable
-      .LS7MD<<-.LS7MD
+      setRGISToolsOpt("LS7METADATA", .LS7MD)
+      
       et<-Sys.time()
 
       message(paste0("MetaData downloaded and saved on HDD for future queries. \nElapsed time: ",et-st," minutes.\nFile Saved in ",mdRdata))
@@ -93,10 +93,11 @@ ls7LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=TRUE,.
     }
   }else{
     message("MetaData Rdata found! loading...")
-    load(mdRdata,envir=globalenv())
+    load(mdRdata)
+    setRGISToolsOpt("LS7METADATA", .LS7MD)
   }
 }
 
 ls7IsMetaData<-function(){
-  return(getRGISToolsOpt("LS7META.var")%in%ls(all.names = TRUE,envir=globalenv()))
+  return(!is.null(getRGISToolsOpt("LS7METADATA")))
 }

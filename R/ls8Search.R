@@ -87,14 +87,16 @@ ls8Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
     stop("There is no Landsat-8 Images before 13-03-2013.")
   arg<-list(...)
   AppRoot<-pathWinLx(AppRoot)
-  if(!ls8IsMetaData()|endDate>as.Date(Sys.time())|getRGISToolsOpt("LS8META.var")%in%ls(all.names=TRUE)){
+  if(!ls8IsMetaData()){
     message("MetaData not loaded! loading...")
     ls8LoadMetadata(AppRoot=AppRoot,update=FALSE,...)
   }
 
   #first filter by date
-  LS8MD<-get(getRGISToolsOpt("LS8META.var"), envir=globalenv())[as.Date(get(getRGISToolsOpt("LS8META.var"), envir=globalenv())$acquisitionDate)>=startDate&
-                                                                as.Date(get(getRGISToolsOpt("LS8META.var"), envir=globalenv())$acquisitionDate)<=endDate,]
+  LS8MD<-getRGISToolsOpt("LS8METADATA")
+  LS8MD<-getRGISToolsOpt("LS8METADATA")[as.Date(LS8MD$acquisitionDate)>=startDate&
+                                        as.Date(LS8MD$acquisitionDate)<=endDate,]
+  
 
   #filter by position
   #pathrow list(c(path1,row1),c(path2,row2)...)

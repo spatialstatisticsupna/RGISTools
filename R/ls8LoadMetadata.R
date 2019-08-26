@@ -24,7 +24,7 @@
 #' @param ... arguments for nested functions.
 #'
 #' @return this function does not return anything, but loads the “.LS8MD” 
-#' \code{data.frame} on your working directory.
+#' \code{data.frame} on the `RGISTools' package.
 #'
 #' @examples
 #' \dontrun{
@@ -35,9 +35,9 @@
 #' # update the metadata file
 #' ls8LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"), update = TRUE)
 #' 
-#' # if .LS8MD is already loaded you can see print its data
-#' ls(all.names = TRUE)
-#' head(.LS8MD)
+#' # get metadata data frame 
+#' LS8MD <- getRGISToolsOpt("LS8METADATA")
+#' head(LS8MD)
 #' }
 ls8LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=FALSE,...){
   stopifnot(class(update)=="logical")
@@ -85,8 +85,8 @@ ls8LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=FALSE,
       .LS8MD$cartURL<-as.character(.LS8MD$cartURL)
 
       save(file = mdRdata,list=c(getRGISToolsOpt("LS8META.var")))
-      #assign(getRGISToolsOpt("LS8META.var"), .LS8MD,envir = globalenv())#as global variable
-      .LS8MD<<-.LS8MD
+      setRGISToolsOpt("LS8METADATA", .LS8MD)
+      
       et<-Sys.time()
 
       message(paste0("MetaData downloaded and saved on HDD for future queries. \nElapsed time: ",et-st," minutes.\nFile Saved in ",mdRdata))
@@ -95,12 +95,12 @@ ls8LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=FALSE,
     }
   }else{
     message("MetaData Rdata found! loading...")
-    load(mdRdata,envir=globalenv())
+    load(mdRdata)
+    setRGISToolsOpt("LS8METADATA", .LS8MD)
   }
-
 }
 
 ls8IsMetaData<-function(){
-  return(getRGISToolsOpt("LS8META.var")%in%ls(all.names = TRUE,envir=globalenv()))
+  return(!is.null(getRGISToolsOpt("LS8METADATA")))
 }
 
