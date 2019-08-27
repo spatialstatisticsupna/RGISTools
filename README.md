@@ -128,6 +128,14 @@ can be identified by the prefix "var".
 
 
 # Installation
+## Install from CRAN
+```
+# Install RGISTools package
+install.packages("RGISTools")
+
+# load RGISTools library
+library(RGISTools)
+```
 
 ## Install from GitHub
 ```
