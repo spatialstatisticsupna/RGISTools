@@ -40,7 +40,7 @@ senSearchQuery<-function(...){
     if(!length(arg$lonlat)==2){
       stop("The intersects argument is not a longitude/latitude valid location.")
     }
-    url<-paste0(url," AND footprint:",'"',"intersects(",arg$lonlat[2],", ",arg$lonlat[1],")",'"')
+    url<-paste0(url," AND footprint:",'"',"intersects(",arg$lonlat[1],", ",arg$lonlat[2],")",'"')
   }
   if("product"%in%names(arg)){
     if(arg$verbose){
