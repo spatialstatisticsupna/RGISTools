@@ -17,9 +17,13 @@ as.Date<-function(x,...){
   }
 }
 pathWinLx<-function(str){
-  if(substr(str,1,2)=="\\"){
-    return(paste0("\\",gsub("\\","/",substr(str,3,nchar(str)),fixed = TRUE)))
-  }else{
-    return(gsub("\\","/",str,fixed = TRUE))
+  res<-c()
+  for(str1 in str){
+    if(substr(str1,1,2)=="\\"){
+      res<-c(res,paste0("\\",gsub("\\","/",substr(str1,3,nchar(str1)),fixed = TRUE)))
+    }else{
+      res<-c(res,gsub("\\","/",str1,fixed = TRUE))
+    }
   }
+  return(res)
 }
