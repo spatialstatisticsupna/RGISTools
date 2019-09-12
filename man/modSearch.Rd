@@ -40,7 +40,7 @@ running steps and warnings.}
 \description{
 \code{modSearch} searches MODIS images in the 
 \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository}
-(CMR) concerning a particular location and date interval. The function returns an 
+(CMR) concerning a particular location and date interval. The function returns a 
 \code{character} vector with the names of the images and their uniform resource
 locators (URLs)
 }
