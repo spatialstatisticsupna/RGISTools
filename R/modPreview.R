@@ -27,16 +27,25 @@
 #'                       resType = "browseurl",
 #'                       extent = ex.navarre)
 #'                       
-#' modPreview(searchres, 1)
-#' modPreview(searchres, 1, size = 600)
+#' modPreview(searchres,1)
+#' modPreview(searchres,2,add.Layer=T)
 #' }
-modPreview<-function(searchres,n,size=NULL){
+modPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,showWarnings = FALSE,...){
   ser<-searchres[n]
   tmp <- tempfile()
   download.file(ser,tmp,mode="wb")
-  pic<-image_read(tmp)
-  pic <- image_resize(pic, size)
-  print(pic)
-  file.remove(tmp)
-  message(paste0("Printing the image ",basename(ser),"."))
+  pic<-stack(tmp)
+
+  pr<-modGetPathRow(ser)
+  ho<-as.numeric(substr(pr,2,3))
+  ve<-as.numeric(substr(pr,5,6))
+  
+  extent(pic)<-extent(mod.tiles[mod.tiles$Name==paste0("h:",ho," v:",ve),])
+  proj4string(pic)<-'+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
+  
+  if(showWarnings){
+    return(genMapViewSession(pic,lpos,lname=paste0("MOD_",ho,"_",ve,"_D",format(modGetDates(ser),"%Y%j")),add.Layer=add.Layer,...))
+  }else{
+    return(suppressWarnings(genMapViewSession(pic,lpos,lname=paste0("MOD_",ho,"_",ve,"_D",format(modGetDates(ser),"%Y%j")),add.Layer=add.Layer,...)))
+  }
 }

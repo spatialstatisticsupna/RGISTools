@@ -34,13 +34,27 @@
 #' lsPreview(search_cloudFree, 1)
 #' lsPreview(search_cloudFree, 2)
 #' }
-lsPreview<-function(searchres,n,size=NULL){
+lsPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,showWarnings = FALSE,...){
   ser<-searchres[n,]
   tmp <- tempfile()
-  download.file(ser$browseURL,tmp,mode="wb")
-  pic<-image_read(tmp)
-  pic <- image_resize(pic, size)
-  print(pic)
-  file.remove(tmp)
-  message(ser[c("acquisitionDate","sceneID","cloudCover","path","row")])
+  if(showWarnings){
+    download.file(ser$browseURL,tmp,mode="wb")
+  }else{
+    suppressWarnings(download.file(ser$browseURL,tmp,mode="wb"))
+  }
+  
+  r<-stack(tmp)
+  lat<-unlist(ser[grepl("Latitude",names(ser))])
+  lon<-unlist(ser[grepl("Longitude",names(ser))])
+  extent(r)<-extent(min(lon),max(lon),min(lat),max(lat))
+  proj4string(r)<-'+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
+  
+  if(showWarnings){
+    return(genMapViewSession(r,lpos,lname=paste0("LS_",ser["path"],ser["row"],"_D",format(ser["acquisitionDate"],"%Y%j")),add.Layer=add.Layer,...))
+  }else{
+    return(suppressWarnings(genMapViewSession(r,lpos,lname=paste0("LS_",ser["path"],ser["row"],"_D",format(ser["acquisitionDate"],"%Y%j")),add.Layer=add.Layer,...)))
+  }
 }
+
+
+

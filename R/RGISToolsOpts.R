@@ -54,13 +54,16 @@ assign("SENUNZIPEXT",".zip", env=optEnv)
 #bands
 assign("LS7BANDS",c(blue='B1',green='B2',red='B3',nir='B4',swir1='B5',tirs1='B6_VCID_1',tirs2='B6_VCID_2',swir2='B7',panchromatic='B8',quality='BQA',cloud="CLD"), env=optEnv)
 assign("LS8BANDS",c(bluecoastal='B1',blue='B2',green='B3',red='B4',nir='B5',swir1='B6',swir2='B7',panchromatic='B8',cirrus='B9',tirs1='B10',tirs2='B11',quality='BQA',cloud="CLD"), env=optEnv)
-assign("MOD09BANDS",c(red='B01_1',nir='B02_1',blue='B03_1',green='B04_1',tirs1='B05_1',swir1='B06_1',swir2='B07_1',quality='QC'), env=optEnv)
+assign("MOD09BANDS",c(red='B01_1',nir='B02_1',blue='B03_1',green='B04_1',tirs1='B05_1',swir1='B06_1',swir2='B07_1',quality='_state_1km_1',cloud="CLD"), env=optEnv)
 
 assign("SEN1BANDS",NULL, env=optEnv)
 #https://www.spectralcam.com/2019/02/12/maia-s2-and-sentinel-2-multispectral-images-for-agriculture/
 assign("SEN2BANDS",c(bluecoastal='B01',blue='B02',green='B03',red='B04',vegrededge="B05",vegrededge1="B06",vegrededge2="B07",nir='B08',narrownir='B8A',watervapour="B09",cirrus="B10",swir1='B11',swir2='B12',cloud='CLD',snow='SNW',rgb="TCI",preview='PVI',watervap='WVP'), env=optEnv)
 assign("SEN3BANDS",NULL, env=optEnv)
 
+
+#global mapview
+assign("GMapView",NULL, env=optEnv)
 
 #scale functions
 assign("MOD09SCL",function(r,sc=1/16000){((r+100)*sc)}, env=optEnv)

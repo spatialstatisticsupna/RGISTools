@@ -36,10 +36,8 @@
 #' # show the dates in julian days
 #' senGetDates(names(searchres),format="%Y%j")
 #' }
-senPreview<-function(searchres,username,password,n,size=NULL){
+senPreview<-function(searchres,username,password,n,lpos=c(3,2,1),add.Layer=FALSE,showWarnings = FALSE,...){
   ser<-searchres[n]
-  ser<-gsub('$value',"Products('Quicklook')/$value",ser,	fixed = TRUE)
-  tmp <- tempfile()
   c.handle = new_handle()
   handle_setopt(c.handle,
                 referer=getRGISToolsOpt("SCIHUBHUSURL"),
@@ -48,11 +46,28 @@ senPreview<-function(searchres,username,password,n,size=NULL){
                 autoreferer = TRUE ,
                 username=username,
                 password=password)
+  bonquery<-gsub('/$value',"",ser,	fixed = TRUE)
+  res<-curl(bonquery,handle = c.handle)
+  html<-suppressWarnings(readLines(res))
+  html<-html[grepl("coordinates",html)]
+  html<-gsub("&lt;/gml:coordinates>","",html,fixed = T)
+  html<-gsub("&lt;gml:coordinates>","",html,fixed = T)
+  coor<-na.omit(as.numeric(unlist(lapply(unlist(strsplit(html,",")),strsplit," "))))
+  lat<-coor[seq(1,length(coor),2)]
+  lon<-coor[seq(2,length(coor),2)]
+  
+  ser<-gsub('$value',"Products('Quicklook')/$value",ser,	fixed = TRUE)
+  tmp <- tempfile()
+  
   image.url<-URLencode(ser)
   curl_download(image.url, destfile=tmp,handle = c.handle)
-  pic <- image_read(tmp)
-  pic <- image_resize(pic, size)
-  print(pic)
-  file.remove(tmp)
-  message(paste0("Printing the image ",names(ser),"."))
+  r<-stack(tmp)
+  extent(r)<-extent(min(lon),max(lon),min(lat),max(lat))
+  proj4string(r)<-'+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
+  
+  if(showWarnings){
+    return(genMapViewSession(r,lpos,lname=paste0("SEN_",senGetTile(names(ser)),"_D",format(senGetDates(names(ser)),"%Y%j")),add.Layer=add.Layer,...))
+  }else{
+    return(suppressWarnings(genMapViewSession(r,lpos,lname=paste0("SEN_",senGetTile(names(ser)),"_D",format(senGetDates(names(ser)),"%Y%j")),add.Layer=add.Layer,...)))
+  }
 }
