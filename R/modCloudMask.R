@@ -84,40 +84,41 @@
 #' # plot the cloud free b01 layer
 #' spplot(navarre.b01.stack*cmask.stack)
 #' }
-modCloudMask<-function(startDate,endDate,AppRoot,extent,out.name="outname",raw.rm=FALSE,overwrite=FALSE,verbose=FALSE,...){
-  arg <- list(...)
+modCloudMask<-function(src,AppRoot,overwrite=FALSE,...){
+  arg<-list(...)
+  src<-pathWinLx(src)
   AppRoot<-pathWinLx(AppRoot)
-  AppRoot <- file.path(AppRoot,"Modis","CloudMask")
-  modDownloadAtmosphere(startDate=startDate,
-                        endDate=endDate,
-                        extent=extent,
-                        product = "MOD35_L2",
-                        bFilter=c("Cloud_Mask"),
-                        rm.band=c("SPI"),
-                        s_srs=CRS("+init=epsg:4326"),
-                        AppRoot=AppRoot,
-                        verbose=verbose
-  )
-  
-  tif.dir<-file.path(AppRoot,"tif")
-  modMosaic(src=tif.dir,
-            extent = extent,
-            gutils = TRUE,
-            AppRoot=AppRoot,
-            verbose=verbose)
-  
-  tif.images<-list.files(file.path(AppRoot,"outfile"),recursive = TRUE,full.names = TRUE,pattern = "\\.tif$")
-  dir.create(file.path(AppRoot,out.name),recursive=TRUE,showWarnings = verbose)
-  for(i in tif.images){
-    out.file<-file.path(AppRoot,out.name,gsub("__","_",basename(i)))
-    if((!file.exists(out.file))||overwrite){
-      cimg<-stack(i)
-      cimg[[5]][!is.na(cimg[[5]])]<-1
-      cimg[[6]][!is.na(cimg[[6]])]<-1
-      cldmask<-cimg[[5]]*cimg[[6]]
-      writeRaster(cldmask,out.file,overwrite=overwrite)
+  imgdir.list<-list.dirs(src,recursive=FALSE)
+  AppRoot<-file.path(AppRoot,"CloudMask")
+  dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
+  for(id in imgdir.list){
+    out.img<-file.path(AppRoot,paste0(basename(id),paste0("_",getRGISToolsOpt("MOD09BANDS")["cloud"],".tif")))
+    if(!file.exists(out.img)|overwrite){
+      #id<-imgdir.list[1]
+      message(paste0("Creating cloud mask of date ",genGetDates(basename(id)),"."))
+      tif.list<-list.files(id,pattern = "\\.tif$",full.names = TRUE)
+      cloudmask<-tif.list[grepl(getRGISToolsOpt("MOD09BANDS")["quality"],tif.list)]
+      
+      r <- raster(cloudmask)
+      stime<-Sys.time()
+      v <- matrix(as.numeric(matrix(intToBits(getValues(r)), ncol = 32, byrow = T)[,1:3]),ncol = 3)
+      
+      # clouds
+      # interpret the bytes: 0 = clear, 1+1 = not known, assumed clear
+      r[] <- rowSums(v[,1:2])
+      r[r==1] <- NA
+      r[r!=1] <- 1
+      #r[(r == 0 | r == 2)] <- 1
+      # shadows
+      # interpret the bytes: 0 = clear, 1 = shadow
+      r_shadow <- r
+      r_shadow <- 1 - v[,3]
+      r_shadow[r_shadow == 0] <- NA
+      # save the result
+      ras.cloud <- r * r_shadow
+      writeRaster(ras.cloud,out.img,overwrite=overwrite)
+    }else{
+      message(paste0("Cloud mask of date ",genGetDates(basename(id))," already exists."))
     }
   }
-  if(raw.rm){unlink(file.path(AppRoot,"outfile"),recursive=TRUE)}
-  message(paste0("Clouds masks saved in:",AppRoot))
 }
