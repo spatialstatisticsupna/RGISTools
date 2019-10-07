@@ -9,9 +9,11 @@ export(genCompositions,genSmoothingCovIMA,genFilterStack,
        getRGISToolsOpt,showRGISToolsOpt,senDownload,senDownSearch,senGetTile,senGetOrbit,
        senFolderToVar,senSearch,senMosaic,senPreview,varEVI,varMSAVI2,varNBR,
        varNBR2,varNDMI,varNDVI,varNDWI,varRGB,varSAVI,lsCloudMask,senCloudMask,modCloudMask,
-       lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders)
+       lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders,genClearMapView)
 import("raster","curl", "rjson","rvest", "urltools","tools",
-       "fields", "gdalUtils", "magick")
+       "fields", "gdalUtils","sf")
+importFrom("mapview","viewRGB")
+importFrom("leafem","addLogo","addHomeButton")
 importFrom("methods", "formalArgs")
 importFrom("httr","POST","authenticate")
 importFrom("sp","bbox","layout.scale.bar","layout.north.arrow",
