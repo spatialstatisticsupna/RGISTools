@@ -26,19 +26,26 @@
 #' # plot limited data
 #' spplot(stack(r, r2 ,r3))
 genLimitRasterRange<-function(r,mx=NULL,mn=NULL,rm.values=FALSE){
+  message("Function deprecated, use 'clamp' from 'raster' package")
   stopifnot(!(is.null(mx)&is.null(mn)))
   if(rm.values){
-    mx.val<-NA
-    mn.val<-NA
+    r<-clamp(r,lower=mn,upper=mx)
+    #mx.val<-NA
+    #mn.val<-NA
   }else{
-    mx.val<-mx
-    mn.val<-mn
+    r<-clamp(r,lower=mn,upper=mx,useValues=FALSE)
+    #mx.val<-mx
+    #mn.val<-mn
   }
-  if(!is.null(mx)){
-    r[r>mx]<-mx.val
-  }
-  if(!is.null(mn)){
-    r[r<mn]<-mn.val
-  }
+  # if(!is.null(mx)){
+  #   #r<-calc(r,fun = function(x,mx.val=mx.val){x[x>mx.val]<-mx.val;return(x)})
+  #   
+  #    
+  #   #r[r>mx]<-mx.val
+  # }
+  # if(!is.null(mn)){
+  #   r<-calc(r,fun = function(x,mn.val){x[x>mn.val]<-mn.val;return(x)},mn.val=mn)
+  #   #r[r<mn]<-mn.val
+  # }
   return(r)
 }
