@@ -13,7 +13,7 @@
 #' masking eliminates cloud reflectance that would otherwise be erroneously 
 #' attributed to land surface features. Cloud removal and (measurement or 
 #' processing) errors trigger data gaps and outliers, decreasing the quality and
-#' quantity of measurements. Hence, the package includes a set of function for
+#' quantity of measurements. Hence, the package includes a set of functions for
 #' filling and smoothing the satellite imagery. The combination of functions in
 #' `RGISTools' results in a stack of satellite images ready-to-use. Due to the
 #' wide variety of procedures and sources of information being handled in 
