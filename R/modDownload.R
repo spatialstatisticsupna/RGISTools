@@ -1,10 +1,10 @@
 #' Search and download MODIS images
 #'
-#' \code{modDownload} searches and downloads MODIS images concerning a particular
+#' \code{modDownSearch} searches and downloads MODIS images concerning a particular
 #' location and time interval from the `EarthData' repository. Images are
 #' saved as GTiff files in the \code{AppRoot} directory.
 #'
-#' \code{modDownload} uses the 
+#' \code{modDownSearch} uses the 
 #' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA’s Common Metadata Repository}
 #' to search and the
 #' \href{https://earthdata.nasa.gov/}{`EarthData' web service}
@@ -53,15 +53,15 @@
 #' data(ex.navarre)
 #' src <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' print(src)
-#' modDownload(product = "MOD09GA",
-#'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
-#'             endDate = as.Date("03-01-2018", "%d-%m-%Y"),
-#'             username = "username",
-#'             password = "password",
-#'             AppRoot = src,
-#'             extract.tif = TRUE,
-#'             collection = 6,
-#'             extent = ex.navarre)
+#' modDownSearch(product = "MOD09GA",
+#'               startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'               endDate = as.Date("03-01-2018", "%d-%m-%Y"),
+#'               username = "username",
+#'               password = "password",
+#'               AppRoot = src,
+#'               extract.tif = TRUE,
+#'               collection = 6,
+#'               extent = ex.navarre)
 #' tif.src <- file.path(src,"Modis","MOD09GA","tif")
 #' files <- list.files(tif.src,
 #'                     pattern = "\\.tif$",
@@ -75,7 +75,7 @@
 #'                  qrange)
 #' plotRGB(imagen)
 #'}
-modDownload<-function(product,
+modDownSearch<-function(product,
                      startDate,
                      endDate,
                      username,
@@ -121,7 +121,7 @@ modDownload<-function(product,
 recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,nattempts,extract.tif,natps,...){
   tryCatch(
     {
-      modDownSearch(s,username,password,AppRoot=downdir)
+      modDownload(s,username,password,AppRoot=downdir)
       if(extract.tif){
         if(verbose){message(paste0("Extracting ",file.path(downdir,basename(s))," to dir ",tiffdir))}
         modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose,...)

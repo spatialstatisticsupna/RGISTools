@@ -47,15 +47,15 @@
 #' src <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' print(src)
 #' # download MODIS images
-#' modDownload(product = "MOD09GA",
-#'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
-#'             endDate = as.Date("03-01-2018", "%d-%m-%Y"),
-#'             username = "username",
-#'             password = "password",
-#'             AppRoot = src,
-#'             extract.tif = TRUE,
-#'             collection = 6,
-#'             extent = ex.navarre)
+#' modDownSearch(product = "MOD09GA",
+#'               startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'               endDate = as.Date("03-01-2018", "%d-%m-%Y"),
+#'               username = "username",
+#'               password = "password",
+#'               AppRoot = src,
+#'               extract.tif = TRUE,
+#'               collection = 6,
+#'               extent = ex.navarre)
 #' # folder with the MODIS images extracted 
 #' src.mod <- file.path(src, "Modis", "MOD09GA")
 #' tif.src <- file.path(src.mod, "tif")

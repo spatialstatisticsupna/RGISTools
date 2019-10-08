@@ -34,7 +34,7 @@
 #' 
 #' # search and download images from MODIS between
 #' # 01-01-2018 and 03-01-2018 for the region of Navarre
-#' modDownload(product = "MOD09GA",
+#' modDownSearch(product = "MOD09GA",
 #'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'             endDate = as.Date("03-01-2018", "%d-%m-%Y"),
 #'             username = "username",

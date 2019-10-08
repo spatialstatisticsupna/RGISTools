@@ -34,7 +34,7 @@
 #' src <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' print(src)
 #' # download the images
-#' modDownload(product = "MOD09GA",
+#' modDownSearch(product = "MOD09GA",
 #'             startDate = as.Date("30-07-2018", "%d-%m-%Y"),
 #'             endDate = as.Date("06-08-2018", "%d-%m-%Y"),
 #'             username = "username",
