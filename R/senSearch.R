@@ -88,14 +88,24 @@ senSearch<-function(username,
   if(as.integer(json$feed$`opensearch:totalResults`)>0){
     imgNames<-c()
     imgURL<-c()
-    for(i in json$feed$entry){
+    print(json$feed)
+    if(as.integer(json$feed$`opensearch:totalResults`)==1){
       if(arg$verbose){
-        message(paste0("Image result ",cont," Name:",i$title))
-        message(paste0("Image result ",cont," Url:",i$link[[1]]$href))#each entry have 3 links: 1-image link, 2-meta data link, 3-quicklook mini image
+        message(paste0("Image result ",cont," Name:",json$feed$entry$title))
+        message(paste0("Image result ",cont," Url:",json$feed$entry$link[[1]]$href))#each entry have 3 links: 1-image link, 2-meta data link, 3-quicklook mini image
       }
-      imgNames<-c(imgNames,i$title)
-      imgURL<-c(imgURL,i$link[[1]]$href)
-      cont<-cont+1
+      imgNames<-c(imgNames,json$feed$entry$title)
+      imgURL<-c(imgURL,json$feed$entry$link[[1]]$href)
+    }else{
+      for(i in json$feed$entry){
+        if(arg$verbose){
+          message(paste0("Image result ",cont," Name:",i$title))
+          message(paste0("Image result ",cont," Url:",i$link[[1]]$href))#each entry have 3 links: 1-image link, 2-meta data link, 3-quicklook mini image
+        }
+        imgNames<-c(imgNames,i$title)
+        imgURL<-c(imgURL,i$link[[1]]$href)
+        cont<-cont+1
+      }
     }
     if(arg$verbose)
       message(paste0("Results added to the list: ",cont))

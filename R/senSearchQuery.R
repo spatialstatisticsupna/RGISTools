@@ -54,6 +54,12 @@ senSearchQuery<-function(...){
     }
     url<-paste0(url," AND relativeorbitnumber:",arg$relativeorbit)
   }
+  if("cloudCover"%in%names(arg)){
+    if(arg$verbose){
+      message("Added cloud cover percentage.")
+    }
+    url<-paste0(url," AND cloudcoverpercentage:[",min(arg$cloudCover)," TO ",max(arg$cloudCover),"]")
+  }
   if("qformat"%in%names(arg)){
     url<-paste0(url,"&format=",arg$qformat)
   }else{
