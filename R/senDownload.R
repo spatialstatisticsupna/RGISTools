@@ -1,10 +1,10 @@
 #' Search and download Sentinel images
 #'
-#' \code{senDownload} searches and downloads Sentinel images concerning a
+#' \code{senDownSearch} searches and downloads Sentinel images concerning a
 #' particular location and time interval from `SciHub's' repository.  
 #' 
-#' \code{senDonwload} is a wrapper function of \code{\link{senSearch}} and 
-#' \code{\link{senDownSearch}} to search and download images in a single step.
+#' \code{senDownSearch} is a wrapper function of \code{\link{senSearch}} and 
+#' \code{\link{senDownload}} to search and download images in a single step.
 #' The function requires ESA’s `SciHub' credentials, which can be obtained
 #' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 #'
@@ -61,11 +61,11 @@
 #' rgb <- stack(files[1])
 #' plotRGB(rgb)
 #' }
-senDownload<-function(username,
-                      password,
-                      AppRoot,
-                      verbose=FALSE,
-                      ...){
+senDownSearch<-function(username,
+                        password,
+                        AppRoot,
+                        verbose=FALSE,
+                        ...){
   arg<-list(...)
   if("platform"%in%names(arg)){
     AppRoot<-file.path(AppRoot,arg$platform)
@@ -94,7 +94,7 @@ senDownload<-function(username,
   message(paste0(length(senURL)," tiles found! Starting the download process..."))
   
   if(length(senURL)==0){stop("There are not images for downloading.")}
-  senDownSearch(searchres=senURL,
+  senDownload(searchres=senURL,
                 username=username,
                 password=password,
                 AppRoot=AppRoot,
