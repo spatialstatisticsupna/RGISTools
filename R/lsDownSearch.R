@@ -1,6 +1,6 @@
 #' Download Landsat-7 or Landsat-8 images from a search list
 #'
-#' \code{lsDownSearch} downloads the results from \code{\link{ls7Search}} and
+#' \code{lsDownload} downloads the results from \code{\link{ls7Search}} and
 #' \code{\link{ls8Search}} functions. The images are saved as GTiff files in the
 #' \code{AppRoot} directory.
 #'
@@ -9,7 +9,7 @@
 #' `EarthExplorer' account, which can be obtained 
 #' \href{https://ers.cr.usgs.gov/register/}{here}.
 #' 
-#' The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDownSearch}
+#' The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDownload}
 #' decompresses the images and obtains the corresponding GTiffs. The GTiff files
 #' are saved in the \code{AppRoot} directory. To change this option, provide
 #' \code{AppRoot = “full path”}. When \code{untar = TRUE}, the function
@@ -53,23 +53,23 @@
 #'                         AppRoot = src)
 #'
 #' # download 1 image
-#' lsDownSearch(searchres = search.res[1,], 
-#'              username = "user", 
-#'              password = "pass", 
-#'              AppRoot = src,
-#'              untar = TRUE)
+#' lsDownload(searchres = search.res[1,], 
+#'            username = "user", 
+#'            password = "pass", 
+#'            AppRoot = src,
+#'            untar = TRUE)
 #' # download 4 images
-#' lsDownSearch(searchres = search.res[1:4,], 
-#'              username = "user", 
-#'              password = "pass",
-#'              AppRoot = src, 
-#'              untar = TRUE)
+#' lsDownload(searchres = search.res[1:4,], 
+#'            username = "user", 
+#'            password = "pass",
+#'            AppRoot = src, 
+#'            untar = TRUE)
 #' # download all the images
-#' lsDownSearch(searchres = search.res, 
-#'              username = "user", 
-#'              password = "pass",
-#'              AppRoot = src,
-#'              untar = TRUE)
+#' lsDownload(searchres = search.res, 
+#'            username = "user", 
+#'            password = "pass",
+#'            AppRoot = src,
+#'            untar = TRUE)
 #'
 #' # search and download the images from Landsat-7 between
 #' # 2011 and 2013 in the region of Navarre
@@ -81,23 +81,23 @@
 #'                         browseAvaliable = "Y",
 #'                         AppRoot = src)
 #' # download 1 image
-#' lsDownSearch(searchres = search.res[1,], 
-#'              username = "user", 
-#'              password = "pass", 
-#'              untar = TRUE,
-#'              AppRoot = src)
+#' lsDownload(searchres = search.res[1,], 
+#'            username = "user", 
+#'            password = "pass", 
+#'            untar = TRUE,
+#'            AppRoot = src)
 #' # download 4 images
-#' lsDownSearch(searchres = search.res[1:4,], 
-#'              username = "user", 
-#'              password = "pass", 
-#'              untar = TRUE, 
-#'              AppRoot = src)
+#' lsDownload(searchres = search.res[1:4,], 
+#'            username = "user", 
+#'            password = "pass", 
+#'            untar = TRUE, 
+#'            AppRoot = src)
 #' # download all the images
-#' lsDownSearch(searchres = search.res, 
-#'              username = "user", 
-#'              password = "pass", 
-#'              untar = TRUE, 
-#'              AppRoot = src)
+#' lsDownload(searchres = search.res, 
+#'            username = "user", 
+#'            password = "pass", 
+#'            untar = TRUE, 
+#'            AppRoot = src)
 #' 
 #' # removes the metadata to free memory space
 #' lsRemoveMetadata()
@@ -116,18 +116,18 @@
 #'                  qrange)
 #' plotRGB(imagen)
 #' }
-lsDownSearch<-function(searchres,
-                       username=NULL,
-                       password=NULL,
-                       AppRoot,
-                       lvl=1,
-                       product=c("sr","source_metadata"),
-                       verbose=FALSE,
-                       raw.rm=FALSE,
-                       untar=FALSE,
-                       overwrite=FALSE,
-                       nattempts=5,
-                       ...){
+lsDownload<-function(searchres,
+                     username=NULL,
+                     password=NULL,
+                     AppRoot,
+                     lvl=1,
+                     product=c("sr","source_metadata"),
+                     verbose=FALSE,
+                     raw.rm=FALSE,
+                     untar=FALSE,
+                     overwrite=FALSE,
+                     nattempts=5,
+                     ...){
   stopifnot(class(searchres)=="data.frame")
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")

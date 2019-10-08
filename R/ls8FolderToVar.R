@@ -38,14 +38,14 @@
 #' src <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' print(src)
 #' # download Landsat-8 images
-#' lsDownload(satellite = "ls8",
-#'            username = "username",
-#'            password = "password",
-#'            startDate = as.Date("01-01-2018","%d-%m-%Y"),
-#'            endDate = as.Date("18-01-2018","%d-%m-%Y"),
-#'            pathrow = list(c(200, 31), c(200, 30)),
-#'            untar = TRUE,
-#'            AppRoot = src)
+#' lsDownSearch(satellite = "ls8",
+#'              username = "username",
+#'              password = "password",
+#'              startDate = as.Date("01-01-2018","%d-%m-%Y"),
+#'              endDate = as.Date("18-01-2018","%d-%m-%Y"),
+#'              pathrow = list(c(200, 31), c(200, 30)),
+#'              untar = TRUE,
+#'              AppRoot = src)
 #' # folder with the Landsat-8 untared images
 #' src.ls8 <-file.path(src,"Landsat8")
 #' tif.src <- file.path(src.ls8, "untar")

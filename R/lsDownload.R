@@ -1,17 +1,17 @@
 #' Search and download Landsat-7 or Landsat-8 images
 #'
-#' \code{lsDonwload} searches and downloads Landsat-7 or Landsat-8 images
+#' \code{lsDownSearch} searches and downloads Landsat-7 or Landsat-8 images
 #' concerning a particular location and time interval from the 
 #' \href{https://earthexplorer.usgs.gov/}{`EarthExplorer' repository}.
 #' Images are saved as GTiff files in the \code{AppRoot} directory.
 #'
-#' \code{lsDonwload} is a wrapper function of \code{\link{ls7Search}}, 
-#' \code{\link{ls8Search}}, and \code{\link{lsDownSearch}} to search and
+#' \code{lsDownSearch} is a wrapper function of \code{\link{ls7Search}}, 
+#' \code{\link{ls8Search}}, and \code{\link{lsDownload}} to search and
 #' download images in a single step. The function requires USGS's `EarthExplorer'
 #' credentials, which can be obtained
 #' \href{https://ers.cr.usgs.gov/register/}{here}.
 #' 
-#' The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDonwload}
+#' The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDownSearch}
 #' decompresses the images and obtains the corresponding GTiffs. The GTiffs are
 #' saved in the \code{AppRoot} directory. To change this option, provide 
 #' \code{AppRoot = “full path”}. When the \code{untarDir} argument is defined,
@@ -38,7 +38,7 @@
 #' @param ... argumetns for nested functions:
 #'  \itemize{
 #'   \item any argument for \code{\link{ls8Search}}/\code{\link{ls7Search}} or 
-#'   \code{\link{lsDownSearch}}.
+#'   \code{\link{lsDownload}}.
 #' }
 #'
 #' @return this function does not return anything. It saves the imagery as
@@ -54,18 +54,18 @@
 #' print(src)
 #' # search and download the images from Landsat-8 between
 #' # 01-01-2018 and 20-01-2018 for the region of Navarre
-#' lsDownload(satellite = "ls8",
-#'            username = "username",
-#'            password = "password",
-#'            startDate = as.Date("01-01-2018", "%d-%m-%Y"),
-#'            endDate = as.Date("20-01-2018", "%d-%m-%Y"),
-#'            extent = ex.navarre,
-#'            AppRoot = src)
+#' lsDownSearch(satellite = "ls8",
+#'              username = "username",
+#'              password = "password",
+#'              startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'              endDate = as.Date("20-01-2018", "%d-%m-%Y"),
+#'              extent = ex.navarre,
+#'              AppRoot = src)
 #'            
 #' # remove metadata to free memory space
 #' lsRemoveMetadata()
 #' }
-lsDownload<-function(satellite,
+lsDownSearch<-function(satellite,
                      startDate,
                      endDate,
                      username,
@@ -98,13 +98,13 @@ lsDownload<-function(satellite,
     message("Search result:")
     message(searchres)
   }
-  lsDownSearch(searchres=searchres,
-               username=username,
-               password=password,
-               untar=untar,
-               raw.rm=raw.rm,
-               AppRoot=AppRoot,
-               lvl=lvl,
-               product=product,
-               ...)
+  lsDownload(searchres=searchres,
+             username=username,
+             password=password,
+             untar=untar,
+             raw.rm=raw.rm,
+             AppRoot=AppRoot,
+             lvl=lvl,
+             product=product,
+             ...)
 }
