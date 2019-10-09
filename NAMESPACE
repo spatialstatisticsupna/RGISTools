@@ -9,9 +9,10 @@ export(genCompositions,genSmoothingCovIMA,genFilterStack,
        getRGISToolsOpt,showRGISToolsOpt,senDownload,senDownSearch,senGetTile,senGetOrbit,
        senFolderToVar,senSearch,senMosaic,senPreview,varEVI,varMSAVI2,varNBR,
        varNBR2,varNDMI,varNDVI,varNDWI,varRGB,varSAVI,lsCloudMask,senCloudMask,modCloudMask,
-       lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders,genClearMapView)
+       lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders)
 import("raster","curl", "rjson","rvest", "urltools","tools",
-       "fields", "gdalUtils","sf")
+       "fields","sf")
+importFrom("gdalUtils","gdal_translate","gdalwarp","mosaic_rasters")
 importFrom("mapview","viewRGB")
 importFrom("leafem","addLogo","addHomeButton")
 importFrom("methods", "formalArgs")
