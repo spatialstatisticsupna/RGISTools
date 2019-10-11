@@ -40,8 +40,8 @@ modPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,showWarnings = FA
   ho<-as.numeric(substr(pr,2,3))
   ve<-as.numeric(substr(pr,5,6))
   
-  extent(pic)<-extent(mod.tiles[mod.tiles$Name==paste0("h:",ho," v:",ve),])
-  projection(pic)<-'+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
+  extent(pic)<-extent(st_transform(mod.tiles[mod.tiles$Name==paste0("h:",ho," v:",ve),],crs="+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"))
+  projection(pic)<-"+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
   
   if(showWarnings){
     return(genMapViewSession(pic,lpos,lname=paste0("MOD_",ho,"_",ve,"_D",format(modGetDates(ser),"%Y%j")),add.Layer=add.Layer,...))
