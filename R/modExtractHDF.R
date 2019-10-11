@@ -64,8 +64,10 @@ modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NU
       image.name<-gsub(".hdf","",basename(fileHDF))
         dir.create(paste0(AppRoot,"/",image.name),recursive = TRUE,showWarnings = verbose)
         message(paste0("Extracting bands from hdf file of image ",image.name))
-        image.data<-gdalinfo(fileHDF)
-        bands.names<-image.data[grepl(".*SUBDATASET_.*_NAME.*", image.data)]
+        image.data<-unlist(strsplit(gdal_utils(util = "info", 
+                           source =fileHDF,quiet=TRUE),"\n"),
+                           recursive =FALSE)
+        bands.names<-image.data[grepl(".*SUBDATASET_.*_NAME=", image.data)]
         names<-gsub('.*":','',bands.names)
         names<-gsub(':','_',names)
         if(!is.null(bFilter)){
@@ -85,18 +87,22 @@ modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NU
           if((!file.exists(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif")))||overwrite){
             message(paste0("Extract band ",i))
             if("s_srs"%in%names(arg)){
-              gdal_translate(fileHDF,
-                             paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"),
-                             sd_index=i)
-              gdalwarp(srcfile=paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"),
-                       dstfile= paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
-                       s_srs=arg$s_srs)
+              gdal_utils(util = "translate", 
+                        source =gsub(".*SUBDATASET_.*_NAME=","",bands.names[i]),
+                        destination = gsub(" ","_",paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"))
+                        )
+              gdal_utils(util = "warp", 
+                         source =paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"),
+                         destination = paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
+                         options=c("-s_srs",arg$s_srs)
+              )
               file.remove(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"))
             }else{
-              gdal_translate(fileHDF,
-                             paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
-                             sd_index=i,
-                             overwrite=arg$overwrite)
+              gdal_utils(util = "translate", 
+                         source =gsub(".*SUBDATASET_.*_NAME=","",bands.names[i]),
+                         destination = gsub(" ","_",paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif")),
+                         quiet=TRUE
+              )
             }
 
           }else{

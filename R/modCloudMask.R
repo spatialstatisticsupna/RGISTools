@@ -95,7 +95,7 @@ modCloudMask<-function(src,AppRoot,overwrite=FALSE,...){
     out.img<-file.path(AppRoot,paste0(basename(id),paste0("_",getRGISToolsOpt("MOD09BANDS")["cloud"],".tif")))
     if(!file.exists(out.img)|overwrite){
       #id<-imgdir.list[1]
-      message(paste0("Creating cloud mask of date ",genGetDates(basename(id)),"."))
+      message(paste0("Creating cloud mask of date ",modGetDates(basename(id)),"."))
       tif.list<-list.files(id,pattern = "\\.tif$",full.names = TRUE)
       cloudmask<-tif.list[grepl(getRGISToolsOpt("MOD09BANDS")["quality"],tif.list)]
       
@@ -118,7 +118,7 @@ modCloudMask<-function(src,AppRoot,overwrite=FALSE,...){
       ras.cloud <- r * r_shadow
       writeRaster(ras.cloud,out.img,overwrite=overwrite)
     }else{
-      message(paste0("Cloud mask of date ",genGetDates(basename(id))," already exists."))
+      message(paste0("Cloud mask of date ",modGetDates(basename(id))," already exists."))
     }
   }
 }
