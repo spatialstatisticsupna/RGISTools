@@ -4,7 +4,8 @@
 \alias{modPreview}
 \title{Preview MODIS satellite images}
 \usage{
-modPreview(searchres, n, size = NULL)
+modPreview(searchres, n, lpos = c(3, 2, 1), add.Layer = FALSE,
+  showWarnings = FALSE, ...)
 }
 \arguments{
 \item{searchres}{a vector with the results from \code{\link{modSearch}}.}
@@ -38,7 +39,7 @@ searchres <- modSearch(product = "MOD09GA",
                       resType = "browseurl",
                       extent = ex.navarre)
                       
-modPreview(searchres, 1)
-modPreview(searchres, 1, size = 600)
+modPreview(searchres,1)
+modPreview(searchres,2,add.Layer=T)
 }
 }

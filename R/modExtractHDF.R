@@ -111,11 +111,12 @@ modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NU
             }
           }
           if(!is.null(shp)){
-            gdalwarp(srcfile=paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
-                     dstfile=paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_cutted.tif"),
-                     cutline=shp,
-                     crop_to_cutline=TRUE,
-                     overwrite=arg$overwrite)
+            ext=extent(shp)
+            gdal_utils(util = "warp", 
+                       source =paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
+                       destination = paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_cutted.tif"),
+                       options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",proj4string(shp))
+            )
           }
         }
       

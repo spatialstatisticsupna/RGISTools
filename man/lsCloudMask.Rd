@@ -32,7 +32,7 @@ for a new cloud band (CLD) inside the folder of every image.
 \code{lsCloudMask} creates a cloud mask derived from the band for quality
 assurance (BQA) from Landsat-7 or Landsat-8 time series. The function is
 applied to untarred images, such as those resulting from 
-\code{\link{lsDownSearch}} or \code{\link{lsDownload}}. The result is a new
+\code{\link{lsDownload}} or \code{\link{lsDownSearch}}. The result is a new
 image band, called cloud (CLD), that is saved as separate GTiffs.
 }
 \details{
@@ -49,14 +49,14 @@ print(src)
 
 # search and download images from Landsat-8 between
 # 01-01-2018 and 20-01-2018 for the region of Navarre
-lsDownload(satellite = "ls8",
-           username = "username",
-           password = "password",
-           startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
-           endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
-           pathrow = list(c(200, 31), c(200, 30)),
-           untar = TRUE,
-           AppRoot = src)
+lsDownSearch(satellite = "ls8",
+             username = "username",
+             password = "password",
+             startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+             endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
+             pathrow = list(c(200, 31), c(200, 30)),
+             untar = TRUE,
+             AppRoot = src)
            
 # define the path where the GTiff images are located
 src.ls8 <- file.path(src,"Landsat8")

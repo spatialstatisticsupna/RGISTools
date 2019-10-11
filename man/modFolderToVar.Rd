@@ -51,15 +51,15 @@ data(ex.navarre)
 src <- paste0(tempdir(),"/Path_for_downloading_folder")
 print(src)
 # download MOD09 images
-modDownload(product = "MOD09GA",
-            startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
-            endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
-            username = "username",
-            password = "password",
-            AppRoot = src, # output folder for tif images
-            extract.tif = TRUE, 
-            collection = 6,
-            extent = ex.navarre)
+modDownSearch(product = "MOD09GA",
+              startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+              endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
+              username = "username",
+              password = "password",
+              AppRoot = src, # output folder for tif images
+              extract.tif = TRUE, 
+              collection = 6,
+              extent = ex.navarre)
 # assign src.mod as the output folder from modMosaic
 src.mod <- file.path(src, "Modis", "MOD09GA") # output directory
 src.tif <- file.path(src.mod, "tif") # input directory

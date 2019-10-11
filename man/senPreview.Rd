@@ -4,7 +4,8 @@
 \alias{senPreview}
 \title{Preview Sentinel-2 satellite images}
 \usage{
-senPreview(searchres, username, password, n, size = NULL)
+senPreview(searchres, username, password, n, lpos = c(3, 2, 1),
+  add.Layer = FALSE, showWarnings = FALSE, ...)
 }
 \arguments{
 \item{searchres}{a vector with the results from \code{\link{senSearch}}.}

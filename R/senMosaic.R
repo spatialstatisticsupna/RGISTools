@@ -186,7 +186,7 @@ senMosaic<-function(src,
             gdal_utils(util = "warp", 
                        source =out.tmp,
                        destination = out.file.path,
-                       option=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",proj4string(extent))
+                       options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",proj4string(extent))
             )
             
             

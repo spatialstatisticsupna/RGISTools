@@ -39,15 +39,15 @@ data(ex.navarre)
 # between the julian days 210 and 218, 2018
 src <- paste0(tempdir(),"/Path_for_downloading_folder")
 print(src)
-senDownload(startDate = as.Date("2018210", "\%Y\%j"),
-            endDate = as.Date("2018218", "\%Y\%j"),
-            platform = "Sentinel-2",
-            extent = ex.navarre,
-            product = "S2MSI2A",
-            pathrow = c("R094"),
-            username = "username",
-            password = "password",
-            AppRoot = src)
+senDownSearch(startDate = as.Date("2018210", "\%Y\%j"),
+              endDate = as.Date("2018218", "\%Y\%j"),
+              platform = "Sentinel-2",
+              extent = ex.navarre,
+              product = "S2MSI2A",
+              pathrow = c("R094"),
+              username = "username",
+              password = "password",
+              AppRoot = src)
 # define the paths to the Sentinle-2 images and the
 # folder with the unzipped images
 src.sen2 <- file.path(src, "Sentinel-2")

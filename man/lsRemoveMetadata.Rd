@@ -12,7 +12,7 @@ lsRemoveMetadata()
 }
 \details{
 The metadata file is loaded in `R' with \code{\link{ls7Search}}, 
-\code{\link{ls8Search}} and \code{\link{lsDownload}}. \code{lsRemoveMetadata}
+\code{\link{ls8Search}} and \code{\link{lsDownSearch}}. \code{lsRemoveMetadata}
 removes the metadata and frees up valuable RAM.
 }
 \examples{

@@ -4,7 +4,8 @@
 \alias{lsPreview}
 \title{Preview Landsat-7 or Landsat-8 satellite images}
 \usage{
-lsPreview(searchres, n, size = NULL)
+lsPreview(searchres, n, lpos = c(3, 2, 1), add.Layer = FALSE,
+  showWarnings = FALSE, ...)
 }
 \arguments{
 \item{searchres}{a \code{data.frame} with the results from 

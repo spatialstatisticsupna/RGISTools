@@ -58,7 +58,7 @@ img.list <- modSearch(product = "MOD11A1",
                       
 # download the images of the list
 src.mod <- file.path(src, "Modis", "MOD11A1")
-modDownSearch(searchres = img.list, 
+modDownload(searchres = img.list, 
               username = "username", 
               password = "password",
               AppRoot = src.mod.hdf)

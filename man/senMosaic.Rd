@@ -5,7 +5,7 @@
 \title{Mosaic a set of Sentinel-2 images}
 \usage{
 senMosaic(src, AppRoot, extent = NULL, out.name = "outfile",
-  verbose = FALSE, gutils = FALSE, overwrite = FALSE, ...)
+  verbose = FALSE, gutils = TRUE, overwrite = FALSE, ...)
 }
 \arguments{
 \item{src}{the path of the folder with the Sentinel images in GTiff format.}
@@ -64,15 +64,15 @@ data(ex.navarre)
 src <- paste0(tempdir(),"/Path_for_downloading_folder")
 print(src)
 # download Sentinel-2 images
-senDownload(startDate = as.Date("2018210", "\%Y\%j"),
-            endDate = as.Date("2018218", "\%Y\%j"),
-            platform = "Sentinel-2",
-            extent = ex.navarre,
-            product = "S2MSI1C",
-            pathrow = c("R094"),
-            username = "username",
-            password = "password",
-            AppRoot = src)
+senDownSearch(startDate = as.Date("2018210", "\%Y\%j"),
+              endDate = as.Date("2018218", "\%Y\%j"),
+              platform = "Sentinel-2",
+              extent = ex.navarre,
+              product = "S2MSI1C",
+              pathrow = c("R094"),
+              username = "username",
+              password = "password",
+              AppRoot = src)
 # folder with the unzipped images
 src.sen <- file.path(src, "Sentinel-2")
 src.unzip <- file.path(src.sen, "unzip")

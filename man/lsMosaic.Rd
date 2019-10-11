@@ -5,7 +5,7 @@
 \title{Mosaic a set of Landsat-7 or Landsat-8 images}
 \usage{
 lsMosaic(src, AppRoot, extent = NULL, out.name = "outfile",
-  verbose = FALSE, gutils = FALSE, overwrite = FALSE, ...)
+  verbose = FALSE, gutils = TRUE, overwrite = FALSE, ...)
 }
 \arguments{
 \item{src}{the path to the folder with the Landsat-7 or Landsa-8 images in
@@ -66,14 +66,14 @@ data(ex.navarre)
 src <- paste0(tempdir(),"/Path_for_downloading_folder")
 print(src)
 # download Landsat-8 images
-lsDownload(satellite = "ls8",
-           username = "username",
-           password = "password",
-           startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
-           endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
-           extent = ex.navarre,
-           untar = TRUE,
-           AppRoot = src)
+lsDownSearch(satellite = "ls8",
+             username = "username",
+             password = "password",
+             startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+             endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
+             extent = ex.navarre,
+             untar = TRUE,
+             AppRoot = src)
 # folder with the Landsat-8 untared images
 ls8.src <- file.path(src, "Landsat8")
 tif.src <- file.path(ls8.src,"untar")

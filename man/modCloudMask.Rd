@@ -4,33 +4,32 @@
 \alias{modCloudMask}
 \title{Create cloud masks for MODIS images}
 \usage{
-modCloudMask(startDate, endDate, AppRoot, extent, out.name = "outname",
-  raw.rm = FALSE, overwrite = FALSE, verbose = FALSE, ...)
+modCloudMask(src, AppRoot, overwrite = FALSE, ...)
 }
 \arguments{
+\item{AppRoot}{the directory where cloud masks are saved.}
+
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
+images with the same name.}
+
+\item{...}{arguments for nested functions.}
+
 \item{startDate}{a \code{Date} class object with the starting date of the 
 study period.}
 
 \item{endDate}{a \code{Date} class object with the ending date of the 
 study period.}
 
-\item{AppRoot}{the directory where cloud masks are saved.}
+\item{out.name}{he name of the folder that stores the outputs. By default,
+“outfile” is assigned.}
 
 \item{extent}{An \code{extent}, \code{Raster*}, or \code{Spatial*} object
 representing the region of interest with longitude/latitude coordinates.}
 
-\item{out.name}{he name of the folder that stores the outputs. By default,
-“outfile” is assigned.}
-
 \item{raw.rm}{logical argument. If \code{TRUE}, raw images are removed.}
-
-\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
-images with the same name.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
-
-\item{...}{arguments for nested functions.}
 }
 \description{
 \code{modCloudMask} creates cloud masks derived from the "\code{MOD35_L2}" 
@@ -52,7 +51,7 @@ print(src)
 
 # search and download images from MODIS between
 # 01-01-2018 and 03-01-2018 for the region of Navarre
-modDownload(product = "MOD09GA",
+modDownSearch(product = "MOD09GA",
             startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
             endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
             username = "username",

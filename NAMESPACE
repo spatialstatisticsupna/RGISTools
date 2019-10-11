@@ -12,8 +12,8 @@ export(genCompositions,genSmoothingCovIMA,genFilterStack,
        lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders)
 import("raster","curl", "rjson","rvest", "urltools","tools",
        "fields","sf")
+importFrom("stats", "na.omit")
 importFrom("mapview","viewRGB")
-importFrom("leafem","addLogo","addHomeButton")
 importFrom("methods", "formalArgs")
 importFrom("httr","POST","authenticate")
 importFrom("sp","bbox","layout.scale.bar","layout.north.arrow",

@@ -1,5 +1,5 @@
 genMosaicGdalUtils<-function(typechunks,temp="temp.vrt",nodata,out.name){
-  diffproj<-FALSE
+  newchunks<-NULL
   
   tryCatch({
     if(is.null(nodata)){
@@ -11,7 +11,7 @@ genMosaicGdalUtils<-function(typechunks,temp="temp.vrt",nodata,out.name){
       gdal_utils(util = "buildvrt", 
                  source =typechunks,
                  destination = temp,
-                 option=c("-srcnodata",nodata,"-vrtnodata",nodata)
+                 options=c("-srcnodata",nodata,"-vrtnodata",nodata)
       )
     }
   }, warning = function(warning_condition) {
@@ -20,27 +20,27 @@ genMosaicGdalUtils<-function(typechunks,temp="temp.vrt",nodata,out.name){
       diffproj=TRUE
       suppressWarnings(file.remove(temp))
       proj<-paste0("EPSG:",gdal_crs(typechunks[1])$crs[[1]])
-      newchucks<-c(typechunks[1])
+      newchunks<-c(typechunks[1])
       for(ni in 2:length(typechunks)){
         destemp<-gsub(".TIF","_proj.TIF",typechunks[ni],ignore.case =T)
         destemp<-gsub(".jp2","_warp.tif",typechunks[ni],ignore.case =T)
         gdal_utils(util = "warp", 
                    source =typechunks[ni],
                    destination = destemp,
-                   option=c("-t_srs",proj)
+                   options=c("-t_srs",proj)
         )
-        newchucks<-c(newchucks,destemp)
+        newchunks<-c(newchunks,destemp)
       }
       if(is.null(nodata)){
         gdal_utils(util = "buildvrt", 
-                   source =typechunks,
+                   source =newchunks,
                    destination = temp
         )
       }else{
         gdal_utils(util = "buildvrt", 
-                   source =typechunks,
+                   source =newchunks,
                    destination = temp,
-                   option=c("-srcnodata",nodata,"-vrtnodata",nodata)
+                   options=c("-srcnodata",nodata,"-vrtnodata",nodata)
         )
       }
     }
@@ -48,12 +48,12 @@ genMosaicGdalUtils<-function(typechunks,temp="temp.vrt",nodata,out.name){
   gdal_utils(util = "translate", 
              source =temp,
              destination = out.name,
-             option=c(paste0("of GTiff"))
+             options=c(paste0("of GTiff"))
   )
   
   suppressWarnings(file.remove(temp,showWarnings=FALSE))
-  if(diffproj){
-    suppressWarnings(file.remove(newchucks[-1],showWarnings=FALSE))
+  if(!is.null(newchunks)){
+    suppressWarnings(file.remove(newchunks[-1],showWarnings=FALSE))
   }
 }
 

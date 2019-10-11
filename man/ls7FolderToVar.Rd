@@ -53,7 +53,7 @@ data(ex.navarre)
 src <- paste0(tempdir(),"/Path_for_downloading_folder")
 print(src)
 # download Landsat-7 images
-lsDownload(satellite = "ls7",
+auxDownload(satellite = "ls7",
            username = "username",
            password = "password",
            startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),

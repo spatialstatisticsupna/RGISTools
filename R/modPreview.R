@@ -41,7 +41,7 @@ modPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,showWarnings = FA
   ve<-as.numeric(substr(pr,5,6))
   
   extent(pic)<-extent(mod.tiles[mod.tiles$Name==paste0("h:",ho," v:",ve),])
-  proj4string(pic)<-'+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
+  projection(pic)<-'+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
   
   if(showWarnings){
     return(genMapViewSession(pic,lpos,lname=paste0("MOD_",ho,"_",ve,"_D",format(modGetDates(ser),"%Y%j")),add.Layer=add.Layer,...))
