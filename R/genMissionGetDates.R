@@ -135,10 +135,15 @@ senGetDates<-function(str,...){
 #' modGetDates(imgsPaths, format = "%Y%j")
 modGetDates<-function(str,...){
   arg<-list(...)
-  if("format"%in%names(arg)){
-    return(format(as.Date(gsub(".*\\As*(\\d{7}).*", "\\1", str),"%Y%j"),format=arg$format))
+  dt<-as.Date(gsub(".*\\As*(\\d{7}).*", "\\1", str),"%Y%j")
+  if(!any(is.na(dt))){
+    if("format"%in%names(arg)){
+      return(format(dt,format=arg$format))
+    }else{
+      return(dt)
+    }
   }else{
-    return(as.Date(gsub(".*\\As*(\\d{7}).*", "\\1", str),"%Y%j"))
+    return(genGetDates(str,...))
   }
 }
 
