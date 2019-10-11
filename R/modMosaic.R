@@ -169,12 +169,12 @@ modMosaic<-function(src,
             #mosaic_rasters(typechunks,out.file.path,overwrite=overwrite)
           }else{
             ext<-extent(extent)
-            temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),dtype[dt],"_temp.vrt"))
+            temp<-gsub(".tif","_temp.vrt",out.file.path)
             out.tmp<-gsub(".vrt",".tif",temp)
             genMosaicGdalUtils(typechunks=typechunks,
                                temp=temp,
                                nodata=NULL,
-                               out.name=out.file.path)
+                               out.name=out.tmp)
             gdal_utils(util = "warp", 
                        source =out.tmp,
                        destination = out.file.path,
