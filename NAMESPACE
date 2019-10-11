@@ -12,7 +12,6 @@ export(genCompositions,genSmoothingCovIMA,genFilterStack,
        lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders)
 import("raster","curl", "rjson","rvest", "urltools","tools",
        "fields","sf")
-importFrom("gdalUtils","gdal_translate","gdalwarp","mosaic_rasters")
 importFrom("mapview","viewRGB")
 importFrom("leafem","addLogo","addHomeButton")
 importFrom("methods", "formalArgs")
