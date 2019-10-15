@@ -96,7 +96,7 @@ modDownSearch<-function(product,
     message(paste0(search.res,sep="\n"))
   }
   AppRoot<-file.path(AppRoot,"Modis")
-  downdir<-file.path(AppRoot,product,"raw")
+  downdir<-file.path(AppRoot,product,"hdf")
   tiffdir<-file.path(AppRoot,product,"tif")
   if(extract.tif)
     dir.create(tiffdir,recursive=TRUE,showWarnings = FALSE)

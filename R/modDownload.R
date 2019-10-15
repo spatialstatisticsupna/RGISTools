@@ -60,7 +60,7 @@ modDownload<-function(searchres,
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")
   }
-  downdir<-file.path(AppRoot,"raw")
+  downdir<-file.path(AppRoot,"hdf")
   tiffdir<-file.path(AppRoot,"tif")
   if(extract.tif)
     dir.create(tiffdir,recursive=TRUE,showWarnings = FALSE)
