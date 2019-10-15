@@ -97,6 +97,7 @@ recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,natte
       }
     },
     error=function(cond) {
+      if(grepl("Operation was aborted",cond)){stop(cond)}
       message(paste0(cond,"\n"))
       file.remove(file.path(downdir,basename(s)))
       if(natps<nattempts){

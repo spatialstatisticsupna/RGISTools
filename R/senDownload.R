@@ -140,6 +140,7 @@ senDownload<-function(searchres,
         }
       }
     }, error = function(e) {
+      if(grepl("Operation was aborted",e)){stop(e)}
       message(paste0("ERROR:",e))
       file.remove(downPath)
       senDownload(username=username,
