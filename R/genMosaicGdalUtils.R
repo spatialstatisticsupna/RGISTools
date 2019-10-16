@@ -9,7 +9,7 @@ genMosaicGdalUtils<-function(typechunks,temp="temp.vrt",nodata,out.name){
       )
     }else{
       gdal_utils(util = "buildvrt", 
-                 source =typechunks,
+                 source = typechunks,
                  destination = temp,
                  options=c("-srcnodata",nodata,"-vrtnodata",nodata)
       )
@@ -22,8 +22,8 @@ genMosaicGdalUtils<-function(typechunks,temp="temp.vrt",nodata,out.name){
       proj<-paste0("EPSG:",gdal_crs(typechunks[1])$crs[[1]])
       newchunks<-c(typechunks[1])
       for(ni in 2:length(typechunks)){
-        destemp<-gsub(".TIF","_proj.TIF",typechunks[ni],ignore.case =T)
-        destemp<-gsub(".jp2","_warp.tif",typechunks[ni],ignore.case =T)
+        destemp<-gsub(".TIF","_proj.TIF",typechunks[ni],ignore.case =T,fixed = TRUE)
+        destemp<-gsub(".jp2","_warp.tif",typechunks[ni],ignore.case =T,fixed = TRUE)
         gdal_utils(util = "warp", 
                    source =typechunks[ni],
                    destination = destemp,
@@ -51,9 +51,9 @@ genMosaicGdalUtils<-function(typechunks,temp="temp.vrt",nodata,out.name){
              options=c(paste0("of GTiff"))
   )
   
-  suppressWarnings(file.remove(temp,showWarnings=FALSE))
+  suppressWarnings(file.remove(temp,showWarnings = FALSE))
   if(!is.null(newchunks)){
-    suppressWarnings(file.remove(newchunks[-1],showWarnings=FALSE))
+    suppressWarnings(file.remove(newchunks[-1],showWarnings = FALSE))
   }
 }
 
