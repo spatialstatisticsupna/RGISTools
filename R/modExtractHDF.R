@@ -13,7 +13,7 @@
 #'
 #' @param filesHDF  the full path where the HDF files are located.
 #' @param AppRoot the directory where the extracted images are saved.
-#' @param shp the path to shape file of the area of interest in the hard drive.
+#' @param shp spatial polygon of the area of interest.
 #' @param bFilter a vector containing the names of the bands to extract.
 #' @param rm.band a vector containing the names of the bands excluded from the
 #' extraction.
@@ -100,7 +100,7 @@ modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NU
             }else{
               gdal_utils(util = "translate", 
                          source =gsub(".*SUBDATASET_.*_NAME=","",bands.names[i]),
-                         destination = gsub(" ","_",paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif")),
+                         destination = gsub(" ","_",paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif")),
                          quiet=TRUE
               )
             }
