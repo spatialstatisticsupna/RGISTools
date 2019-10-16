@@ -26,6 +26,10 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.
 #' @param ... arguments for nested functions.
+#'  \itemize{
+#'   \item \code{dayFilter} a vector with the capturing dates being considered
+#'   for mosaicking. If not supplied, all dates are mosaicked.
+#' }
 #'
 #' @examples
 #' \dontrun{
@@ -83,6 +87,12 @@ modFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
   mod.list<-list.files(src,full.names = TRUE)
   result<-NULL
   rstack<-NULL
+  
+  dates<-genGetDates(mod.list)
+  if("dayFilter"%in%names(function.arg)){
+    mod.list<-mod.list[dates%in%function.arg$dayFilter]
+  }
+  
   for(imgfd in mod.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     modbands<-getRGISToolsOpt("MOD09BANDS")

@@ -28,7 +28,13 @@
 #' when the imagery comes from the Senintel-2 "\code{S2MSI2A}" product. By 
 #' default, all resolutions (10m, 20m, and 60m) are used.
 #' @param ... arguments for nested functions.
-#'
+#'  \itemize{
+#'   \item \code{dayFilter} a vector with the capturing dates being considered
+#'   for mosaicking. If not supplied, all dates are mosaicked.
+#' }
+#' @return this function does not return anything, unless \code{getStack = TRUE}
+#' and then it returns a \code{RasterStack} with the time series of with the
+#' index.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
@@ -82,6 +88,12 @@ senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
   if(verbose){message(paste0("var type: ",vartype))}
   resbands=paste0("_",resbands)
   sen.list<-list.files(src,full.names = TRUE)
+  
+  dates<-genGetDates(sen.list)
+  if("dayFilter"%in%names(function.arg)){
+    sen.list<-sen.list[dates%in%function.arg$dayFilter]
+  }
+  
   rstack<-NULL
   result<-NULL
   for(imgfd in sen.list){

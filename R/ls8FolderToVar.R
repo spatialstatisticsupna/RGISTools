@@ -25,7 +25,10 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.
 #' @param ... arguments for nested functions.
-#'
+#'  \itemize{
+#'   \item \code{dayFilter} a vector with the capturing dates being considered
+#'   for mosaicking. If not supplied, all dates are mosaicked.
+#' }
 #' @return this function does not return anything, unless \code{getStack = TRUE}
 #' and then it returns a \code{RasterStack} with the time series of with the
 #' index.
@@ -85,6 +88,12 @@ ls8FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
     message(vartype)
   }
   ls.list<-list.files(src,full.names = TRUE)
+  
+  dates<-genGetDates(ls.list)
+  if("dayFilter"%in%names(function.arg)){
+    ls.list<-ls.list[dates%in%function.arg$dayFilter]
+  }
+  
   rstack<-NULL
   result<-NULL
   for(imgfd in ls.list){
