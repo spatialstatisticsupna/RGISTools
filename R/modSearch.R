@@ -36,12 +36,12 @@
 #' \itemize{
 #'   \item \code{lonlat} a vector with the longitude/latitude
 #'   coordinates of the point of interest. This argument is mandatory if 
-#'   \code{polygon} or \code{extent} are not defined.
+#'   \code{region} or \code{extent} are not defined.
 #'   \item \code{extent}  an \code{extent}, \code{Raster*}, or 
 #'   \code{Spatial*} object representing the region of interest with 
 #'   longitude/latitude coordinates. This argument is mandatory if 
-#'   \code{polygon} or \code{lonlat} are not defined.
-#'   \item \code{polygon} a list of vectors defining the points of a polygon
+#'   \code{region} or \code{lonlat} are not defined.
+#'   \item \code{region} a list of vectors defining the points of a polygon
 #'   with longitude/latitude coordinates. This argument is mandatory if
 #'   \code{lonlat} or \code{extent} are not defined.
 #' }
@@ -94,18 +94,12 @@ modSearch<-function(product,startDate,endDate,collection=6,resType="url",verbose
                 "&return=",resType,
                 "&date=",format(startDate,"%Y-%m-%d"),
                 ",",format(endDate,"%Y-%m-%d"))
-  }else if("polygon"%in%names(arg)){
-    #arg$polygon<-list(c(1,2),c(3,4))
-    pts<-paste(arg$polygon[[1]][2])
-    pts<-paste(pts,arg$polygon[[1]][1],sep = ",")
-    for(x in 2:length(arg$polygon)){
-      pts<-paste(pts,arg$polygon[[x]][2],sep = ",")
-      pts<-paste(pts,arg$polygon[[x]][1],sep = ",")
-    }
+  }else if("region"%in%names(arg)){
+    arg$region<-transform_multiple_proj(arg$region, proj='+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs')
     loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
                 "?product=",product,
                 "&version=",collection,
-                "&polygon=",pts,
+                "&bbox=",paste0(st_bbox(arg$region),collapse = ","),
                 "&return=",resType,
                 "&date=",format(startDate,"%Y-%m-%d"),
                 ",",format(endDate,"%Y-%m-%d"))

@@ -109,8 +109,8 @@ ls7Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
   if("pathrow"%in%names(arg)){
       stopifnot(class(arg$pathrow)=="list")
       LS7MD<-do.call(rbind,lapply(arg$pathrow,function(rp,LS7MD,verbose)return(genFilterDF(LS7MD,row=rp[2],path=rp[1],verbose=verbose)),
-                                   LS7MD,
-                                   verbose=verbose))
+                                  LS7MD,
+                                  verbose=verbose))
   }else if("extent"%in%names(arg)){
       stopifnot(class(extent(arg$extent))=="Extent")
       if(precise){
@@ -146,14 +146,14 @@ ls7Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
                                   LS7MD=LS7MD,
                                   verbose=verbose))
     }
-  }else if("polygon"%in%names(arg)){
-    stopifnot(class(arg$polygon)=="SpatialPolygons"||class(arg$polygon)=="SpatialPolygonsDataFrame")
+  }else if("region"%in%names(arg)){
+    arg$region<-transform_multiple_proj(arg$region, proj='+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs')
     if(precise){
-      tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=extent(arg$polygon)))
+      tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=extent(arg$region)))
       LS7MD<-LS7MD[tiles,]
     }else{
       #data(ls7pr)
-      pathrow<-names(ls7pr)[unlist(lapply(ls7pr,tileInExt,ext2=extent(arg$polygon)))]
+      pathrow<-names(ls7pr)[unlist(lapply(ls7pr,tileInExt,ext2=extent(arg$region)))]
       pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
       pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) unname(pathrow[x[1],]))
       LS7MD<-do.call(rbind,lapply(pathrow,

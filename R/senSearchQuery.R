@@ -42,6 +42,18 @@ senSearchQuery<-function(...){
     }
     url<-paste0(url," AND footprint:",'"',"intersects(",arg$lonlat[1],", ",arg$lonlat[2],")",'"')
   }
+  if("region"%in%names(arg)){
+    if(arg$verbose){
+      message(print("Adding query region"))
+    }
+    arg$region<-transform_multiple_proj(arg$region, proj='+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs')
+    ext<-st_bbox(arg$region)
+    url<-paste0(url," AND footprint:",'"',"intersects(POLYGON((",ext$xmin," ",ext$ymin,","
+                ,ext$xmin," ",ext$ymax,","
+                ,ext$xmax," ",ext$ymax,","
+                ,ext$xmax," ",ext$ymin,","
+                ,ext$xmin," ",ext$ymin,")))",'"')
+  }
   if("product"%in%names(arg)){
     if(arg$verbose){
       message("Added product type.")

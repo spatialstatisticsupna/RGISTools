@@ -114,7 +114,7 @@ ls8Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
       LS8MD<-LS8MD[tiles,]
     }else{
       #data(ls8pr)
-      pathrow<-names(ls8pr)[unlist(lapply(ls8pr,tileInExt,ext2=extent(arg$extent)))]
+      pathrow<-names(ls8pr)[unlist(lapply(ls8pr,tileInExt,ext2=extent(arg$region)))]
       pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
       pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) pathrow[x[1],])
       LS8MD<-do.call(rbind,lapply(pathrow,function(rp,LS8MD,verbose){rp=unlist(rp);return(genFilterDF(LS8MD,row=rp[2],path=rp[1],verbose=verbose))},
@@ -141,14 +141,14 @@ ls8Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
                                   LS8MD=LS8MD,
                                   verbose=verbose))
     }
-  }else if("polygon"%in%names(arg)){
-    stopifnot(class(arg$polygon)=="SpatialPolygons"||class(arg$polygon)=="SpatialPolygonsDataFrame")
+  }else if("region"%in%names(arg)){
+    arg$region<-transform_multiple_proj(arg$region, proj='+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs')
     if(precise){
-      tiles<-unlist(apply(LS8MD[grepl("Corner",names(LS8MD))],1,tileIn,ext=extent(arg$polygon)))
+      tiles<-unlist(apply(LS8MD[grepl("Corner",names(LS8MD))],1,tileIn,ext=extent(arg$region)))
       LS8MD<-LS8MD[tiles,]
     }else{
       #data(ls8pr)
-      pathrow<-names(ls8pr)[unlist(lapply(ls8pr,tileInExt,ext2=extent(arg$polygon)))]
+      pathrow<-names(ls8pr)[unlist(lapply(ls8pr,tileInExt,ext2=extent(arg$region)))]
       pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
       pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) unname(pathrow[x[1],]))
       LS8MD<-do.call(rbind,lapply(pathrow,
@@ -159,7 +159,7 @@ ls8Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
   }else{
     warning("Location not defined!")
   }
-  arg<-arg[names(arg)[which(!names(arg)%in%c("pathrow","extent"))]]
+  arg<-arg[names(arg)[which(!names(arg)%in%c("pathrow","region"))]]
   if(length(arg)>0)
     LS8MD<-genFilterDF(LS8MD,verbose=verbose,...)
   
