@@ -157,17 +157,10 @@ senMosaic<-function(src,
           }
           writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
-          if((!file.exists(out.file.path))|overwrite){
           #mosaic with gdalutils no support cutline
           message(paste0("Merging band ",dtype[dt]))
           if(is.null(extent)){
-            # mosaic_rasters(typechunks,
-            #                dst_dataset=out.file.path,
-            #                srcnodata=0,
-            #                vrtnodata=0,
-            #                overwrite=overwrite)
-            
-            temp<-gsub(".tif","_temp.vrt",out.file.path)
+            temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
             genMosaicGdalUtils(typechunks=typechunks,
                                temp=temp,
                                nodata=0,
@@ -175,9 +168,9 @@ senMosaic<-function(src,
           }else{
             
             ext<-extent(extent)
-            temp<-gsub(".tif","_temp.vrt",out.file.path)
+            temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
             
-            out.tmp<-gsub(".tif","_temp.tif",out.file.path)
+            out.tmp<-gsub(".tif","_temp.tif",out.file.path,fixed = TRUE)
             genMosaicGdalUtils(typechunks=typechunks,
                                temp=temp,
                                nodata=0,
@@ -188,23 +181,9 @@ senMosaic<-function(src,
                        destination = out.file.path,
                        options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",proj4string(extent))
             )
-            
-            
-            # ext<-extent(extent)
-            # temp<-gsub(".tif","_temp.tif",out.file.path)
-            # mosaic_rasters(typechunks,
-            #                dst_dataset=temp,
-            #                srcnodata=0,
-            #                vrtnodata=0,
-            #                overwrite=TRUE)
-            # gdalwarp(srcfile=temp,
-            #          dstfile=out.file.path,
-            #          te=c(ext@xmin,ext@ymin,ext@xmax,ext@ymax),
-            #          te_srs=proj4string(extent),
-            #          overwrite=overwrite)
-            file.remove(out.tmp)
+
+            suppressWarnings(file.remove(out.tmp, showWarnings = FALSE))
           }
-        }else{if(verbose){warning("File exists! not mergin...")}}
       }
       }else{
         if(verbose){

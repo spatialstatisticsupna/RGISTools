@@ -158,19 +158,16 @@ modMosaic<-function(src,
           }
           writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
-          if((!file.exists(out.file.path))|overwrite){
           if(is.null(extent)){
-            temp<-gsub(".tif","_temp.vrt",out.file.path)
+            temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
             genMosaicGdalUtils(typechunks=typechunks,
                                temp=temp,
                                nodata=NULL,
                                out.name=out.file.path)
-            
-            #mosaic_rasters(typechunks,out.file.path,overwrite=overwrite)
           }else{
             ext<-extent(extent)
-            temp<-gsub(".tif","_temp.vrt",out.file.path)
-            out.tmp<-gsub(".vrt",".tif",temp)
+            temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
+            out.tmp<-gsub(".vrt",".tif",temp,fixed = TRUE)
             genMosaicGdalUtils(typechunks=typechunks,
                                temp=temp,
                                nodata=NULL,
@@ -180,18 +177,8 @@ modMosaic<-function(src,
                        destination = out.file.path,
                        options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",proj4string(extent))
             )
-            # mosaic_rasters(typechunks,
-            #                dst_dataset=temp,
-            #                overwrite=TRUE)
-            # 
-            # gdalwarp(srcfile=temp,
-            #          dstfile=out.file.path,
-            #          te=c(ext@xmin,ext@ymin,ext@xmax,ext@ymax),
-            #          te_srs=proj4string(extent),
-            #          overwrite=overwrite)
-            file.remove(out.tmp,showWarnings=FALSE)
+            suppressWarnings(file.remove(out.tmp, showWarnings = FALSE))
           }
-          }else{if(verbose){warning("File exists! not mergin...")}}
         }
       }else{
         if(verbose){

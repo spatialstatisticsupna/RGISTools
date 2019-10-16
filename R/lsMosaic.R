@@ -198,7 +198,6 @@ lsMosaic<-function(src,
           }
           writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
-          if((!file.exists(out.file.path))|overwrite){
           #mosaic with gdalutils no supporting cutline
           if(any(grepl(dtype[dt],qcband))){
             nodata<-1
@@ -214,23 +213,16 @@ lsMosaic<-function(src,
           }
           
           if(is.null(extent)){
-            # mosaic_rasters(typechunks,
-            #                dst_dataset=out.file.path,
-            #                srcnodata=nodata,
-            #                vrtnodata=nodata,
-            #                overwrite=overwrite,
-            #                verbose = verbose,
-            #                allow_projection_difference=TRUE)
-            temp<-gsub(".tif","_temp.vrt",out.file.path)
+            temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
             genMosaicGdalUtils(typechunks=typechunks,
                                temp=temp,
                                nodata=nodata,
                                out.name=out.file.path)
           }else{
             ext<-extent(extent)
-            temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",gsub(".tif","",dtype[dt]),"_temp.vrt"))
+            temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",gsub(".tif","",dtype[dt],fixed = TRUE),"_temp.vrt"))
             
-            out.tmp<-gsub(".tif","_tmp.tif",out.file.path)
+            out.tmp<-gsub(".tif","_tmp.tif",out.file.path,fixed = TRUE)
             genMosaicGdalUtils(typechunks=typechunks,
                                temp=temp,
                                nodata=nodata,
@@ -242,22 +234,8 @@ lsMosaic<-function(src,
                        options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",proj4string(extent))
             )
 
-            # mosaic_rasters(typechunks,
-            #                dst_dataset=temp,
-            #                srcnodata=nodata,
-            #                vrtnodata=nodata,
-            #                overwrite=TRUE,
-            #                verbose = verbose,
-            #                allow_projection_difference=TRUE)
-            # gdalwarp(srcfile=temp,
-            #          dstfile=out.file.path,
-            #          te=c(ext@xmin,ext@ymin,ext@xmax,ext@ymax),
-            #          te_srs=proj4string(extent),
-            #          overwrite=overwrite,
-            #          verbose = verbose)
-            file.remove(out.tmp,showWarnings=FALSE)
+            suppressWarnings(file.remove(out.tmp, showWarnings = FALSE))
           }
-        }else{if(verbose){warning("File exists! not mergin...")}}
       }
       }else{
         if(verbose){
