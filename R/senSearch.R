@@ -88,7 +88,6 @@ senSearch<-function(username,
   if(as.integer(json$feed$`opensearch:totalResults`)>0){
     imgNames<-c()
     imgURL<-c()
-    print(json$feed)
     if(as.integer(json$feed$`opensearch:totalResults`)==1){
       if(arg$verbose){
         message(paste0("Image result ",cont," Name:",json$feed$entry$title))
