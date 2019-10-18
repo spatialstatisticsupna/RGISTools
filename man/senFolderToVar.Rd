@@ -28,7 +28,16 @@ running steps and warnings.}
 when the imagery comes from the Senintel-2 "\code{S2MSI2A}" product. By 
 default, all resolutions (10m, 20m, and 60m) are used.}
 
-\item{...}{arguments for nested functions.}
+\item{...}{arguments for nested functions.
+ \itemize{
+  \item \code{dates} a vector with the capturing dates being considered
+  for mosaicking. If not supplied, all dates are mosaicked.
+}}
+}
+\value{
+this function does not return anything, unless \code{getStack = TRUE}
+and then it returns a \code{RasterStack} with the time series of with the
+index.
 }
 \description{
 \code{senFolderToVar} computes a remote sensing index from the spectral bands

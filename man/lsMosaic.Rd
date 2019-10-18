@@ -34,7 +34,7 @@ images with the same name.}
   the tiles concerning the region of interest.
   \item \code{bFilter} a vector with the bands to be mosaicked. If not
   supplied, all bands are mosaicked.
-  \item \code{dayFilter} a vector with the capturing dates being considered
+  \item \code{dates} a vector with the capturing dates being considered
   for mosaicking. If not supplied, all dates are mosaicked.
 }}
 }

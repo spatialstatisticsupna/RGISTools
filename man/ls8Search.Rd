@@ -4,16 +4,9 @@
 \alias{ls8Search}
 \title{Search Landsat-8 images}
 \usage{
-ls8Search(startDate, endDate, AppRoot, verbose = FALSE,
-  precise = FALSE, ...)
+ls8Search(AppRoot, verbose = FALSE, precise = FALSE, ...)
 }
 \arguments{
-\item{startDate}{a \code{Date} class object with the starting date of the 
-study period.}
-
-\item{endDate}{a \code{Date} class object with the ending date of the 
-study period.}
-
 \item{AppRoot}{directory of the metadata file.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
@@ -36,6 +29,12 @@ tile by tile (slower).}
   \code{pathrow} or \code{lonlat} are not defined.
   \item column names in the .LS8MD \code{data.frame} and their values.
 }}
+
+\item{startDate}{a \code{Date} class object with the starting date of the 
+study period.}
+
+\item{endDate}{a \code{Date} class object with the ending date of the 
+study period.}
 }
 \value{
 a \code{data.frame} with the name of the images and their metadata.

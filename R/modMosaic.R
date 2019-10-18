@@ -6,7 +6,7 @@
 #' The function mosaics the imagery in the \code{src} folder. The folder can
 #' hold GTiff images from several tiles, dates and bands. When only a subset
 #' of bands or dates has to be mosaicked, the band names or dates should be
-#' provided through the argument \code{bFilter} or \code{dayFilter}. Band
+#' provided through the argument \code{bFilter} or \code{dates}. Band
 #' names are defined by the letter “b” and the two-digit band number (e.g., 
 #' ‘b01’). The dates must be provided as a \code{Date} class object. Once
 #' mosaicked, the images can be cropped to fit the \code{extent} (optional).
@@ -36,7 +36,7 @@
 #'   of the tiles concerning the region of interest.
 #'   \item \code{bFilter} a vector with the bands to be mosaicked. If not
 #'   supplied, all bands are mosaicked.
-#'   \item \code{dayFilter} a vector with the capturing dates being considered
+#'   \item \code{dates} a vector with the capturing dates being considered
 #'   for mosaicking. If not supplied, all dates are mosaicked.
 #' }
 #' @examples
@@ -87,8 +87,8 @@ modMosaic<-function(src,
   bpath<-file.path(AppRoot,out.name)
 
   #filter dates
-  if("dayFilter"%in%names(arg)){
-    dates<-dates[dates%in%arg$dayFilter]
+  if("dates"%in%names(arg)){
+    dates<-dates[dates%in%arg$dates]
   }
 
   for(d in 1:length(dates)){

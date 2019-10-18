@@ -20,7 +20,7 @@ images with the same name.}
 \item{rm.band}{a vector containing the names of the bands excluded from the
 extraction.}
 
-\item{shp}{the path to shape file of the area of interest in the hard drive.}
+\item{shp}{spatial polygon of the area of interest.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}

@@ -4,17 +4,11 @@
 \alias{modSearch}
 \title{Search MODIS images}
 \usage{
-modSearch(product, startDate, endDate, collection = 6, resType = "url",
-  verbose = FALSE, ...)
+modSearch(product, collection = 6, resType = "url", verbose = FALSE,
+  ...)
 }
 \arguments{
 \item{product}{the short name of the MODIS product.}
-
-\item{startDate}{a \code{Date} class object with the starting date of the 
-study period.}
-
-\item{endDate}{a \code{Date} class object with the ending date of the 
-study period.}
 
 \item{collection}{MODIS collection. By default, 6.}
 
@@ -27,15 +21,21 @@ running steps and warnings.}
 \itemize{
   \item \code{lonlat} a vector with the longitude/latitude
   coordinates of the point of interest. This argument is mandatory if 
-  \code{polygon} or \code{extent} are not defined.
+  \code{region} or \code{extent} are not defined.
   \item \code{extent}  an \code{extent}, \code{Raster*}, or 
   \code{Spatial*} object representing the region of interest with 
   longitude/latitude coordinates. This argument is mandatory if 
-  \code{polygon} or \code{lonlat} are not defined.
-  \item \code{polygon} a list of vectors defining the points of a polygon
+  \code{region} or \code{lonlat} are not defined.
+  \item \code{region} a list of vectors defining the points of a polygon
   with longitude/latitude coordinates. This argument is mandatory if
   \code{lonlat} or \code{extent} are not defined.
 }}
+
+\item{startDate}{a \code{Date} class object with the starting date of the 
+study period.}
+
+\item{endDate}{a \code{Date} class object with the ending date of the 
+study period.}
 }
 \description{
 \code{modSearch} searches MODIS images in the 

@@ -24,7 +24,7 @@
 #' running steps and warnings.
 #' @param ... arguments for nested functions.
 #'  \itemize{
-#'   \item \code{dayFilter} a vector with the capturing dates being considered
+#'   \item \code{dates} a vector with the capturing dates being considered
 #'   for mosaicking. If not supplied, all dates are mosaicked.
 #' }
 #' 
@@ -90,8 +90,8 @@ ls7FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
   result<-NULL
   
   dates<-genGetDates(ls.list)
-  if("dayFilter"%in%names(function.arg)){
-    ls.list<-ls.list[dates%in%function.arg$dayFilter]
+  if("dates"%in%names(function.arg)){
+    ls.list<-ls.list[dates%in%function.arg$dates]
   }
   
   for(imgfd in ls.list){

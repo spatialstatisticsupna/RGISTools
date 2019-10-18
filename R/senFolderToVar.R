@@ -29,7 +29,7 @@
 #' default, all resolutions (10m, 20m, and 60m) are used.
 #' @param ... arguments for nested functions.
 #'  \itemize{
-#'   \item \code{dayFilter} a vector with the capturing dates being considered
+#'   \item \code{dates} a vector with the capturing dates being considered
 #'   for mosaicking. If not supplied, all dates are mosaicked.
 #' }
 #' @return this function does not return anything, unless \code{getStack = TRUE}
@@ -90,8 +90,8 @@ senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
   sen.list<-list.files(src,full.names = TRUE)
   
   dates<-genGetDates(sen.list)
-  if("dayFilter"%in%names(function.arg)){
-    sen.list<-sen.list[dates%in%function.arg$dayFilter]
+  if("dates"%in%names(function.arg)){
+    sen.list<-sen.list[dates%in%function.arg$dates]
   }
   
   rstack<-NULL

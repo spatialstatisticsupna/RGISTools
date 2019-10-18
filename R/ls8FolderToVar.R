@@ -26,7 +26,7 @@
 #' running steps and warnings.
 #' @param ... arguments for nested functions.
 #'  \itemize{
-#'   \item \code{dayFilter} a vector with the capturing dates being considered
+#'   \item \code{dates} a vector with the capturing dates being considered
 #'   for mosaicking. If not supplied, all dates are mosaicked.
 #' }
 #' @return this function does not return anything, unless \code{getStack = TRUE}
@@ -90,8 +90,8 @@ ls8FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
   ls.list<-list.files(src,full.names = TRUE)
   
   dates<-genGetDates(ls.list)
-  if("dayFilter"%in%names(function.arg)){
-    ls.list<-ls.list[dates%in%function.arg$dayFilter]
+  if("dates"%in%names(function.arg)){
+    ls.list<-ls.list[dates%in%function.arg$dates]
   }
   
   rstack<-NULL

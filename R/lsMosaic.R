@@ -37,7 +37,7 @@
 #'   the tiles concerning the region of interest.
 #'   \item \code{bFilter} a vector with the bands to be mosaicked. If not
 #'   supplied, all bands are mosaicked.
-#'   \item \code{dayFilter} a vector with the capturing dates being considered
+#'   \item \code{dates} a vector with the capturing dates being considered
 #'   for mosaicking. If not supplied, all dates are mosaicked.
 #' }
 #' @examples
@@ -91,8 +91,8 @@ lsMosaic<-function(src,
   bpath<-file.path(AppRoot,out.name)
 
   #filter dates
-  if("dayFilter"%in%names(arg)){
-    dates<-dates[dates%in%arg$dayFilter]
+  if("dates"%in%names(arg)){
+    dates<-dates[dates%in%arg$dates]
   }
   #definition of bands names
   if(any(grepl("LE",imgFolders))){

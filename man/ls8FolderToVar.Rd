@@ -24,7 +24,11 @@ images with the same name.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the
 running steps and warnings.}
 
-\item{...}{arguments for nested functions.}
+\item{...}{arguments for nested functions.
+ \itemize{
+  \item \code{dates} a vector with the capturing dates being considered
+  for mosaicking. If not supplied, all dates are mosaicked.
+}}
 }
 \value{
 this function does not return anything, unless \code{getStack = TRUE}
