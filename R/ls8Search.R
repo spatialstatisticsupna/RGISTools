@@ -80,12 +80,29 @@
 #' # remove metadata to free memory space
 #' lsRemoveMetadata()
 #' }
-ls8Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
+ls8Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
+  arg<-list(...)
+  if((!"dates"%in%names(arg))&
+     ((!"startDate"%in%names(arg)|(!"endDate"%in%names(arg))))
+  )stop("startDate and endDate, or dates argument need to be defined!")
+  
+  if("dates"%in%names(arg)){
+    stopifnot(class(arg$dates)=="Date")
+    startDate<-min(arg$dates)
+    endDate<-max(arg$dates)
+  }else{
+    startDate<-arg$startDate
+    endDate<-arg$endDate
+  }
+  
   stopifnot(class(startDate)=="Date")
   stopifnot(class(endDate)=="Date")
+    
   if(endDate<as.Date("2011-03-13"))
     stop("There is no Landsat-8 Images before 13-03-2013.")
-  arg<-list(...)
+  if(startDate<as.Date("2011-03-13"))
+    warning("There is no Landsat-8 Images before 13-03-2013.")
+
   AppRoot<-pathWinLx(AppRoot)
   if(!ls8IsMetaData()){
     message("MetaData not loaded! loading...")
@@ -94,8 +111,8 @@ ls8Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
 
   #first filter by date
   LS8MD<-getRGISToolsOpt("LS8METADATA")
-  LS8MD<-getRGISToolsOpt("LS8METADATA")[as.Date(LS8MD$acquisitionDate)>=startDate&
-                                        as.Date(LS8MD$acquisitionDate)<=endDate,]
+  LS8MD<-LS8MD[as.Date(LS8MD$acquisitionDate)>=startDate&
+               as.Date(LS8MD$acquisitionDate)<=endDate,]
   
 
   #filter by position
@@ -164,6 +181,12 @@ ls8Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
     LS8MD<-genFilterDF(LS8MD,verbose=verbose,...)
   
   LS8MD<-LS8MD[!duplicated(LS8MD[,c('sceneID')]),]
+  
+  #filter dates
+  if("dates"%in%names(arg)){
+    LS8MD<-LS8MD[as.Date(LS8MD$acquisitionDate)%in%arg$dates,]
+  }
+  
   return(LS8MD)
 }
 

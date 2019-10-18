@@ -53,11 +53,27 @@
 senSearch<-function(username,
                     password,
                     ...){
-  arg<-list(...)
+  arg=list(...)
+  if((!"dates"%in%names(arg))&
+     ((!"startDate"%in%names(arg)|(!"endDate"%in%names(arg))))
+  )stop("startDate and endDate, or dates argument need to be defined!")
+  
+  if("startDate"%in%names(arg)){
+    startDate<-arg$startDate
+    endDate<-arg$endDate
+  }else{
+    stopifnot(class(arg$dates)=="Date")
+    startDate<-min(arg$dates)
+    endDate<-max(arg$dates)
+  }
+  
+  #stopifnot(class(startDate)=="Date")
+  #stopifnot(class(endDate)=="Date")
+  
   if(!"verbose"%in%names(arg)){
     arg$verbose=FALSE
   }
-  query.url<-senSearchQuery(...)
+  query.url<-senSearchQuery(startDate=startDate,endDate=endDate,...)
 
   if(arg$verbose)
     message(query.url)
@@ -130,11 +146,19 @@ senSearch<-function(username,
     }
     rURLs<-senSearch(username=username,
                      password=password,
-                     #startDate=max(senGetDates(imgNames)),
+                     startDate=startDate,
                      endDate=mn.date,
+                     rec=TRUE,
                       ...)
     imgURL<-c(imgURL,rURLs)
     imgURL<-imgURL[!duplicated(imgURL)]
   }
+  
+  #filter dates
+  if("dates"%in%names(arg)){
+    dates<-senGetDates(names(imgURL))
+    imgURL<-imgURL[dates%in%arg$dates]
+  }
+  
   return(imgURL)
 }

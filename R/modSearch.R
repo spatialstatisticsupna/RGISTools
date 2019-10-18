@@ -67,10 +67,24 @@
 #'                      extent = aoi)
 #' head(my.imgs)
 #' }
-modSearch<-function(product,startDate,endDate,collection=6,resType="url",verbose=FALSE,...){
+modSearch<-function(product,collection=6,resType="url",verbose=FALSE,...){
+  arg=list(...)
+  if((!"dates"%in%names(arg))&
+     ((!"startDate"%in%names(arg)|(!"endDate"%in%names(arg))))
+  )stop("startDate and endDate, or dates argument need to be defined!")
+  
+  if("dates"%in%names(arg)){
+    stopifnot(class(arg$dates)=="Date")
+    startDate<-min(arg$dates)
+    endDate<-max(arg$dates)
+  }else{
+    startDate<-arg$startDate
+    endDate<-arg$endDate
+  }
+  
   stopifnot(class(startDate)=="Date")
   stopifnot(class(endDate)=="Date")
-  arg=list(...)
+  
   if(any(names(arg)%in%c("pathrow"))){
     stopifnot(class(arg$pathrow)=="list")
     stop("pathrow search not supported for Modis Search")
@@ -122,6 +136,13 @@ modSearch<-function(product,startDate,endDate,collection=6,resType="url",verbose
   modisres <- xmlSApply(xmlres,
                         function(x) xmlSApply(x,xmlValue))
   close(req)
+  
+  #filter dates
+  if("dates"%in%names(arg)){
+    dates<-modGetDates(modisres)
+    modisres<-modisres[dates%in%arg$dates]
+  }
+  
   return(modisres)
 }
 

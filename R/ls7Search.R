@@ -88,16 +88,32 @@
 #' # remove metadata to free memory space
 #' lsRemoveMetadata()
 #' }
-ls7Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
+ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
+  arg<-list(...)
+  if((!"dates"%in%names(arg))&
+     ((!"startDate"%in%names(arg)|(!"endDate"%in%names(arg))))
+  )stop("startDate and endDate, or dates argument need to be defined!")
+  
+  if("dates"%in%names(arg)){
+    stopifnot(class(arg$dates)=="Date")
+    startDate<-min(arg$dates)
+    endDate<-max(arg$dates)
+  }else{
+    startDate<-arg$startDate
+    endDate<-arg$endDate
+  }
+  
   stopifnot(class(startDate)=="Date")
   stopifnot(class(endDate)=="Date")
-  arg<-list(...)
+
   
   AppRoot<-pathWinLx(AppRoot)
   if(!ls7IsMetaData()){
     message("MetaData not loaded! loading...")
     ls7LoadMetadata(AppRoot=AppRoot,update=FALSE,...)
   }
+  
+  
   LS7MD<-getRGISToolsOpt("LS7METADATA")
   LS7MD<-LS7MD[as.Date(LS7MD$acquisitionDate)>=startDate&
                as.Date(LS7MD$acquisitionDate)<=endDate,]
@@ -170,6 +186,11 @@ ls7Search<-function(startDate,endDate,AppRoot,verbose=FALSE,precise=FALSE,...){
     LS7MD<-genFilterDF(LS7MD,verbose=verbose,...)
 
   LS7MD<-LS7MD[!duplicated(LS7MD[,c('sceneID')]),]
+  #filter dates
+  if("dates"%in%names(arg)){
+    LS7MD<-LS7MD[as.Date(LS7MD$acquisitionDate)%in%arg$dates,]
+  }
+  
   return(LS7MD)
 }
 
