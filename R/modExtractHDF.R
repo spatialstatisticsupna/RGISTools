@@ -22,6 +22,10 @@
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param ... arguments for nested functions.
+#'\itemize{
+#'        \item \code{dates} a vector with the capturing dates being considered
+#'   for downloading. 
+#' }
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
@@ -57,6 +61,7 @@
 #' }
 modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NULL,shp=NULL,verbose=FALSE,...){
     arg<-list(...)
+    if("dates"%in%names(arg)){filesHDF<-filesHDF[modGetDates(filesHDF)%in%arg$dates]}
     filesHDF<-pathWinLx(filesHDF)
     AppRoot<-pathWinLx(AppRoot)
     dir.create(AppRoot,showWarnings = verbose)
