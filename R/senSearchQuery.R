@@ -46,7 +46,7 @@ senSearchQuery<-function(...){
     if(arg$verbose){
       message(print("Adding query region"))
     }
-    arg$region<-transform_multiple_proj(arg$region, proj='+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs')
+    arg$region<-transform_multiple_proj(arg$region, proj4=st_crs("+init=epsg:4326"))
     ext<-st_bbox(arg$region)
     url<-paste0(url," AND footprint:",'"',"intersects(POLYGON((",ext$xmin," ",ext$ymin,","
                 ,ext$xmin," ",ext$ymax,","

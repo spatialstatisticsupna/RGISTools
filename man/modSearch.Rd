@@ -19,6 +19,15 @@ running steps and warnings.}
 
 \item{...}{arguments for nested functions:
 \itemize{
+  \item \code{dates} a vector with the capturing dates being considered
+  for searching. This argument is mandatory if 
+  \code{startDate} and \code{endDate} are not defined.
+  \item  startDate a \code{Date} class object with the starting date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
+  \item  endDate a \code{Date} class object with the ending date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
   \item \code{lonlat} a vector with the longitude/latitude
   coordinates of the point of interest. This argument is mandatory if 
   \code{region} or \code{extent} are not defined.
@@ -30,12 +39,6 @@ running steps and warnings.}
   with longitude/latitude coordinates. This argument is mandatory if
   \code{lonlat} or \code{extent} are not defined.
 }}
-
-\item{startDate}{a \code{Date} class object with the starting date of the 
-study period.}
-
-\item{endDate}{a \code{Date} class object with the ending date of the 
-study period.}
 }
 \description{
 \code{modSearch} searches MODIS images in the 

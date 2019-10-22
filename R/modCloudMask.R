@@ -8,23 +8,15 @@
 #' resulting cloud mask layers need to be reprojected because resolution and
 #' projection differences with other MODIS products. This function requires
 #' `GDAL' and the `\code{gdalUtils}' library properly installed.
-#'
-#' @param startDate a \code{Date} class object with the starting date of the 
-#' study period.
-#' @param endDate a \code{Date} class object with the ending date of the 
-#' study period.
+#' @param src the path to the folder with the MODIS with \code{state_1km} images. 
 #' @param AppRoot the directory where cloud masks are saved.
-#' @param out.name he name of the folder that stores the outputs. By default,
-#' “outfile” is assigned.
-#' @param extent An \code{extent}, \code{Raster*}, or \code{Spatial*} object
-#' representing the region of interest with longitude/latitude coordinates.
-#' @param raw.rm logical argument. If \code{TRUE}, raw images are removed.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
-#' @param verbose logical argument. If \code{TRUE}, the function prints the 
-#' running steps and warnings.
 #' @param ... arguments for nested functions.
-#'
+#' \itemize{
+#'   \item \code{dates} a vector with the dates being considered
+#'   for creating cloud mask. This argument is optional.
+#' }
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
@@ -35,8 +27,8 @@
 #' # search and download images from MODIS between
 #' # 01-01-2018 and 03-01-2018 for the region of Navarre
 #' modDownSearch(product = "MOD09GA",
-#'             startDate = as.Date("01-01-2018", "%d-%m-%Y"),
-#'             endDate = as.Date("03-01-2018", "%d-%m-%Y"),
+#'             startDate = as.Date("01-01-2017", "%d-%m-%Y"),
+#'             endDate = as.Date("03-01-2017", "%d-%m-%Y"),
 #'             username = "username",
 #'             password = "password",
 #'             AppRoot = src,
@@ -54,41 +46,36 @@
 #'           out.name = "Navarre", # creates Navarre folder in AppRoot
 #'           gutils = TRUE,
 #'           extent = ex.navarre)
-#'           
+#' 
+#' 
+#' src.tiles.navarre <- file.path(src.tiles, "Navarre")
 #' # generate the cloud masks      
-#' modCloudMask(startDate = as.Date("01-01-2018", "%d-%m-%Y"),
-#'              endDate = as.Date("04-01-2018", "%d-%m-%Y"),
-#'              extent = ex.navarre,
-#'              AppRoot = src,
-#'              out.name = "Navarre")
+#' modCloudMask(src = src.tiles.navarre,
+#'              AppRoot = src.tiles,
+#'              overwrite = TRUE)
 #'              
-#' src.cloud <- file.path(src.mod,"CloudMask")
-#' # the cloud mask may have different extent, resolution...  
-#' src.cloud.navarre <- file.path(src.cloud,"Navarre")
-#' cmask <- list.files(src.cloud.navarre, full.names = TRUE, pattern = "\\.tif$")
-#' cmask.ras <- lapply(cmask, raster)
+#' src.cloud <- file.path(src.tiles,"CloudMask")
+#' src.cloud.stack <- stack(list.files(src.cloud, full.names=TRUE, pattern="CLD"))
 #' 
-#' navarre.path <- file.path(src.tiles, "Navarre")
-#' navarre.img <- list.files(navarre.path,
-#'                           full.names = TRUE,
-#'                           recursive = TRUE,
-#'                           pattern = "\\.tif$")
 #' # select b01
-#' navarre.img <- navarre.img[grepl("b01_1",navarre.img)]
-#' navarre.b01.ras <- lapply(navarre.img,raster)
-#' navarre.b01.stack <- stack(lapply(navarre.b01.ras, projectRaster, navarre.b01.ras[[1]]))
+#' navarre.img <- stack(list.files(tif.src.tiles, 
+#'                                 full.names=TRUE, 
+#'                                 recursive = TRUE, 
+#'                                 pattern="b01_1"))
 #' 
-#' # reproject the cloud mask to the projection of navarre.b01.stack
-#' cmask.stack <- stack(lapply(cmask.ras, projectRaster, navarre.b01.stack))
+#' # project to 500m
+#' src.cloud.stack <- projectRaster(src.cloud.stack,navarre.img)
 #' 
 #' # plot the cloud free b01 layer
-#' spplot(navarre.b01.stack*cmask.stack)
+#' spplot(navarre.img*src.cloud.stack)
 #' }
 modCloudMask<-function(src,AppRoot,overwrite=FALSE,...){
   arg<-list(...)
   src<-pathWinLx(src)
+
   AppRoot<-pathWinLx(AppRoot)
   imgdir.list<-list.dirs(src,recursive=FALSE)
+  if("dates"%in%names(arg)){imgdir.list<-imgdir.list[genGetDates(imgdir.list)%in%arg$dates]}
   AppRoot<-file.path(AppRoot,"CloudMask")
   dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
   for(id in imgdir.list){
@@ -108,7 +95,7 @@ modCloudMask<-function(src,AppRoot,overwrite=FALSE,...){
       r[] <- rowSums(v[,1:2])
       r[r==1] <- NA
       r[r!=1] <- 1
-      #r[(r == 0 | r == 2)] <- 1
+      # r[(r == 0 | r == 2)] <- 1
       # shadows
       # interpret the bytes: 0 = clear, 1 = shadow
       r_shadow <- r

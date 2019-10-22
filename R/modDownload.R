@@ -18,10 +18,18 @@
 #' @param username NASA’s `EarthData' username.
 #' @param password NASA’s `EarthData' password.
 #' @param AppRoot the directory where the images will be saved.
+#' @param nattempts the number of attempts to download an image in case it
+#' becomes corrupted.
+#' @param extract.tif logical argument. If \code{TRUE}, extracts all the layers
+#' from hdf files and saves them as GTiff.
+#' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param ... argument for nested functions:
-#'
+#'  \itemize{
+#'        \item \code{dates} a vector with the capturing dates being considered
+#'   for downloading. 
+#' }
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
@@ -60,6 +68,8 @@ modDownload<-function(searchres,
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")
   }
+  if("dates"%in%names(arg)){searchres<-searchres[modGetDates(searchres)%in%arg$dates]}
+    
   downdir<-file.path(AppRoot,"hdf")
   tiffdir<-file.path(AppRoot,"tif")
   if(extract.tif)
@@ -123,6 +133,8 @@ mod_Download<-function(searchres, AppRoot, username = NULL,password = NULL,overw
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")
   }
+  if("dates"%in%names(arg)){searchres<-searchres[modGetDates(searchres)%in%arg$dates]}
+  
   AppRoot<-pathWinLx(AppRoot)
   dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
   

@@ -14,7 +14,7 @@ import("raster","curl", "rjson","rvest", "urltools","tools",
        "fields","sf")
 importFrom("stats", "na.omit")
 importFrom("mapview","viewRGB")
-importFrom("methods", "formalArgs")
+importFrom("methods", "formalArgs","as", "is")
 importFrom("httr","POST","authenticate")
 importFrom("sp","bbox","layout.scale.bar","layout.north.arrow",
            "proj4string","spplot","Polygons","Polygon",

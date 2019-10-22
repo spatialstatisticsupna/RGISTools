@@ -22,7 +22,11 @@ images with the same name.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the
 running steps and warnings.}
 
-\item{...}{arguments for nested functions.}
+\item{...}{arguments for nested functions.
+\itemize{
+  \item \code{dates} a vector with the dates being considered
+  for creating cloud mask. This argument is optional.
+}}
 }
 \value{
 this function does not return anything. It creates new GTiff files

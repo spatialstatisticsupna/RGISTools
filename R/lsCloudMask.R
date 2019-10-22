@@ -20,7 +20,11 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.
 #' @param ... arguments for nested functions.
-#'
+#' \itemize{
+#'   \item \code{dates} a vector with the dates being considered
+#'   for creating cloud mask. This argument is optional.
+#' }
+#' 
 #' @return this function does not return anything. It creates new GTiff files
 #' for a new cloud band (CLD) inside the folder of every image.
 #'
@@ -80,7 +84,7 @@ lsCloudMask<-function(src,AppRoot,sensitivity=2800,overwrite=FALSE,verbose=FALSE
   src<-pathWinLx(src)
   AppRoot<-pathWinLx(AppRoot)
   imgdir.list<-list.dirs(src,recursive=FALSE)
-  
+  if("dates"%in%names(arg)){imgdir.list<-imgdir.list[genGetDates(imgdir.list)%in%arg$dates]}
   if(verbose){message(paste0("Identifies folders:  \n",imgdir.list))}
   for(id in imgdir.list){
     #id<-imgdir.list[2]

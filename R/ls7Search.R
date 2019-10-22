@@ -24,10 +24,6 @@
 #' \code{browseAvaliable=”Y”} must be added as an argument of the function
 #' (see the examples).
 #'
-#' @param startDate a \code{Date} class object with the starting date of the 
-#' study period.
-#' @param endDate a \code{Date} class object with the ending date of the 
-#' study period.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.
 #' @param precise logical argument. If \code{TRUE}, conducts a thorough search,
@@ -35,6 +31,15 @@
 #' @param AppRoot directory of the metadata file. 
 #' @param ... arguments for nested functions:
 #'  \itemize{
+#'   \item \code{dates} a vector with the capturing dates being considered
+#'   for searching. This argument is mandatory if 
+#'   \code{startDate} and \code{endDate} are not defined.
+#'   \item  startDate a \code{Date} class object with the starting date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'   \item  endDate a \code{Date} class object with the ending date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
 #'   \item \code{pathrow} a list of vectors with the path and row numbers of
 #'   the tiles concerning the region of interest. This argument is mandatory
 #'   if \code{extent} or \code{lonlat} are not provided. Ex. 
@@ -148,7 +153,7 @@ ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
     circle=list()
     circle[[1]]<-Polygons(list(Polygon(genCreateSpatialCircle(x=arg$lonlat[1],y=arg$lonlat[2]))),ID=1)
 
-    circle<-SpatialPolygons(circle,proj4string=CRS('+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'))
+    circle<-SpatialPolygons(circle,proj4string=st_crs("+init=epsg:4326")$proj4string)
     if(precise){
       tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=circle))
       LS7MD<-LS7MD[tiles,]
@@ -163,7 +168,7 @@ ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
                                   verbose=verbose))
     }
   }else if("region"%in%names(arg)){
-    arg$region<-transform_multiple_proj(arg$region, proj='+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs')
+    arg$region<-transform_multiple_proj(arg$region, proj4=st_crs("+init=epsg:4326"))
     if(precise){
       tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=extent(arg$region)))
       LS7MD<-LS7MD[tiles,]

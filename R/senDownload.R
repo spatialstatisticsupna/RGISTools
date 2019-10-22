@@ -24,7 +24,10 @@
 #' @param nattempts the number of attempts to download an image in case it
 #' becomes corrupted.
 #' @param ... arguments for nested functions.
-#'
+#'  \itemize{
+#'        \item \code{dates} a vector with the capturing dates being considered
+#'   for downloading. 
+#' }
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
@@ -69,6 +72,9 @@ senDownload<-function(searchres,
                         overwrite=FALSE,
                         ...){
   arg<-list(...)
+  
+  if("dates"%in%names(arg)){searchres<-searchres[senGetDates(names(searchres))%in%arg$dates]}
+  
   AppRoot<-pathWinLx(AppRoot)
   if(nattempts==0){
     message(paste0("Error downloading ",names(searchres)))
@@ -110,7 +116,9 @@ senDownload<-function(searchres,
       message(md5.url)
       repeat{
         response<-curl(md5.url,handle =c.handle)
-        md5.text<-readLines(response)
+        
+        md5.text<-suppressWarnings(readLines(response))
+        close(response)
         if(!grepl("Error",md5.text)){
           message(paste0("Get md5: ",md5.text))
           break
@@ -134,9 +142,9 @@ senDownload<-function(searchres,
         message(paste0("OK: cheking ",file.name," file md5."))
         if(unzip){
           message("Unzipping ", basename(downPath)," file.")
-          unzip(zipfile=downPath,
-                exdir = unzipFolder,
-                overwrite=overwrite)
+          suppressWarnings(unzip(zipfile=downPath,
+                                 exdir = unzipFolder,
+                                 overwrite=overwrite))
         }
       }
     }, error = function(e) {

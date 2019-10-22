@@ -17,10 +17,15 @@
 #' \itemize{
 #'   \item \code{product} the type of Sentinel product. Ex. "S2MSI1C",
 #'   "S2MSI2A", "S2MSI2Ap", ... 
-#'   \item \code{startDate} a \code{Date} class object with the starting date of
-#'   the study period.
-#'   \item \code{endDate} a \code{Date} class object with the ending date of
-#'    the study period.
+#'   \code{startDate} and \code{endDate} are not defined.
+#'   \item  \code{startDate} a \code{Date} class object with the starting date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'   \item  \code{endDate} a \code{Date} class object with the ending date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'   \item \code{dates} a vector with the capturing dates being considered
+#'   for searching. This argument is mandatory if 
 #'   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
 #'   object representing the region of interest with longitude/latitude
 #'   coordinates.
@@ -66,6 +71,7 @@ senDownSearch<-function(username,
                         AppRoot,
                         verbose=FALSE,
                         ...){
+  if(missing(username)|missing(password))stop("username or password not defined!")
   arg<-list(...)
   if("platform"%in%names(arg)){
     AppRoot<-file.path(AppRoot,arg$platform)

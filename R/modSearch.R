@@ -21,10 +21,6 @@
 #' By default, the URL points towards the actual image.
 #'
 #' @param product the short name of the MODIS product.
-#' @param startDate  a \code{Date} class object with the starting date of the 
-#' study period.
-#' @param endDate a \code{Date} class object with the ending date of the 
-#' study period.
 #' @param collection MODIS collection. By default, 6.
 #' @param resType response type of the query (\code{browseurl} or \code{url}).
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
@@ -34,6 +30,15 @@
 # This argument is mandatory if extent is not defined.
 #' @param ... arguments for nested functions:
 #' \itemize{
+#'   \item \code{dates} a vector with the capturing dates being considered
+#'   for searching. This argument is mandatory if 
+#'   \code{startDate} and \code{endDate} are not defined.
+#'   \item  startDate a \code{Date} class object with the starting date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'   \item  endDate a \code{Date} class object with the ending date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
 #'   \item \code{lonlat} a vector with the longitude/latitude
 #'   coordinates of the point of interest. This argument is mandatory if 
 #'   \code{region} or \code{extent} are not defined.
@@ -109,7 +114,7 @@ modSearch<-function(product,collection=6,resType="url",verbose=FALSE,...){
                 "&date=",format(startDate,"%Y-%m-%d"),
                 ",",format(endDate,"%Y-%m-%d"))
   }else if("region"%in%names(arg)){
-    arg$region<-transform_multiple_proj(arg$region, proj='+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs')
+    arg$region<-transform_multiple_proj(arg$region, proj4=st_crs("+init=epsg:4326"))
     loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
                 "?product=",product,
                 "&version=",collection,

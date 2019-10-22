@@ -4,19 +4,13 @@
 \alias{lsDownSearch}
 \title{Search and download Landsat-7 or Landsat-8 images}
 \usage{
-lsDownSearch(satellite, startDate, endDate, username, password, AppRoot,
-  lvl = 1, product = c("sr", "source_metadata"), verbose = FALSE,
+lsDownSearch(satellite, username, password, AppRoot, lvl = 1,
+  product = c("sr", "source_metadata"), verbose = FALSE,
   untar = TRUE, raw.rm = FALSE, ...)
 }
 \arguments{
 \item{satellite}{string containing the type of satellite 
 (\code{"ls7"} or \code{"ls8"}).}
-
-\item{startDate}{a \code{Date} class object with the starting date of the 
-study period.}
-
-\item{endDate}{a \code{Date} class object with the ending date of the 
-study period.}
 
 \item{username}{USGS’s `EarthExplorer' username.}
 
@@ -38,6 +32,15 @@ running steps and warnings.}
 
 \item{...}{argumetns for nested functions:
  \itemize{
+  \item \code{dates} a vector with the capturing dates being considered
+  for searching. This argument is mandatory if 
+  \code{startDate} and \code{endDate} are not defined.
+  \item  startDate a \code{Date} class object with the starting date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
+  \item  endDate a \code{Date} class object with the ending date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
   \item any argument for \code{\link{ls8Search}}/\code{\link{ls7Search}} or 
   \code{\link{lsDownload}}.
 }}

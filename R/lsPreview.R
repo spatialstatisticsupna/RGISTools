@@ -47,7 +47,7 @@ lsPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,showWarnings = FAL
   lat<-unlist(ser[grepl("Latitude",names(ser))])
   lon<-unlist(ser[grepl("Longitude",names(ser))])
   extent(r)<-extent(min(lon),max(lon),min(lat),max(lat))
-  projection(r)<-'+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
+  projection(r)<-st_crs("+init=epsg:4326")$proj4string
   
   if(showWarnings){
     return(genMapViewSession(r,lpos,lname=paste0("LS_",ser["path"],ser["row"],"_D",format(ser["acquisitionDate"],"%Y%j")),add.Layer=add.Layer,...))

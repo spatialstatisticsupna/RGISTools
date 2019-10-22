@@ -17,10 +17,22 @@ modDownload(searchres, AppRoot, username = NULL, password = NULL,
 
 \item{password}{NASA’s `EarthData' password.}
 
+\item{nattempts}{the number of attempts to download an image in case it
+becomes corrupted.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints running stages and warnings.}
+
+\item{extract.tif}{logical argument. If \code{TRUE}, extracts all the layers
+from hdf files and saves them as GTiff.}
+
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
 images with the same name.}
 
-\item{...}{argument for nested functions:}
+\item{...}{argument for nested functions:
+ \itemize{
+       \item \code{dates} a vector with the capturing dates being considered
+  for downloading. 
+}}
 }
 \description{
 \code{modDownload} downloads the images from a list of uniform resource 

@@ -21,10 +21,6 @@
 #' 
 #' @param satellite string containing the type of satellite 
 #' (\code{"ls7"} or \code{"ls8"}).
-#' @param startDate a \code{Date} class object with the starting date of the 
-#' study period.
-#' @param endDate a \code{Date} class object with the ending date of the 
-#' study period.
 #' @param AppRoot the download directory.
 #' @param username USGS’s `EarthExplorer' username.
 #' @param password USGS’s `EarthExplorer' password.
@@ -37,6 +33,15 @@
 #' @param untar logical argument. If \code{TRUE}, untars downloaded images.
 #' @param ... argumetns for nested functions:
 #'  \itemize{
+#'   \item \code{dates} a vector with the capturing dates being considered
+#'   for searching. This argument is mandatory if 
+#'   \code{startDate} and \code{endDate} are not defined.
+#'   \item  startDate a \code{Date} class object with the starting date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'   \item  endDate a \code{Date} class object with the ending date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
 #'   \item any argument for \code{\link{ls8Search}}/\code{\link{ls7Search}} or 
 #'   \code{\link{lsDownload}}.
 #' }
@@ -66,8 +71,6 @@
 #' lsRemoveMetadata()
 #' }
 lsDownSearch<-function(satellite,
-                     startDate,
-                     endDate,
                      username,
                      password,
                      AppRoot,
@@ -77,18 +80,15 @@ lsDownSearch<-function(satellite,
                      untar=TRUE,
                      raw.rm=FALSE,
                      ...){
+  if(missing(username)|missing(password))stop("username or password not defined!")
   if(tolower(satellite)=="ls7"){
     message("Searching Landsat-7 image time series.")
-    searchres=ls7Search(startDate=startDate,
-                        endDate=endDate,
-                        verbose=verbose,
+    searchres=ls7Search(verbose=verbose,
                         AppRoot=AppRoot,
                         ...)
   }else if (tolower(satellite)=="ls8"){
     message("Searching Landsat-8 image time series.")
-    searchres=ls8Search(startDate=startDate,
-                        endDate=endDate,
-                        verbose=verbose,
+    searchres=ls8Search(verbose=verbose,
                         AppRoot=AppRoot,
                         ...)
   }else{

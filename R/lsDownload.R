@@ -34,7 +34,10 @@
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param ... arguments for nested functions.
-#'
+#'  \itemize{
+#'        \item \code{dates} a vector with the capturing dates being considered
+#'   for downloading. 
+#' }
 #'
 #' @examples
 #' \dontrun{
@@ -132,7 +135,10 @@ lsDownload<-function(searchres,
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")
   }
+  
+  
   arg<-list(...)
+  if("dates"%in%names(arg)){searchres<-searchres[as.Date(searchres$acquisitionDate)%in%arg$dates,]}
   AppRoot<-pathWinLx(AppRoot)
   #identify mission
   if(grepl("LC8",searchres[1,]$sceneID)){

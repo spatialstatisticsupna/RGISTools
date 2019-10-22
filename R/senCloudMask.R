@@ -15,7 +15,10 @@
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param ... arguments for nested functions.
-#'
+#'  \itemize{
+#'   \item \code{dates} a vector with the capturing dates being considered
+#'   for mosaicking. If not supplied, all dates are mosaicked.
+#' }
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
@@ -84,9 +87,15 @@ senCloudMask<-function(src,AppRoot,img.res,sensitivity=50,overwrite=FALSE,...){
   # img.res 10m, 20m o 30m img.res<-"20m"
   
   arg<-list(...)
+  #filter dates
+  if("dates"%in%names(arg)){
+    dates<-dates[dates%in%arg$dates]
+  }
+  
   src<-pathWinLx(src)
   AppRoot<-pathWinLx(AppRoot)
   imgdir.list<-list.dirs(src,recursive=FALSE)
+  if("dates"%in%names(arg)){imgdir.list<-imgdir.list[genGetDates(imgdir.list)%in%arg$dates]}
   AppRoot<-file.path(AppRoot,"CloudMask")
   dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
   for(id in imgdir.list){

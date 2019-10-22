@@ -4,19 +4,12 @@
 \alias{modDownSearch}
 \title{Search and download MODIS images}
 \usage{
-modDownSearch(product, startDate, endDate, username, password, AppRoot,
-  collection = 6, nattempts = 5, verbose = FALSE,
-  extract.tif = FALSE, ...)
+modDownSearch(product, username, password, AppRoot, collection = 6,
+  nattempts = 5, verbose = FALSE, extract.tif = FALSE, ...)
 }
 \arguments{
 \item{product}{a \code{character} argument with the short name of the MODIS
 product.}
-
-\item{startDate}{a \code{Date} class object with the starting date of the 
-study period.}
-
-\item{endDate}{a \code{Date} class object with the ending date of the 
-study period.}
 
 \item{username}{NASA's `EarthData' username.}
 
@@ -36,6 +29,15 @@ from hdf files and saves them as GTiff.}
 
 \item{...}{arguments for nested functions:
 \itemize{
+  \item \code{dates} a vector with the capturing dates being considered
+  for searching. This argument is mandatory if 
+  \code{startDate} and \code{endDate} are not defined.
+  \item  startDate a \code{Date} class object with the starting date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
+  \item  endDate a \code{Date} class object with the ending date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
   \item \code{lonlat} a vector with the longitude/latitude
   coordinates of the point of interest. This argument is mandatory if
   \code{polygon} or \code{extent} are not defined.

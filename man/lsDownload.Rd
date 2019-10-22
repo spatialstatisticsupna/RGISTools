@@ -37,7 +37,11 @@ images with the same name.}
 \item{nattempts}{the number of attempts to download an image in case it
 becomes corrupted.}
 
-\item{...}{arguments for nested functions.}
+\item{...}{arguments for nested functions.
+ \itemize{
+       \item \code{dates} a vector with the capturing dates being considered
+  for downloading. 
+}}
 }
 \description{
 \code{lsDownload} downloads the results from \code{\link{ls7Search}} and

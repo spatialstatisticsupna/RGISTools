@@ -17,6 +17,15 @@ tile by tile (slower).}
 
 \item{...}{arguments for nested functions:
  \itemize{
+  \item \code{dates} a vector with the capturing dates being considered
+  for searching. This argument is mandatory if 
+  \code{startDate} and \code{endDate} are not defined.
+  \item  startDate a \code{Date} class object with the starting date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
+  \item  endDate a \code{Date} class object with the ending date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
   \item \code{pathrow} a list of vectors with the path and row numbers of
   the tiles concerning the region of interest. This argument is mandatory
   if \code{extent} or \code{lonlat} are not provided. Ex. 
@@ -30,12 +39,6 @@ tile by tile (slower).}
   
   \item column names in the .LS7MD \code{data.frame} and their values.
 }}
-
-\item{startDate}{a \code{Date} class object with the starting date of the 
-study period.}
-
-\item{endDate}{a \code{Date} class object with the ending date of the 
-study period.}
 }
 \value{
 a \code{data.frame} with the name of the images and their metadata.

@@ -18,10 +18,7 @@
 #'
 #' @param product a \code{character} argument with the short name of the MODIS
 #' product.
-#' @param startDate a \code{Date} class object with the starting date of the 
-#' study period.
-#' @param endDate a \code{Date} class object with the ending date of the 
-#' study period.
+
 #' @param username NASA's `EarthData' username.
 #' @param password NASA's `EarthData' password.
 #' @param AppRoot the directory to save the outcoming time series.
@@ -33,6 +30,15 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param ... arguments for nested functions:
 #' \itemize{
+#'   \item \code{dates} a vector with the capturing dates being considered
+#'   for searching. This argument is mandatory if 
+#'   \code{startDate} and \code{endDate} are not defined.
+#'   \item  startDate a \code{Date} class object with the starting date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'   \item  endDate a \code{Date} class object with the ending date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
 #'   \item \code{lonlat} a vector with the longitude/latitude
 #'   coordinates of the point of interest. This argument is mandatory if
 #'   \code{polygon} or \code{extent} are not defined.
@@ -76,8 +82,6 @@
 #' plotRGB(imagen)
 #'}
 modDownSearch<-function(product,
-                     startDate,
-                     endDate,
                      username,
                      password,
                      AppRoot,
@@ -87,9 +91,8 @@ modDownSearch<-function(product,
                      extract.tif=FALSE,
                      ...){
   arg<-list(...)
+  if(missing(username)|missing(password))stop("username and/or password not defined!")
   search.res<-modSearch(product=product,
-                        startDate=startDate,
-                        endDate=endDate,
                         collection=collection,
                         ...)
   if(verbose){
@@ -114,5 +117,9 @@ modDownSearch<-function(product,
                          natps=0,
                          ...)
   }
-  message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",tiffdir))
+  if(extract.tif){
+    message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",tiffdir))
+  }else{
+    message(paste0("The images have been downloaded and saved on HDD. \nFile path: ",downdir))
+  }
 }

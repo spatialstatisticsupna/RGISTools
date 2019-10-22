@@ -63,7 +63,7 @@ senPreview<-function(searchres,username,password,n,lpos=c(3,2,1),add.Layer=FALSE
   curl_download(image.url, destfile=tmp,handle = c.handle)
   r<-stack(tmp)
   extent(r)<-extent(min(lon),max(lon),min(lat),max(lat))
-  projection(r)<-'+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
+  projection(r)<-st_crs("+init=epsg:4326")$proj4string
   
   if(showWarnings){
     return(genMapViewSession(r,lpos,lname=paste0("SEN_",senGetTile(names(ser)),"_D",format(senGetDates(names(ser)),"%Y%j")),add.Layer=add.Layer,...))
