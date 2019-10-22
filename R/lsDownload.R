@@ -33,6 +33,8 @@
 #' becomes corrupted.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
+#' @param l2rqname character argument defining the name of the order for level
+#' 2 products.
 #' @param ... arguments for nested functions.
 #'  \itemize{
 #'        \item \code{dates} a vector with the capturing dates being considered
@@ -130,12 +132,14 @@ lsDownload<-function(searchres,
                      untar=FALSE,
                      overwrite=FALSE,
                      nattempts=5,
+                     l2rqname,
                      ...){
   stopifnot(class(searchres)=="data.frame")
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")
   }
   
+  if(!missing(l2rqname)){setRGISToolsOpt("LS.ESPA.Request",l2rqname)}
   
   arg<-list(...)
   if("dates"%in%names(arg)){searchres<-searchres[as.Date(searchres$acquisitionDate)%in%arg$dates,]}
