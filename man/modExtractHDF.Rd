@@ -5,7 +5,7 @@
 \title{Convert an HDF file into a set of GTiff files}
 \usage{
 modExtractHDF(filesHDF, AppRoot, overwrite = FALSE, bFilter = NULL,
-  rm.band = NULL, shp = NULL, verbose = FALSE, ...)
+  rm.band = NULL, region = NULL, verbose = FALSE, ...)
 }
 \arguments{
 \item{filesHDF}{the full path where the HDF files are located.}
@@ -20,12 +20,17 @@ images with the same name.}
 \item{rm.band}{a vector containing the names of the bands excluded from the
 extraction.}
 
-\item{shp}{spatial polygon of the area of interest.}
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+defining the area of interest for image masking.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}
 
-\item{...}{arguments for nested functions.}
+\item{...}{arguments for nested functions.
+\itemize{
+       \item \code{dates} a vector with the capturing dates being considered
+  for downloading. 
+}}
 }
 \description{
 \code{modExtractHDF} converts the original format of MODIS images (hierarchical

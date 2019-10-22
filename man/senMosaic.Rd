@@ -4,7 +4,7 @@
 \alias{senMosaic}
 \title{Mosaic a set of Sentinel-2 images}
 \usage{
-senMosaic(src, AppRoot, extent = NULL, out.name = "outfile",
+senMosaic(src, AppRoot, region = NULL, out.name = "outfile",
   verbose = FALSE, gutils = TRUE, overwrite = FALSE, ...)
 }
 \arguments{
@@ -12,8 +12,8 @@ senMosaic(src, AppRoot, extent = NULL, out.name = "outfile",
 
 \item{AppRoot}{the directory to save the mosaicked images.}
 
-\item{extent}{an \code{extent}, \code{Raster*}, or \code{Spatial*} object
-representing the region of interest.}
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+defining the area of interest.}
 
 \item{out.name}{the name of the folder that stores the outputs. By default,
 “outfile” is assigned.}

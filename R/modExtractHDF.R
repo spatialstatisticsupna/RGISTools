@@ -13,7 +13,8 @@
 #'
 #' @param filesHDF  the full path where the HDF files are located.
 #' @param AppRoot the directory where the extracted images are saved.
-#' @param shp spatial polygon of the area of interest.
+#' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest for image masking.
 #' @param bFilter a vector containing the names of the bands to extract.
 #' @param rm.band a vector containing the names of the bands excluded from the
 #' extraction.
@@ -59,7 +60,7 @@
 #' modExtractHDF(filesHDF = first.hdf.file,
 #'               AppRoot = src.tif)
 #' }
-modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NULL,shp=NULL,verbose=FALSE,...){
+modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NULL,region=NULL,verbose=FALSE,...){
     arg<-list(...)
     if("dates"%in%names(arg)){filesHDF<-filesHDF[modGetDates(filesHDF)%in%arg$dates]}
     filesHDF<-pathWinLx(filesHDF)
@@ -115,12 +116,13 @@ modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NU
               warning("File exists! not extracting...")
             }
           }
-          if(!is.null(shp)){
-            ext=extent(shp)
+          if(!is.null(region)){
+            region<-transform_multiple_proj(region)
+            ext=extent(region)
             gdal_utils(util = "warp", 
                        source =paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
                        destination = paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_cutted.tif"),
-                       options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",proj4string(shp))
+                       options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",st_crs(region)$proj4string)
             )
           }
         }

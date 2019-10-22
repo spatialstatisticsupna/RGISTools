@@ -4,7 +4,7 @@
 \alias{lsMosaic}
 \title{Mosaic a set of Landsat-7 or Landsat-8 images}
 \usage{
-lsMosaic(src, AppRoot, extent = NULL, out.name = "outfile",
+lsMosaic(src, AppRoot, region = NULL, out.name = "outfile",
   verbose = FALSE, gutils = TRUE, overwrite = FALSE, ...)
 }
 \arguments{
@@ -13,8 +13,8 @@ GTiff format.}
 
 \item{AppRoot}{the directory to save the mosaicked images.}
 
-\item{extent}{an \code{axtent}, \code{Raster*}, or \code{Spatial*} object
-representing the region of interest.}
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+defining the area of interest.}
 
 \item{out.name}{the name of the folder that stores the outputs. By default,
 “outfile” is assigned.}

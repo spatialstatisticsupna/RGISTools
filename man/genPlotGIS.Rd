@@ -9,7 +9,8 @@ genPlotGIS(r, region = NULL, ...)
 \arguments{
 \item{r}{a \code{Raster*} class object with the image or image stack to be plotted.}
 
-\item{region}{a \code{Polygon} class object defining the area of interest.}
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+defining the area of interest.}
 
 \item{...}{argument for nested functions:
 \itemize{
@@ -59,7 +60,7 @@ library('RColorBrewer')
 my.palette <- rev(brewer.pal(n = 9, name = "YlOrRd"))
 genPlotGIS(r = ex.ndvi.navarre[[1]],
            region = ex.navarre,
-           proj = CRS("+init=epsg:4670"), # project all components
+           proj = st_crs("+init=epsg:4670")$proj4string, # project all components
            col.regions = colorRampPalette(my.palette)
 )
 }
@@ -67,7 +68,7 @@ genPlotGIS(r = ex.ndvi.navarre[[1]],
 # change scale text relative Y
 genPlotGIS(r = ex.ndvi.navarre[[1:4]],
            region = ex.navarre,
-           proj = CRS("+init=epsg:4670"),
+           proj = st_crs("+init=epsg:4670")$proj4string,
            compOpt=list(
            # arrow relatives 0-1
            ArrowRelativeX = 0.85,

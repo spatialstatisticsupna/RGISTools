@@ -29,6 +29,9 @@ study period. This argument is mandatory if
   \code{dates} is not defined.
   \item \code{dates} a vector with the capturing dates being considered
   for searching. This argument is mandatory if 
+  \code{startDate} and \code{endDate} are not defined.
+  \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+defining the area of interest.
   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
   object representing the region of interest with longitude/latitude
   coordinates.

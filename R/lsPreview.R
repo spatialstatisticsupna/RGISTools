@@ -1,7 +1,7 @@
 #' Preview Landsat-7 or Landsat-8 satellite images
 #'
 #' \code{lsPreview} shows a preview of the \code{n}-th image from a set of 
-#' search results.
+#' search results on a interactive map. 
 #'
 #' The function shows a preview of the \code{n}-th output image from a search
 #' in the Landsat archives (\code{\link{ls7Search}} or \code{\link{ls8Search}}),
@@ -13,9 +13,19 @@
 #' \code{\link{ls7Search}} or \code{\link{ls8Search}}.
 #' @param n a \code{numeric} argument identifying the location of the image in
 #' \code{searchres}.
-#' @param size a \code{numeric} argument specifying the size of the preview to
-#' be displayed, in pixels.
-#'
+#' @param lpos vector argument. Defines the position of the layers when RGB 
+#' image is generated allowing false color visualizations.
+#' @param add.Layer logical argument. If \code{TRUE}, the function plots the 
+#' image over previous map. Allows combinations of images on a map using 
+#' \code{\link{senPreview}} and \code{\link{modPreview}} functions.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param ... arguments for nested functions:
+#'  \itemize{
+#'   \item arguments of \code{viewRGB} function from \code{mapview} packages are
+#'   valid arguments
+#' }
+#' 
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
@@ -34,10 +44,10 @@
 #' lsPreview(search_cloudFree, 1)
 #' lsPreview(search_cloudFree, 2)
 #' }
-lsPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,showWarnings = FALSE,...){
+lsPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   ser<-searchres[n,]
   tmp <- tempfile()
-  if(showWarnings){
+  if(verbose){
     download.file(ser$browseURL,tmp,mode="wb")
   }else{
     suppressWarnings(download.file(ser$browseURL,tmp,mode="wb"))
@@ -49,7 +59,7 @@ lsPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,showWarnings = FAL
   extent(r)<-extent(min(lon),max(lon),min(lat),max(lat))
   projection(r)<-st_crs("+init=epsg:4326")$proj4string
   
-  if(showWarnings){
+  if(verbose){
     return(genMapViewSession(r,lpos,lname=paste0("LS_",ser["path"],ser["row"],"_D",format(ser["acquisitionDate"],"%Y%j")),add.Layer=add.Layer,...))
   }else{
     return(suppressWarnings(genMapViewSession(r,lpos,lname=paste0("LS_",ser["path"],ser["row"],"_D",format(ser["acquisitionDate"],"%Y%j")),add.Layer=add.Layer,...)))

@@ -7,7 +7,7 @@
 lsDownload(searchres, username = NULL, password = NULL, AppRoot,
   lvl = 1, product = c("sr", "source_metadata"), verbose = FALSE,
   raw.rm = FALSE, untar = FALSE, overwrite = FALSE, nattempts = 5,
-  ...)
+  l2rqname, ...)
 }
 \arguments{
 \item{searchres}{the results from \code{\link{ls7Search}} or 
@@ -36,6 +36,9 @@ images with the same name.}
 
 \item{nattempts}{the number of attempts to download an image in case it
 becomes corrupted.}
+
+\item{l2rqname}{character argument defining the name of the order for level
+2 products.}
 
 \item{...}{arguments for nested functions.
  \itemize{

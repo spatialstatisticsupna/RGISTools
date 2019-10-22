@@ -4,7 +4,7 @@
 \alias{varRGB}
 \title{Generate an RGB image from 3 spectral bands}
 \usage{
-varRGB(red, green, blue, q.range = c(), rPath = NULL, cutline = NULL)
+varRGB(red, green, blue, q.range = c(), rPath = NULL, region = NULL)
 }
 \arguments{
 \item{red}{a \code{raster} with the red band of the capture.}
@@ -18,8 +18,8 @@ being considered.}
 
 \item{rPath}{the file path where the resulting RGB image is saved.}
 
-\item{cutline}{a \code{SpatialPolygonsDataFrame} with the boundary of the
-region of interest.}
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+defining the area of interest for image masking.}
 }
 \description{
 \code{varRGB} creates red-green-blue (RGB) \code{RasterStack} images by

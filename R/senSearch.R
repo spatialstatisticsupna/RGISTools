@@ -30,6 +30,8 @@
 #'   \item  endDate a \code{Date} class object with the ending date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
+#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest.
 #'   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
 #'   object representing the region of interest with longitude/latitude
 #'   coordinates.

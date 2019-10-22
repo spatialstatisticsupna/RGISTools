@@ -12,7 +12,6 @@
 #'
 #' @param src the path to the folder with the untarred images from Landsat-7 or
 #' Landsat-8.
-#' @param AppRoot the directory where cloud masks are saved.
 #' @param sensitivity \code{numeric} argument. Defines the sensitivity of the
 #' cloud detection method.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
@@ -79,10 +78,10 @@
 #' b1.cloud.free <- b1.tiles.ras[[1]] * cloud.tiles.ras[[1]]
 #' spplot(b1.cloud.free)
 #' }
-lsCloudMask<-function(src,AppRoot,sensitivity=2800,overwrite=FALSE,verbose=FALSE,...){
+lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=FALSE,...){
   arg<-list(...)
   src<-pathWinLx(src)
-  AppRoot<-pathWinLx(AppRoot)
+  if("AppRoot"%in%names(arg)){warning("This function creates a cloud mask in the tile folder as a new tile CLD, and do not use AppRoot argument.")}
   imgdir.list<-list.dirs(src,recursive=FALSE)
   if("dates"%in%names(arg)){imgdir.list<-imgdir.list[genGetDates(imgdir.list)%in%arg$dates]}
   if(verbose){message(paste0("Identifies folders:  \n",imgdir.list))}

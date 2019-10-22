@@ -26,6 +26,8 @@ study period. This argument is mandatory if
   \item  endDate a \code{Date} class object with the ending date of the 
 study period. This argument is mandatory if 
   \code{dates} is not defined.
+  \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+defining the area of interest.
   \item \code{pathrow} a list of vectors with the path and row numbers of
   the tiles concerning the region of interest. This argument is mandatory
   if \code{extent} or \code{lonlat} are not provided. Ex. 

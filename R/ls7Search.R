@@ -40,6 +40,8 @@
 #'   \item  endDate a \code{Date} class object with the ending date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
+#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest.
 #'   \item \code{pathrow} a list of vectors with the path and row numbers of
 #'   the tiles concerning the region of interest. This argument is mandatory
 #'   if \code{extent} or \code{lonlat} are not provided. Ex. 
@@ -123,9 +125,6 @@ ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
   LS7MD<-LS7MD[as.Date(LS7MD$acquisitionDate)>=startDate&
                as.Date(LS7MD$acquisitionDate)<=endDate,]
   
-  #filter by position
-  #pathrow list(c(path1,row1),c(path2,row2)...)
-  #extent in latlog
 
   if("pathrow"%in%names(arg)){
       stopifnot(class(arg$pathrow)=="list")
@@ -138,7 +137,6 @@ ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
         tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=extent(arg$extent)))
         LS7MD<-LS7MD[tiles,]
       }else{
-        #data(ls7pr)
         pathrow<-names(ls7pr)[unlist(lapply(ls7pr,tileInExt,ext2=extent(arg$extent)))]
         pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
         pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) unname(pathrow[x[1],]))
@@ -150,16 +148,17 @@ ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
   }else if("lonlat"%in%names(arg)){
     stopifnot(class(arg$lonlat)=="numeric")
     stopifnot(length(arg$lonlat)==2)
-    circle=list()
-    circle[[1]]<-Polygons(list(Polygon(genCreateSpatialCircle(x=arg$lonlat[1],y=arg$lonlat[2]))),ID=1)
-
-    circle<-SpatialPolygons(circle,proj4string=st_crs("+init=epsg:4326")$proj4string)
+    
+    dat_sim <- data.frame(lat = arg$lonlat[2],long = arg$lonlat[1])
+    dat_sf <- st_transform(st_as_sf(dat_sim, coords = c("long", "lat"), crs = 4326), 3035)
+    circle <- st_buffer(dat_sf, dist = 1)
+    circle <- st_transform(circle, 4326)
+    
     if(precise){
-      tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=circle))
+      tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=extent(circle)))
       LS7MD<-LS7MD[tiles,]
     }else{
-      #data(ls7pr)
-      pathrow<-names(ls7pr)[unlist(lapply(ls7pr,tileInExt,ext2=circle))]
+      pathrow<-names(ls7pr)[unlist(lapply(ls7pr,tileInExt,ext2=extent(circle)))]
       pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
       pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) unname(pathrow[x[1],]))
       LS7MD<-do.call(rbind,lapply(pathrow,
@@ -173,7 +172,6 @@ ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
       tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=extent(arg$region)))
       LS7MD<-LS7MD[tiles,]
     }else{
-      #data(ls7pr)
       pathrow<-names(ls7pr)[unlist(lapply(ls7pr,tileInExt,ext2=extent(arg$region)))]
       pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
       pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) unname(pathrow[x[1],]))
@@ -186,9 +184,15 @@ ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
     warning("Location not defined!")
   }
 
-  arg<-arg[names(arg)[which(!names(arg)%in%c("pathrow","extent"))]]
-  if(length(arg)>0)
-    LS7MD<-genFilterDF(LS7MD,verbose=verbose,...)
+  if("cloudCover"%in%names(arg)){
+    LS7MD<-LS7MD[LS7MD$cloudCover>min(arg$cloudCover)&LS7MD$cloudCover<max(arg$cloudCover),]
+  }
+  
+  arg<-arg[names(arg)[which(!names(arg)%in%c("pathrow","region","cloudCover"))]]
+  if(length(arg)>0){
+    arg$df<-LS8MD
+    LS8MD<-do.call(genFilterDF,arg)
+  }
 
   LS7MD<-LS7MD[!duplicated(LS7MD[,c('sceneID')]),]
   #filter dates

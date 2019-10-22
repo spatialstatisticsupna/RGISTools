@@ -34,12 +34,14 @@
 #'   \item \code{dates} a vector with the capturing dates being considered
 #'   for searching. This argument is mandatory if 
 #'   \code{startDate} and \code{endDate} are not defined.
-#'   \item  startDate a \code{Date} class object with the starting date of the 
+#'   \item startDate a \code{Date} class object with the starting date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
-#'   \item  endDate a \code{Date} class object with the ending date of the 
+#'   \item endDate a \code{Date} class object with the ending date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
+#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest.
 #'   \item \code{pathrow} a \code{list} of vectors with the path and row numbers
 #'   of the tiles concerning the region of interest. This argument is mandatory
 #'   if \code{extent} or \code{lonlat} are not provided. Ex. 
@@ -120,9 +122,6 @@ ls8Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
                as.Date(LS8MD$acquisitionDate)<=endDate,]
   
 
-  #filter by position
-  #pathrow list(c(path1,row1),c(path2,row2)...)
-  #extent in latlog
   if("pathrow"%in%names(arg)){
     stopifnot(class(arg$pathrow)=="list")
     LS8MD<-do.call(rbind,lapply(arg$pathrow,function(rp,LS8MD,verbose)return(genFilterDF(LS8MD,row=rp[2],path=rp[1],verbose=verbose)),
@@ -135,7 +134,6 @@ ls8Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
       tiles<-unlist(apply(LS8MD[grepl("Corner",names(LS8MD))],1,tileIn,ext))
       LS8MD<-LS8MD[tiles,]
     }else{
-      #data(ls8pr)
       pathrow<-names(ls8pr)[unlist(lapply(ls8pr,tileInExt,ext2=extent(arg$region)))]
       pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
       pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) pathrow[x[1],])
@@ -146,16 +144,17 @@ ls8Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
   }else if("lonlat"%in%names(arg)){
     stopifnot(class(arg$lonlat)=="numeric")
     stopifnot(length(arg$lonlat)==2)
-    circle=list()
-    circle[[1]]<-Polygons(list(Polygon(genCreateSpatialCircle(x=arg$lonlat[1],y=arg$lonlat[2]))),ID=1)
 
-    circle<-SpatialPolygons(circle,proj4string=st_crs("+init=epsg:4326")$proj4string)
+    dat_sim <- data.frame(lat = arg$lonlat[2],long = arg$lonlat[1])
+    dat_sf <- st_transform(st_as_sf(dat_sim, coords = c("long", "lat"), crs = 4326), 3035)
+    circle <- st_buffer(dat_sf, dist = 1)
+    circle <- st_transform(circle, 4326)
+    
     if(precise){
-      tiles<-unlist(apply(LS8MD[grepl("Corner",names(LS8MD))],1,tileIn,ext=circle))
+      tiles<-unlist(apply(LS8MD[grepl("Corner",names(LS8MD))],1,tileIn,ext=extent(circle)))
       LS8MD<-LS8MD[tiles,]
     }else{
-      #data(ls8pr)
-      pathrow<-names(ls8pr)[unlist(lapply(ls8pr,tileInExt,ext2=circle))]
+      pathrow<-names(ls8pr)[unlist(lapply(ls8pr,tileInExt,ext2=extent(circle)))]
       pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
       pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) unname(pathrow[x[1],]))
       LS8MD<-do.call(rbind,lapply(pathrow,
@@ -181,9 +180,16 @@ ls8Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
   }else{
     warning("Location not defined!")
   }
-  arg<-arg[names(arg)[which(!names(arg)%in%c("pathrow","region"))]]
-  if(length(arg)>0)
-    LS8MD<-genFilterDF(LS8MD,verbose=verbose,...)
+  #filter dates
+  if("cloudCover"%in%names(arg)){
+    LS8MD<-LS8MD[LS8MD$cloudCover>min(arg$cloudCover)&LS8MD$cloudCover<max(arg$cloudCover),]
+  }
+  
+  arg<-arg[names(arg)[which(!names(arg)%in%c("pathrow","region","cloudCover"))]]
+  if(length(arg)>0){
+    arg$df<-LS8MD
+    LS8MD<-do.call(genFilterDF,arg)
+  }
   
   LS8MD<-LS8MD[!duplicated(LS8MD[,c('sceneID')]),]
   
@@ -191,6 +197,8 @@ ls8Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
   if("dates"%in%names(arg)){
     LS8MD<-LS8MD[as.Date(LS8MD$acquisitionDate)%in%arg$dates,]
   }
+  
+  
   
   return(LS8MD)
 }

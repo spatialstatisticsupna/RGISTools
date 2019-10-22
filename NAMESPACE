@@ -16,9 +16,8 @@ importFrom("stats", "na.omit")
 importFrom("mapview","viewRGB")
 importFrom("methods", "formalArgs","as", "is")
 importFrom("httr","POST","authenticate")
-importFrom("sp","bbox","layout.scale.bar","layout.north.arrow",
-           "proj4string","spplot","Polygons","Polygon",
-           "SpatialPolygons","CRS","spTransform")
+importFrom("sp","layout.scale.bar","layout.north.arrow"
+           ,"spplot")
 importFrom("XML","xmlNativeTreeParse","xmlSApply",
            "xmlValue","xmlRoot")
 importFrom("xml2","read_xml","xml_attr",

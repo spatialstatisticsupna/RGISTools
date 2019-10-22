@@ -4,7 +4,7 @@
 \alias{modMosaic}
 \title{Mosaic a set of MODIS images}
 \usage{
-modMosaic(src, AppRoot, extent = NULL, out.name = "outfile",
+modMosaic(src, AppRoot, region = NULL, out.name = "outfile",
   verbose = FALSE, gutils = TRUE, overwrite = FALSE, ...)
 }
 \arguments{
@@ -12,8 +12,8 @@ modMosaic(src, AppRoot, extent = NULL, out.name = "outfile",
 
 \item{AppRoot}{the directory where the mosaicked images are saved.}
 
-\item{extent}{an \code{extent}, \code{Raster*}, or \code{Spatial*} object
-representing the region of interest.}
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+defining the area of interest.}
 
 \item{out.name}{the name of the folder that stores the outputs. By default,
 “outfile” is assigned.}
@@ -82,6 +82,6 @@ modMosaic(tif.src,
           out.name = "Navarre",
           gutils = TRUE,
           overwrite = TRUE,
-          extent = ex.navarre)
+          region = ex.navarre)
 }
 }

@@ -23,8 +23,8 @@
 #' @param out.name the name of the folder that stores the outputs. By default,
 #' “outfile” is assigned.
 #' @param AppRoot the directory to save the mosaicked images.
-#' @param extent an \code{axtent}, \code{Raster*}, or \code{Spatial*} object
-#' representing the region of interest.
+#' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param gutils logical argument. If \code{TRUE}, the function uses `GDAL'
@@ -73,7 +73,7 @@
 #' }
 lsMosaic<-function(src,
                    AppRoot,
-                   extent=NULL,
+                   region=NULL,
                    out.name="outfile",
                    verbose=FALSE,
                    gutils=TRUE,
@@ -144,8 +144,6 @@ lsMosaic<-function(src,
     #filter the images by data type
     if("bFilter"%in%names(arg)){
       flist<-flist[Reduce("|", lapply(arg$bFilter,grepl,flist))]
-      message(dtype)
-      message(arg$bFilter)
       dtype<-dtype[Reduce("|", lapply(arg$bFilter,grepl,dtype))]
     }
 
@@ -189,11 +187,12 @@ lsMosaic<-function(src,
               }
             })
           
-          if(!is.null(extent)){
-            extent<-spTransform(extent,crs(img))
-            img<-crop(img,extent)
+          if(!is.null(region)){
+            region<-transform_multiple_proj(region)
+            c_region<-as(region, 'Spatial')
+            img<-crop(img,c_region)
             if("cutline"%in%names(arg)){
-              img<-mask(img,extent)
+              img<-mask(img,c_region)
             }
           }
           writeRaster(img,out.file.path,overwrite=overwrite)
@@ -212,14 +211,14 @@ lsMosaic<-function(src,
             message(paste0("Chunks ",typechunks))
           }
           
-          if(is.null(extent)){
+          if(is.null(region)){
             temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
             genMosaicGdalUtils(typechunks=typechunks,
                                temp=temp,
                                nodata=nodata,
                                out.name=out.file.path)
           }else{
-            ext<-extent(extent)
+            ext<-extent(region)
             temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",gsub(".tif","",dtype[dt],fixed = TRUE),"_temp.vrt"))
             
             out.tmp<-gsub(".tif","_tmp.tif",out.file.path,fixed = TRUE)
@@ -231,7 +230,7 @@ lsMosaic<-function(src,
             gdal_utils(util = "warp", 
                        source =out.tmp,
                        destination = out.file.path,
-                       options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",proj4string(extent))
+                       options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",st_crs(region)$proj4string)
             )
 
             suppressWarnings(file.remove(out.tmp, showWarnings = FALSE))

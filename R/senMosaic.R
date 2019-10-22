@@ -21,8 +21,8 @@
 #' @param AppRoot the directory to save the mosaicked images.
 #' @param out.name the name of the folder that stores the outputs. By default,
 #' “outfile” is assigned.
-#' @param extent  an \code{extent}, \code{Raster*}, or \code{Spatial*} object
-#' representing the region of interest.
+#' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param gutils logical argument. If \code{TRUE}, the function uses `GDAL' 
@@ -73,7 +73,7 @@
 #' }
 senMosaic<-function(src,
                     AppRoot,
-                    extent=NULL,
+                    region=NULL,
                     out.name="outfile",
                     verbose=FALSE,
                     gutils=TRUE,
@@ -150,16 +150,19 @@ senMosaic<-function(src,
                 stop(cond)
               }
             })
-          if(!is.null(extent)){
-            if(class(extent)!="Extent")
-              extent<-spTransform(extent,crs(img))
-            img<-crop(img,extent)
+          if(!is.null(region)){
+            region<-transform_multiple_proj(region)
+            c_region<-as(region, 'Spatial')
+            img<-crop(img,c_region)
+            if("cutline"%in%names(arg)){
+              img<-mask(img,c_region)
+            }
           }
           writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
           #mosaic with gdalutils no support cutline
-          message(paste0("Merging band ",dtype[dt]))
-          if(is.null(extent)){
+           message(paste0("Merging band ",dtype[dt]))
+          if(is.null(region)){
             temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
             genMosaicGdalUtils(typechunks=typechunks,
                                temp=temp,
@@ -167,7 +170,7 @@ senMosaic<-function(src,
                                out.name=out.file.path)
           }else{
             
-            ext<-extent(extent)
+            ext<-extent(region)
             temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
             
             out.tmp<-gsub(".tif","_temp.tif",out.file.path,fixed = TRUE)
@@ -179,7 +182,7 @@ senMosaic<-function(src,
             gdal_utils(util = "warp", 
                        source =out.tmp,
                        destination = out.file.path,
-                       options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",proj4string(extent))
+                       options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",st_crs(region)$proj4string)
             )
 
             suppressWarnings(file.remove(out.tmp, showWarnings = FALSE))

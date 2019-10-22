@@ -5,7 +5,7 @@
 \title{Preview Landsat-7 or Landsat-8 satellite images}
 \usage{
 lsPreview(searchres, n, lpos = c(3, 2, 1), add.Layer = FALSE,
-  showWarnings = FALSE, ...)
+  verbose = FALSE, ...)
 }
 \arguments{
 \item{searchres}{a \code{data.frame} with the results from 
@@ -14,12 +14,25 @@ lsPreview(searchres, n, lpos = c(3, 2, 1), add.Layer = FALSE,
 \item{n}{a \code{numeric} argument identifying the location of the image in
 \code{searchres}.}
 
-\item{size}{a \code{numeric} argument specifying the size of the preview to
-be displayed, in pixels.}
+\item{lpos}{vector argument. Defines the position of the layers when RGB 
+image is generated allowing false color visualizations.}
+
+\item{add.Layer}{logical argument. If \code{TRUE}, the function plots the 
+image over previous map. Allows combinations of images on a map using 
+\code{\link{senPreview}} and \code{\link{modPreview}} functions.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
+running steps and warnings.}
+
+\item{...}{arguments for nested functions:
+ \itemize{
+  \item arguments of \code{viewRGB} function from \code{mapview} packages are
+  valid arguments
+}}
 }
 \description{
 \code{lsPreview} shows a preview of the \code{n}-th image from a set of 
-search results.
+search results on a interactive map.
 }
 \details{
 The function shows a preview of the \code{n}-th output image from a search

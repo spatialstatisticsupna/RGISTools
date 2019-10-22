@@ -1,15 +1,22 @@
 transform_multiple_proj <- function(obj, proj4){
   # Object to be transformed
   if(is(obj, "sf")) {
-    return(st_transform(obj, proj4))
+    new_obj<-obj
   }else if(is(obj, "Spatial")){
-    return(st_transform(st_as_sf(obj), proj4))
+    new_obj<-st_as_sf(obj)
   }else if(is(obj, "Raster")){ 
     new_obj <- extent(obj)
-    new_obj<-st_as_sf(as(new_obj, 'SpatialPolygons') )
+    new_obj<-st_as_sf(as(new_obj, 'SpatialPolygons'))
     st_crs(new_obj)<-projection(obj)
-    return(st_transform(new_obj, proj4))
   }else{
     stop("Spatial object not supported!")
   }
+
+  if(missing(proj4)){
+    return(obj)
+  }else{
+    return(st_transform(obj, proj4))
+  }
 }
+
+

@@ -15,8 +15,8 @@
 #' @param q.range a vector with the minimum and maximum reflectance quantiles
 #' being considered.
 #' @param rPath the file path where the resulting RGB image is saved.
-#' @param cutline a \code{SpatialPolygonsDataFrame} with the boundary of the
-#'  region of interest.
+#' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest for image masking.
 #'
 #' @examples
 #' # path to the cropped and cutted MODIS images for the region of Navarre
@@ -34,7 +34,7 @@
 #' q.range=c(0.001,0.999)
 #' image<-varRGB(red,green,blue,q.range)
 #' print(plotRGB(image))
-varRGB<-function(red,green,blue,q.range=c(),rPath=NULL,cutline=NULL){
+varRGB<-function(red,green,blue,q.range=c(),rPath=NULL,region=NULL){
   rgb<-list(red,green,blue)
   names(rgb)<-c("red","green","blue")
 
@@ -44,9 +44,10 @@ varRGB<-function(red,green,blue,q.range=c(),rPath=NULL,cutline=NULL){
   }
   rgb<-lapply(rgb,raster::stretch, minv=0, maxv=255)
   image<-raster::stack(rgb)
-  if(!is.null(cutline)){
-    cutline<-spTransform(cutline,CRSobj=crs(image))
-    image<-raster::mask(image,cutline)
+  if(!is.null(region)){
+    region<-transform_multiple_proj(region,projection(image))
+    region<-as(region, 'Spatial')
+    image<-raster::mask(image,region)
   }
   if(!is.null(rPath)){
     writeRaster(image,rPath)

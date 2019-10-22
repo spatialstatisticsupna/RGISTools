@@ -14,7 +14,8 @@
 #' graph. Their positions can be modified with the argument \code{compOpt}.
 #'
 #' @param r a \code{Raster*} class object with the image or image stack to be plotted.
-#' @param region a \code{Polygon} class object defining the area of interest.
+#' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest.
 #' @param ... argument for nested functions:
 #' \itemize{
 #'   \item \code{compOpt} list to fit the size and the location of the GIS 
@@ -47,7 +48,7 @@
 #' my.palette <- rev(brewer.pal(n = 9, name = "YlOrRd"))
 #' genPlotGIS(r = ex.ndvi.navarre[[1]],
 #'            region = ex.navarre,
-#'            proj = CRS("+init=epsg:4670"), # project all components
+#'            proj = st_crs("+init=epsg:4670")$proj4string, # project all components
 #'            col.regions = colorRampPalette(my.palette)
 #' )
 #' }
@@ -55,7 +56,7 @@
 #' # change scale text relative Y
 #' genPlotGIS(r = ex.ndvi.navarre[[1:4]],
 #'            region = ex.navarre,
-#'            proj = CRS("+init=epsg:4670"),
+#'            proj = st_crs("+init=epsg:4670")$proj4string,
 #'            compOpt=list(
 #'            # arrow relatives 0-1
 #'            ArrowRelativeX = 0.85,
@@ -75,20 +76,22 @@ genPlotGIS<-function(r,region=NULL,...){
   arg<-list(...)
   if("proj"%in%names(arg)){
     r<-projectRaster(r,crs=arg$proj)
+    r<-trim(r)
   }
+  
   if(!is.null(region)){
     if("proj"%in%names(arg)){
-      region<-spTransform(region,proj4string(r))
-      r<-crop(r,region)
+      region<-transform_multiple_proj(region,arg$proj)
+      region<- as(region, 'Spatial')
     }else{
-      region<-spTransform(region,proj4string(r))
+      region<-transform_multiple_proj(region,projection(r))
+      region<-as(region, 'Spatial')
     }
   }
   if(!"lwd"%in%names(arg)){lwd=1}else{lwd=arg$lwd}
   args_gis.components <- arg[names(arg) %in% names(formals(.componentPosition))]
   #scale and north arrow
-  gis.components=do.call(.componentPosition,c(ext=extent(r),rasProj=proj4string(r),args_gis.components))
-  #gis.components=.componentPosition(ext=extent(ras),rasProj=proj4string(ras),args_gis.components)
+  gis.components=do.call(.componentPosition,c(ext=extent(r),rasProj=projection(r),args_gis.components))
 
   spplot(r,
          sp.layout=list(list("sp.polygons", region,first = FALSE,lwd=lwd,...),
@@ -122,7 +125,7 @@ genPlotGIS<-function(r,region=NULL,...){
   }
 
 
-  rbbox<-bbox(ext)
+  rbbox<-matrix(st_bbox(ext),2)
   differences<-rbbox[,2]-rbbox[,1]
   posArrow<-c(differences[1]*compOpt$ArrowRelativeX+rbbox[1,1]
               ,differences[2]*compOpt$ArrowRelativeY+rbbox[2,1])

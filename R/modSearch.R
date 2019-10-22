@@ -39,6 +39,8 @@
 #'   \item  endDate a \code{Date} class object with the ending date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
+#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest.
 #'   \item \code{lonlat} a vector with the longitude/latitude
 #'   coordinates of the point of interest. This argument is mandatory if 
 #'   \code{region} or \code{extent} are not defined.
@@ -109,7 +111,7 @@ modSearch<-function(product,collection=6,resType="url",verbose=FALSE,...){
     loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
                 "?product=",product,
                 "&version=",collection,
-                "&bbox=",paste0(c(bbox(arg$extent)),collapse = ","),
+                "&bbox=",paste0(c(st_bbox(arg$extent)),collapse = ","),
                 "&return=",resType,
                 "&date=",format(startDate,"%Y-%m-%d"),
                 ",",format(endDate,"%Y-%m-%d"))
