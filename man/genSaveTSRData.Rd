@@ -82,7 +82,7 @@ src3 <- file.path(dirname(src2),"NDVI")
 # create the Rdata
 genSaveTSRData(src3, ts.name = "ModisNDVI", AppRoot = src1)
 # remove values out of 0-1 range
-ModisNDVI.lim <- genLimitRasterRange(ModisNDVI, mn = 0, mx = 1)
+ModisNDVI.lim <- clamp(ModisNDVI,lower=0,upper=1)
 # plot the ndvi images
 spplot(ModisNDVI.lim)
 s.end <- Sys.time()
