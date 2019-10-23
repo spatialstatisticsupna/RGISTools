@@ -85,10 +85,21 @@ lsCloudMask<-function(src,sensitivity=2800,overwrite=FALSE,verbose=FALSE,...){
   imgdir.list<-list.dirs(src,recursive=FALSE)
   if("dates"%in%names(arg)){imgdir.list<-imgdir.list[genGetDates(imgdir.list)%in%arg$dates]}
   if(verbose){message(paste0("Identifies folders:  \n",imgdir.list))}
+  
+  #manage level 2 bands
+  if(nchar(basename(imgdir.list[1]))!=21){
+    message("Level-2 images detected!")
+    lvl2=TRUE
+    qc<-"pixel_qa"
+  }else{
+    qc<-getRGISToolsOpt("LS8BANDS")["quality"]
+    lvl2=FALSE
+  }
+  
   for(id in imgdir.list){
     #id<-imgdir.list[2]
     tif.list<-list.files(id,pattern = "\\.tif$",full.names = TRUE,ignore.case = TRUE)
-    qc<-getRGISToolsOpt("LS8BANDS")["quality"]
+    
     qcmask<-tif.list[grepl(qc,tif.list,ignore.case = TRUE)]
     if(verbose){message(paste0("QC mask name:  \n",qcmask))}
     if(length(qcmask)==0){
