@@ -116,7 +116,7 @@ modSearch<-function(product,collection=6,resType="url",verbose=FALSE,...){
                 "&date=",format(startDate,"%Y-%m-%d"),
                 ",",format(endDate,"%Y-%m-%d"))
   }else if("region"%in%names(arg)){
-    arg$region<-transform_multiple_proj(arg$region, proj4=st_crs("+init=epsg:4326"))
+    arg$region<-transform_multiple_proj(arg$region, proj4=st_crs(4326))
     loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
                 "?product=",product,
                 "&version=",collection,

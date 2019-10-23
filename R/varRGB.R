@@ -39,7 +39,7 @@ varRGB<-function(red,green,blue,q.range=c(),rPath=NULL,region=NULL){
   names(rgb)<-c("red","green","blue")
 
   if(!is.null(q.range)){
-    rgb<-lapply(rgb,FUN = function(r,q.range){q<-raster::quantile(r,q.range,na.rm=TRUE);r<-genLimitRasterRange(r,mn=q[1],mx=q[2]);return(r)},q.range)
+    rgb<-lapply(rgb,FUN = function(r,q.range){q<-raster::quantile(r,q.range,na.rm=TRUE);r<-clamp(r,lower=q[1],upper=q[2]);return(r)},q.range)
     names(rgb)<-c("red","green","blue")
   }
   rgb<-lapply(rgb,raster::stretch, minv=0, maxv=255)

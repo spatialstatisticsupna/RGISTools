@@ -163,7 +163,7 @@ ls8Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
                                   verbose=verbose))
     }
   }else if("region"%in%names(arg)){
-    arg$region<-transform_multiple_proj(arg$region, proj4=st_crs("+init=epsg:4326"))
+    arg$region<-transform_multiple_proj(arg$region, proj4=st_crs(4326))
     if(precise){
       tiles<-unlist(apply(LS8MD[grepl("Corner",names(LS8MD))],1,tileIn,ext=extent(arg$region)))
       LS8MD<-LS8MD[tiles,]

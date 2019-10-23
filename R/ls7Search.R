@@ -167,7 +167,7 @@ ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
                                   verbose=verbose))
     }
   }else if("region"%in%names(arg)){
-    arg$region<-transform_multiple_proj(arg$region, proj4=st_crs("+init=epsg:4326"))
+    arg$region<-transform_multiple_proj(arg$region, proj4=st_crs(4326))
     if(precise){
       tiles<-unlist(apply(LS7MD[grepl("Corner",names(LS7MD))],1,tileIn,ext=extent(arg$region)))
       LS7MD<-LS7MD[tiles,]
