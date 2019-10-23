@@ -153,6 +153,7 @@ modMosaic<-function(src,
             })
           if(!is.null(region)){
             region<-transform_multiple_proj(region)
+            #TODO remove as spatial using raster v3 package
             c_region<-as(region, 'Spatial')
             img<-crop(img,c_region)
             if("cutline"%in%names(arg)){
