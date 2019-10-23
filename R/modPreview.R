@@ -43,7 +43,11 @@
 modPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   ser<-searchres[n]
   tmp <- tempfile()
-  download.file(ser,tmp,mode="wb")
+  if(verbose){
+    download.file(ser,tmp,mode="wb")
+  }else{
+    suppressWarnings(download.file(ser,tmp,mode="wb"))
+  }
   pic<-stack(tmp)
 
   pr<-modGetPathRow(ser)
