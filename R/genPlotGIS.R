@@ -16,6 +16,7 @@
 #' @param r a \code{Raster*} class object with the image or image stack to be plotted.
 #' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
 #' defining the area of interest.
+#' @param cex A numeric multiplier to control character sizes for axis labels.
 #' @param ... argument for nested functions:
 #' \itemize{
 #'   \item \code{compOpt} list to fit the size and the location of the GIS 
@@ -72,7 +73,7 @@
 #'            scaleLabelSize = 5000
 #'         )
 #' )
-genPlotGIS<-function(r,region=NULL,...){
+genPlotGIS<-function(r,region=NULL,cex=1,...){
   arg<-list(...)
   if("proj"%in%names(arg)){
     r<-projectRaster(r,crs=arg$proj)
@@ -96,7 +97,7 @@ genPlotGIS<-function(r,region=NULL,...){
   spplot(r,
          sp.layout=list(list("sp.polygons", region,first = FALSE,lwd=lwd,...),
                         gis.components),
-         scales=list(draw=TRUE),
+         scales=list(draw=TRUE,cex=cex),
          ...
   )
 }

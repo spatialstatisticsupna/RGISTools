@@ -4,12 +4,18 @@
 \alias{lsCloudMask}
 \title{Create cloud masks for Landsat images}
 \usage{
-lsCloudMask(src, sensitivity = 2800, overwrite = FALSE,
-  verbose = FALSE, ...)
+lsCloudMask(src, AppRoot, out.name, sensitivity = 28000,
+  overwrite = FALSE, verbose = FALSE, ...)
 }
 \arguments{
 \item{src}{the path to the folder with the untarred images from Landsat-7 or
 Landsat-8.}
+
+\item{AppRoot}{the directory where the cloud masks are saved.}
+
+\item{out.name}{the name of the folder that stores the outputs. If the arguemnt is defined 
+as "outname", the name of the folder will be named "outname_CloudMask". 
+If the arguemnt is not defined the folder will be named as "CloudMask".}
 
 \item{sensitivity}{\code{numeric} argument. Defines the sensitivity of the
 cloud detection method.}

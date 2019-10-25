@@ -4,13 +4,15 @@
 \alias{genPlotGIS}
 \title{Plot satellite images with a GIS format}
 \usage{
-genPlotGIS(r, region = NULL, ...)
+genPlotGIS(r, region = NULL, cex = 1, ...)
 }
 \arguments{
 \item{r}{a \code{Raster*} class object with the image or image stack to be plotted.}
 
 \item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
 defining the area of interest.}
+
+\item{cex}{A numeric multiplier to control character sizes for axis labels.}
 
 \item{...}{argument for nested functions:
 \itemize{

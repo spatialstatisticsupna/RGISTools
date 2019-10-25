@@ -10,6 +10,9 @@
 #' `GDAL' and the `\code{gdalUtils}' library properly installed.
 #' @param src the path to the folder with the MODIS with \code{state_1km} images. 
 #' @param AppRoot the directory where cloud masks are saved.
+#' @param out.name the name of the folder that stores the outputs. If the arguemnt is defined 
+#' as "outname", the name of the folder will be named "outname_CloudMask". 
+#' If the arguemnt is not defined the folder will be named as "CloudMask".
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param ... arguments for nested functions.
@@ -74,7 +77,6 @@ modCloudMask<-function(src,AppRoot,out.name,overwrite=FALSE,...){
   src<-pathWinLx(src)
   if(!missing(AppRoot)){
     AppRoot<-pathWinLx(AppRoot)
-    AppRoot<-file.path(AppRoot,"CloudMask")
     if(missing(out.name))
       AppRoot<-file.path(AppRoot,"CloudMask")
     else

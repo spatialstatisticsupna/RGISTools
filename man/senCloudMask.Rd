@@ -4,13 +4,17 @@
 \alias{senCloudMask}
 \title{Create cloud masks for Sentinel-2 images}
 \usage{
-senCloudMask(src, AppRoot, img.res, sensitivity = 50,
+senCloudMask(src, AppRoot, out.name, img.res, sensitivity = 50,
   overwrite = FALSE, ...)
 }
 \arguments{
 \item{src}{the path to the folder with the "\code{S2MSI2A}" images.}
 
 \item{AppRoot}{the directory where the cloud masks are saved.}
+
+\item{out.name}{the name of the folder that stores the outputs. If the arguemnt is defined 
+as "outname", the name of the folder will be named "outname_CloudMask". 
+If the arguemnt is not defined the folder will be named as "CloudMask".}
 
 \item{img.res}{a \code{character} vector argument. Defines the band resolution
 used to create the cloud mask. Ex "20m" or "30m".}

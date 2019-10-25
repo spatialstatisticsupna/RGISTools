@@ -8,6 +8,9 @@
 #' 
 #' @param src the path to the folder with the "\code{S2MSI2A}" images. 
 #' @param AppRoot the directory where the cloud masks are saved.
+#' @param out.name the name of the folder that stores the outputs. If the arguemnt is defined 
+#' as "outname", the name of the folder will be named "outname_CloudMask". 
+#' If the arguemnt is not defined the folder will be named as "CloudMask".
 #' @param img.res a \code{character} vector argument. Defines the band resolution
 #' used to create the cloud mask. Ex "20m" or "30m".
 #' @param sensitivity a \code{numeric} argument. Defines the sensitivity of the
@@ -97,7 +100,6 @@ senCloudMask<-function(src,AppRoot,out.name,img.res,sensitivity=50,overwrite=FAL
   AppRoot<-pathWinLx(AppRoot)
   imgdir.list<-list.dirs(src,recursive=FALSE)
   if("dates"%in%names(arg)){imgdir.list<-imgdir.list[genGetDates(imgdir.list)%in%arg$dates]}
-  AppRoot<-file.path(AppRoot,"CloudMask")
   if(missing(out.name))
     AppRoot<-file.path(AppRoot,"CloudMask")
   else

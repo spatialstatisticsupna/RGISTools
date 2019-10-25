@@ -4,12 +4,16 @@
 \alias{modCloudMask}
 \title{Create cloud masks for MODIS images}
 \usage{
-modCloudMask(src, AppRoot, overwrite = FALSE, ...)
+modCloudMask(src, AppRoot, out.name, overwrite = FALSE, ...)
 }
 \arguments{
 \item{src}{the path to the folder with the MODIS with \code{state_1km} images.}
 
 \item{AppRoot}{the directory where cloud masks are saved.}
+
+\item{out.name}{the name of the folder that stores the outputs. If the arguemnt is defined 
+as "outname", the name of the folder will be named "outname_CloudMask". 
+If the arguemnt is not defined the folder will be named as "CloudMask".}
 
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
 images with the same name.}
