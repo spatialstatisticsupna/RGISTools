@@ -69,23 +69,35 @@
 #' # plot the cloud free b01 layer
 #' spplot(navarre.img*src.cloud.stack)
 #' }
-modCloudMask<-function(src,AppRoot,overwrite=FALSE,...){
+modCloudMask<-function(src,AppRoot,out.name,overwrite=FALSE,...){
   arg<-list(...)
   src<-pathWinLx(src)
-
-  AppRoot<-pathWinLx(AppRoot)
+  if(!missing(AppRoot)){
+    AppRoot<-pathWinLx(AppRoot)
+    AppRoot<-file.path(AppRoot,"CloudMask")
+    if(missing(out.name))
+      AppRoot<-file.path(AppRoot,"CloudMask")
+    else
+      AppRoot<-file.path(AppRoot,paste0(out.name,"_CloudMask"))
+    dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
+  }
+  
   imgdir.list<-list.dirs(src,recursive=FALSE)
   if("dates"%in%names(arg)){imgdir.list<-imgdir.list[genGetDates(imgdir.list)%in%arg$dates]}
-  AppRoot<-file.path(AppRoot,"CloudMask")
-  dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
+
   for(id in imgdir.list){
-    out.img<-file.path(AppRoot,paste0(basename(id),paste0("_",getRGISToolsOpt("MOD09BANDS")["cloud"],".tif")))
+    tif.list<-list.files(id,pattern = "\\.tif$",full.names = TRUE)
+    cloudmask<-tif.list[grepl(getRGISToolsOpt("MOD09BANDS")["quality"],tif.list)]
+    if(missing(AppRoot)){
+      out.img<-gsub(paste0(getRGISToolsOpt("MOD09BANDS")["quality"],".tif"),"_CLD.tif",cloudmask,ignore.case =TRUE)
+    }else{
+      out.img<-file.path(AppRoot,paste0(basename(id),paste0("_",getRGISToolsOpt("MOD09BANDS")["cloud"],".tif")))
+    }
+    
     if(!file.exists(out.img)|overwrite){
       #id<-imgdir.list[1]
       message(paste0("Creating cloud mask of date ",modGetDates(basename(id)),"."))
-      tif.list<-list.files(id,pattern = "\\.tif$",full.names = TRUE)
-      cloudmask<-tif.list[grepl(getRGISToolsOpt("MOD09BANDS")["quality"],tif.list)]
-      
+
       r <- raster(cloudmask)
       stime<-Sys.time()
       v <- matrix(as.numeric(matrix(intToBits(getValues(r)), ncol = 32, byrow = T)[,1:3]),ncol = 3)

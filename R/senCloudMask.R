@@ -78,7 +78,7 @@
 #' # plot b2 cloud free layers
 #' spplot(b2.cloud.free)
 #' }
-senCloudMask<-function(src,AppRoot,img.res,sensitivity=50,overwrite=FALSE,...){
+senCloudMask<-function(src,AppRoot,out.name,img.res,sensitivity=50,overwrite=FALSE,...){
   # src<-"D:/Downscaling/Sentinel2_L2/Navarre"/2017209
   # AppRoot<-"D:/Downscaling/Sentinel2_L2"
   # library(RGISTools)
@@ -93,10 +93,16 @@ senCloudMask<-function(src,AppRoot,img.res,sensitivity=50,overwrite=FALSE,...){
   }
   
   src<-pathWinLx(src)
+  if(missing(AppRoot))stop("AppRoot needed for defining output file.")
   AppRoot<-pathWinLx(AppRoot)
   imgdir.list<-list.dirs(src,recursive=FALSE)
   if("dates"%in%names(arg)){imgdir.list<-imgdir.list[genGetDates(imgdir.list)%in%arg$dates]}
   AppRoot<-file.path(AppRoot,"CloudMask")
+  if(missing(out.name))
+    AppRoot<-file.path(AppRoot,"CloudMask")
+  else
+    AppRoot<-file.path(AppRoot,paste0(out.name,"_CloudMask"))
+  
   dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
   for(id in imgdir.list){
     out.img<-file.path(AppRoot,paste0(basename(id),"_",img.res,"_CloudMask.tif"))

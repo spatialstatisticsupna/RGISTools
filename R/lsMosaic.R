@@ -199,14 +199,14 @@ lsMosaic<-function(src,
           writeRaster(img,out.file.path,overwrite=overwrite)
         }else{
           #mosaic with gdalutils no supporting cutline
-          if(any(grepl(dtype[dt],qcband))){
+          if(any(grepl(qcband,dtype[dt]))){
             nodata<-1
           }else if(lvl2){
             nodata<--9999
           }else{
-            nodata<-0
-            
+           nodata<-0
           }
+          
           if(verbose){
             message(paste0("Nodata to ",nodata))
             message(paste0("Chunks ",typechunks))
