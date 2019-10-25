@@ -70,7 +70,7 @@
 #'            # scale text relatives 0-1
 #'            scaleLabelRelativeX = 0.1,
 #'            scaleLabelRelativeY = 0.2,
-#'            scaleLabelSize = 5000
+#'            scaleLabelSize = 0.8
 #'         )
 #' )
 genPlotGIS<-function(r,region=NULL,cex=1,...){
