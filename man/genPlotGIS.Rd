@@ -4,15 +4,14 @@
 \alias{genPlotGIS}
 \title{Plot satellite images with a GIS format}
 \usage{
-genPlotGIS(r, region = NULL, cex = 1, ...)
+genPlotGIS(r, region, breaks, labels, nbreaks = 40, nlabels = 10,
+  compass.rm = FALSE, scale.bar.rm = FALSE, ...)
 }
 \arguments{
 \item{r}{a \code{Raster*} class object with the image or image stack to be plotted.}
 
 \item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
 defining the area of interest.}
-
-\item{cex}{A numeric multiplier to control character sizes for axis labels.}
 
 \item{...}{argument for nested functions:
 \itemize{
@@ -22,9 +21,11 @@ defining the area of interest.}
   reference system of the plot.
   \item \code{...} any argument accepted by the \code{spplot} function.
 }}
+
+\item{cex}{A numeric multiplier to control character sizes for axis labels.}
 }
 \value{
-\code{trellis} class to with the raster plot.
+\code{tmap} class containing the plot.
 }
 \description{
 This function displays satellite images with the usual format in geographic
@@ -42,48 +43,26 @@ is measured in relative distances (0-1) to the lower left corner of the
 graph. Their positions can be modified with the argument \code{compOpt}.
 }
 \examples{
-# load the ndvi object of Navarre
-data(ex.ndvi.navarre)
-# load a spatial polygon object of Navarre
-data(ex.navarre)
+genPlotGIS(ex.ndvi.navarre,
+           ex.navarre)
 
-# show a panel of 4 maps, one per date
-# the region of interest is shown in the last map
-genPlotGIS(r = ex.ndvi.navarre[[1:4]],
-           region = ex.navarre,
-           which = c(4), # show region only in the 4th image
-           wComp = c(4) # show component only in the 4th image
-)
+genPlotGIS(ex.ndvi.navarre,
+           ex.navarre,
+           tm.compass.size=1,
+           tm.compass.type="rose",
+           tm.scale.bar.text.size=0.4,
+           tm.polygon.region.lwd=6,
+           tm.polygon.region.border.col="#000000",
+           tm.raster.r.palette=rev(terrain.colors(40)),
+           tm.raster.r.title="NDVI")
 
-\dontrun{
-# plot the land surface temperature of the first date available in 2011 in Navarre
-# using color palette
-library('RColorBrewer')
-my.palette <- rev(brewer.pal(n = 9, name = "YlOrRd"))
-genPlotGIS(r = ex.ndvi.navarre[[1]],
-           region = ex.navarre,
-           proj = st_crs("+init=epsg:4670")$proj4string, # project all components
-           col.regions = colorRampPalette(my.palette)
-)
-}
+tmap_mode("view")
+genPlotGIS(ex.ndvi.navarre[[1]],
+           ex.navarre,
+           tm.raster.r.palette=rev(terrain.colors(40)))
 
-# change scale text relative Y
-genPlotGIS(r = ex.ndvi.navarre[[1:4]],
-           region = ex.navarre,
-           proj = st_crs("+init=epsg:4670")$proj4string,
-           compOpt=list(
-           # arrow relatives 0-1
-           ArrowRelativeX = 0.85,
-           ArrowRelativeY = 0.1,
-           ArrowRelativeSize = 0.15,
-           # scale relatives 0-1
-           scaleRelativeX = 0.1,
-           scaleRelativeY = 0.1,
-           scaleRelativeSize = 0.15,
-           # scale text relatives 0-1
-           scaleLabelRelativeX = 0.1,
-           scaleLabelRelativeY = 0.2,
-           scaleLabelSize = 0.8
-        )
-)
+tmap_mode(mode = c("plot"))
+genPlotGIS(ex.ndvi.navarre,
+           ex.navarre,
+           tm.raster.r.palette=rev(terrain.colors(40)))
 }
