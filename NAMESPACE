@@ -10,7 +10,7 @@ export(genCompositions,genSmoothingCovIMA,genFilterStack,
        varNBR2,varNDMI,varNDVI,varNDWI,varRGB,varSAVI,lsCloudMask,senCloudMask,modCloudMask,
        lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders)
 import("raster","curl", "rjson","rvest", "urltools","tools",
-       "fields","sf")
+       "fields","sf","tmap")
 importFrom("stats", "na.omit")
 importFrom("mapview","viewRGB")
 importFrom("methods", "formalArgs","as", "is")

@@ -26,149 +26,167 @@
 #'   \item \code{...} any argument accepted by the \code{spplot} function.
 #' }
 #'
-#' @return \code{trellis} class to with the raster plot.
+#' @return \code{tmap} class containing the plot.
 #'
 #' @examples
-#' # load the ndvi object of Navarre
-#' data(ex.ndvi.navarre)
-#' # load a spatial polygon object of Navarre
-#' data(ex.navarre)
-#'
-#' # show a panel of 4 maps, one per date
-#' # the region of interest is shown in the last map
-#' genPlotGIS(r = ex.ndvi.navarre[[1:4]],
-#'            region = ex.navarre,
-#'            which = c(4), # show region only in the 4th image
-#'            wComp = c(4) # show component only in the 4th image
-#' )
-#'
-#' \dontrun{
-#' # plot the land surface temperature of the first date available in 2011 in Navarre
-#' # using color palette
-#' library('RColorBrewer')
-#' my.palette <- rev(brewer.pal(n = 9, name = "YlOrRd"))
-#' genPlotGIS(r = ex.ndvi.navarre[[1]],
-#'            region = ex.navarre,
-#'            proj = st_crs("+init=epsg:4670")$proj4string, # project all components
-#'            col.regions = colorRampPalette(my.palette)
-#' )
-#' }
+#' genPlotGIS(ex.ndvi.navarre,
+#'            ex.navarre)
 #' 
-#' # change scale text relative Y
-#' genPlotGIS(r = ex.ndvi.navarre[[1:4]],
-#'            region = ex.navarre,
-#'            proj = st_crs("+init=epsg:4670")$proj4string,
-#'            compOpt=list(
-#'            # arrow relatives 0-1
-#'            ArrowRelativeX = 0.85,
-#'            ArrowRelativeY = 0.1,
-#'            ArrowRelativeSize = 0.15,
-#'            # scale relatives 0-1
-#'            scaleRelativeX = 0.1,
-#'            scaleRelativeY = 0.1,
-#'            scaleRelativeSize = 0.15,
-#'            # scale text relatives 0-1
-#'            scaleLabelRelativeX = 0.1,
-#'            scaleLabelRelativeY = 0.2,
-#'            scaleLabelSize = 0.8
-#'         )
-#' )
-genPlotGIS<-function(r,region=NULL,cex=1,...){
-  arg<-list(...)
-  if("proj"%in%names(arg)){
-    r<-projectRaster(r,crs=arg$proj)
-    r<-trim(r)
+#' genPlotGIS(ex.ndvi.navarre,
+#'            ex.navarre,
+#'            tm.compass.size=1,
+#'            tm.compass.type="rose",
+#'            tm.scale.bar.text.size=0.4,
+#'            tm.polygon.region.lwd=6,
+#'            tm.polygon.region.border.col="#000000",
+#'            tm.raster.r.palette=rev(terrain.colors(40)),
+#'            tm.raster.r.title="NDVI")
+#' 
+#' tmap_mode("view")
+#' genPlotGIS(ex.ndvi.navarre[[1]],
+#'            ex.navarre,
+#'            tm.raster.r.palette=rev(terrain.colors(40)))
+#' 
+#' tmap_mode(mode = c("plot"))
+#' genPlotGIS(ex.ndvi.navarre,
+#'            ex.navarre,
+#'            tm.raster.r.palette=rev(terrain.colors(40)))
+genPlotGIS<-function(r,region,breaks,labels,nbreaks=40,nlabels=10,compass.rm=FALSE,scale.bar.rm=FALSE,...){
+  args<-list(...)
+  # layout preconfigured arguments
+  tm_layout_args<-args[names(args)%in%names(formals(tm_layout))]
+  if(!("legend.bg.color" %in% names(tm_layout_args))){
+    tm_layout_args$legend.bg.color="white"
+  }
+  if(!("panel.show" %in% names(tm_layout_args))){
+    tm_layout_args$panel.show=TRUE
+  }
+  if(!("panel.labels" %in% names(tm_layout_args))){
+    tm_layout_args$panel.labels=names(r)
+  }
+  if(!("legend.outside" %in% names(tm_layout_args))){
+    tm_layout_args$legend.outside=TRUE
+  }
+  if(!("legend.outside.size" %in% names(tm_layout_args))){
+    tm_layout_args$legend.outside.size=0.08
+  }
+  if(!("legend.outside.position" %in% names(tm_layout_args))){
+    tm_layout_args$legend.outside.position="right"
   }
   
-  if(!is.null(region)){
-    if("proj"%in%names(arg)){
-      region<-transform_multiple_proj(region,arg$proj)
-      region<- as(region, 'Spatial')
-    }else{
-      region<-transform_multiple_proj(region,projection(r))
-      region<-as(region, 'Spatial')
+  #compass arguments and preconfigured assignation
+  if(!compass.rm){
+    compass_args<-names(formals(tm_compass))
+    names(compass_args)<-paste0("tm.compass.",compass_args)
+    tm_compass_args<-args[names(args)%in%names(compass_args)]
+    names(tm_compass_args)<-compass_args[names(tm_compass_args)]
+    if(!("type" %in% names(tm_compass_args))){
+      tm_compass_args$type="arrow"
+    }
+    if(!("position" %in% names(tm_compass_args))){
+      tm_compass_args$position=c("right", "top")
+    }
+    if(!("size" %in% names(tm_compass_args))){
+      tm_compass_args$size=2
+    }
+    compass<-do.call(tm_compass,tm_compass_args)
+  }else{
+    compass<-NULL
+  }
+  
+  
+  #scale bar arguments and preconfigured assignation
+  if(!scale.bar.rm){
+    scale_bar_args<-names(formals(tm_scale_bar))
+    names(scale_bar_args)<-paste0("tm.scale.bar.",scale_bar_args)
+    tm_scale_bar_args<-args[names(args)%in%names(scale_bar_args)]
+    names(tm_scale_bar_args)<-scale_bar_args[names(tm_scale_bar_args)]
+    if(!("position" %in% names(tm_scale_bar_args))){
+      tm_scale_bar_args$position=c("left", "bottom")
+    }
+    if(!(any(c("text.size","size") %in% names(tm_scale_bar_args)))){
+      tm_scale_bar_args$text.size=0.8
+    }
+    scale.bar<-do.call(tm_scale_bar,tm_scale_bar_args)
+  }else{
+    scale.bar<-NULL
+  }
+  
+  if(!missing(region)){
+    # region default arguments
+    shape_region_args<-names(formals(tm_shape))
+    shape_region_args<-shape_region_args[!(shape_region_args%in%"...")]
+    names(shape_region_args)<-paste0("tm.shape.region.",shape_region_args)
+    tm_shape_region_args<-args[names(args)%in%names(shape_region_args)]
+    names(tm_shape_region_args)<-shape_region_args[names(tm_shape_region_args)]
+    tm_shape_region_args$shp=region
+    
+    polygon_region_args<-c(names(formals(tm_polygons)),names(formals(tm_fill)),names(formals(tm_borders)))
+    polygon_region_args<-unique(polygon_region_args[!(polygon_region_args%in%"...")])
+    names(polygon_region_args)<-paste0("tm.polygon.region.",polygon_region_args)
+    tm_polygon_region_args<-args[names(args)%in%names(polygon_region_args)]
+    names(tm_polygon_region_args)<-polygon_region_args[names(tm_polygon_region_args)]
+    if(!("alpha" %in% names(tm_polygon_region_args))){
+      tm_polygon_region_args$alpha=0
+    }
+    if(!("lwd" %in% names(tm_polygon_region_args))){
+      tm_polygon_region_args$lwd=1
+    }
+    reg<-do.call(tm_shape,tm_shape_region_args) + do.call(tm_polygons,tm_polygon_region_args)
+  }else{
+    reg<-NULL
+  }
+  
+  # default label and breaks for the raster
+  lower<-min(minValue(r))
+  upper<-max(maxValue(r))
+  nbreaks=nbreaks-2
+  if(missing(breaks))
+    breaks<-c(-Inf,seq(from=lower,to=upper,by=((upper-lower)/nbreaks)),Inf)
+  if(missing(labels)){
+    labels<-c("",as.character(round(breaks[-c(1,length(breaks))],digits = 2)))
+    if(length(labels)>nlabels){
+      labels<-rep("",length(labels))
+      labels[c(seq(1,length(labels),as.integer(length(labels)/nlabels)),length(labels))]<-as.character(round(seq(from=lower,to=upper,by=((upper-lower)/nlabels)),digits = 2))
     }
   }
-  if(!"lwd"%in%names(arg)){lwd=1}else{lwd=arg$lwd}
-  args_gis.components <- arg[names(arg) %in% names(formals(.componentPosition))]
-  #scale and north arrow
-  gis.components=do.call(.componentPosition,c(ext=extent(r),rasProj=projection(r),args_gis.components))
-
-  spplot(r,
-         sp.layout=list(list("sp.polygons", region,first = FALSE,lwd=lwd,...),
-                        gis.components),
-         scales=list(draw=TRUE,cex=cex),
-         ...
-  )
+  
+  # raster default arguments
+  shape_r_args<-names(formals(tm_shape))
+  shape_r_args<-shape_r_args[!(shape_r_args%in%c("..."))]
+  names(shape_r_args)<-paste0("tm.shape.r.",shape_r_args)
+  tm_shape_r_args<-args[names(args)%in%names(shape_r_args)]
+  names(tm_shape_r_args)<-shape_r_args[names(tm_shape_r_args)]
+  tm_shape_r_args$shp=r
+  
+  raster_r_args<-names(formals(tm_raster))
+  names(raster_r_args)<-paste0("tm.raster.r.",raster_r_args)
+  tm_raster_r_args<-args[names(args)%in%names(raster_r_args)]
+  names(tm_raster_r_args)<-raster_r_args[names(tm_raster_r_args)]
+  if(!("col" %in% names(tm_raster_r_args))){
+    tm_raster_r_args$col=names(r)
+  }
+  if(!("breaks" %in% names(tm_raster_r_args))){
+    tm_raster_r_args$breaks=breaks
+  }
+  if(!("labels" %in% names(tm_raster_r_args))){
+    tm_raster_r_args$labels=labels
+  }
+  if(!("legend.reverse" %in% names(tm_raster_r_args))){
+    tm_raster_r_args$legend.reverse=TRUE
+  }
+  if(!("title" %in% names(tm_raster_r_args))){
+    tm_raster_r_args$title=""
+  }
+  
+  # Base tmap
+  do.call(tm_shape,tm_shape_r_args) + do.call(tm_raster,tm_raster_r_args) + # raster conf
+    do.call(tm_layout,tm_layout_args) +# layout
+    reg+ #region
+    scale.bar+ #scale
+    compass
 }
 
-
-.componentPosition<-function(ext,rasProj,wComp=NULL,compOpt=NULL,first=NULL,...){
-  arg<-list(...)
-  if(is.null(first)){
-    first=F
-  }
-  #componets relative position an size default
-  if(is.null(compOpt)){
-    compOpt=list(#arrow relatives
-                 ArrowRelativeX=0.85,
-                 ArrowRelativeY=0.1,
-                 ArrowRelativeSize=0.15,
-                 #scale relatives
-                 scaleRelativeX=0.13,
-                 scaleRelativeY=0.1,
-                 scaleRelativeSize=0.18,
-                 #scale text relatives
-                 scaleLabelRelativeX=0.14,
-                 scaleLabelRelativeY=0.16,
-                 scaleLabelSize=5000
-    )
-  }
-
-
-  rbbox<-matrix(st_bbox(ext),2)
-  differences<-rbbox[,2]-rbbox[,1]
-  posArrow<-c(differences[1]*compOpt$ArrowRelativeX+rbbox[1,1]
-              ,differences[2]*compOpt$ArrowRelativeY+rbbox[2,1])
-  if(differences[1]>differences[2]){
-    arrowscale<-differences[2]*compOpt$ArrowRelativeSize
-  }else{
-    arrowscale<-differences[1]*compOpt$ArrowRelativeSize
-  }
-
-  scaleSize<-differences[1]*compOpt$scaleRelativeSize
-  scaleSize<-round(scaleSize,floor(log10(scaleSize))*-1)
-
-  #scale bar
-  ptScale<-c(differences[1]*compOpt$scaleRelativeX+rbbox[1,1],differences[2]*compOpt$scaleRelativeY+rbbox[2,1])
-
-  #labels
-  ptlScale<-c(differences[1]*compOpt$scaleLabelRelativeX+rbbox[1,1],differences[2]*compOpt$scaleLabelRelativeY+rbbox[2,1])
-  ptl2Scale<-c(differences[1]*(compOpt$scaleLabelRelativeX+0.02)+rbbox[1,1]+scaleSize,differences[2]*compOpt$scaleLabelRelativeY+rbbox[2,1])
-
-  #get position
-  pUnits<-unlist(strsplit(rasProj,"+",fixed = TRUE))
-  if(any(grepl("longlat",pUnits))){
-    pUnits<-rawToChar(as.raw(186))
-  }else{
-    pUnits<-pUnits[grepl("units",pUnits)]
-    pUnits<-gsub(" ","",gsub("units=","",pUnits))
-  }
-
-  gis.components<-list(scale = list("SpatialPolygonsRescale",
-                                    layout.scale.bar(),
-                                    offset = ptScale,
-                                    scale = scaleSize,
-                                    fill=c("transparent","black"),first=first,which=wComp),
-                       l3 = list("sp.text",ptlScale, "0",cex=compOpt$scaleLabelSize,first=first,which=wComp),
-                       l4 = list("sp.text", ptl2Scale, paste(scaleSize,pUnits),cex=compOpt$scaleLabelSize,first=first,which=wComp),
-                       arrow = list("SpatialPolygonsRescale",
-                                    layout.north.arrow(),
-                                    offset = posArrow,
-                                    scale = arrowscale,
-                                    first=first,which=wComp))
-  return(gis.components)
-}
 
 
 
