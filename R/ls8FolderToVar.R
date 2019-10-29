@@ -38,8 +38,8 @@
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # main output directory
-#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
-#' print(src)
+#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(wdir)
 #' # download Landsat-8 images
 #' lsDownSearch(satellite = "ls8",
 #'              username = "username",
@@ -48,33 +48,33 @@
 #'              endDate = as.Date("18-01-2018","%d-%m-%Y"),
 #'              pathrow = list(c(200, 31), c(200, 30)),
 #'              untar = TRUE,
-#'              AppRoot = src)
+#'              AppRoot = wdir)
 #' # folder with the Landsat-8 untared images
-#' src.ls8 <-file.path(src,"Landsat8")
-#' tif.src <- file.path(src.ls8, "untar")
+#' src.ls8 <-file.path(wdir,"Landsat8")
+#' src.ls8.untar <- file.path(src.ls8, "untar")
 #' # mosaic the Landsat-8 images
-#' lsMosaic(src = tif.src,
+#' lsMosaic(src = src.ls8.untar,
 #'          AppRoot = src.ls8,
 #'          out.name = "Navarre",
 #'          extent = ex.navarre,
 #'          gutils = TRUE)
 #' # path to the folder with mosaicked images
-#' src2 <- file.path(src.ls8, "Navarre")
+#' src.ls8.navarre <- file.path(src.ls8, "Navarre")
 #' # generate NDVI images of Navarre
-#' src3 <- file.path(src.ls8, "Navarre_Variables")
-#' dir.create(src3)
-#' ls8FolderToVar(src2,
+#' src.ls8.var <- file.path(src.ls8.navarre, "Navarre_Variables")
+#' dir.create(src.ls8.var)
+#' ls8FolderToVar(src.ls8.navarre,
 #'                fun = varNDVI,
-#'                AppRoot = src3,
+#'                AppRoot = src.ls8.var,
 #'                overwrite = TRUE)
 #'                
-#' flist <- list.files(file.path(src3,"NDVI"),
-#'                     pattern = "\\.tif$",
-#'                     full.names = TRUE,
-#'                     recursive = TRUE)
+#' files.ls8.ndvi <- list.files(file.path(src.ls8.var,"NDVI"),
+#'                              pattern = "\\.tif$",
+#'                              full.names = TRUE,
+#'                              recursive = TRUE)
 #' 
-#' file.raster <- raster(flist[1])
-#' spplot(file.raster)
+#' img.ls8.ndvi <- raster(files.ls8.ndvi[1])
+#' spplot(img.ls8.ndvi)
 #' }
 ls8FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
   function.arg<-list(...)

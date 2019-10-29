@@ -57,8 +57,8 @@
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' 
-#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
-#' print(src)
+#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(wdir)
 #' # search and download the images from Landsat-8 between
 #' # 01-01-2018 and 20-01-2018 for the region of Navarre
 #' lsDownSearch(satellite = "ls8",
@@ -67,7 +67,7 @@
 #'              startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'              endDate = as.Date("20-01-2018", "%d-%m-%Y"),
 #'              extent = ex.navarre,
-#'              AppRoot = src)
+#'              AppRoot = wdir)
 #'            
 #' # remove metadata to free memory space
 #' lsRemoveMetadata()

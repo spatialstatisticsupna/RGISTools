@@ -32,33 +32,33 @@
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' 
-#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
-#' print(src)
-#' src.mod <- file.path(src, "Modis","MOD11A1")
-#' src.mod.hdf <- file.path(src.mod, "hdf")
-#' img.list <- modSearch(product = "MOD11A1",
+#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(wdir)
+#' wdir.mod <- file.path(wdir, "Modis","MOD11A1")
+#' wdir.mod.hdf <- file.path(wdir.mod, "hdf")
+#' sres <- modSearch(product = "MOD11A1",
 #'                       startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                       endDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                       collection = 6,
 #'                       extent = ex.navarre,
-#'                       AppRoot = src.mod.hdf)
+#'                       AppRoot = wdir.mod.hdf)
 #'                       
 #' # download the images of the list
-#' src.mod <- file.path(src, "Modis", "MOD11A1")
-#' modDownload(searchres = img.list, 
+#' wdir.mod <- file.path(wdir, "Modis", "MOD11A1")
+#' modDownload(searchres = sres, 
 #'               username = "username", 
 #'               password = "password",
-#'               AppRoot = src.mod.hdf)
+#'               AppRoot = wdir.mod.hdf)
 #' 
-#' src.tif<-file.path(src.mod,"tif")
+#' wdir.mod.tif<-file.path(wdir.mod,"tif")
 #' 
 #' # extract the first image
-#' hdf.files <- list.files(src.mod.hdf, 
+#' files.mod.hdf <- list.files(wdir.mod.hdf, 
 #'                         full.names = TRUE, 
 #'                         pattern = "\\.hdf$")
-#' first.hdf.file <- hdf.files[1]
-#' modExtractHDF(filesHDF = first.hdf.file,
-#'               AppRoot = src.tif)
+#' files.mod.hdf.1 <- files.mod.hdf[1]
+#' modExtractHDF(filesHDF = files.mod.hdf.1,
+#'               AppRoot = wdir.mod.tif)
 #' }
 modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NULL,region=NULL,verbose=FALSE,...){
     arg<-list(...)

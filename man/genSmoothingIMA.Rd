@@ -4,12 +4,12 @@
 \alias{genSmoothingIMA}
 \title{Fill data gaps and smooth outliers in a time series of satellite images}
 \usage{
-genSmoothingIMA(imgTS, Img2Fill = NULL, nDays = 3, nYears = 1,
+genSmoothingIMA(rStack, Img2Fill = NULL, nDays = 3, nYears = 1,
   fact = 5, fun = mean, aFilter = c(0.05, 0.95), factSE = 8,
   predictSE = FALSE, snow.mode = FALSE, out.name = "outname", ...)
 }
 \arguments{
-\item{imgTS}{a \code{RasterStack} class argument containing a time series of
+\item{rStack}{a \code{RasterStack} class argument containing a time series of
 satellite images. Layer names should contain the date of the image in
 "\code{YYYYJJJ}" format.}
 
@@ -70,14 +70,14 @@ data(ex.ndvi.navarre)
 genPlotGIS(ex.ndvi.navarre)
 
 # filled images
-ndvi.filled <- genSmoothingIMA(ex.ndvi.navarre,
+tiles.mod.ndvi.filled  <- genSmoothingIMA(ex.ndvi.navarre,
                                Img2Fill = c(1,2))
 # show the filled images
-genPlotGIS(ndvi.filled)
+genPlotGIS(tiles.mod.ndvi.filled)
 # plot comparison of the cloud and the filled images
-ndvi.comp <- stack(ex.ndvi.navarre[[1]], ndvi.filled[[1]],
-                   ex.ndvi.navarre[[2]], ndvi.filled[[2]])
-genPlotGIS(ndvi.comp, layout=c(2, 2))
+tiles.mod.ndvi.comp <- stack(ex.ndvi.navarre[[1]], tiles.mod.ndvi.filled[[1]],
+                             ex.ndvi.navarre[[2]], tiles.mod.ndvi.filled[[2]])
+genPlotGIS(tiles.mod.ndvi.comp, layout=c(2, 2))
 }
 \references{
 \insertRef{militino2019interpolation}{RGISTools}

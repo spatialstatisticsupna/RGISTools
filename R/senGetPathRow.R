@@ -14,10 +14,10 @@
 #'
 #' @examples
 #' # getting path and row numbers from a couple of Sentinel-2 images
-#' str <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
-#'          "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
-#' pr <- senGetTile(str)
-#' print(pr)
+#' files.sen <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
+#'                "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
+#' pr.sen <- senGetTile(files.sen)
+#' print(pr.sen)
 #'
 senGetTile<-function(str){
   name.first<-gsub(".SAFE","",basename(str))
@@ -54,10 +54,10 @@ senGetTile<-function(str){
 #'
 #' @examples
 #' #example of getting date from Sentinel2 image name
-#' str <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
-#'          "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
-#' pr <- senGetOrbit(str)
-#' print(pr)
+#' files.sen <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
+#'                "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
+#' tile.sen <- senGetOrbit(files.sen)
+#' print(tile.sen)
 #'
 senGetOrbit<-function(str){
   name.first<-gsub(".SAFE","",basename(str))

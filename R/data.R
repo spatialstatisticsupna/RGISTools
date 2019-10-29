@@ -39,7 +39,7 @@ NULL
 
 #' A spatial polygon with the border of Navarre (Spain)
 #'
-#' \code{SpatialPolygonsDataFrame} representing the border of Navarre with
+#' Spatial feature (\code{sf}) representing the border of Navarre with
 #' coordinates in the longitude/latitude format.
 #' @name ex.navarre
 #' @docType data

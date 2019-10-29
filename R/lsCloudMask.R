@@ -13,8 +13,7 @@
 #' @param src the path to the folder with the untarred images from Landsat-7 or
 #' Landsat-8.
 #' @param AppRoot the directory where the cloud masks are saved.
-#' @param out.name the name of the folder that stores the outputs. If the arguemnt is defined 
-#' as "outname", the name of the folder will be named "outname_CloudMask". 
+#' @param out.name the name of the folder that stores the outputs. 
 #' If the arguemnt is not defined the folder will be named as "CloudMask".
 #' @param sensitivity \code{numeric} argument. Defines the sensitivity of the
 #' cloud detection method.
@@ -29,13 +28,13 @@
 #' }
 #' 
 #' @return this function does not return anything. It creates new GTiff files
-#' for a new cloud band (CLD) inside the folder of every image.
+#' for a new cloud band (CLD) inside the AppRoot folder.
 #'
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' print(src)
 #' 
 #' # search and download images from Landsat-8 between
@@ -47,18 +46,14 @@
 #'              endDate = as.Date("20-01-2018", "%d-%m-%Y"),
 #'              pathrow = list(c(200, 31), c(200, 30)),
 #'              untar = TRUE,
-#'              AppRoot = src)
+#'              AppRoot = wdir)
 #'            
 #' # define the path where the GTiff images are located
-#' src.ls8 <- file.path(src,"Landsat8")
-#' src.untar <- file.path(src.ls8,"untar")
-#' # calculate the cloud mask from QC layer
-#' lsCloudMask(src=src.untar,
-#'             overwrite=TRUE,
-#'             AppRoot = src.ls8)
+#' src.ls8 <- file.path(wdir,"Landsat8")
+#' src.ls8.untar <- file.path(src.ls8,"untar")
 #'             
 #' # mosaic and crop the imagery
-#' lsMosaic(src = src.untar,
+#' lsMosaic(src = src.ls8.untar,
 #'          AppRoot = src.ls8,
 #'          out.name = "Navarre",
 #'          extent = ex.navarre,
@@ -67,20 +62,26 @@
 #'          overwrite = TRUE) # overwrite
 #'          
 #' # generate the path where mosaicked images are located
-#' src.navarre <- file.path(src,"Landsat8","Navarre")
+#' src.ls8.navarre <- file.path(src.ls8, "Navarre")
+#' 
+#' # calculate the cloud mask from QC layer
+#' lsCloudMask(src=src.ls8.navarre,
+#'             overwrite=TRUE,
+#'             AppRoot = src.ls8) 
+#'             
 #' # load the B1 layer and calculate the CLD layer
-#' tiles.path <- list.files(src.navarre,
-#'                          full.names = TRUE,
-#'                          recursive = TRUE,
-#'                          pattern = "\\.tif$")
-#' cloud.tiles <- tiles.path[grepl("CLD",tiles.path)]
-#' b1.tiles <- tiles.path[grepl("B1.tif",tiles.path)]
-#' cloud.tiles.ras <- lapply(cloud.tiles,raster)
-#' b1.tiles.ras <- lapply(b1.tiles,raster)
+#' files.ls8.navarre.path <- list.files(src.ls8.navarre,
+#'                                      full.names = TRUE,
+#'                                      recursive = TRUE,
+#'                                      pattern = "\\.tif$")
+#' tiles.ls8.cld <- files.ls8.navarre.path[grepl("CLD",tiles.path)]
+#' tiles.ls8.b1 <- files.ls8.navarre.path[grepl("B1.tif",tiles.path)]
+#' img.ls8.cld <- lapply(tiles.ls8.cld,raster)
+#' img.ls8.b1 <- lapply(tiles.ls8.b1,raster)
 #' 
 #' # calculate cloud free b1 layers
-#' b1.cloud.free <- b1.tiles.ras[[1]] * cloud.tiles.ras[[1]]
-#' spplot(b1.cloud.free)
+#' img.ls8.b1.cloud.free <- img.ls8.b1[[1]] * img.ls8.cld[[1]]
+#' spplot(img.ls8.b1.cloud.free)
 #' }
 lsCloudMask<-function(src,AppRoot,out.name,sensitivity=28000,overwrite=FALSE,verbose=FALSE,...){
   arg<-list(...)
@@ -90,7 +91,7 @@ lsCloudMask<-function(src,AppRoot,out.name,sensitivity=28000,overwrite=FALSE,ver
     if(missing(out.name))
       AppRoot<-file.path(AppRoot,"CloudMask")
     else
-      AppRoot<-file.path(AppRoot,paste0(out.name,"_CloudMask"))
+      AppRoot<-file.path(AppRoot,out.name)
     dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
   }
   imgdir.list<-list.dirs(src,recursive=FALSE)

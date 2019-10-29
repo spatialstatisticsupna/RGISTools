@@ -10,8 +10,7 @@
 #' `GDAL' and the `\code{gdalUtils}' library properly installed.
 #' @param src the path to the folder with the MODIS with \code{state_1km} images. 
 #' @param AppRoot the directory where cloud masks are saved.
-#' @param out.name the name of the folder that stores the outputs. If the arguemnt is defined 
-#' as "outname", the name of the folder will be named "outname_CloudMask". 
+#' @param out.name the name of the folder that stores the outputs. 
 #' If the arguemnt is not defined the folder will be named as "CloudMask".
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
@@ -20,12 +19,14 @@
 #'   \item \code{dates} a vector with the dates being considered
 #'   for creating cloud mask. This argument is optional.
 #' }
+#' @return this function does not return anything. It creates new GTiff files
+#' for a new cloud band (CLD) inside the AppRoot folder.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
-#' print(src)
+#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(wdir)
 #' 
 #' # search and download images from MODIS between
 #' # 01-01-2018 and 03-01-2018 for the region of Navarre
@@ -34,43 +35,43 @@
 #'             endDate = as.Date("03-01-2017", "%d-%m-%Y"),
 #'             username = "username",
 #'             password = "password",
-#'             AppRoot = src,
+#'             AppRoot = wdir,
 #'             extract.tif = TRUE,
 #'             collection = 6,
 #'             extent = ex.navarre)
 #'             
 #' # assign src1 as the output folder for modMosaic
-#' src.mod <- file.path(src, "Modis")
-#' src.tiles <- file.path(src.mod, "MOD09GA")
-#' tif.src.tiles <- file.path(src.tiles, "tif")
+#' wdir.mod <- file.path(wdir, "Modis")
+#' wdir.mod.tiles <- file.path(src.mod, "MOD09GA")
+#' wdir.mod.tif <- file.path(wdir.mod.tiles, "tif")
 #' # mosaic the MODIS images
-#' modMosaic(tif.src.tiles, # the input folder 
-#'           AppRoot = src.tiles, # the output folder 
+#' modMosaic(wdir.mod.tif, # the input folder 
+#'           AppRoot = wdir.mod.tiles, # the output folder 
 #'           out.name = "Navarre", # creates Navarre folder in AppRoot
 #'           gutils = TRUE,
 #'           extent = ex.navarre)
 #' 
 #' 
-#' src.tiles.navarre <- file.path(src.tiles, "Navarre")
+#' wdir.mod.navarre <- file.path(wdir.mod.tiles, "Navarre")
 #' # generate the cloud masks      
-#' modCloudMask(src = src.tiles.navarre,
-#'              AppRoot = src.tiles,
+#' modCloudMask(src = wdir.mod.navarre,
+#'              AppRoot = wdir.mod.tiles,
 #'              overwrite = TRUE)
 #'              
-#' src.cloud <- file.path(src.tiles,"CloudMask")
-#' src.cloud.stack <- stack(list.files(src.cloud, full.names=TRUE, pattern="CLD"))
+#' files.mod.cld <- file.path(wdir.mod.tiles,"CloudMask")
+#' img.mod.cld <- stack(list.files(files.mod.cld, full.names=TRUE, pattern="CLD"))
 #' 
 #' # select b01
-#' navarre.img <- stack(list.files(tif.src.tiles, 
-#'                                 full.names=TRUE, 
-#'                                 recursive = TRUE, 
-#'                                 pattern="b01_1"))
+#' img.mod.navarre <- stack(list.files(img.mod.cld, 
+#'                                     full.names=TRUE, 
+#'                                     recursive = TRUE, 
+#'                                     pattern="b01_1"))
 #' 
 #' # project to 500m
-#' src.cloud.stack <- projectRaster(src.cloud.stack,navarre.img)
+#' img.mod.cld.500 <- projectRaster(img.mod.cld,img.mod.navarre)
 #' 
 #' # plot the cloud free b01 layer
-#' spplot(navarre.img*src.cloud.stack)
+#' spplot(img.mod.navarre*img.mod.cld.500)
 #' }
 modCloudMask<-function(src,AppRoot,out.name,overwrite=FALSE,...){
   arg<-list(...)
@@ -80,7 +81,7 @@ modCloudMask<-function(src,AppRoot,out.name,overwrite=FALSE,...){
     if(missing(out.name))
       AppRoot<-file.path(AppRoot,"CloudMask")
     else
-      AppRoot<-file.path(AppRoot,paste0(out.name,"_CloudMask"))
+      AppRoot<-file.path(AppRoot,out.name)
     dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
   }
   

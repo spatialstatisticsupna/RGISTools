@@ -22,6 +22,9 @@ is mandatory if \code{username} and \code{password} are not defined.}
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the
 running steps and warnings.}
 }
+\value{
+this function returns a \code{dataframe} with the updated order information from ESPA.
+}
 \description{
 \code{lsEspaUpdateOrders} checks the current status of a request made to EROS
 Centre Science Processing Architecture (ESPA) to pre-process Landsat level-1

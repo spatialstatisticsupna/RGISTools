@@ -20,6 +20,10 @@ lsEspaOrderImages(search.res, username, password, product = c("sr",
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the
 running steps and warnings.}
 }
+\value{
+this function does not return anything.Ask for processing Landsat level 2 
+images before the downloading.
+}
 \description{
 \code{lsEspaOrder} makes a request to the EROS Centre Science Processing
 Architecture (ESPA) to further process level-1 Landsat scenes.
@@ -53,15 +57,15 @@ short-names:
 }
 \examples{
 \dontrun{
-src <- paste0(tempdir(),"/Path_for_downloading_folder")
+wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
 # search Landsat 7 level-1
-search.res <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
-                        endDate = as.Date("07-01-2017", "\%d-\%m-\%Y"),
-                        lonlat = c(-1.64323, 42.81687),
-                        AppRoot = src)
+sres <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
+                  endDate = as.Date("07-01-2017", "\%d-\%m-\%Y"),
+                  lonlat = c(-1.64323, 42.81687),
+                  AppRoot = wdir)
 # request to ESPA the pre-pocessing of level-1 images 
 # to get the surface reflectance
-order <- lsEspaOrderImages(search.res = search.res,
+order <- lsEspaOrderImages(search.res = sres,
                            username = "username", 
                            password = "password", 
                            product = 'sr',

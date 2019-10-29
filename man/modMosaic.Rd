@@ -61,24 +61,24 @@ of `GDAL' is required. This method is faster than the native `R' functions.
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 # main output directory
-src <- paste0(tempdir(),"/Path_for_downloading_folder")
-print(src)
+wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(wdir)
 # download MODIS images
 modDownSearch(product = "MOD09GA",
               startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
               endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
               username = "username",
               password = "password",
-              AppRoot = src,
+              AppRoot = wdir,
               extract.tif = TRUE,
               collection = 6,
               extent = ex.navarre)
 # folder with the MODIS images extracted 
-src.mod <- file.path(src, "Modis", "MOD09GA")
-tif.src <- file.path(src.mod, "tif")
+wdir.mod <- file.path(wdir, "Modis", "MOD09GA")
+wdir.mod.tif <- file.path(wdir.mod, "tif")
 # mosaic the MODIS images
-modMosaic(tif.src,
-          AppRoot = src.mod,
+modMosaic(wdir.mod.tif,
+          AppRoot = wdir.mod,
           out.name = "Navarre",
           gutils = TRUE,
           overwrite = TRUE,

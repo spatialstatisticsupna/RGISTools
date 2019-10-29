@@ -52,6 +52,11 @@ study period. This argument is mandatory if
   \code{bFilter="b01_1"}.
 }}
 }
+\value{
+this function does not return anything. It saves the imagery as
+`tar.gz’ (and GTiff files) in a folder called `raw’ (`tif’) in the
+ \code{AppRoot} directory.
+}
 \description{
 \code{modDownSearch} searches and downloads MODIS images concerning a particular
 location and time interval from the `EarthData' repository. Images are
@@ -74,28 +79,28 @@ their server. You can get your `EarthData' credentials
 \dontrun{
 # load a spatial polygon object of Navarre
 data(ex.navarre)
-src <- paste0(tempdir(),"/Path_for_downloading_folder")
+wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
 print(src)
 modDownSearch(product = "MOD09GA",
               startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
               endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
               username = "username",
               password = "password",
-              AppRoot = src,
+              AppRoot = wdir,
               extract.tif = TRUE,
               collection = 6,
               extent = ex.navarre)
-tif.src <- file.path(src,"Modis","MOD09GA","tif")
-files <- list.files(tif.src,
-                    pattern = "\\\\.tif$",
-                    full.names = TRUE,
-                    recursive = TRUE)[c(16,19,18)]
-files.stack <- stack(files)
+wdir.mod.tif <- file.path(wdir,"Modis","MOD09GA","tif")
+files.mod <- list.files(wdir.mod.tif,
+                        pattern = "\\\\.tif$",
+                        full.names = TRUE,
+                        recursive = TRUE)[c(16,19,18)]
+img.mod <- stack(files.mod)
 qrange <- c(0.001, 0.999)
-imagen <- varRGB(files.stack[[1]], 
-                 files.stack[[2]],
-                 files.stack[[3]],
-                 qrange)
-plotRGB(imagen)
+img.mod.rgb <- varRGB(img.mod[[1]], 
+                      img.mod[[2]],
+                      img.mod[[3]],
+                      qrange)
+plotRGB(img.mod.rgb)
 }
 }

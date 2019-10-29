@@ -19,8 +19,8 @@ tile's path and row number, in 'hXXvYY' format (MODIS naming convention).
 }
 \examples{
 # getting the path and row number of the tile of a Landsat-8 image
-str <- "MYD09GA.A2003136.h17v04.005.2008324054225"
-pr <- modGetPathRow(str)
-print(pr)
+files.mod <- "MYD09GA.A2003136.h17v04.005.2008324054225"
+pr.mod <- modGetPathRow(files.mod)
+print(pr.mod)
 
 }

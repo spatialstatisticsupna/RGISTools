@@ -15,7 +15,8 @@ genGetDates(str, ...)
 }}
 }
 \value{
-a \code{Date} class object with the date of the image.
+a \code{Date} class object with the date of the image or \code{character} class,
+if \code{format} argument is used.
 }
 \description{
 \code{genGetDates} extracts the date of one or several images when the name

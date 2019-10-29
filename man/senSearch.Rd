@@ -60,13 +60,13 @@ are needed and they can be obtained
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 # perform the search query
-searchres <- senSearch(startDate = as.Date("2018210", "\%Y\%j"),
-                       endDate = as.Date("2018218", "\%Y\%j"),
-                       platform = "Sentinel-2",
-                       extent = ex.navarre,
-                       product = "S2MSI1C",
-                       username = "username",
-                       password = "password")
-head(searchres)
+sres <- senSearch(startDate = as.Date("2018210", "\%Y\%j"),
+                  endDate = as.Date("2018218", "\%Y\%j"),
+                  platform = "Sentinel-2",
+                  extent = ex.navarre,
+                  product = "S2MSI1C",
+                  username = "username",
+                  password = "password")
+head(sres)
 }
 }

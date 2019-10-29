@@ -13,7 +13,7 @@
 #'
 #' @references \insertRef{militino2019interpolation}{RGISTools}
 #'
-#' @param imgTS a \code{RasterStack} class argument containing a time series of
+#' @param rStack a \code{RasterStack} class argument containing a time series of
 #' satellite images. Layer names should contain the date of the image in
 #' "\code{YYYYJJJ}" format.
 #' @param Img2Fill a \code{vector} class argument defining the images to be 
@@ -50,18 +50,18 @@
 #' genPlotGIS(ex.ndvi.navarre)
 #'
 #' # filled images
-#' ndvi.filled <- genSmoothingIMA(ex.ndvi.navarre,
+#' tiles.mod.ndvi.filled  <- genSmoothingIMA(ex.ndvi.navarre,
 #'                                Img2Fill = c(1,2))
 #' # show the filled images
-#' genPlotGIS(ndvi.filled)
+#' genPlotGIS(tiles.mod.ndvi.filled)
 #' # plot comparison of the cloud and the filled images
-#' ndvi.comp <- stack(ex.ndvi.navarre[[1]], ndvi.filled[[1]],
-#'                    ex.ndvi.navarre[[2]], ndvi.filled[[2]])
-#' genPlotGIS(ndvi.comp, layout=c(2, 2))
-genSmoothingIMA<-function(imgTS,
+#' tiles.mod.ndvi.comp <- stack(ex.ndvi.navarre[[1]], tiles.mod.ndvi.filled[[1]],
+#'                              ex.ndvi.navarre[[2]], tiles.mod.ndvi.filled[[2]])
+#' genPlotGIS(tiles.mod.ndvi.comp, layout=c(2, 2))
+genSmoothingIMA<-function(rStack,
                           Img2Fill = NULL,
                           nDays = 3,
-                          nYears=1,
+                          nYears = 1,
                           fact = 5,
                           fun=mean,
                           aFilter = c(.05,.95),
@@ -81,14 +81,14 @@ genSmoothingIMA<-function(imgTS,
   }
   # select images to predict
   if(is.null(Img2Fill)){
-    Img2Fill<-1:nlayers(imgTS)
+    Img2Fill<-1:nlayers(rStack)
   }else{
-    aux<-Img2Fill[Img2Fill%in%1:nlayers(imgTS)]
+    aux<-Img2Fill[Img2Fill%in%1:nlayers(rStack)]
     if(is.null(aux)){stop("Target images in Img2Fill do not exist.")}
     if(length(aux)!=length(Img2Fill)){warning("Some of target images in Img2Fill do not exist in imgTS.")}
     Img2Fill<-aux
   }
-  alldates<-genGetDates(names(imgTS))
+  alldates<-genGetDates(names(rStack))
   if(all(is.na(alldates))){stop("The name of the layers has to include the date and it must be in julian days (%Y%j) .")}
   fillstack<-raster()
   for(i in Img2Fill){
@@ -97,7 +97,7 @@ genSmoothingIMA<-function(imgTS,
     message(paste0("Predicting period ",target.date))
 
     # define temporal neighbourhood
-    neighbours<-dateNeighbours(ts.raster=imgTS,
+    neighbours<-dateNeighbours(ts.raster=rStack,
                                target.date=target.date,
                                nPeriods=nDays,
                                nYears=nYears)
@@ -105,7 +105,7 @@ genSmoothingIMA<-function(imgTS,
     # calculate mean image
     meanImage<-raster::calc(neighbours,fun=fun,na.rm=TRUE)
     # get target image
-    targetImage<-raster::subset(imgTS,which(format(genGetDates(names(imgTS)),"%Y%j")%in%format(target.date,"%Y%j")))
+    targetImage<-raster::subset(rStack,which(format(genGetDates(names(rStack)),"%Y%j")%in%format(target.date,"%Y%j")))
     # calculate anomaly
     anomaly<-targetImage-meanImage
     # remove extreme values
@@ -151,7 +151,7 @@ genSmoothingIMA<-function(imgTS,
   if(snow.mode){
     endCluster()
   }
-  names(fillstack)<-names(imgTS)[Img2Fill]
+  names(fillstack)<-names(rStack)[Img2Fill]
   etime<-Sys.time()
   message(paste0(length(Img2Fill)," images processed in ",MinSeg(etime,stime)))
   return(fillstack)

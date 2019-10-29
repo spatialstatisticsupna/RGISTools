@@ -46,6 +46,11 @@ becomes corrupted.}
   for downloading. 
 }}
 }
+\value{
+this function does not return anything. It saves the imagery as
+`tar.gz’ (and GTiff files) in a folder called `raw’ (`untar’) in the
+ \code{AppRoot} directory.
+}
 \description{
 \code{lsDownload} downloads the results from \code{\link{ls7Search}} and
 \code{\link{ls8Search}} functions. The images are saved as GTiff files in the
@@ -70,79 +75,79 @@ due to the presence of both, compressed and decompressed images. Set
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 
-src <- paste0(tempdir(),"/Path_for_downloading_folder")
-print(src)
+wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(wdir)
 
 # search and download the images from Landsat-8 between
 # 2011 and 2013 in the region of Navarre
-search.res <- ls8Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
-                        endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
-                        extent = ex.navarre,
-                        browseAvaliable = "Y",
-                        AppRoot = src)
+sres <- ls8Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+                  endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
+                  extent = ex.navarre,
+                  browseAvaliable = "Y",
+                  AppRoot = wdir)
 
 # download 1 image
-lsDownload(searchres = search.res[1,], 
+lsDownload(searchres = sres[1,], 
            username = "user", 
            password = "pass", 
-           AppRoot = src,
+           AppRoot = wdir,
            untar = TRUE)
 # download 4 images
-lsDownload(searchres = search.res[1:4,], 
+lsDownload(searchres = sres[1:4,], 
            username = "user", 
            password = "pass",
-           AppRoot = src, 
+           AppRoot = wdir, 
            untar = TRUE)
 # download all the images
-lsDownload(searchres = search.res, 
+lsDownload(searchres = sres, 
            username = "user", 
            password = "pass",
-           AppRoot = src,
+           AppRoot = wdir,
            untar = TRUE)
 
 # search and download the images from Landsat-7 between
 # 2011 and 2013 in the region of Navarre
-src <- paste0(tempdir(),"/Path_for_downloading_folder")
-print(src)
-search.res <- ls7Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
-                        endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
-                        extent = ex.navarre,
-                        browseAvaliable = "Y",
-                        AppRoot = src)
+wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(wdir)
+sres <- ls7Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+                  endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
+                  extent = ex.navarre,
+                  browseAvaliable = "Y",
+                  AppRoot = wdir)
 # download 1 image
-lsDownload(searchres = search.res[1,], 
+lsDownload(searchres = sres[1,], 
            username = "user", 
            password = "pass", 
            untar = TRUE,
-           AppRoot = src)
+           AppRoot = wdir)
 # download 4 images
-lsDownload(searchres = search.res[1:4,], 
+lsDownload(searchres = sres[1:4,], 
            username = "user", 
            password = "pass", 
            untar = TRUE, 
-           AppRoot = src)
+           AppRoot = wdir)
 # download all the images
-lsDownload(searchres = search.res, 
+lsDownload(searchres = sres, 
            username = "user", 
            password = "pass", 
            untar = TRUE, 
-           AppRoot = src)
+           AppRoot = wdir)
 
 # removes the metadata to free memory space
 lsRemoveMetadata()
 
 # select Landsat-7 RGB bands
-src.ls7 <- file.path(src,"Landsat7")
-files <- list.files(src.ls7, 
-                    pattern = "\\\\.TIF$", 
-                    full.names = TRUE, 
-                    recursive = TRUE)[c(6,5,4)]
-files.stack <- stack(files)
+wdir.ls7 <- file.path(wdir,"Landsat7")
+files.ls7 <- list.files(wdir.ls7, 
+                        pattern = "\\\\.TIF$", 
+                        full.names = TRUE, 
+                        recursive = TRUE)[c(6,5,4)]
+files.ls7.rgb <- stack(files.ls7)
 qrange <- c(0.001, 0.999)
-imagen <- varRGB(files.stack[[1]], 
-                 files.stack[[2]],
-                 files.stack[[3]],
-                 qrange)
-plotRGB(imagen)
+img.ls7.rgb <- varRGB(files.ls7.rgb[[1]], 
+                      files.ls7.rgb[[2]],
+                      files.ls7.rgb[[3]],
+                      qrange)
+plotRGB(img.ls7.rgb)
 }
 }

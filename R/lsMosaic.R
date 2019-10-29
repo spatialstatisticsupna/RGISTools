@@ -40,13 +40,15 @@
 #'   \item \code{dates} a vector with the capturing dates being considered
 #'   for mosaicking. If not supplied, all dates are mosaicked.
 #' }
+#' @return this function does not return anything. It saves the imagery in the
+#'  \code{AppRoot} directory.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # main output directory
-#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
-#' print(src)
+#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(wdir)
 #' # download Landsat-8 images
 #' lsDownSearch(satellite = "ls8",
 #'              username = "username",
@@ -55,17 +57,13 @@
 #'              endDate = as.Date("20-01-2018", "%d-%m-%Y"),
 #'              extent = ex.navarre,
 #'              untar = TRUE,
-#'              AppRoot = src)
+#'              AppRoot = wdir)
 #' # folder with the Landsat-8 untared images
-#' ls8.src <- file.path(src, "Landsat8")
-#' tif.src <- file.path(ls8.src,"untar")
+#' wdir.ls8 <- file.path(wdir, "Landsat8")
+#' tif.src <- file.path(wdir.ls8,"untar")
 #' # mosaic the Landsat-8 images
 #' lsMosaic(src = tif.src,
-#'          AppRoot = ls8.src,
-#'          out.name = "Navarre")
-#'
-#' lsMosaic(src = tif.src,
-#'          AppRoot = ls8.src,
+#'          AppRoot = wdir.ls8,
 #'          out.name = "Navarre",
 #'          extent = ex.navarre,
 #'          gutils = TRUE, # using gdalUtils

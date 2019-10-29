@@ -44,6 +44,11 @@ defining the area of interest.
   the running steps and warnings.
 }}
 }
+\value{
+this function does not return anything. It saves the imagery as
+`zip’ (and JP2 files) in a folder called `raw’ (`unzip’) in the
+ \code{AppRoot} directory.
+}
 \description{
 \code{senDownSearch} searches and downloads Sentinel images concerning a
 particular location and time interval from `SciHub's' repository.
@@ -60,8 +65,8 @@ The function requires ESA’s `SciHub' credentials, which can be obtained
 data(ex.navarre)
 # Download S2MSI1C products sensed by Sentinel-2 
 # between the julian dates 210 and 218, 2018
-src <- paste0(tempdir(),"/Path_for_downloading_folder")
-print(src)
+wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(wdir)
 senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             endDate = as.Date("2018218", "\%Y\%j"),
             platform = "Sentinel-2",
@@ -70,16 +75,16 @@ senDownload(startDate = as.Date("2018210", "\%Y\%j"),
             pathrow = c("R094"),
             username = "username",
             password = "password",
-            AppRoot = src)
+            AppRoot = wdir)
             
-src.sen <- file.path(src, "Sentinel-2")
-src.sen.unzip <- file.path(src.sen, "unzip")
+wdir.sen <- file.path(wdir, "Sentinel")
+wdir.sen.unzip <- file.path(wdir.sen, "unzip")
                   
-files <- list.files(src.unzip,
-                    pattern = "\\\\TCI.jp2$",
-                    full.names = TRUE,
-                    recursive = TRUE)
-rgb <- stack(files[1])
-plotRGB(rgb)
+files.sen.unzip <- list.files(wdir.sen.unzip,
+                              pattern = "\\\\TCI.jp2$",
+                              full.names = TRUE,
+                              recursive = TRUE)
+img.sen.rgb <- stack(files.sen.unzip[1])
+plotRGB(img.sen.rgb)
 }
 }

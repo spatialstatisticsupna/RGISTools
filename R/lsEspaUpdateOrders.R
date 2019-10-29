@@ -22,7 +22,7 @@
 #' is mandatory if \code{username} and \code{password} are not defined.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.
-#'
+#' @return this function returns a \code{dataframe} with the updated order information from ESPA. 
 #' @examples
 #' \dontrun{
 #' src <- paste0(tempdir(),"/Path_for_downloading_folder")

@@ -42,6 +42,9 @@ defining the area of interest.
   \code{lonlat} or \code{extent} are not defined.
 }}
 }
+\value{
+a \code{vector} with the url for image downloading.
+}
 \description{
 \code{modSearch} searches MODIS images in the 
 \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA Common Metadata Repository}
@@ -70,20 +73,20 @@ By default, the URL points towards the actual image.
 data(ex.navarre)
 # searching MODIS MYD13A2 images between 2011 and 2013 by longitude/latitude
 # using a polygon class variable
-img.list <- modSearch(product = "MYD13A2",
-                      startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
-                      endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
-                      collection = 6,
-                      extent = ex.navarre)
+sres <- modSearch(product = "MYD13A2",
+                  startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                  endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
+                  collection = 6,
+                  extent = ex.navarre)
 # region of interest: defined based on longitude/latitude extent
 # searching MODIS MYD13A2 images in 2010 by longitude/latitude
 # using a extent class variable defined by the user
 aoi = extent(c(-2.49, -0.72, 41.91, 43.31))
-my.imgs <- modSearch(product = "MYD13A2",
-                     startDate = as.Date("01-01-2010", "\%d-\%m-\%Y"),
-                     endDate = as.Date("31-12-2010", "\%d-\%m-\%Y"),
-                     collection = 6,
-                     extent = aoi)
-head(my.imgs)
+sres <- modSearch(product = "MYD13A2",
+                  startDate = as.Date("01-01-2010", "\%d-\%m-\%Y"),
+                  endDate = as.Date("31-12-2010", "\%d-\%m-\%Y"),
+                  collection = 6,
+                  extent = aoi)
+head(sres)
 }
 }

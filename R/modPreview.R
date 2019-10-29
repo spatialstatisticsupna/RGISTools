@@ -24,21 +24,22 @@
 #'   \item arguments of \code{viewRGB} function from \code{mapview} packages are
 #'   valid arguments
 #' }
-#' 
+#' @return this function does not return anything. It previews on a map an image
+#' from search result.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # retrieve jpg images covering Navarre region between 2011 and 2013
-#' searchres <- modSearch(product = "MOD09GA",
-#'                       startDate = as.Date("01-01-2011", "%d-%m-%Y"),
-#'                       endDate = as.Date("31-12-2013", "%d-%m-%Y"),
-#'                       collection = 6,
-#'                       resType = "browseurl",
-#'                       extent = ex.navarre)
+#' sres <- modSearch(product = "MOD09GA",
+#'                   startDate = as.Date("01-01-2011", "%d-%m-%Y"),
+#'                   endDate = as.Date("31-12-2013", "%d-%m-%Y"),
+#'                   collection = 6,
+#'                   resType = "browseurl",
+#'                   extent = ex.navarre)
 #'                       
-#' modPreview(searchres,1)
-#' modPreview(searchres,2,add.Layer=T)
+#' modPreview(sres,1)
+#' modPreview(sres,2,add.Layer=T)
 #' }
 modPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   ser<-searchres[n]

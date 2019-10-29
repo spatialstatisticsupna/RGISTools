@@ -33,24 +33,24 @@ function is used within \code{\link{ls7FolderToVar}},
 }
 \examples{
 # path to the cropped and cutted MODIS images for the region of Navarre
-img.dir <- system.file("ExNavarreVar", package = "RGISTools")
+wdir <- system.file("ExNavarreVar", package = "RGISTools")
 # list all the tif files
-img.files <- list.files(img.dir, pattern = "\\\\.tif$", recursive = TRUE, full.names = TRUE)
+files.mod <- list.files(wdir, pattern = "\\\\.tif$", recursive = TRUE, full.names = TRUE)
 # print the MOD09 bands
 getRGISToolsOpt("MOD09BANDS")
 scale.factor <- 0.0001
 
 # select the red, blue and nir bands
-red <- raster(img.files[1]) * scale.factor
-blue <- raster(img.files[3]) * scale.factor
-nir <- raster(img.files[2]) * scale.factor
+img.mod.red <- raster(files.mod[1]) * scale.factor
+img.mod.blue <- raster(files.mod[3]) * scale.factor
+img.mod.nir <- raster(files.mod[2]) * scale.factor
 # calculate the EVI without scale
-evi.1 <- varEVI(blue, red, nir)
+img.mod.evi <- varEVI(img.mod.blue, img.mod.red, img.mod.nir)
 # calculate the EVI scaling 0-1
-evi.2 <- varEVI(blue, red, nir,scfun=getRGISToolsOpt("MOD09SCL"))
-evi.12 <- stack(evi.1,evi.2)
+img.mod.evi.2 <- varEVI(img.mod.blue, img.mod.red, img.mod.nir,scfun=getRGISToolsOpt("MOD09SCL"))
+img.mod.evi.12 <- stack(img.mod.evi,img.mod.evi.2)
 # plot the image
-spplot(evi.12,col.regions=rev(terrain.colors(20)),at = c(seq(0,1,0.05)))
+spplot(img.mod.evi.12,col.regions=rev(terrain.colors(20)),at = c(seq(0,1,0.05)))
 }
 \references{
 \insertRef{huete2002overview}{RGISTools}

@@ -20,20 +20,20 @@
 #'
 #' @examples
 #' # path to the cropped and cutted MODIS images for the region of Navarre
-#' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
+#' wdir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all the tif files
-#' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)
+#' files.mod <- list.files(wdir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)
 #' # print the MOD09 bands
 #' getRGISToolsOpt("MOD09BANDS")
 #' 
 #' # select the red, blue and NIR bands
-#' red <- raster(img.files[1])
-#' blue <- raster(img.files[3])
-#' green <- raster(img.files[4])
+#' img.mod.red <- raster(files.mod[1])
+#' img.mod.blue <- raster(files.mod[3])
+#' img.mod.green <- raster(files.mod[4])
 #'
 #' q.range=c(0.001,0.999)
-#' image<-varRGB(red,green,blue,q.range)
-#' print(plotRGB(image))
+#' img.mod.rgb<-varRGB(img.mod.red,img.mod.green,img.mod.blue,q.range)
+#' print(plotRGB(img.mod.rgb))
 varRGB<-function(red,green,blue,q.range=c(),rPath=NULL,region=NULL){
   rgb<-list(red,green,blue)
   names(rgb)<-c("red","green","blue")

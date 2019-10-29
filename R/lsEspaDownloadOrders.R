@@ -29,18 +29,20 @@
 #' with the same name.
 #' @param untar logical argument. If TRUE, untars the downloaded images.
 #' @param ... argument for nested functions
-#'
+#' @return this function does not return anything. It saves the imagery as
+#' `tar.gz’ (and GTiff files) in a folder called `raw’ (`untar’) in the
+#'  \code{AppRoot} directory.
 #' @examples
 #' \dontrun{
-#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
-#' print(src)
+#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' print(wdir)
 #' # search Landsat-7 level-1
-#' search.res <- ls7Search(startDate = as.Date("01-01-2017", "%d-%m-%Y"),
-#'                         endDate = as.Date("15-01-2017", "%d-%m-%Y"),
-#'                         lonlat = c(-1.64323, 42.81687),
-#'                         AppRoot = src)
+#' sres <- ls7Search(startDate = as.Date("01-01-2017", "%d-%m-%Y"),
+#'                   endDate = as.Date("15-01-2017", "%d-%m-%Y"),
+#'                   lonlat = c(-1.64323, 42.81687),
+#'                   AppRoot = wdir)
 #' # request to ESPA the prepocessing of level-1 images to get the surface reflectance
-#' order <- lsEspaOrderImages(search.res = search.res,
+#' order <- lsEspaOrderImages(search.res = sres,
 #'                            username = "username", 
 #'                            password = "password", 
 #'                            product = 'sr',
@@ -53,14 +55,14 @@
 #'                              username = "username", 
 #'                              password = "password")
 #' # saving directory
-#' dir.ESPA <- file.path(src,"Landsat7","ESPA")
-#' dir.create(dir.ESPA, recursive = TRUE)
+#' wdir.ls7.ESPA <- file.path(wdir,"Landsat7","ESPA")
+#' dir.create(wdir.ls7.ESPA, recursive = TRUE)
 #' # download when status says: complete
 #' lsEspaDownloadOrders(orders = orders,
 #'                      username = "username", 
 #'                      password = "password",
 #'                      untar = TRUE,
-#'                      AppRoot = dir.ESPA)
+#'                      AppRoot = wdir.ls7.ESPA)
 #'}
 lsEspaDownloadOrders<-function(orders,
                                AppRoot,

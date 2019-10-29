@@ -49,42 +49,42 @@ name of the \code{RasterStack} is specified in \code{ts.name}. The
 data(ex.navarre)
 # set the download folder
 s.start <- Sys.time()
-src <- paste0(tempdir(),"/Path_for_downloading_folder")
-print(src)
+wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(wdir)
 # download the images
 modDownSearch(product = "MOD09GA",
             startDate = as.Date("30-07-2018", "\%d-\%m-\%Y"),
             endDate = as.Date("06-08-2018", "\%d-\%m-\%Y"),
             username = "username",
             password = "password",
-            AppRoot = src,
+            AppRoot = wdir,
             extract.tif = TRUE,
             collection = 6,
             extent = ex.navarre)
 # set folder path where MOD09GA images will be saved
-src1 <- file.path(src,"Modis","MOD09GA")
+wdir.mod <- file.path(wdir,"Modis","MOD09GA")
 # set the tif folder path
-tif.src <- file.path(src1,"tif")
+wdir.mod.tif <- file.path(wdir.mod,"tif")
 # mosaic and cut navarre region
-modMosaic(tif.src,
-          AppRoot = src1,
+modMosaic(wdir.mod.tif,
+          AppRoot = wdir.mod,
           out.name = "Navarre",
           extent = ex.navarre)
 # change src to navarre folder
-src2 <- file.path(src1,"Navarre")
+wdir.mod.navarre <- file.path(wdir.mod,"Navarre")
 # calculate NDVI from navarre folder
-modFolderToVar(src2,
+modFolderToVar(wdir.mod.navarre,
                fun = varNDVI,
-               AppRoot = dirname(src2),
+               AppRoot = dirname(wdir.mod.navarre),
                overwrite = TRUE)
 # change src TS_sample
-src3 <- file.path(dirname(src2),"NDVI")
+wdir.mod.ndvi <- file.path(dirname(wdir.mod.navarre),"NDVI")
 # create the Rdata
-genSaveTSRData(src3, ts.name = "ModisNDVI", AppRoot = src1)
+tiles.mod.ndvi<-genSaveTSRData(wdir.mod.ndvi, ts.name = "ModisNDVI", AppRoot = wdir.mod)
 # remove values out of 0-1 range
-ModisNDVI.lim <- clamp(ModisNDVI,lower=0,upper=1)
+tiles.mod.ndvi.lim <- clamp(tiles.mod.ndvi,lower=0,upper=1)
 # plot the ndvi images
-spplot(ModisNDVI.lim)
+spplot(tiles.mod.ndvi.lim)
 s.end <- Sys.time()
 s.end - s.start
 }

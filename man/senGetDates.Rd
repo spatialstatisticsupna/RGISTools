@@ -15,6 +15,10 @@ images from which the capturing date is retrieved.}
   \item \code{format} the format of the date being returned.
 }}
 }
+\value{
+a \code{Date} class object with the date of the Sentinel image or \code{character} class,
+if \code{format} argument is used.
+}
 \description{
 \code{senGetDates} reads the official name of a Sentinel-2 image and returns
 the capturing date, as a \code{Date} class object.
@@ -28,11 +32,11 @@ argument \code{format}.
 }
 \examples{
 # getting the capturing date from the name of Sentinel-2 images
-str <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
-       "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
-dt <- senGetDates(str)
-print(dt)
-print(format(dt,"\%Y\%j"))
-senGetDates(str, format = "\%Y\%j")
+file.sen <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
+              "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
+date.sen <- senGetDates(file.sen)
+print(date.sen)
+print(format(date.sen,"\%Y\%j"))
+senGetDates(file.sen, format = "\%Y\%j")
 
 }

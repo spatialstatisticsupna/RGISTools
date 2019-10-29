@@ -10,9 +10,9 @@
 #'
 #' @examples
 #' # getting the path and row number of the tile of a Landsat-8 image
-#' str <- "MYD09GA.A2003136.h17v04.005.2008324054225"
-#' pr <- modGetPathRow(str)
-#' print(pr)
+#' files.mod <- "MYD09GA.A2003136.h17v04.005.2008324054225"
+#' pr.mod <- modGetPathRow(files.mod)
+#' print(pr.mod)
 #'
 modGetPathRow<-function(str){
   return(gsub(".*\\s*(h\\d{2}v\\d{2}).*", "\\1", str))

@@ -37,6 +37,10 @@ images with the same name.}
   for mosaicking. If not supplied, all dates are mosaicked.
 }}
 }
+\value{
+this function does not return anything. It saves the imagery in the
+ \code{AppRoot} directory.
+}
 \description{
 \code{senMosaic} merges the Sentinel-2 imagery that covers a region of interest
 on the same dates.
@@ -61,8 +65,8 @@ of `GDAL' is required. This method is faster than the native `R' functions.
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 # main output directory
-src <- paste0(tempdir(),"/Path_for_downloading_folder")
-print(src)
+wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(wdir)
 # download Sentinel-2 images
 senDownSearch(startDate = as.Date("2018210", "\%Y\%j"),
               endDate = as.Date("2018218", "\%Y\%j"),
@@ -72,21 +76,21 @@ senDownSearch(startDate = as.Date("2018210", "\%Y\%j"),
               pathrow = c("R094"),
               username = "username",
               password = "password",
-              AppRoot = src)
+              AppRoot = wdir)
 # folder with the unzipped images
-src.sen <- file.path(src, "Sentinel-2")
-src.unzip <- file.path(src.sen, "unzip")
+wdir.sen <- file.path(wdir, "Sentinel-2")
+wdir.sen.unzip <- file.path(wdir.sen, "unzip")
 # mosaic the Sentinel-2 images
-senMosaic(src.unzip,
-          AppRoot = src.sen,
+senMosaic(wdir.sen.unzip,
+          AppRoot = wdir.sen,
           gutils = TRUE,
           out.name = "Navarre")
 
 # load and plot a Sentinel-2 image
-files <- list.files(src.sen, pattern = "\\\\.tif$", full.names = TRUE ,recursive = TRUE)
+files.sen <- list.files(wdir.sen, pattern = "\\\\.tif$", full.names = TRUE ,recursive = TRUE)
 # print Sentinel-2 bands
 getRGISToolsOpt("SEN2BANDS")
-file.rgb <- stack(files[grepl("TCI",files)][1])
-plotRGB(file.rgb)
+file.sen.rgb <- stack(files.sen[grepl("TCI",files)][1])
+plotRGB(file.sen.rgb)
 }
 }

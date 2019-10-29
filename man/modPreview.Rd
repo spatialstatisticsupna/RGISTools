@@ -29,6 +29,10 @@ running steps and warnings.}
   valid arguments
 }}
 }
+\value{
+this function does not return anything. It previews on a map an image
+from search result.
+}
 \description{
 \code{modPreview} shows a preview of the \code{n}-th image from a set of 
 search results on a interactive map.
@@ -45,14 +49,14 @@ Please, be aware that only some images may have a preview.
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 # retrieve jpg images covering Navarre region between 2011 and 2013
-searchres <- modSearch(product = "MOD09GA",
-                      startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
-                      endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
-                      collection = 6,
-                      resType = "browseurl",
-                      extent = ex.navarre)
+sres <- modSearch(product = "MOD09GA",
+                  startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                  endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
+                  collection = 6,
+                  resType = "browseurl",
+                  extent = ex.navarre)
                       
-modPreview(searchres,1)
-modPreview(searchres,2,add.Layer=T)
+modPreview(sres,1)
+modPreview(sres,2,add.Layer=T)
 }
 }

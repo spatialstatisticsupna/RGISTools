@@ -17,19 +17,19 @@
 #'
 #' @examples
 #' # path to the cropped and cutted MODIS images for the region of Navarre
-#' img.dir <- system.file("ExNavarreVar", package = "RGISTools")
+#' wdir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all the tif files
-#' img.files <- list.files(img.dir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)
+#' files.mod <- list.files(wdir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)
 #' # print the MOD09 bands
 #' getRGISToolsOpt("MOD09BANDS")
 #' 
 #' # select the SWIR1 and SWIR2 bands
-#' swir1 <- raster(img.files[6])
-#' swir2 <- raster(img.files[7])
+#' img.mod.swir1 <- raster(files.mod[6])
+#' img.mod.swir2 <- raster(files.mod[7])
 #' # calculate the NBR2 image
-#' nbr2 <- varNBR2(swir1,swir2)
+#' img.mod.nbr2 <- varNBR2(img.mod.swir1,img.mod.swir2)
 #' # plot the image
-#' spplot(nbr2,col.regions=rev(heat.colors(20)))
+#' spplot(img.mod.nbr2,col.regions=rev(heat.colors(20)))
 varNBR2<-function(swir1,swir2){
   nbr2<-(swir1-swir2)/(swir1+swir2)
   return(nbr2)

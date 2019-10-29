@@ -24,7 +24,7 @@ defining the area of interest.}
 }}
 }
 \value{
-this function does not return anything.
+\code{trellis} class to with the raster plot.
 }
 \description{
 This function displays satellite images with the usual format in geographic

@@ -25,24 +25,25 @@
 #'   \item arguments of \code{viewRGB} function from \code{mapview} packages are
 #'   valid arguments
 #' }
-#' 
+#' @return this function does not return anything. It previews on a map an image
+#' from search result.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' # retrieve jpg images covering Navarre between 2011 and 2013
-#' search.res <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
-#'                         endDate = as.Date("31-12-2013", "%d-%m-%Y"),
-#'                         extent = ex.navarre,
-#'                         precise = TRUE,
-#'                         browseAvaliable = "Y",
-#'                         AppRoot = src)
-#' lsPreview(search.res, 1)
+#' sres <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
+#'                   endDate = as.Date("31-12-2013", "%d-%m-%Y"),
+#'                   extent = ex.navarre,
+#'                   precise = TRUE,
+#'                   browseAvaliable = "Y",
+#'                   AppRoot = wdir)
+#' lsPreview(sres, 1)
 #' # filter the images with less than 1% pixels covered by clouds
-#' search_cloudFree = subset(search.res, search.res$cloudCover < 1)
-#' lsPreview(search_cloudFree, 1)
-#' lsPreview(search_cloudFree, 2)
+#' sres.cloud.free = subset(sres, sres$cloudCover < 1)
+#' lsPreview(sres.cloud.free, 1)
+#' lsPreview(sres.cloud.free, 2,add.Layer = TRUE)
 #' }
 lsPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   ser<-searchres[n,]

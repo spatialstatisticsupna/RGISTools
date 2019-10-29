@@ -54,8 +54,8 @@ etc.). Custom functions can also be implemented.
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 # main output directory
-src <- paste0(tempdir(),"/Path_for_downloading_folder")
-print(src)
+wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(wdir)
 # download Landsat-7 images
 auxDownload(satellite = "ls7",
            username = "username",
@@ -64,31 +64,31 @@ auxDownload(satellite = "ls7",
            endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
            extent = ex.navarre,
            untar = TRUE,
-           AppRoot = src)
+           AppRoot = wdir)
 # folder with the Landsat-7 untared images 
-src.ls7 <-file.path(src,"Landsat7")
-tif.src <- file.path(src.ls7, "untar")
+wdir.ls7 <-file.path(wdir,"Landsat7")
+wdir.ls7.untar <- file.path(wdir.ls7, "untar")
 # mosaic the Landsat-7 images
-lsMosaic(tif.src,
-         AppRoot = src.ls7,
+lsMosaic(wdir.ls7.untar,
+         AppRoot = wdir.ls7,
          out.name = "Navarre",
          extent = ex.navarre,
          gutils = TRUE)
 # folder with the mosaicked images
-src2 <- file.path(src.ls7, "Navarre")
+wdir.ls7.navarre <- file.path(wdir.ls7, "Navarre")
 # generate NDVI images of Navarre
-src3 <- file.path(src.ls7, "Navarre_Variables")
-dir.create(src3)
-ls7FolderToVar(src2,
+wdir.ls7.var <- file.path(wdir.ls7, "Navarre_Variables")
+dir.create(wdir.ls7.var)
+ls7FolderToVar(wdir.ls7.navarre,
                fun = varNDVI,
-               AppRoot = src3,
+               AppRoot = wdir.ls7.var,
                overwrite = TRUE)
                
-flist <- list.files(file.path(src3,"NDVI"),
-                    pattern = "\\\\.tif$",
-                    full.names = TRUE,
-                    recursive = TRUE)
-ras <- raster(flist[1])
-spplot(ras)
+files.ls7.ndvi <- list.files(file.path(wdir.ls7.var,"NDVI"),
+                             pattern = "\\\\.tif$",
+                             full.names = TRUE,
+                             recursive = TRUE)
+img.ls7.ndvi <- raster(files.ls7.ndvi[1])
+spplot(img.ls7.ndvi)
 }
 }

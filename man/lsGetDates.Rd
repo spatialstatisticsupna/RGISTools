@@ -15,6 +15,10 @@ Landsat-8 images from which the capturing date is retrieved.}
   \item \code{format} the format of the date being returned.
 }}
 }
+\value{
+a \code{Date} class object with the date of the Landsat image or \code{character} class,
+if \code{format} argument is used.
+}
 \description{
 \code{lsGetDates} reads the official name of a Landsat-7 or Landsat-8 image
 and returns the capturing date, as a \code{Date} class object.
@@ -28,15 +32,15 @@ argument \code{format}.
 }
 \examples{
 # getting the capturing date from the name of a Landsat-8 image
-str <- "LC82000312017010LGN01.tar.gz"
-dt <- lsGetDates(str)
-print(dt)
-print(format(dt, "\%Y\%j"))
+file.ls8 <- "LC82000312017010LGN01.tar.gz"
+date.ls8 <- lsGetDates(file.ls8)
+print(date.ls8)
+print(format(date.ls8, "\%Y\%j"))
 
 # getting the capturing date from the name of a Landsat-7 and a Landsat-8
 # image
-str <- c("LE72330822017009ASN01")
-dt <- lsGetDates(str)
-print(dt)
+file.ls7 <- c("LE72330822017009ASN01")
+date.ls7 <- lsGetDates(file.ls7)
+print(date.ls7)
 
 }

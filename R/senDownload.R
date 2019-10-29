@@ -28,13 +28,16 @@
 #'        \item \code{dates} a vector with the capturing dates being considered
 #'   for downloading. 
 #' }
+#' @return this function does not return anything. It saves the imagery as
+#' `zip’ (and JP2 files) in a folder called `raw’ (`unzip’) in the
+#'  \code{AppRoot} directory.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # download S2MSI1C products sensed by Sentinel-2
 #' # in July-August 2018
-#' searchres <- senSearch(startDate = as.Date("2018-07-29","%Y-%m-%d"),
+#' sres <- senSearch(startDate = as.Date("2018-07-29","%Y-%m-%d"),
 #'                        endDate = as.Date("2018-08-06","%Y-%m-%d"),
 #'                        platform = "Sentinel-2",
 #'                        extent = ex.navarre,
@@ -43,25 +46,25 @@
 #'                        password = "password")
 #'
 #' # filtering the path R094 where Navarre is located
-#' names(searchres)
-#' searchres.R094 <- searchres[grepl("R094", names(searchres))]
-#' names(searchres.R094)
-#' # list the dates in searchres
-#' senGetDates(names(searchres.R094),format="%Y%j")
-#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' names(sres)
+#' sres.sen.R094 <- sres[grepl("R094", names(sres))]
+#' names(sres.sen.R094)
+#' # list the dates in sres
+#' senGetDates(names(sres.sen.R094),format="%Y%j")
+#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
 #' # donwload the imagery
-#' senDownload(searchres = searchres.R094,
+#' senDownload(searchres = sres.sen.R094,
 #'             username = "username",
 #'             password = "password",
-#'             AppRoot = src,
+#'             AppRoot = wdir,
 #'             unzip = TRUE)
-#' src.unzip <- file.path(src,"unzip")
-#' files<-list.files(src.unzip,
-#'                   pattern = "\\TCI.jp2$",
-#'                   full.names = TRUE,
-#'                   recursive = TRUE)
-#' rgb<-stack(files[1])
-#' plotRGB(rgb)
+#' wdir.sen.unzip <- file.path(wdir,"Sentinel","unzip")
+#' files.sen.unzip<-list.files(wdir.sen.unzip,
+#'                             pattern = "\\TCI.jp2$",
+#'                             full.names = TRUE,
+#'                             recursive = TRUE)
+#' img.sen.rgb<-stack(files.sen.unzip[1])
+#' plotRGB(img.sen.rgb)
 #' }
 senDownload<-function(searchres,
                         AppRoot,

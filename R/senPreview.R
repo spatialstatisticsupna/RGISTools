@@ -26,25 +26,26 @@
 #'   \item arguments of \code{viewRGB} function from \code{mapview} packages are
 #'   valid arguments
 #' }
-#' 
+#' @return this function does not return anything. It previews on a map an image
+#' from search result.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # perform the search query
-#' searchres <- senSearch(startDate = as.Date("2018210","%Y%j"),
-#'                        endDate = as.Date("2018218","%Y%j"),
-#'                        platform = "Sentinel-2",
-#'                        extent = ex.navarre,
-#'                        product = "S2MSI1C",
-#'                        username = "username",
-#'                        password = "password")
+#' sres <- senSearch(startDate = as.Date("2018210","%Y%j"),
+#'                   endDate = as.Date("2018218","%Y%j"),
+#'                   platform = "Sentinel-2",
+#'                   extent = ex.navarre,
+#'                   product = "S2MSI1C",
+#'                   username = "username",
+#'                   password = "password")
 #' # preview some images
-#' senPreview(searchres, 3, username = "username", password = "password")
-#' senPreview(searchres, 1, username = "username", password = "password", 600)
+#' senPreview(sres, 3, username = "username", password = "password")
+#' senPreview(sres, 1, username = "username", password = "password", add.Layer =TRUE)
 #' 
 #' # show the dates in julian days
-#' senGetDates(names(searchres),format="%Y%j")
+#' senGetDates(names(sres),format="%Y%j")
 #' }
 senPreview<-function(searchres,username,password,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   ser<-searchres[n]

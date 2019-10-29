@@ -15,6 +15,10 @@ images from which the capturing date is retrieved.}
   \item \code{format} the format of the date being returned.
 }}
 }
+\value{
+a \code{Date} class object with the date of the MODIS image or \code{character} class,
+if \code{format} argument is used.
+}
 \description{
 \code{modGetDates} reads the official name of MODIS images and returns its
 capturing date, as \code{Date} class object.
@@ -28,11 +32,11 @@ modified through the argument \code{format}.
 }
 \examples{
 # getting the capturing date from the name of a MODIS image
-imgPath <- 'MYD13A2.A2016361.h17v04.006.2017285133407.hdf'
-modGetDates(imgPath)
+file.mod <- 'MYD13A2.A2016361.h17v04.006.2017285133407.hdf'
+modGetDates(file.mod)
 
 # a list of the full file paths of MODIS images, mixing .hdf and .tif files
-imgsPaths<-list('MYD13A2.A2013297.h17v04.006.2015269230726.hdf',
-                'MYD13A2.A2013313.h17v04.006.2015271071143.tif')
-modGetDates(imgsPaths, format = "\%Y\%j")
+file.mod<-list('MYD13A2.A2013297.h17v04.006.2015269230726.hdf',
+               'MYD13A2.A2013313.h17v04.006.2015271071143.tif')
+modGetDates(file.mod, format = "\%Y\%j")
 }

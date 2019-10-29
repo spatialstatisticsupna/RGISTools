@@ -31,6 +31,11 @@ running steps and warnings.}
   for mosaicking. If not supplied, all dates are mosaicked.
 }}
 }
+\value{
+this function does not return anything, unless \code{getStack = TRUE}
+and then it returns a \code{RasterStack} with the time series of with the
+index.
+}
 \description{
 \code{modFolderToVar} computes a remote sensing index from the spectral bands
 of a time series of MODIS images. The images are specified by the path to
@@ -52,42 +57,42 @@ red-gree-blue (RGB) images must be imported afterwards.
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 # main output directory
-src <- paste0(tempdir(),"/Path_for_downloading_folder")
-print(src)
+wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+print(wdir)
 # download MOD09 images
 modDownSearch(product = "MOD09GA",
               startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
               endDate = as.Date("03-01-2018", "\%d-\%m-\%Y"),
               username = "username",
               password = "password",
-              AppRoot = src, # output folder for tif images
+              AppRoot = wdir, # output folder for tif images
               extract.tif = TRUE, 
               collection = 6,
               extent = ex.navarre)
-# assign src.mod as the output folder from modMosaic
-src.mod <- file.path(src, "Modis", "MOD09GA") # output directory
-src.tif <- file.path(src.mod, "tif") # input directory
+# assign wdir.mod as the output folder from modMosaic
+wdir.mod <- file.path(wdir, "Modis", "MOD09GA") # output directory
+wdir.mod.tif <- file.path(wdir.mod, "tif") # input directory
 # mosaic the MODIS images
-modMosaic(src.tif,
-          AppRoot = src.mod,
+modMosaic(wdir.mod.tif,
+          AppRoot = wdir.mod,
           out.name = "Navarre")
 # path to the folder with the mosaicked images
-src.navarre <- file.path(src.mod, "Navarre")
+wdir.mod.navarre <- file.path(wdir.mod, "Navarre")
 # generate NDVI images of Navarre
-src.variables <- file.path(src.mod, "Variables")
-dir.create(src.variables)
-modFolderToVar(src = src.navarre,
+wdir.mod.var <- file.path(wdir.mod, "Variables")
+dir.create(wdir.mod.var)
+modFolderToVar(src = wdir.mod.navarre,
                fun = varEVI,
                scfun = getRGISToolsOpt("MOD09SCL"),
-               AppRoot = src.variables,
+               AppRoot = wdir.mod.var,
                overwrite = TRUE)
 # import mosaicked images (.tif) to the environment in `R'
-flist <- list.files(file.path(src.variables,"EVI"),
-                    pattern = "\\\\.tif$",
-                    full.names = TRUE,
-                    recursive = TRUE)
+files.mod.evi <- list.files(file.path(wdir.mod.var,"EVI"),
+                            pattern = "\\\\.tif$",
+                            full.names = TRUE,
+                            recursive = TRUE)
 
-files.raster <- lapply(flist,raster)
-spplot(files.raster[[1]],at=seq(-1,2.5))
+img.mod.evi <- lapply(files.mod.evi,raster)
+spplot(img.mod.evi[[1]],at=seq(-1,2.5))
 }
 }

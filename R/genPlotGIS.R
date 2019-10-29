@@ -26,7 +26,7 @@
 #'   \item \code{...} any argument accepted by the \code{spplot} function.
 #' }
 #'
-#' @return this function does not return anything.
+#' @return \code{trellis} class to with the raster plot.
 #'
 #' @examples
 #' # load the ndvi object of Navarre
@@ -53,7 +53,7 @@
 #'            col.regions = colorRampPalette(my.palette)
 #' )
 #' }
-#'
+#' 
 #' # change scale text relative Y
 #' genPlotGIS(r = ex.ndvi.navarre[[1:4]],
 #'            region = ex.navarre,

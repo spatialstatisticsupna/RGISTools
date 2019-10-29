@@ -12,7 +12,8 @@
 #'   \item \code{format} the format of the date being returned.
 #' }
 #'
-#' @return a \code{Date} class object with the date of the image.
+#' @return a \code{Date} class object with the date of the image or \code{character} class,
+#' if \code{format} argument is used.
 #'
 #' @examples
 #' img <- matrix(1:16, ncol = 4, byrow = TRUE)
