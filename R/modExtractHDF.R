@@ -119,9 +119,11 @@ modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NU
           if(!is.null(region)){
             region<-transform_multiple_proj(region)
             ext=extent(region)
+            file.rename(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
+                        paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"))
             gdal_utils(util = "warp", 
-                       source =paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
-                       destination = paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_cutted.tif"),
+                       source =paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"),
+                       destination = paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
                        options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",st_crs(region)$proj4string)
             )
           }
