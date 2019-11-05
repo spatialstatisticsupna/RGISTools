@@ -42,11 +42,25 @@
 #'            tm.raster.r.palette=rev(terrain.colors(40)),
 #'            tm.raster.r.title="NDVI",
 #'            tm.layout.legend.stack="horizontal")
-#' 
+#'            
+#'genPlotGIS(ex.ndvi.navarre,
+#'           ex.navarre,
+#'           tm.compass.size=1,
+#'           tm.compass.type="rose",
+#'           tm.scale.bar.text.size=0.8,
+#'           tm.polygon.region.lwd=6,
+#'           tm.polygon.region.border.col="#000000",
+#'           tm.raster.r.palette=rev(terrain.colors(40)),
+#'           tm.raster.r.title="NDVI",
+#'           as.grid = T,
+#'           tm.graticules.labels.size=1,
+#'           tm.graticules.n.x=3,
+#'           tm.graticules.n.y=3)
 #' tmap_mode("view")
-#' genPlotGIS(ex.ndvi.navarre[[1]],
+#' genPlotGIS(ex.ndvi.navarre,
 #'            ex.navarre,
-#'            tm.raster.r.palette=rev(terrain.colors(40)))
+#'            tm.raster.r.palette=rev(terrain.colors(40)))+
+#'            tm_facets(as.layers=TRUE)
 #' 
 #' tmap_mode(mode = c("plot"))
 #' genPlotGIS(ex.ndvi.navarre,
@@ -86,13 +100,23 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as
     lyt<-NULL
   }
   
+  graticules_args<-c(names(formals(tm_graticules)),names(formals(tm_grid)))
+  names(graticules_args)<-paste0("tm.graticules.",graticules_args)
+  tm_graticules_args<-args[names(args)%in%names(graticules_args)]
+  names(tm_graticules_args)<-graticules_args[names(tm_graticules_args)]
+  if(!("lines" %in% names(tm_layout_args))){
+    tm_graticules_args$lines=FALSE
+  }
   if(as.grid){
     tm_layout_args$between.margin=-.1
-    grid<-tm_graticules(lines=FALSE,labels.space.x=.10,labels.space.y=.10)
-  }else{
-    grid<-tm_graticules(lines=FALSE)
+    if(!("labels.space.x" %in% names(tm_layout_args))){
+      tm_graticules_args$labels.space.x=.10
+    }
+    if(!("labels.space.y" %in% names(tm_layout_args))){
+      tm_graticules_args$labels.space.y=.10
+    }
   }
-  
+  grid<-do.call(tm_graticules,tm_graticules_args)
 
   #compass arguments and preconfigured assignation
   if(!compass.rm){
