@@ -109,6 +109,9 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as
     if(!("size" %in% names(tm_compass_args))){
       tm_compass_args$size=2
     }
+    if(!("show.labels" %in% names(tm_compass_args))){
+      tm_compass_args$show.labels=0
+    }
     compass<-do.call(tm_compass,tm_compass_args)
   }else{
     compass<-NULL
