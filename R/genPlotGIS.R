@@ -52,9 +52,8 @@
 #' genPlotGIS(ex.ndvi.navarre,
 #'            ex.navarre,
 #'            tm.raster.r.palette=rev(terrain.colors(40)))
-genPlotGIS<-function(r,region,breaks,labels,zlim,nbreaks=40,nlabels=10,as.grid=FALSE,compass.rm=FALSE,scale.bar.rm=FALSE,...){
+genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as.grid=FALSE,compass.rm=FALSE,scale.bar.rm=FALSE,...){
   args<-list(...)
-  
   
   
   # layout preconfigured arguments
@@ -79,6 +78,12 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,nbreaks=40,nlabels=10,as.grid=F
   }
   if(!("frame" %in% names(tm_layout_args))){
     tm_layout_args$frame=TRUE
+  }
+  
+  if(!missing(layout)){
+    lyt<-tm_facets(ncol=layout[2],nrow = layout[1])
+  }else{
+    lyt<-NULL
   }
   
   if(as.grid){
@@ -211,7 +216,8 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,nbreaks=40,nlabels=10,as.grid=F
     compass + #the compass
     reg+ #region
     scale.bar+#scale
-    grid
+    grid+
+    lyt
     #tm_facets(inside.original.bbox=F,free.coords=F)
     #tm_graticules(lines=FALSE,labels.inside.frame=F) #coordinates
   
