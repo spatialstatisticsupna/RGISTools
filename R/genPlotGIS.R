@@ -32,15 +32,16 @@
 #' genPlotGIS(ex.ndvi.navarre,
 #'            ex.navarre)
 #' 
-#' genPlotGIS(ex.ndvi.navarre,
-#'            ex.navarre,
+#' genPlotGIS(r=ex.ndvi.navarre,
+#'            region=ex.navarre,
 #'            tm.compass.size=1,
 #'            tm.compass.type="rose",
 #'            tm.scale.bar.text.size=0.4,
 #'            tm.polygon.region.lwd=6,
 #'            tm.polygon.region.border.col="#000000",
 #'            tm.raster.r.palette=rev(terrain.colors(40)),
-#'            tm.raster.r.title="NDVI")
+#'            tm.raster.r.title="NDVI",
+#'            tm.layout.legend.stack="horizontal")
 #' 
 #' tmap_mode("view")
 #' genPlotGIS(ex.ndvi.navarre[[1]],
@@ -51,8 +52,11 @@
 #' genPlotGIS(ex.ndvi.navarre,
 #'            ex.navarre,
 #'            tm.raster.r.palette=rev(terrain.colors(40)))
-genPlotGIS<-function(r,region,breaks,labels,nbreaks=40,nlabels=10,compass.rm=FALSE,scale.bar.rm=FALSE,...){
+genPlotGIS<-function(r,region,breaks,labels,zlim,nbreaks=40,nlabels=10,as.grid=FALSE,compass.rm=FALSE,scale.bar.rm=FALSE,...){
   args<-list(...)
+  
+  
+  
   # layout preconfigured arguments
   tm_layout_args<-args[names(args)%in%names(formals(tm_layout))]
   if(!("legend.bg.color" %in% names(tm_layout_args))){
@@ -73,7 +77,18 @@ genPlotGIS<-function(r,region,breaks,labels,nbreaks=40,nlabels=10,compass.rm=FAL
   if(!("legend.outside.position" %in% names(tm_layout_args))){
     tm_layout_args$legend.outside.position="right"
   }
+  if(!("frame" %in% names(tm_layout_args))){
+    tm_layout_args$frame=TRUE
+  }
   
+  if(as.grid){
+    tm_layout_args$between.margin=-.1
+    grid<-tm_graticules(lines=FALSE,labels.space.x=.10,labels.space.y=.10)
+  }else{
+    grid<-tm_graticules(lines=FALSE)
+  }
+  
+
   #compass arguments and preconfigured assignation
   if(!compass.rm){
     compass_args<-names(formals(tm_compass))
@@ -121,6 +136,7 @@ genPlotGIS<-function(r,region,breaks,labels,nbreaks=40,nlabels=10,compass.rm=FAL
     names(tm_shape_region_args)<-shape_region_args[names(tm_shape_region_args)]
     tm_shape_region_args$shp=region
     
+    
     polygon_region_args<-c(names(formals(tm_polygons)),names(formals(tm_fill)),names(formals(tm_borders)))
     polygon_region_args<-unique(polygon_region_args[!(polygon_region_args%in%"...")])
     names(polygon_region_args)<-paste0("tm.polygon.region.",polygon_region_args)
@@ -132,14 +148,24 @@ genPlotGIS<-function(r,region,breaks,labels,nbreaks=40,nlabels=10,compass.rm=FAL
     if(!("lwd" %in% names(tm_polygon_region_args))){
       tm_polygon_region_args$lwd=1
     }
+
     reg<-do.call(tm_shape,tm_shape_region_args) + do.call(tm_polygons,tm_polygon_region_args)
+    
   }else{
     reg<-NULL
   }
   
   # default label and breaks for the raster
-  lower<-min(minValue(r))
-  upper<-max(maxValue(r))
+  if(missing(zlim)){
+    lower<-min(minValue(r))
+    upper<-max(maxValue(r))
+  }else{
+    if((class(zlim)!="numeric")&(length(zlim)!=0))
+      stop("zlim must be a vector of length 2 specifying the upper and lower boundaries of the legend.")
+    lower<-min(zlim)
+    upper<-max(zlim)
+  }
+
   nbreaks=nbreaks-2
   if(missing(breaks))
     breaks<-c(-Inf,seq(from=lower,to=upper,by=((upper-lower)/nbreaks)),Inf)
@@ -180,11 +206,15 @@ genPlotGIS<-function(r,region,breaks,labels,nbreaks=40,nlabels=10,compass.rm=FAL
   }
   
   # Base tmap
-  do.call(tm_shape,tm_shape_r_args) + do.call(tm_raster,tm_raster_r_args) + # raster conf
+  do.call(tm_shape,tm_shape_r_args) + do.call(tm_raster,tm_raster_r_args) +# tm_facets(nrow=3,ncol=2)+# raster conf
     do.call(tm_layout,tm_layout_args) +# layout
+    compass + #the compass
     reg+ #region
-    scale.bar+ #scale
-    compass
+    scale.bar+#scale
+    grid
+    #tm_facets(inside.original.bbox=F,free.coords=F)
+    #tm_graticules(lines=FALSE,labels.inside.frame=F) #coordinates
+  
 }
 
 
