@@ -39,6 +39,8 @@
 #'  \itemize{
 #'        \item \code{dates} a vector with the capturing dates being considered
 #'   for downloading. 
+#'        \item \code{bFilter} a vector with the bands to be extracted when \code{untar=TRUE}. If not
+#'   supplied, all bands are extracted.
 #' }
 #' 
 #' @return this function does not return anything. It saves the imagery as
@@ -174,7 +176,8 @@ lsDownload<-function(searchres,
                             verbose=verbose,
                             untar=untar,
                             raw.rm=raw.rm,
-                            overwrite=overwrite)
+                            overwrite=overwrite,
+                            ...)
   }else if(lvl==2){
     message("Starting Landsat level 2 download process...")
     lsEspaOrderImages(search.res=searchres,
@@ -192,7 +195,8 @@ lsDownload<-function(searchres,
                          nattempts=nattempts,
                          untar=untar,
                          overwrite=overwrite,
-                         AppRoot=downPath)
+                         AppRoot=downPath,
+                         ...)
   }else{
     stop("Landsat level not identified, check 'lvl'. Valid values 1 or 2.")
   }

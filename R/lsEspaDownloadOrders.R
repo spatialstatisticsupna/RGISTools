@@ -99,7 +99,8 @@ lsEspaDownloadOrders<-function(orders,
                             verbose=verbose,
                             n.attempts=n.attempts,
                             untar=untar,
-                            overwrite=overwrite)
+                            overwrite=overwrite,
+                            ...)
         }
       }
       if(all(!unname(unlist(lapply(orders,function(x)return(x$Status))))%in%c("ordered","processing","complete"))){
@@ -115,7 +116,8 @@ lsEspaDownloadOrders<-function(orders,
 ############################################################################
 #  RECURSIVE FUNCTION
 ############################################################################
-lsDownEspa<-function(orders,norder,c.handle,AppRoot,images.order,n.attempts,verbose=FALSE,overwrite=FALSE,untar=FALSE){
+lsDownEspa<-function(orders,norder,c.handle,AppRoot,images.order,n.attempts,verbose=FALSE,overwrite=FALSE,untar=FALSE,...){
+  arg<-list(...)
   r <- curl_fetch_memory(paste0(getRGISToolsOpt("LS.ESPA.API"),getRGISToolsOpt("LS.ESPA.API.v"),"/item-status/",orders[norder]), 
                          c.handle)
   jd<-rawToChar(r$content)
@@ -162,7 +164,17 @@ lsDownEspa<-function(orders,norder,c.handle,AppRoot,images.order,n.attempts,verb
   untar.dir<-file.path(dirname(dirname(out.file.name)),"untar",gsub(".tar.gz","",basename(out.file.name)))
   if((untar&!file.exists(untar.dir))|(untar&overwrite)){
     dir.create(untar.dir,showWarnings = FALSE)
-    untar(out.file.name,exdir=untar.dir)
+    
+    if("bFilter"%in%names(arg)){
+      flist<-untar(out.file.name,list=TRUE)
+      flist<-flist[Reduce("|", lapply(paste0(arg$bFilter,"\\.TIF$"),grepl,flist))]
+      untar(tarfile=out.file.name,
+            files=flist,
+            exdir = untar.dir)
+    }else{
+      untar(out.file.name,exdir=untar.dir)
+    }
+
   }
   return(images.order)
 }

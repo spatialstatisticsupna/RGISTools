@@ -1,4 +1,4 @@
-lsEarthExplorerdownload<-function(searchres,username,password,cookies.file,untar,raw.rm,downDir,AppRoot,downPath,verbose,overwrite){
+lsEarthExplorerdownload<-function(searchres,username,password,cookies.file,untar,raw.rm,downDir,AppRoot,downPath,verbose,overwrite,...){
   #start usgs session
   handler<-startUSGSsession(username,password,cookies.file,verbose)
   if(verbose)
@@ -21,7 +21,19 @@ lsEarthExplorerdownload<-function(searchres,username,password,cookies.file,untar
         file.remove(untarDir,showWarnings=FALSE,recursive=TRUE)
       }
       dir.create(untarDir,recursive=TRUE,showWarnings=FALSE)
-      untar(paste0(downPath,"/",scene,".tar.gz"),exdir=untarDir)
+      
+      if("bFilter"%in%names(arg)){
+        flist<-untar(downPath,list=TRUE)
+        flist<-flist[Reduce("|", lapply(paste0(arg$bFilter,"\\.TIF$"),grepl,flist))]
+        untar(tarfile=downPath,
+              files=flist,
+              exdir = untarDir)
+      }else{
+        untar(paste0(downPath,"/",scene,".tar.gz"),exdir=untarDir)
+      }
+      
+      
+      
       #Flag is true, so remove compressed files
       if(raw.rm){
         file.remove(paste0(downPath,"/",scene,".tar.gz"))
