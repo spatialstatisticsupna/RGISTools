@@ -145,9 +145,19 @@ senDownload<-function(searchres,
         message(paste0("OK: cheking ",file.name," file md5."))
         if(unzip){
           message("Unzipping ", basename(downPath)," file.")
-          suppressWarnings(unzip(zipfile=downPath,
-                                 exdir = unzipFolder,
-                                 overwrite=overwrite))
+          if("bFilter"%in%names(arg)){
+            flist<-unzip(downPath,list=TRUE)
+            flist<-flist$Name
+            flist<-flist[Reduce("|", lapply(paste0(arg$bFilter,"\\.jp2$"),grepl,flist))]
+            suppressWarnings(unzip(zipfile=downPath,
+                                   files=flist,
+                                   exdir = unzipFolder,
+                                   overwrite=overwrite))
+          }else{
+            suppressWarnings(unzip(zipfile=downPath,
+                                   exdir = unzipFolder,
+                                   overwrite=overwrite))
+          }
         }
       }
     }, error = function(e) {
