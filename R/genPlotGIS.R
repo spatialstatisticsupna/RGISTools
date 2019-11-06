@@ -69,7 +69,6 @@
 genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as.grid=FALSE,compass.rm=FALSE,scale.bar.rm=FALSE,...){
   args<-list(...)
   
-  
   # layout preconfigured arguments
   tm_layout_args<-args[names(args)%in%names(formals(tm_layout))]
   if(!("legend.bg.color" %in% names(tm_layout_args))){
@@ -186,68 +185,93 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as
   }else{
     reg<-NULL
   }
-  
-  # default label and breaks for the raster
-  if(missing(zlim)){
-    lower<-min(minValue(r))
-    upper<-max(maxValue(r))
-  }else{
-    if((class(zlim)!="numeric")&(length(zlim)!=0))
-      stop("zlim must be a vector of length 2 specifying the upper and lower boundaries of the legend.")
-    lower<-min(zlim)
-    upper<-max(zlim)
-  }
 
-  nbreaks=nbreaks-2
-  if(missing(breaks))
-    breaks<-c(-Inf,seq(from=lower,to=upper,by=((upper-lower)/nbreaks)),Inf)
-  if(missing(labels)){
-    labels<-c("",as.character(round(breaks[-c(1,length(breaks))],digits = 2)))
-    if(length(labels)>nlabels){
-      labels<-rep("",length(labels))
-      labels[c(seq(1,length(labels),as.integer(length(labels)/nlabels)),length(labels))]<-as.character(round(seq(from=lower,to=upper,by=((upper-lower)/nlabels)),digits = 2))
+  if(class(r)=="list"){
+    ####################################################
+    # RGB plot
+    ####################################################
+    if(class(r[[1]])=="RasterBrick"|class(r[[1]])=="RasterStack"){
+      maplist<-lapply(r,function(shp,compass,scale.bar,grid,reg){return(tm_shape(shp=shp,frame=T)+tm_rgb()+compass+scale.bar+grid+reg)},compass,scale.bar,grid,reg)
+      #tmap_arrange arguments
+      maplist$asp=NA
+      
+      if(missing(layout)){
+        maplist$ncol=ceiling(sqrt(length(r)))
+      }else{
+        maplist$nrow=layout[1]
+        maplist$nrow=layout[2]
+      }
+      
+      return(do.call(tmap_arrange,maplist))
+    }else{
+      stop("genPlotGIS only supports list composed by RasterBrick or RasterStack.")
     }
-  }
-  
-  # raster default arguments
-  shape_r_args<-names(formals(tm_shape))
-  shape_r_args<-shape_r_args[!(shape_r_args%in%c("..."))]
-  names(shape_r_args)<-paste0("tm.shape.r.",shape_r_args)
-  tm_shape_r_args<-args[names(args)%in%names(shape_r_args)]
-  names(tm_shape_r_args)<-shape_r_args[names(tm_shape_r_args)]
-  tm_shape_r_args$shp=r
-  
-  raster_r_args<-names(formals(tm_raster))
-  names(raster_r_args)<-paste0("tm.raster.r.",raster_r_args)
-  tm_raster_r_args<-args[names(args)%in%names(raster_r_args)]
-  names(tm_raster_r_args)<-raster_r_args[names(tm_raster_r_args)]
-  if(!("col" %in% names(tm_raster_r_args))){
-    tm_raster_r_args$col=names(r)
-  }
-  if(!("breaks" %in% names(tm_raster_r_args))){
-    tm_raster_r_args$breaks=breaks
-  }
-  if(!("labels" %in% names(tm_raster_r_args))){
-    tm_raster_r_args$labels=labels
-  }
-  if(!("legend.reverse" %in% names(tm_raster_r_args))){
-    tm_raster_r_args$legend.reverse=TRUE
-  }
-  if(!("title" %in% names(tm_raster_r_args))){
-    tm_raster_r_args$title=""
-  }
-  
-  # Base tmap
-  do.call(tm_shape,tm_shape_r_args) + do.call(tm_raster,tm_raster_r_args) +# tm_facets(nrow=3,ncol=2)+# raster conf
-    do.call(tm_layout,tm_layout_args) +# layout
-    compass + #the compass
-    reg+ #region
-    scale.bar+#scale
-    grid+
-    lyt
+  }else{
+    ####################################################
+    # Stack plot
+    ####################################################
+    # default label and breaks for the raster
+    if(missing(zlim)){
+      lower<-min(minValue(r))
+      upper<-max(maxValue(r))
+    }else{
+      if((class(zlim)!="numeric")&(length(zlim)!=0))
+        stop("zlim must be a vector of length 2 specifying the upper and lower boundaries of the legend.")
+      lower<-min(zlim)
+      upper<-max(zlim)
+    }
+    
+    
+    nbreaks=nbreaks-2
+    if(missing(breaks))
+      breaks<-c(-Inf,seq(from=lower,to=upper,by=((upper-lower)/nbreaks)),Inf)
+    if(missing(labels)){
+      labels<-c("",as.character(round(breaks[-c(1,length(breaks))],digits = 2)))
+      if(length(labels)>nlabels){
+        labels<-rep("",length(labels))
+        labels[c(seq(1,length(labels),as.integer(length(labels)/nlabels)),length(labels))]<-as.character(round(seq(from=lower,to=upper,by=((upper-lower)/nlabels)),digits = 2))
+      }
+    }
+    
+    # raster default arguments
+    shape_r_args<-names(formals(tm_shape))
+    shape_r_args<-shape_r_args[!(shape_r_args%in%c("..."))]
+    names(shape_r_args)<-paste0("tm.shape.r.",shape_r_args)
+    tm_shape_r_args<-args[names(args)%in%names(shape_r_args)]
+    names(tm_shape_r_args)<-shape_r_args[names(tm_shape_r_args)]
+    tm_shape_r_args$shp=r
+    
+    raster_r_args<-names(formals(tm_raster))
+    names(raster_r_args)<-paste0("tm.raster.r.",raster_r_args)
+    tm_raster_r_args<-args[names(args)%in%names(raster_r_args)]
+    names(tm_raster_r_args)<-raster_r_args[names(tm_raster_r_args)]
+    if(!("col" %in% names(tm_raster_r_args))){
+      tm_raster_r_args$col=names(r)
+    }
+    if(!("breaks" %in% names(tm_raster_r_args))){
+      tm_raster_r_args$breaks=breaks
+    }
+    if(!("labels" %in% names(tm_raster_r_args))){
+      tm_raster_r_args$labels=labels
+    }
+    if(!("legend.reverse" %in% names(tm_raster_r_args))){
+      tm_raster_r_args$legend.reverse=TRUE
+    }
+    if(!("title" %in% names(tm_raster_r_args))){
+      tm_raster_r_args$title=""
+    }
+    
+    # Base tmap
+    return(do.call(tm_shape,tm_shape_r_args) + do.call(tm_raster,tm_raster_r_args) +# tm_facets(nrow=3,ncol=2)+# raster conf
+      do.call(tm_layout,tm_layout_args) +# layout
+      compass + #the compass
+      reg+ #region
+      scale.bar+#scale
+      grid+
+      lyt)
     #tm_facets(inside.original.bbox=F,free.coords=F)
     #tm_graticules(lines=FALSE,labels.inside.frame=F) #coordinates
-  
+  }
 }
 
 
