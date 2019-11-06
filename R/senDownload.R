@@ -27,6 +27,8 @@
 #'  \itemize{
 #'        \item \code{dates} a vector with the capturing dates being considered
 #'   for downloading. 
+#'        \item \code{bFilter} a vector with the bands to be extracted when \code{untar=TRUE}. If not
+#'   supplied, all bands are extracted.
 #' }
 #' @return this function does not return anything. It saves the imagery as
 #' `zip’ (and JP2 files) in a folder called `raw’ (`unzip’) in the
@@ -75,7 +77,7 @@ senDownload<-function(searchres,
                         overwrite=FALSE,
                         ...){
   arg<-list(...)
-  
+
   if("dates"%in%names(arg)){searchres<-searchres[senGetDates(names(searchres))%in%arg$dates]}
   
   AppRoot<-pathWinLx(AppRoot)
