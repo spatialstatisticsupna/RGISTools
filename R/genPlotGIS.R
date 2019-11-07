@@ -193,16 +193,24 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as
     if(class(r[[1]])=="RasterBrick"|class(r[[1]])=="RasterStack"){
       maplist<-lapply(r,function(shp,compass,scale.bar,grid,reg){return(tm_shape(shp=shp,frame=T)+tm_rgb()+compass+scale.bar+grid+reg)},compass,scale.bar,grid,reg)
       #tmap_arrange arguments
-      maplist$asp=NA
+      tmap_arrange_args<-names(formals(tmap_arrange))
+      tmap_arrange_args<-unique(tmap_arrange_args[!(tmap_arrange_args%in%"...")])
+      names(tmap_arrange_args)<-paste0("tmap.arrange.",tmap_arrange_args)
+      tm_tmap_arrange_args<-args[names(args)%in%names(tmap_arrange_args)]
+      names(tm_tmap_arrange_args)<-tmap_arrange_args[names(tm_tmap_arrange_args)]
       
-      if(missing(layout)){
-        maplist$ncol=ceiling(sqrt(length(r)))
-      }else{
-        maplist$nrow=layout[1]
-        maplist$nrow=layout[2]
+      if(!("asp" %in% tm_tmap_arrange_args)){
+        tm_tmap_arrange_args$asp=NA
       }
       
-      return(do.call(tmap_arrange,maplist))
+      if(missing(layout)){
+        tm_tmap_arrange_args$ncol=ceiling(sqrt(length(r)))
+      }else{
+        tm_tmap_arrange_args$nrow=layout[1]
+        tm_tmap_arrange_args$ncol=layout[2]
+      }
+      
+      return(do.call(tmap_arrange,c(maplist,tm_tmap_arrange_args)))
     }else{
       stop("genPlotGIS only supports list composed by RasterBrick or RasterStack.")
     }
