@@ -4,45 +4,71 @@
 #' information systems (GIS), i.e., adding a scale, north arrow, and the border
 #' of the region of interest (optional).
 #'
-#' This is a wrapper function of \code{spplot} and hence displays any 
+#' This is a wrapper function of \code{tmp} and hence displays any 
 #' \code{Raster*} object and accepts all of its parameters. The function adds a
 #' scale, a north arrow and a polygon in the area of interest. If necessary, the
 #' function automatically reprojects the polygon to match the projection of the
 #' \code{raster}. The projection of the map can be changed by modifying the 
-#' \code{proj} argument. The position in the graph of the arrow and scale bar
-#' is measured in relative distances (0-1) to the lower left corner of the
-#' graph. Their positions can be modified with the argument \code{compOpt}.
+#' \code{proj} argument. 
 #'
-#' @param r a \code{Raster*} class object with the image or image stack to be plotted.
+#' @param r a \code{Raster*} class object with the image or image stack to be plotted. If \code{r} is a list 
+#' of raster stack, \code{genPlotGIS} plot the images as RGB images.
 #' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
 #' defining the area of interest.
-#' @param cex A numeric multiplier to control character sizes for axis labels.
+#' @param proj character or object of class 'CRS' defining the coordinate 
+#' reference system of the plot.
+#' @param breaks a \code{numeric} vector defining the color breaks of the legend.
+#' @param labels a \code{character} vector defining the labels in the breaks of the legend.
+#' @param zlim a \code{numeric} vector defining the maximun and minimun values to be mapped.
+#' @param layout a \code{numeric} vector defining rows and columns to divide the plotting area.
+#' @param nbreaks a \code{numeric} argument defining the default number of breaks.
+#' @param nlabels a \code{numeric} argument defining the default number of labels in the legend.
+#' @param as.grid a \code{logical} argument. If \code{TRUE}, removes the space between 
+#' plotted layers. 
+#' @param compass.rm a \code{logical} argument to remove the compass from the plot. 
+#' \code{FALSE} by default.
+#' @param scale.bar.rm a \code{logical} argument to remove the scale bat from the plot. 
+#' \code{FALSE} by default.
 #' @param ... argument for nested functions:
 #' \itemize{
-#'   \item \code{compOpt} list to fit the size and the location of the GIS 
-#'   components as the arrow and the scales.
-#'   \item \code{proj} a \code{CRS} class object defining the coordinate 
-#'   reference system of the plot.
-#'   \item \code{...} any argument accepted by the \code{spplot} function.
+#'   \item \code{tm_layout} any argument accepted by the \code{tm_layout} function.
+#'   \item \code{tm_graticules} any argument accepted by the \code{tm_graticules} function. 
+#'   The arguments are defined as \code{tm.graticules.arg}, where \code{arg} is the 
+#'   \code{tm_graticules} argument name. For example, the \code{labels.size} of \code{tm_graticules} 
+#'   is defined as \code{tm.graticules.labels.size}.
+#'   \item \code{tm_compass} any argument accepted by the \code{tm_compass} function. 
+#'   The arguments are defined as \code{tm.compass.arg}, where \code{arg} is the 
+#'   \code{tm_compass} argument name. For example, the \code{type} of \code{tm_compass} 
+#'   is defined as \code{tm.compass.type}.
+#'   \item \code{tm_scale_bar} any argument accepted by the \code{tm_scale_bar} function. 
+#'   The arguments are defined as \code{tm.scale.bar.arg}, where \code{arg} is the 
+#'   \code{tm_scale_bar} argument name. For example, the \code{text.size} of \code{tm_scale_bar} 
+#'   is defined as \code{tm.scale.bar.text.size}.
+#'   \item \code{tm_shape} and \code{tm_polygon} for \code{region}. Any argument accepted by the 
+#'   \code{tm_shape} and \code{tm_polygon} functions. 
+#'   The arguments are defined as \code{tm.shape.region.arg} or \code{tm.polygon.region.arg}, where \code{arg} is the 
+#'   \code{tm_shape} and \code{tm_polygon} argument name respectively. For example, the \code{lwd} of \code{tm_polygon} 
+#'   is defined as \code{tm.polygon.region.lwd}.
+#'   \item \code{tm_shape} and \code{tm_raster} for \code{r}. Any argument accepted by the 
+#'   \code{tm_shape} and \code{tm_raster} functions. 
+#'   The arguments are defined as \code{tm.shape.r.arg} or \code{tm.raster.r.arg}, where \code{arg} is the 
+#'   \code{tm_shape} and \code{tm_raster} argument name respectively. For example, 
+#'   the \code{legend.reverse} of \code{tm_raster} is defined as \code{tm.raster.r.legend.reverse}.
+#'   \item \code{tm_tmap_arrange} any argument accepted by the \code{tm_tmap_arrange} function. 
+#'   The arguments are defined as \code{tm.tmap.arrange.arg}, where \code{arg} is the 
+#'   \code{tm_tmap_arrange} argument name. For example, the \code{asp} of \code{tm_tmap_arrange} 
+#'   is defined as \code{tm.tmap.arrange.asp}. This arguments are only accepted when plotting a \code{list}
+#'   of stack images to plot as RGB.
 #' }
 #'
 #' @return \code{tmap} class containing the plot.
 #'
 #' @examples
+#' # Simple plot of NDVI in Navarre
 #' genPlotGIS(ex.ndvi.navarre,
 #'            ex.navarre)
 #' 
-#' genPlotGIS(r=ex.ndvi.navarre,
-#'            region=ex.navarre,
-#'            tm.compass.size=1,
-#'            tm.compass.type="rose",
-#'            tm.scale.bar.text.size=0.4,
-#'            tm.polygon.region.lwd=6,
-#'            tm.polygon.region.border.col="#000000",
-#'            tm.raster.r.palette=rev(terrain.colors(40)),
-#'            tm.raster.r.title="NDVI",
-#'            tm.layout.legend.stack="horizontal")
-#'            
+#' # Using tm arguments        
 #'genPlotGIS(ex.ndvi.navarre,
 #'           ex.navarre,
 #'           tm.compass.size=1,
@@ -56,18 +82,55 @@
 #'           tm.graticules.labels.size=1,
 #'           tm.graticules.n.x=3,
 #'           tm.graticules.n.y=3)
+#' # Using the view mode of tmap for ploting the images in the viewer
 #' tmap_mode("view")
 #' genPlotGIS(ex.ndvi.navarre,
 #'            ex.navarre,
 #'            tm.raster.r.palette=rev(terrain.colors(40)))+
 #'            tm_facets(as.layers=TRUE)
-#' 
+#'            
+#' # Plotting RGB image      
 #' tmap_mode(mode = c("plot"))
-#' genPlotGIS(ex.ndvi.navarre,
-#'            ex.navarre,
-#'            tm.raster.r.palette=rev(terrain.colors(40)))
-genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as.grid=FALSE,compass.rm=FALSE,scale.bar.rm=FALSE,...){
+#' # path to the cropped and cutted MODIS images for the region of Navarre
+#' wdir <- system.file("ExNavarreVar", package = "RGISTools")
+#' # list all the tif files
+#' files.mod <- list.files(wdir, pattern="\\.tif$", recursive = TRUE, full.names = TRUE)
+#' # print the MOD09 bands
+#' getRGISToolsOpt("MOD09BANDS")
+#' 
+#' # select the red, blue and NIR bands
+#' img.mod.red <- raster(files.mod[1])
+#' img.mod.blue <- raster(files.mod[3])
+#' img.mod.green <- raster(files.mod[4])
+#' img.mod.rgb<-varRGB(img.mod.red,img.mod.green,img.mod.blue)
+#' genPlotGIS(list(img.mod.rgb),
+#'            ex.navarre)
+genPlotGIS<-function(r,region,breaks,labels,zlim,layout,proj,nbreaks=40,nlabels=10,as.grid=TRUE,compass.rm=FALSE,scale.bar.rm=FALSE,...){
   args<-list(...)
+  
+  # r and region projection management
+  if(class(r)=="list"){
+    if(class(r[[1]])=="RasterBrick"|class(r[[1]])=="RasterStack"){
+      if(!missing(proj)){
+        if(!missing(proj)){
+          r = lapply(r, projectRaster,crs=proj)
+        }
+        if(!missing(region)){region=transform_multiple_proj(region,proj4=projection(r[[1]]))}
+      }
+    }else{
+      stop("genPlotGIS only supports RasterBrick or RasterStack, or a list composed by RasterBrick or RasterStack.")
+    }
+  }else{
+    if(class(r)=="RasterBrick"|class(r)=="RasterStack"){
+      if(!missing(proj)){
+        r = projectRaster(r,crs=proj)
+        if(!missing(region)){region=transform_multiple_proj(region,proj4=projection(r))}
+      }
+    }else{
+      stop("genPlotGIS only supports RasterBrick or RasterStack, or a list composed by RasterBrick or RasterStack.")
+    }
+  }
+  
   
   # layout preconfigured arguments
   tm_layout_args<-args[names(args)%in%names(formals(tm_layout))]
@@ -103,7 +166,7 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as
   names(graticules_args)<-paste0("tm.graticules.",graticules_args)
   tm_graticules_args<-args[names(args)%in%names(graticules_args)]
   names(tm_graticules_args)<-graticules_args[names(tm_graticules_args)]
-  if(!("lines" %in% names(tm_layout_args))){
+  if(!("lines" %in% names(tm_graticules_args))){
     tm_graticules_args$lines=FALSE
   }
   if(as.grid){
@@ -190,8 +253,7 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as
     ####################################################
     # RGB plot
     ####################################################
-    if(class(r[[1]])=="RasterBrick"|class(r[[1]])=="RasterStack"){
-      maplist<-lapply(r,function(shp,compass,scale.bar,grid,reg){return(tm_shape(shp=shp,frame=T)+tm_rgb()+compass+scale.bar+grid+reg)},compass,scale.bar,grid,reg)
+    maplist<-lapply(r,function(shp,compass,scale.bar,grid,reg){return(tm_shape(shp=shp,frame=T)+tm_rgb()+compass+scale.bar+grid+reg)},compass,scale.bar,grid,reg)
       #tmap_arrange arguments
       tmap_arrange_args<-names(formals(tmap_arrange))
       tmap_arrange_args<-unique(tmap_arrange_args[!(tmap_arrange_args%in%"...")])
@@ -204,16 +266,19 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as
       }
       
       if(missing(layout)){
-        tm_tmap_arrange_args$ncol=ceiling(sqrt(length(r)))
+        if(length(r)>1){
+          tm_tmap_arrange_args$ncol=ceiling(sqrt(length(r)))
+        }else{
+          tm_tmap_arrange_args$ncol=1
+        }
+        
       }else{
         tm_tmap_arrange_args$nrow=layout[1]
         tm_tmap_arrange_args$ncol=layout[2]
       }
       
       return(do.call(tmap_arrange,c(maplist,tm_tmap_arrange_args)))
-    }else{
-      stop("genPlotGIS only supports list composed by RasterBrick or RasterStack.")
-    }
+
   }else{
     ####################################################
     # Stack plot
@@ -277,8 +342,6 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,nbreaks=40,nlabels=10,as
       scale.bar+#scale
       grid+
       lyt)
-    #tm_facets(inside.original.bbox=F,free.coords=F)
-    #tm_graticules(lines=FALSE,labels.inside.frame=F) #coordinates
   }
 }
 

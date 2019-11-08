@@ -44,6 +44,8 @@ becomes corrupted.}
  \itemize{
        \item \code{dates} a vector with the capturing dates being considered
   for downloading. 
+       \item \code{bFilter} a vector with the bands to be extracted when \code{untar=TRUE}. If not
+  supplied, all bands are extracted.
 }}
 }
 \value{
