@@ -167,7 +167,7 @@ lsDownEspa<-function(orders,norder,c.handle,AppRoot,images.order,n.attempts,verb
     
     if("bFilter"%in%names(arg)){
       flist<-untar(out.file.name,list=TRUE)
-      flist<-flist[Reduce("|", lapply(paste0(arg$bFilter,"\\.TIF$"),grepl,flist))]
+      flist<-flist[Reduce("|", lapply(paste0(arg$bFilter,"\\.tif$"),grepl,flist))]
       untar(tarfile=out.file.name,
             files=flist,
             exdir = untar.dir)
