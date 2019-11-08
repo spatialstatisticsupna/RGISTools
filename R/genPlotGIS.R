@@ -89,8 +89,6 @@
 #'            tm.raster.r.palette=rev(terrain.colors(40)))+
 #'            tm_facets(as.layers=TRUE)
 #'            
-#' # Plotting RGB image      
-#' tmap_mode(mode = c("plot"))
 #' # path to the cropped and cutted MODIS images for the region of Navarre
 #' wdir <- system.file("ExNavarreVar", package = "RGISTools")
 #' # list all the tif files
@@ -103,6 +101,9 @@
 #' img.mod.blue <- raster(files.mod[3])
 #' img.mod.green <- raster(files.mod[4])
 #' img.mod.rgb<-varRGB(img.mod.red,img.mod.green,img.mod.blue)
+#' genPlotGIS(ex.ndvi.navarre,
+#'            ex.navarre)+
+#'            tm_facets(as.layers = T)+
 #' genPlotGIS(list(img.mod.rgb),
 #'            ex.navarre)
 genPlotGIS<-function(r,region,breaks,labels,zlim,layout,proj,nbreaks=40,nlabels=10,as.grid=TRUE,compass.rm=FALSE,scale.bar.rm=FALSE,...){
@@ -269,7 +270,7 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,proj,nbreaks=40,nlabels=
         if(length(r)>1){
           tm_tmap_arrange_args$ncol=ceiling(sqrt(length(r)))
         }else{
-          tm_tmap_arrange_args$ncol=1
+            return(tm_shape(shp=r[[1]],frame=T)+tm_rgb()+compass+scale.bar+grid+reg)
         }
         
       }else{
@@ -278,71 +279,70 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,proj,nbreaks=40,nlabels=
       }
       
       return(do.call(tmap_arrange,c(maplist,tm_tmap_arrange_args)))
-
-  }else{
-    ####################################################
-    # Stack plot
-    ####################################################
-    # default label and breaks for the raster
-    if(missing(zlim)){
-      lower<-min(minValue(r))
-      upper<-max(maxValue(r))
-    }else{
-      if((class(zlim)!="numeric")&(length(zlim)!=0))
-        stop("zlim must be a vector of length 2 specifying the upper and lower boundaries of the legend.")
-      lower<-min(zlim)
-      upper<-max(zlim)
-    }
-    
-    
-    nbreaks=nbreaks-2
-    if(missing(breaks))
-      breaks<-c(-Inf,seq(from=lower,to=upper,by=((upper-lower)/nbreaks)),Inf)
-    if(missing(labels)){
-      labels<-c("",as.character(round(breaks[-c(1,length(breaks))],digits = 2)))
-      if(length(labels)>nlabels){
-        labels<-rep("",length(labels))
-        labels[c(seq(1,length(labels),as.integer(length(labels)/nlabels)),length(labels))]<-as.character(round(seq(from=lower,to=upper,by=((upper-lower)/nlabels)),digits = 2))
-      }
-    }
-    
-    # raster default arguments
-    shape_r_args<-names(formals(tm_shape))
-    shape_r_args<-shape_r_args[!(shape_r_args%in%c("..."))]
-    names(shape_r_args)<-paste0("tm.shape.r.",shape_r_args)
-    tm_shape_r_args<-args[names(args)%in%names(shape_r_args)]
-    names(tm_shape_r_args)<-shape_r_args[names(tm_shape_r_args)]
-    tm_shape_r_args$shp=r
-    
-    raster_r_args<-names(formals(tm_raster))
-    names(raster_r_args)<-paste0("tm.raster.r.",raster_r_args)
-    tm_raster_r_args<-args[names(args)%in%names(raster_r_args)]
-    names(tm_raster_r_args)<-raster_r_args[names(tm_raster_r_args)]
-    if(!("col" %in% names(tm_raster_r_args))){
-      tm_raster_r_args$col=names(r)
-    }
-    if(!("breaks" %in% names(tm_raster_r_args))){
-      tm_raster_r_args$breaks=breaks
-    }
-    if(!("labels" %in% names(tm_raster_r_args))){
-      tm_raster_r_args$labels=labels
-    }
-    if(!("legend.reverse" %in% names(tm_raster_r_args))){
-      tm_raster_r_args$legend.reverse=TRUE
-    }
-    if(!("title" %in% names(tm_raster_r_args))){
-      tm_raster_r_args$title=""
-    }
-    
-    # Base tmap
-    return(do.call(tm_shape,tm_shape_r_args) + do.call(tm_raster,tm_raster_r_args) +# tm_facets(nrow=3,ncol=2)+# raster conf
-      do.call(tm_layout,tm_layout_args) +# layout
-      compass + #the compass
-      reg+ #region
-      scale.bar+#scale
-      grid+
-      lyt)
   }
+
+  ####################################################
+  # Stack plot
+  ####################################################
+  # default label and breaks for the raster
+  if(missing(zlim)){
+    lower<-min(minValue(r))
+    upper<-max(maxValue(r))
+  }else{
+    if((class(zlim)!="numeric")&(length(zlim)!=0))
+      stop("zlim must be a vector of length 2 specifying the upper and lower boundaries of the legend.")
+    lower<-min(zlim)
+    upper<-max(zlim)
+  }
+  
+  
+  nbreaks=nbreaks-2
+  if(missing(breaks))
+    breaks<-c(-Inf,seq(from=lower,to=upper,by=((upper-lower)/nbreaks)),Inf)
+  if(missing(labels)){
+    labels<-c("",as.character(round(breaks[-c(1,length(breaks))],digits = 2)))
+    if(length(labels)>nlabels){
+      labels<-rep("",length(labels))
+      labels[c(seq(1,length(labels),as.integer(length(labels)/nlabels)),length(labels))]<-as.character(round(seq(from=lower,to=upper,by=((upper-lower)/nlabels)),digits = 2))
+    }
+  }
+  
+  # raster default arguments
+  shape_r_args<-names(formals(tm_shape))
+  shape_r_args<-shape_r_args[!(shape_r_args%in%c("..."))]
+  names(shape_r_args)<-paste0("tm.shape.r.",shape_r_args)
+  tm_shape_r_args<-args[names(args)%in%names(shape_r_args)]
+  names(tm_shape_r_args)<-shape_r_args[names(tm_shape_r_args)]
+  tm_shape_r_args$shp=r
+  
+  raster_r_args<-names(formals(tm_raster))
+  names(raster_r_args)<-paste0("tm.raster.r.",raster_r_args)
+  tm_raster_r_args<-args[names(args)%in%names(raster_r_args)]
+  names(tm_raster_r_args)<-raster_r_args[names(tm_raster_r_args)]
+  if(!("col" %in% names(tm_raster_r_args))){
+    tm_raster_r_args$col=names(r)
+  }
+  if(!("breaks" %in% names(tm_raster_r_args))){
+    tm_raster_r_args$breaks=breaks
+  }
+  if(!("labels" %in% names(tm_raster_r_args))){
+    tm_raster_r_args$labels=labels
+  }
+  if(!("legend.reverse" %in% names(tm_raster_r_args))){
+    tm_raster_r_args$legend.reverse=TRUE
+  }
+  if(!("title" %in% names(tm_raster_r_args))){
+    tm_raster_r_args$title=""
+  }
+  
+  # Base tmap
+  return(do.call(tm_shape,tm_shape_r_args) + do.call(tm_raster,tm_raster_r_args) +# tm_facets(nrow=3,ncol=2)+# raster conf
+           do.call(tm_layout,tm_layout_args) +# layout
+           compass + #the compass
+           reg+ #region
+           scale.bar+#scale
+           grid+
+           lyt)
 }
 
 

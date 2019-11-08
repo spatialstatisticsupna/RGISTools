@@ -113,8 +113,6 @@ genPlotGIS(ex.ndvi.navarre,
            tm.raster.r.palette=rev(terrain.colors(40)))+
            tm_facets(as.layers=TRUE)
            
-# Plotting RGB image      
-tmap_mode(mode = c("plot"))
 # path to the cropped and cutted MODIS images for the region of Navarre
 wdir <- system.file("ExNavarreVar", package = "RGISTools")
 # list all the tif files
@@ -127,6 +125,9 @@ img.mod.red <- raster(files.mod[1])
 img.mod.blue <- raster(files.mod[3])
 img.mod.green <- raster(files.mod[4])
 img.mod.rgb<-varRGB(img.mod.red,img.mod.green,img.mod.blue)
+genPlotGIS(ex.ndvi.navarre,
+           ex.navarre)+
+           tm_facets(as.layers = T)+
 genPlotGIS(list(img.mod.rgb),
            ex.navarre)
 }
