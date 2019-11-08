@@ -112,7 +112,7 @@ lsEspaOrderImages<-function(search.res,username,password,product=c("sr","source_
                       body = as.character(query))
     if(verbose){message(paste0("ESPA Order: \n",res))}
     #print the response
-    message(data.frame(fromJSON(rawToChar(res$content))))
+    #message(data.frame(fromJSON(rawToChar(res$content))))
   }
   if(verbose)message(paste0("Check the orders in ",getRGISToolsOpt("LS.ESPA.API"),getRGISToolsOpt("LS.ESPA.API.v"),"/list-orders"))
 }
