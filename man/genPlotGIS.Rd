@@ -42,29 +42,29 @@ plotted layers.}
 \item{...}{argument for nested functions:
 \itemize{
   \item \code{tm_layout} any argument accepted by the \code{tm_layout} function.
-  \item \code{tm_graticules} any argument accepted by the \code{tm_graticules} function. 
+  \item \code{tm.graticules} any argument accepted by the \code{tm_graticules} function. 
   The arguments are defined as \code{tm.graticules.arg}, where \code{arg} is the 
   \code{tm_graticules} argument name. For example, the \code{labels.size} of \code{tm_graticules} 
   is defined as \code{tm.graticules.labels.size}.
-  \item \code{tm_compass} any argument accepted by the \code{tm_compass} function. 
+  \item \code{tm.compass} any argument accepted by the \code{tm_compass} function. 
   The arguments are defined as \code{tm.compass.arg}, where \code{arg} is the 
   \code{tm_compass} argument name. For example, the \code{type} of \code{tm_compass} 
   is defined as \code{tm.compass.type}.
-  \item \code{tm_scale_bar} any argument accepted by the \code{tm_scale_bar} function. 
+  \item \code{tm.scale.bar} any argument accepted by the \code{tm_scale_bar} function. 
   The arguments are defined as \code{tm.scale.bar.arg}, where \code{arg} is the 
   \code{tm_scale_bar} argument name. For example, the \code{text.size} of \code{tm_scale_bar} 
   is defined as \code{tm.scale.bar.text.size}.
-  \item \code{tm_shape} and \code{tm_polygon} for \code{region}. Any argument accepted by the 
+  \item \code{tm.shape} and \code{tm.polygon} for \code{region}. Any argument accepted by the 
   \code{tm_shape} and \code{tm_polygon} functions. 
   The arguments are defined as \code{tm.shape.region.arg} or \code{tm.polygon.region.arg}, where \code{arg} is the 
   \code{tm_shape} and \code{tm_polygon} argument name respectively. For example, the \code{lwd} of \code{tm_polygon} 
   is defined as \code{tm.polygon.region.lwd}.
-  \item \code{tm_shape} and \code{tm_raster} for \code{r}. Any argument accepted by the 
+  \item \code{tm.shape} and \code{tm.raster} for \code{r}. Any argument accepted by the 
   \code{tm_shape} and \code{tm_raster} functions. 
   The arguments are defined as \code{tm.shape.r.arg} or \code{tm.raster.r.arg}, where \code{arg} is the 
   \code{tm_shape} and \code{tm_raster} argument name respectively. For example, 
   the \code{legend.reverse} of \code{tm_raster} is defined as \code{tm.raster.r.legend.reverse}.
-  \item \code{tm_tmap_arrange} any argument accepted by the \code{tm_tmap_arrange} function. 
+  \item \code{tm.tmap.arrange} any argument accepted by the \code{tm_tmap_arrange} function. 
   The arguments are defined as \code{tm.tmap.arrange.arg}, where \code{arg} is the 
   \code{tm_tmap_arrange} argument name. For example, the \code{asp} of \code{tm_tmap_arrange} 
   is defined as \code{tm.tmap.arrange.asp}. This arguments are only accepted when plotting a \code{list}
