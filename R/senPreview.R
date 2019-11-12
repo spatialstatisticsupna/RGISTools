@@ -12,6 +12,9 @@
 #' @param searchres a vector with the results from \code{\link{senSearch}}.
 #' @param username ESA’s `SciHub' username.
 #' @param password ESA’s `SciHub' password.
+#' @param dates a vector with the dates being considered
+#'   for previewing. This argument is mandatory if 
+#'   \code{n} is not defined.
 #' @param n a \code{numeric} argument identifying the row of the image in
 #' \code{searchres}.
 #' @param lpos vector argument. Defines the position of the layers when RGB 
@@ -47,7 +50,26 @@
 #' # show the dates in julian days
 #' senGetDates(names(sres),format="%Y%j")
 #' }
-senPreview<-function(searchres,username,password,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
+senPreview<-function(searchres,username,password,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
+  if(missing(dates)){
+    return(.lsPreviewRecursive(searchres=searchres,n=n,dates=dates,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
+  }else{
+    searchres<-searchres[senGetDates(names(searchres))%in%dates]
+    if(length(searchres)>0){
+      .senPreviewRecursive(searchres=searchres,username=username,password=password,n=1,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...)
+      if(length(searchres)>1){
+        for(x in 2:length(searchres)){
+          .senPreviewRecursive(searchres=searchres,username=username,password=password,n=x,lpos=lpos,add.Layer=T,verbose=verbose,...)
+        }
+      }
+      return(getRGISToolsOpt("GMapView"))
+    }else{
+      stop("There is no image for preview in ")
+    }
+    
+  }
+}
+.senPreviewRecursive<-function(searchres,username,password,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   ser<-searchres[n]
   c.handle = new_handle()
   handle_setopt(c.handle,

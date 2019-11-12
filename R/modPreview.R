@@ -10,6 +10,9 @@
 #' Please, be aware that only some images may have a preview.
 #'
 #' @param searchres a vector with the results from \code{\link{modSearch}}.
+#' @param dates a vector with the dates being considered
+#'   for previewing. This argument is mandatory if 
+#'   \code{n} is not defined.
 #' @param n a \code{numeric} argument identifying the location of the image in
 #' \code{searchres}.
 #' @param lpos vector argument. Defines the position of the layers when RGB 
@@ -41,7 +44,26 @@
 #' modPreview(sres,1)
 #' modPreview(sres,2,add.Layer=T)
 #' }
-modPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
+modPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
+  if(missing(dates)){
+    return(.lsPreviewRecursive(searchres=searchres,n=n,dates=dates,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
+  }else{
+    searchres<-searchres[modGetDates(searchres)%in%dates]
+    if(length(searchres)>0){
+      .modPreviewRecursive(searchres=searchres,n=1,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...)
+      if(length(searchres)>1){
+        for(x in 2:length(searchres)){
+          .modPreviewRecursive(searchres=searchres,n=x,lpos=lpos,add.Layer=T,verbose=verbose,...)
+        }
+      }
+      return(getRGISToolsOpt("GMapView"))
+    }else{
+      stop("There is no image for preview in ")
+    }
+    
+  }
+}
+.modPreviewRecursive<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   ser<-searchres[n]
   tmp <- tempfile()
   if(verbose){
@@ -50,7 +72,7 @@ modPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,.
     suppressWarnings(download.file(ser,tmp,mode="wb"))
   }
   pic<-stack(tmp)
-
+  
   pr<-modGetPathRow(ser)
   ho<-as.numeric(substr(pr,2,3))
   ve<-as.numeric(substr(pr,5,6))

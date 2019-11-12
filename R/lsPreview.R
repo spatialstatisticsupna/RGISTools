@@ -11,6 +11,9 @@
 #'
 #' @param searchres a \code{data.frame} with the results from 
 #' \code{\link{ls7Search}} or \code{\link{ls8Search}}.
+#' @param dates a vector with the dates being considered
+#'   for previewing. This argument is mandatory if 
+#'   \code{n} is not defined.
 #' @param n a \code{numeric} argument identifying the location of the image in
 #' \code{searchres}.
 #' @param lpos vector argument. Defines the position of the layers when RGB 
@@ -52,8 +55,10 @@ lsPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FA
     searchres<-searchres[as.Date(searchres$acquisitionDate)%in%dates,]
     if(nrow(searchres)>0){
       .lsPreviewRecursive(searchres=searchres,n=1,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...)
-      for(x in 2:nrow(searchres)){
-        .lsPreviewRecursive(searchres=searchres,n=x,lpos=lpos,add.Layer=T,verbose=verbose,...)
+      if(nrow(searchres)>1){
+        for(x in 2:nrow(searchres)){
+          .lsPreviewRecursive(searchres=searchres,n=x,lpos=lpos,add.Layer=T,verbose=verbose,...)
+        }
       }
     return(getRGISToolsOpt("GMapView"))
     }else{

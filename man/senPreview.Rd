@@ -4,7 +4,7 @@
 \alias{senPreview}
 \title{Preview Sentinel-2 satellite images}
 \usage{
-senPreview(searchres, username, password, n, lpos = c(3, 2, 1),
+senPreview(searchres, username, password, n, dates, lpos = c(3, 2, 1),
   add.Layer = FALSE, verbose = FALSE, ...)
 }
 \arguments{
@@ -16,6 +16,10 @@ senPreview(searchres, username, password, n, lpos = c(3, 2, 1),
 
 \item{n}{a \code{numeric} argument identifying the row of the image in
 \code{searchres}.}
+
+\item{dates}{a vector with the dates being considered
+for previewing. This argument is mandatory if 
+\code{n} is not defined.}
 
 \item{lpos}{vector argument. Defines the position of the layers when RGB 
 image is generated allowing false color visualizations.}
