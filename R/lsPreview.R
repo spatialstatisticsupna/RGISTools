@@ -45,7 +45,24 @@
 #' lsPreview(sres.cloud.free, 1)
 #' lsPreview(sres.cloud.free, 2,add.Layer = TRUE)
 #' }
-lsPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
+lsPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
+  if(missing(dates)){
+    return(.lsPreviewRecursive(searchres=searchres,n=n,dates=dates,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
+  }else{
+    searchres<-searchres[as.Date(searchres$acquisitionDate)%in%dates,]
+    if(nrow(searchres)>0){
+      .lsPreviewRecursive(searchres=searchres,n=1,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...)
+      for(x in 2:nrow(searchres)){
+        .lsPreviewRecursive(searchres=searchres,n=x,lpos=lpos,add.Layer=T,verbose=verbose,...)
+      }
+    return(getRGISToolsOpt("GMapView"))
+    }else{
+      stop("There is no image for preview in ")
+    }
+    
+  }
+}
+.lsPreviewRecursive<-function(searchres,n,dates,lpos,add.Layer,verbose,...){
   ser<-searchres[n,]
   tmp <- tempfile()
   if(verbose){
@@ -53,7 +70,6 @@ lsPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,..
   }else{
     suppressWarnings(download.file(ser$browseURL,tmp,mode="wb"))
   }
-  
   r<-stack(tmp)
   lat<-unlist(ser[grepl("Latitude",names(ser))])
   lon<-unlist(ser[grepl("Longitude",names(ser))])
@@ -66,6 +82,5 @@ lsPreview<-function(searchres,n,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,..
     return(suppressWarnings(genMapViewSession(r,lpos,lname=paste0("LS_",ser["path"],ser["row"],"_D",format(ser["acquisitionDate"],"%Y%j")),add.Layer=add.Layer,...)))
   }
 }
-
 
 
