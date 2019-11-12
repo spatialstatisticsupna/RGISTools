@@ -134,7 +134,7 @@ ls8Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
       tiles<-unlist(apply(LS8MD[grepl("Corner",names(LS8MD))],1,tileIn,ext))
       LS8MD<-LS8MD[tiles,]
     }else{
-      pathrow<-names(ls8pr)[unlist(lapply(ls8pr,tileInExt,ext2=extent(arg$region)))]
+      pathrow<-names(ls8pr)[unlist(lapply(ls8pr,tileInExt,ext2=extent(arg$extent)))]
       pathrow<-as.data.frame(cbind(as.integer(substr(pathrow,1,3)),as.integer(substr(pathrow,4,6))))
       pathrow = lapply(as.list(1:dim(pathrow)[1]), function(x) pathrow[x[1],])
       LS8MD<-do.call(rbind,lapply(pathrow,function(rp,LS8MD,verbose){rp=unlist(rp);return(genFilterDF(LS8MD,row=rp[2],path=rp[1],verbose=verbose))},

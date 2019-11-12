@@ -13,9 +13,9 @@ transform_multiple_proj <- function(obj, proj4){
   }
 
   if(missing(proj4)){
-    return(obj)
+    return(new_obj)
   }else{
-    return(st_transform(obj, proj4))
+    return(st_transform(new_obj, proj4))
   }
 }
 
