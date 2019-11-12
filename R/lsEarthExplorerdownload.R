@@ -1,5 +1,6 @@
 lsEarthExplorerdownload<-function(searchres,username,password,cookies.file,untar,raw.rm,downDir,AppRoot,downPath,verbose,overwrite,...){
   #start usgs session
+  arg<-list(...)
   handler<-startUSGSsession(username,password,cookies.file,verbose)
   if(verbose)
     message("USGS session started, downloading images...")
