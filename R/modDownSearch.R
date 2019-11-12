@@ -59,7 +59,7 @@
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' print(src)
 #' modDownSearch(product = "MOD09GA",
 #'               startDate = as.Date("01-01-2018", "%d-%m-%Y"),

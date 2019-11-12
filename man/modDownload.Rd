@@ -66,7 +66,7 @@ sres <- modSearch(product = "MYD13A2",
                   extent = ex.navarre)
 head(sres)
 # download the first image in sres
-wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 print(wdir)
 wdir.mod <- file.path(wdir,"Modis","MYD13A2")
 wdir.mod.hdf <- file.path(wdir.mod,"hdf")

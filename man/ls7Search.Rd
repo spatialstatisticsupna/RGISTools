@@ -73,7 +73,7 @@ For instance, to filter the imagery with an available preview, the
 }
 \examples{
 \dontrun{
-wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 # search by path and row numbers of a tile
 sres <- ls7Search(startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                   endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),

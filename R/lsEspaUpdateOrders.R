@@ -25,7 +25,7 @@
 #' @return this function returns a \code{dataframe} with the updated order information from ESPA. 
 #' @examples
 #' \dontrun{
-#' src <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' src <- file.path(tempdir(),"Path_for_downloading_folder")
 #' # search Landsat 7 level-1
 #' search.res <- ls7Search(startDate = as.Date("01-01-2017", "%d-%m-%Y"),
 #'                         endDate = as.Date("15-01-2017", "%d-%m-%Y"),

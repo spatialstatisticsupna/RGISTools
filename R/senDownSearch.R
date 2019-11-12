@@ -49,7 +49,7 @@
 #' data(ex.navarre)
 #' # Download S2MSI1C products sensed by Sentinel-2 
 #' # between the julian dates 210 and 218, 2018
-#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' print(wdir)
 #' senDownload(startDate = as.Date("2018210", "%Y%j"),
 #'             endDate = as.Date("2018218", "%Y%j"),

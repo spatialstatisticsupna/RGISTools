@@ -60,7 +60,7 @@ If \code{fun = varRGB}, then the argument \code{getStack} must be equal to
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 # main output directory
-wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 print(wdir)
 # download Sentinel-2 images
 senDownSearch(startDate = as.Date("2018210","\%Y\%j"),

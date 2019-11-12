@@ -50,7 +50,7 @@ using the `\code{raster}' package.
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 
-wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 print(wdir)
 wdir.mod <- file.path(wdir, "Modis","MOD11A1")
 wdir.mod.hdf <- file.path(wdir.mod, "hdf")

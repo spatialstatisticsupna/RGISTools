@@ -31,7 +31,7 @@
 #' data(ex.navarre)
 #' # set the download folder
 #' s.start <- Sys.time()
-#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' print(wdir)
 #' # download the images
 #' modDownSearch(product = "MOD09GA",

@@ -40,7 +40,7 @@
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # main output directory
-#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' print(wdir)
 #' # download Sentinel-2 images
 #' senDownSearch(startDate = as.Date("2018210","%Y%j"),
@@ -102,9 +102,12 @@ senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
     sen.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
     
     #check if there are S2MSI2A images
-    if(sum(unlist(lapply(resbands,grepl,sen.img)))>0){
+    cres<-lapply(resbands,grepl,sen.img)
+    cres<-unlist(lapply(cres,function(x){if(sum(x)>0){return(TRUE)}else{return(FALSE)}}))
+    if(sum(cres)>0){
       if(verbose){message("Multiple resolution layers, getStack not supported.")}
       getStack=FALSE
+      resbands<-resbands[cres]
     }else{
       resbands=c("")
     }

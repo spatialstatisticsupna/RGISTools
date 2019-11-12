@@ -29,10 +29,10 @@
 #' @examples
 #' \dontrun{
 #' # creates a MetaData folder and downloads the csv in the "Path_for_downloading_folder" directory
-#' ls7LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"))
+#' ls7LoadMetadata(AppRoot = file.path(tempdir(),"Path_for_downloading_folder"))
 #'
 #' # update the metadata file
-#' ls7LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"), update = TRUE)
+#' ls7LoadMetadata(AppRoot = file.path(tempdir(),"Path_for_downloading_folder"), update = TRUE)
 #' 
 #' # get metadata data frame 
 #' LS7MD <- getRGISToolsOpt("LS7METADATA")

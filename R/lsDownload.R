@@ -52,7 +52,7 @@
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' 
-#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' print(wdir)
 #' 
 #' # search and download the images from Landsat-8 between
@@ -84,7 +84,7 @@
 #'
 #' # search and download the images from Landsat-7 between
 #' # 2011 and 2013 in the region of Navarre
-#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' print(wdir)
 #' sres <- ls7Search(startDate = as.Date("01-01-2018", "%d-%m-%Y"),
 #'                   endDate = as.Date("20-01-2018", "%d-%m-%Y"),

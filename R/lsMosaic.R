@@ -47,7 +47,7 @@
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
 #' # main output directory
-#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' print(wdir)
 #' # download Landsat-8 images
 #' lsDownSearch(satellite = "ls8",

@@ -53,7 +53,7 @@
 #' names(sres.sen.R094)
 #' # list the dates in sres
 #' senGetDates(names(sres.sen.R094),format="%Y%j")
-#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' # donwload the imagery
 #' senDownload(searchres = sres.sen.R094,
 #'             username = "username",

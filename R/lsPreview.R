@@ -31,7 +31,7 @@
 #' \dontrun{
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' # retrieve jpg images covering Navarre between 2011 and 2013
 #' sres <- ls7Search(startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                   endDate = as.Date("31-12-2013", "%d-%m-%Y"),

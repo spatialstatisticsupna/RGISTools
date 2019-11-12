@@ -45,10 +45,10 @@ metadata in the future.
 \dontrun{
 
 # creates a MetaData folder and downloads the csv in the "Path_for_downloading_folder" directory
-ls8LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"))
+ls8LoadMetadata(AppRoot = file.path(tempdir(),"Path_for_downloading_folder"))
 
 # update the metadata file
-ls8LoadMetadata(AppRoot = paste0(tempdir(),"/Path_for_downloading_folder"), update = TRUE)
+ls8LoadMetadata(AppRoot = file.path(tempdir(),"Path_for_downloading_folder"), update = TRUE)
 
 # get metadata data frame 
 LS8MD <- getRGISToolsOpt("LS8METADATA")

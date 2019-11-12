@@ -36,7 +36,7 @@ status messages and their interpretation can be found in the ESPA's API
 }
 \examples{
 \dontrun{
-wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 # search Landsat 7 level-2
 sres <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
                   endDate = as.Date("07-01-2017", "\%d-\%m-\%Y"),

@@ -57,7 +57,7 @@ decompressed when \code{untar = TRUE}.
 }
 \examples{
 \dontrun{
-wdir <- paste0(tempdir(),"/Path_for_downloading_folder")
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 print(wdir)
 # search Landsat-7 level-1
 sres <- ls7Search(startDate = as.Date("01-01-2017", "\%d-\%m-\%Y"),
