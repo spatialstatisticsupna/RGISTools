@@ -69,7 +69,7 @@ modPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = F
   if(verbose){
     download.file(ser,tmp,mode="wb")
   }else{
-    suppressWarnings(download.file(ser,tmp,mode="wb"))
+    download.file(ser,tmp,mode="wb",quiet = TRUE)
   }
   pic<-stack(tmp)
   
