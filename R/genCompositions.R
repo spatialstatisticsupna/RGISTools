@@ -47,27 +47,52 @@
 #'                                      fun = max)
 #' # Check that the clouds were removed
 #' genPlotGIS(composite.NDVI.3a)
-genCompositions<-function(rstack,n,fun,by.days=FALSE,...){
+genCompositions<-function(rstack,n,fun,by,by.days=FALSE,verbose=FALSE,...){
   args<-list(...)
-  if(by.days){
-    # Create compositions using dates
+
+  if(!missing(by)){
     dates<-genGetDates(names(rstack))
-    mxdate<-max(dates)
-    mndate<-min(dates)
-    alldates<-as.Date(mndate:mxdate)
-    n.ped<-length(alldates)
-    rnp<-ceiling(n.ped/n)
-    idx<-rep(1:rnp,each=n)[1:length(alldates)]
-    idx<-idx[alldates%in%dates]
-    comp<-stackApply(rstack,idx,fun=fun, ...)
-    names(comp)<-paste0("Comp_",n,"_",format(alldates,"%Y%j")[seq(1,n.ped,n)[unique(idx)]])
+    if(verbose){message("Omitting n and by.day argument...")}
+    switch (by,
+            "month" = {
+              alldates<-format(dates,"%Y%m")
+              alldates<-as.factor(alldates)
+              idx<-as.integer(alldates)
+              comp<-stackApply(rstack,idx,fun=fun, ...)
+              alldates<-as.Date(paste0(unique(as.character(alldates)),"01"),"%Y%m%d")
+              names(comp)<-paste0("Comp_",format(alldates,"%Y%j"))
+            },
+            "years" = {
+              alldates<-format(dates,"%Y")
+              alldates<-as.factor(alldates)
+              idx<-as.integer(alldates)
+              comp<-stackApply(rstack,idx,fun=fun, ...)
+              alldates<-as.Date(paste0(unique(as.character(alldates)),"0101"),"%Y%m%d")
+              names(comp)<-paste0("Comp_",format(alldates,"%Y%j"))
+            },
+            stop("by argument only accepts 'month' or 'years'.")
+    )
   }else{
-    # Create compositions using periods
-    n.ped<-nlayers(rstack)
-    rnp<-ceiling(n.ped/n)
-    idx<-rep(1:rnp,each=n)[1:n.ped]
-    comp<-stackApply(rstack,idx,fun=fun, ...)
-    names(comp)<-paste0(names(rstack)[seq(1,n.ped,n)[unique(idx)]],"_Comp_",n)
+    if(by.days){
+      # Create compositions using dates
+      dates<-genGetDates(names(rstack))
+      mxdate<-max(dates)
+      mndate<-min(dates)
+      alldates<-as.Date(mndate:mxdate)
+      n.ped<-length(alldates)
+      rnp<-ceiling(n.ped/n)
+      idx<-rep(1:rnp,each=n)[1:length(alldates)]
+      idx<-idx[alldates%in%dates]
+      comp<-stackApply(rstack,idx,fun=fun, ...)
+      names(comp)<-paste0("Comp_",n,"_",format(alldates,"%Y%j")[seq(1,n.ped,n)[unique(idx)]])
+    }else {
+      alldates<-format(dates,"%Y%m")
+      alldates<-as.factor(alldates)
+      idx<-as.integer(alldates)
+      comp<-stackApply(rstack,idx,fun=fun, ...)
+      alldates<-as.Date(paste0(unique(as.character(alldates)),"01"),"%Y%m%d")
+      names(comp)<-paste0("Comp_",format(alldates,"%Y%j"))
+    }
   }
   if("AppRoot"%in%names(args)){
     writeRaster(comp,filename=paste0(pathWinLx(args$AppRoot),"/",names(comp),".tif"),bylayer=TRUE)
