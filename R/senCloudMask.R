@@ -10,7 +10,7 @@
 #' @param AppRoot the directory where the cloud masks are saved.
 #' @param out.name the name of the folder that stores the outputs. 
 #' If the arguemnt is not defined the folder will be named as "CloudMask".
-#' @param img.res a \code{character} vector argument. Defines the band resolution
+#' @param resbands a \code{character} vector argument. Defines the band resolution
 #' used to create the cloud mask. Ex "20m" or "30m".
 #' @param sensitivity a \code{numeric} argument. Defines the sensitivity of the
 #' cloud detection method.
@@ -53,7 +53,7 @@
 #' # calculate the cloud mask
 #' wdir.sen.navarre <- file.path(wdir.sen, "Navarre")
 #' senCloudMask(src = wdir.sen.navarre,
-#'              img.res = "60m",
+#'              resbands = "60m",
 #'              overwrite = TRUE,
 #'              sensitivity = 98,
 #'              AppRoot = wdir.sen)
@@ -82,7 +82,7 @@
 #' # plot b2 cloud free layers
 #' spplot(img.sen.navarre.b2.cloud.free)
 #' }
-senCloudMask<-function(src,AppRoot,out.name,img.res,sensitivity=50,overwrite=FALSE,...){
+senCloudMask<-function(src,AppRoot,out.name,resbands,sensitivity=50,overwrite=FALSE,...){
   # src<-"D:/Downscaling/Sentinel2_L2/Navarre"/2017209
   # AppRoot<-"D:/Downscaling/Sentinel2_L2"
   # library(RGISTools)
@@ -108,14 +108,14 @@ senCloudMask<-function(src,AppRoot,out.name,img.res,sensitivity=50,overwrite=FAL
   
   dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
   for(id in imgdir.list){
-    out.img<-file.path(AppRoot,paste0(basename(id),"_",img.res,"_CloudMask.tif"))
+    out.img<-file.path(AppRoot,paste0(basename(id),"_",resbands,"_CloudMask.tif"))
     if(!file.exists(out.img)|overwrite){
       #id<-imgdir.list[1]
       tif.list<-list.files(id,pattern = "\\.tif$",full.names = TRUE)
       cloudmask<-tif.list[grepl(getRGISToolsOpt("SEN2BANDS")["cloud"],tif.list)]
-      cloudmask<-cloudmask[grepl(img.res,cloudmask)]
+      cloudmask<-cloudmask[grepl(resbands,cloudmask)]
       if(length(cloudmask)==0){
-        message(paste0("No cloud mask of ",img.res," found for date ",genGetDates(basename(id))))
+        message(paste0("No cloud mask of ",resbands," found for date ",genGetDates(basename(id))))
         next
       }
       message("Creating cloud mask from image ",basename(cloudmask))
