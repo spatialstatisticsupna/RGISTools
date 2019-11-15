@@ -93,7 +93,7 @@ senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
   if("dates"%in%names(function.arg)){
     sen.list<-sen.list[dates%in%function.arg$dates]
   }
-  if(length(sen.list)==0)stop(paste0("There is no images in ",src," path."))
+  if(length(sen.list)==0)stop(paste0("No images found in ",src," path."))
   rstack<-NULL
   result<-NULL
   for(imgfd in sen.list){

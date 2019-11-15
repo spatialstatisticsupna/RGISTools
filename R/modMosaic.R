@@ -82,7 +82,7 @@ modMosaic<-function(src,
   imgFolders<-list.files(src,full.names = TRUE)
   #remove folders
   #imgFolders<-imgFolders[nchar(basename(imgFolders))==41]
-  if(length(imgFolders)==0)stop(paste0("There is no images in ",src," path."))
+  
   dates<-unique(modGetDates(imgFolders))
   bpath<-file.path(AppRoot,out.name)
 
@@ -90,7 +90,7 @@ modMosaic<-function(src,
   if("dates"%in%names(arg)){
     dates<-dates[dates%in%arg$dates]
   }
-
+  if(length(imgFolders)==0)stop(paste0("No images found in ",src," path."))
   for(d in 1:length(dates)){
     #filter the images to one day
     dayImg<-imgFolders[modGetDates(imgFolders)%in%dates[d]]

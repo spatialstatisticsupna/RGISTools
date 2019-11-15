@@ -54,7 +54,9 @@ a particular location and date interval. The function returns a
 \code{ls7Search} searches images in the metadata file. If the metadata was
 downloaded before to the current directory, \code{ls7Search} will use this
 metadata by default. In case the metadata was not downloaded before, 
-\code{ls7Search} will make that call for you.
+\code{ls7Search} will make that call for you. The function creates the
+following subfolders "Landsat-8/metadata", where the metadata file is
+located.
 
 Landsat images are organized by tiles, which have a unique path and row
 numbers according to the

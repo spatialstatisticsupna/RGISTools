@@ -86,7 +86,7 @@ ls7FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
   }
 
   ls.list<-list.files(src,full.names = TRUE)
-  if(length(ls.list)==0)stop(paste0("There is no images in ",src," path."))
+  
   rstack<-NULL
   result<-NULL
   
@@ -94,7 +94,7 @@ ls7FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
   if("dates"%in%names(function.arg)){
     ls.list<-ls.list[dates%in%function.arg$dates]
   }
-  
+  if(length(ls.list)==0)stop(paste0("No images found in ",src," path."))
   for(imgfd in ls.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     ls7bands<-getRGISToolsOpt("LS7BANDS")

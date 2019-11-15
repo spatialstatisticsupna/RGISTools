@@ -94,7 +94,7 @@ modFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
   if("dates"%in%names(function.arg)){
     mod.list<-mod.list[dates%in%function.arg$dates]
   }
-  if(length(mod.list)==0)stop(paste0("There is no images in ",src," path."))
+  if(length(mod.list)==0)stop(paste0("No images found in ",src," path."))
   for(imgfd in mod.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     modbands<-getRGISToolsOpt("MOD09BANDS")

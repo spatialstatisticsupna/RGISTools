@@ -84,7 +84,7 @@ lsMosaic<-function(src,
   imgFolders<-list.files(src,full.names = TRUE)
   #remove folders
   #imgFolders<-imgFolders[nchar(basename(imgFolders))==21]
-  if(length(imgFolders)==0)stop(paste0("There is no images in ",src," path."))
+  if(length(imgFolders)==0)stop(paste0("No images found in ",src," path."))
   dates<-unique(lsGetDates(imgFolders))
   bpath<-file.path(AppRoot,out.name)
 
