@@ -86,6 +86,7 @@ ls7FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
   }
 
   ls.list<-list.files(src,full.names = TRUE)
+  if(length(ls.list)==0)stop(paste0("There is no images in ",src," path."))
   rstack<-NULL
   result<-NULL
   

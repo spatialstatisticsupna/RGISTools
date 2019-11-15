@@ -88,7 +88,7 @@ ls8FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
     message(vartype)
   }
   ls.list<-list.files(src,full.names = TRUE)
-  
+  if(length(ls.list)==0)stop(paste0("There is no images in ",src," path."))
   dates<-genGetDates(ls.list)
   if("dates"%in%names(function.arg)){
     ls.list<-ls.list[dates%in%function.arg$dates]
