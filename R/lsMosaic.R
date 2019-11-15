@@ -71,7 +71,7 @@
 #' }
 lsMosaic<-function(src,
                    AppRoot,
-                   region=NULL,
+                   region,
                    out.name="outfile",
                    verbose=FALSE,
                    gutils=TRUE,
@@ -185,7 +185,7 @@ lsMosaic<-function(src,
               }
             })
           
-          if(!is.null(region)){
+          if(!missing(region)){
             region<-transform_multiple_proj(region)
             #TODO remove as spatial using raster v3 package
             c_region<-as(region, 'Spatial')
@@ -210,22 +210,23 @@ lsMosaic<-function(src,
             message(paste0("Chunks ",typechunks))
           }
           
-          if(is.null(region)){
+          if(missing(region)){
             temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
-            genMosaicGdalUtils(typechunks=typechunks,
-                               temp=temp,
-                               nodata=nodata,
-                               out.name=out.file.path)
+            mknext=genMosaicGdalUtils(typechunks=typechunks,
+                                      temp=temp,
+                                      nodata=nodata,
+                                      out.name=out.file.path)
+            if(!mknext) next
           }else{
             ext<-extent(region)
             temp<-file.path(AppRoot,paste0(out.name,"_",format(dates[d],"%Y%j"),"_",gsub(".tif","",dtype[dt],fixed = TRUE),"_temp.vrt"))
             
             out.tmp<-gsub(".tif","_tmp.tif",out.file.path,fixed = TRUE)
-            genMosaicGdalUtils(typechunks=typechunks,
-                               temp=temp,
-                               nodata=nodata,
-                               out.name=out.tmp)
-            
+            mknext=genMosaicGdalUtils(typechunks=typechunks,
+                                      temp=temp,
+                                      nodata=nodata,
+                                      out.name=out.tmp)
+            if(!mknext) next
             gdal_utils(util = "warp", 
                        source =out.tmp,
                        destination = out.file.path,
