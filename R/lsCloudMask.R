@@ -134,9 +134,9 @@ lsCloudMask<-function(src,AppRoot,out.name,sensitivity=28000,overwrite=FALSE,ver
       if(verbose){
         message(paste0("Minimun: ",mn))
       }
-      ras.cloud[ras.cloud<=max(mn,1)]<-0
-      ras.cloud[ras.cloud>=sensitivity]<-0
-      ras.cloud[ras.cloud!=0]<-1
+      ras.cloud[ras.cloud<=max(mn,1)]<-1
+      ras.cloud[ras.cloud>=sensitivity]<-1
+      ras.cloud[ras.cloud!=1]<-NA
       
       NAvalue(ras.cloud)<-0
       writeRaster(ras.cloud,out.img,overwrite=overwrite)
