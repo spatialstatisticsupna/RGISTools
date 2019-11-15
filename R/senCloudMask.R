@@ -88,7 +88,7 @@ senCloudMask<-function(src,AppRoot,out.name,resbands,sensitivity=50,overwrite=FA
   # library(RGISTools)
   # getRGISToolsOpt("SEN2BANDS")
   # sensitivity 0-100
-  # img.res 10m, 20m o 30m img.res<-"20m"
+  # img.res 20m o 30m img.res<-"20m"
   
   arg<-list(...)
   #filter dates
@@ -107,26 +107,32 @@ senCloudMask<-function(src,AppRoot,out.name,resbands,sensitivity=50,overwrite=FA
     AppRoot<-file.path(AppRoot,out.name)
   
   dir.create(AppRoot,showWarnings = FALSE,recursive = TRUE)
-  for(id in imgdir.list){
-    out.img<-file.path(AppRoot,paste0(basename(id),"_",resbands,"_CloudMask.tif"))
-    if(!file.exists(out.img)|overwrite){
-      #id<-imgdir.list[1]
-      tif.list<-list.files(id,pattern = "\\.tif$",full.names = TRUE)
-      cloudmask<-tif.list[grepl(getRGISToolsOpt("SEN2BANDS")["cloud"],tif.list)]
-      cloudmask<-cloudmask[grepl(resbands,cloudmask)]
-      if(length(cloudmask)==0){
-        message(paste0("No cloud mask of ",resbands," found for date ",genGetDates(basename(id))))
-        next
+  if(missing(resbands)){
+    resbands<-c("20m","60m")
+  }
+  for(resband in resbands){
+    for(id in imgdir.list){
+      out.img<-file.path(AppRoot,paste0(basename(id),"_",resband,"_CloudMask.tif"))
+      if(!file.exists(out.img)|overwrite){
+        #id<-imgdir.list[1]
+        tif.list<-list.files(id,pattern = "\\.tif$",full.names = TRUE)
+        cloudmask<-tif.list[grepl(getRGISToolsOpt("SEN2BANDS")["cloud"],tif.list)]
+        cloudmask<-cloudmask[grepl(resband,cloudmask)]
+        if(length(cloudmask)==0){
+          message(paste0("No cloud mask of ",resband," found for date ",genGetDates(basename(id))))
+          next
+        }
+        message("Creating cloud mask from image ",basename(cloudmask))
+        ras.cloud<-raster(cloudmask)
+        ras.cloud[is.na(ras.cloud)]<--1
+        ras.cloud[ras.cloud>=sensitivity]<-NA
+        ras.cloud[!is.na(ras.cloud)]<-1
+        
+        writeRaster(ras.cloud,out.img,overwrite=overwrite)
+      }else{
+        message(paste0("Cloud mask of date ",genGetDates(basename(id))," already exists."))
       }
-      message("Creating cloud mask from image ",basename(cloudmask))
-      ras.cloud<-raster(cloudmask)
-      ras.cloud[is.na(ras.cloud)]<--1
-      ras.cloud[ras.cloud>=sensitivity]<-NA
-      ras.cloud[!is.na(ras.cloud)]<-1
-
-      writeRaster(ras.cloud,out.img,overwrite=overwrite)
-    }else{
-      message(paste0("Cloud mask of date ",genGetDates(basename(id))," already exists."))
     }
   }
+  
 }
