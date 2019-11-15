@@ -16,6 +16,8 @@
 #' @param n number of images combined in the aggregation.
 #' @param fun the function used to create the composite, such as \code{max},
 #' \code{min}, \code{mean}, ...
+#' @param by character argument. Accepts \code{"month"} or \code{"year"} for creating monthly
+#' or yearly composites.
 #' @param by.days logical argument. If \code{FALSE}, \code{n} indicates the 
 #' number of consucutive images being aggregated. If \code{TRUE}, the function
 #' aggregates the imagery within every \code{n} days. The aggregation requires
@@ -47,7 +49,7 @@
 #'                                      fun = max)
 #' # Check that the clouds were removed
 #' genPlotGIS(composite.NDVI.3a)
-genCompositions<-function(rstack,n,fun,by,by.days=FALSE,verbose=FALSE,...){
+genCompositions<-function(rstack,by,fun,n,by.days=FALSE,verbose=FALSE,...){
   args<-list(...)
 
   if(!missing(by)){
@@ -62,7 +64,7 @@ genCompositions<-function(rstack,n,fun,by,by.days=FALSE,verbose=FALSE,...){
               alldates<-as.Date(paste0(unique(as.character(alldates)),"01"),"%Y%m%d")
               names(comp)<-paste0("Comp_",format(alldates,"%Y%j"))
             },
-            "years" = {
+            "year" = {
               alldates<-format(dates,"%Y")
               alldates<-as.factor(alldates)
               idx<-as.integer(alldates)

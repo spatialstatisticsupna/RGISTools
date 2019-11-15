@@ -4,7 +4,7 @@
 \alias{senCloudMask}
 \title{Create cloud masks for Sentinel-2 images}
 \usage{
-senCloudMask(src, AppRoot, out.name, img.res, sensitivity = 50,
+senCloudMask(src, AppRoot, out.name, resbands, sensitivity = 50,
   overwrite = FALSE, ...)
 }
 \arguments{
@@ -15,7 +15,7 @@ senCloudMask(src, AppRoot, out.name, img.res, sensitivity = 50,
 \item{out.name}{the name of the folder that stores the outputs. 
 If the arguemnt is not defined the folder will be named as "CloudMask".}
 
-\item{img.res}{a \code{character} vector argument. Defines the band resolution
+\item{resbands}{a \code{character} vector argument. Defines the band resolution
 used to create the cloud mask. Ex "20m" or "30m".}
 
 \item{sensitivity}{a \code{numeric} argument. Defines the sensitivity of the
@@ -72,7 +72,7 @@ senMosaic(wdir.sen.unzip,
 # calculate the cloud mask
 wdir.sen.navarre <- file.path(wdir.sen, "Navarre")
 senCloudMask(src = wdir.sen.navarre,
-             img.res = "60m",
+             resbands = "60m",
              overwrite = TRUE,
              sensitivity = 98,
              AppRoot = wdir.sen)

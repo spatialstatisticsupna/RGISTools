@@ -4,16 +4,20 @@
 \alias{genCompositions}
 \title{Create image compositions from a time series of satellite images}
 \usage{
-genCompositions(rstack, n, fun, by.days = FALSE, ...)
+genCompositions(rstack, by, fun, n, by.days = FALSE, verbose = FALSE,
+  ...)
 }
 \arguments{
 \item{rstack}{a \code{RasterStack}, where layer names contain the capturing
 date of an image in "\code{YYYYJJJ}" format.}
 
-\item{n}{number of images combined in the aggregation.}
+\item{by}{character argument. Accepts \code{"month"} or \code{"year"} for creating monthly
+or yearly composites.}
 
 \item{fun}{the function used to create the composite, such as \code{max},
 \code{min}, \code{mean}, ...}
+
+\item{n}{number of images combined in the aggregation.}
 
 \item{by.days}{logical argument. If \code{FALSE}, \code{n} indicates the 
 number of consucutive images being aggregated. If \code{TRUE}, the function
