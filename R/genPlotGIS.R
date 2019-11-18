@@ -11,8 +11,8 @@
 #' \code{raster}. The projection of the map can be changed by modifying the 
 #' \code{proj} argument. 
 #'
-#' @param r a \code{Raster*} class object with the image or image stack to be plotted. If \code{r} is a list 
-#' of raster stack, \code{genPlotGIS} plot the images as RGB images.
+#' @param r a \code{Raster*} class object with the image or image stack to be plotted. If \code{r} is a \code{list} 
+#' of \code{RasterStack}, \code{genPlotGIS} treates the stacks as RGB images.
 #' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
 #' defining the area of interest.
 #' @param proj character or object of class 'CRS' defining the coordinate 
