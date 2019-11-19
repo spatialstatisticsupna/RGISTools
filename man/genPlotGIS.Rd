@@ -9,8 +9,8 @@ genPlotGIS(r, region, breaks, labels, zlim, layout, proj, nbreaks = 40,
   scale.bar.rm = FALSE, ...)
 }
 \arguments{
-\item{r}{a \code{Raster*} class object with the image or image stack to be plotted. If \code{r} is a list 
-of raster stack, \code{genPlotGIS} plot the images as RGB images.}
+\item{r}{a \code{Raster*} class object with the image or image stack to be plotted. If \code{r} is a \code{list} 
+of \code{RasterStack}, \code{genPlotGIS} treates the stacks as RGB images.}
 
 \item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
 defining the area of interest.}

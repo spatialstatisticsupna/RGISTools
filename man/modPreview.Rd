@@ -60,7 +60,7 @@ sres <- modSearch(product = "MOD09GA",
                   resType = "browseurl",
                   extent = ex.navarre)
                       
-modPreview(sres,1)
+modPreview(sres,n=1)
 modPreview(sres,2,add.Layer=T)
 }
 }

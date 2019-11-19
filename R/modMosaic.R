@@ -101,12 +101,15 @@ modMosaic<-function(src,
     }
     #filter the images by pathrow
     if("pathrow"%in%names(arg)){
-      prstr<-c()
-      for(pr in arg$pathrow){
-        prstr<-c(prstr,paste0("h",sprintf("%02d",pr[1]),"v",sprintf("%02d",pr[2])))
+      # prstr<-c()
+      # for(pr in arg$pathrow){
+      #   prstr<-c(prstr,paste0("h",sprintf("%02d",pr[1]),"v",sprintf("%02d",pr[2])))
+      # }
+      dayImg<-dayImg[modGetPathRow(dayImg)%in%arg$pathrow]
+      if(length(dayImg)==0){
+        warning("There is no tiles after the pathrow filtering.")
+        next
       }
-      dayImg<-dayImg[modGetPathRow(dayImg)%in%prstr]
-      stopifnot(length(dayImg)>0)
     }
 
     flist<-list.files(dayImg,recursive=TRUE,full.names=TRUE,pattern="\\.tif$")
