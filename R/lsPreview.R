@@ -50,7 +50,7 @@
 #' }
 lsPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   if(missing(dates)){
-    return(.lsPreviewRecursive(searchres=searchres,n=n,dates=dates,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
+    return(.lsPreviewRecursive(searchres=searchres,n=n,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
   }else{
     searchres<-searchres[as.Date(searchres$acquisitionDate)%in%dates,]
     if(nrow(searchres)>0){

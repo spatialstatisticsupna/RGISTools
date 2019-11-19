@@ -41,19 +41,19 @@
 #'                   resType = "browseurl",
 #'                   extent = ex.navarre)
 #'                       
-#' modPreview(sres,1)
+#' modPreview(sres,n=1)
 #' modPreview(sres,2,add.Layer=T)
 #' }
 modPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   if(missing(dates)){
-    return(.lsPreviewRecursive(searchres=searchres,n=n,dates=dates,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
+    return(.modPreviewRecursive(searchres=searchres,n=n,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
   }else{
     searchres<-searchres[modGetDates(searchres)%in%dates]
     if(length(searchres)>0){
       .modPreviewRecursive(searchres=searchres,n=1,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...)
       if(length(searchres)>1){
         for(x in 2:length(searchres)){
-          .modPreviewRecursive(searchres=searchres,n=x,lpos=lpos,add.Layer=T,verbose=verbose,...)
+          .modPreviewRecursive(searchres=searchres,n=x,lpos=lpos,add.Layer=TRUE,verbose=verbose,...)
         }
       }
       return(getRGISToolsOpt("GMapView"))

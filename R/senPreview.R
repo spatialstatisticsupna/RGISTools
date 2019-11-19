@@ -52,7 +52,7 @@
 #' }
 senPreview<-function(searchres,username,password,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   if(missing(dates)){
-    return(.lsPreviewRecursive(searchres=searchres,n=n,dates=dates,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
+    return(.senPreviewRecursive(searchres=searchres,n=n,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
   }else{
     searchres<-searchres[senGetDates(names(searchres))%in%dates]
     if(length(searchres)>0){
