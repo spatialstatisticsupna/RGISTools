@@ -130,7 +130,7 @@ senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
           }
           if(verbose){message(paste0("Loading ",l.img,"..."))}
           
-          if(l.img==''){
+          if(length(l.img)==0){
             warning(paste0("Image not found for ",resb," and ",arg))
             noargs=TRUE
             break
