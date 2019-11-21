@@ -118,6 +118,7 @@ senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
         funString<-"result<-fun("
         #band load and asignation
         funargs<-formalArgs(fun)
+        noargs=FALSE
         for(arg in funargs){
           band<-senbands[names(senbands)%in%arg]
           if(length(band)==0)
@@ -128,8 +129,18 @@ senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
             l.img<-sen.img[grepl(paste0(band,resb,".tif"),sen.img)]
           }
           if(verbose){message(paste0("Loading ",l.img,"..."))}
+          
+          if(l.img==''){
+            warning(paste0("Image not found for ",resb," and ",arg))
+            noargs=TRUE
+            break
+          }
           eval(parse( text=paste0(arg,"<-raster('",l.img,"')") ))
           funString<-paste0(funString,arg,"=",arg,",")
+        }
+        if(noargs){
+          noargs=FALSE
+          next
         }
         # arguments asignation
         arguments<-as.list(match.call())
