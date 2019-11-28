@@ -82,10 +82,7 @@ modMosaic<-function(src,
   imgFolders<-list.files(src,full.names = TRUE)
   #remove folders
   #imgFolders<-imgFolders[nchar(basename(imgFolders))==41]
-  if(!is.null(region)){
-    region <- transform_multiple_proj(region, gdal_crs(src[1]))
-  }
-  
+
   dates<-unique(modGetDates(imgFolders))
   bpath<-file.path(AppRoot,out.name)
 
@@ -158,7 +155,8 @@ modMosaic<-function(src,
               }
             })
           if(!is.null(region)){
-            #TODO remove as spatial using raster v3 package
+            region <- transform_multiple_proj(region, gdal_crs(typechunks[1]))
+            #TODO remove as spatial using raster v3 package 
             c_region<-as(region, 'Spatial')
             img<-crop(img,c_region)
             if("cutline"%in%names(arg)){
@@ -174,6 +172,7 @@ modMosaic<-function(src,
                                nodata=NULL,
                                out.name=out.file.path)
           }else{
+            region <- transform_multiple_proj(region, gdal_crs(typechunks[1]))
             ext<-extent(region)
             temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
             out.tmp<-gsub(".vrt",".tif",temp,fixed = TRUE)
