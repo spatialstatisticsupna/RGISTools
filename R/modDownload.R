@@ -20,6 +20,7 @@
 #' @param AppRoot the directory where the images will be saved.
 #' @param nattempts the number of attempts to download an image in case it
 #' becomes corrupted.
+#' @param raw.rm logical argument. If \code{TRUE}, removes the raw images.
 #' @param extract.tif logical argument. If \code{TRUE}, extracts all the layers
 #' from hdf files and saves them as GTiff.
 #' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
@@ -66,6 +67,7 @@ modDownload<-function(searchres,
                       verbose=FALSE,
                       extract.tif=FALSE,
                       overwrite=FALSE,
+                      raw.rm=FALSE,
                       ...){
   arg<-list(...)
   if(is.null(username)|is.null(password)){
@@ -90,6 +92,7 @@ modDownload<-function(searchres,
                          extract.tif=extract.tif,
                          nattempts=nattempts,
                          natps=0,
+                         raw.rm=raw.rm,
                          ...)
   }
   if(extract.tif){
@@ -100,13 +103,16 @@ modDownload<-function(searchres,
   
 }
 
-recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,nattempts,extract.tif,natps,...){
+recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,nattempts,extract.tif,natps,raw.rm=FALSE,...){
   tryCatch(
     {
       mod_Download(s,username,password,AppRoot=downdir)
       if(extract.tif){
         if(verbose){message(paste0("Extracting ",file.path(downdir,basename(s))," to dir ",tiffdir))}
         modExtractHDF(file.path(downdir,basename(s)),AppRoot=tiffdir,verbose=verbose,...)
+        if(raw.rm){
+          file.remove(file.path(downdir,basename(s)))
+        }
       }
     },
     error=function(cond) {
@@ -124,6 +130,7 @@ recursiveModDownload<-function(s,username,password,downdir,tiffdir,verbose,natte
                              nattempts=nattempts,
                              extract.tif=extract.tif,
                              natps=natps+1,
+                             raw.rm=raw.rm,
                              ...)
       }else{
         message(paste0("No way for downloading ",basename(s), " image, skipping..."))

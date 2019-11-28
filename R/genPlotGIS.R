@@ -113,16 +113,14 @@ genPlotGIS<-function(r,region,breaks,labels,zlim,layout,proj,nbreaks=40,nlabels=
   if(class(r)=="list"){
     if(class(r[[1]])=="RasterBrick"|class(r[[1]])=="RasterStack"){
       if(!missing(proj)){
-        if(!missing(proj)){
           r = lapply(r, projectRaster,crs=proj)
-        }
         if(!missing(region)){region=transform_multiple_proj(region,proj4=projection(r[[1]]))}
       }
     }else{
       stop("genPlotGIS only supports RasterBrick or RasterStack, or a list composed by RasterBrick or RasterStack.")
     }
   }else{
-    if(class(r)=="RasterBrick"|class(r)=="RasterStack"){
+    if(class(r)=="RasterBrick"|class(r)=="RasterStack"|class(r)=="RasterLayer"){
       if(!missing(proj)){
         r = projectRaster(r,crs=proj)
         if(!missing(region)){region=transform_multiple_proj(region,proj4=projection(r))}

@@ -33,7 +33,7 @@ senGetTile<-function(str){
       }
     }
   }else{
-    stop("Introduced image path is not supported Sentinel image name")
+    stop("Introduced image path is not a supported Sentinel image name.")
   }
   
   return(sTime)
