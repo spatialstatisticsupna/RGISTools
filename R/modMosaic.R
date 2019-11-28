@@ -155,7 +155,7 @@ modMosaic<-function(src,
               }
             })
           if(!is.null(region)){
-            region <- transform_multiple_proj(region, gdal_crs(typechunks[1]))
+            region <- transform_multiple_proj(region, gdal_crs(typechunks[1])$crs[["proj4string"]])
             #TODO remove as spatial using raster v3 package 
             c_region<-as(region, 'Spatial')
             img<-crop(img,c_region)
@@ -172,7 +172,7 @@ modMosaic<-function(src,
                                nodata=NULL,
                                out.name=out.file.path)
           }else{
-            region <- transform_multiple_proj(region, gdal_crs(typechunks[1]))
+            region <- transform_multiple_proj(region, gdal_crs(typechunks[1])$crs[["proj4string"]])
             ext<-extent(region)
             temp<-gsub(".tif","_temp.vrt",out.file.path,fixed = TRUE)
             out.tmp<-gsub(".vrt",".tif",temp,fixed = TRUE)
