@@ -4,9 +4,9 @@
 #' location and time interval from the `EarthData' repository. Images are
 #' saved as GTiff files in the \code{AppRoot} directory.
 #'
-#' \code{modDownSearch} uses the 
+#' \code{modDownSearch} searches via 
 #' \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA’s Common Metadata Repository}
-#' to search and the
+#' and downloads the imagert from the
 #' \href{https://earthdata.nasa.gov/}{`EarthData' web service}
 #' to download the imagery. The catalogue of MODIS products can be found
 #' \href{https://modis.gsfc.nasa.gov/data/dataprod/}{here}.
@@ -30,9 +30,8 @@
 #' @param verbose logical argument. If \code{TRUE}, the function prints running stages and warnings.
 #' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{dates} a vector with the capturing dates being considered
-#'   for searching. This argument is mandatory if 
-#'   \code{startDate} and \code{endDate} are not defined.
+#'   \item \code{dates} a vector with the capturing dates being searched. This
+#'   argument is mandatory if \code{startDate} and \code{endDate} are not defined.
 #'   \item  startDate a \code{Date} class object with the starting date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.

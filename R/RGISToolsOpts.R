@@ -74,7 +74,7 @@ assign("MOD09SCL",function(r,sc=1/16000){((r+100)*sc)}, env=optEnv)
 #' configuration variable. This function can be jointly used with 
 #' \code{\link{showRGISToolsOpt}} and \code{\link{getRGISToolsOpt}}.
 #'
-#' @param opt the name of the option to be change in \code{character} format.
+#' @param opt a \code{character} with the name of the option.
 #' @param value the new value of the selected option.
 #' @param env the environment where the `\code{RGISTools}' option is saved.
 #'
@@ -99,7 +99,7 @@ setRGISToolsOpt <- function(opt,value,env=optEnv) {
 #' configuration variable. This function can be jointly used with
 #' \code{\link{setRGISToolsOpt}} and \code{\link{showRGISToolsOpt}}.
 #'
-#' @param opt the name of the `\code{RGISTools}' setting to be returned.
+#' @param opt a \code{character} with the name of the option.
 #' @param env the environment where the `\code{RGISTools}' option are saved.
 #'
 #' @return an option of `RGISTools’ configuration variable.
@@ -119,7 +119,7 @@ getRGISToolsOpt <- function(opt,env=optEnv) {
 
 #' Print the name of all RGISTools configuration variables
 #' 
-#' \code{showRGISToolsOpt} prints the name of all options in `\code{RGISTools}' package.
+#' \code{showRGISToolsOpt} prints the name of all options in the `\code{RGISTools}' package.
 #' This function can be jointly used with \code{\link{setRGISToolsOpt}} and 
 #' \code{\link{getRGISToolsOpt}}.
 #'

@@ -33,16 +33,15 @@
 #' @param AppRoot directory of the metadata file. 
 #' @param ... arguments for nested functions:
 #'  \itemize{
-#'   \item \code{dates} a vector with the capturing dates being considered
-#'   for searching. This argument is mandatory if 
-#'   \code{startDate} and \code{endDate} are not defined.
-#'   \item startDate a \code{Date} class object with the starting date of the 
+#'   \item \code{dates} a vector with the capturing dates being searched. This
+#'    argument is mandatory if \code{startDate} and \code{endDate} are not defined.
+#'   \item \code{startDate} a \code{Date} class object with the starting date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
-#'   \item endDate a \code{Date} class object with the ending date of the 
+#'   \item \code{endDate} a \code{Date} class object with the ending date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
-#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
 #' defining the area of interest.
 #'   \item \code{pathrow} a \code{list} of vectors with the path and row numbers
 #'   of the tiles concerning the region of interest. This argument is mandatory

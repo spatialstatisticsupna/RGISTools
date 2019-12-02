@@ -36,8 +36,8 @@
 #' @param product the acronym of the requested product (see the details).
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.
-#' @return this function does not return anything.Ask for processing Landsat level 2 
-#' images before the downloading.
+#' @return this function does not return anything. It makes a petition to
+#' process level-1 images before doing the download.
 #' @examples
 #' \dontrun{
 #' wdir <- file.path(tempdir(),"Path_for_downloading_folder")

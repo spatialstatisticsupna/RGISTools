@@ -1,4 +1,4 @@
-#' Calculate normalized difference moisture (water) index (NDMI)
+#' Calculate the normalized difference moisture (water) index (NDMI)
 #'
 #' \code{varNDMI} computes the normalized difference moisture index (NDMI) from
 #' the near-infrared (NIR) and shortwave-infrared 1 (SWIR1) bands.

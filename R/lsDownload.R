@@ -13,9 +13,12 @@
 #' decompresses the images and obtains the corresponding GTiffs. The GTiff files
 #' are saved in the \code{AppRoot} directory. To change this option, provide
 #' \code{AppRoot = “full path”}. When \code{untar = TRUE}, the function
-#' decompresses the imagery. Image decompression duplicates the information
-#' due to the presence of both, compressed and decompressed images. Set 
-#' \code{raw.rm = TRUE} to remove former ones.
+#' decompresses the imagery. When only a subset of bands is required, band names
+#' can be provided through the \code{bFilter} argument. The band names are 
+#' specified by string “band” and the band number (e.g., “band1”). Image
+#' decompression duplicates the information due to the presence of both,
+#' compressed and decompressed images. Set \code{raw.rm = TRUE} to remove former
+#' ones.
 #' 
 #' @param searchres the results from \code{\link{ls7Search}} or 
 #' \code{\link{ls8Search}}.

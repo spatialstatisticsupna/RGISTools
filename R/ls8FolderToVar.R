@@ -4,7 +4,7 @@
 #' of a time series of Landsat-8 images. The images are specified by the path to
 #' the folder that stores the imagery (resulting from the \code{\link{lsMosaic}} 
 #' function). The function returns a \code{RasterStack} with a time series of 
-#' images with the index.
+#' images of the remote sensing index.
 #'
 #' The function requires the definition of the \code{src} and \code{fun} 
 #' arguments. The \code{src} is usually the path resulting from 
@@ -15,7 +15,7 @@
 #' red-green-blue (RGB) images must be imported afterwards.
 #' 
 #' @param src path to the folder with the Landsat-8 multispectral image.
-#' @param fun is a function that computes the remote sensing index.
+#' @param fun a \code{function} that computes the remote sensing index.
 #' @param AppRoot the directory of the outcoming time series.
 #' @param getStack logical argument. If \code{TRUE}, returns the time series of
 #' images as a \code{RasterStack}, otherwise the images are saved in the Hard
@@ -30,7 +30,7 @@
 #'   for mosaicking. If not supplied, all dates are mosaicked.
 #' }
 #' @return this function does not return anything, unless \code{getStack = TRUE}
-#' and then it returns a \code{RasterStack} with the time series of with the
+#' which then returns a \code{RasterStack} with the time series of with the
 #' index.
 #'
 #' @examples

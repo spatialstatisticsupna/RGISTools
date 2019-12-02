@@ -13,6 +13,14 @@
 #' of attempts is set to 3. The function requires an ESA’s `SciHub' account, which
 #' can be obtained 
 #' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
+#' 
+#' When \code{unzip = TRUE}, the function decompresses the imagery. If
+#' only a subset of bands is required, band names can be provided through the
+#' \code{bFilter} argument. The band names are specified by “B”, followed by 
+#' the two-digit band number, and the resolution of the band (either 10m, 20m,
+#' or 60m) (e.g, "B01_10m"). Image decompression duplicates the information due
+#' to the presence of both, compressed and decompressed images. Set 
+#' \code{raw.rm = TRUE} to remove former ones.
 #'
 #' @param searchres the output from the \code{\link{senSearch}} function.
 #' @param username ESA’s `SciHub' username.
@@ -27,7 +35,7 @@
 #'  \itemize{
 #'        \item \code{dates} a vector with the capturing dates being considered
 #'   for downloading. 
-#'        \item \code{bFilter} a vector with the bands to be extracted when \code{untar=TRUE}. If not
+#'        \item \code{bFilter} a vector with the bands to be extracted when \code{unzip=TRUE}. If not
 #'   supplied, all bands are extracted.
 #' }
 #' @return this function does not return anything. It saves the imagery as

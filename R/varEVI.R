@@ -4,7 +4,7 @@
 #' blue, near-infrared (NIR) and red bands.
 #'
 #' The enhanced vegetation index (EVI) is a vegetation indicator that improves
-#' sensitivity towards high biomass densities compared to NDVI 
+#' the sensitivity towards high biomass densities compared to NDVI 
 #' \insertCite{huete2002overview}{RGISTools} (See \code{\link{varNDVI}}). This
 #' function is used within \code{\link{ls7FolderToVar}},
 #' \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and

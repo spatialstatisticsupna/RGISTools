@@ -10,9 +10,9 @@
 #' \href{http://scihub.copernicus.eu}{ESA's powered API} (`SciHub').The catalogue
 #' of Sentinel-2 products can be found
 #' \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/data-products}{here}.
-#' Images are searched within a range of dates and a region of interest. Dates
-#' must be provided as a \code{Date} class object. Credentials from ESA’s `SciHub'
-#' are needed and they can be obtained 
+#' The function explores the images available for a specific location and 
+#' time-span. Dates must be provided as \code{Date} class objects. Credentials
+#' from ESA’s `SciHub' are needed and they can be obtained 
 #' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 #' 
 #' @param username ESA’s `SciHub' username.
@@ -21,16 +21,15 @@
 #' \itemize{
 #'   \item \code{product} the type of Sentinel product.  Ex. "S2MSI1C",
 #'   "S2MSI2A", "S2MSI2Ap", ...
-#'   \item \code{dates} a vector with the capturing dates being considered
-#'   for searching. This argument is mandatory if 
-#'   \code{startDate} and \code{endDate} are not defined.
-#'   \item  startDate a \code{Date} class object with the starting date of the 
+#'   \item \code{dates} a vector with the capturing dates being searched. This
+#'   argument is mandatory if \code{startDate} and \code{endDate} are not defined.
+#'   \item  \code{startDate} a \code{Date} class object with the starting date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
-#'   \item  endDate a \code{Date} class object with the ending date of the 
+#'   \item  \code{endDate} a \code{Date} class object with the ending date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
-#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
 #' defining the area of interest.
 #'   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
 #'   object representing the region of interest with longitude/latitude

@@ -23,7 +23,8 @@
 #' searching for GTiff images.
 #' @param AppRoot the path where the RData is saved.
 #'
-#' @return if \code{AppRoot} is not asigned a \code{RasterStack} with the time series in src folder.
+#' @return a \code{RasterStack} when the \code{AppRoot} argument is not defined.
+#' The function does not return anything otherwise.
 #'
 #' @examples
 #' \dontrun{

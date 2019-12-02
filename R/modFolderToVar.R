@@ -5,7 +5,7 @@
 #' of a time series of MODIS images. The images are specified by the path to
 #' the folder that stores the imagery (resulting from the \code{\link{modMosaic}} 
 #' function). The function returns a \code{RasterStack} with a time series of 
-#' images with the index.
+#' images of the remote sensing index.
 #'
 #' The function requires the definition of the \code{src} and \code{fun} 
 #' arguments. The \code{src} is usually the path resulting from 
@@ -17,7 +17,7 @@
 #'
 #' @param src path to the folder with the MODIS multispectral images.
 #' @param AppRoot the directory of the outcoming time series.
-#' @param fun is a \code{function} that computes the remote sensing index.
+#' @param fun a \code{function} that computes the remote sensing index.
 #' @param getStack logical argument. If \code{TRUE}, returns the time series of
 #' images as a \code{RasterStack}, otherwise the images are saved in the Hard
 #' Drive Device (HDD).
@@ -31,8 +31,8 @@
 #'   for mosaicking. If not supplied, all dates are mosaicked.
 #' }
 #' @return this function does not return anything, unless \code{getStack = TRUE}
-#' and then it returns a \code{RasterStack} with the time series of with the
-#' index.
+#' which then returns a \code{RasterStack} with the time series of with the
+#' index. 
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre

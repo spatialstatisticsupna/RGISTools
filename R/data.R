@@ -37,7 +37,7 @@ NULL
 #' @keywords data
 NULL
 
-#' A spatial polygon with the border of Navarre (Spain)
+#' A polygon with the border of Navarre (Spain)
 #'
 #' Spatial feature (\code{sf}) representing the border of Navarre with
 #' coordinates in the longitude/latitude format.

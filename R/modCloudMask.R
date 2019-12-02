@@ -1,13 +1,11 @@
 #' Create cloud masks for MODIS images
 #' 
-#' \code{modCloudMask} creates cloud masks derived from the "\code{MOD35_L2}" 
-#' product.
+#' \code{modCloudMask} creates cloud masks derived from the State Quality
+#' Assurance (State QA) band.
 #' 
-#' This function, downloads and processes the "\code{MOD35_L2}" products to create
-#' cloud masks composed of \code{NA}'s (cloud) and \code{1}'s (clear). The
-#' resulting cloud mask layers need to be reprojected because resolution and
-#' projection differences with other MODIS products. This function requires
-#' `GDAL' and the `\code{gdalUtils}' library properly installed.
+#' This function, interprets the State Quality Assurance (State QA) band to
+#' create cloud masks. The \code{NA} and \code{1} values of the mask represent
+#' cloudy and clear-sky pixels pixels respectively.
 #' @param src the path to the folder with the MODIS with \code{state_1km} images. 
 #' @param AppRoot the directory where cloud masks are saved.
 #' @param out.name the name of the folder that stores the outputs. 
@@ -16,11 +14,11 @@
 #' images with the same name.
 #' @param ... arguments for nested functions.
 #' \itemize{
-#'   \item \code{dates} a vector with the dates being considered
-#'   for creating cloud mask. This argument is optional.
+#'   \item \code{dates} a vector of dates being considered
+#'   for creating cloud masks. This argument is optional.
 #' }
-#' @return this function does not return anything. It creates new GTiff files
-#' for a new cloud band (CLD) inside the AppRoot folder.
+#' @return this function does not return anything. It saves the cloud masks (CLD)
+#' as GTiff files in the \code{AppRoot} directory.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre

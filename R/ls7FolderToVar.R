@@ -4,7 +4,7 @@
 #' spectral bands of a time series of Landsat-7 images. The images are specified
 #' by the path to the folder that stores the imagery (resulting from the 
 #' \code{\link{lsMosaic}} function). The function returns a \code{RasterStack}
-#' with the time series of images with the index.
+#' with the time series of images of the remote sensing index.
 #'
 #' The function requires the definition of the \code{src} and \code{fun} 
 #' arguments. The \code{src} is usually the path resulting from 
@@ -29,7 +29,7 @@
 #' }
 #' 
 #' @return this function does not return anything, unless \code{getStack = TRUE}
-#' and then it returns a \code{RasterStack} with the time series of with the
+#' which then returns a \code{RasterStack} with the time series of with the
 #' index. 
 #'
 #' @examples

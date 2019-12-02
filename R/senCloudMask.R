@@ -1,7 +1,7 @@
 #' Create cloud masks for Sentinel-2 images
 #' 
 #' \code{senCloudMask} creates cloud masks derived from the cloud probability
-#' band (\code{CLDPROB}) band from the "\code{S2MSI2A}" product.
+#' band (\code{CLDPRB}) band from the "\code{S2MSI2A}" product.
 #'
 #' The valid threshold range for \code{sensitivity} is 0-100. By default,
 #' the argument is set to 50.
@@ -11,7 +11,7 @@
 #' @param out.name the name of the folder that stores the outputs. 
 #' If the arguemnt is not defined the folder will be named as "CloudMask".
 #' @param resbands a \code{character} vector argument. Defines the band resolution
-#' used to create the cloud mask. Ex "20m" or "30m".
+#' used to create the cloud mask. Ex "20m" or "60m".
 #' @param sensitivity a \code{numeric} argument. Defines the sensitivity of the
 #' cloud detection method.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
@@ -21,8 +21,8 @@
 #'   \item \code{dates} a vector with the capturing dates being considered
 #'   for mosaicking. If not supplied, all dates are mosaicked.
 #' }
-#' @return this function does not return anything. It creates new GTiff files
-#' for a new cloud band (CLD) inside the AppRoot folder.
+#' @return this function does not return anything. It saves the cloud masks (CLD)
+#' as GTiff files in the \code{AppRoot} directory.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre

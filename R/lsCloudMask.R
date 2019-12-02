@@ -4,11 +4,12 @@
 #' assurance (BQA) from Landsat-7 or Landsat-8 time series. The function is
 #' applied to untarred images, such as those resulting from 
 #' \code{\link{lsDownload}} or \code{\link{lsDownSearch}}. The result is a new
-#' image band, called cloud (CLD), that is saved as separate GTiffs.
+#' image band, called cloud (CLD), that is saved as separate GoeTiffs.
 #' 
 #' The valid range for the \code{sensitivity} threshold is 0-8000. By defualt,
 #' the argument is set to 2800. We recommend 600 and 2800 for Landsat-7 and
-#' Landsat-8 respectively.
+#' Landsat-8 respectively. The \code{NA} and \code{1} values of the mask represent
+#' cloudy and clear-sky pixels pixels respectively.
 #'
 #' @param src the path to the folder with the untarred images from Landsat-7 or
 #' Landsat-8.
@@ -24,11 +25,11 @@
 #' @param ... arguments for nested functions.
 #' \itemize{
 #'   \item \code{dates} a vector with the dates being considered
-#'   for creating cloud mask. This argument is optional.
+#'   for creating cloud masks. This argument is optional.
 #' }
 #' 
-#' @return this function does not return anything. It creates new GTiff files
-#' for a new cloud band (CLD) inside the AppRoot folder.
+#' @return this function does not return anything. It saves the cloud masks (CLD)
+#' as GTiff files in the \code{AppRoot} directory.
 #'
 #' @examples
 #' \dontrun{

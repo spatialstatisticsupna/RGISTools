@@ -1,4 +1,4 @@
-#' Calculates soil-adjusted vegetation index (SAVI)
+#' Calculates the soil-adjusted vegetation index (SAVI)
 #'
 #' \code{varSAVI} Calculate the soil-adjusted vegetation index (SAVI) from the
 #' red and near-infrared (NIR) bands.

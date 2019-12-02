@@ -25,7 +25,7 @@
 #' @param username USGS’s `EarthExplorer' username.
 #' @param password USGS’s `EarthExplorer' password.
 #' @param lvl a number specifying the processing level. Default value, 1.
-#' @param product \code{character} vector with the requested Level-2 products.
+#' @param product a \code{character} vector with the requested Level-2 products.
 #' By default \code{c("sr", "source_metadata")}.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
 #' running steps and warnings.
@@ -33,9 +33,8 @@
 #' @param untar logical argument. If \code{TRUE}, untars downloaded images.
 #' @param ... argumetns for nested functions:
 #'  \itemize{
-#'   \item \code{dates} a vector with the capturing dates being considered
-#'   for searching. This argument is mandatory if 
-#'   \code{startDate} and \code{endDate} are not defined.
+#'   \item \code{dates} a vector with the capturing dates being searched. This
+#'    argument is mandatory if \code{startDate} and \code{endDate} are not defined.
 #'   \item  \code{startDate} a \code{Date} class object with the starting date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.

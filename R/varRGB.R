@@ -1,13 +1,13 @@
 #' Generate an RGB image from 3 spectral bands
 #'
-#' \code{varRGB} creates red-green-blue (RGB) \code{RasterStack} images by
+#' \code{varRGB} creates red-green-blue (RGB) images as a \code{RasterStack} by
 #' scaling the pixel values to 0-255 color range.
 #'
 #' The function rescales the original reflectance values to a range of 0-255.
-#' The functions re-aranges the RGB bands to create a stack with a RGB image
-#' ready to visualize with plotRGB. Bands may contain reflectance outliers which
-#' cause the image to look dark. Use the \code{q.range} argument to remove the
-#' outliers and get a better-looking image.
+#' The function re-arranges the RGB bands to create a stack ready to visualize
+#' with plotRGB. Bands may contain outliers which cause the image to look dark.
+#' Use the \code{q.range} argument to remove the outliers and get a 
+#' better-looking image.
 #'
 #' @param red a \code{raster} with the red band of the capture.
 #' @param green a \code{raster} with the green band of the capture.
@@ -15,7 +15,7 @@
 #' @param q.range a vector with the minimum and maximum reflectance quantiles
 #' being considered.
 #' @param rPath the file path where the resulting RGB image is saved.
-#' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
 #' defining the area of interest for image masking.
 #'
 #' @examples

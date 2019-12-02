@@ -1,35 +1,35 @@
 #' Preview Landsat-7 or Landsat-8 satellite images
 #'
 #' \code{lsPreview} shows a preview of the \code{n}-th image from a set of 
-#' search results on a interactive map. 
+#' search results on an interactive map. 
 #'
 #' The function shows a preview of the \code{n}-th output image from a search
-#' in the Landsat archives (\code{\link{ls7Search}} or \code{\link{ls8Search}}),
+#' in the Landsat archives (\code{\link{ls7Search}} or \code{\link{ls8Search}},
 #' with \code{browseAvailable = "Y"}). The preview is downloaded from 
 #' \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{USGS Bulk Metadata Service}.
 #' Please, be aware that only some images may have a preview.
 #'
 #' @param searchres a \code{data.frame} with the results from 
 #' \code{\link{ls7Search}} or \code{\link{ls8Search}}.
-#' @param dates a vector with the dates being considered
+#' @param dates a vector of \code{Date}s being considered
 #'   for previewing. This argument is mandatory if 
 #'   \code{n} is not defined.
 #' @param n a \code{numeric} argument identifying the location of the image in
 #' \code{searchres}.
-#' @param lpos vector argument. Defines the position of the layers when RGB 
-#' image is generated allowing false color visualizations.
+#' @param lpos vector argument. Defines the position of the red-green-blue
+#' layers to enable false color visualization.
 #' @param add.Layer logical argument. If \code{TRUE}, the function plots the 
-#' image over previous map. Allows combinations of images on a map using 
+#' image on an existing map. Allows combinations of images on a map using 
 #' \code{\link{senPreview}} and \code{\link{modPreview}} functions.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.
 #' @param ... arguments for nested functions:
 #'  \itemize{
-#'   \item arguments of \code{viewRGB} function from \code{mapview} packages are
-#'   valid arguments
+#'   \item arguments allowed by the \code{viewRGB} function from the 
+#'   \code{mapview} packages are valid arguments.
 #' }
-#' @return this function does not return anything. It previews on a map an image
-#' from search result.
+#' @return this function does not return anything. It displays a preview of
+#'  one of the search results.
 #' @examples
 #' \dontrun{
 #' # load a spatial polygon object of Navarre

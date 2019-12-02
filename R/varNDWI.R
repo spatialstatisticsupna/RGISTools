@@ -1,4 +1,4 @@
-#' Calculates normalized difference water index (NDWI)
+#' Calculates the normalized difference water index (NDWI)
 #'
 #' \code{varNDWI} Calculate the normalized difference water index (NDWI) from
 #' the green and near-infrared (NIR) bands.

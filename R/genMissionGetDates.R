@@ -5,7 +5,7 @@
 #'
 #' The function works with file names (or their paths) regardless of their
 #' extension. The function accepts more than on file path, which can be passed
-#' as a \code{character} vector. Dates are returned as `\code{YYYY-mm-dd}' by
+#' as a vector of \code{character}s. Dates are returned as `\code{YYYY-mm-dd}' by
 #' default. If another format is required, it can be modified through the 
 #' argument \code{format}.
 #'
@@ -16,7 +16,7 @@
 #'   \item \code{format} the format of the date being returned.
 #' }
 #' @return a \code{Date} class object with the date of the Landsat image or \code{character} class,
-#' if \code{format} argument is used.
+#' if the \code{format} argument is used.
 #' @examples
 #' # getting the capturing date from the name of a Landsat-8 image
 #' file.ls8 <- "LC82000312017010LGN01.tar.gz"
@@ -59,7 +59,7 @@ lsGetDates<-function(str,...){
 #'
 #' The function works with file names (or their paths) regardless of their
 #' extension. The function accepts more than on file path, which can be passed
-#' as a \code{characters} vector. Dates are returned as `\code{YYYY-mm-dd}' by
+#' as a vector of \code{character}s. Dates are returned as `\code{YYYY-mm-dd}' by
 #' default. If another format is required, it can be modified through the
 #' argument \code{format}.
 #'
@@ -70,7 +70,7 @@ lsGetDates<-function(str,...){
 #'   \item \code{format} the format of the date being returned.
 #' }
 #' @return a \code{Date} class object with the date of the Sentinel image or \code{character} class,
-#' if \code{format} argument is used.
+#' if the \code{format} argument is used.
 #' @examples
 #' # getting the capturing date from the name of Sentinel-2 images
 #' file.sen <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",

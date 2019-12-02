@@ -37,7 +37,7 @@
 #' @param ... arguments for nested functions:
 #' \itemize{
 #'   \item \code{AppRoot} the path where the filled/smoothed time series of 
-#'   images are saved in GTiff format.
+#'   images are saved as GTiff.
 #' }
 #' 
 #' @return a \code{RasterStack} with the filled/smoothed images. 
