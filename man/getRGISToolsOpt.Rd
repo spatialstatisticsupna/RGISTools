@@ -7,7 +7,7 @@
 getRGISToolsOpt(opt, env = optEnv)
 }
 \arguments{
-\item{opt}{the name of the `\code{RGISTools}' setting to be returned.}
+\item{opt}{a \code{character} with the name of the option.}
 
 \item{env}{the environment where the `\code{RGISTools}' option are saved.}
 }

@@ -7,7 +7,8 @@
 genGetDates(str, ...)
 }
 \arguments{
-\item{str}{\code{character} argument containing the date in julian format "\code{YYYYJJJ}".}
+\item{str}{\code{character} containing the date as "\code{YYYYJJJ}",
+where \code{Y} and \code{J} are year and julian day digits.}
 
 \item{...}{arguments for nested functions:
 \itemize{

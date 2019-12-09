@@ -2,7 +2,7 @@
 % Please edit documentation in R/varNBR.R
 \name{varNBR}
 \alias{varNBR}
-\title{Calculate normalized burn ratio (NBR)}
+\title{Calculate the normalized burn ratio (NBR)}
 \usage{
 varNBR(nir, swir2)
 }
@@ -19,8 +19,8 @@ A NBR image in \code{raster} format.
 near-infrared (NIR) and shortwave-infrared 2 (SWIR2) bands.
 }
 \details{
-The normalized burn ratio (NBR) is an index to identify burned areas by 
-comparing its value before and after the fire event. Is calculated using the
+The normalized burn ratio (NBR) is an index that identifies burned areas by 
+comparing its value before and after the fire event. It is calculated using the
 NIR and SWIR2 bands \insertCite{garcia1991mapping}{RGISTools}.This function
 is used within \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, 
 \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.

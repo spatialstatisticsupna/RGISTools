@@ -21,8 +21,8 @@ lsEspaOrderImages(search.res, username, password, product = c("sr",
 running steps and warnings.}
 }
 \value{
-this function does not return anything.Ask for processing Landsat level 2 
-images before the downloading.
+this function does not return anything. It makes a petition to
+process level-1 images before doing the download.
 }
 \description{
 \code{lsEspaOrder} makes a request to the EROS Centre Science Processing

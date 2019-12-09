@@ -2,7 +2,7 @@
 % Please edit documentation in R/varNDWI.R
 \name{varNDWI}
 \alias{varNDWI}
-\title{Calculates normalized difference water index (NDWI)}
+\title{Calculates the normalized difference water index (NDWI)}
 \usage{
 varNDWI(green, nir)
 }

@@ -7,7 +7,7 @@
 setRGISToolsOpt(opt, value, env = optEnv)
 }
 \arguments{
-\item{opt}{the name of the option to be change in \code{character} format.}
+\item{opt}{a \code{character} with the name of the option.}
 
 \item{value}{the new value of the selected option.}
 

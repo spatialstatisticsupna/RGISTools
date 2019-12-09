@@ -28,24 +28,25 @@ running steps and warnings.}
 \item{...}{arguments for nested functions.
 \itemize{
   \item \code{dates} a vector with the dates being considered
-  for creating cloud mask. This argument is optional.
+  for creating cloud masks. This argument is optional.
 }}
 }
 \value{
-this function does not return anything. It creates new GTiff files
-for a new cloud band (CLD) inside the AppRoot folder.
+this function does not return anything. It saves the cloud masks (CLD)
+as GTiff files in the \code{AppRoot} directory.
 }
 \description{
 \code{lsCloudMask} creates a cloud mask derived from the band for quality
 assurance (BQA) from Landsat-7 or Landsat-8 time series. The function is
 applied to untarred images, such as those resulting from 
 \code{\link{lsDownload}} or \code{\link{lsDownSearch}}. The result is a new
-image band, called cloud (CLD), that is saved as separate GTiffs.
+image band, called cloud (CLD), that is saved as separate GoeTiffs.
 }
 \details{
-The valid range for the \code{sensitivity} threshold is 0-8000. By defualt,
-the argument is set to 2800. We recommend 600 and 2800 for Landsat-7 and
-Landsat-8 respectively.
+The valid range for the \code{sensitivity} threshold is 0-80000. By defualt,
+the argument is set to 28000. We recommend 6000 and 28000 for Landsat-7 and
+Landsat-8 respectively. The \code{NA} and \code{1} values of the mask represent
+cloudy and clear-sky pixels pixels respectively.
 }
 \examples{
 \dontrun{

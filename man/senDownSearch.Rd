@@ -20,7 +20,6 @@ running steps and warnings.}
 \itemize{
   \item \code{product} the type of Sentinel product. Ex. "S2MSI1C",
   "S2MSI2A", "S2MSI2Ap", ... 
-  \code{startDate} and \code{endDate} are not defined.
   \item  \code{startDate} a \code{Date} class object with the starting date of the 
 study period. This argument is mandatory if 
   \code{dates} is not defined.
@@ -30,11 +29,11 @@ study period. This argument is mandatory if
   \item \code{dates} a vector with the capturing dates being considered
   for searching. This argument is mandatory if 
   \code{startDate} and \code{endDate} are not defined.
-  \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+  \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
 defining the area of interest.
   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
   object representing the region of interest with longitude/latitude
-  coordinates.
+  coordinates. This argument is mandatroy when \code{region} is not defined.
   \item \code{platform} the name of the Sentinel mission ("Sentinel-1", 
   "Sentinel-2", ...).
   \item \code{nattempts} the number of attempts to download an image in case

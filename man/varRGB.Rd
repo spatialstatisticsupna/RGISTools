@@ -18,19 +18,19 @@ being considered.}
 
 \item{rPath}{the file path where the resulting RGB image is saved.}
 
-\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
 defining the area of interest for image masking.}
 }
 \description{
-\code{varRGB} creates red-green-blue (RGB) \code{RasterStack} images by
+\code{varRGB} creates red-green-blue (RGB) images as a \code{RasterStack} by
 scaling the pixel values to 0-255 color range.
 }
 \details{
 The function rescales the original reflectance values to a range of 0-255.
-The functions re-aranges the RGB bands to create a stack with a RGB image
-ready to visualize with plotRGB. Bands may contain reflectance outliers which
-cause the image to look dark. Use the \code{q.range} argument to remove the
-outliers and get a better-looking image.
+The function re-arranges the RGB bands to create a stack ready to visualize
+with plotRGB. Bands may contain outliers which cause the image to look dark.
+Use the \code{q.range} argument to remove the outliers and get a 
+better-looking image.
 }
 \examples{
 # path to the cropped and cutted MODIS images for the region of Navarre

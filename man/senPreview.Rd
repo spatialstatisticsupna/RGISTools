@@ -21,11 +21,11 @@ senPreview(searchres, username, password, n, dates, lpos = c(3, 2, 1),
 for previewing. This argument is mandatory if 
 \code{n} is not defined.}
 
-\item{lpos}{vector argument. Defines the position of the layers when RGB 
-image is generated allowing false color visualizations.}
+\item{lpos}{vector argument. Defines the position of the red-green-blue
+layers to enable false color visualization.}
 
 \item{add.Layer}{logical argument. If \code{TRUE}, the function plots the 
-image over previous map. Allows combinations of images on a map using 
+image on an existing map. Allows combinations of images on a map using 
 \code{\link{lsPreview}} and \code{\link{modPreview}} functions.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
@@ -33,17 +33,17 @@ running steps and warnings.}
 
 \item{...}{arguments for nested functions:
  \itemize{
-  \item arguments of \code{viewRGB} function from \code{mapview} packages are
-  valid arguments
+  \item arguments allowed by the \code{viewRGB} function from \code{mapview}
+  packages are valid arguments
 }}
 }
 \value{
-this function does not return anything. It previews on a map an image
-from search result.
+this function does not return anything. It displays a preview of one
+of the search results.
 }
 \description{
 \code{senPreview} shows a preview of the \code{n}-th image from a set of 
-search results on a interactive map.
+search results on an interactive map.
 }
 \details{
 The function shows a preview of the \code{n}-th output image from a search

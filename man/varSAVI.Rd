@@ -2,7 +2,7 @@
 % Please edit documentation in R/varSAVI.R
 \name{varSAVI}
 \alias{varSAVI}
-\title{Calculates soil-adjusted vegetation index (SAVI)}
+\title{Calculates the soil-adjusted vegetation index (SAVI)}
 \usage{
 varSAVI(red, nir, L = 0.5, scfun = function(r) {     r })
 }

@@ -44,7 +44,7 @@ when saved in the Hard Disk Drive (HDD).}
 \item{...}{arguments for nested functions:
 \itemize{
   \item \code{AppRoot} the path where the filled/smoothed time series of 
-  images are saved in GTiff format.
+  images are saved as GTiff.
 }}
 }
 \value{

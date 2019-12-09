@@ -13,7 +13,7 @@ showRGISToolsOpt(env = optEnv)
 a \code{character} vector with the names of the configuration variables.
 }
 \description{
-\code{showRGISToolsOpt} prints the name of all options in `\code{RGISTools}' package.
+\code{showRGISToolsOpt} prints the name of all options in the `\code{RGISTools}' package.
 This function can be jointly used with \code{\link{setRGISToolsOpt}} and 
 \code{\link{getRGISToolsOpt}}.
 }

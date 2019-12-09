@@ -29,9 +29,8 @@ from hdf files and saves them as GTiff.}
 
 \item{...}{arguments for nested functions:
 \itemize{
-  \item \code{dates} a vector with the capturing dates being considered
-  for searching. This argument is mandatory if 
-  \code{startDate} and \code{endDate} are not defined.
+  \item \code{dates} a vector with the capturing dates being searched. This
+  argument is mandatory if \code{startDate} and \code{endDate} are not defined.
   \item  startDate a \code{Date} class object with the starting date of the 
 study period. This argument is mandatory if 
   \code{dates} is not defined.
@@ -40,12 +39,12 @@ study period. This argument is mandatory if
   \code{dates} is not defined.
   \item \code{lonlat} a vector with the longitude/latitude
   coordinates of the point of interest. This argument is mandatory if
-  \code{polygon} or \code{extent} are not defined.
-  \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
+  \code{region} or \code{extent} are not defined.
+  \item \code{extent} an \code{sf}, \code{Raster*}, or \code{Spatial*}
   object representing the region of interest with longitude/latitude
   coordinates. This argument is mandatory if \code{polygon} or \code{lonlat}
   are not defined.
-  \item \code{polygon} A list of vectors defining the points of a polygon in
+  \item \code{region} A list of vectors defining the points of a polygon in
   longitude/latitude format. This argument is mandatory if \code{lonlat} or
   \code{extent} are not defined.
   \item Any argument in \code{\link{modExtractHDF}} function. Ex.
@@ -63,9 +62,9 @@ location and time interval from the `EarthData' repository. Images are
 saved as GTiff files in the \code{AppRoot} directory.
 }
 \details{
-\code{modDownSearch} uses the 
+\code{modDownSearch} searches via 
 \href{https://lpdaacsvc.cr.usgs.gov/services/inventory}{NASA’s Common Metadata Repository}
-to search and the
+and downloads the imagert from the
 \href{https://earthdata.nasa.gov/}{`EarthData' web service}
 to download the imagery. The catalogue of MODIS products can be found
 \href{https://modis.gsfc.nasa.gov/data/dataprod/}{here}.

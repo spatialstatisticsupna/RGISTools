@@ -10,7 +10,7 @@ ls8FolderToVar(src, fun, AppRoot, getStack = FALSE, overwrite = FALSE,
 \arguments{
 \item{src}{path to the folder with the Landsat-8 multispectral image.}
 
-\item{fun}{is a function that computes the remote sensing index.}
+\item{fun}{a \code{function} that computes the remote sensing index.}
 
 \item{AppRoot}{the directory of the outcoming time series.}
 
@@ -32,7 +32,7 @@ running steps and warnings.}
 }
 \value{
 this function does not return anything, unless \code{getStack = TRUE}
-and then it returns a \code{RasterStack} with the time series of with the
+which then returns a \code{RasterStack} with the time series of with the
 index.
 }
 \description{
@@ -40,7 +40,7 @@ index.
 of a time series of Landsat-8 images. The images are specified by the path to
 the folder that stores the imagery (resulting from the \code{\link{lsMosaic}} 
 function). The function returns a \code{RasterStack} with a time series of 
-images with the index.
+images of the remote sensing index.
 }
 \details{
 The function requires the definition of the \code{src} and \code{fun} 

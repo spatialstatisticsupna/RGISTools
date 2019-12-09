@@ -20,8 +20,8 @@ from the red an near-infrared (NIR) bands.
 }
 \details{
 The normalized difference vegetation index (NDVI) is the most widely used 
-index for monitoring vegetation dynamics. The NDVI reflex vegetation vigour
-and it is closed related to the amount of photosynthetically active radiation
+index for monitoring vegetation dynamics. The NDVI reflects the vegetation vigour
+and it is closely related to the amount of photosynthetically active radiation
 absorbed \insertCite{rouse1972monitoring}{RGISTools}. This function is used
 within \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}},
 \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.

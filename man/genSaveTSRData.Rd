@@ -28,7 +28,8 @@ extent of the \code{RasterStack} to embrace the extents of all GTiff images.}
 searching for GTiff images.}
 }
 \value{
-if \code{AppRoot} is not asigned a \code{RasterStack} with the time series in src folder.
+a \code{RasterStack} when the \code{AppRoot} argument is not defined.
+The function does not return anything otherwise.
 }
 \description{
 \code{genSaveTSRData} imports a time series of images from a folder (GTiff

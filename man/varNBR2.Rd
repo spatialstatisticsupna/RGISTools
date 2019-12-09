@@ -2,7 +2,7 @@
 % Please edit documentation in R/varNBR2.R
 \name{varNBR2}
 \alias{varNBR2}
-\title{Calculate normalized burn ratio 2 (NBR2)}
+\title{Calculate the normalized burn ratio 2 (NBR2)}
 \usage{
 varNBR2(swir1, swir2)
 }
@@ -15,10 +15,11 @@ varNBR2(swir1, swir2)
 A NBR2 image in \code{raster} format.
 }
 \description{
-\code{varNBR2} computes the NBR2 index from SWIR1 and SWIR2 bands.
+\code{varNBR2} computes the NBR2 index from the shortwave infrared 1 (SWIR1)
+and shortwave infrared 2 (SWIR2).
 }
 \details{
-The normalized burn ratio 2 (NRB) is an index to identify burned areas. 
+The normalized burn ratio 2 (NRB2) is an index to identify burned areas. 
 In contrast to NBR, NRB2 highlights the sensitivity to water in vegetation
 \insertCite{lutes2006firemon}{RGISTools}. This function is used within
 \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}},

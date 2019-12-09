@@ -13,7 +13,7 @@ modFolderToVar(src, AppRoot, fun, getStack = FALSE, overwrite = FALSE,
 
 \item{AppRoot}{the directory of the outcoming time series.}
 
-\item{fun}{is a \code{function} that computes the remote sensing index.}
+\item{fun}{a \code{function} that computes the remote sensing index.}
 
 \item{getStack}{logical argument. If \code{TRUE}, returns the time series of
 images as a \code{RasterStack}, otherwise the images are saved in the Hard
@@ -33,7 +33,7 @@ running steps and warnings.}
 }
 \value{
 this function does not return anything, unless \code{getStack = TRUE}
-and then it returns a \code{RasterStack} with the time series of with the
+which then returns a \code{RasterStack} with the time series of with the
 index.
 }
 \description{
@@ -41,7 +41,7 @@ index.
 of a time series of MODIS images. The images are specified by the path to
 the folder that stores the imagery (resulting from the \code{\link{modMosaic}} 
 function). The function returns a \code{RasterStack} with a time series of 
-images with the index.
+images of the remote sensing index.
 }
 \details{
 The function requires the definition of the \code{src} and \code{fun} 

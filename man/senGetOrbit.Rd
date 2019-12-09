@@ -7,8 +7,8 @@
 senGetOrbit(str)
 }
 \arguments{
-\item{str}{the full path or official image name of the Sentinel image from
-which the relative orbit is extracted.}
+\item{str}{the full path(s) or official name(s) of the Sentinel images from
+which the orbits are retrieved.}
 }
 \value{
 an string with the relative orbit of the image in "\code{NXXXX_RYYY}"
@@ -16,7 +16,11 @@ or "\code{RYYY}" format, depending on the version of name convention.
 }
 \description{
 \code{senGetOrbit} reads the official name of a Sentinel image and returns 
-relative orbit. Get relative orbit information 
+relative orbit, in "\code{NXXXX_RYYY}" or "\code{RYYY}" format (Sentinel
+namig convention).
+}
+\details{
+Get information about the relative orbits
 \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2/satellite-description/orbit}{here}.
 }
 \examples{

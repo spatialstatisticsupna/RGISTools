@@ -22,7 +22,7 @@ loading the metadata is omitted.}
 }
 \value{
 this function does not return anything, but loads the “.LS7MD” 
-\code{data.frame} on the `RGISTools' package.
+\code{data.frame} on the environment of the `RGISTools' package.
 }
 \description{
 \code{ls7LoadMetadata} loads a \code{data.frame} called "\code{.LS7MD}"

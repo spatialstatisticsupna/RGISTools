@@ -20,7 +20,7 @@ lsDownSearch(satellite, username, password, AppRoot, lvl = 1,
 
 \item{lvl}{a number specifying the processing level. Default value, 1.}
 
-\item{product}{\code{character} vector with the requested Level-2 products.
+\item{product}{a \code{character} vector with the requested Level-2 products.
 By default \code{c("sr", "source_metadata")}.}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the
@@ -32,9 +32,8 @@ running steps and warnings.}
 
 \item{...}{argumetns for nested functions:
  \itemize{
-  \item \code{dates} a vector with the capturing dates being considered
-  for searching. This argument is mandatory if 
-  \code{startDate} and \code{endDate} are not defined.
+  \item \code{dates} a vector with the capturing dates being searched. This
+   argument is mandatory if \code{startDate} and \code{endDate} are not defined.
   \item  \code{startDate} a \code{Date} class object with the starting date of the 
 study period. This argument is mandatory if 
   \code{dates} is not defined.
@@ -68,10 +67,10 @@ credentials, which can be obtained
 The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDownSearch}
 decompresses the images and obtains the corresponding GTiffs. The GTiffs are
 saved in the \code{AppRoot} directory. To change this option, provide 
-\code{AppRoot = “full path”}. When the \code{untarDir} argument is defined,
-the function untars the imagery in this location. Image decompression
-duplicates the information due to the presence of both, compressed and 
-decompressed images. Set \code{raw.rm = TRUE} to remove the former ones.
+\code{AppRoot = “full path”}. When \code{untar=TRUE}, the function untars
+the imagery in this location. Image decompression duplicates the information
+due to the presence of both, compressed and decompressed images. Set 
+\code{raw.rm = TRUE} to remove the former ones.
 }
 \examples{
 \dontrun{

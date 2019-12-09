@@ -16,7 +16,7 @@ senCloudMask(src, AppRoot, out.name, resbands, sensitivity = 50,
 If the arguemnt is not defined the folder will be named as "CloudMask".}
 
 \item{resbands}{a \code{character} vector argument. Defines the band resolution
-used to create the cloud mask. Ex "20m" or "30m".}
+used to create the cloud mask. Ex "20m" or "60m".}
 
 \item{sensitivity}{a \code{numeric} argument. Defines the sensitivity of the
 cloud detection method.}
@@ -31,12 +31,12 @@ images with the same name.}
 }}
 }
 \value{
-this function does not return anything. It creates new GTiff files
-for a new cloud band (CLD) inside the AppRoot folder.
+this function does not return anything. It saves the cloud masks (CLD)
+as GTiff files in the \code{AppRoot} directory.
 }
 \description{
 \code{senCloudMask} creates cloud masks derived from the cloud probability
-band (\code{CLDPROB}) band from the "\code{S2MSI2A}" product.
+band (\code{CLDPRB}) band from the "\code{S2MSI2A}" product.
 }
 \details{
 The valid threshold range for \code{sensitivity} is 0-100. By default,

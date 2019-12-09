@@ -2,7 +2,7 @@
 % Please edit documentation in R/varNDMI.R
 \name{varNDMI}
 \alias{varNDMI}
-\title{Calculate normalized difference moisture (water) index (NDMI)}
+\title{Calculate the normalized difference moisture (water) index (NDMI)}
 \usage{
 varNDMI(nir, swir1)
 }

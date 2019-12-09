@@ -36,15 +36,15 @@ default, all resolutions (10m, 20m, and 60m) are used.}
 }
 \value{
 this function does not return anything, unless \code{getStack = TRUE}
-and then it returns a \code{RasterStack} with the time series of with the
+which then returns a \code{RasterStack} with the time series of with the
 index.
 }
 \description{
 \code{senFolderToVar} computes a remote sensing index from the spectral bands
 of a time series of Sentinel-2 images. The images are specified by the path to
 the folder that stores the imagery (resulting from the \code{\link{senMosaic}} 
-function). The function returns a \code{RasterStack} with a time series of 
-images with the index.
+function). The function returns a \code{RasterStack}  with a time series of 
+images of the remote sensing index.
 }
 \details{
 The function requires the definition of the \code{src} and \code{fun} 

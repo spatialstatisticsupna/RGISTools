@@ -17,7 +17,7 @@ images from which the capturing date is retrieved.}
 }
 \value{
 a \code{Date} class object with the date of the Sentinel image or \code{character} class,
-if \code{format} argument is used.
+if the \code{format} argument is used.
 }
 \description{
 \code{senGetDates} reads the official name of a Sentinel-2 image and returns
@@ -26,7 +26,7 @@ the capturing date, as a \code{Date} class object.
 \details{
 The function works with file names (or their paths) regardless of their
 extension. The function accepts more than on file path, which can be passed
-as a \code{characters} vector. Dates are returned as `\code{YYYY-mm-dd}' by
+as a vector of \code{character}s. Dates are returned as `\code{YYYY-mm-dd}' by
 default. If another format is required, it can be modified through the
 argument \code{format}.
 }

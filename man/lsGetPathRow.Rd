@@ -7,15 +7,16 @@
 lsGetPathRow(str)
 }
 \arguments{
-\item{str}{path to the folder with the Landsat-7 or 
-Landsat-8 multispectral images.}
+\item{str}{the full path(s) or official name(s) of the Landsat-7 or Landsa-8
+images from which the tile’s path and row numbers are retrieved.}
 }
 \value{
-a string with the path and row in "\code{ppprrr}" format.
+a string with the path and row in "\code{PPPRRR}" format.
 }
 \description{
-\code{lsGetPathRow} reads the official name of a Landsat-7 or Landsat-8 image
-and returns the path and row of its tile.
+\code{lsGetPathRow} reads the official name of a Landsat-7 or Landsa-8 image
+ and returns the tile’s path and row number, in "PPPRRR" format (Landsat
+ naming convention).
 }
 \examples{
 # example of getting date from Landsat-8 image name

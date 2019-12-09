@@ -9,21 +9,21 @@ genPlotGIS(r, region, breaks, labels, zlim, layout, proj, nbreaks = 40,
   scale.bar.rm = FALSE, ...)
 }
 \arguments{
-\item{r}{a \code{Raster*} class object with the image or image stack to be plotted. If \code{r} is a \code{list} 
+\item{r}{a \code{Raster*} class object with an image or stack of images to be plotted. If \code{r} is a \code{list} 
 of \code{RasterStack}, \code{genPlotGIS} treates the stacks as RGB images.}
 
-\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
 defining the area of interest.}
 
 \item{breaks}{a \code{numeric} vector defining the color breaks of the legend.}
 
 \item{labels}{a \code{character} vector defining the labels in the breaks of the legend.}
 
-\item{zlim}{a \code{numeric} vector defining the maximun and minimun values to be mapped.}
+\item{zlim}{a \code{numeric} vector defining the maximun and minimun pixel values to be mapped.}
 
 \item{layout}{a \code{numeric} vector defining rows and columns to divide the plotting area.}
 
-\item{proj}{character or object of class 'CRS' defining the coordinate 
+\item{proj}{a \code{character} or 'CRS' class object defining the coordinate 
 reference system of the plot.}
 
 \item{nbreaks}{a \code{numeric} argument defining the default number of breaks.}
@@ -54,12 +54,12 @@ plotted layers.}
   The arguments are defined as \code{tm.scale.bar.arg}, where \code{arg} is the 
   \code{tm_scale_bar} argument name. For example, the \code{text.size} of \code{tm_scale_bar} 
   is defined as \code{tm.scale.bar.text.size}.
-  \item \code{tm.shape} and \code{tm.polygon} for \code{region}. Any argument accepted by the 
+  \item \code{tm.shape} and \code{tm.polygon} refer to the \code{region} argument. Any argument accepted by the 
   \code{tm_shape} and \code{tm_polygon} functions. 
   The arguments are defined as \code{tm.shape.region.arg} or \code{tm.polygon.region.arg}, where \code{arg} is the 
   \code{tm_shape} and \code{tm_polygon} argument name respectively. For example, the \code{lwd} of \code{tm_polygon} 
   is defined as \code{tm.polygon.region.lwd}.
-  \item \code{tm.shape} and \code{tm.raster} for \code{r}. Any argument accepted by the 
+  \item \code{tm.shape} and \code{tm.raster} refer to the \code{r} argument. Any argument accepted by the 
   \code{tm_shape} and \code{tm_raster} functions. 
   The arguments are defined as \code{tm.shape.r.arg} or \code{tm.raster.r.arg}, where \code{arg} is the 
   \code{tm_shape} and \code{tm_raster} argument name respectively. For example, 
@@ -80,12 +80,13 @@ information systems (GIS), i.e., adding a scale, north arrow, and the border
 of the region of interest (optional).
 }
 \details{
-This is a wrapper function of \code{tmp} and hence displays any 
+This is a wrapper function of \code{tmap} and hence displays any 
 \code{Raster*} object and accepts all of its parameters. The function adds a
 scale, a north arrow and a polygon in the area of interest. If necessary, the
 function automatically reprojects the polygon to match the projection of the
 \code{raster}. The projection of the map can be changed by modifying the 
-\code{proj} argument.
+\code{proj} argument. For futher help on tmap arguements, please go the
+\code{\link{tmap}} reference manual.
 }
 \examples{
 # Simple plot of NDVI in Navarre
