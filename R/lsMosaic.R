@@ -8,7 +8,7 @@
 #' of dates has to be mosaicked, the dates should be provided through the
 #' argument \code{dateFilter}. The dates must be provided as a \code{Date} 
 #' class objects. For further details about the \code{bFilter} argument go
-#' to \link{\code{lsDownload}}.Once mosaicked, the images can be cropped to fit
+#' to \code{\link{lsDownload}}.Once mosaicked, the images can be cropped to fit
 #' the extent (optional). The extent can be defined in any coordinate reference
 #' system, since \code{lsMosaic} automatically reprojects the extent to match
 #' the projection of the image. The outputs are placed in the \code{AppRoot}

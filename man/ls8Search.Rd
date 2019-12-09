@@ -37,7 +37,7 @@ study period. This argument is mandatory if
   \item \code{extent} an \code{extent}, \code{Raster*}, or 
   \code{Spatial*} object representing the region of interest with 
   longitude/latitude coordinates. This argument is mandatory if 
-  \ode{region}, \code{pathrow}, or \code{lonlat} are not defined.
+  \code{region}, \code{pathrow}, or \code{lonlat} are not defined.
   \item column names in the .LS8MD \code{data.frame} and their values.
 }}
 }

@@ -8,7 +8,7 @@
 #' dates has to be mosaicked, the dates should be provided through the argument
 #' \code{dates}. The dates must be provided as a \code{Date} class object.For
 #' further details about the \code{bFilter} argument, go to the 
-#' \link{\code{senDownload}} function. Once mosaicked, the images can be cropped
+#' \code{\link{senDownload}} function. Once mosaicked, the images can be cropped
 #' to fit the \code{region} (optional). The \code{region} can be defined in any
 #' coordinate reference system, since \code{senMosaic} automatically reproject
 #' the extent to match the projection of the image. The outputs will be placed
