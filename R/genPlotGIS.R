@@ -9,7 +9,9 @@
 #' scale, a north arrow and a polygon in the area of interest. If necessary, the
 #' function automatically reprojects the polygon to match the projection of the
 #' \code{raster}. The projection of the map can be changed by modifying the 
-#' \code{proj} argument. 
+#' \code{proj} argument. For futher help on tmap arguements, please go the
+#' \code{\link{tmap}} reference manual.
+
 #'
 #' @param r a \code{Raster*} class object with an image or stack of images to be plotted. If \code{r} is a \code{list} 
 #' of \code{RasterStack}, \code{genPlotGIS} treates the stacks as RGB images.

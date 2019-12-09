@@ -30,7 +30,7 @@
 #' defining the area of interest.
 #'   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
 #'   object representing the region of interest with longitude/latitude
-#'   coordinates.
+#'   coordinates. This argument is mandatroy when \code{region} is not defined.
 #'   \item \code{platform} the name of the Sentinel mission ("Sentinel-1", 
 #'   "Sentinel-2", ...).
 #'   \item \code{nattempts} the number of attempts to download an image in case

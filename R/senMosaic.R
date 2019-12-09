@@ -30,7 +30,8 @@
 #' @param ... arguments for nested functions:
 #'  \itemize{
 #'   \item \code{pathrow} a \code{list} of vectors with the path and row numbers
-#'   of the tiles concerning the region of interest.
+#'   of the tiles concerning the region of interest. This argument is mandatory
+#'   if \code{region} is not defined.
 #'   \item \code{bFilter} a vector with the bands to be mosaicked. If not
 #'   supplied, all bands are mosaicked.
 #'   \item \code{dates} a vector with the capturing dates being considered

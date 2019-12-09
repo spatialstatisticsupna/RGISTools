@@ -18,7 +18,7 @@
 #' (\code{pathrow}). This method requires to know in advance the path and row
 #' numbers of the tile that is relevant for your region of interest. From the
 #' user's standpoint, the simplest way to search a time series of Landsat-7
-#' images is by \code{extent}, \code{lonlat} or \code{polygon}, since they do 
+#' images is by \code{region}, \code{extent}, or \code{lonlat}, since they do 
 #' not require any prior knowledge about the tiles.
 #'
 #' The function can screen the results by any other attribute in the metadata.
@@ -41,18 +41,21 @@
 #'   \item  \code{endDate} a \code{Date} class object with the ending date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
-#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
-#' defining the area of interest.
+#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, o
+#'   r \code{sf} class object defining the area of interest. This argument is
+#'   mandatory if \code{pathrow}, \code{extent}, or \code{lonlat} are not defined.
 #'   \item \code{pathrow} a list of vectors with the path and row numbers of
 #'   the tiles concerning the region of interest. This argument is mandatory
-#'   if \code{extent} or \code{lonlat} are not provided. Ex. 
+#'   if \code{region}, \code{extent} or \code{lonlat} are not provided. Ex. 
 #'   \code{list(c(200,31),c(200,30))}.
 #'   \item \code{lonlat} a vector with the longitude/latitude
 #'   coordinates of the point of interest. Ex. \code{c(-1.64323,42.81687)}.
+#'   This argument is mandatory if \code{region}, \code{pathrow}, or \code{lonlat}
+#'   are not defined.
 #'   \item \code{extent} an \code{extent}, \code{Raster*}, or 
 #'   \code{Spatial*} object representing the region of interest with 
 #'   longitude/latitude coordinates. This argument is mandatory if 
-#'   \code{pathrow} or \code{lonlat} are not defined.
+#'   \code{region}, \code{pathrow} or \code{lonlat} are not defined.
 #'   
 #'   \item column names in the .LS7MD \code{data.frame} and their values.
 #' }

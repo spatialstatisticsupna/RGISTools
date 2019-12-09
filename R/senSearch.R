@@ -29,13 +29,16 @@
 #'   \item  \code{endDate} a \code{Date} class object with the ending date of the 
 #' study period. This argument is mandatory if 
 #'   \code{dates} is not defined.
-#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
-#' defining the area of interest.
+#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or 
+#'   \code{sf} class object defining the area of interest. This argument is
+#'   mandatory if \code{extent} or \code{lonlat} are not defined.
 #'   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
 #'   object representing the region of interest with longitude/latitude
-#'   coordinates.
+#'   coordinates. This argument is mandatory if \code{region} or \code{lonlat}
+#'   are not defined.
 #'   \item \code{lonlat} a vector with the longitude/latitude
-#'   coordinates of the point of interest.
+#'   coordinates of the point of interest. This argument is mandatory if 
+#'   \code{region} or \code{extent} are not defined.
 #'   \item \code{platform} the name of the Sentinel mission ("Sentinel-1", 
 #'   "Sentinel-2", ...).
 #'   \item \code{qformat} the format of the response.

@@ -14,10 +14,10 @@
 #' The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDownSearch}
 #' decompresses the images and obtains the corresponding GTiffs. The GTiffs are
 #' saved in the \code{AppRoot} directory. To change this option, provide 
-#' \code{AppRoot = “full path”}. When the \code{untarDir} argument is defined,
-#' the function untars the imagery in this location. Image decompression
-#' duplicates the information due to the presence of both, compressed and 
-#' decompressed images. Set \code{raw.rm = TRUE} to remove the former ones.
+#' \code{AppRoot = “full path”}. When \code{untar=TRUE}, the function untars
+#' the imagery in this location. Image decompression duplicates the information
+#' due to the presence of both, compressed and decompressed images. Set 
+#' \code{raw.rm = TRUE} to remove the former ones.
 #' 
 #' @param satellite string containing the type of satellite 
 #' (\code{"ls7"} or \code{"ls8"}).

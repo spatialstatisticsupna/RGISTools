@@ -6,8 +6,8 @@
 #' \code{\link{lsDownload}} or \code{\link{lsDownSearch}}. The result is a new
 #' image band, called cloud (CLD), that is saved as separate GoeTiffs.
 #' 
-#' The valid range for the \code{sensitivity} threshold is 0-8000. By defualt,
-#' the argument is set to 2800. We recommend 600 and 2800 for Landsat-7 and
+#' The valid range for the \code{sensitivity} threshold is 0-80000. By defualt,
+#' the argument is set to 28000. We recommend 6000 and 28000 for Landsat-7 and
 #' Landsat-8 respectively. The \code{NA} and \code{1} values of the mask represent
 #' cloudy and clear-sky pixels pixels respectively.
 #'

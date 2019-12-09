@@ -40,12 +40,12 @@
 #'   \code{dates} is not defined.
 #'   \item \code{lonlat} a vector with the longitude/latitude
 #'   coordinates of the point of interest. This argument is mandatory if
-#'   \code{polygon} or \code{extent} are not defined.
-#'   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
+#'   \code{region} or \code{extent} are not defined.
+#'   \item \code{extent} an \code{sf}, \code{Raster*}, or \code{Spatial*}
 #'   object representing the region of interest with longitude/latitude
 #'   coordinates. This argument is mandatory if \code{polygon} or \code{lonlat}
 #'   are not defined.
-#'   \item \code{polygon} A list of vectors defining the points of a polygon in
+#'   \item \code{region} A list of vectors defining the points of a polygon in
 #'   longitude/latitude format. This argument is mandatory if \code{lonlat} or
 #'   \code{extent} are not defined.
 #'   \item Any argument in \code{\link{modExtractHDF}} function. Ex.

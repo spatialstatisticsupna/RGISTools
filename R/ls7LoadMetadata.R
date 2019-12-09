@@ -24,7 +24,7 @@
 #' @param ... arguments for nested functions.
 #'
 #' @return this function does not return anything, but loads the “.LS7MD” 
-#' \code{data.frame} on the `RGISTools' package.
+#' \code{data.frame} on the environment of the `RGISTools' package.
 #'
 #' @examples
 #' \dontrun{

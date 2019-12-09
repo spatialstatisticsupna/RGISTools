@@ -6,7 +6,8 @@
 #' The function reads a date from a \code{character} class object in year-julian
 #' ("\code{YYYYJJJ}") format and returns a \code{Date} class object.
 #'
-#' @param str \code{character} argument containing the date in julian format "\code{YYYYJJJ}".
+#' @param str \code{character} containing the date as "\code{YYYYJJJ}",
+#' where \code{Y} and \code{J} are year and julian day digits.
 #' @param ... arguments for nested functions:
 #' \itemize{
 #'   \item \code{format} the format of the date being returned.

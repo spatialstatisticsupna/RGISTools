@@ -13,11 +13,12 @@
 #'
 #' @param rstack a \code{RasterStack}, where layer names contain the capturing
 #' date of an image in "\code{YYYYJJJ}" format.
-#' @param n number of images combined in the aggregation.
+#' @param n number of images combined in the aggregation. Only required if 
+#' \code{by} is not provided.
 #' @param fun the function used to create the composite, such as \code{max},
 #' \code{min}, \code{mean}, ...
 #' @param by character argument. Accepts \code{"month"} or \code{"year"} for creating monthly
-#' or yearly composites.
+#' or yearly composites. Only required if \code{n} is provided.
 #' @param by.days logical argument. If \code{FALSE}, \code{n} indicates the 
 #' number of consucutive images being aggregated. If \code{TRUE}, the function
 #' aggregates the imagery within every \code{n} days. The aggregation requires
