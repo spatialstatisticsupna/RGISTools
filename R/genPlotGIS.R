@@ -80,7 +80,7 @@
 #'           tm.polygon.region.border.col="#000000",
 #'           tm.raster.r.palette=rev(terrain.colors(40)),
 #'           tm.raster.r.title="NDVI",
-#'           as.grid = T,
+#'           as.grid = TRUE,
 #'           tm.graticules.labels.size=1,
 #'           tm.graticules.n.x=3,
 #'           tm.graticules.n.y=3)
@@ -105,7 +105,7 @@
 #' img.mod.rgb<-varRGB(img.mod.red,img.mod.green,img.mod.blue)
 #' genPlotGIS(ex.ndvi.navarre,
 #'            ex.navarre)+
-#'            tm_facets(as.layers = T)+
+#'            tm_facets(as.layers = TRUE)+
 #' genPlotGIS(list(img.mod.rgb),
 #'            ex.navarre)
 genPlotGIS<-function(r,region,breaks,labels,zlim,layout,proj,nbreaks=40,nlabels=10,as.grid=TRUE,compass.rm=FALSE,scale.bar.rm=FALSE,...){

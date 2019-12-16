@@ -65,10 +65,15 @@ sres <- senSearch(startDate = as.Date("2018210","\%Y\%j"),
                   username = "username",
                   password = "password")
 # preview some images
-senPreview(sres, 3, username = "username", password = "password")
-senPreview(sres, 1, username = "username", password = "password", add.Layer =TRUE)
+senPreview(sres, username = "username", password = "password",n=1)
+senPreview(sres, username = "username", password = "password",n=3, add.Layer =TRUE)
 
 # show the dates in julian days
 senGetDates(names(sres),format="\%Y\%j")
+
+senPreview(sres, 
+           username = "username", 
+           password = "password", 
+           dates = senGetDates(names(sres[3]))
 }
 }

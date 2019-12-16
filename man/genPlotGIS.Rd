@@ -103,7 +103,7 @@ genPlotGIS(ex.ndvi.navarre,
           tm.polygon.region.border.col="#000000",
           tm.raster.r.palette=rev(terrain.colors(40)),
           tm.raster.r.title="NDVI",
-          as.grid = T,
+          as.grid = TRUE,
           tm.graticules.labels.size=1,
           tm.graticules.n.x=3,
           tm.graticules.n.y=3)
@@ -128,7 +128,7 @@ img.mod.green <- raster(files.mod[4])
 img.mod.rgb<-varRGB(img.mod.red,img.mod.green,img.mod.blue)
 genPlotGIS(ex.ndvi.navarre,
            ex.navarre)+
-           tm_facets(as.layers = T)+
+           tm_facets(as.layers = TRUE)+
 genPlotGIS(list(img.mod.rgb),
            ex.navarre)
 }

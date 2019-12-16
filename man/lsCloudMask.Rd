@@ -53,7 +53,7 @@ cloudy and clear-sky pixels pixels respectively.
 # load a spatial polygon object of Navarre
 data(ex.navarre)
 wdir <- file.path(tempdir(),"Path_for_downloading_folder")
-print(src)
+print(wdir)
 
 # search and download images from Landsat-8 between
 # 01-01-2018 and 20-01-2018 for the region of Navarre
@@ -67,12 +67,12 @@ lsDownSearch(satellite = "ls8",
              AppRoot = wdir)
            
 # define the path where the GTiff images are located
-src.ls8 <- file.path(wdir,"Landsat8")
-src.ls8.untar <- file.path(src.ls8,"untar")
+wdir.ls8 <- file.path(wdir,"Landsat8")
+wdir.ls8.untar <- file.path(wdir.ls8,"untar")
             
 # mosaic and crop the imagery
-lsMosaic(src = src.ls8.untar,
-         AppRoot = src.ls8,
+lsMosaic(src = wdir.ls8.untar,
+         AppRoot = wdir.ls8,
          out.name = "Navarre",
          extent = ex.navarre,
          bFilter = c("CLD"),
@@ -80,15 +80,15 @@ lsMosaic(src = src.ls8.untar,
          overwrite = TRUE) # overwrite
          
 # generate the path where mosaicked images are located
-src.ls8.navarre <- file.path(src.ls8, "Navarre")
+wdirls8.navarre <- file.path(wdir.ls8, "Navarre")
 
 # calculate the cloud mask from QC layer
-lsCloudMask(src=src.ls8.navarre,
+lsCloudMask(src=wdir.ls8.navarre,
             overwrite=TRUE,
-            AppRoot = src.ls8) 
+            AppRoot = wdir.ls8) 
             
 # load the B1 layer and calculate the CLD layer
-files.ls8.navarre.path <- list.files(src.ls8.navarre,
+files.ls8.navarre.path <- list.files(wdir.ls8.navarre,
                                      full.names = TRUE,
                                      recursive = TRUE,
                                      pattern = "\\\\.tif$")

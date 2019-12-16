@@ -44,15 +44,20 @@
 #'                   username = "username",
 #'                   password = "password")
 #' # preview some images
-#' senPreview(sres, 3, username = "username", password = "password")
-#' senPreview(sres, 1, username = "username", password = "password", add.Layer =TRUE)
+#' senPreview(sres, username = "username", password = "password",n=1)
+#' senPreview(sres, username = "username", password = "password",n=3, add.Layer =TRUE)
 #' 
 #' # show the dates in julian days
 #' senGetDates(names(sres),format="%Y%j")
+#' 
+#' senPreview(sres, 
+#'            username = "username", 
+#'            password = "password", 
+#'            dates = senGetDates(names(sres[3]))
 #' }
 senPreview<-function(searchres,username,password,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   if(missing(dates)){
-    return(.senPreviewRecursive(searchres=searchres,n=n,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
+    return(.senPreviewRecursive(searchres=searchres,username=username,password=password,n=n,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
   }else{
     searchres<-searchres[senGetDates(names(searchres))%in%dates]
     if(length(searchres)>0){

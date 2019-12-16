@@ -81,7 +81,7 @@ modFolderToVar(wdir.mod.navarre,
 # change src TS_sample
 wdir.mod.ndvi <- file.path(dirname(wdir.mod.navarre),"NDVI")
 # create the Rdata
-tiles.mod.ndvi<-genSaveTSRData(wdir.mod.ndvi, ts.name = "ModisNDVI", AppRoot = wdir.mod)
+tiles.mod.ndvi<-genSaveTSRData(wdir.mod.ndvi, ts.name = "ModisNDVI")
 # remove values out of 0-1 range
 tiles.mod.ndvi.lim <- clamp(tiles.mod.ndvi,lower=0,upper=1)
 # plot the ndvi images

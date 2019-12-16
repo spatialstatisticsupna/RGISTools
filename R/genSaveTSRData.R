@@ -63,7 +63,7 @@
 #' # change src TS_sample
 #' wdir.mod.ndvi <- file.path(dirname(wdir.mod.navarre),"NDVI")
 #' # create the Rdata
-#' tiles.mod.ndvi<-genSaveTSRData(wdir.mod.ndvi, ts.name = "ModisNDVI", AppRoot = wdir.mod)
+#' tiles.mod.ndvi<-genSaveTSRData(wdir.mod.ndvi, ts.name = "ModisNDVI")
 #' # remove values out of 0-1 range
 #' tiles.mod.ndvi.lim <- clamp(tiles.mod.ndvi,lower=0,upper=1)
 #' # plot the ndvi images
@@ -100,7 +100,8 @@ genSaveTSRData<-function(src,AppRoot=NULL,ts.name="TS.Name",startDate=NULL,endDa
     } 
     assign(ts.name,readAll(rstack))
   }else{
-    assign(ts.name,readAll(stack(flist)))
+    rstack<-readAll(stack(flist))
+    assign(ts.name,rstack)
   }
  
   

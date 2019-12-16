@@ -73,7 +73,7 @@ senDownSearch(startDate = as.Date("2018210","\%Y\%j"),
               password = "password",
               AppRoot = wdir)
 # folder with the unzipped images from Sentinel-2
-wdir.sen <- file.path(wdir,"Sentinel")
+wdir.sen <- file.path(wdir,"Sentinel-2")
 wdir.sen.unzip <- file.path(wdir.sen, "unzip")
 # mosaic the Sentinel-2 images
 senMosaic(wdir.sen.unzip,

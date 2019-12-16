@@ -64,12 +64,13 @@
 #'           AppRoot = wdir.sen,
 #'           gutils = TRUE,
 #'           out.name = "Navarre")
-#' 
+#'           
+#' wdir.sen <- file.path(wdir.sen,"Navarre")
 #' # load and plot a Sentinel-2 image
 #' files.sen <- list.files(wdir.sen, pattern = "\\.tif$", full.names = TRUE ,recursive = TRUE)
 #' # print Sentinel-2 bands
 #' getRGISToolsOpt("SEN2BANDS")
-#' file.sen.rgb <- stack(files.sen[grepl("TCI",files)][1])
+#' file.sen.rgb <- stack(files.sen[grepl("TCI",files.sen)][1])
 #' plotRGB(file.sen.rgb)
 #' }
 senMosaic<-function(src,

@@ -194,8 +194,8 @@ ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
   
   arg<-arg[names(arg)[which(!names(arg)%in%c("pathrow","region","cloudCover"))]]
   if(length(arg)>0){
-    arg$df<-LS8MD
-    LS8MD<-do.call(genFilterDF,arg)
+    arg$df<-LS7MD
+    LS7MD<-do.call(genFilterDF,arg)
   }
 
   LS7MD<-LS7MD[!duplicated(LS7MD[,c('sceneID')]),]

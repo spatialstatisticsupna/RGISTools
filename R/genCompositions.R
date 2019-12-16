@@ -52,9 +52,9 @@
 #' genPlotGIS(composite.NDVI.3a)
 genCompositions<-function(rstack,by,fun,n,by.days=FALSE,verbose=FALSE,...){
   args<-list(...)
-
+  dates<-genGetDates(names(rstack))
   if(!missing(by)){
-    dates<-genGetDates(names(rstack))
+    
     if(verbose){message("Omitting n and by.day argument...")}
     switch (by,
             "month" = {
