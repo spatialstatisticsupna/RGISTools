@@ -40,14 +40,14 @@
 #' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' print(wdir)
 #' # download Landsat-7 images
-#' auxDownload(satellite = "ls7",
-#'            username = "username",
-#'            password = "password",
-#'            startDate = as.Date("01-01-2018", "%d-%m-%Y"),
-#'            endDate = as.Date("20-01-2018", "%d-%m-%Y"),
-#'            extent = ex.navarre,
-#'            untar = TRUE,
-#'            AppRoot = wdir)
+#' lsDownSearch(satellite = "ls7",
+#'              username = "username",
+#'              password = "password",
+#'              startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'              endDate = as.Date("20-01-2018", "%d-%m-%Y"),
+#'              extent = ex.navarre,
+#'              untar = TRUE,
+#'              AppRoot = wdir)
 #' # folder with the Landsat-7 untared images 
 #' wdir.ls7 <-file.path(wdir,"Landsat7")
 #' wdir.ls7.untar <- file.path(wdir.ls7, "untar")
@@ -99,6 +99,10 @@ ls7FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     ls7bands<-getRGISToolsOpt("LS7BANDS")
     ls.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
+    if(length(ls.img)==0){
+      message(paste0("Images not found in ",imgfd))
+      next
+    }
     out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
     if(overwrite|(!file.exists(out.file.name))){
       funString<-"result<-fun("

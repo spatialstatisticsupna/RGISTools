@@ -99,6 +99,10 @@ modFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     modbands<-getRGISToolsOpt("MOD09BANDS")
     mod.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
+    if(length(mod.img)==0){
+      message(paste0("Images not found in ",imgfd))
+      next
+    }
     out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
     if(overwrite|(!file.exists(out.file.name))){
       funString<-"result<-fun("

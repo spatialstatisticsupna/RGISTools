@@ -75,25 +75,23 @@ lsMosaic(src = wdir.ls8.untar,
          AppRoot = wdir.ls8,
          out.name = "Navarre",
          extent = ex.navarre,
-         bFilter = c("CLD"),
          gutils = TRUE, # using gdalUtils
          overwrite = TRUE) # overwrite
          
 # generate the path where mosaicked images are located
-wdirls8.navarre <- file.path(wdir.ls8, "Navarre")
+wdir.ls8.navarre <- file.path(wdir.ls8, "Navarre")
 
 # calculate the cloud mask from QC layer
 lsCloudMask(src=wdir.ls8.navarre,
-            overwrite=TRUE,
-            AppRoot = wdir.ls8) 
+            overwrite=TRUE) 
             
 # load the B1 layer and calculate the CLD layer
 files.ls8.navarre.path <- list.files(wdir.ls8.navarre,
                                      full.names = TRUE,
                                      recursive = TRUE,
                                      pattern = "\\\\.tif$")
-tiles.ls8.cld <- files.ls8.navarre.path[grepl("CLD",tiles.path)]
-tiles.ls8.b1 <- files.ls8.navarre.path[grepl("B1.tif",tiles.path)]
+tiles.ls8.cld <- files.ls8.navarre.path[grepl("CLD",files.ls8.navarre.path)]
+tiles.ls8.b1 <- files.ls8.navarre.path[grepl("B1.tif",files.ls8.navarre.path)]
 img.ls8.cld <- lapply(tiles.ls8.cld,raster)
 img.ls8.b1 <- lapply(tiles.ls8.b1,raster)
 

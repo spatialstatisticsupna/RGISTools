@@ -53,7 +53,7 @@
 #' senPreview(sres, 
 #'            username = "username", 
 #'            password = "password", 
-#'            dates = senGetDates(names(sres[3]))
+#'            dates = senGetDates(names(sres[3])))
 #' }
 senPreview<-function(searchres,username,password,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   if(missing(dates)){

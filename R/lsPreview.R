@@ -47,6 +47,8 @@
 #' sres.cloud.free = subset(sres, sres$cloudCover < 1)
 #' lsPreview(sres.cloud.free, 1)
 #' lsPreview(sres.cloud.free, 2,add.Layer = TRUE)
+#' # plot all the images in one date
+#' lsPreview(sres.cloud.free,dates=as.Date("2013-09-04"))
 #' }
 lsPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
   if(missing(dates)){

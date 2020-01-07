@@ -50,7 +50,7 @@
 #' # between the julian dates 210 and 218, 2018
 #' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' print(wdir)
-#' senDownload(startDate = as.Date("2018210", "%Y%j"),
+#' senDownSearch(startDate = as.Date("2018210", "%Y%j"),
 #'             endDate = as.Date("2018218", "%Y%j"),
 #'             platform = "Sentinel-2",
 #'             extent = ex.navarre,
@@ -60,7 +60,7 @@
 #'             password = "password",
 #'             AppRoot = wdir)
 #'             
-#' wdir.sen <- file.path(wdir, "Sentinel")
+#' wdir.sen <- file.path(wdir, "Sentinel-2")
 #' wdir.sen.unzip <- file.path(wdir.sen, "unzip")
 #'                   
 #' files.sen.unzip <- list.files(wdir.sen.unzip,

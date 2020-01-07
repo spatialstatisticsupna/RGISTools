@@ -120,7 +120,7 @@ senDownload<-function(searchres,
       if((!file.exists(downPath))|overwrite){
         message(paste0("Downloading image ",file.name," (",i,"/",n.imgs,")"))
         image.url<-URLencode(url)
-        
+        if("verbose"%in%names(arg)){if(arg$verbose==T)message(paste0('Trying to download the url: ',image.url))}
         curl_download(image.url, destfile=downPath,handle = c.handle)
       }
 

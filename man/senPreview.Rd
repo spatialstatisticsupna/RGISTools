@@ -74,6 +74,6 @@ senGetDates(names(sres),format="\%Y\%j")
 senPreview(sres, 
            username = "username", 
            password = "password", 
-           dates = senGetDates(names(sres[3]))
+           dates = senGetDates(names(sres[3])))
 }
 }

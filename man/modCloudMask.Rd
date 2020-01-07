@@ -57,7 +57,7 @@ modDownSearch(product = "MOD09GA",
             
 # assign src1 as the output folder for modMosaic
 wdir.mod <- file.path(wdir, "Modis")
-wdir.mod.tiles <- file.path(src.mod, "MOD09GA")
+wdir.mod.tiles <- file.path(wdir.mod, "MOD09GA")
 wdir.mod.tif <- file.path(wdir.mod.tiles, "tif")
 # mosaic the MODIS images
 modMosaic(wdir.mod.tif, # the input folder 
@@ -77,7 +77,7 @@ files.mod.cld <- file.path(wdir.mod.tiles,"CloudMask")
 img.mod.cld <- stack(list.files(files.mod.cld, full.names=TRUE, pattern="CLD"))
 
 # select b01
-img.mod.navarre <- stack(list.files(img.mod.cld, 
+img.mod.navarre <- stack(list.files(wdir.mod.navarre, 
                                     full.names=TRUE, 
                                     recursive = TRUE, 
                                     pattern="b01_1"))

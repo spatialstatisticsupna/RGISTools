@@ -85,14 +85,14 @@ tiles.sen.navarre <- list.files(wdir.sen.navarre,
                             full.names = TRUE,
                             recursive = TRUE,
                            pattern = "\\\\.tif$")
-tiles.sen.navarre.b2 <- tiles.sen.navarre[grepl("B02",tiles.navarre)]
-tiles.sen.navarre.b2 <- tiles.sen.navarre.b2[grepl("60m",b2.tiles)]
+tiles.sen.navarre.b2 <- tiles.sen.navarre[grepl("B02",tiles.sen.navarre)]
+tiles.sen.navarre.b2 <- tiles.sen.navarre.b2[grepl("60m",tiles.sen.navarre.b2)]
 
 # generate a 60-meter resolution cloud mask 
 tiles.sen.cloud <- list.files(wdir.sen.cloud,
                               full.names = TRUE,
                               pattern = "\\\\.tif$")
-tiles.sen.cloud.60 <- tiles.sen.cloud[grepl("60m",cloud.tiles)]
+tiles.sen.cloud.60 <- tiles.sen.cloud[grepl("60m",tiles.sen.cloud)]
 
 # remove the cloud mask from b02 tiles
 img.sen.navarre.b2 <- stack(tiles.sen.navarre.b2)

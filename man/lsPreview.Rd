@@ -66,5 +66,7 @@ lsPreview(sres, 1)
 sres.cloud.free = subset(sres, sres$cloudCover < 1)
 lsPreview(sres.cloud.free, 1)
 lsPreview(sres.cloud.free, 2,add.Layer = TRUE)
+# plot all the images in one date
+lsPreview(sres.cloud.free,dates=as.Date("2013-09-04"))
 }
 }

@@ -100,7 +100,10 @@ senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     senbands<-getRGISToolsOpt("SEN2BANDS")
     sen.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
-    
+    if(length(sen.img)==0){
+      message(paste0("Images not found in ",imgfd))
+      next
+    }
     #check if there are S2MSI2A images
     cres<-lapply(resbands,grepl,sen.img)
     cres<-unlist(lapply(cres,function(x){if(sum(x)>0){return(TRUE)}else{return(FALSE)}}))

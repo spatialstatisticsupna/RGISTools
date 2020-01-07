@@ -68,20 +68,20 @@
 #'
 #' # download 1 image
 #' lsDownload(searchres = sres[1,], 
-#'            username = "user", 
-#'            password = "pass", 
+#'            username = "username", 
+#'            password = "password", 
 #'            AppRoot = wdir,
 #'            untar = TRUE)
 #' # download 4 images
 #' lsDownload(searchres = sres[1:4,], 
-#'            username = "user", 
-#'            password = "pass",
+#'            username = "username", 
+#'            password = "password",
 #'            AppRoot = wdir, 
 #'            untar = TRUE)
 #' # download all the images
 #' lsDownload(searchres = sres, 
-#'            username = "user", 
-#'            password = "pass",
+#'            username = "username", 
+#'            password = "password",
 #'            AppRoot = wdir,
 #'            untar = TRUE)
 #'
@@ -96,20 +96,20 @@
 #'                   AppRoot = wdir)
 #' # download 1 image
 #' lsDownload(searchres = sres[1,], 
-#'            username = "user", 
-#'            password = "pass", 
+#'            username = "username", 
+#'            password = "password", 
 #'            untar = TRUE,
 #'            AppRoot = wdir)
 #' # download 4 images
 #' lsDownload(searchres = sres[1:4,], 
-#'            username = "user", 
-#'            password = "pass", 
+#'            username = "username", 
+#'            password = "password", 
 #'            untar = TRUE, 
 #'            AppRoot = wdir)
 #' # download all the images
 #' lsDownload(searchres = sres, 
-#'            username = "user", 
-#'            password = "pass", 
+#'            username = "username", 
+#'            password = "password", 
 #'            untar = TRUE, 
 #'            AppRoot = wdir)
 #' 

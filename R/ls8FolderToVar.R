@@ -61,7 +61,7 @@
 #' # path to the folder with mosaicked images
 #' src.ls8.navarre <- file.path(src.ls8, "Navarre")
 #' # generate NDVI images of Navarre
-#' src.ls8.var <- file.path(src.ls8.navarre, "Navarre_Variables")
+#' src.ls8.var <- file.path(src.ls8, "Navarre_Variables")
 #' dir.create(src.ls8.var)
 #' ls8FolderToVar(src.ls8.navarre,
 #'                fun = varNDVI,
@@ -101,6 +101,10 @@ ls8FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     ls8bands<-getRGISToolsOpt("LS8BANDS")
     ls.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
+    if(length(ls.img)==0){
+      message(paste0("Images not found in ",imgfd))
+      next
+    }
     out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
     if(overwrite|(!file.exists(out.file.name))){
       funString<-"result<-fun("

@@ -82,13 +82,13 @@ print(wdir)
 wdir.mod <- file.path(wdir,"Modis","MYD13A2")
 wdir.mod.hdf <- file.path(wdir.mod,"hdf")
 modDownload(mList[1], 
-            username = "user", 
-            password = "pass",
+            username = "username", 
+            password = "password",
             AppRoot = wdir.mod.hdf)
 # download all images in mList
 modDownload(sres, 
-            username = "user", 
-            password = "pass",
+            username = "username", 
+            password = "password",
             AppRoot = wdir.mod.hdf)
 }
 }

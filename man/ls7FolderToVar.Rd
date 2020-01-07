@@ -57,14 +57,14 @@ data(ex.navarre)
 wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 print(wdir)
 # download Landsat-7 images
-auxDownload(satellite = "ls7",
-           username = "username",
-           password = "password",
-           startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
-           endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
-           extent = ex.navarre,
-           untar = TRUE,
-           AppRoot = wdir)
+lsDownSearch(satellite = "ls7",
+             username = "username",
+             password = "password",
+             startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+             endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
+             extent = ex.navarre,
+             untar = TRUE,
+             AppRoot = wdir)
 # folder with the Landsat-7 untared images 
 wdir.ls7 <-file.path(wdir,"Landsat7")
 wdir.ls7.untar <- file.path(wdir.ls7, "untar")

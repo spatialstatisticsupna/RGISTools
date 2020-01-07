@@ -79,7 +79,7 @@ lsMosaic(src = src.ls8.untar,
 # path to the folder with mosaicked images
 src.ls8.navarre <- file.path(src.ls8, "Navarre")
 # generate NDVI images of Navarre
-src.ls8.var <- file.path(src.ls8.navarre, "Navarre_Variables")
+src.ls8.var <- file.path(src.ls8, "Navarre_Variables")
 dir.create(src.ls8.var)
 ls8FolderToVar(src.ls8.navarre,
                fun = varNDVI,

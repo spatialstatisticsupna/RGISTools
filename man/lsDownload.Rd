@@ -93,20 +93,20 @@ sres <- ls8Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
 
 # download 1 image
 lsDownload(searchres = sres[1,], 
-           username = "user", 
-           password = "pass", 
+           username = "username", 
+           password = "password", 
            AppRoot = wdir,
            untar = TRUE)
 # download 4 images
 lsDownload(searchres = sres[1:4,], 
-           username = "user", 
-           password = "pass",
+           username = "username", 
+           password = "password",
            AppRoot = wdir, 
            untar = TRUE)
 # download all the images
 lsDownload(searchres = sres, 
-           username = "user", 
-           password = "pass",
+           username = "username", 
+           password = "password",
            AppRoot = wdir,
            untar = TRUE)
 
@@ -121,20 +121,20 @@ sres <- ls7Search(startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
                   AppRoot = wdir)
 # download 1 image
 lsDownload(searchres = sres[1,], 
-           username = "user", 
-           password = "pass", 
+           username = "username", 
+           password = "password", 
            untar = TRUE,
            AppRoot = wdir)
 # download 4 images
 lsDownload(searchres = sres[1:4,], 
-           username = "user", 
-           password = "pass", 
+           username = "username", 
+           password = "password", 
            untar = TRUE, 
            AppRoot = wdir)
 # download all the images
 lsDownload(searchres = sres, 
-           username = "user", 
-           password = "pass", 
+           username = "username", 
+           password = "password", 
            untar = TRUE, 
            AppRoot = wdir)
 

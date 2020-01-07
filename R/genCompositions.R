@@ -23,6 +23,8 @@
 #' number of consucutive images being aggregated. If \code{TRUE}, the function
 #' aggregates the imagery within every \code{n} days. The aggregation requires
 #' at least one image avaiable.
+#' @param verbose logical argument. If \code{TRUE}, the function prints
+#'   the running steps and warnings.
 #' @param ... arguments for nested functions:
 #' \itemize{
 #'   \item \code{AppRoot} the path where the images will be saved in the

@@ -53,22 +53,21 @@ data(ex.navarre)
 wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 print(wdir)
 wdir.mod <- file.path(wdir, "Modis","MOD11A1")
-wdir.mod.hdf <- file.path(wdir.mod, "hdf")
 sres <- modSearch(product = "MOD11A1",
-                      startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
-                      endDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
-                      collection = 6,
-                      extent = ex.navarre,
-                      AppRoot = wdir.mod.hdf)
+                  startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                  endDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                  collection = 6,
+                  extent = ex.navarre)
                       
 # download the images of the list
 wdir.mod <- file.path(wdir, "Modis", "MOD11A1")
 modDownload(searchres = sres, 
-              username = "username", 
-              password = "password",
-              AppRoot = wdir.mod.hdf)
+            username = "username", 
+            password = "password",
+            AppRoot = wdir.mod)
 
 wdir.mod.tif<-file.path(wdir.mod,"tif")
+wdir.mod.hdf <- file.path(wdir.mod, "hdf")
 
 # extract the first image
 files.mod.hdf <- list.files(wdir.mod.hdf, 
