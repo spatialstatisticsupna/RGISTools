@@ -27,7 +27,7 @@ citEntry(entry = "Article",
   pages        = "6068--6078",
   url = "http://dx.doi.org/10.1109/TGRS.2019.2904193",
   textVersion  =
-  paste("Militino, A.F., Ugarte, M.D., Pérez-Goya, U. (2019).",
+  paste("Militino, A.F., Ugarte, M.D., Pérez-Goya, U., M G Genton (2019).",
         "Interpolation of the Mean Anomalies for Cloud-Filling in Land Surface Temperature (LST) and Normalized Difference Vegetation Index (NDVI).",
          "IEEE Transactions on Geoscience and Remote Sensing 2019. (Open-access) doi:http://dx.doi.org/10.1109/TGRS.2019.2904193"),
   header = "To cite the gap filling method implemented in the function genSmoothingIMA:"
