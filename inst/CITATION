@@ -15,7 +15,7 @@ citEntry(entry = "Manual",
 )
 
 citEntry(entry = "Article",
-  title        = "Interpolation of the Mean Anomalies for Cloud-Filling in Land Surface Temperature (LST) and Normalized Difference Vegetation Index (NDVI)",
+  title        = "Interpolation of the Mean Anomalies for Cloud-Filling in Land Surface Temperature and Normalized Difference Vegetation Index",
   author       = personList(as.person("A F Militino"),
                    as.person("M D Ugarte"),
                    as.person("U P{\\'e}rez-Goya"),
@@ -28,8 +28,8 @@ citEntry(entry = "Article",
   url = "http://dx.doi.org/10.1109/TGRS.2019.2904193",
   textVersion  =
   paste("Militino, A.F., Ugarte, M.D., Pérez-Goya, U., M G Genton (2019).",
-        "Interpolation of the Mean Anomalies for Cloud-Filling in Land Surface Temperature (LST) and Normalized Difference Vegetation Index (NDVI).",
-         "IEEE Transactions on Geoscience and Remote Sensing 2019. (Open-access) doi:http://dx.doi.org/10.1109/TGRS.2019.2904193"),
+        "Interpolation of the Mean Anomalies for Cloud-Filling in Land Surface Temperature and Normalized Difference Vegetation Index.",
+         "IEEE Transactions on Geoscience and Remote Sensing 2019. 57(8), pp 6068-6078. (Open-access) doi:http://dx.doi.org/10.1109/TGRS.2019.2904193"),
   header = "To cite the gap filling method implemented in the function genSmoothingIMA:"
 )
 
@@ -47,6 +47,6 @@ citEntry(entry = "Article",
   textVersion  =
   paste("Militino, A.F., Ugarte, M.D., Pérez-Goya, U. (2018).",
         "Improving the Quality of Satellite Imagery Based on Ground-Truth Data from Rain Gauge Stations.",
-         "Remote Sensing 2018; 10(398): 1-16. (Open-access) doi:http://dx.doi.org/10.3390/rs10030398"),
+         "Remote Sensing 2018; 10(398). (Open-access) doi:http://dx.doi.org/10.3390/rs10030398"),
   header = "To cite the smoothing method implemented in the function genSmoothingCovIMA:"
 )
