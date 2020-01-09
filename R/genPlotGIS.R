@@ -66,6 +66,7 @@
 #' @return \code{tmap} class containing the plot.
 #'
 #' @examples
+#' \dontrun{
 #' # Simple plot of NDVI in Navarre
 #' genPlotGIS(ex.ndvi.navarre,
 #'            ex.navarre)
@@ -108,6 +109,7 @@
 #'            tm_facets(as.layers = TRUE)+
 #' genPlotGIS(list(img.mod.rgb),
 #'            ex.navarre)
+#' }
 genPlotGIS<-function(r,region,breaks,labels,zlim,layout,proj,nbreaks=40,nlabels=10,as.grid=TRUE,compass.rm=FALSE,scale.bar.rm=FALSE,...){
   args<-list(...)
   

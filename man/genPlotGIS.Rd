@@ -89,6 +89,7 @@ function automatically reprojects the polygon to match the projection of the
 \code{\link{tmap}} reference manual.
 }
 \examples{
+\dontrun{
 # Simple plot of NDVI in Navarre
 genPlotGIS(ex.ndvi.navarre,
            ex.navarre)
@@ -131,4 +132,5 @@ genPlotGIS(ex.ndvi.navarre,
            tm_facets(as.layers = TRUE)+
 genPlotGIS(list(img.mod.rgb),
            ex.navarre)
+}
 }
