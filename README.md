@@ -1,6 +1,8 @@
-# RGISTools
+# RGISTools 
 Handling multiplatform satellite images.
 
+[![CRAN version](https://www.r-pkg.org/badges/version/RGISTools)](https://cran.r-project.org/web/packages/RGISTools/)
+[![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 ## Table of contents
 
 - [The package](#the-package)
