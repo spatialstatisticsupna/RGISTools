@@ -112,7 +112,7 @@ modFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
         band<-modbands[names(modbands)%in%arg]
         if(length(band)==0)
           next
-        eval(parse( text=paste0(arg,"<-raster('",mod.img[grepl(tolower(band),mod.img)],"')") ))
+        eval(parse( text=paste0(arg,"<-read_stars('",mod.img[grepl(tolower(band),mod.img)],"')") ))
         funString<-paste0(funString,arg,"=",arg,",")
       }
       # arguments asignation
@@ -137,7 +137,7 @@ modFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
           rstack<-addLayer(rstack,result)
         }
       }else{
-        writeRaster(result,out.file.name,overwrite=overwrite)
+        write_stars(result,out.file.name)
       }
     }else{
       message(paste0("File exists!\nFile: ",out.file.name))

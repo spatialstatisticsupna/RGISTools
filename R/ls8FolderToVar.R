@@ -12,7 +12,8 @@
 #' package beginning with “var” (\code{\link{varNDVI}}, \code{\link{varEVI}},
 #' etc.). Custom functions can also be implemented. If \code{fun = varRGB}, 
 #' then the argument \code{getStack} must be equal to \code{FALSE} and the 
-#' red-green-blue (RGB) images must be imported afterwards.
+#' red-green-blue (RGB) images must be imported afterwards. Caution! It is mandatory to 
+#' use level-2 products to get accurate derived variables.
 #' 
 #' @param src path to the folder with the Landsat-8 multispectral image.
 #' @param fun a \code{function} that computes the remote sensing index.
@@ -114,7 +115,7 @@ ls8FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
         band<-ls8bands[names(ls8bands)%in%arg]
         if(length(band)==0)
           next
-        eval(parse( text=paste0(arg,"<-raster('",ls.img[grepl(band,ls.img)],"')") ))
+        eval(parse( text=paste0(arg,"<-read_stars('",ls.img[grepl(band,ls.img)],"')") ))
         funString<-paste0(funString,arg,"=",arg,",")
       }
       # arguments asignation
@@ -139,7 +140,7 @@ ls8FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
           rstack<-addLayer(rstack,result)
         }
       }else{
-        writeRaster(result,out.file.name,overwrite=overwrite)
+        write_stars(result,out.file.name)
       }
     }else{
       message(paste0("File exists!\nFile: ",out.file.name))

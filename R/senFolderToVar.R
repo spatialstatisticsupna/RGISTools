@@ -12,7 +12,8 @@
 #' this package beginning with “var” (\code{\link{varNDVI}}, 
 #' \code{\link{varEVI}}, etc.). Custom functions can also be implemented.
 #' If \code{fun = varRGB}, then the argument \code{getStack} must be equal to
-#' \code{FALSE} and the red-green-blue (RGB) images must be imported afterwards.
+#' \code{FALSE} and the red-green-blue (RGB) images must be imported afterwards. 
+#' Caution! It is mandatory to use level-2 products to get accurate derived variables.
 #' 
 #' @param src the path to the folder with the Sentinel-2 multispectral images.
 #' @param AppRoot directory where the outcoming time series is saved.
@@ -138,7 +139,7 @@ senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
             noargs=TRUE
             break
           }
-          eval(parse( text=paste0(arg,"<-raster('",l.img,"')") ))
+          eval(parse( text=paste0(arg,"<-read_stars('",l.img,"')") ))
           funString<-paste0(funString,arg,"=",arg,",")
         }
         if(noargs){
@@ -168,7 +169,7 @@ senFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=
             rstack<-addLayer(rstack,result)
           }
         }else{
-          writeRaster(result,out.file.name,overwrite=overwrite)
+          write_stars(result,out.file.name)
         }
       }else{
         message(paste0("File exists!\nFile: ",out.file.name))

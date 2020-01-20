@@ -11,7 +11,7 @@ Description: Downloading, customizing, and processing time series of satellite i
 URL: https://github.com/spatialstatisticsupna/RGISTools#RGISTools
 BugReports: https://github.com/spatialstatisticsupna/RGISTools/issues
 Depends: R (>= 3.5.0), raster, sf, tmap
-Imports: Rdpack, XML, xml2, utils, fields, urltools, rjson, rvest, tools, methods, curl, httr, mapview, sp
+Imports: Rdpack, XML, xml2, utils, fields, urltools, rjson, rvest, tools, methods, curl, httr, mapview, sp, stars
 RdMacros: Rdpack
 License: GPL-3
 Encoding: UTF-8
