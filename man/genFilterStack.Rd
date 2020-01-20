@@ -2,36 +2,43 @@
 % Please edit documentation in R/genFilterStack.R
 \name{genFilterStack}
 \alias{genFilterStack}
-\title{Subsets a raster stack given a range of dates}
+\title{Subset a RasterStack given a range of dates}
 \usage{
 genFilterStack(r, ...)
 }
 \arguments{
-\item{r}{the raster stack to be filtered}
+\item{r}{the \code{RasterStack} to be filtered.}
 
-\item{...}{accepts \code{startDate} and \code{endDate} as the starting date of
-the range of interest and the ending date of the range of interest}
+\item{...}{arguments for nested functions:
+\itemize{
+  \item \code{startDate} a \code{Date} class object with the starting date of the study period.
+  \item \code{endDate} a \code{Date} class object with the ending date of the study period.
+  \item \code{AppRoot} the path where the RData will be saved.
+}}
+}
+\value{
+a \code{RasterStack} with images within the specified dates.
 }
 \description{
-\code{genFilterStack} filters the raster layers within a range of dates
+\code{genFilterStack} filters the \code{RasterLayer}s within a range of dates.
 }
 \details{
 This is a helper function used by other functions in this package.
 }
 \examples{
-#generate random images
+# generate random images
 img <- matrix(1:16, ncol = 4, byrow = TRUE)
-r<-raster(img)
-r<-stack(r,r,r,r,r,r)
-names(r)<-paste0("RandomImage_201803",1:6)
-#print the names and dates of the random images
+r <- raster(img)
+r <- stack(r, r, r, r, r, r)
+names(r) <- paste0("RandomImage_201803", 1:6)
+# print the names and dates of the random images
 print(names(r))
 genGetDates(names(r))
-#example of filtering the raster stack
-r2<-genFilterStack(r,
-                   startDate=as.Date("2018-02-02","\%Y-\%m-\%d"),
-                   endDate=as.Date("2018-02-04","\%Y-\%m-\%d"))
-#print the names and the number of layers of the filtered stack
+# example of filtering the raster stack
+r2 <- genFilterStack(r = r,
+                     startDate = as.Date("2018-02-02", "\%Y-\%m-\%d"),
+                     endDate = as.Date("2018-02-04", "\%Y-\%m-\%d"))
+# print the names and the number of layers of the filtered stack
 genGetDates(names(r2))
 nlayers(r2)
 }

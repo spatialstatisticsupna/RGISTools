@@ -2,69 +2,100 @@
 % Please edit documentation in R/senFolderToVar.R
 \name{senFolderToVar}
 \alias{senFolderToVar}
-\title{Calculates an index from Sentinel-2 multispectral bands}
+\title{Compute a remote sensing index from a time series of Sentinel-2 images}
 \usage{
-senFolderToVar(src, fun, getStack = F, overwrite = F, ...)
+senFolderToVar(src, AppRoot, fun, getStack = FALSE, overwrite = FALSE,
+  verbose = FALSE, resbands = c("10m", "20m", "60m"), ...)
 }
 \arguments{
-\item{src}{path to the folder with the Sentinel multispectral images}
+\item{src}{the path to the folder with the Sentinel-2 multispectral images.}
 
-\item{fun}{function with the calculation of the index.
-All functions in the package starting with three characters
-'var' are acceptable functions. Custom functions can be also implemented.}
+\item{AppRoot}{directory where the outcoming time series is saved.}
 
-\item{getStack}{if \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD)}
+\item{fun}{a \code{function} that computes the remote sensing index.}
 
-\item{overwrite}{flag to overwrite the existing images with the same name}
+\item{getStack}{logical argument. If \code{TRUE}, returns the time series of
+images as a \code{RasterStack}, otherwise the images are saved in the Hard
+Drive Device (HDD).}
 
-\item{...}{argument to allow function nestering
-\itemize{
-  \item \code{AppRoot} the directory to save the resulting time series
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
+images with the same name.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
+running steps and warnings.}
+
+\item{resbands}{the resolution of the image being used to compute index,
+when the imagery comes from the Senintel-2 "\code{S2MSI2A}" product. By 
+default, all resolutions (10m, 20m, and 60m) are used.}
+
+\item{...}{arguments for nested functions.
+ \itemize{
+  \item \code{dates} a vector with the capturing dates being considered
+  for mosaicking. If not supplied, all dates are mosaicked.
 }}
 }
+\value{
+this function does not return anything, unless \code{getStack = TRUE}
+which then returns a \code{RasterStack} with the time series of with the
+index.
+}
 \description{
-\code{senFolderToVar} calculates an index using the bands from Sentinel-2 multispectral
-images. The images are specified by a path to the storing folder
-(resulting from the senMosaic function). The function returns a
-\code{rasterStack} with the time-series of the index.
+\code{senFolderToVar} computes a remote sensing index from the spectral bands
+of a time series of Sentinel-2 images. The images are specified by the path to
+the folder that stores the imagery (resulting from the \code{\link{senMosaic}} 
+function). The function returns a \code{RasterStack}  with a time series of 
+images of the remote sensing index.
 }
 \details{
-The function requires the definition of src and fun arguments. The argument \code{src}
- contains the path to the folder with the multispectral
- images. It can be easily defined as the path resulting from \code{senMosaic}.
- The fun argument is a function with the calculation of the index based
- on spectral bands. There are some pre-programmed indexes in \code{RGISTools}.
- Functions with the pre-programmed indices start with var (\code{varNDVI}, \code{varEVI}).
- The user can define its own functions.
+The function requires the definition of the \code{src} and \code{fun} 
+arguments. The \code{src} is usually the path resulting from 
+\code{\link{senMosaic}}. The \code{fun} argument can be any function from
+this package beginning with “var” (\code{\link{varNDVI}}, 
+\code{\link{varEVI}}, etc.). Custom functions can also be implemented.
+If \code{fun = varRGB}, then the argument \code{getStack} must be equal to
+\code{FALSE} and the red-green-blue (RGB) images must be imported afterwards.
 }
 \examples{
 \dontrun{
-#load a spatial polygon object of navarre for the example
-data(navarre)
-#asign the folder where the example will be run
-src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Sentinel"
-#download sentinel images
-senDownload(startDate=as.Date("2018210","\%Y\%j"),
-            endDate=as.Date("2018218","\%Y\%j"),
-            platform="Sentinel-2",
-            intersects=navarre,
-            product="S2MSI1C",
-            pathrow=c("R094"),
-            username="rgistools",
-            password="EspacialUPNA88",
-            AppRoot=src)
-#asign the folder with the sentinel images unzipped
-src.unzip<-file.path(src,"unzip")
-#mosaic the sentinel images
-senMosaic(src.unzip,
-          AppRoot=src,
-          gutils=T,
-          out.name="Navarre")
-#asign src as the path to mosaiced folder
-src<-file.path(src,"Navarre")
-#generate EVI images of Navarre
-senFolderToVar(src,
-               fun=varEVI,
-               AppRoot=file.path(dirname(src)))
+# load a spatial polygon object of Navarre
+data(ex.navarre)
+# main output directory
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+print(wdir)
+# download Sentinel-2 images
+senDownSearch(startDate = as.Date("2018210","\%Y\%j"),
+              endDate = as.Date("2018218","\%Y\%j"),
+              platform = "Sentinel-2",
+              extent = ex.navarre,
+              product = "S2MSI1C",
+              pathrow = c("R094"),
+              username = "username",
+              password = "password",
+              AppRoot = wdir)
+# folder with the unzipped images from Sentinel-2
+wdir.sen <- file.path(wdir,"Sentinel-2")
+wdir.sen.unzip <- file.path(wdir.sen, "unzip")
+# mosaic the Sentinel-2 images
+senMosaic(wdir.sen.unzip,
+          AppRoot = wdir.sen,
+          gutils = TRUE,
+          out.name = "Navarre")
+# path to the folder with the mosaicked images
+wdir.sen.navarre <- file.path(wdir.sen, "Navarre")
+wdir.sen.var <- file.path(wdir.sen.navarre, "Navarre_Variables")
+dir.create(wdir.sen.var)
+# generate EVI images of Navarre
+senFolderToVar(wdir.sen.navarre,
+               fun = varEVI,
+               resbands = c("60m"),
+               AppRoot = wdir.sen.var)
+               
+files.sen.evi <- list.files(file.path(wdir.sen.var,"EVI"),
+                            pattern = "\\\\.tif$",
+                            full.names = TRUE,
+                            recursive = TRUE)
+
+img.sen.evi <- lapply(files.sen.evi, raster)
+spplot(img.sen.evi[[1]])
 }
 }

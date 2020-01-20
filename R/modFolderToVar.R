@@ -1,96 +1,152 @@
-#' Calculates an index from MODIS multispectral bands
+#' Compute a remote sensing index from a time series of MODIS multispectral 
+#' images
 #'
-#' \code{modFolderToVar} calculates an index using the bands from MODIS multispectral images.
-#' The images are specified by a path to the storing folder (resulting from the \code{modMosaic} function).
-#' The function returns a \code{rasterStack} with the time-series of the index.
+#' \code{modFolderToVar} computes a remote sensing index from the spectral bands
+#' of a time series of MODIS images. The images are specified by the path to
+#' the folder that stores the imagery (resulting from the \code{\link{modMosaic}} 
+#' function). The function returns a \code{RasterStack} with a time series of 
+#' images of the remote sensing index.
 #'
-#' The function requires the definition of src and fun arguments. The argument \code{src}
-#' contains the path to the folder with the multispectral images. It can be easily
-#' defined as the path resulting from \code{modMosaic}. The fun argument is a function with
-#' the calculation of the index based on spectral bands. There are some pre-programmed
-#' indices in \code{RGISTools}. Functions with the pre-programmed indexes start with var
-#' (\code{varNDVI}, \code{varEVI}). The user can define its own functions.
+#' The function requires the definition of the \code{src} and \code{fun} 
+#' arguments. The \code{src} is usually the path resulting from 
+#' \code{\link{modMosaic}}. The \code{fun} argument can be any function from
+#' this package beginning with “var” (\code{\link{varNDVI}}, \code{\link{varEVI}},
+#' etc.). Custom functions can also be implemented. If \code{fun = varRGB}, then
+#' the argument \code{getStack} must be equal to \code{FALSE} and the 
+#' red-gree-blue (RGB) images must be imported afterwards.
 #'
-#' @param src path to the folder with the MODIS multispectral images
-#' @param fun is a function with the calculation of the index.
-#' All functions in the package starting with three characters
-#' 'var' are acceptable functions. Custom functions can be also implemented
-#' @param getStack if \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD)
-#' @param overwrite flag to overwrite the existing images with the same name
-#' @param ... argument to allow function nestering
-#' \itemize{
-#'   \item \code{AppRoot} the directory to save the resulting time series
+#' @param src path to the folder with the MODIS multispectral images.
+#' @param AppRoot the directory of the outcoming time series.
+#' @param fun a \code{function} that computes the remote sensing index.
+#' @param getStack logical argument. If \code{TRUE}, returns the time series of
+#' images as a \code{RasterStack}, otherwise the images are saved in the Hard
+#' Drive Device (HDD).
+#' @param overwrite logical argument. If \code{TRUE}, it overwrites the existing
+#' images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param ... arguments for nested functions.
+#'  \itemize{
+#'   \item \code{dates} a vector with the capturing dates being considered
+#'   for mosaicking. If not supplied, all dates are mosaicked.
 #' }
-#'
+#' @return this function does not return anything, unless \code{getStack = TRUE}
+#' which then returns a \code{RasterStack} with the time series of with the
+#' index. 
 #' @examples
 #' \dontrun{
-#' #load a spatial polygon object of navarre for the example
-#' data(navarre)
-#' #asign the folder where the example will be run
-#' src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Modis"
-#' #download modis images
-#' modDownload(product="MOD09GA",
-#'             startDate=as.Date("01-01-2018","%d-%m-%Y"),
-#'             endDate=as.Date("03-01-2018","%d-%m-%Y"),
-#'             username="rgistools",
-#'             password="EspacialUPNA88",
-#'             AppRoot=src,
-#'             hdfdir="hdf",
-#'             tiffdir="tif",
-#'             collection=6,
-#'             extent=navarre)
-#' #asign the folder with the sentinel images untared
-#' src<-file.path(src,"MOD09GA")
-#' tif.src<-file.path(src,"tif")
-#' #mosaic the modis images
-#' modMosaic(tif.src,
-#'           AppRoot=src,
-#'           out.name="Navarre")
-#' #asign src as the path to mosaiced folder
-#' src<-file.path(src,"Navarre")
-#' #generate NDVI images of Navarre
-#' modFolderToVar(src,
-#'                fun=varEVI,
-#'                AppRoot=file.path(dirname(src)),
-#'                overwrite = T)
+#' # load a spatial polygon object of Navarre
+#' data(ex.navarre)
+#' # main output directory
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+#' print(wdir)
+#' # download MOD09 images
+#' modDownSearch(product = "MOD09GA",
+#'               startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'               endDate = as.Date("03-01-2018", "%d-%m-%Y"),
+#'               username = "username",
+#'               password = "password",
+#'               AppRoot = wdir, # output folder for tif images
+#'               extract.tif = TRUE, 
+#'               collection = 6,
+#'               extent = ex.navarre)
+#' # assign wdir.mod as the output folder from modMosaic
+#' wdir.mod <- file.path(wdir, "Modis", "MOD09GA") # output directory
+#' wdir.mod.tif <- file.path(wdir.mod, "tif") # input directory
+#' # mosaic the MODIS images
+#' modMosaic(wdir.mod.tif,
+#'           AppRoot = wdir.mod,
+#'           out.name = "Navarre")
+#' # path to the folder with the mosaicked images
+#' wdir.mod.navarre <- file.path(wdir.mod, "Navarre")
+#' # generate NDVI images of Navarre
+#' wdir.mod.var <- file.path(wdir.mod, "Variables")
+#' dir.create(wdir.mod.var)
+#' modFolderToVar(src = wdir.mod.navarre,
+#'                fun = varEVI,
+#'                scfun = getRGISToolsOpt("MOD09SCL"),
+#'                AppRoot = wdir.mod.var,
+#'                overwrite = TRUE)
+#' # import mosaicked images (.tif) to the environment in `R'
+#' files.mod.evi <- list.files(file.path(wdir.mod.var,"EVI"),
+#'                             pattern = "\\.tif$",
+#'                             full.names = TRUE,
+#'                             recursive = TRUE)
+#' 
+#' img.mod.evi <- lapply(files.mod.evi,raster)
+#' spplot(img.mod.evi[[1]],at=seq(-1,2.5))
 #' }
-modFolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
-  AppRoot=defineAppRoot(...)
+modFolderToVar<-function(src,AppRoot,fun,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
+  function.arg<-list(...)
+  src<-pathWinLx(src)
+  AppRoot<-pathWinLx(AppRoot)
+  vartype<-gsub("var","",as.character(match.call()[c("fun")]))
   if(!getStack){
-    vartype<-gsub("var","",as.character(match.call()[c("fun")]))
     AppRoot<-file.path(AppRoot,vartype)
-    dir.create(AppRoot,showWarnings = F,recursive=T)
-    print(vartype)
+    dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
+    message(vartype)
   }
-  # modfd<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Modis/Navarra"
-  mod.list<-list.files(src,full.names = T)
-  result<-raster()
-  rstack<-stack()
+  mod.list<-list.files(src,full.names = TRUE)
+  result<-NULL
+  rstack<-NULL
+  
+  dates<-genGetDates(mod.list)
+  if("dates"%in%names(function.arg)){
+    mod.list<-mod.list[dates%in%function.arg$dates]
+  }
+  if(length(mod.list)==0)stop(paste0("No images found in ",src," path."))
   for(imgfd in mod.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     modbands<-getRGISToolsOpt("MOD09BANDS")
-    mod.img<-list.files(imgfd,full.names = T,pattern = "\\.tif$")
-    funString<-"result<-fun("
-    for(arg in formalArgs(fun)){
-      band<-modbands[names(modbands)%in%arg]
-      if(length(band)==0)
-        next
-      eval(parse( text=paste0(arg,"<-raster('",mod.img[grepl(tolower(band),mod.img)],"')") ))
-      funString<-paste0(funString,arg,"=",arg,",")
+    mod.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
+    if(length(mod.img)==0){
+      message(paste0("Images not found in ",imgfd))
+      next
     }
-    funString<-paste0(substr(funString,1,nchar(funString)-1),")")
-    eval(parse(text=funString))
-    if(getStack){
-      rstack<-addLayer(rstack,result)
+    out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
+    if(overwrite|(!file.exists(out.file.name))){
+      funString<-"result<-fun("
+      #band load and asignation
+      funargs<-formalArgs(fun)
+      for(arg in funargs){
+        band<-modbands[names(modbands)%in%arg]
+        if(length(band)==0)
+          next
+        eval(parse( text=paste0(arg,"<-read_stars('",mod.img[grepl(tolower(band),mod.img)],"')") ))
+        funString<-paste0(funString,arg,"=",arg,",")
+      }
+      # arguments asignation
+      arguments<-as.list(match.call())
+      arguments<-arguments[names(arguments)%in%funargs&
+                           (!names(arguments)%in%names(modbands))]
+      for(arg in names(arguments)){
+        funString<-paste0(funString,arg,"=function.arg$",arg,",")
+      }
+      # complete the function
+      funString<-paste0(substr(funString,1,nchar(funString)-1),")")
+      if(verbose){message(paste0("Function for evaluation: \n",funString))}
+      eval(parse(text=funString))
+      if(getStack){
+        if(is.null(rstack)){
+          names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
+          rstack<-result
+        }else{
+          result<-extend(result,rstack)
+          names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
+          rstack<-extend(rstack,result)
+          rstack<-addLayer(rstack,result)
+        }
+      }else{
+        write_stars(result,out.file.name)
+      }
     }else{
-      #print(paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"))
-      writeRaster(result,paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"),overwrite=overwrite)
+      message(paste0("File exists!\nFile: ",out.file.name))
     }
   }
   if(getStack){
-    return(result)
+    return(rstack)
   }else{
-    message(paste0(vartype," images saved in HHD"))
+    message(paste0(vartype," images saved in HDD."))
     message(paste0("File dir: ",AppRoot))
   }
 }

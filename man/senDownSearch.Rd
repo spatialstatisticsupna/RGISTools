@@ -2,66 +2,88 @@
 % Please edit documentation in R/senDownSearch.R
 \name{senDownSearch}
 \alias{senDownSearch}
-\title{Downloads Sentinel images from search function response}
+\title{Search and download Sentinel images}
 \usage{
-senDownSearch(searchres, username, password,
-  error.log = "download_error.log", nattempts = NULL, unzip = F,
-  overwrite = F, ...)
+senDownSearch(username, password, AppRoot, verbose = FALSE, ...)
 }
 \arguments{
-\item{searchres}{response from \code{senSearch}}
+\item{username}{ESA’s `SciHub' username.}
 
-\item{username}{login credentials to access the ESA’s SciHub web service}
+\item{password}{ESA’s `SciHub' password.}
 
-\item{password}{login credentials to access the ESA’s SciHub web service}
+\item{AppRoot}{the directory where the images are saved.}
 
-\item{error.log}{error log file name}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
+running steps and warnings.}
 
-\item{nattempts}{the number of attempts that the function has to carry out to download an image in case the file becomes corrupted.}
-
-\item{unzip}{flag for unzipping the images}
-
-\item{overwrite}{flag for overwriting the resulting the images}
-
-\item{...}{argument to allow function nestering
+\item{...}{arguments for nested functions:
 \itemize{
-  \item \code{AppRoot} the directory to save the resulting time series
+  \item \code{product} the type of Sentinel product. Ex. "S2MSI1C",
+  "S2MSI2A", "S2MSI2Ap", ... 
+  \item  \code{startDate} a \code{Date} class object with the starting date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
+  \item  \code{endDate} a \code{Date} class object with the ending date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
+  \item \code{dates} a vector with the capturing dates being considered
+  for searching. This argument is mandatory if 
+  \code{startDate} and \code{endDate} are not defined.
+  \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
+defining the area of interest.
+  \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
+  object representing the region of interest with longitude/latitude
+  coordinates. This argument is mandatroy when \code{region} is not defined.
+  \item \code{platform} the name of the Sentinel mission ("Sentinel-1", 
+  "Sentinel-2", ...).
+  \item \code{nattempts} the number of attempts to download an image in case
+  it becomes corrupted.
+  \item \code{unzip} logical argument. If \code{TRUE}, unzips the images.
+  \item \code{verbose} logical argument. If \code{TRUE}, the function prints
+  the running steps and warnings.
 }}
 }
+\value{
+this function does not return anything. It saves the imagery as
+`zip’ (and JP2 files) in a folder called `raw’ (`unzip’) in the
+ \code{AppRoot} directory.
+}
 \description{
-\code{senDownSearch} downloads the list of urls generated y the function senSearch by using the ESA’s SciHub API
+\code{senDownSearch} searches and downloads Sentinel images concerning a
+particular location and time interval from `SciHub's' repository.
 }
 \details{
-\code{senDownSearch} downloads the images from Sentinel products using the search results provided by \code{\link{senSearch}}.
- The raw images are downloaded into the Aproot directory. In case the download is interrupted,
- the image file could be corrupted. The function detects the corrupted files to restart the process.
- To prevent the computer from crashing, the nattempts  flag limits the number of attempts to download the image.
- The default number of attempts is set to 3.
-senDownload requires the credentials to access the ESA’s SciHub data service. Please,
-sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}
+\code{senDownSearch} is a wrapper function of \code{\link{senSearch}} and 
+\code{\link{senDownload}} to search and download images in a single step.
+The function requires ESA’s `SciHub' credentials, which can be obtained
+\href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 }
 \examples{
 \dontrun{
-# Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
-data(navarre)
-searchres<-senSearch(startDate=as.Date("2018-07-29","\%Y-\%m-\%d"),
-                     endDate=as.Date("2018-08-06","\%Y-\%m-\%d"),
-                     platform="Sentinel-2",
-                     extent=navarre,
-                     product="S2MSI1C",
-                     username="rgistools",
-                     password="EspacialUPNA88")
-
-#filtering the path R094 where Navarre is located
-length(searchres)
-searchres<-searchres[grepl("R094",names(searchres))]
-length(searchres)
-
-#sentinel download function
-senDownSearch(searchres=searchres,
-              username="rgistools",
-              password="EspacialUPNA88",
-              AppRoot="D:/TestEnvironment",
-              unzip=T)
+# load a spatial polygon object of Navarre
+data(ex.navarre)
+# Download S2MSI1C products sensed by Sentinel-2 
+# between the julian dates 210 and 218, 2018
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+print(wdir)
+senDownSearch(startDate = as.Date("2018210", "\%Y\%j"),
+            endDate = as.Date("2018218", "\%Y\%j"),
+            platform = "Sentinel-2",
+            extent = ex.navarre,
+            product = "S2MSI1C",
+            pathrow = c("R094"),
+            username = "username",
+            password = "password",
+            AppRoot = wdir)
+            
+wdir.sen <- file.path(wdir, "Sentinel-2")
+wdir.sen.unzip <- file.path(wdir.sen, "unzip")
+                  
+files.sen.unzip <- list.files(wdir.sen.unzip,
+                              pattern = "\\\\TCI.jp2$",
+                              full.names = TRUE,
+                              recursive = TRUE)
+img.sen.rgb <- stack(files.sen.unzip[1])
+plotRGB(img.sen.rgb)
 }
 }

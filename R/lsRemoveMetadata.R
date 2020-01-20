@@ -1,18 +1,23 @@
-#' removes from R environment LS7 and LS8 metadata files
+#' Remove the Landsat-7 or Lansat-8 metadata from the environment
 #'
-#' \code{lsRemoveMetadata} frees the memory used by metadata data frame loaded in R enviroment.
+#' \code{lsRemoveMetadata} removes Landsat-7 and/or Landsat-8 (\code{.LS7MD}/
+#' \code{.LS8MD}) metadata from the environment in `R'.
 #'
-#' If the metadata file has been loaded by any landsat search function or using load
-#' metadata funcion, \code{lsRemoveMetadata} removes anoy of both dataframes \code{.LS8MD} or \code{.LS7MD}.
+#' The metadata file is loaded in `R' with \code{\link{ls7Search}}, 
+#' \code{\link{ls8Search}} and \code{\link{lsDownSearch}}. \code{lsRemoveMetadata}
+#' removes the metadata and frees up valuable RAM.
 #'
 #' @examples
 #' \dontrun{
-#' #creates a MetaData folder and downloads the csv on working directory
-#' ls8LoadMetadata()
+#' # creates a MetaData folder and downloads the csv file
+#' # in the current working directory
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+#' print(wdir)
+#' ls8LoadMetadata(AppRoot = wdir)
 #' lsRemoveMetadata()
 #' }
 lsRemoveMetadata<-function(){
-  md <- ls(pos = ".GlobalEnv",all.names = T)
-  rm(list = md[grepl(getRGISToolsOpt("LS8META.var"), md)|grepl(getRGISToolsOpt("LS7META.var"), md)], pos = ".GlobalEnv")
+  setRGISToolsOpt("LS7METADATA",NULL)
+  setRGISToolsOpt("LS8METADATA",NULL)
   gc()
 }

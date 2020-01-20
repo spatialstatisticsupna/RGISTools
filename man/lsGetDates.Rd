@@ -2,36 +2,45 @@
 % Please edit documentation in R/genMissionGetDates.R
 \name{lsGetDates}
 \alias{lsGetDates}
-\title{Returns the capturing date of a Landsat 7 or 8 image}
+\title{Return the capturing dates of Landsat-7 or Landsat-8 images}
 \usage{
 lsGetDates(str, ...)
 }
 \arguments{
-\item{str}{a string or a list of strings defining the file path(s) or file name(s)}
+\item{str}{the full path(s) or official name(s) of the Landsat-7 or
+Landsat-8 images from which the capturing date is retrieved.}
 
-\item{...}{accepts \code{date.format} to modify the format of the date being returned}
+\item{...}{arguments for nested functions:
+\itemize{
+  \item \code{format} the format of the date being returned.
+}}
+}
+\value{
+a \code{Date} class object with the date of the Landsat image or \code{character} class,
+if the \code{format} argument is used.
 }
 \description{
-\code{lsGetDates} extracts the capturing date of one or several Landsat images,
-given their file paths or names. The function returns a date class object
+\code{lsGetDates} reads the official name of a Landsat-7 or Landsat-8 image
+and returns the capturing date, as a \code{Date} class object.
 }
 \details{
-The function works with names or file paths having either of the two file extensions,
- \code{.tar.gz} or \code{.tif} files. The function accepts more than on file path or file names.
- If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
- If another format is required, it can be modified through the argument date.format.
+The function works with file names (or their paths) regardless of their
+extension. The function accepts more than on file path, which can be passed
+as a vector of \code{character}s. Dates are returned as `\code{YYYY-mm-dd}' by
+default. If another format is required, it can be modified through the 
+argument \code{format}.
 }
 \examples{
-#example of getting the date from the name of a Landsat-8 image
-str<-"LC82000312017010LGN01_B1.TIF"
-dt<-lsGetDates(str)
-print(dt)
-print(format(df,"\%Y\%j"))
+# getting the capturing date from the name of a Landsat-8 image
+file.ls8 <- "LC82000312017010LGN01.tar.gz"
+date.ls8 <- lsGetDates(file.ls8)
+print(date.ls8)
+print(format(date.ls8, "\%Y\%j"))
 
-#example of getting the date from the name of a Landsat-7 and 8 image
-str<-c("LE72330822017009ASN01","LC82000312017010LGN01_B1.TIF")
-dt<-lsGetDates(str)
-print(dt)
-print(format(df,"\%Y\%j"))
+# getting the capturing date from the name of a Landsat-7 and a Landsat-8
+# image
+file.ls7 <- c("LE72330822017009ASN01")
+date.ls7 <- lsGetDates(file.ls7)
+print(date.ls7)
 
 }

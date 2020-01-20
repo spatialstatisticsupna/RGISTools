@@ -2,70 +2,91 @@
 % Please edit documentation in R/genSaveTSRData.R
 \name{genSaveTSRData}
 \alias{genSaveTSRData}
-\title{Imports time series of images and saves as RData}
+\title{Saves a time series of images as an RData}
 \usage{
-genSaveTSRData(src, ts.name = "TS.Name", startDate = NULL,
-  endDate = NULL, recursive = F, ...)
+genSaveTSRData(src, AppRoot = NULL, ts.name = "TS.Name",
+  startDate = NULL, endDate = NULL, dextent = FALSE,
+  recursive = FALSE)
 }
 \arguments{
-\item{src}{path to the folder where the time series of images is located}
+\item{src}{path to the folder where the time series of images is located.}
 
-\item{ts.name}{the name of the variable containing the time series in R}
+\item{AppRoot}{the path where the RData is saved.}
 
-\item{startDate}{the starting date of the time series}
+\item{ts.name}{the name of the \code{RasterStack} in the RData.}
 
-\item{endDate}{the ending date of the time series}
+\item{startDate}{a \code{Date} class object with the starting date of the
+study period.}
 
-\item{recursive}{a flag to read folders recursively}
+\item{endDate}{a \code{Date} class object with the ending date of the study
+period.}
 
-\item{...}{accepts \code{AppRoot} the path where the RData will
-be saved or/and other argument for function nestering}
+\item{dextent}{a logical argument. If \code{TRUE}, the function expands the
+extent of the \code{RasterStack} to embrace the extents of all GTiff images.}
+
+\item{recursive}{logical argument. If \code{TRUE}, reads folders recursively,
+searching for GTiff images.}
+}
+\value{
+a \code{RasterStack} when the \code{AppRoot} argument is not defined.
+The function does not return anything otherwise.
 }
 \description{
-\code{genSaveTSRData} imports time series of (tif) satellite images into R from a folder and creates an RData.
+\code{genSaveTSRData} imports a time series of images from a folder (GTiff
+ format), builds a \code{RasterStack} and saves it in an RData.
 }
 \details{
-The function reads all the images inside the folder specified in \code{src}. The images must be .tif files.
- The \code{src} can take the path created by other functions of this package, such as \code{senMosaic},
- \code{modMosaic}, \code{senFolderToVar}, etc. The images are imported into R to build a \code{RasterStack} that
- is loaded into the global environment. The name of the raster stack will be the one specified
- in ts.name. The RasterStack is saved into an RData file in the Approot directory.
+The function reads all the images inside the folder specified in \code{src}.
+Images files must be GTiffs. The \code{src} can take the path created by
+other functions of this package, such as \code{\link{senMosaic}},
+\code{\link{modMosaic}}, \code{\link{senFolderToVar}}, etc. The images are
+imported into `R' to build a \code{RasterStack}. The
+name of the \code{RasterStack} is specified in \code{ts.name}. The
+\code{RasterStack} is saved in an RData file in the \code{AppRoot} directory.
 }
 \examples{
 \dontrun{
+# load a spatial polygon object of Navarre
+data(ex.navarre)
 # set the download folder
-s.start<-Sys.time()
-src<-"D:/TestEnvironment"
-#download the images
-modDownload(product="MOD09GA",
-            startDate=as.Date("30-07-2018","\%d-\%m-\%Y"),
-            endDate=as.Date("06-08-2018","\%d-\%m-\%Y"),
-            username="rgistools",
-            password="EspacialUPNA88",
-            AppRoot=src,
-            hdfdir="hdf",
-            tiffdir="tif",
-            collection=6,
-            extent=navarre)
-#set tif folder where hdf will be imported
-src<-file.path(src,"MOD09GA")
-#set the tif folder path
-tif.src<-file.path(src,"tif")
-#mosaic and cut navarre region
-modMosaic(tif.src,
-          AppRoot=src,
-          out.name="Navarre",
-          extent=navarre)
-#change src to navarre folder
-src<-file.path(src,"Navarre")
-#calculate NDVI from navarre folder
-modFolderToVar(src,
-               fun=varNDVI,
-               AppRoot=dirname(src))
-#change src TS_sample
-src<-file.path(dirname(src),"NDVI")
-#create the Rdata
-genSaveTSRData(src,ts.name="ModisNDVI",AppRoot=dirname(src))
-s.end<-Sys.time()
+s.start <- Sys.time()
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+print(wdir)
+# download the images
+modDownSearch(product = "MOD09GA",
+            startDate = as.Date("30-07-2018", "\%d-\%m-\%Y"),
+            endDate = as.Date("06-08-2018", "\%d-\%m-\%Y"),
+            username = "username",
+            password = "password",
+            AppRoot = wdir,
+            extract.tif = TRUE,
+            collection = 6,
+            extent = ex.navarre)
+# set folder path where MOD09GA images will be saved
+wdir.mod <- file.path(wdir,"Modis","MOD09GA")
+# set the tif folder path
+wdir.mod.tif <- file.path(wdir.mod,"tif")
+# mosaic and cut navarre region
+modMosaic(wdir.mod.tif,
+          AppRoot = wdir.mod,
+          out.name = "Navarre",
+          extent = ex.navarre)
+# change src to navarre folder
+wdir.mod.navarre <- file.path(wdir.mod,"Navarre")
+# calculate NDVI from navarre folder
+modFolderToVar(wdir.mod.navarre,
+               fun = varNDVI,
+               AppRoot = dirname(wdir.mod.navarre),
+               overwrite = TRUE)
+# change src TS_sample
+wdir.mod.ndvi <- file.path(dirname(wdir.mod.navarre),"NDVI")
+# create the Rdata
+tiles.mod.ndvi<-genSaveTSRData(wdir.mod.ndvi, ts.name = "ModisNDVI")
+# remove values out of 0-1 range
+tiles.mod.ndvi.lim <- clamp(tiles.mod.ndvi,lower=0,upper=1)
+# plot the ndvi images
+spplot(tiles.mod.ndvi.lim)
+s.end <- Sys.time()
+s.end - s.start
 }
 }

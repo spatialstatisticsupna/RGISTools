@@ -1,28 +1,46 @@
-#' Uses covariates for smoothing outliers in a time series of satellite images
+#' Fill data gaps and smooth outliers in a time series of satellite images using
+#' covariates
 #'
-#' \code{genSmoothingIMA} is the implementation of a spatio-temporal smoothing
-#' method that uses covariates. The methodology is explained in \url{http://dx.doi.org/10.3390/rs10030398}.
+#' \code{genSmoothingCovIMA} runs the image mean anomaly (IMA) algorithm
+#' with covariates \insertCite{militino2018improving}{RGISTools}.
 #'
-#' The procedure uses spatio temporal data to exprese each image in the time series as a mean
-#' image plus a residual called anomaly.The procedure smoothed the anomaly using covariates to
-#' smooth the outliers in the anomaly. See more information in \url{http://dx.doi.org/10.3390/rs10030398}.
+#' This filling/smoothing method was developed by 
+#' \insertCite{militino2018improving;textual}{RGISTools}. This technique 
+#' decomposes a time series of images into a new series of mean and anomaly 
+#' images. The procedure applies the filling/smoothing algorithm with covariates
+#' over the anomaly images. The procedure requires a proper definition of a
+#' temporal neighbourhood for the target image and aggregation factor.
 #'
-#' This function provides a set of arguments to configure the run of the precedure, such as the images to fill (\code{Img2Process}),
-#' the number of periods or years in the definition of the spatio temporal neighbourhoood, or the size of the
-#' aggregation. All these particularities are explained in the publication.
+#' @references \insertRef{militino2018improving}{RGISTools}
 #'
-#' @param rStack a \code{RasterStack} with time series of satellite images
-#' @param cStack a \code{RasterStack} with time series of covariates
-#' @param Img2Process a vector defining the images to smooth
-#' @param nPeriods number of periods used in the temporal window
-#' @param nYears number of years used in the temporal window
-#' @param aFilter two element vector defining the quantiles to filter the anomaly. Ex. c(0.05,0.95)
-#' @param fun a function used to calculate the mean image. Both the \code{mean} or \code{median} functions are acceptable.
-#' @param snow.mode a flag to use \code{snow} package for parallelizing the reconstruction procedure
-#' @param fact an aggregation factor to be used to reduce the anomalies before smoothing
-#' @param out.name the name of the images if the result is written in the HDD
-#' @param ... accepts \code{AppRoot} the path where the smoothed data will
-#' be saved or/and other argument for function nestering
+#' @param rStack a \code{RasterStack} class argument containing a time series of
+#' satellite images. Layer names should contain the date of the image in
+#'  "\code{YYYYJJJ}" format.
+#' @param cStack a \code{RasterStack} class argument containing a time series of
+#' covariates.
+#' @param Img2Process a \code{vector} class argument defining the images to be
+#' filled/smoothed.
+#' @param nDays a \code{numeric} argument with the number of previous and 
+#' subsequent days that define the temporal neighborhood.
+#' @param nYears a \code{numeric} argument with the number of previous and
+#' subsequent years that define the temporal neighborhood.
+#' @param aFilter a \code{vector} with the lower and upper quantiles that define
+#' the outliers of the anomalies. Ex. c(0.05,0.95).
+#' @param fact a \code{numeric} argument with an aggregation factor of the
+#' anomalies carried out before the interpolation.
+#' @param fun a \code{function} used to aggregate the image of anomalies. Both
+#' \code{mean}(default) or \code{median} are acceptted.
+#' @param snow.mode logical argument. If \code{TRUE}, the filling process will
+#' be parallelized using the `\code{raster}' package.
+#' @param out.name the name of the folder containing the filled/smoothed images
+#' when saved in the Hard Disk Drive (HDD).
+#' @param ... arguments for nested functions:
+#' \itemize{
+#'   \item \code{AppRoot} the path where the filled/smoothed time series of 
+#'   images are saved as GTiff.
+#' }
+#' 
+#' @return a \code{RasterStack} with the filled/smoothed images. 
 #'
 #' @examples
 #' set.seed(0)
@@ -33,40 +51,40 @@
 #' genPlotGIS(ex.ndvi.navarre)
 #' genPlotGIS(ex.dem.navarre)
 #'
-#' # distort ndvi data
+#' # distorts 5% of the original ndvi data by 
+#' # altering 50% its values
 #' for(x in c(2,5)){
 #'   aux <- sampleRandom(ex.ndvi.navarre[[x]],
-#'                       ncell(ex.ndvi.navarre)*0.05,
-#'                       cells=TRUE,
+#'                       ncell(ex.ndvi.navarre) * 0.05,
+#'                       cells = TRUE,
 #'                       na.rm = TRUE)
-#'   ex.ndvi.navarre[[x]][aux[,1]]<-aux[,2]*1.5
+#'   ex.ndvi.navarre[[x]][aux[,1]] <- aux[,2] * 1.5
 #' }
 #' genPlotGIS(ex.ndvi.navarre)
 #'
-#' # smoothing the image using dem as covariate
-#' smth.ndvi<-genSmoothingIMA(rStack=ex.ndvi.navarre,
-#'                            cStack=ex.dem.navarre,
-#'                            Img2Process=c(2,5))
-#' # plot the result
-#' genPlotGIS(stack(ex.ndvi.navarre[[2]],
+#' # smoothing the image using the DEM as covariate
+#' smth.ndvi <- genSmoothingCovIMA(rStack = ex.ndvi.navarre,
+#'                                 cStack = ex.dem.navarre,
+#'                                 Img2Process = c(2,5))
+#' # plot the distorted 1, smoothed 1, 
+#' # distorted 5, smoothed 5 images
+#' plot(stack(ex.ndvi.navarre[[2]],
 #'                  smth.ndvi[[1]],
 #'                  ex.ndvi.navarre[[5]],
-#'                  smth.ndvi[[2]]),
-#'            layout=c(2,2))
-genSmoothingIMA <- function (rStack,
+#'                  smth.ndvi[[2]]))
+genSmoothingCovIMA <- function (rStack,
                              cStack,
                              Img2Process=NULL,
-                             fun=mean,
-                             nPeriods=3,
+                             nDays=3,
                              nYears=1,
                              fact=5,
-                             out.name="out",
-                             aFilter=c(),
+                             fun=mean,
+                             aFilter=c(.05,.95),
                              snow.mode=FALSE,
+                             out.name="out",
                              ...)
 {
   arg<-list(...)
-  AppRoot<-defineAppRoot()
   # rStack<-target.2011.2013
   # cStack<-target.covs.2011.2013
   #chequea que los datos de entrada tengan el formato correcto
@@ -80,7 +98,7 @@ genSmoothingIMA <- function (rStack,
   # days in rStack
   days<-genGetDates(names(rStack))
   oday<-order(days)
-
+  if(all(is.na(days))){stop("The name of the layers has to include the date and it must be in julian days (%Y%j) .")}
   # ensure the images order
   rStack<-raster::subset(rStack,oday)
 
@@ -119,8 +137,11 @@ genSmoothingIMA <- function (rStack,
     Img2Process<-aux
   }
 
-  if(!file.exists(AppRoot))
-    dir.create(AppRoot,recursive=T)
+  if("AppRoot"%in%names(args)){
+    args$AppRoot<-pathWinLx(args$AppRoot)
+    dir.create(args$AppRoot,recursive=TRUE,showWarnings = FALSE)
+  }
+    
 
 
 
@@ -131,13 +152,13 @@ genSmoothingIMA <- function (rStack,
     message(paste0("Smoothing image of date ",target.date))
     neighbours<-dateNeighbours(rStack,
                                target.date,
-                               nPeriods=10,
-                               nYears=10)
+                               nPeriods=nDays,
+                               nYears=nYears)
 
 
 
     # calculate mean image
-    meanImage<-raster::calc(neighbours,fun=fun,na.rm=T)
+    meanImage<-raster::calc(neighbours,fun=fun,na.rm=TRUE)
 
     # get target image
     targetImage<-raster::subset(rStack,which(format(genGetDates(names(rStack)),"%Y%j")%in%format(target.date,"%Y%j")))
@@ -154,7 +175,7 @@ genSmoothingIMA <- function (rStack,
     names(cov.targetImage)<-cname
 
     # remove extreme values
-    qrm<-raster::quantile(anomaly,aFilter,na.omit=T)
+    qrm<-raster::quantile(anomaly,aFilter,na.omit=TRUE)
     anomaly[anomaly<qrm[1]|anomaly>qrm[2]]<-NA
 
     # reduce the resolution for tps
@@ -192,8 +213,7 @@ genSmoothingIMA <- function (rStack,
     target.prediction<-target.prediction+meanImage
     # write filled images
     if("AppRoot"%in%names(args)){
-      dir.create(args$writeRaster,showWarnings = F,recursive = T)
-      writeRaster(target.prediction,paste0(AppRoot,"/",out.name,"_",format(target.date,"%Y%j"),".tif"))
+      writeRaster(target.prediction,paste0(args$AppRoot,"/",out.name,"_",format(target.date,"%Y%j"),".tif"))
     }else{
       fillstack<-addLayer(fillstack,target.prediction)
     }

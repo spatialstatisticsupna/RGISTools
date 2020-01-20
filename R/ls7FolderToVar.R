@@ -1,91 +1,153 @@
-#' Creates variables from Landsat 7 multispectral bands
+#' Compute a remote sensing index from a time series of Landsat-7 images 
 #'
-#' \code{ls7FolderToVar} calculates an index using the bands from Landsat multispectral
-#' images. The images are specified by a path to the storing folder (resulting from
-#' the \code{lsMosaic} function). The function returns a rasterStack with the time-series of the index.
+#' \link{ls7FolderToVar} computes a remote sensing index from the 
+#' spectral bands of a time series of Landsat-7 images. The images are specified
+#' by the path to the folder that stores the imagery (resulting from the 
+#' \code{\link{lsMosaic}} function). The function returns a \code{RasterStack}
+#' with the time series of images of the remote sensing index.
 #'
-#' The function requires to define \code{src} and \code{fun} attributes. \code{src} defines the path to
-#' the result of \code{\link{lsMosaic}}, with all bands of Landsat-7 for a region of interest. \code{fun} defines
-#' the variable of interest using any of the functions in the packages starting with \code{var} (\code{\link{varNDVI}},
-#'  \code{\link{varEVI}}, ...)
+#' The function requires the definition of the \code{src} and \code{fun} 
+#' arguments. The \code{src} is usually the path resulting from 
+#' \code{\link{lsMosaic}}. The \code{fun} argument can be any function from this
+#' package beginning with “var” (\code{\link{varNDVI}}, \code{\link{varEVI}}, 
+#' etc.). Custom functions can also be implemented. Caution! It is mandatory to 
+#' use level-2 products to get accurate derived variables.
 #'
-#' @param src path to the folder with the Landsat multispectral image
-#' @param fun is a function with the calculation of the index.
-#' All functions in the package starting with three characters
-#' 'var' are acceptable functions. Custom functions can be also
-#' implemented \code{var} are acceptable functions.
-#' @param getStack if \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD)
-#' @param overwrite flag to overwrite the existing images with the same name
-#' @param ... accepts \code{AppRoot} as the directory to save the resulting time series
-#' or/and other argument for function nestering
+#' @param src the path to the folder with the Landsat-7 multispectral imagery.
+#' @param fun a \code{function} that computes the remote sensing index.
+#' @param AppRoot the directory of the outcoming time series.
+#' @param getStack logical argument. If \code{TRUE}, returns the time series 
+#' as a \code{RasterStack}, otherwise the images are saved in the Hard Drive
+#' Device (HDD).
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
+#' images with the same name.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the
+#' running steps and warnings.
+#' @param ... arguments for nested functions.
+#'  \itemize{
+#'   \item \code{dates} a vector with the capturing dates being considered
+#'   for mosaicking. If not supplied, all dates are mosaicked.
+#' }
+#' 
+#' @return this function does not return anything, unless \code{getStack = TRUE}
+#' which then returns a \code{RasterStack} with the time series of with the
+#' index. 
 #'
 #' @examples
 #' \dontrun{
-#' #load a spatial polygon object of navarre for the example
-#' data(navarre)
-#' #asign the folder where the example will be run
-#' src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat7"
-#' #download landsat7 images
-#' search<-lsDownload(satellite="ls7",
-#'                    username="rgistools",
-#'                    password="EspacialUPNA88",
-#'                    startDate=as.Date("01-01-2018","%d-%m-%Y"),
-#'                    endDate=as.Date("20-01-2018","%d-%m-%Y"),
-#'                    extent=navarre,
-#'                    untarDir="untar",
-#'                    AppRoot=src)
-#' #asign the folder with the Landsat 7 images untared
-#' tif.src<-file.path(src,"untar")
-#' #mosaic the Landsat7 images
-#' lsMosaic(tif.src,
-#'          AppRoot=src,
-#'          out.name="Navarre")
-#' #asign src as the path to mosaiced folder
-#' src<-file.path(src,"Navarre")
-#' #generate NDVI images of Navarre
-#' ls7FolderToVar(src,
-#'                fun=varNDVI,
-#'                AppRoot=file.path(dirname(src)),
-#'                overwrite = T)
+#' # load a spatial polygon object of Navarre
+#' data(ex.navarre)
+#' # main output directory
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+#' print(wdir)
+#' # download Landsat-7 images
+#' lsDownSearch(satellite = "ls7",
+#'              username = "username",
+#'              password = "password",
+#'              startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'              endDate = as.Date("20-01-2018", "%d-%m-%Y"),
+#'              extent = ex.navarre,
+#'              untar = TRUE,
+#'              AppRoot = wdir)
+#' # folder with the Landsat-7 untared images 
+#' wdir.ls7 <-file.path(wdir,"Landsat7")
+#' wdir.ls7.untar <- file.path(wdir.ls7, "untar")
+#' # mosaic the Landsat-7 images
+#' lsMosaic(wdir.ls7.untar,
+#'          AppRoot = wdir.ls7,
+#'          out.name = "Navarre",
+#'          extent = ex.navarre,
+#'          gutils = TRUE)
+#' # folder with the mosaicked images
+#' wdir.ls7.navarre <- file.path(wdir.ls7, "Navarre")
+#' # generate NDVI images of Navarre
+#' wdir.ls7.var <- file.path(wdir.ls7, "Navarre_Variables")
+#' dir.create(wdir.ls7.var)
+#' ls7FolderToVar(wdir.ls7.navarre,
+#'                fun = varNDVI,
+#'                AppRoot = wdir.ls7.var,
+#'                overwrite = TRUE)
+#'                
+#' files.ls7.ndvi <- list.files(file.path(wdir.ls7.var,"NDVI"),
+#'                              pattern = "\\.tif$",
+#'                              full.names = TRUE,
+#'                              recursive = TRUE)
+#' img.ls7.ndvi <- raster(files.ls7.ndvi[1])
+#' spplot(img.ls7.ndvi)
 #' }
-ls7FolderToVar<-function(src,fun,getStack=F,overwrite=F,...){
-  AppRoot=defineAppRoot(...)
+ls7FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=FALSE,...){
+  src<-pathWinLx(src)
+  AppRoot<-pathWinLx(AppRoot)
+  function.arg<-list(...)
+  vartype<-gsub("var","",as.character(match.call()[c("fun")]))
   if(!getStack){
-    vartype<-gsub("var","",as.character(match.call()[c("fun")]))
     AppRoot<-file.path(AppRoot,vartype)
-    dir.create(AppRoot,showWarnings = F,recursive=T)
-    print(vartype)
+    dir.create(AppRoot,showWarnings = FALSE,recursive=TRUE)
+    message(vartype)
   }
 
-  # lsfd<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat7/untar/outfile"
-  ls.list<-list.files(src,full.names = T)
-  rstack<-stack()
-  result<-raster()
+  ls.list<-list.files(src,full.names = TRUE)
+  
+  rstack<-NULL
+  result<-NULL
+  
+  dates<-genGetDates(ls.list)
+  if("dates"%in%names(function.arg)){
+    ls.list<-ls.list[dates%in%function.arg$dates]
+  }
+  if(length(ls.list)==0)stop(paste0("No images found in ",src," path."))
   for(imgfd in ls.list){
     message(paste0("Calculating ",vartype," at date ",genGetDates(imgfd),"."))
     ls7bands<-getRGISToolsOpt("LS7BANDS")
-    ls.img<-list.files(imgfd,full.names = T,pattern = "\\.tif$")
-    funString<-"result<-fun("
-    for(arg in formalArgs(fun)){
-      band<-ls7bands[names(ls7bands)%in%arg]
-      if(length(band)==0)
-        next
-      eval(parse( text=paste0(arg,"<-raster('",ls.img[grepl(band,ls.img)],"')") ))
-      funString<-paste0(funString,arg,"=",arg,",")
+    ls.img<-list.files(imgfd,full.names = TRUE,pattern = "\\.tif$")
+    if(length(ls.img)==0){
+      message(paste0("Images not found in ",imgfd))
+      next
     }
-    funString<-paste0(substr(funString,1,nchar(funString)-1),")")
-    eval(parse(text=funString))
-    if(getStack){
-      rstack<-addLayer(rstack,result)
+    out.file.name<-paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif")
+    if(overwrite|(!file.exists(out.file.name))){
+      funString<-"result<-fun("
+      #band load and asignation
+      funargs<-formalArgs(fun)
+      for(arg in funargs){
+        band<-ls7bands[names(ls7bands)%in%arg]
+        if(length(band)==0)
+          next
+        eval(parse( text=paste0(arg,"<-read_stars('",ls.img[grepl(band,ls.img)],"')") ))
+        funString<-paste0(funString,arg,"=",arg,",")
+      }
+      # arguments asignation
+      arguments<-as.list(match.call())
+      arguments<-arguments[names(arguments)%in%funargs&
+                             (!names(arguments)%in%names(ls7bands))]
+      for(arg in names(arguments)){
+        funString<-paste0(funString,arg,"=function.arg$",arg,",")
+      }
+      # complete the function
+      funString<-paste0(substr(funString,1,nchar(funString)-1),")")
+      if(verbose){message(paste0("Function for evaluation: \n",funString))}
+      eval(parse(text=funString))
+      if(getStack){
+        if(is.null(rstack)){
+          names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
+          rstack<-result
+        }else{
+          result<-extend(result,rstack)
+          names(result)<-paste0(vartype,"_",format(genGetDates(imgfd),"%Y%j"))
+          rstack<-extend(rstack,result)
+          rstack<-addLayer(rstack,result)
+        }
+      }else{
+        write_stars(result,out.file.name)
+      }
     }else{
-      #print(paste0(AppRoot,"/",vartype,"_",format(genGetDate(imgfd),"%Y%j"),".tif"))
-      writeRaster(result,paste0(AppRoot,"/",vartype,"_",format(genGetDates(imgfd),"%Y%j"),".tif"),overwrite=overwrite)
+      message(paste0("File exists!\nFile: ",out.file.name))
     }
   }
   if(getStack){
-    return(result)
+    return(rstack)
   }else{
-    message(paste0(vartype," images saved in HHD"))
+    message(paste0(vartype," images saved in HDD"))
     message(paste0("File dir: ",AppRoot))
   }
 

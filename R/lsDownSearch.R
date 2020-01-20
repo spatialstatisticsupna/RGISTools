@@ -1,123 +1,111 @@
-#' Downloads a time series of satellite images from Landsat 7-8
+#' Search and download Landsat-7 or Landsat-8 images
 #'
-#' \code{lsDownSearch} downloads the list of images provided by \code{ls7Search} and \code{ls8Search} functions.
-#' The images are saved as ‘.tiff’ files in the AppRoot directory..
+#' \code{lsDownSearch} searches and downloads Landsat-7 or Landsat-8 images
+#' concerning a particular location and time interval from the 
+#' \href{https://earthexplorer.usgs.gov/}{`EarthExplorer' repository}.
+#' Images are saved as GTiff files in the \code{AppRoot} directory.
 #'
-#' This function is used for download landsat images. Uses the data frame result from  any landsat
-#' search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}) and download all images in data frame.
-#' Image download requires USGS login account from \url{https://ers.cr.usgs.gov/register/}.
-#'
-#' The image files from the USGS EROS web service are compressed as ‘.tar.gz’ files. lsDownSearch decompresses the
-#' images and obtains the corresponding ‘.tiff’ files. The ‘.tiff’ files are saved in the
-#' \code{AppRoot} directory. When \code{untarDir} is defined the function untars the images in this folder.
-#' This replicates the images in compresses version as tar.gz and uncompresses version. To save space in the disk
-#' \code{raw.rm = T} can be defined, and \code{lsDownSearch} will remove the ‘tar.gz’ files.
-#' If \code{raw.rm = F}, the original files remain, which might be useful to have access to the original files
-#' in the future and avoid further downloads. By default, lsDownSearch saves the images in (...), in the AppRoot
-#' directory. To change this setting, provide AppRoot = the full path as an argument.
-#'
-#' @param searchres the results from \code{ls7Search} or \code{ls8Search}
-#' @param username login credentials to access the USGS EROS web service
-#' @param password login credentials to access the USGS EROS web service
-#' @param cookies.file  File path for saving the cookies that are used in the download process
-#' @param verbose Flag for debugging mode
-#' @param raw.rm Flag for removing the raw images
-#' @param untar Flag for untaring downloaded images
-#' @param ... argument for function nestering and/or
-#' \itemize{
-#'   \item \code{AppRoot}  Root directory where the images will be saved
+#' \code{lsDownSearch} is a wrapper function of \code{\link{ls7Search}}, 
+#' \code{\link{ls8Search}}, and \code{\link{lsDownload}} to search and
+#' download images in a single step. The function requires USGS's `EarthExplorer'
+#' credentials, which can be obtained
+#' \href{https://ers.cr.usgs.gov/register/}{here}.
+#' 
+#' The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDownSearch}
+#' decompresses the images and obtains the corresponding GTiffs. The GTiffs are
+#' saved in the \code{AppRoot} directory. To change this option, provide 
+#' \code{AppRoot = “full path”}. When \code{untar=TRUE}, the function untars
+#' the imagery in this location. Image decompression duplicates the information
+#' due to the presence of both, compressed and decompressed images. Set 
+#' \code{raw.rm = TRUE} to remove the former ones.
+#' 
+#' @param satellite string containing the type of satellite 
+#' (\code{"ls7"} or \code{"ls8"}).
+#' @param AppRoot the download directory.
+#' @param username USGS’s `EarthExplorer' username.
+#' @param password USGS’s `EarthExplorer' password.
+#' @param lvl a number specifying the processing level. Default value, 1.
+#' @param product a \code{character} vector with the requested Level-2 products.
+#' By default \code{c("sr", "source_metadata")}.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the
+#' running steps and warnings.
+#' @param raw.rm logical argument. If \code{TRUE}, removes the raw images.
+#' @param untar logical argument. If \code{TRUE}, untars downloaded images.
+#' @param ... argumetns for nested functions:
+#'  \itemize{
+#'   \item \code{dates} a vector with the capturing dates being searched. This
+#'    argument is mandatory if \code{startDate} and \code{endDate} are not defined.
+#'   \item  \code{startDate} a \code{Date} class object with the starting date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'   \item  \code{endDate} a \code{Date} class object with the ending date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest.
+#'   \item any argument for \code{\link{ls8Search}}/\code{\link{ls7Search}} or 
+#'   \code{\link{lsDownload}}.
 #' }
 #'
+#' @return this function does not return anything. It saves the imagery as
+#' `tar.gz’ (and GTiff files) in a folder called `raw’ (`untar’) in the
+#'  \code{AppRoot} directory.
 #'
 #' @examples
 #' \dontrun{
-#' # Search and download the images from Landsat 8 comprised between
-#' # 2011 and 2013 for the region of Navarre
-#' data(navarre)
-#' search<-ls8Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
-#'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
-#'                   extent=navarre,
-#'                   browseAvaliable="Y")
-#'
-#' #download 1 image
-#' lsDownSearch(search[1,],username="user",password="pass",untarDir=T,raw.rm=T)
-#' # download 10 images
-#' lsDownSearch(search[1:10,],username="user",password="pass",untarDir=T,raw.rm=T)
-#' # download all the images
-#' lsDownSearch(search,username="user",password="pass",untarDir=T,raw.rm=T)
-#'
-#' # Search and download the images from Landsat 7 comprised between
-#' # 2011 and 2013 for the region of Navarre
-#' data(navarre)
-#' search<-ls7Search(startDate=as.Date("01-01-2011","%d-%m-%Y"),
-#'                   endDate=as.Date("31-12-2013","%d-%m-%Y"),
-#'                   extent=navarre,
-#'                   browseAvaliable="Y")
-#' #download 1 image
-#' lsDownSearch(search[1,],username="user",password="pass",untarDir=T,raw.rm=T)
-#' #download 10 images
-#' lsDownSearch(search[1:10,],username="user",password="pass",untarDir=T,raw.rm=T)
-#' #download all the images
-#' lsDownSearch(search,username="user",password="pass",untarDir=T,raw.rm=T)
+#' # load a spatial polygon object of Navarre
+#' data(ex.navarre)
+#' 
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+#' print(wdir)
+#' # search and download the images from Landsat-8 between
+#' # 01-01-2018 and 20-01-2018 for the region of Navarre
+#' lsDownSearch(satellite = "ls8",
+#'              username = "username",
+#'              password = "password",
+#'              startDate = as.Date("01-01-2018", "%d-%m-%Y"),
+#'              endDate = as.Date("20-01-2018", "%d-%m-%Y"),
+#'              extent = ex.navarre,
+#'              AppRoot = wdir)
+#'            
+#' # remove metadata to free memory space
+#' lsRemoveMetadata()
 #' }
-lsDownSearch<-function(searchres,
-                       username=NULL,
-                       password=NULL,
-                       cookies.file="lscookies.txt",
-                       verbose=FALSE,
-                       raw.rm=FALSE,
-                       untar=FALSE,
-                       ...){
-  stopifnot(class(searchres)=="data.frame")
-  if(is.null(username)|is.null(password)){
-    stop("User")
-  }
-  arg<-list(...)
-  AppRoot<-defineAppRoot(...)
-  #identify mission
-  if(grepl("LC8",searchres[1,]$sceneID)){
-    downDir<-getRGISToolsOpt("LS8DownloadDir")
-  }else if(grepl("LE7",searchres[1,]$sceneID)){
-    downDir<-getRGISToolsOpt("LS7DownloadDir")
+lsDownSearch<-function(satellite,
+                     username,
+                     password,
+                     AppRoot,
+                     lvl=1,
+                     product=c("sr","source_metadata"),
+                     verbose=FALSE,
+                     untar=TRUE,
+                     raw.rm=FALSE,
+                     ...){
+  if(missing(username)|missing(password))stop("username or password not defined!")
+  if(tolower(satellite)=="ls7"){
+    message("Searching Landsat-7 image time series.")
+    searchres=ls7Search(verbose=verbose,
+                        AppRoot=AppRoot,
+                        ...)
+  }else if (tolower(satellite)=="ls8"){
+    message("Searching Landsat-8 image time series.")
+    searchres=ls8Search(verbose=verbose,
+                        AppRoot=AppRoot,
+                        ...)
   }else{
-    stop("Unknown mission.")
+    stop("Satellite not supported. Perform the search with the argument satellite as 'ls7' or 'ls8'.")
   }
-  downPath<-file.path(AppRoot,downDir,"raw")
-  #create download folder
-  if(!file.exists(downPath)){
-    dir.create(downPath,recursive=T)
+  if(verbose){
+    message("Search result:")
+    message(searchres)
   }
-
-  #start usgs session
-  handler<-startUSGSsession(username,password,cookies.file,verbose)
-  if(verbose)
-    print("USGS session started, downloading images...")
-
-  for(scene in searchres$sceneID){
-    if(!file.exists(paste0(downPath,"/",scene,".tar.gz"))){
-      if(grepl("LC8",searchres[1,]$sceneID)){
-        .ls8DownloadUSGS(scene,downPath,handler,verbose=verbose)
-      }else if(grepl("LE7",searchres[1,]$sceneID)){
-        .ls7DownloadUSGS(scene,downPath,handler,verbose=verbose)
-      }
-    }
-    #Unzip in downDir when available
-    if(untar){
-      print(paste0("Untar ",scene," file."))
-      untarDir<-file.path(AppRoot,downDir,untar,scene)
-      dir.create(untarDir,recursive=T)
-      untar(paste0(downPath,"/",scene,".tar.gz"),exdir=untarDir)
-      #Flag is true, so remove compressed files
-      if(raw.rm){
-        file.remove(paste0(downPath,"/",scene,".tar.gz"))
-      }
-    }
-  }
-
-  if(untar){
-    message(paste0("The images have been downloaded and saved on HHD. \nFile path: ",untarDir))
-  }else{
-    message(paste0("The images have been downloaded and saved on HHD. \nFile path: ",downPath))
-  }
-
+  lsDownload(searchres=searchres,
+             username=username,
+             password=password,
+             untar=untar,
+             raw.rm=raw.rm,
+             AppRoot=AppRoot,
+             lvl=lvl,
+             product=product,
+             ...)
 }

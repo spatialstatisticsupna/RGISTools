@@ -2,37 +2,45 @@
 % Please edit documentation in R/varNBR2.R
 \name{varNBR2}
 \alias{varNBR2}
-\title{calculates normalized burn ratio 2 (NBR2)}
+\title{Calculate the normalized burn ratio 2 (NBR2)}
 \usage{
 varNBR2(swir1, swir2)
 }
 \arguments{
-\item{swir1}{the nir band of the capture in \code{raster} format}
+\item{swir1}{a \code{raster} with the the SWIR1 band of the capture.}
 
-\item{swir2}{the swir2 band of the capture in \code{raster} format}
+\item{swir2}{a \code{raster} with the the SWIR2 band of the capture.}
 }
 \value{
-NBR2 in \code{raster} format
+A NBR2 image in \code{raster} format.
 }
 \description{
-\code{varNBR2} computes the NBR2 index from swir1 and swir2 bands.
+\code{varNBR2} computes the NBR2 index from the shortwave infrared 1 (SWIR1)
+and shortwave infrared 2 (SWIR2).
 }
 \details{
-NBR2 is used to monitor areas that have burned but highlightint the
-sensitivity to water in vegetation using swir1 instead of nir.
-This function is used within
-\code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
+The normalized burn ratio 2 (NRB2) is an index to identify burned areas. 
+In contrast to NBR, NRB2 highlights the sensitivity to water in vegetation
+\insertCite{lutes2006firemon}{RGISTools}. This function is used within
+\code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}},
+\code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }
 \examples{
-# dir path of cropped and cutted modis image in the region of navarre as example
-img.dir <- system.file("ExNavarra", package = "RGISTools")
-# list all tif files
-img.files <- list.files(img.dir,pattern="\\\\.tif$",recursive = TRUE,full.names = TRUE)
-#select the swir1 and swir2 bands
-swir1 <- raster(img.files[6])
-swir2 <- raster(img.files[7])
-# calculate the nbr2 image
-nbr2 <- varNBR2(swir1,swir2)
+# path to the cropped and cutted MODIS images for the region of Navarre
+wdir <- system.file("ExNavarreVar", package = "RGISTools")
+# list all the tif files
+files.mod <- list.files(wdir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)
+# print the MOD09 bands
+getRGISToolsOpt("MOD09BANDS")
+
+# select the SWIR1 and SWIR2 bands
+img.mod.swir1 <- raster(files.mod[6])
+img.mod.swir2 <- raster(files.mod[7])
+# calculate the NBR2 image
+img.mod.nbr2 <- varNBR2(img.mod.swir1,img.mod.swir2)
 # plot the image
-spplot(nbr2)
+spplot(img.mod.nbr2,col.regions=rev(heat.colors(20)))
+}
+\references{
+\insertRef{lutes2006firemon}{RGISTools}
 }

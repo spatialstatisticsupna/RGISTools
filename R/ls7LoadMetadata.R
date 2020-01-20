@@ -1,50 +1,56 @@
-#' Sinchronizes landsat 7 meta data file for image search.
+#' Load or update the Landsat-7 metadata file
 #'
-#' \code{ls7LoadMetadata} loads a data frame called \code{.LS7MD}
-#'  with the names of the Landsat-7 images and their metadata.The metadata provides
-#'  auxiliary information regarding Landsat-7 images repository such as image quality, acquisition
-#'  data, cloud cover, etc. You can find a description of the metadata at
-#'  \url{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}
+#' \code{ls7LoadMetadata} loads a \code{data.frame} called "\code{.LS7MD}"
+#' with the names of the Landsat-7 images and their metadata. The metadata provides
+#' auxiliary information, such as image quality, acquisition date, cloud cover,
+#' etc. You can find a description of the metadata on the
+#' \href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{USGS's website}.
 #'
-#' All captures done by Landsat-7 are cataloged in a unique csv file. The size of the file
-#' might be larger than 360MB. Therefore, the process of downloading and importing R may take several
-#' minutes (around 15 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device). The function creates an
-#' RData file with the metadata csv. Thus, every time \code{ls7MetaDataFile} is called,
-#' this function loads the existing RData in the Approot. This is intended to reduce the loading
-#' time of metadata in the future.
+#' All captures done by Landsat-7 are catalogued and documented in a unique csv
+#' file. The size of the file could be larger than 360MB. The function downloads
+#' and imports the metadata into `R', which may take several minutes (roughly 15
+#' minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device). The 
+#' function creates an RData file with the csv metadata. Thus, every time
+#' \code{ls7LoadMetadata} is called, this function loads the existing RData from
+#' the \code{AppRoot} directory, which aims to reduce the loading time of the 
+#' metadata in the future.
 #'
+#' @param update logical argument. If \code{TRUE}, updates the metadata file.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param omit.question logical argument. If \code{TRUE}, the question about 
+#' loading the metadata is omitted.
+#' @param AppRoot the directory where the metadata file should be located. 
+#' @param ... arguments for nested functions.
 #'
-#'
-#' @param update TRUE/FALSE argument to force update of metadata file
-#' @param verbose TRUE/FALSE argument to print all steps of metadata download process
-#' @param omit.question omit the question for ensure the loading of the metadata
-#' @param ... accepts \code{AppRoot} as root directory where meta data file will be saved
-#' or/and other argument for function nestering
+#' @return this function does not return anything, but loads the “.LS7MD” 
+#' \code{data.frame} on the environment of the `RGISTools' package.
 #'
 #' @examples
 #' \dontrun{
-#' #creates a MetaData folder and downloads the csv on working directory
-#' ls7LoadMetadata()
+#' # creates a MetaData folder and downloads the csv in the "Path_for_downloading_folder" directory
+#' ls7LoadMetadata(AppRoot = file.path(tempdir(),"Path_for_downloading_folder"))
 #'
-#' #creates a MetaData folder and downloads the csv on "C:/LandsatDownload" directory
-#' ls7LoadMetadata(AppRoot="C:/LandsatDownload")
-#'
-#' Force renew existing meta data csv
-#' ls7LoadMetadata(update=TRUE)
+#' # update the metadata file
+#' ls7LoadMetadata(AppRoot = file.path(tempdir(),"Path_for_downloading_folder"), update = TRUE)
+#' 
+#' # get metadata data frame 
+#' LS7MD <- getRGISToolsOpt("LS7METADATA")
+#' head(LS7MD)
 #' }
-ls7LoadMetadata<-function(update=F,verbose=T,omit.question=F,...){
+ls7LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=TRUE,...){
   stopifnot(class(update)=="logical")
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
-
+  AppRoot<-pathWinLx(AppRoot)
   #meta data directory and metadata file
-  mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS7META.dir"))
+  mdRawdir<-file.path(AppRoot,getRGISToolsOpt("LS7DownloadDir"),getRGISToolsOpt("LS7META.dir"))
+  
   if(!file.exists(mdRawdir)){
-    dir.create(mdRawdir,recursive=T)
+    dir.create(mdRawdir,recursive=TRUE)
   }
   mdRdata<-file.path(mdRawdir,getRGISToolsOpt("LS7META.rdata"))
   mdRawURL<-getRGISToolsOpt("LS7META.csv")
-
+  message(paste0("Looking for metadata in ",mdRdata))
   if(is.na(file.info(mdRdata)$ctime)|
      update){
     message("MetaData Rdata not found or out of date! \nThis task may take few minutes.")
@@ -62,7 +68,7 @@ ls7LoadMetadata<-function(update=F,verbose=T,omit.question=F,...){
       if(verbose)
         message("Reading metadata csv file, this task may take more than 15 minutes...")
       gzLS7<-gzfile(paste0(mdRawdir,"/",basename(mdRawURL)),'rt')
-      .LS7MD<-read.csv(gzLS7,header=T)
+      .LS7MD<-read.csv(gzLS7,header=TRUE)
       close(gzLS7)
 
       if(verbose)
@@ -77,20 +83,21 @@ ls7LoadMetadata<-function(update=F,verbose=T,omit.question=F,...){
       .LS7MD$cartURL<-as.character(.LS7MD$cartURL)
 
       save(file = mdRdata,list=c(getRGISToolsOpt("LS7META.var")))
-      #assign(getRGISToolsOpt("LS7META.var"), .LS7MD,envir = globalenv())#as global variable
-      .LS7MD<<-.LS7MD
+      setRGISToolsOpt("LS7METADATA", .LS7MD)
+      
       et<-Sys.time()
 
-      message(paste0("MetaData downloaded and saved on HHD for future queries. \nElapsed time: ",et-st," minutes.\nFile Saved in ",mdRdata))
+      message(paste0("MetaData downloaded and saved on HDD for future queries. \nElapsed time: ",et-st," minutes.\nFile Saved in ",mdRdata))
     }else{
       stop("Metadata not loaded!")
     }
   }else{
-    print("MetaData Rdata found! loading...")
-    load(mdRdata,envir=globalenv())
+    message("MetaData Rdata found! loading...")
+    load(mdRdata)
+    setRGISToolsOpt("LS7METADATA", .LS7MD)
   }
 }
 
 ls7IsMetaData<-function(){
-  return(getRGISToolsOpt("LS7META.var")%in%ls(all.names = T,envir=globalenv()))
+  return(!is.null(getRGISToolsOpt("LS7METADATA")))
 }

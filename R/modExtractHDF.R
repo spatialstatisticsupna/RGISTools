@@ -1,91 +1,133 @@
-#' Converts an .hdf file into a set of .tif files
+#' Convert an HDF file into a set of GTiff files
 #'
-#' \code{modExtractHDF} converts the original compressed from MODIS (.df) into a file
-#' format loadable by R (.tif). The function extracts all image layers and crops the
-#' area of interest (if needed)
+#' \code{modExtractHDF} converts the original format of MODIS images (hierarchical
+#' data format or HDF) into GTiffs (one file for each layer). 
 #'
-#' HDF files cannot be directly loaded into R. The function modExtractHDF
-#' borrows gdalwarp and gdal_translate functions from the gdalUtils package.
-#' These functions are used to convert the .hdf files into .tif files. The .tif
-#' files can be loaded in R using the raster package. Go to \code{\link{modSearch}} and \code{\link{modDownload}}
-#' for further details about these functions. Further details about the \code{gdalUtils} and \code{gdalUtils} packages
+#' HDF files cannot be directly loaded into `R', so they must be converted into
+#' GTiffs. To acomplish this task, the function \code{modExtractHDF}
+#' borrows the \code{gdalwarp} and \code{gdal_translate} functions from the 
+#' `\code{gdalUtils}' package. Further details about these functions can be found
+#' in the corresponding package manual. `GDAL' and `\code{gdalUtils}' must be 
+#' properly installed to use \code{modExtractHDF}. GTiffs can be loaded in `R'
+#' using the `\code{raster}' package.
 #'
-#' @param filesHDF  the full path of the .hdf files to be converted
-#' @param shp  the shape file of the area of interest
-#' @param overwrite Flag for overwrite existing images
-#' @param bFilter a vector containing the names of the bands to extract
-#' @param vebose  a boolean flag to print warning messages from external functions
-#' @param ... argument to allow function nestering
-#' \itemize{
-#'   \item \code{AppRoot} the directory where the extracted images should be located
+#' @param filesHDF  the full path where the HDF files are located.
+#' @param AppRoot the directory where the extracted images are saved.
+#' @param region a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+#' defining the area of interest for image masking.
+#' @param bFilter a vector containing the names of the bands to extract.
+#' @param rm.band a vector containing the names of the bands excluded from the
+#' extraction.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
+#' images with the same name.
+#' @param ... arguments for nested functions.
+#'\itemize{
+#'        \item \code{dates} a vector with the capturing dates being considered
+#'   for downloading. 
 #' }
 #' @examples
 #' \dontrun{
-#' data(navarre)
-#' img.list<-modSearch(product="MOD11A1",
-#'                     startDate=as.Date("01-01-2011","%d-%m-%Y"),
-#'                     endDate=as.Date("01-01-2011","%d-%m-%Y"),
-#'                     collection=6,
-#'                     extent=navarre)
-#' #download first image of image list
-#' modDownSearch(img.list,"rgistools","EspacialUPNA88")
-#' #Extract one layer from downloaded image
-#' hdf.files <- list.files("./",full.names = T,pattern="\\.hdf$")
-#' first.hdf.file <-hdf.files[1]
-#' modExtractHDF(first.hdf.file)
+#' # load a spatial polygon object of Navarre
+#' data(ex.navarre)
+#' 
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+#' print(wdir)
+#' wdir.mod <- file.path(wdir, "Modis","MOD11A1")
+#' sres <- modSearch(product = "MOD11A1",
+#'                   startDate = as.Date("01-01-2011", "%d-%m-%Y"),
+#'                   endDate = as.Date("01-01-2011", "%d-%m-%Y"),
+#'                   collection = 6,
+#'                   extent = ex.navarre)
+#'                       
+#' # download the images of the list
+#' wdir.mod <- file.path(wdir, "Modis", "MOD11A1")
+#' modDownload(searchres = sres, 
+#'             username = "username", 
+#'             password = "password",
+#'             AppRoot = wdir.mod)
+#' 
+#' wdir.mod.tif<-file.path(wdir.mod,"tif")
+#' wdir.mod.hdf <- file.path(wdir.mod, "hdf")
+#'
+#' # extract the first image
+#' files.mod.hdf <- list.files(wdir.mod.hdf, 
+#'                         full.names = TRUE, 
+#'                         pattern = "\\.hdf$")
+#' files.mod.hdf.1 <- files.mod.hdf[1]
+#' modExtractHDF(filesHDF = files.mod.hdf.1,
+#'               AppRoot = wdir.mod.tif)
 #' }
-modExtractHDF<-function(filesHDF,overwrite=FALSE,shp=NULL,vebose=F,bFilter=NULL,...){
+modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NULL,region=NULL,verbose=FALSE,...){
     arg<-list(...)
-    AppRoot<-defineAppRoot(...)
-    dir.create(AppRoot,showWarnings = vebose)
+    if("dates"%in%names(arg)){filesHDF<-filesHDF[modGetDates(filesHDF)%in%arg$dates]}
+    filesHDF<-pathWinLx(filesHDF)
+    AppRoot<-pathWinLx(AppRoot)
+    dir.create(AppRoot,showWarnings = verbose)
     for(fileHDF in filesHDF){
       image.name<-gsub(".hdf","",basename(fileHDF))
-      if(!file.exists(paste0(AppRoot,"/",image.name))||overwrite){
-        dir.create(paste0(AppRoot,"/",image.name),recursive = T,showWarnings = vebose)
-        print(paste0("Extracting bands from hdf file of image ",image.name))
-        image.data<-gdalinfo(fileHDF)
-        bands.names<-image.data[grepl(".*SUBDATASET_.*_NAME.*", image.data)]
+        dir.create(paste0(AppRoot,"/",image.name),recursive = TRUE,showWarnings = verbose)
+        message(paste0("Extracting bands from hdf file of image ",image.name))
+        image.data<-unlist(strsplit(gdal_utils(util = "info", 
+                           source =fileHDF,quiet=TRUE),"\n"),
+                           recursive =FALSE)
+        bands.names<-image.data[grepl(".*SUBDATASET_.*_NAME=", image.data)]
         names<-gsub('.*":','',bands.names)
         names<-gsub(':','_',names)
         if(!is.null(bFilter)){
-          exname<-names[Reduce("|", lapply(bFilter,grepl,names))]
+          exname<-names[Reduce("|", lapply(bFilter,grepl,names,ignore.case = TRUE))]
           bds<-which(names%in%exname)
         }else{
           bds<-1:length(names)
         }
+        if(!is.null(rm.band)){
+          n.exname<-names[Reduce("|", lapply(rm.band,grepl,names,ignore.case = TRUE))]
+          bds.2<-which(names%in%n.exname)
+          bds<-bds[!bds%in%bds.2]
+        }
+        
 
         for(i in bds){
-          if(!file.exists(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"))){
-            print(paste0("Extract band ",i))
+          if((!file.exists(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif")))||overwrite){
+            message(paste0("Extract band ",i))
             if("s_srs"%in%names(arg)){
-              gdal_translate(fileHDF,
-                             paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"),
-                             sd_index=i)
-              gdalwarp(srcfile=paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"),
-                       dstfile= paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
-                       s_srs=arg$s_srs)
+              gdal_utils(util = "translate", 
+                        source =gsub(".*SUBDATASET_.*_NAME=","",bands.names[i]),
+                        destination = gsub(" ","_",paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"))
+                        )
+              gdal_utils(util = "warp", 
+                         source =paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"),
+                         destination = paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
+                         options=c("-s_srs",arg$s_srs)
+              )
               file.remove(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"))
             }else{
-              gdal_translate(fileHDF,
-                             paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
-                             sd_index=i,
-                             overwrite=arg$overwrite)
+              gdal_utils(util = "translate", 
+                         source =gsub(".*SUBDATASET_.*_NAME=","",bands.names[i]),
+                         destination = gsub(" ","_",paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif")),
+                         quiet=TRUE
+              )
             }
 
+          }else{
+            if(verbose){
+              warning("File exists! not extracting...")
+            }
           }
-          if(!is.null(shp)){
-            gdalwarp(srcfile=paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
-                     dstfile=paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_cutted.tif"),
-                     cutline=shp,
-                     crop_to_cutline=TRUE,
-                     overwrite=arg$overwrite)
+          if(!is.null(region)){
+            region<-transform_multiple_proj(region)
+            ext=extent(region)
+            file.rename(paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
+                        paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"))
+            gdal_utils(util = "warp", 
+                       source =paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],"_temp.tif"),
+                       destination = paste0(AppRoot,"/",image.name,"/",image.name,"_",names[[i]],".tif"),
+                       options=c("-te",ext@xmin,ext@ymin,ext@xmax,ext@ymax,"-te_srs",st_crs(region)$proj4string)
+            )
           }
         }
-      }else{
-        if(vebose){
-          warning("File exists! not extracting...")
-        }
-      }
+      
     }
 
 }

@@ -1,34 +1,36 @@
 citEntry(entry = "Manual",
-  title        = "RGISTools: Tools for downloading and processing time-series of satellite images",
+  title        = "RGISTools: Handling Multiplatform Satellite Images",
   author       = personList(as.person("U P{\\'e}rez-Goya"),
+                   as.person("M Montesino-SanMartin"),
                    as.person("A F Militino"),
-                   as.person("M D Ugarte"),
-                   as.person("M Montesino - SanMartin")),
-  year         = "2019",
-
+                   as.person("M D Ugarte")),
+  year         = "2020",
+  note = "R package version 1.0.0",
+  url = "https://CRAN.R-project.org/package=RGISTools",
   textVersion  =
-  paste("U Pérez - Goya, A F Militino, M D Ugarte, M Montesino - SanMartin (2019).",
-        "RGISTools: Tools for downloading and processing time-series of satellite images"),
+  paste("U Pérez-Goya, M Montesino-SanMartin, A F Militino, M D Ugarte (2020).",
+        "RGISTools: Handling Multiplatform Satellite Images. R package version 1.0.0.",
+        "https://CRAN.R-project.org/package=RGISTools."),
   header = "To cite the package:"
 )
 
 citEntry(entry = "Article",
-  title        = "Interpolation of the Mean Anomalies for Cloud-Filling in Land Surface Temperature (LST) and Normalized Difference Vegetation Index (NDVI)",
+  title        = "Interpolation of the Mean Anomalies for Cloud-Filling in Land Surface Temperature and Normalized Difference Vegetation Index",
   author       = personList(as.person("A F Militino"),
                    as.person("M D Ugarte"),
                    as.person("U P{\\'e}rez-Goya"),
-                   as.person("Marc G. Genton")),
+                   as.person("M G Genton")),
   journal      = "IEEE Transactions on Geoscience and Remote Sensing",
   year         = "2019",
-  volume       = "",
-  number       = "",
-  pages        = "",
+  volume       = "57",
+  number       = "8",
+  pages        = "6068--6078",
   url = "http://dx.doi.org/10.1109/TGRS.2019.2904193",
   textVersion  =
-  paste("Fernández-Militino, A., Ugarte-Martínez, M.D., Pérez-Goya, U. (2019).",
-        "Interpolation of the Mean Anomalies for Cloud-Filling in Land Surface Temperature (LST) and Normalized Difference Vegetation Index (NDVI).",
-         "IEEE Transactions on Geoscience and Remote Sensing 2019. (Open-access) doi:http://dx.doi.org/10.1109/TGRS.2019.2904193"),
-  header = "To cite the gap filling method implemented in the function genFillingIMA:"
+  paste("Militino, A.F., Ugarte, M.D., Pérez-Goya, U., M G Genton (2019).",
+        "Interpolation of the Mean Anomalies for Cloud-Filling in Land Surface Temperature and Normalized Difference Vegetation Index.",
+         "IEEE Transactions on Geoscience and Remote Sensing 2019. 57(8), pp 6068-6078. (Open-access) doi:http://dx.doi.org/10.1109/TGRS.2019.2904193"),
+  header = "To cite the gap filling method implemented in the function genSmoothingIMA:"
 )
 
 citEntry(entry = "Article",
@@ -37,14 +39,14 @@ citEntry(entry = "Article",
                    as.person("M D Ugarte"),
                    as.person("U P{\\'e}rez-Goya")),
   journal      = "Remote Sensing",
-  year         = "2011",
+  year         = "2018",
   volume       = "10",
   number       = "398",
   pages        = "1--16",
   url = "http://dx.doi.org/10.3390/rs10030398",
   textVersion  =
-  paste("Fernández-Militino, A., Ugarte-Martínez, M.D., Pérez-Goya, U. (2018).",
+  paste("Militino, A.F., Ugarte, M.D., Pérez-Goya, U. (2018).",
         "Improving the Quality of Satellite Imagery Based on Ground-Truth Data from Rain Gauge Stations.",
-         "Remote Sensing 2018; 10(398): 1-16. (Open-access) doi:http://dx.doi.org/10.3390/rs10030398"),
-  header = "To cite the smoothing method implemented in the function genSmoothingIMA:"
+         "Remote Sensing 2018; 10(398). (Open-access) doi:http://dx.doi.org/10.3390/rs10030398"),
+  header = "To cite the smoothing method implemented in the function genSmoothingCovIMA:"
 )

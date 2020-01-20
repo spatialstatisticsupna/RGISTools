@@ -1,62 +1,84 @@
-#' Returns the capturing date of a Landsat 7 or 8 image
+#' Return the capturing dates of Landsat-7 or Landsat-8 images
 #'
-#' \code{lsGetDates} extracts the capturing date of one or several Landsat images,
-#' given their file paths or names. The function returns a date class object
+#' \code{lsGetDates} reads the official name of a Landsat-7 or Landsat-8 image
+#' and returns the capturing date, as a \code{Date} class object.
 #'
-#'  The function works with names or file paths having either of the two file extensions,
-#'  \code{.tar.gz} or \code{.tif} files. The function accepts more than on file path or file names.
-#'  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
-#'  If another format is required, it can be modified through the argument date.format.
+#' The function works with file names (or their paths) regardless of their
+#' extension. The function accepts more than on file path, which can be passed
+#' as a vector of \code{character}s. Dates are returned as `\code{YYYY-mm-dd}' by
+#' default. If another format is required, it can be modified through the 
+#' argument \code{format}.
 #'
-#' @param str a string or a list of strings defining the file path(s) or file name(s)
-#' @param ... accepts \code{date.format} to modify the format of the date being returned
-#'
+#' @param str the full path(s) or official name(s) of the Landsat-7 or
+#' Landsat-8 images from which the capturing date is retrieved.
+#' @param ... arguments for nested functions:
+#' \itemize{
+#'   \item \code{format} the format of the date being returned.
+#' }
+#' @return a \code{Date} class object with the date of the Landsat image or \code{character} class,
+#' if the \code{format} argument is used.
 #' @examples
-#' #example of getting the date from the name of a Landsat-8 image
-#' str<-"LC82000312017010LGN01_B1.TIF"
-#' dt<-lsGetDates(str)
-#' print(dt)
-#' print(format(df,"%Y%j"))
+#' # getting the capturing date from the name of a Landsat-8 image
+#' file.ls8 <- "LC82000312017010LGN01.tar.gz"
+#' date.ls8 <- lsGetDates(file.ls8)
+#' print(date.ls8)
+#' print(format(date.ls8, "%Y%j"))
 #'
-#' #example of getting the date from the name of a Landsat-7 and 8 image
-#' str<-c("LE72330822017009ASN01","LC82000312017010LGN01_B1.TIF")
-#' dt<-lsGetDates(str)
-#' print(dt)
-#' print(format(df,"%Y%j"))
+#' # getting the capturing date from the name of a Landsat-7 and a Landsat-8
+#' # image
+#' file.ls7 <- c("LE72330822017009ASN01")
+#' date.ls7 <- lsGetDates(file.ls7)
+#' print(date.ls7)
 #'
 lsGetDates<-function(str,...){
   arg<-list(...)
-  #str<-"LC82000312017010LGN01"
-  #str<-"LE72330822017009ASN01"
-  if("date.format"%in%names(arg)){
-    return(format(as.Date(substr(basename(str),10,16),"%Y%j"),format=arg$date.format))
+  bname<-basename(str)
+  str<-gsub("\\..*","",bname)
+  sizes<-sapply(str,nchar)
+  sday<-c()
+  for(s in 1:length(sizes)){
+    if(sizes[s]==21){#new name convention
+      sday<-c(sday,as.Date(substr(basename(str[s]),10,16),"%Y%j"))
+    }else{#old name convention
+      sday<-c(sday,as.Date(substr(basename(str[s]),11,18),"%Y%m%d"))
+    }
+  }
+  sday<-as.Date(sday)
+  if("format"%in%names(arg)){
+    return(format(sday,format=arg$format))
   }else{
-    return(as.Date(substr(basename(str),10,16),"%Y%j"))
+    return(as.Date(sday,"%Y%j"))
   }
 }
 
 
-#' Returns the capturing date of Sentinel image
+#' Return the capturing dates of Sentinel-2 images
 #'
-#' \code{senGetDates} extracts the capturing date of one or several Sentinel
-#' images, given their file paths or names. The function returns a date class object.
+#' \code{senGetDates} reads the official name of a Sentinel-2 image and returns
+#' the capturing date, as a \code{Date} class object.
 #'
-#' The function works with names or file paths having either of the two file extensions,
-#'  \code{.jp2} or \code{.tif} files. The function accepts more than on file path or file names.
-#'  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
-#'  If another format is required, it can be modified through the argument date.format.
+#' The function works with file names (or their paths) regardless of their
+#' extension. The function accepts more than on file path, which can be passed
+#' as a vector of \code{character}s. Dates are returned as `\code{YYYY-mm-dd}' by
+#' default. If another format is required, it can be modified through the
+#' argument \code{format}.
 #'
-#' @param str a string or a list of strings defining the file path(s) or file name(s)
-#' @param ... accepts \code{date.format} to modify the format of the date being returned
-#'
+#' @param str the full path(s) or official name(s) of the Sentinel
+#' images from which the capturing date is retrieved.
+#' @param ... arguments for nested functions:
+#' \itemize{
+#'   \item \code{format} the format of the date being returned.
+#' }
+#' @return a \code{Date} class object with the date of the Sentinel image or \code{character} class,
+#' if the \code{format} argument is used.
 #' @examples
-#' #example of getting date from Sentinel2 image name
-#' str<-c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
-#'        "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
-#' dt<-senGetDates(str)
-#' print(dt)
-#' print(format(dt,"%Y%j"))
-#' senGetDates(str,date.format="%Y%j")
+#' # getting the capturing date from the name of Sentinel-2 images
+#' file.sen <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
+#'               "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
+#' date.sen <- senGetDates(file.sen)
+#' print(date.sen)
+#' print(format(date.sen,"%Y%j"))
+#' senGetDates(file.sen, format = "%Y%j")
 #'
 senGetDates<-function(str,...){
   arg<-list(...)
@@ -77,8 +99,8 @@ senGetDates<-function(str,...){
     stop("Introduced image path is not supported Sentinel image name")
   }
 
-  if("date.format"%in%names(arg)){
-    return(format(as.Date(gsub(".*\\s*(\\d{8}).*", "\\1", sTime),"%Y%m%d"),format=arg$date.format))
+  if("format"%in%names(arg)){
+    return(format(as.Date(gsub(".*\\s*(\\d{8}).*", "\\1", sTime),"%Y%m%d"),format=arg$format))
   }else{
     return(as.Date(gsub(".*\\s*(\\d{8}).*", "\\1", sTime),"%Y%m%d"))
   }
@@ -86,35 +108,45 @@ senGetDates<-function(str,...){
 
 
 
-#' Returns the capturing date of Modis image
+#' Return the capturing dates of MODIS images
 #'
-#' \code{modGetDates} extracts the capturing date of one or several Modis
-#' images, given their file paths or names. The function returns a date class object.
+#' \code{modGetDates} reads the official name of MODIS images and returns its
+#' capturing date, as \code{Date} class object.
 #'
-#' The function works with names or file paths having either of the two file extensions,
-#'  \code{.hdf} or \code{.tif} files. The function accepts more than on file path or file names.
-#'  If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
-#'  If another format is required, it can be modified through the argument date.format.
+#' The function works with file names (or their paths) regardless of their
+#' extension. The function accepts more than on file path, which can be passed
+#' as a \code{list} of \code{characters}. Dates are returned as 
+#' `\code{YYYY-mm-dd}' by default. If another format is required, it can be
+#' modified through the argument \code{format}.
 #'
-#' @param str a string or a list of strings defining the file path(s) or file name(s)
-#' @param ... accepts \code{date.format} to modify the format of the date being returned
-#'
+#' @param str the full path(s) or official name(s) of MODIS
+#' images from which the capturing date is retrieved.
+#' @param ... arguments for nested functions:
+#' \itemize{
+#'   \item \code{format} the format of the date being returned.
+#' }
+#' @return a \code{Date} class object with the date of the MODIS image or \code{character} class,
+#' if \code{format} argument is used.
 #' @examples
-#' # example of getting date from Sentinel2 image name
-#' imgPath <- 'MYD13A2.A2016361.h17v04.006.2017285133407.hdf'
-#' modGetDates(imgPath)
+#' # getting the capturing date from the name of a MODIS image
+#' file.mod <- 'MYD13A2.A2016361.h17v04.006.2017285133407.hdf'
+#' modGetDates(file.mod)
 #'
-#' # example of a list of the full file paths of MODIS images, mixing .hdf and .tif files
-#' imgsPaths<-list('MYD13A2.A2013297.h17v04.006.2015269230726.hdf',
-#'                 'MYD13A2.A2013313.h17v04.006.2015271071143.tif')
-#' modGetDates(imgsPaths)
+#' # a list of the full file paths of MODIS images, mixing .hdf and .tif files
+#' file.mod<-list('MYD13A2.A2013297.h17v04.006.2015269230726.hdf',
+#'                'MYD13A2.A2013313.h17v04.006.2015271071143.tif')
+#' modGetDates(file.mod, format = "%Y%j")
 modGetDates<-function(str,...){
   arg<-list(...)
-  #imgPath<-"D:/01-Packages/TestEnvironment/Modis/MYD13A2/tiff/MYD13A2.A2016361.h17v04.006.2017285133407"
-  if("date.format"%in%names(arg)){
-    return(format(as.Date(gsub(".*\\As*(\\d{7}).*", "\\1", str),"%Y%j"),format=arg$date.format))
+  dt<-as.Date(gsub(".*\\As*(\\d{7}).*", "\\1", str),"%Y%j")
+  if(!any(is.na(dt))){
+    if("format"%in%names(arg)){
+      return(format(dt,format=arg$format))
+    }else{
+      return(dt)
+    }
   }else{
-    return(as.Date(gsub(".*\\As*(\\d{7}).*", "\\1", str),"%Y%j"))
+    return(genGetDates(str,...))
   }
 }
 

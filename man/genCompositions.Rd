@@ -2,51 +2,71 @@
 % Please edit documentation in R/genCompositions.R
 \name{genCompositions}
 \alias{genCompositions}
-\title{Creates image compositions from a time series of satellite images}
+\title{Create image compositions from a time series of satellite images}
 \usage{
-genCompositions(rstack, n.days, fun, by.periods = F, ...)
+genCompositions(rstack, by, fun, n, by.days = FALSE, verbose = FALSE,
+  ...)
 }
 \arguments{
-\item{rstack}{a \code{RasterStack} where every layer is named after the date it was captured in \%Y\%j format}
+\item{rstack}{a \code{RasterStack}, where layer names contain the capturing
+date of an image in "\code{YYYYJJJ}" format.}
 
-\item{n.days}{number of days considered in the temporal window}
+\item{by}{character argument. Accepts \code{"month"} or \code{"year"} for creating monthly
+or yearly composites. Only required if \code{n} is provided.}
 
-\item{fun}{the function used to create the composite, such as \code{max}, \code{min}, \code{mean}, ...}
+\item{fun}{the function used to create the composite, such as \code{max},
+\code{min}, \code{mean}, ...}
 
-\item{by.periods}{flag to specify the number of images to aggregate instead a temporal window}
+\item{n}{number of images combined in the aggregation. Only required if 
+\code{by} is not provided.}
 
-\item{...}{accepts \code{AppRoot} the path where the RData will be saved and argument for nested functions}
+\item{by.days}{logical argument. If \code{FALSE}, \code{n} indicates the 
+number of consucutive images being aggregated. If \code{TRUE}, the function
+aggregates the imagery within every \code{n} days. The aggregation requires
+at least one image avaiable.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints
+the running steps and warnings.}
+
+\item{...}{arguments for nested functions:
+\itemize{
+  \item \code{AppRoot} the path where the images will be saved in the
+  GTiff format.
+}}
+}
+\value{
+a \code{RasterStack} with the time series of the composite images.
 }
 \description{
-\code{genCompositions} combines satellite images over a temporal window to create composites
+\code{genCompositions} combines a series of satellite images to create compositions.
 }
 \details{
-This function supports temporal aggregations with different function specifying \code{fun} argument.
-THe number of images aggregated is defined using \code{n.days} argument.
+The layer of the composite image takes its name from the first image used in
+the composition.
 
-Composites reduce the number of images, but improve the quality of the images,
-since clouds and potential outliers are removed. One of the most used
-techniques is the Maximum Value Composition (\code{MVC}). The \code{MVC} applied over
-images of remote sensing indices. Clouds and outliers usually appear as
-very low values the index. Hence, the \code{MVC} builds a composite using the
-maximum value a pixel over a period of time. Write \code{fun = max} to use the
-\code{MVC} technique. Other functions are also supported
+\code{genCompositions} reduces the number of images but improves the total
+quality of the time-series by removing cloulds and outliers. One widespread
+compositing technique is the maximum value composition (MVC). This technique
+allocates in each pixel of the composite the maximum value (fun = max) that
+the pixel reaches during a time period (\code{n}, \code{by.days = TRUE}).
 }
 \examples{
-# load a time series of NDVI images over Navarre
+# loading NDVI images of Navarre
 data("ex.ndvi.navarre")
-# show the images: clouds are found
+# Ploting the images: clouds are found
 genPlotGIS(ex.ndvi.navarre)
-# Composites dividing the series in two periods and using MVC
-composite.NDVI.1 <- genCompositions(ex.ndvi.navarre,
-                                    n.days = 2,
-                                    by.periods = TRUE,
+# the first composite image is made with images 1, 2 and 3, 
+# and the second composite image is made with images 4, 5 and 6
+composite.NDVI.a <- genCompositions(rstack = ex.ndvi.navarre,
+                                    n = 3,
                                     fun = max)
+genPlotGIS(composite.NDVI.a)
+# when by.days=TRUE, the first composite image is made with images 1, 2 and 3, 
+# the second with image 4, and the third with images 5 and 6.
+composite.NDVI.3a <- genCompositions(rstack = ex.ndvi.navarre,
+                                     n = 3,
+                                     by.days = TRUE,
+                                     fun = max)
 # Check that the clouds were removed
-genPlotGIS(composite.NDVI.1)
-# Equivalent: Use 3 images for every composite
-composite.NDVI.2 <- genCompositions(ex.ndvi.navarre,
-                                    n.days = 3,
-                                    fun = max)
-genPlotGIS(composite.NDVI.2)
+genPlotGIS(composite.NDVI.3a)
 }

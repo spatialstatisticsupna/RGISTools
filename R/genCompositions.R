@@ -1,67 +1,106 @@
-#' Creates image compositions from a time series of satellite images
+#' Create image compositions from a time series of satellite images
 #'
-#' \code{genCompositions} combines satellite images over a temporal window to create composites
+#' \code{genCompositions} combines a series of satellite images to create compositions.
 #'
-#' This function supports temporal aggregations with different function specifying \code{fun} argument.
-#' THe number of images aggregated is defined using \code{n.days} argument.
+#' The layer of the composite image takes its name from the first image used in
+#' the composition.
 #'
-#' Composites reduce the number of images, but improve the quality of the images,
-#' since clouds and potential outliers are removed. One of the most used
-#' techniques is the Maximum Value Composition (\code{MVC}). The \code{MVC} applied over
-#' images of remote sensing indices. Clouds and outliers usually appear as
-#' very low values the index. Hence, the \code{MVC} builds a composite using the
-#' maximum value a pixel over a period of time. Write \code{fun = max} to use the
-#' \code{MVC} technique. Other functions are also supported
+#' \code{genCompositions} reduces the number of images but improves the total
+#' quality of the time-series by removing cloulds and outliers. One widespread
+#' compositing technique is the maximum value composition (MVC). This technique
+#' allocates in each pixel of the composite the maximum value (fun = max) that
+#' the pixel reaches during a time period (\code{n}, \code{by.days = TRUE}).
 #'
-#' @param rstack a \code{RasterStack} where every layer is named after the date it was captured in \%Y\%j format
-#' @param n.days number of days considered in the temporal window
-#' @param fun the function used to create the composite, such as \code{max}, \code{min}, \code{mean}, ...
-#' @param by.periods flag to specify the number of images to aggregate instead a temporal window
-#' @param ... accepts \code{AppRoot} the path where the RData will be saved and argument for nested functions
+#' @param rstack a \code{RasterStack}, where layer names contain the capturing
+#' date of an image in "\code{YYYYJJJ}" format.
+#' @param n number of images combined in the aggregation. Only required if 
+#' \code{by} is not provided.
+#' @param fun the function used to create the composite, such as \code{max},
+#' \code{min}, \code{mean}, ...
+#' @param by character argument. Accepts \code{"month"} or \code{"year"} for creating monthly
+#' or yearly composites. Only required if \code{n} is provided.
+#' @param by.days logical argument. If \code{FALSE}, \code{n} indicates the 
+#' number of consucutive images being aggregated. If \code{TRUE}, the function
+#' aggregates the imagery within every \code{n} days. The aggregation requires
+#' at least one image avaiable.
+#' @param verbose logical argument. If \code{TRUE}, the function prints
+#'   the running steps and warnings.
+#' @param ... arguments for nested functions:
+#' \itemize{
+#'   \item \code{AppRoot} the path where the images will be saved in the
+#'   GTiff format.
+#' }
+#' 
+#' @return a \code{RasterStack} with the time series of the composite images.
 #'
 #' @examples
-#' # load a time series of NDVI images over Navarre
+#' # loading NDVI images of Navarre
 #' data("ex.ndvi.navarre")
-#' # show the images: clouds are found
+#' # Ploting the images: clouds are found
 #' genPlotGIS(ex.ndvi.navarre)
-#' # Composites dividing the series in two periods and using MVC
-#' composite.NDVI.1 <- genCompositions(ex.ndvi.navarre,
-#'                                     n.days = 2,
-#'                                     by.periods = TRUE,
+#' # the first composite image is made with images 1, 2 and 3, 
+#' # and the second composite image is made with images 4, 5 and 6
+#' composite.NDVI.a <- genCompositions(rstack = ex.ndvi.navarre,
+#'                                     n = 3,
 #'                                     fun = max)
+#' genPlotGIS(composite.NDVI.a)
+#' # when by.days=TRUE, the first composite image is made with images 1, 2 and 3, 
+#' # the second with image 4, and the third with images 5 and 6.
+#' composite.NDVI.3a <- genCompositions(rstack = ex.ndvi.navarre,
+#'                                      n = 3,
+#'                                      by.days = TRUE,
+#'                                      fun = max)
 #' # Check that the clouds were removed
-#' genPlotGIS(composite.NDVI.1)
-#' # Equivalent: Use 3 images for every composite
-#' composite.NDVI.2 <- genCompositions(ex.ndvi.navarre,
-#'                                     n.days = 3,
-#'                                     fun = max)
-#' genPlotGIS(composite.NDVI.2)
-genCompositions<-function(rstack,n.days,fun,by.periods=F,...){
+#' genPlotGIS(composite.NDVI.3a)
+genCompositions<-function(rstack,by,fun,n,by.days=FALSE,verbose=FALSE,...){
   args<-list(...)
-  AppRoot<-defineAppRoot(...)
-  #rstack<-stack(list.files("Z:/ImagenesSatelite/MODIS_v6/NDVI",full.names=T,pattern="\\.tif"))
-  if(!by.periods){
-    # Create compositions using dates
-    dates<-genGetDates(names(rstack))
-    mxdate<-max(dates)
-    mndate<-min(dates)
-    alldates<-as.Date(mndate:mxdate)
-    n.ped<-length(alldates)
-    rnp<-ceiling(n.ped/n.days)
-    idx<-rep(1:rnp,each=n.days)[1:length(alldates)]
-    idx<-idx[alldates%in%dates]
-    comp<-stackApply(rstack,idx,fun=fun)
-    names(comp)<-paste0("Comp_",n.days,"_",format(alldates,"%Y%j")[unique(idx)])
+  dates<-genGetDates(names(rstack))
+  if(!missing(by)){
+    
+    if(verbose){message("Omitting n and by.day argument...")}
+    switch (by,
+            "month" = {
+              alldates<-format(dates,"%Y%m")
+              alldates<-as.factor(alldates)
+              idx<-as.integer(alldates)
+              comp<-stackApply(rstack,idx,fun=fun, ...)
+              alldates<-as.Date(paste0(unique(as.character(alldates)),"01"),"%Y%m%d")
+              names(comp)<-paste0("Comp_",format(alldates,"%Y%j"))
+            },
+            "year" = {
+              alldates<-format(dates,"%Y")
+              alldates<-as.factor(alldates)
+              idx<-as.integer(alldates)
+              comp<-stackApply(rstack,idx,fun=fun, ...)
+              alldates<-as.Date(paste0(unique(as.character(alldates)),"0101"),"%Y%m%d")
+              names(comp)<-paste0("Comp_",format(alldates,"%Y%j"))
+            },
+            stop("by argument only accepts 'month' or 'years'.")
+    )
   }else{
-    # Create compositions using periods
-    n.ped<-nlayers(rstack)
-    rnp<-ceiling(n.ped/n.days)
-    idx<-rep(1:rnp,each=n.days)[1:n.ped]
-    comp<-stackApply(rstack,idx,fun=fun)
-    names(comp)<-paste0(names(rstack)[unique(idx)],"_Comp_",n.days)
+    if(by.days){
+      # Create compositions using dates
+      dates<-genGetDates(names(rstack))
+      mxdate<-max(dates)
+      mndate<-min(dates)
+      alldates<-as.Date(mndate:mxdate)
+      n.ped<-length(alldates)
+      rnp<-ceiling(n.ped/n)
+      idx<-rep(1:rnp,each=n)[1:length(alldates)]
+      idx<-idx[alldates%in%dates]
+      comp<-stackApply(rstack,idx,fun=fun, ...)
+      names(comp)<-paste0("Comp_",n,"_",format(alldates,"%Y%j")[seq(1,n.ped,n)[unique(idx)]])
+    }else {
+      alldates<-format(dates,"%Y%m")
+      alldates<-as.factor(alldates)
+      idx<-as.integer(alldates)
+      comp<-stackApply(rstack,idx,fun=fun, ...)
+      alldates<-as.Date(paste0(unique(as.character(alldates)),"01"),"%Y%m%d")
+      names(comp)<-paste0("Comp_",format(alldates,"%Y%j"))
+    }
   }
   if("AppRoot"%in%names(args)){
-    writeRaster(comp,filename=paste0(AppRoot,"/",names(comp),".tif"),bylayer=T)
+    writeRaster(comp,filename=paste0(pathWinLx(args$AppRoot),"/",names(comp),".tif"),bylayer=TRUE)
   }else{
     return(comp)
   }

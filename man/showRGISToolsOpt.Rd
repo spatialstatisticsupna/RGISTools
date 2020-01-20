@@ -2,15 +2,20 @@
 % Please edit documentation in R/RGISToolsOpts.R
 \name{showRGISToolsOpt}
 \alias{showRGISToolsOpt}
-\title{prints the name of all options in RGISTools package}
+\title{Print the name of all RGISTools configuration variables}
 \usage{
 showRGISToolsOpt(env = optEnv)
 }
 \arguments{
-\item{env}{the environment where the RGISTools option are saved}
+\item{env}{the environment where the `\code{RGISTools}' option are saved.}
+}
+\value{
+a \code{character} vector with the names of the configuration variables.
 }
 \description{
-prints the name of all options in RGISTools package
+\code{showRGISToolsOpt} prints the name of all options in the `\code{RGISTools}' package.
+This function can be jointly used with \code{\link{setRGISToolsOpt}} and 
+\code{\link{getRGISToolsOpt}}.
 }
 \examples{
 showRGISToolsOpt()

@@ -2,38 +2,51 @@
 % Please edit documentation in R/varSAVI.R
 \name{varSAVI}
 \alias{varSAVI}
-\title{calculates soil-adjusted vegetation index (SAVI) from raster bands}
+\title{Calculates the soil-adjusted vegetation index (SAVI)}
 \usage{
-varSAVI(red, nir, L = 0.5)
+varSAVI(red, nir, L = 0.5, scfun = function(r) {     r })
 }
 \arguments{
-\item{red}{the red band of the capture in \code{raster} format}
+\item{red}{a \code{raster} with the red band of the capture.}
 
-\item{nir}{the nir band of the capture in \code{raster} format}
+\item{nir}{a \code{raster} with the NIR band of the capture.}
 
-\item{L}{value of 0.5 in reflectance space was found to minimize soil brightness variations}
+\item{L}{a constant to remove soil background effect. A value of 0.5 is
+recommended in the literature.}
+
+\item{scfun}{a function to re-scale the original pixel values into 
+reflectance (0-1).}
 }
 \value{
-SAVI in \code{raster} format
+A SAVI image in \code{raster} format.
 }
 \description{
-\code{varSAVI} computes the the SAVI index from red and nir bands.
+\code{varSAVI} Calculate the soil-adjusted vegetation index (SAVI) from the
+red and near-infrared (NIR) bands.
 }
 \details{
-The index minimized the soil brightness influences from spectral
-vegetation indices using red and near-infrared (NIR) wavelengths. This function is used within
-\code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
+The soil adjusted vegetation index (SAVI) is an indicator engineered to remove 
+the influence of the soil background effect \insertCite{huete1988soil}{RGISTools}.  
+This function is used within \code{\link{ls7FolderToVar}}, 
+\code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and
+\code{\link{senFolderToVar}}.
 }
 \examples{
-# dir path of cropped and cutted modis image in the region of navarre as example
-img.dir <- system.file("ExNavarra", package = "RGISTools")
-# list all tif files
-img.files <- list.files(img.dir,pattern="\\\\.tif$",recursive = TRUE,full.names = TRUE)
-#select the red and nir bands
-red <- raster(img.files[1])
-nir <- raster(img.files[2])
-# calculate the ndwi image
-savi <- varSAVI(red,nir)
+# path to the cropped and cutted MODIS images for the region of Navarre
+wdir <- system.file("ExNavarreVar", package = "RGISTools")
+# list all the tif files
+files.mod <- list.files(wdir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)
+# print the MOD09 bands
+getRGISToolsOpt("MOD09BANDS")
+
+# select the red and NIR bands
+img.mod.red <- raster(files.mod[1])
+img.mod.nir <- raster(files.mod[2])
+# calculate the SAVI image
+img.mod.savi <- varSAVI(img.mod.red,img.mod.nir,scfun=getRGISToolsOpt("MOD09SCL"))
 # plot the image
-spplot(savi)
+spplot(img.mod.savi,col.regions=rev(topo.colors(20)))
+}
+\references{
+\insertRef{huete1988soil}{RGISTools}
 }

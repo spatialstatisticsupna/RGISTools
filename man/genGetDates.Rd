@@ -2,29 +2,37 @@
 % Please edit documentation in R/genGetDates.R
 \name{genGetDates}
 \alias{genGetDates}
-\title{Returns the capure date from name}
+\title{Return the capturing date from the name of a raster layer}
 \usage{
 genGetDates(str, ...)
 }
 \arguments{
-\item{str}{String containing the date in "\%Y\%j" format}
+\item{str}{\code{character} containing the date as "\code{YYYYJJJ}",
+where \code{Y} and \code{J} are year and julian day digits.}
 
-\item{...}{accepts \code{date.format} to modify the format of the date being returned}
+\item{...}{arguments for nested functions:
+\itemize{
+  \item \code{format} the format of the date being returned.
+}}
+}
+\value{
+a \code{Date} class object with the date of the image or \code{character} class,
+if \code{format} argument is used.
 }
 \description{
-\code{genGetDates} extracts the date of one or several images when the date is included in "\%Y\%j" date format.
+\code{genGetDates} extracts the date of one or several images when the name
+of the layer includes the date in the "\code{YYYYJJJ}" format.
 }
 \details{
-The function reads a date from a character type variable in year-julian format and returns an R date format variable
+The function reads a date from a \code{character} class object in year-julian
+("\code{YYYYJJJ}") format and returns a \code{Date} class object.
 }
 \examples{
-library(raster)
-
 img <- matrix(1:16, ncol = 4, byrow = TRUE)
-r<-raster(img)
-names(r)<-c("RandomImage_2018034")
+r <- raster(img)
+names(r) <- c("RandomImage_2018034")
 
 spplot(r)
-genGetDates(names(r))
+genGetDates(names(r), format = "\%Y\%j")
 
 }

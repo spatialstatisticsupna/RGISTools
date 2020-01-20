@@ -2,43 +2,50 @@
 % Please edit documentation in R/varRGB.R
 \name{varRGB}
 \alias{varRGB}
-\title{Generates an RGB image from 3 spectral bands}
+\title{Generate an RGB image from 3 spectral bands}
 \usage{
-varRGB(red, green, blue, range = c(), rPath = NULL, cutline = NULL)
+varRGB(red, green, blue, q.range = c(), rPath = NULL, region = NULL)
 }
 \arguments{
-\item{red}{the red band of the capture in \code{raster} format}
+\item{red}{a \code{raster} with the red band of the capture.}
 
-\item{green}{the green band of the capture in \code{raster} format}
+\item{green}{a \code{raster} with the green band of the capture.}
 
-\item{blue}{the blue band of the capture in \code{raster} format}
+\item{blue}{a \code{raster} with the blue band of the capture.}
 
-\item{range}{a vector with the minimum and maximum reflectance quantiles being considered}
+\item{q.range}{a vector with the minimum and maximum reflectance quantiles
+being considered.}
 
-\item{rPath}{file path were resulting RGB image is saved}
+\item{rPath}{the file path where the resulting RGB image is saved.}
 
-\item{cutline}{\code{SpatialPolygonsDataFrame} for cutting the image by a region}
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
+defining the area of interest for image masking.}
 }
 \description{
-\code{varRGB} creates RGB raster stack in scaling the range of the images to 0-255 color range.
+\code{varRGB} creates red-green-blue (RGB) images as a \code{RasterStack} by
+scaling the pixel values to 0-255 color range.
 }
 \details{
-The function rescales the original reflectance values to a range of 0-255. The functions
-rearranges the RGB bands to create a stack with a RGB image ready to visualize with plotRGB.
-Bands may contain reflectance outliers which cause the image to look dark. Use the range
-argument to remove the outliers and get a better-looking image.
+The function rescales the original reflectance values to a range of 0-255.
+The function re-arranges the RGB bands to create a stack ready to visualize
+with plotRGB. Bands may contain outliers which cause the image to look dark.
+Use the \code{q.range} argument to remove the outliers and get a 
+better-looking image.
 }
 \examples{
-# dir path of cropped and cutted modis image in the region of navarre as example
-img.dir <- system.file("ExNavarra", package = "RGISTools")
-# list all tif files
-img.files <- list.files(img.dir,pattern="\\\\.tif$",recursive = TRUE,full.names = TRUE)
-#select the red, blue and nir bands
-red <- raster(img.files[1])
-blue <- raster(img.files[3])
-green <- raster(img.files[4])
+# path to the cropped and cutted MODIS images for the region of Navarre
+wdir <- system.file("ExNavarreVar", package = "RGISTools")
+# list all the tif files
+files.mod <- list.files(wdir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)
+# print the MOD09 bands
+getRGISToolsOpt("MOD09BANDS")
 
-range=c(0.001,0.999)
-image<-varRGB(red,green,blue,range)
-print(plotRGB(image))
+# select the red, blue and NIR bands
+img.mod.red <- raster(files.mod[1])
+img.mod.blue <- raster(files.mod[3])
+img.mod.green <- raster(files.mod[4])
+
+q.range=c(0.001,0.999)
+img.mod.rgb<-varRGB(img.mod.red,img.mod.green,img.mod.blue,q.range)
+print(plotRGB(img.mod.rgb))
 }

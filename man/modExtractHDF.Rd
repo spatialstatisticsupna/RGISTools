@@ -2,52 +2,79 @@
 % Please edit documentation in R/modExtractHDF.R
 \name{modExtractHDF}
 \alias{modExtractHDF}
-\title{Converts an .hdf file into a set of .tif files}
+\title{Convert an HDF file into a set of GTiff files}
 \usage{
-modExtractHDF(filesHDF, overwrite = FALSE, shp = NULL,
-  showWarnings = T, bFilter = NULL, ...)
+modExtractHDF(filesHDF, AppRoot, overwrite = FALSE, bFilter = NULL,
+  rm.band = NULL, region = NULL, verbose = FALSE, ...)
 }
 \arguments{
-\item{filesHDF}{the full path of the .hdf files to be converted}
+\item{filesHDF}{the full path where the HDF files are located.}
 
-\item{overwrite}{Flag for overwrite existing images}
+\item{AppRoot}{the directory where the extracted images are saved.}
 
-\item{shp}{the shape file of the area of interest}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
+images with the same name.}
 
-\item{showWarnings}{a boolean flag to print warning messages from external functions}
+\item{bFilter}{a vector containing the names of the bands to extract.}
 
-\item{bFilter}{a vector containing the names of the bands to extract}
+\item{rm.band}{a vector containing the names of the bands excluded from the
+extraction.}
 
-\item{...}{argument to allow function nestering
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+defining the area of interest for image masking.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
+running steps and warnings.}
+
+\item{...}{arguments for nested functions.
 \itemize{
-  \item \code{AppRoot} the directory where the extracted images should be located
+       \item \code{dates} a vector with the capturing dates being considered
+  for downloading. 
 }}
 }
 \description{
-\code{modExtractHDF} converts the original compressed from MODIS (.df) into a file
-format loadable by R (.tif). The function extracts all image layers and crops the
-area of interest (if needed)
+\code{modExtractHDF} converts the original format of MODIS images (hierarchical
+data format or HDF) into GTiffs (one file for each layer).
 }
 \details{
-HDF files cannot be directly loaded into R. The function modExtractHDF
-borrows gdalwarp and gdal_translate functions from the gdalUtils package.
-These functions are used to convert the .hdf files into .tif files. The .tif
-files can be loaded in R using the raster package. Go to \code{\link{modSearch}} and \code{\link{modDownload}}
-for further details about these functions. Further details about the \code{gdalUtils} and \code{gdalUtils} packages
+HDF files cannot be directly loaded into `R', so they must be converted into
+GTiffs. To acomplish this task, the function \code{modExtractHDF}
+borrows the \code{gdalwarp} and \code{gdal_translate} functions from the 
+`\code{gdalUtils}' package. Further details about these functions can be found
+in the corresponding package manual. `GDAL' and `\code{gdalUtils}' must be 
+properly installed to use \code{modExtractHDF}. GTiffs can be loaded in `R'
+using the `\code{raster}' package.
 }
 \examples{
 \dontrun{
-data(navarre)
-img.list<-modSearch(product="MOD11A1",
-                    startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                    endDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                    collection=6,
-                    extent=navarre)
-#download first image of image list
-modDownSearch(img.list,"rgistools","EspacialUPNA88")
-#Extract one layer from downloaded image
-hdf.files <- list.files("./",full.names = T,pattern="\\\\.hdf$")
-first.hdf.file <-hdf.files[1]
-modExtractHDF(first.hdf.file)
+# load a spatial polygon object of Navarre
+data(ex.navarre)
+
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+print(wdir)
+wdir.mod <- file.path(wdir, "Modis","MOD11A1")
+sres <- modSearch(product = "MOD11A1",
+                  startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                  endDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
+                  collection = 6,
+                  extent = ex.navarre)
+                      
+# download the images of the list
+wdir.mod <- file.path(wdir, "Modis", "MOD11A1")
+modDownload(searchres = sres, 
+            username = "username", 
+            password = "password",
+            AppRoot = wdir.mod)
+
+wdir.mod.tif<-file.path(wdir.mod,"tif")
+wdir.mod.hdf <- file.path(wdir.mod, "hdf")
+
+# extract the first image
+files.mod.hdf <- list.files(wdir.mod.hdf, 
+                        full.names = TRUE, 
+                        pattern = "\\\\.hdf$")
+files.mod.hdf.1 <- files.mod.hdf[1]
+modExtractHDF(filesHDF = files.mod.hdf.1,
+              AppRoot = wdir.mod.tif)
 }
 }

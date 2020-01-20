@@ -2,79 +2,94 @@
 % Please edit documentation in R/lsDownSearch.R
 \name{lsDownSearch}
 \alias{lsDownSearch}
-\title{Downloads a time series of satellite images from Landsat 7-8}
+\title{Search and download Landsat-7 or Landsat-8 images}
 \usage{
-lsDownSearch(searchres, username = NULL, password = NULL,
-  cookies.file = "lscookies.txt", verbose = FALSE, raw.rm = FALSE,
-  untar = FALSE, ...)
+lsDownSearch(satellite, username, password, AppRoot, lvl = 1,
+  product = c("sr", "source_metadata"), verbose = FALSE,
+  untar = TRUE, raw.rm = FALSE, ...)
 }
 \arguments{
-\item{searchres}{the results from \code{ls7Search} or \code{ls8Search}}
+\item{satellite}{string containing the type of satellite 
+(\code{"ls7"} or \code{"ls8"}).}
 
-\item{username}{login credentials to access the USGS EROS web service}
+\item{username}{USGS’s `EarthExplorer' username.}
 
-\item{password}{login credentials to access the USGS EROS web service}
+\item{password}{USGS’s `EarthExplorer' password.}
 
-\item{cookies.file}{File path for saving the cookies that are used in the download process}
+\item{AppRoot}{the download directory.}
 
-\item{verbose}{Flag for debugging mode}
+\item{lvl}{a number specifying the processing level. Default value, 1.}
 
-\item{raw.rm}{Flag for removing the raw images}
+\item{product}{a \code{character} vector with the requested Level-2 products.
+By default \code{c("sr", "source_metadata")}.}
 
-\item{untar}{Flag for untaring downloaded images}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the
+running steps and warnings.}
 
-\item{...}{argument for function nestering and/or
-\itemize{
-  \item \code{AppRoot}  Root directory where the images will be saved
+\item{untar}{logical argument. If \code{TRUE}, untars downloaded images.}
+
+\item{raw.rm}{logical argument. If \code{TRUE}, removes the raw images.}
+
+\item{...}{argumetns for nested functions:
+ \itemize{
+  \item \code{dates} a vector with the capturing dates being searched. This
+   argument is mandatory if \code{startDate} and \code{endDate} are not defined.
+  \item  \code{startDate} a \code{Date} class object with the starting date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
+  \item  \code{endDate} a \code{Date} class object with the ending date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.
+  \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf*} class object 
+defining the area of interest.
+  \item any argument for \code{\link{ls8Search}}/\code{\link{ls7Search}} or 
+  \code{\link{lsDownload}}.
 }}
 }
+\value{
+this function does not return anything. It saves the imagery as
+`tar.gz’ (and GTiff files) in a folder called `raw’ (`untar’) in the
+ \code{AppRoot} directory.
+}
 \description{
-\code{lsDownSearch} downloads the list of images provided by \code{ls7Search} and \code{ls8Search} functions.
-The images are saved as ‘.tiff’ files in the AppRoot directory..
+\code{lsDownSearch} searches and downloads Landsat-7 or Landsat-8 images
+concerning a particular location and time interval from the 
+\href{https://earthexplorer.usgs.gov/}{`EarthExplorer' repository}.
+Images are saved as GTiff files in the \code{AppRoot} directory.
 }
 \details{
-This function is used for download landsat images. Uses the data frame result from  any landsat
-search function (\code{\link{ls7Search}} or \code{\link{ls8Search}}) and download all images in data frame.
-Image download requires USGS login account from \url{https://ers.cr.usgs.gov/register/}.
+\code{lsDownSearch} is a wrapper function of \code{\link{ls7Search}}, 
+\code{\link{ls8Search}}, and \code{\link{lsDownload}} to search and
+download images in a single step. The function requires USGS's `EarthExplorer'
+credentials, which can be obtained
+\href{https://ers.cr.usgs.gov/register/}{here}.
 
-The image files from the USGS EROS web service are compressed as ‘.tar.gz’ files. lsDownSearch decompresses the
-images and obtains the corresponding ‘.tiff’ files. The ‘.tiff’ files are saved in the
-\code{AppRoot} directory. When \code{untarDir} is defined the function untars the images in this folder.
-This replicates the images in compresses version as tar.gz and uncompresses version. To save space in the disk
-\code{raw.rm = T} can be defined, and \code{lsDownSearch} will remove the ‘tar.gz’ files.
-If \code{raw.rm = F}, the original files remain, which might be useful to have access to the original files
-in the future and avoid further downloads. By default, lsDownSearch saves the images in (...), in the AppRoot
-directory. To change this setting, provide AppRoot = the full path as an argument.
+The files from `EarthExplorer' are compressed as ‘tar.gz’. \code{lsDownSearch}
+decompresses the images and obtains the corresponding GTiffs. The GTiffs are
+saved in the \code{AppRoot} directory. To change this option, provide 
+\code{AppRoot = “full path”}. When \code{untar=TRUE}, the function untars
+the imagery in this location. Image decompression duplicates the information
+due to the presence of both, compressed and decompressed images. Set 
+\code{raw.rm = TRUE} to remove the former ones.
 }
 \examples{
 \dontrun{
-# Search and download the images from Landsat 8 comprised between
-# 2011 and 2013 for the region of Navarre
-data(navarre)
-search<-ls8Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                  endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
-                  extent=navarre,
-                  browseAvaliable="Y")
+# load a spatial polygon object of Navarre
+data(ex.navarre)
 
-#download 1 image
-lsDownSearch(search[1,],username="user",password="pass",untarDir=T,raw.rm=T)
-# download 10 images
-lsDownSearch(search[1:10,],username="user",password="pass",untarDir=T,raw.rm=T)
-# download all the images
-lsDownSearch(search,username="user",password="pass",untarDir=T,raw.rm=T)
-
-# Search and download the images from Landsat 7 comprised between
-# 2011 and 2013 for the region of Navarre
-data(navarre)
-search<-ls7Search(startDate=as.Date("01-01-2011","\%d-\%m-\%Y"),
-                  endDate=as.Date("31-12-2013","\%d-\%m-\%Y"),
-                  extent=navarre,
-                  browseAvaliable="Y")
-#download 1 image
-lsDownSearch(search[1,],username="user",password="pass",untarDir=T,raw.rm=T)
-#download 10 images
-lsDownSearch(search[1:10,],username="user",password="pass",untarDir=T,raw.rm=T)
-#download all the images
-lsDownSearch(search,username="user",password="pass",untarDir=T,raw.rm=T)
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+print(wdir)
+# search and download the images from Landsat-8 between
+# 01-01-2018 and 20-01-2018 for the region of Navarre
+lsDownSearch(satellite = "ls8",
+             username = "username",
+             password = "password",
+             startDate = as.Date("01-01-2018", "\%d-\%m-\%Y"),
+             endDate = as.Date("20-01-2018", "\%d-\%m-\%Y"),
+             extent = ex.navarre,
+             AppRoot = wdir)
+           
+# remove metadata to free memory space
+lsRemoveMetadata()
 }
 }

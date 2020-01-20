@@ -2,22 +2,32 @@
 % Please edit documentation in R/RGISToolsOpts.R
 \name{setRGISToolsOpt}
 \alias{setRGISToolsOpt}
-\title{changes the default value of an RGISTools option}
+\title{Change the default value of an RGISTools option}
 \usage{
 setRGISToolsOpt(opt, value, env = optEnv)
 }
 \arguments{
-\item{opt}{the name of the option to change in character format}
+\item{opt}{a \code{character} with the name of the option.}
 
-\item{value}{the new value of selected option}
+\item{value}{the new value of the selected option.}
 
-\item{env}{the environment where the RGISTools option are saved}
+\item{env}{the environment where the `\code{RGISTools}' option is saved.}
+}
+\value{
+this function does not return anything.
 }
 \description{
-changes the default value of an RGISTools option
+\code{setRGISToolsOpt} changes the default value of an `\code{RGISTools}' 
+configuration variable. This function can be jointly used with 
+\code{\link{showRGISToolsOpt}} and \code{\link{getRGISToolsOpt}}.
 }
 \examples{
+# list avaliable options names
+showRGISToolsOpt()
+# list the URL where the Landsat-7 metadata is located
 getRGISToolsOpt("LS7META.dir")
-setRGISToolsOpt("LS7META.dir","NewMTDir")
+# change the URL where the Landsat-7 metadata is located
+setRGISToolsOpt("LS7META.dir", "NewMTDir")
+# list the URL where the Landsat-7 metadata is located
 getRGISToolsOpt("LS7META.dir")
 }

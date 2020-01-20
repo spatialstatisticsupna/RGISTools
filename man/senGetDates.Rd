@@ -2,32 +2,41 @@
 % Please edit documentation in R/genMissionGetDates.R
 \name{senGetDates}
 \alias{senGetDates}
-\title{Returns the capturing date of Sentinel image}
+\title{Return the capturing dates of Sentinel-2 images}
 \usage{
 senGetDates(str, ...)
 }
 \arguments{
-\item{str}{a string or a list of strings defining the file path(s) or file name(s)}
+\item{str}{the full path(s) or official name(s) of the Sentinel
+images from which the capturing date is retrieved.}
 
-\item{...}{accepts \code{date.format} to modify the format of the date being returned}
+\item{...}{arguments for nested functions:
+\itemize{
+  \item \code{format} the format of the date being returned.
+}}
+}
+\value{
+a \code{Date} class object with the date of the Sentinel image or \code{character} class,
+if the \code{format} argument is used.
 }
 \description{
-\code{senGetDates} extracts the capturing date of one or several Sentinel
-images, given their file paths or names. The function returns a date class object.
+\code{senGetDates} reads the official name of a Sentinel-2 image and returns
+the capturing date, as a \code{Date} class object.
 }
 \details{
-The function works with names or file paths having either of the two file extensions,
- \code{.jp2} or \code{.tif} files. The function accepts more than on file path or file names.
- If so, they should be provided as a list. Dates are returned as '\code{YYYY-mm-dd}' by default.
- If another format is required, it can be modified through the argument date.format.
+The function works with file names (or their paths) regardless of their
+extension. The function accepts more than on file path, which can be passed
+as a vector of \code{character}s. Dates are returned as `\code{YYYY-mm-dd}' by
+default. If another format is required, it can be modified through the
+argument \code{format}.
 }
 \examples{
-#example of getting date from Sentinel2 image name
-str<-c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
-       "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
-dt<-senGetDates(str)
-print(dt)
-print(format(dt,"\%Y\%j"))
-senGetDates(str,date.format="\%Y\%j")
+# getting the capturing date from the name of Sentinel-2 images
+file.sen <- c("S2A_MSIL1C_20170102T111442_N0204_R137_T30TWN_20170102T111441.SAFE",
+              "S2A_OPER_PRD_MSIL1C_PDMC_20160308T090616_R094_V20160305T110109_20160305T110109")
+date.sen <- senGetDates(file.sen)
+print(date.sen)
+print(format(date.sen,"\%Y\%j"))
+senGetDates(file.sen, format = "\%Y\%j")
 
 }

@@ -2,36 +2,46 @@
 % Please edit documentation in R/varNDWI.R
 \name{varNDWI}
 \alias{varNDWI}
-\title{calculates normalized difference water index (NDWI)}
+\title{Calculates the normalized difference water index (NDWI)}
 \usage{
 varNDWI(green, nir)
 }
 \arguments{
-\item{green}{the green band of the capture in \code{raster} format}
+\item{green}{a \code{raster} with the green band of the capture.}
 
-\item{nir}{the swir1 band of the capture in \code{raster} format}
+\item{nir}{a \code{raster} with the NIR band of the capture.}
 }
 \value{
-NDWI in \code{raster} format
+A NDWI image in \code{raster} format.
 }
 \description{
-\code{varNDWI} computes the NDWI index from green and nir bands.
+\code{varNDWI} Calculate the normalized difference water index (NDWI) from
+the green and near-infrared (NIR) bands.
 }
 \details{
-NDWI is used to monitor changes related to water content in water bodies, using green and NIR bands.
-This function is used within
-\code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
+The normalized difference water index (NDWI) is a ratio between the green
+and near-infrared bands of the spectrum that was developed to detect open
+water areas and minimize  the influence of the soil and vegetation variations 
+\insertCite{mcfeeters1996use}{RGISTools}. This function is used within
+\code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, 
+\code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
 }
 \examples{
-# dir path of cropped and cutted modis image in the region of navarre as example
-img.dir <- system.file("ExNavarra", package = "RGISTools")
-# list all tif files
-img.files <- list.files(img.dir,pattern="\\\\.tif$",recursive = TRUE,full.names = TRUE)
-#select the green and nir bands
-green <- raster(img.files[4])
-nir <- raster(img.files[2])
-# calculate the ndwi image
-ndwi <- varNDWI(green,nir)
+# path to the cropped and cutted MODIS images for the region of Navarre
+wdir <- system.file("ExNavarreVar", package = "RGISTools")
+# list all the tif files
+files.mod <- list.files(wdir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)
+# print the MOD09 bands
+getRGISToolsOpt("MOD09BANDS")
+
+# select the green and NIR bands
+img.mod.green <- raster(files.mod[4])
+img.mod.nir <- raster(files.mod[2])
+# calculate the NDWI image
+img.mod.ndwi <- varNDWI(img.mod.green,img.mod.nir)
 # plot the image
-spplot(ndwi)
+spplot(img.mod.ndwi,col.regions=rev(rainbow(20)))
+}
+\references{
+\insertRef{mcfeeters1996use}{RGISTools}
 }

@@ -1,126 +1,116 @@
-#' Downloads Sentinel images from search function response
+#' Search and download Sentinel images
 #'
-#' \code{senDownSearch} downloads the list of urls generated y the function senSearch by using the ESA’s SciHub API
+#' \code{senDownSearch} searches and downloads Sentinel images concerning a
+#' particular location and time interval from `SciHub's' repository.  
+#' 
+#' \code{senDownSearch} is a wrapper function of \code{\link{senSearch}} and 
+#' \code{\link{senDownload}} to search and download images in a single step.
+#' The function requires ESA’s `SciHub' credentials, which can be obtained
+#' \href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 #'
-#' \code{senDownSearch} downloads the images from Sentinel products using the search results provided by \code{\link{senSearch}}.
-#'  The raw images are downloaded into the Aproot directory. In case the download is interrupted,
-#'  the image file could be corrupted. The function detects the corrupted files to restart the process.
-#'  To prevent the computer from crashing, the nattempts  flag limits the number of attempts to download the image.
-#'  The default number of attempts is set to 3.
-#' senDownload requires the credentials to access the ESA’s SciHub data service. Please,
-#' sign up at: \url{https://scihub.copernicus.eu/dhus/#/self-registration}
-#'
-#' @param searchres response from \code{senSearch}
-#' @param username login credentials to access the ESA’s SciHub web service
-#' @param password login credentials to access the ESA’s SciHub web service
-#' @param unzip flag for unzipping the images
-#' @param overwrite flag for overwriting the resulting the images
-#' @param nattempts the number of attempts that the function has to carry out to download an image in case the file becomes corrupted.
-#' @param error.log error log file name
-#' @param ... argument to allow function nestering
+#' @param username ESA’s `SciHub' username.
+#' @param password ESA’s `SciHub' password.
+#' @param AppRoot the directory where the images are saved.
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param ... arguments for nested functions:
 #' \itemize{
-#'   \item \code{AppRoot} the directory to save the resulting time series
+#'   \item \code{product} the type of Sentinel product. Ex. "S2MSI1C",
+#'   "S2MSI2A", "S2MSI2Ap", ... 
+#'   \item  \code{startDate} a \code{Date} class object with the starting date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'   \item  \code{endDate} a \code{Date} class object with the ending date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'   \item \code{dates} a vector with the capturing dates being considered
+#'   for searching. This argument is mandatory if 
+#'   \code{startDate} and \code{endDate} are not defined.
+#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
+#' defining the area of interest.
+#'   \item \code{extent} an \code{extent}, \code{Raster*}, or \code{Spatial*}
+#'   object representing the region of interest with longitude/latitude
+#'   coordinates. This argument is mandatroy when \code{region} is not defined.
+#'   \item \code{platform} the name of the Sentinel mission ("Sentinel-1", 
+#'   "Sentinel-2", ...).
+#'   \item \code{nattempts} the number of attempts to download an image in case
+#'   it becomes corrupted.
+#'   \item \code{unzip} logical argument. If \code{TRUE}, unzips the images.
+#'   \item \code{verbose} logical argument. If \code{TRUE}, the function prints
+#'   the running steps and warnings.
 #' }
-#'
+#' @return this function does not return anything. It saves the imagery as
+#' `zip’ (and JP2 files) in a folder called `raw’ (`unzip’) in the
+#'  \code{AppRoot} directory.
 #' @examples
 #' \dontrun{
-#' # Download S2MSI1C products sensed by Sentinel - 2 satellite in July-August 2018
-#' data(navarre)
-#' searchres<-senSearch(startDate=as.Date("2018-07-29","%Y-%m-%d"),
-#'                      endDate=as.Date("2018-08-06","%Y-%m-%d"),
-#'                      platform="Sentinel-2",
-#'                      extent=navarre,
-#'                      product="S2MSI1C",
-#'                      username="rgistools",
-#'                      password="EspacialUPNA88")
-#'
-#' #filtering the path R094 where Navarre is located
-#' length(searchres)
-#' searchres<-searchres[grepl("R094",names(searchres))]
-#' length(searchres)
-#'
-#' #sentinel download function
-#' senDownSearch(searchres=searchres,
-#'               username="rgistools",
-#'               password="EspacialUPNA88",
-#'               AppRoot="D:/TestEnvironment",
-#'               unzip=T)
+#' # load a spatial polygon object of Navarre
+#' data(ex.navarre)
+#' # Download S2MSI1C products sensed by Sentinel-2 
+#' # between the julian dates 210 and 218, 2018
+#' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+#' print(wdir)
+#' senDownSearch(startDate = as.Date("2018210", "%Y%j"),
+#'             endDate = as.Date("2018218", "%Y%j"),
+#'             platform = "Sentinel-2",
+#'             extent = ex.navarre,
+#'             product = "S2MSI1C",
+#'             pathrow = c("R094"),
+#'             username = "username",
+#'             password = "password",
+#'             AppRoot = wdir)
+#'             
+#' wdir.sen <- file.path(wdir, "Sentinel-2")
+#' wdir.sen.unzip <- file.path(wdir.sen, "unzip")
+#'                   
+#' files.sen.unzip <- list.files(wdir.sen.unzip,
+#'                               pattern = "\\TCI.jp2$",
+#'                               full.names = TRUE,
+#'                               recursive = TRUE)
+#' img.sen.rgb <- stack(files.sen.unzip[1])
+#' plotRGB(img.sen.rgb)
 #' }
-senDownSearch<-function(searchres,
-                        username,
+senDownSearch<-function(username,
                         password,
-                        error.log = "download_error.log",
-                        nattempts = NULL,
-                        unzip=F,
-                        overwrite=F,
+                        AppRoot,
+                        verbose=FALSE,
                         ...){
+  if(missing(username)|missing(password))stop("username or password not defined!")
   arg<-list(...)
-  AppRoot<-defineAppRoot(...)
-  downFolder<-file.path(AppRoot,"/raw")
-  dir.create(downFolder,recursive=T,showWarnings = F)
-  if(unzip){
-    unzipFolder<-file.path(AppRoot,"/unzip")
-    dir.create(unzipFolder,recursive=T,showWarnings = F)
+  if("platform"%in%names(arg)){
+    AppRoot<-file.path(AppRoot,arg$platform)
+  }else if("product"%in%names(arg)){
+    if(substr(arg$product,1,2)=="S2"){
+      AppRoot<-file.path(AppRoot,"Sentinel-2")
+    }
+  }
+  
+  senURL<-senSearch(username=username,
+                    password=password,
+                    ...)
+  
+  if(verbose){
+    message("Urls before filters.")
+    message(paste(names(senURL),collapse="\n"))
+  }
+  if(!is.null(arg$pathrow)){
+      #senURL<-senURL[grepl(arg$filter,names(senURL))]
+    senURL<-senURL[Reduce("|",lapply(arg$pathrow,grepl,names(senURL)))]
+  }
+  if(!is.null(arg$senbox)){
+    senURL<-senURL[Reduce("|",lapply(arg$senbox,grepl,names(senURL)))]
   }
 
-  for(i in 1:length(searchres)){
-    url<-searchres[i]
-    file.name<-names(url)
-    tryCatch({
-      c.handle = new_handle()
-      handle_setopt(c.handle,
-                    referer=getRGISToolsOpt("SCIHUBHUSURL"),
-                    useragent = getRGISToolsOpt("USERAGENT"),
-                    followlocation = TRUE ,
-                    autoreferer = TRUE ,
-                    username=username,
-                    password=password)
-      image.url<-URLencode(url)
-      downPath<-file.path(downFolder,paste0(file.name,".zip"))
-      curl_download(image.url, destfile=downPath,handle = c.handle)
-
-      #md5 check
-      md5.url<-paste0(gsub("$value","",url,fixed = T),"Checksum/Value/$value")
-      print(md5.url)
-      repeat{
-        response<-curl(md5.url,handle =c.handle)
-        md5.text<-readLines(response)
-        #asn<-getForm(md5.url, login = username, password = password, curl = curl)
-        #md5.text<- getURLContent(md5.url,userpwd=paste0(username,":",password),curl=curl)
-        if(!grepl("Error",md5.text)){
-          print(paste0("Get md5: ",md5.text))
-          break
-        }else{
-          message("md5 not found! trying again.")
-          Sys.sleep(10)
-        }
-      }
-      if(!genCheckMD5(downPath,oficial.md5=md5.text)){
-        cat(paste0("Error cheking ",file.name," file md5: ",md5.text),file=error.log,sep="\n",append = T)
-        file.remove(downPath)
-        senDownSearch(username,password,url,file.path,file.name,error.log,AppRoot=AppRoot,nattempts +1)
-      }else{
-        print(paste0("OK: cheking ",file.name," file md5."))
-        if(unzip){
-          message("Unzipping ", basename(downPath)," file.")
-          unzip(zipfile=downPath,
-                exdir = unzipFolder,
-                overwrite=overwrite)
-        }
-      }
-    }, error = function(e) {
-      print(paste0("ERROR:",e))
-      close(file)
-      cat(file.name,file=error.log,sep="\n",append = T)
-      file.remove(downPath)
-      senDownSearch(username,password,url,file.path,error.log,AppRoot=AppRoot,nattempts +1)
-    }, finally = {
-    })
-  }
-
-  if(unzip){
-    message(paste0("The images have been unzipped in: ",unzipFolder))
-  }else{
-    message(paste0("The images have been downloaded and saved on HHD. \nFile path: ",downFolder))
-  }
+  message(paste0(length(senURL)," tiles found! Starting the download process..."))
+  
+  if(length(senURL)==0){stop("There are not images for downloading.")}
+  senDownload(searchres=senURL,
+                username=username,
+                password=password,
+                AppRoot=AppRoot,
+                unzip=TRUE,
+                ...)
 }
+
+
+

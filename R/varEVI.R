@@ -1,32 +1,50 @@
-#' calculates the enhanced vegetation index (EVI) from raster bands
+#' Calculate the enhanced vegetation index (EVI)
 #'
-#' \code{varEVI} computes the the EVI index from blue, nir and red bands.
+#' \code{varEVI} computes the enhanced vegetation index (EVI) from the 
+#' blue, near-infrared (NIR) and red bands.
 #'
-#' The enhanced vegetation index (EVI) is an 'optimized' vegetation index designed to enhance the
-#' vegetation signal with improved sensitivity in high biomass.
-#' This function is used within
-#' \code{\link{ls7FolderToVar}}, \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and \code{\link{senFolderToVar}}.
+#' The enhanced vegetation index (EVI) is a vegetation indicator that improves
+#' the sensitivity towards high biomass densities compared to NDVI 
+#' \insertCite{huete2002overview}{RGISTools} (See \code{\link{varNDVI}}). This
+#' function is used within \code{\link{ls7FolderToVar}},
+#' \code{\link{ls8FolderToVar}}, \code{\link{modFolderToVar}} and
+#' \code{\link{senFolderToVar}}.
 #'
-#' @param blue the blue band of the capture in \code{raster} format
-#' @param red the red band of the capture in \code{raster} format
-#' @param nir the nir band of the capture in \code{raster} format
+#' @references \insertRef{huete2002overview}{RGISTools}
 #'
-#' @return EVI in \code{raster} format
+#' @param blue a \code{raster} with the blue band of the capture.
+#' @param red a \code{raster} with the red band of the capture.
+#' @param nir a \code{raster} with the NIR band of the capture.
+#' @param scfun a function to re-scale the original pixel values into 
+#' reflectance (0-1).
+#'
+#' @return An EVI image in \code{raster} format.
 #'
 #' @examples
-#' # dir path of cropped and cutted modis image in the region of navarre as example
-#' img.dir <- system.file("ExNavarra", package = "RGISTools")
-#' # list all tif files
-#' img.files <- list.files(img.dir,pattern="\\.tif$",recursive = TRUE,full.names = TRUE)
-#' #select the red, blue and nir bands
-#' red <- raster(img.files[1])
-#' blue <- raster(img.files[3])
-#' nir <- raster(img.files[2])
-#' # calculate the evi image
-#' evi <- varEVI(blue,red,nir)
+#' # path to the cropped and cutted MODIS images for the region of Navarre
+#' wdir <- system.file("ExNavarreVar", package = "RGISTools")
+#' # list all the tif files
+#' files.mod <- list.files(wdir, pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
+#' # print the MOD09 bands
+#' getRGISToolsOpt("MOD09BANDS")
+#' scale.factor <- 0.0001
+#' 
+#' # select the red, blue and nir bands
+#' img.mod.red <- raster(files.mod[1]) * scale.factor
+#' img.mod.blue <- raster(files.mod[3]) * scale.factor
+#' img.mod.nir <- raster(files.mod[2]) * scale.factor
+#' # calculate the EVI without scale
+#' img.mod.evi <- varEVI(img.mod.blue, img.mod.red, img.mod.nir)
+#' # calculate the EVI scaling 0-1
+#' img.mod.evi.2 <- varEVI(img.mod.blue, img.mod.red, img.mod.nir,scfun=getRGISToolsOpt("MOD09SCL"))
+#' img.mod.evi.12 <- stack(img.mod.evi,img.mod.evi.2)
 #' # plot the image
-#' spplot(evi)
-varEVI<-function(blue,red,nir){
+#' spplot(img.mod.evi.12,col.regions=rev(terrain.colors(20)),at = c(seq(0,1,0.05)))
+varEVI<-function(blue,red,nir,scfun=function(r){r}){
+  blue=scfun(blue)
+  red=scfun(red)
+  nir=scfun(nir)
   evi <- 2.5*((nir - red) / (nir+6 * red-7.5*blue+1))
   return(evi)
 }
+

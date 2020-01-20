@@ -2,44 +2,55 @@
 % Please edit documentation in R/ls7LoadMetadata.R
 \name{ls7LoadMetadata}
 \alias{ls7LoadMetadata}
-\title{Sinchronizes landsat 7 meta data file for image search.}
+\title{Load or update the Landsat-7 metadata file}
 \usage{
-ls7LoadMetadata(update = F, verbose = T, omit.question = F, ...)
+ls7LoadMetadata(AppRoot, update = FALSE, verbose = TRUE,
+  omit.question = TRUE, ...)
 }
 \arguments{
-\item{update}{TRUE/FALSE argument to force update of metadata file}
+\item{AppRoot}{the directory where the metadata file should be located.}
 
-\item{verbose}{TRUE/FALSE argument to print all steps of metadata download process}
+\item{update}{logical argument. If \code{TRUE}, updates the metadata file.}
 
-\item{omit.question}{omit the question for ensure the loading of the metadata}
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
+running steps and warnings.}
 
-\item{...}{accepts \code{AppRoot} as root directory where meta data file will be saved
-or/and other argument for function nestering}
+\item{omit.question}{logical argument. If \code{TRUE}, the question about 
+loading the metadata is omitted.}
+
+\item{...}{arguments for nested functions.}
+}
+\value{
+this function does not return anything, but loads the “.LS7MD” 
+\code{data.frame} on the environment of the `RGISTools' package.
 }
 \description{
-\code{ls7LoadMetadata} loads a data frame called \code{.LS7MD}
- with the names of the Landsat-7 images and their metadata.The metadata provides
- auxiliary information regarding Landsat-7 images repository such as image quality, acquisition
- data, cloud cover, etc. You can find a description of the metadata at
- \url{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}
+\code{ls7LoadMetadata} loads a \code{data.frame} called "\code{.LS7MD}"
+with the names of the Landsat-7 images and their metadata. The metadata provides
+auxiliary information, such as image quality, acquisition date, cloud cover,
+etc. You can find a description of the metadata on the
+\href{https://www.usgs.gov/land-resources/nli/landsat/bulk-metadata-service}{USGS's website}.
 }
 \details{
-All captures done by Landsat-7 are cataloged in a unique csv file. The size of the file
-might be larger than 360MB. Therefore, the process of downloading and importing R may take several
-minutes (around 15 minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device). The function creates an
-RData file with the metadata csv. Thus, every time \code{ls7MetaDataFile} is called,
-this function loads the existing RData in the Approot. This is intended to reduce the loading
-time of metadata in the future.
+All captures done by Landsat-7 are catalogued and documented in a unique csv
+file. The size of the file could be larger than 360MB. The function downloads
+and imports the metadata into `R', which may take several minutes (roughly 15
+minutes in a Intel Core i7-4790, 16Gb of RAM and Hard Drive Device). The 
+function creates an RData file with the csv metadata. Thus, every time
+\code{ls7LoadMetadata} is called, this function loads the existing RData from
+the \code{AppRoot} directory, which aims to reduce the loading time of the 
+metadata in the future.
 }
 \examples{
 \dontrun{
-#creates a MetaData folder and downloads the csv on working directory
-ls7LoadMetadata()
+# creates a MetaData folder and downloads the csv in the "Path_for_downloading_folder" directory
+ls7LoadMetadata(AppRoot = file.path(tempdir(),"Path_for_downloading_folder"))
 
-#creates a MetaData folder and downloads the csv on "C:/LandsatDownload" directory
-ls7LoadMetadata(AppRoot="C:/LandsatDownload")
+# update the metadata file
+ls7LoadMetadata(AppRoot = file.path(tempdir(),"Path_for_downloading_folder"), update = TRUE)
 
-Force renew existing meta data csv
-ls7LoadMetadata(update=TRUE)
+# get metadata data frame 
+LS7MD <- getRGISToolsOpt("LS7METADATA")
+head(LS7MD)
 }
 }

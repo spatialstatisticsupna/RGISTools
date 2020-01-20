@@ -3,20 +3,20 @@
 \docType{data}
 \name{ex.dem.navarre}
 \alias{ex.dem.navarre}
-\title{An example time-series of Digital Elevation Model (DEM) for the region of Navarre in Spain}
-\format{The \code{RasterBrick} contains 6 time-periods, with the same DEM:
+\title{A Digital Elevation Model (DEM) of the region of Navarre (Spain)}
+\format{The \code{RasterStack} contains 6 layers with the same DEM, one for
+every image in the time series of the \code{\link{genSmoothingCovIMA}} example.
+The \code{RasterStack} coordinates are in the Sinusoidal projection:
+
 \describe{
-  \item{name}{The of each capture contains the date of the period in julian format as YYYYJJJ}
-  \item{size}{Each layer contains 113 rows and 105 columns}
+  \item{name}{layer names contain the capturing date of the corresponding image in the format "\code{YYYYJJJ}"}.
+  \item{size}{113 rows by 105 columns and 6 layers}.
 }}
-\source{
-\url{http://www.diamondse.info/}
-}
-\usage{
-ex.dem.navarre
-}
 \description{
-Geographically projected \code{RasterBrick} object with the DEM values for
-the region of Navarre, to use as example in \code{genSmoothingIMA}
+Geographically projected \code{RasterStack} with the digital elevation model
+(DEM) of the region of Navarre (Spain). The DEM was obtained from the
+\href{http://centrodedescargas.cnig.es/CentroDescargas/locale?request_locale=en#}{National Center for Geographic Information}
+of Spain. The DEM is used as a covariable in the Image Mean Anomaly (IMA)
+algorithm (\code{\link{genSmoothingCovIMA}}).
 }
-\keyword{datasets}
+\keyword{data}

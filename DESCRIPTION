@@ -1,14 +1,18 @@
 Type: Package
 Package: RGISTools
-Title: Tools for Downloading and Processing Time-Series of Satellite Images
-Version: 0.9.0
+Title: Handling Multiplatform Satellite Images
+Version: 1.0.0
 Author: U Pérez - Goya [aut, cre] <unai.perez@unavarra.es>,
+        M Montesino - SanMartin [aut] <manuel.montesino@unavarra.es>,
         A F Militino [aut] <militino@unavarra.es>,
-        M D Ugarte [aut] <lola@unavarra.es>,
-        M Montesino - SanMartin [aut] <manuel.montesino@unavarra.es>
+        M D Ugarte [aut] <lola@unavarra.es>
 Maintainer: U Perez - Goya <unai.perez@unavarra.es>
-Description: Download and filling time series of satellite images of a region of interest. The functions of RGISTools allow a unified access to multispectral images from the Landsat, MODIS and Sentinel repositories. RGISTools  also offers capabilities for processing satellite images, including tile mosaicking, cropping and extracting the variables of interest.   Finally, the package implements  the genFillingIMA and genSmoothingIMA functions for gap-filling long time-series of images.
-Depends: R (>= 3.5.0), raster, curl,XML, rjson, rvest, urltools,tools, fields, gdalUtils, magick, methods, sp, xml2
+Description: Downloading, customizing, and processing time series of satellite images for a region of interest. 'RGISTools' functions allow a unified access to multispectral images from Landsat, MODIS and Sentinel repositories. 'RGISTools' also offers capabilities for customizing satellite images, such as tile mosaicking, image cropping and new variables computation. Finally, 'RGISTools' covers the processing, including cloud masking, compositing and gap-filling/smoothing time series of images (Militino et al., 2018 <doi:10.3390/rs10030398> and Militino et al., 2019 <doi:10.1109/TGRS.2019.2904193>).
+URL: https://github.com/spatialstatisticsupna/RGISTools#RGISTools
+BugReports: https://github.com/spatialstatisticsupna/RGISTools/issues
+Depends: R (>= 3.5.0), raster, sf, tmap
+Imports: Rdpack, XML, xml2, utils, fields, urltools, rjson, rvest, tools, methods, curl, httr, mapview, sp, stars
+RdMacros: Rdpack
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

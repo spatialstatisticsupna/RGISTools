@@ -2,63 +2,96 @@
 % Please edit documentation in R/ls8FolderToVar.R
 \name{ls8FolderToVar}
 \alias{ls8FolderToVar}
-\title{Creates variables from Landsat 7 multispectral bands}
+\title{Compute a remote sensing index from a time series of Landsat-8 images}
 \usage{
-ls8FolderToVar(src, fun, getStack = F, overwrite = F, ...)
+ls8FolderToVar(src, fun, AppRoot, getStack = FALSE, overwrite = FALSE,
+  verbose = FALSE, ...)
 }
 \arguments{
-\item{src}{path to the folder with the Landsat multispectral image}
+\item{src}{path to the folder with the Landsat-8 multispectral image.}
 
-\item{fun}{is a function with the calculation of the index.
-All functions in the package starting with three characters
-'var' are acceptable functions. Custom functions can be also
-implemented \code{var} are acceptable functions.}
+\item{fun}{a \code{function} that computes the remote sensing index.}
 
-\item{getStack}{if \code{TRUE}, returns the time-series as a raster or otherwise as Hard Drive Devide (HDD)}
+\item{AppRoot}{the directory of the outcoming time series.}
 
-\item{overwrite}{flag to overwrite the existing images with the same name}
+\item{getStack}{logical argument. If \code{TRUE}, returns the time series of
+images as a \code{RasterStack}, otherwise the images are saved in the Hard
+Drive Device (HDD).}
 
-\item{...}{accepts \code{AppRoot} as the directory to save the resulting time series
-or/and other argument for function nestering}
+\item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
+images with the same name.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the
+running steps and warnings.}
+
+\item{...}{arguments for nested functions.
+ \itemize{
+  \item \code{dates} a vector with the capturing dates being considered
+  for mosaicking. If not supplied, all dates are mosaicked.
+}}
+}
+\value{
+this function does not return anything, unless \code{getStack = TRUE}
+which then returns a \code{RasterStack} with the time series of with the
+index.
 }
 \description{
-\code{ls8FolderToVar} calculates an index using the bands from Landsat multispectral
-images. The images are specified by a path to the storing folder (resulting from
-the \code{lsMosaic} function). The function returns a rasterStack with the time-series of the index.
+\code{ls8FolderToVar} computes a remote sensing index from the spectral bands
+of a time series of Landsat-8 images. The images are specified by the path to
+the folder that stores the imagery (resulting from the \code{\link{lsMosaic}} 
+function). The function returns a \code{RasterStack} with a time series of 
+images of the remote sensing index.
 }
 \details{
-The function requires to define \code{src} and \code{fun} attributes. \code{src} defines the path to
-the result of \code{\link{lsMosaic}}, with all bands of Landsat-7 for a region of interest. \code{fun} defines
-the variable of interest using any of the functions in the packages starting with \code{var} (\code{\link{varNDVI}},
- \code{\link{varEVI}}, ...)
+The function requires the definition of the \code{src} and \code{fun} 
+arguments. The \code{src} is usually the path resulting from 
+\code{\link{lsMosaic}}.The \code{fun} argument can be any function from this
+package beginning with “var” (\code{\link{varNDVI}}, \code{\link{varEVI}},
+etc.). Custom functions can also be implemented. If \code{fun = varRGB}, 
+then the argument \code{getStack} must be equal to \code{FALSE} and the 
+red-green-blue (RGB) images must be imported afterwards.
 }
 \examples{
 \dontrun{
-#load a spatial polygon object of navarre for the example
-data(navarre)
-#asign the folder where the example will be run
-src<-"Z:/Aplicaciones/Paquetes/TestEnvironment/Landsat8"
-#download landsat8 images
-search<-lsDownload(satellite="ls8",
-                   username="rgistools",
-                   password="EspacialUPNA88",
-                   startDate=as.Date("01-01-2018","\%d-\%m-\%Y"),
-                   endDate=as.Date("20-01-2018","\%d-\%m-\%Y"),
-                   extent=navarre,
-                   untarDir="untar",
-                   AppRoot=src)
-#asign the folder with the landsat 8 images untared
-tif.src<-file.path(src,"untar")
-#mosaic the Landsat 8 images
-lsMosaic(tif.src,
-         AppRoot=src,
-         out.name="Navarre")
-#asign src as the path to mosaiced folder
-src<-file.path(src,"Navarre")
-#generate NDVI images of Navarre
-ls8FolderToVar(src,
-               fun=varNDVI,
-               AppRoot=file.path(dirname(src)),
-               overwrite = T)
+# load a spatial polygon object of Navarre
+data(ex.navarre)
+# main output directory
+wdir <- file.path(tempdir(),"Path_for_downloading_folder")
+print(wdir)
+# download Landsat-8 images
+lsDownSearch(satellite = "ls8",
+             username = "username",
+             password = "password",
+             startDate = as.Date("01-01-2018","\%d-\%m-\%Y"),
+             endDate = as.Date("18-01-2018","\%d-\%m-\%Y"),
+             pathrow = list(c(200, 31), c(200, 30)),
+             untar = TRUE,
+             AppRoot = wdir)
+# folder with the Landsat-8 untared images
+src.ls8 <-file.path(wdir,"Landsat8")
+src.ls8.untar <- file.path(src.ls8, "untar")
+# mosaic the Landsat-8 images
+lsMosaic(src = src.ls8.untar,
+         AppRoot = src.ls8,
+         out.name = "Navarre",
+         extent = ex.navarre,
+         gutils = TRUE)
+# path to the folder with mosaicked images
+src.ls8.navarre <- file.path(src.ls8, "Navarre")
+# generate NDVI images of Navarre
+src.ls8.var <- file.path(src.ls8, "Navarre_Variables")
+dir.create(src.ls8.var)
+ls8FolderToVar(src.ls8.navarre,
+               fun = varNDVI,
+               AppRoot = src.ls8.var,
+               overwrite = TRUE)
+               
+files.ls8.ndvi <- list.files(file.path(src.ls8.var,"NDVI"),
+                             pattern = "\\\\.tif$",
+                             full.names = TRUE,
+                             recursive = TRUE)
+
+img.ls8.ndvi <- raster(files.ls8.ndvi[1])
+spplot(img.ls8.ndvi)
 }
 }

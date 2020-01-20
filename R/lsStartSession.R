@@ -1,7 +1,7 @@
 startUSGSsession<-function(username,
                            password,
-                           cookies.file="cookies.txt",
-                           verbose=F){
+                           cookies.file=NULL,
+                           verbose=FALSE){
   c.handle = new_handle()
   handle_setopt(c.handle,
                 referer=getRGISToolsOpt("USGS.url"),

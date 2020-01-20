@@ -2,43 +2,78 @@
 % Please edit documentation in R/senPreview.R
 \name{senPreview}
 \alias{senPreview}
-\title{Allows Sentinel satellite images preview before its download}
+\title{Preview Sentinel-2 satellite images}
 \usage{
-senPreview(searchres, username, password, n, size = NULL)
+senPreview(searchres, username, password, n, dates, lpos = c(3, 2, 1),
+  add.Layer = FALSE, verbose = FALSE, ...)
 }
 \arguments{
-\item{searchres}{a data frame with  the results from a search of Landsat images provided by the function senSearch}
+\item{searchres}{a vector with the results from \code{\link{senSearch}}.}
 
-\item{username}{Scihub username}
+\item{username}{ESA’s `SciHub' username.}
 
-\item{password}{Scihub password}
+\item{password}{ESA’s `SciHub' password.}
 
-\item{n}{a number with the row corresponding to the image of interest in the search data frame}
+\item{n}{a \code{numeric} argument identifying the row of the image in
+\code{searchres}.}
 
-\item{size}{a number specifying the size of the preview to be displayed. The number determines pixels numbe}
+\item{dates}{a vector with the dates being considered
+for previewing. This argument is mandatory if 
+\code{n} is not defined.}
+
+\item{lpos}{vector argument. Defines the position of the red-green-blue
+layers to enable false color visualization.}
+
+\item{add.Layer}{logical argument. If \code{TRUE}, the function plots the 
+image on an existing map. Allows combinations of images on a map using 
+\code{\link{lsPreview}} and \code{\link{modPreview}} functions.}
+
+\item{verbose}{logical argument. If \code{TRUE}, the function prints the 
+running steps and warnings.}
+
+\item{...}{arguments for nested functions:
+ \itemize{
+  \item arguments allowed by the \code{viewRGB} function from \code{mapview}
+  packages are valid arguments
+}}
+}
+\value{
+this function does not return anything. It displays a preview of one
+of the search results.
 }
 \description{
-\code{senPreview} shows a preview of the n image from a set of search results
+\code{senPreview} shows a preview of the \code{n}-th image from a set of 
+search results on an interactive map.
 }
 \details{
-The functions shows a preview of an image resulting from a search in Scihub platform.
-A search with \code{senSearch} has to be carried before proceeding with the preview.
-The preview is downloaded from Scihub website, and the crediantials are needed.
-Please, be aware that only some images have this feature.
+The function shows a preview of the \code{n}-th output image from a search
+in Sentinel archives (\code{\link{modSearch}}). The preview is downloaded from
+`SciHub's' website. Please, be aware that only some images may have a preview.
+Credentials from an ESA’s `SciHub' account are needed, which can be obtained 
+\href{https://scihub.copernicus.eu/dhus/#/self-registration}{here}.
 }
 \examples{
 \dontrun{
-data(navarre)
+# load a spatial polygon object of Navarre
+data(ex.navarre)
 # perform the search query
-searchres<-senSearch(startDate=as.Date("2018210","\%Y\%j"),
-                     endDate=as.Date("2018218","\%Y\%j"),
-                     platform="Sentinel-2",
-                     intersects=navarre,
-                     product="S2MSI1C",
-                     username="rgistools",
-                     password="EspacialUPNA88")
-#Preview some images
-senPreview(searchres,3,username="rgistools",password="EspacialUPNA88")
-senPreview(searchres,1,username="rgistools",password="EspacialUPNA88",600)
+sres <- senSearch(startDate = as.Date("2018210","\%Y\%j"),
+                  endDate = as.Date("2018218","\%Y\%j"),
+                  platform = "Sentinel-2",
+                  extent = ex.navarre,
+                  product = "S2MSI1C",
+                  username = "username",
+                  password = "password")
+# preview some images
+senPreview(sres, username = "username", password = "password",n=1)
+senPreview(sres, username = "username", password = "password",n=3, add.Layer =TRUE)
+
+# show the dates in julian days
+senGetDates(names(sres),format="\%Y\%j")
+
+senPreview(sres, 
+           username = "username", 
+           password = "password", 
+           dates = senGetDates(names(sres[3])))
 }
 }

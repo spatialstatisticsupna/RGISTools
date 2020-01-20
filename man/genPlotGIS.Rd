@@ -2,70 +2,135 @@
 % Please edit documentation in R/genPlotGIS.R
 \name{genPlotGIS}
 \alias{genPlotGIS}
-\title{Plots satellite images with a proper GIS format}
+\title{Plot satellite images with a GIS format}
 \usage{
-genPlotGIS(r, region = NULL, ...)
+genPlotGIS(r, region, breaks, labels, zlim, layout, proj, nbreaks = 40,
+  nlabels = 10, as.grid = TRUE, compass.rm = FALSE,
+  scale.bar.rm = FALSE, ...)
 }
 \arguments{
-\item{r}{\code{raster} class variable with the image or image stack to be plotted}
+\item{r}{a \code{Raster*} class object with an image or stack of images to be plotted. If \code{r} is a \code{list} 
+of \code{RasterStack}, \code{genPlotGIS} treates the stacks as RGB images.}
 
-\item{region}{a \code{polygon} class variable defining the area of interest}
+\item{region}{a \code{Spatial*}, projected \code{raster*}, or \code{sf} class object 
+defining the area of interest.}
 
-\item{...}{other arguments accepted by the function \code{spplot} or
-\code{compOpt} as options to fit the size and the location of the
-GIS components as the arrow and the scales}
+\item{breaks}{a \code{numeric} vector defining the color breaks of the legend.}
+
+\item{labels}{a \code{character} vector defining the labels in the breaks of the legend.}
+
+\item{zlim}{a \code{numeric} vector defining the maximun and minimun pixel values to be mapped.}
+
+\item{layout}{a \code{numeric} vector defining rows and columns to divide the plotting area.}
+
+\item{proj}{a \code{character} or 'CRS' class object defining the coordinate 
+reference system of the plot.}
+
+\item{nbreaks}{a \code{numeric} argument defining the default number of breaks.}
+
+\item{nlabels}{a \code{numeric} argument defining the default number of labels in the legend.}
+
+\item{as.grid}{a \code{logical} argument. If \code{TRUE}, removes the space between 
+plotted layers.}
+
+\item{compass.rm}{a \code{logical} argument to remove the compass from the plot. 
+\code{FALSE} by default.}
+
+\item{scale.bar.rm}{a \code{logical} argument to remove the scale bat from the plot. 
+\code{FALSE} by default.}
+
+\item{...}{argument for nested functions:
+\itemize{
+  \item \code{tm_layout} any argument accepted by the \code{tm_layout} function.
+  \item \code{tm.graticules} any argument accepted by the \code{tm_graticules} function. 
+  The arguments are defined as \code{tm.graticules.arg}, where \code{arg} is the 
+  \code{tm_graticules} argument name. For example, the \code{labels.size} of \code{tm_graticules} 
+  is defined as \code{tm.graticules.labels.size}.
+  \item \code{tm.compass} any argument accepted by the \code{tm_compass} function. 
+  The arguments are defined as \code{tm.compass.arg}, where \code{arg} is the 
+  \code{tm_compass} argument name. For example, the \code{type} of \code{tm_compass} 
+  is defined as \code{tm.compass.type}.
+  \item \code{tm.scale.bar} any argument accepted by the \code{tm_scale_bar} function. 
+  The arguments are defined as \code{tm.scale.bar.arg}, where \code{arg} is the 
+  \code{tm_scale_bar} argument name. For example, the \code{text.size} of \code{tm_scale_bar} 
+  is defined as \code{tm.scale.bar.text.size}.
+  \item \code{tm.shape} and \code{tm.polygon} refer to the \code{region} argument. Any argument accepted by the 
+  \code{tm_shape} and \code{tm_polygon} functions. 
+  The arguments are defined as \code{tm.shape.region.arg} or \code{tm.polygon.region.arg}, where \code{arg} is the 
+  \code{tm_shape} and \code{tm_polygon} argument name respectively. For example, the \code{lwd} of \code{tm_polygon} 
+  is defined as \code{tm.polygon.region.lwd}.
+  \item \code{tm.shape} and \code{tm.raster} refer to the \code{r} argument. Any argument accepted by the 
+  \code{tm_shape} and \code{tm_raster} functions. 
+  The arguments are defined as \code{tm.shape.r.arg} or \code{tm.raster.r.arg}, where \code{arg} is the 
+  \code{tm_shape} and \code{tm_raster} argument name respectively. For example, 
+  the \code{legend.reverse} of \code{tm_raster} is defined as \code{tm.raster.r.legend.reverse}.
+  \item \code{tm.tmap.arrange} any argument accepted by the \code{tm_tmap_arrange} function. 
+  The arguments are defined as \code{tm.tmap.arrange.arg}, where \code{arg} is the 
+  \code{tm_tmap_arrange} argument name. For example, the \code{asp} of \code{tm_tmap_arrange} 
+  is defined as \code{tm.tmap.arrange.asp}. This arguments are only accepted when plotting a \code{list}
+  of stack images to plot as RGB.
+}}
+}
+\value{
+\code{tmap} class containing the plot.
 }
 \description{
-This function helps displaying satellite images with usual GIS information, such as scale, the north arrow and the region of interest
+This function displays satellite images with the usual format in geographic
+information systems (GIS), i.e., adding a scale, north arrow, and the border
+of the region of interest (optional).
 }
 \details{
-The function plots any raster type class as, \code{raster}, \code{RasterStack} or \code{RasterBrick}.
-Accepts all parameter used by the function \code{spplot}.
-The function genPlotGIS adds a north arrow and a polygon with the area of interest.
-If necessary, the projection of the polygon is transformed to match the projection of the raster.
-The projection of the map can be changed by adding the \code{proj} argument. The arrow and scale bar are
-located by default in relative positions. Their positions can be modified with the \code{compOpt} paragram.
+This is a wrapper function of \code{tmap} and hence displays any 
+\code{Raster*} object and accepts all of its parameters. The function adds a
+scale, a north arrow and a polygon in the area of interest. If necessary, the
+function automatically reprojects the polygon to match the projection of the
+\code{raster}. The projection of the map can be changed by modifying the 
+\code{proj} argument. For futher help on tmap arguements, please go the
+\code{\link{tmap}} reference manual.
 }
 \examples{
-data(ex.ndvi.navarre)
-data(navarre)
-
-# Shows a panel of maps, one per date and the region of interest in shown on the fourth map
-genPlotGIS(r=ex.ndvi.navarre[[1:4]],
-           region=navarre,
-           which = c(4),#show region only y 4th image
-           wComp=c(4)  #show component only y 4th image
-)
-
 \dontrun{
-# Plotting the land surface temperature of the first date available in 2011 in Navarre
-# using color palette
-library('RColorBrewer')
-my.palette <- rev(brewer.pal(n = 9, name = "YlOrRd"))
-genPlotGIS(r=ex.ndvi.navarre[[1]],
-           region=navarre,
-           proj=CRS("+init=epsg:4670"), #project all components
-           col.regions=colorRampPalette(my.palette),
-)
-}
+# Simple plot of NDVI in Navarre
+genPlotGIS(ex.ndvi.navarre,
+           ex.navarre)
 
-# change scale text relative Y
-genPlotGIS(r=ex.ndvi.navarre[[1:4]],
-         region=navarre,
-           proj=CRS("+init=epsg:4670"),
-         compOpt=list(
-           #arrow relatives 0-1
-           ArrowRelativeX=0.85,
-           ArrowRelativeY=0.1,
-           ArrowRelativeSize=0.15,
-           #scale relatives 0-1
-           scaleRelativeX=0.1,
-           scaleRelativeY=0.1,
-           scaleRelativeSize=0.15,
-           #scale text relatives 0-1
-           scaleLabelRelativeX=0.1,
-           scaleLabelRelativeY=0.14,
-           scaleLabelSize=5000
-        )
-)
+# Using tm arguments        
+genPlotGIS(ex.ndvi.navarre,
+          ex.navarre,
+          tm.compass.size=1,
+          tm.compass.type="rose",
+          tm.scale.bar.text.size=0.8,
+          tm.polygon.region.lwd=6,
+          tm.polygon.region.border.col="#000000",
+          tm.raster.r.palette=rev(terrain.colors(40)),
+          tm.raster.r.title="NDVI",
+          as.grid = TRUE,
+          tm.graticules.labels.size=1,
+          tm.graticules.n.x=3,
+          tm.graticules.n.y=3)
+# Using the view mode of tmap for ploting the images in the viewer
+tmap_mode("view")
+genPlotGIS(ex.ndvi.navarre,
+           ex.navarre,
+           tm.raster.r.palette=rev(terrain.colors(40)))+
+           tm_facets(as.layers=TRUE)
+           
+# path to the cropped and cutted MODIS images for the region of Navarre
+wdir <- system.file("ExNavarreVar", package = "RGISTools")
+# list all the tif files
+files.mod <- list.files(wdir, pattern="\\\\.tif$", recursive = TRUE, full.names = TRUE)
+# print the MOD09 bands
+getRGISToolsOpt("MOD09BANDS")
+
+# select the red, blue and NIR bands
+img.mod.red <- raster(files.mod[1])
+img.mod.blue <- raster(files.mod[3])
+img.mod.green <- raster(files.mod[4])
+img.mod.rgb<-varRGB(img.mod.red,img.mod.green,img.mod.blue)
+genPlotGIS(ex.ndvi.navarre,
+           ex.navarre)+
+           tm_facets(as.layers = TRUE)+
+genPlotGIS(list(img.mod.rgb),
+           ex.navarre)
+}
 }
