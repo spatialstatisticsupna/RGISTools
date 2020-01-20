@@ -10,7 +10,8 @@
 #' arguments. The \code{src} is usually the path resulting from 
 #' \code{\link{lsMosaic}}. The \code{fun} argument can be any function from this
 #' package beginning with “var” (\code{\link{varNDVI}}, \code{\link{varEVI}}, 
-#' etc.). Custom functions can also be implemented.
+#' etc.). Custom functions can also be implemented. Caution! It is mandatory to 
+#' use level-2 products to get accurate derived variables.
 #'
 #' @param src the path to the folder with the Landsat-7 multispectral imagery.
 #' @param fun a \code{function} that computes the remote sensing index.
@@ -112,7 +113,7 @@ ls7FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
         band<-ls7bands[names(ls7bands)%in%arg]
         if(length(band)==0)
           next
-        eval(parse( text=paste0(arg,"<-raster('",ls.img[grepl(band,ls.img)],"')") ))
+        eval(parse( text=paste0(arg,"<-read_stars('",ls.img[grepl(band,ls.img)],"')") ))
         funString<-paste0(funString,arg,"=",arg,",")
       }
       # arguments asignation
@@ -137,7 +138,7 @@ ls7FolderToVar<-function(src,fun,AppRoot,getStack=FALSE,overwrite=FALSE,verbose=
           rstack<-addLayer(rstack,result)
         }
       }else{
-        writeRaster(result,out.file.name,overwrite=overwrite)
+        write_stars(result,out.file.name)
       }
     }else{
       message(paste0("File exists!\nFile: ",out.file.name))
