@@ -8,7 +8,7 @@ export(genCompositions,genSmoothingCovIMA,genFilterStack,
        getRGISToolsOpt,showRGISToolsOpt,senDownload,senDownSearch,senGetTile,senGetOrbit,
        senFolderToVar,senSearch,senMosaic,senPreview,varEVI,varMSAVI2,varNBR,
        varNBR2,varNDMI,varNDVI,varNDWI,varRGB,varSAVI,lsCloudMask,senCloudMask,modCloudMask,
-       lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders)
+       lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders,lsSearch)
 import("raster","curl", "rjson","rvest", "urltools","tools",
        "fields","sf","tmap","stars")
 importFrom("stats", "na.omit")
