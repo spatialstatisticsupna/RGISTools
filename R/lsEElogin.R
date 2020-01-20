@@ -1,4 +1,4 @@
-loginEEAPI<-function(username,password){
+loginEEAPI<-function(username,password,verbose=FALSE){
   jsonquery<-NULL
   jsonquery$username<-username
   jsonquery$password<-password
@@ -11,12 +11,12 @@ loginEEAPI<-function(username,password){
   if(res$error!=""){
     stop(res$error)
   }
-  message('Logged in to EE API.')
+  if(verbose)message('Logged in to EE API.')
   setRGISToolsOpt("LS.EE.KEY",res$data)
 }
 
 
-logoutEEAPI<-function(){
+logoutEEAPI<-function(verbose=FALSE){
   jsonquery<-NULL
   jsonquery$apikey<-getRGISToolsOpt("LS.EE.KEY")
   if(!is.null(jsonquery$apikey)){
@@ -25,12 +25,12 @@ logoutEEAPI<-function(){
                      content_type("application/x-www-form-urlencoded; charset=UTF-8"))
     res <- content(post.res)
     if(res$error!=""){
-      message('Logged out from EE API.')
+      if(verbose)message('Logged out from EE API.')
       setRGISToolsOpt("LS.EE.KEY",NULL)
     }else{
       stop(res$error)
     }
   }else{
-    message('You are not logged in EE API.') 
+    if(verbose)message('You are not logged in EE API.') 
   }
 }
