@@ -24,9 +24,11 @@ logoutEEAPI<-function(){
                      body = URLencode(paste0('jsonRequest=',toJSON(jsonquery))),
                      content_type("application/x-www-form-urlencoded; charset=UTF-8"))
     res <- content(post.res)
-    if(res$data){
+    if(res$error!=""){
       message('Logged out from EE API.')
       setRGISToolsOpt("LS.EE.KEY",NULL)
+    }else{
+      stop(res$error)
     }
   }else{
     message('You are not logged in EE API.') 

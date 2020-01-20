@@ -8,13 +8,14 @@ export(genCompositions,genSmoothingCovIMA,genFilterStack,
        getRGISToolsOpt,showRGISToolsOpt,senDownload,senDownSearch,senGetTile,senGetOrbit,
        senFolderToVar,senSearch,senMosaic,senPreview,varEVI,varMSAVI2,varNBR,
        varNBR2,varNDMI,varNDVI,varNDWI,varRGB,varSAVI,lsCloudMask,senCloudMask,modCloudMask,
-       lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders,lsSearch)
+       lsEspaOrderImages,lsEspaGetOrderImages,lsEspaUpdateOrders,lsEspaDownloadOrders,lsSearch,
+       lsUpdateEEDataSets)
 import("raster","curl", "rjson","rvest", "urltools","tools",
        "fields","sf","tmap","stars")
 importFrom("stats", "na.omit")
 importFrom("mapview","viewRGB")
 importFrom("methods", "formalArgs","as", "is")
-importFrom("httr","POST","authenticate")
+importFrom("httr","POST","authenticate","content_type")
 importFrom("sp","layout.scale.bar","layout.north.arrow"
            ,"spplot")
 importFrom("XML","xmlNativeTreeParse","xmlSApply",

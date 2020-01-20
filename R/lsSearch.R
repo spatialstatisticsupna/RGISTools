@@ -37,6 +37,6 @@ lsSearch<-function(username,password,startDate,endDate,datasetName,region,logout
   colnames(pathrow)<-c("path","row")
   res.df<-cbind(res.df,pathrow)
 
-  #if(logout){logoutEEAPI()}
+  if(logout){logoutEEAPI()}
   return(res.df)
 }

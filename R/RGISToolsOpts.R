@@ -25,6 +25,7 @@ assign("LS7METADATA", NULL, env=optEnv)
 # Landsat EE API url
 assign("LS.EE.API","https:/earthexplorer.usgs.gov/inventory/json/v/1.4.0/", env=optEnv)
 assign("LS.EE.KEY",NULL, env=optEnv)
+assign("EE.DataSets",readRDS(file.path(system.file("EE_data", package = "RGISTools"),"EE_DataSets.rds")), env=optEnv)
 
 # Landsat lvl2
 assign("LS.ESPA.API","https://espa.cr.usgs.gov", env=optEnv)
