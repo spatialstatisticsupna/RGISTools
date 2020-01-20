@@ -22,6 +22,10 @@ assign("LS7META.var",".LS7MD", env=optEnv)
 assign("LS7DownloadDir","Landsat7", env=optEnv)
 assign("LS7METADATA", NULL, env=optEnv)
 
+# Landsat EE API url
+assign("LS.EE.API","https:/earthexplorer.usgs.gov/inventory/json/v/1.4.0/", env=optEnv)
+assign("LS.EE.KEY",NULL, env=optEnv)
+
 # Landsat lvl2
 assign("LS.ESPA.API","https://espa.cr.usgs.gov", env=optEnv)
 assign("LS.ESPA.API.v","/api/v1", env=optEnv)

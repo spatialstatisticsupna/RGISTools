@@ -100,6 +100,7 @@
 #' lsRemoveMetadata()
 #' }
 ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
+  warning("Obsolete function, use lsSearch.")
   arg<-list(...)
   if((!"dates"%in%names(arg))&
      ((!"startDate"%in%names(arg)|(!"endDate"%in%names(arg))))

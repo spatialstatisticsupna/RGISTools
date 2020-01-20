@@ -40,6 +40,7 @@
 #' head(LS8MD)
 #' }
 ls8LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=FALSE,...){
+  warning("Obsolete function, use lsSearch.")
   stopifnot(class(update)=="logical")
   #define AppRoot
   arg<-list(...)

@@ -54,7 +54,7 @@ lsPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FA
   if(missing(dates)){
     return(.lsPreviewRecursive(searchres=searchres,n=n,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
   }else{
-    searchres<-searchres[as.Date(searchres$acquisitionDate)%in%dates,]
+    searchres<-searchres[as.Date(unlist(searchres$acquisitionDate))%in%dates,]
     if(nrow(searchres)>0){
       .lsPreviewRecursive(searchres=searchres,n=1,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...)
       if(nrow(searchres)>1){
@@ -73,9 +73,9 @@ lsPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FA
   ser<-searchres[n,]
   tmp <- tempfile()
   if(verbose){
-    download.file(ser$browseURL,tmp,mode="wb")
+    download.file(unlist(ser$browseURL),tmp,mode="wb")
   }else{
-    suppressWarnings(download.file(ser$browseURL,tmp,mode="wb"))
+    suppressWarnings(download.file(unlist(ser$browseURL),tmp,mode="wb"))
   }
   r<-stack(tmp)
   lat<-unlist(ser[grepl("Latitude",names(ser))])
@@ -84,9 +84,9 @@ lsPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FA
   projection(r)<-st_crs(4326)$proj4string
   
   if(verbose){
-    return(genMapViewSession(r,lpos,lname=paste0("LS_",ser["path"],ser["row"],"_D",format(ser["acquisitionDate"],"%Y%j")),add.Layer=add.Layer,...))
+    return(genMapViewSession(r,lpos,lname=paste0("LS_",ser["path"],ser["row"],"_D",format(as.Date(unlist((ser["acquisitionDate"]))),"%Y%j")),add.Layer=add.Layer,...))
   }else{
-    return(suppressWarnings(genMapViewSession(r,lpos,lname=paste0("LS_",ser["path"],ser["row"],"_D",format(ser["acquisitionDate"],"%Y%j")),add.Layer=add.Layer,...)))
+    return(suppressWarnings(genMapViewSession(r,lpos,lname=paste0("LS_",ser["path"],ser["row"],"_D",format(as.Date(unlist((ser["acquisitionDate"]))),"%Y%j")),add.Layer=add.Layer,...)))
   }
 }
 

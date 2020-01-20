@@ -39,6 +39,7 @@
 #' head(LS7MD)
 #' }
 ls7LoadMetadata<-function(AppRoot,update=FALSE,verbose=TRUE,omit.question=TRUE,...){
+  warning("Obsolete function, use lsSearch.")
   stopifnot(class(update)=="logical")
   arg<-list(...)
   AppRoot<-pathWinLx(AppRoot)
