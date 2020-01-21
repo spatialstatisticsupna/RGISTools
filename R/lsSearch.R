@@ -157,6 +157,6 @@ lsSearch<-function(datasetName,startDate,endDate,region,username,password,dates,
   if(!missing(dates)){
     res.df<-res.df[as.Date(unlist(res.df$acquisitionDate))%in%dates,]
   }
-  
+  class(res.df)<-"lsres"
   return(res.df)
 }
