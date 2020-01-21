@@ -1,60 +1,41 @@
-#' Search Landsat 7-8 images
+#' Search Landsat 7-8 images using EarthExplorer API
 #'
-#' \code{ls7Search} searches Landsat-7 images in the Landsat repository concerning
+#' \code{lsSearch} searches Landsat 7-8 images in the EarthExplorer API concerning
 #' a particular location and date interval. The function returns a 
 #' \code{data.frame} with the names of the images and their metadata.
-#'
-#' \code{ls7Search} searches images in the metadata file. If the metadata was
-#' downloaded before to the current directory, \code{ls7Search} will use this
-#' metadata by default. In case the metadata was not downloaded before, 
-#' \code{ls7Search} will make that call for you. The function creates the
-#' following subfolders "Landsat-8/metadata", where the metadata file is
-#' located.
-#'
-#' Landsat images are organized by tiles, which have a unique path and row
-#' numbers according to the
-#' \href{https://landsat.gsfc.nasa.gov/the-worldwide-reference-system/}{Worldide Reference System}.
-#' The fastest way to search an image in the metadata file is by path and row
-#' (\code{pathrow}). This method requires to know in advance the path and row
-#' numbers of the tile that is relevant for your region of interest. From the
-#' user's standpoint, the simplest way to search a time series of Landsat-7
-#' images is by \code{region}, \code{extent}, or \code{lonlat}, since they do 
-#' not require any prior knowledge about the tiles.
-#'
-#' The function can screen the results by any other attribute in the metadata.
-#' For instance, to filter the imagery with an available preview, the 
-#' \code{browseAvaliable=”Y”} must be added as an argument of the function
-#' (see the examples).
-#'
-#' @param verbose logical argument. If \code{TRUE}, the function prints the 
-#' running steps and warnings.
-#' @param precise logical argument. If \code{TRUE}, conducts a thorough search,
-#' tile by tile (slower).
-#' @param AppRoot directory of the metadata file. 
-#' @param ... arguments for nested functions:
-#'  \itemize{
-#'   \item \code{dates} a vector with the capturing dates being searched. This
-#'   argument is mandatory if \code{startDate} and \code{endDate} are not defined.
-#'   \item  \code{startDate} a \code{Date} class object with the starting date of the 
-#' study period. This argument is mandatory if 
-#'   \code{dates} is not defined.
-#'   \item  \code{endDate} a \code{Date} class object with the ending date of the 
-#' study period. This argument is mandatory if 
-#'   \code{dates} is not defined.
-#'   \item \code{region} a \code{Spatial*}, projected \code{raster*}, o
+#' 
+#' @param datasetName the name of the dataset. Avaliable names saved in `RGISTools'
+#' (\code{getRGISToolsOpt("EE.DataSets")}).
+#' @param username NASA’s `EarthData' username.
+#' @param password NASA’s `EarthData' password.
+#' @param region a \code{Spatial*}, projected \code{raster*}, o
 #'   r \code{sf} class object defining the area of interest. This argument is
 #'   mandatory if \code{pathrow}, \code{extent}, or \code{lonlat} are not defined.
+#'  @param startDate a \code{Date} class object with the starting date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'  @param endDate a \code{Date} class object with the ending date of the 
+#' study period. This argument is mandatory if 
+#'   \code{dates} is not defined.
+#'  @param dates a vector with the capturing dates being searched. This
+#'   argument is mandatory if \code{startDate} and \code{endDate} are not defined.
+#' @param logout logical argument. If \code{TRUE}, logges out from EarthExplorer
+#' API
+#' @param verbose logical argument. If \code{TRUE}, the function prints the 
+#' running steps and warnings.
+#' @param ... arguments for nested functions:
+#'  \itemize{
 #'   \item \code{pathrow} a list of vectors with the path and row numbers of
 #'   the tiles concerning the region of interest. This argument is mandatory
 #'   if \code{region}, \code{extent} or \code{lonlat} are not provided. Ex. 
 #'   \code{list(c(200,31),c(200,30))}.
-#'   \item \code{lonlat} a vector with the longitude/latitude
+#'   \item \code{lonlat} a vector with the longitude/latitude (EPSG:4326)
 #'   coordinates of the point of interest. Ex. \code{c(-1.64323,42.81687)}.
 #'   This argument is mandatory if \code{region}, \code{pathrow}, or \code{lonlat}
 #'   are not defined.
 #'   \item \code{extent} an \code{extent}, \code{Raster*}, or 
 #'   \code{Spatial*} object representing the region of interest with 
-#'   longitude/latitude coordinates. This argument is mandatory if 
+#'   longitude/latitude (EPSG:4326) coordinates. This argument is mandatory if 
 #'   \code{region}, \code{pathrow} or \code{lonlat} are not defined.
 #'   
 #' }
@@ -91,11 +72,18 @@
 #'                  password = "password",
 #'                  extent = ex.navarre)
 #' }
-lsSearch<-function(username,password,startDate,endDate,datasetName,region,logout=TRUE,verbose=FALSE,...){
+lsSearch<-function(datasetName,startDate,endDate,region,username,password,dates,logout=TRUE,verbose=FALSE,...){
   arg<-list(...)
   ApiKey<-getRGISToolsOpt("LS.EE.KEY")
   if(is.null(ApiKey)){
     loginEEAPI(username,password,verbose)
+  }
+  
+  if(missing(dates)){
+    if(missing(startDate)&&missing(endDate)) stop("startDate and endDate, or dates must be defined.")
+  }else{
+    startDate<-as.Date(min(dates))
+    endDate<-as.Date(max(dates))
   }
 
   ############################################
@@ -134,7 +122,7 @@ lsSearch<-function(username,password,startDate,endDate,datasetName,region,logout
                 autoreferer = TRUE)
   ApiSearch<-curl(paste0(getRGISToolsOpt("LS.EE.API"),'search?jsonRequest=',squery),
                   handle =c.handle)
-  jsonres<-fromJSON(readLines(ApiSearch))
+  jsonres<-fromJSON(suppressWarnings(readLines(ApiSearch)))
   close(ApiSearch)
   res.df<-data.frame(t(sapply(jsonres$data$results,c)))
   names(res.df)[which(names(res.df)%in%"browseUrl")]<-"browseURL"
@@ -163,5 +151,12 @@ lsSearch<-function(username,password,startDate,endDate,datasetName,region,logout
                                  verbose=verbose))
   }
   if(logout){logoutEEAPI(verbose)}
+  ############################################
+  # Filter by dates
+  ############################################
+  if(!missing(dates)){
+    res.df<-res.df[as.Date(res.df$acquisitionDate)%in%dates,]
+  }
+  
   return(res.df)
 }
