@@ -15,7 +15,7 @@ import("raster","curl", "rjson","rvest", "urltools","tools",
 importFrom("stats", "na.omit")
 importFrom("mapview","viewRGB")
 importFrom("methods", "formalArgs","as", "is")
-importFrom("httr","POST","authenticate","content_type")
+importFrom("httr","POST","authenticate","content_type","content")
 importFrom("sp","layout.scale.bar","layout.north.arrow"
            ,"spplot")
 importFrom("XML","xmlNativeTreeParse","xmlSApply",

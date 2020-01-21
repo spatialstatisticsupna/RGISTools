@@ -1,4 +1,4 @@
-#' Search Landsat-7 images
+#' Search Landsat 7-8 images
 #'
 #' \code{ls7Search} searches Landsat-7 images in the Landsat repository concerning
 #' a particular location and date interval. The function returns a 
@@ -68,16 +68,16 @@
 #' sres <- lsSearch(datasetName = "LANDSAT_8_C1",
 #'                  startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                  endDate = as.Date("31-12-2013", "%d-%m-%Y"),
-#'                  username = "rgistools",
-#'                  password = "EspacialUPNA88",
+#'                  username = "username",
+#'                  password = "password",
 #'                  region = ex.navarre,
 #'                  pathrow = list(c(200,31),c(200,30)))
 #'                  
 #' sres <- lsSearch(datasetName = "LANDSAT_8_C1",
 #'                  startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                  endDate = as.Date("31-12-2013", "%d-%m-%Y"),
-#'                  username = "rgistools",
-#'                  password = "EspacialUPNA88",
+#'                  username = "username",
+#'                  password = "password",
 #'                  lonlat = c(-1.64323,42.81687))
 #'                                    
 #'                   
@@ -87,8 +87,8 @@
 #' sres <- lsSearch(datasetName = "LANDSAT_8_C1",
 #'                  startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                  endDate = as.Date("31-12-2013", "%d-%m-%Y"),
-#'                  username = "rgistools",
-#'                  password = "EspacialUPNA88",
+#'                  username = "username",
+#'                  password = "password",
 #'                  extent = ex.navarre)
 #' }
 lsSearch<-function(username,password,startDate,endDate,datasetName,region,logout=TRUE,verbose=FALSE,...){
