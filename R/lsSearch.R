@@ -132,12 +132,11 @@ lsSearch<-function(username,password,startDate,endDate,datasetName,region,logout
                 useragent = getRGISToolsOpt("USERAGENT"),
                 followlocation = TRUE ,
                 autoreferer = TRUE)
-  ApiSearch<-suppressWarnings(curl(paste0(getRGISToolsOpt("LS.EE.API"),'search?jsonRequest=',squery),
-                  handle =c.handle))
-  jsonres<-suppressWarnings(fromJSON(readLines(ApiSearch)))
+  ApiSearch<-curl(paste0(getRGISToolsOpt("LS.EE.API"),'search?jsonRequest=',squery),
+                  handle =c.handle)
+  jsonres<-fromJSON(readLines(ApiSearch))
+  close(ApiSearch)
   res.df<-data.frame(t(sapply(jsonres$data$results,c)))
-  rm(list=c("c.handle","jsonres"))
-  gc(verbose = verbose)
   names(res.df)[which(names(res.df)%in%"browseUrl")]<-"browseURL"
   names(res.df)[which(names(res.df)%in%"entityId")]<-"sceneID"
   
