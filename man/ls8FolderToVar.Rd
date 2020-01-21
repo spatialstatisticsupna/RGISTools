@@ -49,7 +49,8 @@ arguments. The \code{src} is usually the path resulting from
 package beginning with “var” (\code{\link{varNDVI}}, \code{\link{varEVI}},
 etc.). Custom functions can also be implemented. If \code{fun = varRGB}, 
 then the argument \code{getStack} must be equal to \code{FALSE} and the 
-red-green-blue (RGB) images must be imported afterwards.
+red-green-blue (RGB) images must be imported afterwards. Caution! It is mandatory to 
+use level-2 products to get accurate derived variables.
 }
 \examples{
 \dontrun{
