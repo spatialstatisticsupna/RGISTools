@@ -78,6 +78,8 @@ modDownload<-function(searchres,
                       overwrite=FALSE,
                       raw.rm=FALSE,
                       ...){
+  if(class(searchres)!="modres"){stop("A response from modis search function is needed.")}
+  searchres<-searchres$hdf
   arg<-list(...)
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")

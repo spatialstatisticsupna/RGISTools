@@ -22,7 +22,6 @@
 #'
 #' @param product the short name of the MODIS product.
 #' @param collection MODIS collection. By default, 6.
-#' @param resType response type of the query (\code{browseurl} or \code{url}).
 #' @param verbose logical argument. If \code{TRUE}, the function prints the 
 #' running steps and warnings.
 # @param pathrow A list of vectors defining the path and row number for the region of interest according
@@ -71,8 +70,9 @@
 #'                   extent = aoi)
 #' head(sres)
 #' }
-modSearch<-function(product,collection=6,resType="url",verbose=FALSE,...){
+modSearch<-function(product,collection=6,verbose=FALSE,...){
   arg=list(...)
+  if("resType"%in%names(arg)){warning("resType argument it is obsolete.")}
   if((!"dates"%in%names(arg))&
      ((!"startDate"%in%names(arg)|(!"endDate"%in%names(arg))))
   )stop("startDate and endDate, or dates argument need to be defined!")
@@ -89,64 +89,75 @@ modSearch<-function(product,collection=6,resType="url",verbose=FALSE,...){
   stopifnot(class(startDate)=="Date")
   stopifnot(class(endDate)=="Date")
   
-  if(any(names(arg)%in%c("pathrow"))){
-    stopifnot(class(arg$pathrow)=="list")
-    stop("pathrow search not supported for Modis Search")
-  }else if("lonlat"%in%names(arg)){
-    stopifnot(class(arg$lonlat)=="numeric")
-    stopifnot(length(arg$lonlat)==2)
-    loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
-                "?product=",product,
-                "&version=",collection,
-                "&latitude=",arg$lonlat[2],
-                "&longitude=",arg$lonlat[1],
-                "&return=",resType,
-                "&date=",format(startDate,"%Y-%m-%d"),
-                ",",format(endDate,"%Y-%m-%d"))
-  }else if("extent"%in%names(arg)){
-    stopifnot(class(extent(arg$extent))=="Extent")
-    loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
-                "?product=",product,
-                "&version=",collection,
-                "&bbox=",paste0(c(st_bbox(arg$extent)),collapse = ","),
-                "&return=",resType,
-                "&date=",format(startDate,"%Y-%m-%d"),
-                ",",format(endDate,"%Y-%m-%d"))
-  }else if("region"%in%names(arg)){
-    arg$region<-transform_multiple_proj(arg$region, proj4=st_crs(4326))
-    loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
-                "?product=",product,
-                "&version=",collection,
-                "&bbox=",paste0(st_bbox(arg$region),collapse = ","),
-                "&return=",resType,
-                "&date=",format(startDate,"%Y-%m-%d"),
-                ",",format(endDate,"%Y-%m-%d"))
-  }else{
-    stop('Search method not defined.')
+  modisres <- list()
+  modtype<-c("url","browseurl")
+  for(resType in modtype){
+    if(any(names(arg)%in%c("pathrow"))){
+      stopifnot(class(arg$pathrow)=="list")
+      stop("pathrow search not supported for Modis Search")
+    }else if("lonlat"%in%names(arg)){
+      stopifnot(class(arg$lonlat)=="numeric")
+      stopifnot(length(arg$lonlat)==2)
+      loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
+                  "?product=",product,
+                  "&version=",collection,
+                  "&latitude=",arg$lonlat[2],
+                  "&longitude=",arg$lonlat[1],
+                  "&return=",resType,
+                  "&date=",format(startDate,"%Y-%m-%d"),
+                  ",",format(endDate,"%Y-%m-%d"))
+    }else if("extent"%in%names(arg)){
+      stopifnot(class(extent(arg$extent))=="Extent")
+      loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
+                  "?product=",product,
+                  "&version=",collection,
+                  "&bbox=",paste0(c(st_bbox(arg$extent)),collapse = ","),
+                  "&return=",resType,
+                  "&date=",format(startDate,"%Y-%m-%d"),
+                  ",",format(endDate,"%Y-%m-%d"))
+    }else if("region"%in%names(arg)){
+      arg$region<-transform_multiple_proj(arg$region, proj4=st_crs(4326))
+      loc<-paste0(getRGISToolsOpt("MODINVENTORY.url"),
+                  "?product=",product,
+                  "&version=",collection,
+                  "&bbox=",paste0(st_bbox(arg$region),collapse = ","),
+                  "&return=",resType,
+                  "&date=",format(startDate,"%Y-%m-%d"),
+                  ",",format(endDate,"%Y-%m-%d"))
+    }else{
+      stop('Search method not defined.')
+    }
+    
+    if(verbose){
+      message(paste0("Search query: ",loc))
+    }
+    c.handle = new_handle()
+    req <- curl(loc, handle = c.handle)
+    html<-readLines(req)
+    html<-paste(html,collapse = "\n ")
+    
+    if(grepl("Internal Server Error", html)){
+      stop(paste0("Error: ",getRGISToolsOpt("MODINVENTORY.url")," web out of service"))
+    }
+    xmlres <- xmlRoot(xmlNativeTreeParse(html))
+    modisres[[resType]] <- xmlSApply(xmlres,
+                                    function(x) xmlSApply(x,xmlValue))
+    close(req)
   }
-
-  if(verbose){
-    message(paste0("Search query: ",loc))
-  }
-  c.handle = new_handle()
-  req <- curl(loc, handle = c.handle)
-  html<-readLines(req)
-  html<-paste(html,collapse = "\n ")
-
-  if(grepl("Internal Server Error", html)){
-    stop(paste0("Error: ",getRGISToolsOpt("MODINVENTORY.url")," web out of service"))
-  }
-  xmlres <- xmlRoot(xmlNativeTreeParse(html))
-  modisres <- xmlSApply(xmlres,
-                        function(x) xmlSApply(x,xmlValue))
-  close(req)
+  
+  
+  searchres<-list(hdf=modisres[[1]],
+                  jpg=modisres[[2]])
+  
   
   #filter dates
   if("dates"%in%names(arg)){
-    dates<-modGetDates(modisres)
-    modisres<-modisres[dates%in%arg$dates]
+    hdfdates<-modGetDates(modisres$hdf)
+    modisres$hdf<-modisres$hdf[hdfdates%in%arg$dates]
+    jpgdates<-modGetDates(modisres$jpg)
+    modisres$jpg<-modisres$jpg[jpgdates%in%arg$dates]
   }
-  
-  return(modisres)
+  class(searchres)<-"modres"
+  return(searchres)
 }
 

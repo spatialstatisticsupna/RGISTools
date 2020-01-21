@@ -4,15 +4,12 @@
 \alias{modSearch}
 \title{Search MODIS images}
 \usage{
-modSearch(product, collection = 6, resType = "url", verbose = FALSE,
-  ...)
+modSearch(product, collection = 6, verbose = FALSE, ...)
 }
 \arguments{
 \item{product}{the short name of the MODIS product.}
 
 \item{collection}{MODIS collection. By default, 6.}
-
-\item{resType}{response type of the query (\code{browseurl} or \code{url}).}
 
 \item{verbose}{logical argument. If \code{TRUE}, the function prints the 
 running steps and warnings.}

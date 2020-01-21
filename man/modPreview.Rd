@@ -57,7 +57,6 @@ sres <- modSearch(product = "MOD09GA",
                   startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                   endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                   collection = 6,
-                  resType = "browseurl",
                   extent = ex.navarre)
                       
 modPreview(sres,n=1)

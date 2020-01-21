@@ -16,8 +16,9 @@
 #' @param rStack a \code{RasterStack} class argument containing a time series of
 #' satellite images. Layer names should contain the date of the image in
 #' "\code{YYYYJJJ}" format.
-#' @param Img2Fill a \code{vector} class argument defining the images to be 
+#' @param Img2Fill a \code{vector} argument defining the images to be 
 #' filled/smoothed.
+#' @param r.dates a \code{vector} argument containing the dates of the layers in rstack 
 #' @param nDays a \code{numeric} argument with the number of previous and 
 #' subsequent days that define the temporal neighborhood.
 #' @param nYears a \code{numeric} argument with the number of previous and 
@@ -64,6 +65,7 @@ genSmoothingIMA<-function(rStack,
                           nYears = 1,
                           fact = 5,
                           fun=mean,
+                          r.dates,
                           aFilter = c(.05,.95),
                           factSE=8,
                           predictSE=FALSE,
@@ -88,7 +90,15 @@ genSmoothingIMA<-function(rStack,
     if(length(aux)!=length(Img2Fill)){warning("Some of target images in Img2Fill do not exist in imgTS.")}
     Img2Fill<-aux
   }
-  alldates<-genGetDates(names(rStack))
+  if(!missing(r.dates)){
+    if(length(r.dates)!=nlayers(rStack))stop("r.dates and rStack must have the same length.")
+    alldates<-r.dates
+  }else{
+    alldates<-genGetDates(names(rStack))
+  }
+  
+  
+  
   if(all(is.na(alldates))){stop("The name of the layers has to include the date and it must be in julian days (%Y%j) .")}
   fillstack<-raster()
   for(i in Img2Fill){
@@ -99,6 +109,7 @@ genSmoothingIMA<-function(rStack,
     # define temporal neighbourhood
     neighbours<-dateNeighbours(ts.raster=rStack,
                                target.date=target.date,
+                               r.dates=alldates,
                                nPeriods=nDays,
                                nYears=nYears)
     message(paste0("   - Size of the neighbourhood: ",nlayers(neighbours)))
@@ -159,6 +170,7 @@ genSmoothingIMA<-function(rStack,
 
 dateNeighbours<-function(ts.raster,
                          target.date,
+                         r.dates,
                          nPeriods=1,
                          nYears=1){
   targetyear<-as.integer(format(target.date,"%Y"))
@@ -167,7 +179,7 @@ dateNeighbours<-function(ts.raster,
   temporalYears<-(targetyear-nYears):(targetyear+nYears)
   temporalWindow<-paste0(rep(temporalYears,each=length(tempolarPeriods)),
                          rep(tempolarPeriods,length(temporalYears)))
-  return(raster::subset(ts.raster,which(format(genGetDates(names(ts.raster)),"%Y%j")%in%temporalWindow)))
+  return(raster::subset(ts.raster,which(format(r.dates,"%Y%j")%in%temporalWindow)))
 }
 
 MinSeg=function(fim, ini){

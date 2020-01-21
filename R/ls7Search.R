@@ -204,7 +204,7 @@ ls7Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
   if("dates"%in%names(arg)){
     LS7MD<-LS7MD[as.Date(LS7MD$acquisitionDate)%in%arg$dates,]
   }
-  
+  class(LS7MD)<-"ls7res"
   return(LS7MD)
 }
 

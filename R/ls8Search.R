@@ -202,7 +202,7 @@ ls8Search<-function(AppRoot,verbose=FALSE,precise=FALSE,...){
   }
   
   
-  
+  class(LS8MD)<-"ls8res"
   return(LS8MD)
 }
 
