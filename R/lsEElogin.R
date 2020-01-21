@@ -1,9 +1,8 @@
 loginEEAPI<-function(username,password,verbose=FALSE){
-  jsonquery<-NULL
-  jsonquery$username<-username
-  jsonquery$password<-password
-  jsonquery$authType<-"EROS"
-  jsonquery$catalogId<-"EE"
+  jsonquery<-list("username"=username,
+                  "password"=password,
+                  "authType"="EROS",
+                  "catalogId"="EE")
   post.res <- POST(url = paste0(getRGISToolsOpt("LS.EE.API"), "login"),
                    body = paste0('jsonRequest=',toJSON(jsonquery)),
                    content_type("application/x-www-form-urlencoded; charset=UTF-8"))
@@ -17,8 +16,7 @@ loginEEAPI<-function(username,password,verbose=FALSE){
 
 
 logoutEEAPI<-function(verbose=FALSE){
-  jsonquery<-NULL
-  jsonquery$apikey<-getRGISToolsOpt("LS.EE.KEY")
+  jsonquery<-list("apikey"=getRGISToolsOpt("LS.EE.KEY"))
   if(!is.null(jsonquery$apikey)){
     post.res <- POST(url = paste0(getRGISToolsOpt("LS.EE.API"), "logout"),
                      body = URLencode(paste0('jsonRequest=',toJSON(jsonquery))),
