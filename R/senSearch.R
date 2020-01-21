@@ -168,6 +168,6 @@ senSearch<-function(username,
     dates<-senGetDates(names(imgURL))
     imgURL<-imgURL[dates%in%arg$dates]
   }
-  
+  class(imgURL)<-"senres"
   return(imgURL)
 }

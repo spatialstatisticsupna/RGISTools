@@ -38,13 +38,14 @@
 #'                   startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                   endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                   collection = 6,
-#'                   resType = "browseurl",
 #'                   extent = ex.navarre)
 #'                       
 #' modPreview(sres,n=1)
 #' modPreview(sres,2,add.Layer=T)
 #' }
 modPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
+  if(class(searchres)!="modres"){stop("A response from modis search function is needed.")}
+  searchres<-searchres$jpg
   if(missing(dates)){
     return(.modPreviewRecursive(searchres=searchres,n=n,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
   }else{

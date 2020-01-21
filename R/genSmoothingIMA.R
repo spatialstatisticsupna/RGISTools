@@ -16,8 +16,9 @@
 #' @param rStack a \code{RasterStack} class argument containing a time series of
 #' satellite images. Layer names should contain the date of the image in
 #' "\code{YYYYJJJ}" format.
-#' @param Img2Fill a \code{vector} class argument defining the images to be 
+#' @param Img2Fill a \code{vector} argument defining the images to be 
 #' filled/smoothed.
+#' @param r.dates a \code{vector} argument containing the dates of the layers in rstack 
 #' @param nDays a \code{numeric} argument with the number of previous and 
 #' subsequent days that define the temporal neighborhood.
 #' @param nYears a \code{numeric} argument with the number of previous and 

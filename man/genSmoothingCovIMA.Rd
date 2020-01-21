@@ -6,8 +6,8 @@
 covariates}
 \usage{
 genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, nDays = 3,
-  nYears = 1, fact = 5, fun = mean, aFilter = c(0.05, 0.95),
-  snow.mode = FALSE, out.name = "out", ...)
+  nYears = 1, r.dates, fact = 5, fun = mean, aFilter = c(0.05,
+  0.95), snow.mode = FALSE, out.name = "out", ...)
 }
 \arguments{
 \item{rStack}{a \code{RasterStack} class argument containing a time series of
@@ -25,6 +25,8 @@ subsequent days that define the temporal neighborhood.}
 
 \item{nYears}{a \code{numeric} argument with the number of previous and
 subsequent years that define the temporal neighborhood.}
+
+\item{r.dates}{a \code{vector} argument containing the dates of the layers in rstack}
 
 \item{fact}{a \code{numeric} argument with an aggregation factor of the
 anomalies carried out before the interpolation.}

@@ -51,6 +51,7 @@
 #' lsPreview(sres.cloud.free,dates=as.Date("2013-09-04"))
 #' }
 lsPreview<-function(searchres,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
+  if(class(searchres)!="ls7res"&&class(searchres)!="ls8res"){stop("A response from landsat 7-8 search function is needed.")}
   if(missing(dates)){
     return(.lsPreviewRecursive(searchres=searchres,n=n,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
   }else{

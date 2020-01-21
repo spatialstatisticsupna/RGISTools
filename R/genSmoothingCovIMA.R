@@ -18,6 +18,7 @@
 #'  "\code{YYYYJJJ}" format.
 #' @param cStack a \code{RasterStack} class argument containing a time series of
 #' covariates.
+#' @param r.dates a \code{vector} argument containing the dates of the layers in rstack 
 #' @param Img2Process a \code{vector} class argument defining the images to be
 #' filled/smoothed.
 #' @param nDays a \code{numeric} argument with the number of previous and 

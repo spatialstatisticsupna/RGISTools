@@ -56,6 +56,7 @@
 #'            dates = senGetDates(names(sres[3])))
 #' }
 senPreview<-function(searchres,username,password,n,dates,lpos=c(3,2,1),add.Layer=FALSE,verbose = FALSE,...){
+  if(class(searchres)!="senres"){stop("A response from sentinel search function is needed.")}
   if(missing(dates)){
     return(.senPreviewRecursive(searchres=searchres,username=username,password=password,n=n,lpos=lpos,add.Layer=add.Layer,verbose=verbose,...))
   }else{

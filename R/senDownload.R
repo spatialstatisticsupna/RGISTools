@@ -85,7 +85,7 @@ senDownload<-function(searchres,
                         overwrite=FALSE,
                         ...){
   arg<-list(...)
-
+  if(class(searchres)!="senres"){stop("A response from sentinel search function is needed.")}
   if("dates"%in%names(arg)){searchres<-searchres[senGetDates(names(searchres))%in%arg$dates]}
   
   AppRoot<-pathWinLx(AppRoot)

@@ -5,15 +5,16 @@
 \title{Fill data gaps and smooth outliers in a time series of satellite images}
 \usage{
 genSmoothingIMA(rStack, Img2Fill = NULL, nDays = 3, nYears = 1,
-  fact = 5, fun = mean, aFilter = c(0.05, 0.95), factSE = 8,
-  predictSE = FALSE, snow.mode = FALSE, out.name = "outname", ...)
+  fact = 5, fun = mean, r.dates, aFilter = c(0.05, 0.95),
+  factSE = 8, predictSE = FALSE, snow.mode = FALSE,
+  out.name = "outname", ...)
 }
 \arguments{
 \item{rStack}{a \code{RasterStack} class argument containing a time series of
 satellite images. Layer names should contain the date of the image in
 "\code{YYYYJJJ}" format.}
 
-\item{Img2Fill}{a \code{vector} class argument defining the images to be 
+\item{Img2Fill}{a \code{vector} argument defining the images to be 
 filled/smoothed.}
 
 \item{nDays}{a \code{numeric} argument with the number of previous and 
@@ -27,6 +28,8 @@ anomalies before the interpolation.}
 
 \item{fun}{a \code{function} used to aggregate the image of anomalies. Both
 \code{mean} (default) or \code{median} are acceptted.}
+
+\item{r.dates}{a \code{vector} argument containing the dates of the layers in rstack}
 
 \item{aFilter}{a \code{vector} with the lower and upper quantiles that define
 the outliers of the anomalies. Ex. c(0.05,0.95).}
