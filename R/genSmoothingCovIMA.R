@@ -77,6 +77,7 @@ genSmoothingCovIMA <- function (rStack,
                              Img2Process=NULL,
                              nDays=3,
                              nYears=1,
+                             r.dates,
                              fact=5,
                              fun=mean,
                              aFilter=c(.05,.95),
@@ -96,12 +97,20 @@ genSmoothingCovIMA <- function (rStack,
   }
 
   # days in rStack
-  days<-genGetDates(names(rStack))
+  if(!missing(r.dates)){
+    if(length(r.dates)!=nlayers(rStack))stop("dates and rStack must have the same length.")
+    days<-r.dates
+  }else{
+    days<-genGetDates(names(rStack))
+  }
+  
   oday<-order(days)
+  
   if(all(is.na(days))){stop("The name of the layers has to include the date and it must be in julian days (%Y%j) .")}
   # ensure the images order
   rStack<-raster::subset(rStack,oday)
-
+  days<-days[oday]
+  
   # analyse covariates dates
   daysc<-genGetDates(names(cStack))
   ocday<-order(daysc)
@@ -152,6 +161,7 @@ genSmoothingCovIMA <- function (rStack,
     message(paste0("Smoothing image of date ",target.date))
     neighbours<-dateNeighbours(rStack,
                                target.date,
+                               r.dates=days,
                                nPeriods=nDays,
                                nYears=nYears)
 
@@ -161,7 +171,7 @@ genSmoothingCovIMA <- function (rStack,
     meanImage<-raster::calc(neighbours,fun=fun,na.rm=TRUE)
 
     # get target image
-    targetImage<-raster::subset(rStack,which(format(genGetDates(names(rStack)),"%Y%j")%in%format(target.date,"%Y%j")))
+    targetImage<-raster::subset(rStack,which(format(days,"%Y%j")%in%format(target.date,"%Y%j")))
 
     # get covs for target image
     cov.targetImage<-raster::subset(cStack,which(format(genGetDates(names(cStack)),"%Y%j")%in%format(target.date,"%Y%j")))
