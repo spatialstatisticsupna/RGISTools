@@ -60,7 +60,7 @@ lsEspaOrderImages<-function(search.res,username,password,product=c("sr","source_
   c.handle = lsEspaCreateConnection(username,password)
   # 1 request per image
 
-  for(ids in search.res$LANDSAT_PRODUCT_ID){
+  for(ids in search.res$displayId){
     url.products = paste0(getRGISToolsOpt("LS.ESPA.API"),getRGISToolsOpt("LS.ESPA.API.v"),'/available-products/', ids)
     if(verbose){message(paste0("Product url: \n",url.products))}
     req<-curl(url.products,handle = c.handle)
