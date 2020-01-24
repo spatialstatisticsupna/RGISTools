@@ -11,6 +11,19 @@ lsSearchQuery<-function(datasetName,startDate,endDate,sf.obj,...){
                                                "longitude"=st_bbox(sf.obj)[["xmin"]]),
                               "upperRight"=list("latitude"=st_bbox(sf.obj)[["ymax"]],
                                                 "longitude"=st_bbox(sf.obj)[["xmax"]]))
+  if("cloudCover"%in%names(args)){
+    if(length(args$cloudCover)==2&&class(args$cloudCover)=="numeric"){
+      lsquery$minCloudCover<-min(args$cloudCover)
+      lsquery$maxCloudCover<-max(args$cloudCover)
+      if("includeUnknownCloudCover"%in%names(args)){
+        lsquery$includeUnknownCloudCover<-args$includeUnknownCloudCover
+      }else{
+        lsquery$includeUnknownCloudCover<-"true"
+      }
+    }else{stop("cloudCover must be a numeric argument")}
+  }
+
+  
   #additional criteria
   lsquery$maxResults<-50000
   lsquery$startingNumber<-1
