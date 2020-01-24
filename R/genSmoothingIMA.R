@@ -34,7 +34,9 @@
 #' @param predictSE calculate the standard error instead the prediction.
 #' @param factSE the \code{fact} used in the standard error prediction.
 #' @param out.name the name of the folder containing the smoothed/filled images
-#' when saved in the Hard Disk Device (HDD). 
+#' when saved in the Hard Disk Device (HDD).
+#' @param only.na logical argument. If \code{TRUE} only fills the \code{NA} values. 
+#' \code{FALSE}  by default.
 #' @param ... arguments for nested functions:
 #' \itemize{
 #'   \item \code{AppRoot} the path where the filled/smoothed time series of
@@ -67,6 +69,7 @@ genSmoothingIMA<-function(rStack,
                           fun=mean,
                           r.dates,
                           aFilter = c(.05,.95),
+                          only.na = FALSE,
                           factSE=8,
                           predictSE=FALSE,
                           snow.mode=FALSE,
@@ -151,7 +154,11 @@ genSmoothingIMA<-function(rStack,
         target.prediction <- raster::interpolate(object=se.size, model=tps,fun=fields::predictSE)
       }
     }
-
+    
+    if(only.na){
+      targetImage[is.na(targetImage)]<-target.prediction[is.na(targetImage)]
+      target.prediction<-targetImage
+    }
     # write filled images
     if("AppRoot"%in%names(args)){
       writeRaster(target.prediction,paste0(args$AppRoot,"/",out.name,"/",format(target.date,"%Y%j"),".tif"))
