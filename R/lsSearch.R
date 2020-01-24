@@ -46,7 +46,7 @@
 #' \dontrun{
 #' # search by path and row numbers of a tile
 #' getRGISToolsOpt("EE.DataSets")
-#' sres <- lsSearch(datasetName = "LANDSAT_8_C1",
+#' sres <- lsSearch(product = "LANDSAT_8_C1",
 #'                  startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                  endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                  username = "username",
@@ -54,7 +54,7 @@
 #'                  region = ex.navarre,
 #'                  pathrow = list(c(200,31),c(200,30)))
 #'                  
-#' sres <- lsSearch(datasetName = "LANDSAT_8_C1",
+#' sres <- lsSearch(product = "LANDSAT_8_C1",
 #'                  startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                  endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                  username = "username",
@@ -65,14 +65,14 @@
 #' # search by extent (long/lat coordinates)
 #' # load a spatial polygon object of Navarre
 #' data(ex.navarre)
-#' sres <- lsSearch(datasetName = "LANDSAT_8_C1",
+#' sres <- lsSearch(product = "LANDSAT_8_C1",
 #'                  startDate = as.Date("01-01-2011", "%d-%m-%Y"),
 #'                  endDate = as.Date("31-12-2013", "%d-%m-%Y"),
 #'                  username = "username",
 #'                  password = "password",
 #'                  extent = ex.navarre)
 #' }
-lsSearch<-function(datasetName,startDate,endDate,region,username,password,dates,logout=TRUE,verbose=FALSE,...){
+lsSearch<-function(product,startDate,endDate,region,username,password,dates,logout=TRUE,verbose=FALSE,...){
   arg<-list(...)
   ApiKey<-getRGISToolsOpt("LS.EE.KEY")
   if(is.null(ApiKey)){
@@ -108,7 +108,7 @@ lsSearch<-function(datasetName,startDate,endDate,region,username,password,dates,
   ############################################
   # Perform the search
   ############################################
-  squery=lsSearchQuery(datasetName=datasetName,
+  squery=lsSearchQuery(datasetName=product,
                        startDate=startDate,
                        endDate=endDate,
                        sf.obj=st_transform(region,crs=4326),
