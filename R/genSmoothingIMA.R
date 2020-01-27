@@ -54,7 +54,8 @@
 #'
 #' # filled images
 #' tiles.mod.ndvi.filled  <- genSmoothingIMA(ex.ndvi.navarre,
-#'                                Img2Fill = c(1,2))
+#'                                Img2Fill = c(1,2),
+#'                                only.na=TRUE)
 #' # show the filled images
 #' genPlotGIS(tiles.mod.ndvi.filled)
 #' # plot comparison of the cloud and the filled images

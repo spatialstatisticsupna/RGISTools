@@ -6,8 +6,8 @@
 \usage{
 genSmoothingIMA(rStack, Img2Fill = NULL, nDays = 3, nYears = 1,
   fact = 5, fun = mean, r.dates, aFilter = c(0.05, 0.95),
-  factSE = 8, predictSE = FALSE, snow.mode = FALSE,
-  out.name = "outname", ...)
+  only.na = FALSE, factSE = 8, predictSE = FALSE,
+  snow.mode = FALSE, out.name = "outname", ...)
 }
 \arguments{
 \item{rStack}{a \code{RasterStack} class argument containing a time series of
@@ -33,6 +33,9 @@ anomalies before the interpolation.}
 
 \item{aFilter}{a \code{vector} with the lower and upper quantiles that define
 the outliers of the anomalies. Ex. c(0.05,0.95).}
+
+\item{only.na}{logical argument. If \code{TRUE} only fills the \code{NA} values. 
+\code{FALSE}  by default.}
 
 \item{factSE}{the \code{fact} used in the standard error prediction.}
 
@@ -74,7 +77,8 @@ genPlotGIS(ex.ndvi.navarre)
 
 # filled images
 tiles.mod.ndvi.filled  <- genSmoothingIMA(ex.ndvi.navarre,
-                               Img2Fill = c(1,2))
+                               Img2Fill = c(1,2),
+                               only.na=TRUE)
 # show the filled images
 genPlotGIS(tiles.mod.ndvi.filled)
 # plot comparison of the cloud and the filled images
