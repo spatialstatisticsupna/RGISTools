@@ -4,10 +4,21 @@
 \alias{lsDownload}
 \title{Download Landsat-7 or Landsat-8 images from a search list}
 \usage{
-lsDownload(searchres, username = NULL, password = NULL, AppRoot,
-  lvl = 1, product = c("sr", "source_metadata"), verbose = FALSE,
-  raw.rm = FALSE, untar = FALSE, overwrite = FALSE, nattempts = 5,
-  l2rqname, ...)
+lsDownload(
+  searchres,
+  username = NULL,
+  password = NULL,
+  AppRoot,
+  lvl = 1,
+  product = c("sr", "source_metadata"),
+  verbose = FALSE,
+  raw.rm = FALSE,
+  untar = FALSE,
+  overwrite = FALSE,
+  nattempts = 5,
+  l2rqname,
+  ...
+)
 }
 \arguments{
 \item{searchres}{the results from \code{\link{ls7Search}} or 

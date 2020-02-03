@@ -4,8 +4,15 @@
 \alias{modPreview}
 \title{Preview MODIS satellite images}
 \usage{
-modPreview(searchres, n, dates, lpos = c(3, 2, 1), add.Layer = FALSE,
-  verbose = FALSE, ...)
+modPreview(
+  searchres,
+  n,
+  dates,
+  lpos = c(3, 2, 1),
+  add.Layer = FALSE,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{searchres}{a vector with the results from \code{\link{modSearch}}.}

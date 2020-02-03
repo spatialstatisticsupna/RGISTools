@@ -4,8 +4,13 @@
 \alias{lsEspaOrderImages}
 \title{Make a request to ESPA for pre-processing Landsat images}
 \usage{
-lsEspaOrderImages(search.res, username, password, product = c("sr",
-  "source_metadata"), verbose = FALSE)
+lsEspaOrderImages(
+  search.res,
+  username,
+  password,
+  product = c("sr", "source_metadata"),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{search.res}{the results from \code{\link{ls7Search}} or

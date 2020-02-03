@@ -4,8 +4,16 @@
 \alias{senMosaic}
 \title{Mosaic a set of Sentinel-2 images}
 \usage{
-senMosaic(src, AppRoot, region = NULL, out.name = "outfile",
-  verbose = FALSE, gutils = TRUE, overwrite = FALSE, ...)
+senMosaic(
+  src,
+  AppRoot,
+  region = NULL,
+  out.name = "outfile",
+  verbose = FALSE,
+  gutils = TRUE,
+  overwrite = FALSE,
+  ...
+)
 }
 \arguments{
 \item{src}{the path of the folder with the Sentinel images in GTiff format.}

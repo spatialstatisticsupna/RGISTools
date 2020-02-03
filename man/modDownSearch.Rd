@@ -4,8 +4,17 @@
 \alias{modDownSearch}
 \title{Search and download MODIS images}
 \usage{
-modDownSearch(product, username, password, AppRoot, collection = 6,
-  nattempts = 5, verbose = FALSE, extract.tif = FALSE, ...)
+modDownSearch(
+  product,
+  username,
+  password,
+  AppRoot,
+  collection = 6,
+  nattempts = 5,
+  verbose = FALSE,
+  extract.tif = FALSE,
+  ...
+)
 }
 \arguments{
 \item{product}{a \code{character} argument with the short name of the MODIS

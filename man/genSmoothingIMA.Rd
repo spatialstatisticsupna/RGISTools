@@ -4,10 +4,22 @@
 \alias{genSmoothingIMA}
 \title{Fill data gaps and smooth outliers in a time series of satellite images}
 \usage{
-genSmoothingIMA(rStack, Img2Fill = NULL, nDays = 3, nYears = 1,
-  fact = 5, fun = mean, r.dates, aFilter = c(0.05, 0.95),
-  only.na = FALSE, factSE = 8, predictSE = FALSE,
-  snow.mode = FALSE, out.name = "outname", ...)
+genSmoothingIMA(
+  rStack,
+  Img2Fill = NULL,
+  nDays = 3,
+  nYears = 1,
+  fact = 5,
+  fun = mean,
+  r.dates,
+  aFilter = c(0.05, 0.95),
+  only.na = FALSE,
+  factSE = 8,
+  predictSE = FALSE,
+  snow.mode = FALSE,
+  out.name = "outname",
+  ...
+)
 }
 \arguments{
 \item{rStack}{a \code{RasterStack} class argument containing a time series of

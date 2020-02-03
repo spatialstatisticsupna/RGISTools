@@ -5,8 +5,15 @@
 \title{Compute a remote sensing index from a time series of MODIS multispectral 
 images}
 \usage{
-modFolderToVar(src, AppRoot, fun, getStack = FALSE, overwrite = FALSE,
-  verbose = FALSE, ...)
+modFolderToVar(
+  src,
+  AppRoot,
+  fun,
+  getStack = FALSE,
+  overwrite = FALSE,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{src}{path to the folder with the MODIS multispectral images.}

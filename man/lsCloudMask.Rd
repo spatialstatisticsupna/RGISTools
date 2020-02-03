@@ -4,8 +4,15 @@
 \alias{lsCloudMask}
 \title{Create cloud masks for Landsat images}
 \usage{
-lsCloudMask(src, AppRoot, out.name, sensitivity = 28000,
-  overwrite = FALSE, verbose = FALSE, ...)
+lsCloudMask(
+  src,
+  AppRoot,
+  out.name,
+  sensitivity = 28000,
+  overwrite = FALSE,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{src}{the path to the folder with the untarred images from Landsat-7 or

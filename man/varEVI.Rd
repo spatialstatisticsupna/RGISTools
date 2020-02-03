@@ -4,7 +4,9 @@
 \alias{varEVI}
 \title{Calculate the enhanced vegetation index (EVI)}
 \usage{
-varEVI(blue, red, nir, scfun = function(r) {     r })
+varEVI(blue, red, nir, scfun = function(r) {
+    r
+})
 }
 \arguments{
 \item{blue}{a \code{raster} with the blue band of the capture.}

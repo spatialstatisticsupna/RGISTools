@@ -4,9 +4,15 @@
 \alias{genSaveTSRData}
 \title{Saves a time series of images as an RData}
 \usage{
-genSaveTSRData(src, AppRoot = NULL, ts.name = "TS.Name",
-  startDate = NULL, endDate = NULL, dextent = FALSE,
-  recursive = FALSE)
+genSaveTSRData(
+  src,
+  AppRoot = NULL,
+  ts.name = "TS.Name",
+  startDate = NULL,
+  endDate = NULL,
+  dextent = FALSE,
+  recursive = FALSE
+)
 }
 \arguments{
 \item{src}{path to the folder where the time series of images is located.}

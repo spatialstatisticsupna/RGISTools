@@ -4,8 +4,13 @@
 \alias{ls8LoadMetadata}
 \title{Load or update the Landsat-8 metadata file}
 \usage{
-ls8LoadMetadata(AppRoot, update = FALSE, verbose = TRUE,
-  omit.question = FALSE, ...)
+ls8LoadMetadata(
+  AppRoot,
+  update = FALSE,
+  verbose = TRUE,
+  omit.question = FALSE,
+  ...
+)
 }
 \arguments{
 \item{AppRoot}{the directory where the metadata file should be located.}

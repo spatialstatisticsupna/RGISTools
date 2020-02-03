@@ -4,7 +4,9 @@
 \alias{varSAVI}
 \title{Calculates the soil-adjusted vegetation index (SAVI)}
 \usage{
-varSAVI(red, nir, L = 0.5, scfun = function(r) {     r })
+varSAVI(red, nir, L = 0.5, scfun = function(r) {
+    r
+})
 }
 \arguments{
 \item{red}{a \code{raster} with the red band of the capture.}

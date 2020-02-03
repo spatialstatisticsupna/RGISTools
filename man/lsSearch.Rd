@@ -4,13 +4,20 @@
 \alias{lsSearch}
 \title{Search Landsat 7-8 images using EarthExplorer API}
 \usage{
-lsSearch(datasetName, startDate, endDate, region, username, password,
-  dates, logout = TRUE, verbose = FALSE, ...)
+lsSearch(
+  product,
+  startDate,
+  endDate,
+  region,
+  username,
+  password,
+  dates,
+  logout = TRUE,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
-\item{datasetName}{the name of the dataset. Avaliable names saved in `RGISTools'
-(\code{getRGISToolsOpt("EE.DataSets")}).}
-
 \item{region}{a \code{Spatial*}, projected \code{raster*}, o
   r \code{sf} class object defining the area of interest. This argument is
   mandatory if \code{pathrow}, \code{extent}, or \code{lonlat} are not defined.
@@ -49,6 +56,9 @@ running steps and warnings.}
   \code{region}, \code{pathrow} or \code{lonlat} are not defined.
   
 }}
+
+\item{datasetName}{the name of the dataset. Avaliable names saved in `RGISTools'
+(\code{getRGISToolsOpt("EE.DataSets")}).}
 }
 \value{
 a \code{data.frame} with the name of the images and their metadata.
@@ -62,7 +72,7 @@ a particular location and date interval. The function returns a
 \dontrun{
 # search by path and row numbers of a tile
 getRGISToolsOpt("EE.DataSets")
-sres <- lsSearch(datasetName = "LANDSAT_8_C1",
+sres <- lsSearch(product = "LANDSAT_8_C1",
                  startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                  endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                  username = "username",
@@ -70,7 +80,7 @@ sres <- lsSearch(datasetName = "LANDSAT_8_C1",
                  region = ex.navarre,
                  pathrow = list(c(200,31),c(200,30)))
                  
-sres <- lsSearch(datasetName = "LANDSAT_8_C1",
+sres <- lsSearch(product = "LANDSAT_8_C1",
                  startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                  endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                  username = "username",
@@ -81,7 +91,7 @@ sres <- lsSearch(datasetName = "LANDSAT_8_C1",
 # search by extent (long/lat coordinates)
 # load a spatial polygon object of Navarre
 data(ex.navarre)
-sres <- lsSearch(datasetName = "LANDSAT_8_C1",
+sres <- lsSearch(product = "LANDSAT_8_C1",
                  startDate = as.Date("01-01-2011", "\%d-\%m-\%Y"),
                  endDate = as.Date("31-12-2013", "\%d-\%m-\%Y"),
                  username = "username",

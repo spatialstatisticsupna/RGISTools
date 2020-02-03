@@ -4,8 +4,16 @@
 \alias{senFolderToVar}
 \title{Compute a remote sensing index from a time series of Sentinel-2 images}
 \usage{
-senFolderToVar(src, AppRoot, fun, getStack = FALSE, overwrite = FALSE,
-  verbose = FALSE, resbands = c("10m", "20m", "60m"), ...)
+senFolderToVar(
+  src,
+  AppRoot,
+  fun,
+  getStack = FALSE,
+  overwrite = FALSE,
+  verbose = FALSE,
+  resbands = c("10m", "20m", "60m"),
+  ...
+)
 }
 \arguments{
 \item{src}{the path to the folder with the Sentinel-2 multispectral images.}

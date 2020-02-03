@@ -4,8 +4,15 @@
 \alias{senCloudMask}
 \title{Create cloud masks for Sentinel-2 images}
 \usage{
-senCloudMask(src, AppRoot, out.name, resbands, sensitivity = 50,
-  overwrite = FALSE, ...)
+senCloudMask(
+  src,
+  AppRoot,
+  out.name,
+  resbands,
+  sensitivity = 50,
+  overwrite = FALSE,
+  ...
+)
 }
 \arguments{
 \item{src}{the path to the folder with the "\code{S2MSI2A}" images.}

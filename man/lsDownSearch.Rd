@@ -4,9 +4,18 @@
 \alias{lsDownSearch}
 \title{Search and download Landsat-7 or Landsat-8 images}
 \usage{
-lsDownSearch(satellite, username, password, AppRoot, lvl = 1,
-  product = c("sr", "source_metadata"), verbose = FALSE,
-  untar = TRUE, raw.rm = FALSE, ...)
+lsDownSearch(
+  satellite,
+  username,
+  password,
+  AppRoot,
+  lvl = 1,
+  product = c("sr", "source_metadata"),
+  verbose = FALSE,
+  untar = TRUE,
+  raw.rm = FALSE,
+  ...
+)
 }
 \arguments{
 \item{satellite}{string containing the type of satellite 

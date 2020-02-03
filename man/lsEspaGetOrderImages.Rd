@@ -4,8 +4,13 @@
 \alias{lsEspaGetOrderImages}
 \title{Gets a first response from ESPA regarding a recent request}
 \usage{
-lsEspaGetOrderImages(username = NULL, password = NULL,
-  c.handle = NULL, order.list = NULL, verbose = TRUE)
+lsEspaGetOrderImages(
+  username = NULL,
+  password = NULL,
+  c.handle = NULL,
+  order.list = NULL,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{username}{USGS's `EarthExplorer' username.}

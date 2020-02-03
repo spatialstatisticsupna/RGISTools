@@ -4,8 +4,16 @@
 \alias{modExtractHDF}
 \title{Convert an HDF file into a set of GTiff files}
 \usage{
-modExtractHDF(filesHDF, AppRoot, overwrite = FALSE, bFilter = NULL,
-  rm.band = NULL, region = NULL, verbose = FALSE, ...)
+modExtractHDF(
+  filesHDF,
+  AppRoot,
+  overwrite = FALSE,
+  bFilter = NULL,
+  rm.band = NULL,
+  region = NULL,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{filesHDF}{the full path where the HDF files are located.}

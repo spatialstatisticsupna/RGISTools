@@ -4,8 +4,16 @@
 \alias{lsMosaic}
 \title{Mosaic a set of Landsat-7 or Landsat-8 images}
 \usage{
-lsMosaic(src, AppRoot, region, out.name = "outfile", verbose = FALSE,
-  gutils = TRUE, overwrite = FALSE, ...)
+lsMosaic(
+  src,
+  AppRoot,
+  region,
+  out.name = "outfile",
+  verbose = FALSE,
+  gutils = TRUE,
+  overwrite = FALSE,
+  ...
+)
 }
 \arguments{
 \item{src}{the path to the folder with the Landsat-7 or Landsa-8 images in

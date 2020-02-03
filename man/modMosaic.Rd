@@ -4,8 +4,16 @@
 \alias{modMosaic}
 \title{Mosaic a set of MODIS images}
 \usage{
-modMosaic(src, AppRoot, region = NULL, out.name = "outfile",
-  verbose = FALSE, gutils = TRUE, overwrite = FALSE, ...)
+modMosaic(
+  src,
+  AppRoot,
+  region = NULL,
+  out.name = "outfile",
+  verbose = FALSE,
+  gutils = TRUE,
+  overwrite = FALSE,
+  ...
+)
 }
 \arguments{
 \item{src}{the path of the folder with the MODIS images in GTiff format.}

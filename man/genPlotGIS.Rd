@@ -4,9 +4,21 @@
 \alias{genPlotGIS}
 \title{Plot satellite images with a GIS format}
 \usage{
-genPlotGIS(r, region, breaks, labels, zlim, layout, proj, nbreaks = 40,
-  nlabels = 10, as.grid = TRUE, compass.rm = FALSE,
-  scale.bar.rm = FALSE, ...)
+genPlotGIS(
+  r,
+  region,
+  breaks,
+  labels,
+  zlim,
+  layout,
+  proj,
+  nbreaks = 40,
+  nlabels = 10,
+  as.grid = TRUE,
+  compass.rm = FALSE,
+  scale.bar.rm = FALSE,
+  ...
+)
 }
 \arguments{
 \item{r}{a \code{Raster*} class object with an image or stack of images to be plotted. If \code{r} is a \code{list} 

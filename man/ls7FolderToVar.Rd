@@ -4,8 +4,15 @@
 \alias{ls7FolderToVar}
 \title{Compute a remote sensing index from a time series of Landsat-7 images}
 \usage{
-ls7FolderToVar(src, fun, AppRoot, getStack = FALSE, overwrite = FALSE,
-  verbose = FALSE, ...)
+ls7FolderToVar(
+  src,
+  fun,
+  AppRoot,
+  getStack = FALSE,
+  overwrite = FALSE,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{src}{the path to the folder with the Landsat-7 multispectral imagery.}

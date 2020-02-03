@@ -4,9 +4,18 @@
 \alias{modDownload}
 \title{Download MODIS images from a search list}
 \usage{
-modDownload(searchres, AppRoot, username = NULL, password = NULL,
-  nattempts = 5, verbose = FALSE, extract.tif = FALSE,
-  overwrite = FALSE, raw.rm = FALSE, ...)
+modDownload(
+  searchres,
+  AppRoot,
+  username = NULL,
+  password = NULL,
+  nattempts = 5,
+  verbose = FALSE,
+  extract.tif = FALSE,
+  overwrite = FALSE,
+  raw.rm = FALSE,
+  ...
+)
 }
 \arguments{
 \item{searchres}{the output from the \code{\link{modSearch}} function.}

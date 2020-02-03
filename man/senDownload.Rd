@@ -4,8 +4,16 @@
 \alias{senDownload}
 \title{Download Sentinel images from a search list}
 \usage{
-senDownload(searchres, AppRoot, username = NULL, password = NULL,
-  nattempts = 5, unzip = FALSE, overwrite = FALSE, ...)
+senDownload(
+  searchres,
+  AppRoot,
+  username = NULL,
+  password = NULL,
+  nattempts = 5,
+  unzip = FALSE,
+  overwrite = FALSE,
+  ...
+)
 }
 \arguments{
 \item{searchres}{the output from the \code{\link{senSearch}} function.}

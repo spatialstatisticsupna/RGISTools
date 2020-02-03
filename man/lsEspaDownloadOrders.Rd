@@ -4,9 +4,18 @@
 \alias{lsEspaDownloadOrders}
 \title{Downloads the images that have been pre-processed by ESPA}
 \usage{
-lsEspaDownloadOrders(orders, AppRoot, username = NULL, password = NULL,
-  c.handle = NULL, verbose = FALSE, overwrite = FALSE,
-  n.attempts = 5, untar = FALSE, ...)
+lsEspaDownloadOrders(
+  orders,
+  AppRoot,
+  username = NULL,
+  password = NULL,
+  c.handle = NULL,
+  verbose = FALSE,
+  overwrite = FALSE,
+  n.attempts = 5,
+  untar = FALSE,
+  ...
+)
 }
 \arguments{
 \item{orders}{a list of the requested images as returned by

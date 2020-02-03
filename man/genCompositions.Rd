@@ -4,8 +4,7 @@
 \alias{genCompositions}
 \title{Create image compositions from a time series of satellite images}
 \usage{
-genCompositions(rstack, by, fun, n, by.days = FALSE, verbose = FALSE,
-  ...)
+genCompositions(rstack, by, fun, n, by.days = FALSE, verbose = FALSE, ...)
 }
 \arguments{
 \item{rstack}{a \code{RasterStack}, where layer names contain the capturing

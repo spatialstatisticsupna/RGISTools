@@ -4,8 +4,13 @@
 \alias{lsEspaUpdateOrders}
 \title{Updates the status of a request made to ESPA}
 \usage{
-lsEspaUpdateOrders(orders, username = NULL, password = NULL,
-  c.handle = NULL, verbose = FALSE)
+lsEspaUpdateOrders(
+  orders,
+  username = NULL,
+  password = NULL,
+  c.handle = NULL,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{orders}{a list of the requested orders as returned by

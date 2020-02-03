@@ -5,9 +5,20 @@
 \title{Fill data gaps and smooth outliers in a time series of satellite images using
 covariates}
 \usage{
-genSmoothingCovIMA(rStack, cStack, Img2Process = NULL, nDays = 3,
-  nYears = 1, r.dates, fact = 5, fun = mean, aFilter = c(0.05,
-  0.95), snow.mode = FALSE, out.name = "out", ...)
+genSmoothingCovIMA(
+  rStack,
+  cStack,
+  Img2Process = NULL,
+  nDays = 3,
+  nYears = 1,
+  r.dates,
+  fact = 5,
+  fun = mean,
+  aFilter = c(0.05, 0.95),
+  snow.mode = FALSE,
+  out.name = "out",
+  ...
+)
 }
 \arguments{
 \item{rStack}{a \code{RasterStack} class argument containing a time series of

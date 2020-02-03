@@ -4,8 +4,15 @@
 \alias{ls8FolderToVar}
 \title{Compute a remote sensing index from a time series of Landsat-8 images}
 \usage{
-ls8FolderToVar(src, fun, AppRoot, getStack = FALSE, overwrite = FALSE,
-  verbose = FALSE, ...)
+ls8FolderToVar(
+  src,
+  fun,
+  AppRoot,
+  getStack = FALSE,
+  overwrite = FALSE,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{src}{path to the folder with the Landsat-8 multispectral image.}
