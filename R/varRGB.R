@@ -36,9 +36,9 @@
 #' print(plotRGB(img.mod.rgb))
 varRGB<-function(red,green,blue,q.range=c(),rPath=NULL,region=NULL){
   
-  if(class(red)="stars"){red<-as(red,"Raster")}
-  if(class(green)="stars"){green<-as(green,"Raster")}
-  if(class(blue)="stars"){blue<-as(blue,"Raster")}
+  if(class(red)=="stars"){red<-as(red,"Raster")}
+  if(class(green)=="stars"){green<-as(green,"Raster")}
+  if(class(blue)=="stars"){blue<-as(blue,"Raster")}
   
   rgb<-list(red,green,blue)
   names(rgb)<-c("red","green","blue")
