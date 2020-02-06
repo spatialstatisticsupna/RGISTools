@@ -35,14 +35,14 @@
 #' img.mod.rgb<-varRGB(img.mod.red,img.mod.green,img.mod.blue,q.range)
 #' print(plotRGB(img.mod.rgb))
 varRGB<-function(red,green,blue,q.range=c(),rPath=NULL,region=NULL){
-  
-  if(class(red)=="stars"){red<-as(red,"Raster")}
-  if(class(green)=="stars"){green<-as(green,"Raster")}
-  if(class(blue)=="stars"){blue<-as(blue,"Raster")}
-  
+
   rgb<-list(red,green,blue)
   names(rgb)<-c("red","green","blue")
-
+  bclass<-unlist(lapply(rgb,FUN = function(x){return(class(x)=="stars")}))
+  if(bclass[1]){rgb[[1]]<-as(rgb[[1]],"Raster")}
+  if(bclass[2]){rgb[[2]]<-as(rgb[[2]],"Raster")}
+  if(bclass[3]){rgb[[3]]<-as(rgb[[3]],"Raster")}
+  
   if(!is.null(q.range)){
     rgb<-lapply(rgb,FUN = function(r,q.range){q<-raster::quantile(r,q.range,na.rm=TRUE);r<-clamp(r,lower=q[1],upper=q[2]);return(r)},q.range)
     names(rgb)<-c("red","green","blue")
@@ -57,6 +57,10 @@ varRGB<-function(red,green,blue,q.range=c(),rPath=NULL,region=NULL){
   if(!is.null(rPath)){
     writeRaster(image,rPath)
   }else{
-    return(image)
+    if(any(bclass)){
+      return(st_as_stars(image))
+    }else{
+      return(image)
+    }
   }
 }
