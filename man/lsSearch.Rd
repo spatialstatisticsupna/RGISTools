@@ -18,21 +18,24 @@ lsSearch(
 )
 }
 \arguments{
+\item{startDate}{a \code{Date} class object with the starting date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.}
+
+\item{endDate}{a \code{Date} class object with the ending date of the 
+study period. This argument is mandatory if 
+  \code{dates} is not defined.}
+
 \item{region}{a \code{Spatial*}, projected \code{raster*}, o
-  r \code{sf} class object defining the area of interest. This argument is
-  mandatory if \code{pathrow}, \code{extent}, or \code{lonlat} are not defined.
- @param startDate a \code{Date} class object with the starting date of the 
-study period. This argument is mandatory if 
-  \code{dates} is not defined.
- @param endDate a \code{Date} class object with the ending date of the 
-study period. This argument is mandatory if 
-  \code{dates} is not defined.
- @param dates a vector with the capturing dates being searched. This
-  argument is mandatory if \code{startDate} and \code{endDate} are not defined.}
+r \code{sf} class object defining the area of interest. This argument is
+mandatory if \code{pathrow}, \code{extent}, or \code{lonlat} are not defined.}
 
 \item{username}{NASA’s `EarthData' username.}
 
 \item{password}{NASA’s `EarthData' password.}
+
+\item{dates}{a vector with the capturing dates being searched. This
+argument is mandatory if \code{startDate} and \code{endDate} are not defined.}
 
 \item{logout}{logical argument. If \code{TRUE}, logges out from EarthExplorer
 API}

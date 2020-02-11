@@ -31,6 +31,8 @@
 #' images with the same name.
 #' @param nattempts the number of attempts to download an image in case it
 #' becomes corrupted.
+#' @param omit.md5.error logical argument. If \code{TRUE}, omits md5 errors and 
+#' do not removes the downloaded image.
 #' @param ... arguments for nested functions.
 #'  \itemize{
 #'        \item \code{dates} a vector with the capturing dates being considered
@@ -83,6 +85,7 @@ senDownload<-function(searchres,
                         nattempts = 5,
                         unzip=FALSE,
                         overwrite=FALSE,
+                        omit.md5.error=FALSE,
                         ...){
   arg<-list(...)
   if(class(searchres)!="senres"){stop("A response from sentinel search function is needed.")}
@@ -142,6 +145,9 @@ senDownload<-function(searchres,
       }
       if(!genCheckMD5(downPath,oficial.md5=md5.text,...)){
         message(paste0("Error cheking ",file.name," file md5: ",md5.text))
+        if(omit.md5.error){
+          next
+        }
         file.remove(downPath)
         senDownload(username=username,
                       password=password,

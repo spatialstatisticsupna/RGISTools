@@ -12,6 +12,7 @@ senDownload(
   nattempts = 5,
   unzip = FALSE,
   overwrite = FALSE,
+  omit.md5.error = FALSE,
   ...
 )
 }
@@ -31,6 +32,9 @@ becomes corrupted.}
 
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
 images with the same name.}
+
+\item{omit.md5.error}{logical argument. If \code{TRUE}, omits md5 errors and 
+do not removes the downloaded image.}
 
 \item{...}{arguments for nested functions.
  \itemize{
