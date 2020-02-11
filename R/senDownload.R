@@ -149,9 +149,11 @@ senDownload<-function(searchres,
           next
         }
         file.remove(downPath)
+        sres<-searchres[i]
+        class(sres)<-"senres"
         senDownload(username=username,
                       password=password,
-                      searchres=searchres[i],
+                      searchres=sres,
                       unzip=unzip,
                       overwrite = overwrite,
                       nattempts=nattempts -1,
@@ -180,9 +182,11 @@ senDownload<-function(searchres,
       if(grepl("Operation was aborted",e)){stop(e)}
       message(paste0("ERROR:",e))
       file.remove(downPath)
+      sres<-searchres[i]
+      class(sres)<-"senres"
       senDownload(username=username,
                     password=password,
-                    searchres=searchres[i],
+                    searchres=sres,
                     unzip=unzip,
                     overwrite = overwrite,
                     nattempts=nattempts -1,
