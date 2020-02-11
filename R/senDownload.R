@@ -146,6 +146,7 @@ senDownload<-function(searchres,
       if(!genCheckMD5(downPath,oficial.md5=md5.text,...)){
         message(paste0("Error cheking ",file.name," file md5: ",md5.text))
         if(omit.md5.error){
+          Sys.sleep(3)
           next
         }
         file.remove(downPath)
@@ -181,10 +182,12 @@ senDownload<-function(searchres,
     }, error = function(e) {
       if(grepl("Operation was aborted",e)){stop(e)}
       message(paste0("ERROR:",e))
-      file.remove(downPath)
-      sres<-searchres[i]
-      class(sres)<-"senres"
-      senDownload(username=username,
+      if(!grepl("HTTP error 403.",e)){
+        Sys.sleep(5)
+        file.remove(downPath)
+        sres<-searchres[i]
+        class(sres)<-"senres"
+        senDownload(username=username,
                     password=password,
                     searchres=sres,
                     unzip=unzip,
@@ -192,6 +195,7 @@ senDownload<-function(searchres,
                     nattempts=nattempts -1,
                     AppRoot = AppRoot,
                     ...)
+      }
     }, finally = {
     })
   }
