@@ -53,7 +53,7 @@
 #' sres <- senSearch(startDate = as.Date("2018210", "%Y%j"),
 #'                   endDate = as.Date("2018218", "%Y%j"),
 #'                   platform = "Sentinel-2",
-#'                   extent = ex.navarre,
+#'                   region = ex.navarre,
 #'                   product = "S2MSI1C",
 #'                   username = "username",
 #'                   password = "password")
@@ -99,21 +99,22 @@ senSearch<-function(username,
   tryCatch({
     html<-suppressWarnings(readLines(response))
   }, error = function(e) {
+    close(response)
     if(grepl("HTTP error 503.",e$message)){
       stop("Service on maintenace. HTTP error 503.")
     }
     stop(e)
   })
-
+  close(response)
   json <- fromJSON(paste0(html))
   if(arg$verbose)
     message(paste0("Search Total result: ",json$feed$`opensearch:totalResults`))
   cont=1
-
-  if(as.integer(json$feed$`opensearch:totalResults`)>0){
+  tres<-json$feed$`opensearch:totalResults`
+  if(!is.null(tres)&&as.integer(tres)>0){
     imgNames<-c()
     imgURL<-c()
-    if(as.integer(json$feed$`opensearch:totalResults`)==1){
+    if(as.integer(tres)==1){
       if(arg$verbose){
         message(paste0("Image result ",cont," Name:",json$feed$entry$title))
         message(paste0("Image result ",cont," Url:",json$feed$entry$link[[1]]$href))#each entry have 3 links: 1-image link, 2-meta data link, 3-quicklook mini image
@@ -134,11 +135,10 @@ senSearch<-function(username,
     if(arg$verbose)
       message(paste0("Results added to the list: ",cont))
   }else{
-    message("There is no images in response.")
+    message("There is no images in response, check spatial and temporal arguments.")
     return(NULL)
   }
   names(imgURL)<-imgNames
-  close(response)
   #recursively perform search to get all results search results
   if(as.integer(json$feed$`opensearch:totalResults`)>100){
     dt<-senGetDates(imgNames)
