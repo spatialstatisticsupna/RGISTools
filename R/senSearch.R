@@ -135,7 +135,7 @@ senSearch<-function(username,
     if(arg$verbose)
       message(paste0("Results added to the list: ",cont))
   }else{
-    message("There is no images in response, check spatial and temporal arguments.")
+    message("There is no images in the response, check spatial and temporal arguments.")
     return(NULL)
   }
   names(imgURL)<-imgNames
