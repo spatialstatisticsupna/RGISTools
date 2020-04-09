@@ -26,10 +26,12 @@ supported by EarthExplorer API. If these names changes, \code{\link{lsUpdateEEDa
 updates these data.
 }
 \examples{
+\dontrun{
 setRGISToolsOpt("EE.DataSets",NULL)
 getRGISToolsOpt("EE.DataSets")
 datasetNames<-lsUpdateEEDataSets(username = "username",
                                  password = "password")
 
 getRGISToolsOpt("EE.DataSets")
+}
 }

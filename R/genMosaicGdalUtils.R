@@ -1,6 +1,6 @@
 genMosaicGdalUtils<-function(typechunks,temp="temp.vrt",nodata,out.name){
   newchunks<-NULL
-  
+
   tryCatch({
     if(is.null(nodata)){
       gdal_utils(util = "buildvrt", 

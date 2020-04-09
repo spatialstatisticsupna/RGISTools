@@ -16,8 +16,9 @@
 #' @param AppRoot the directory where the cloud masks are saved.
 #' @param out.name the name of the folder that stores the outputs. 
 #' If the arguemnt is not defined the folder will be named as "CloudMask".
-#' @param sensitivity \code{numeric} argument. Defines the sensitivity of the
-#' cloud detection method.
+#' @param ls8 \code{logical} argument. Defines the lansat satellite number.
+#' If \code{TRUE} clouds for landsat-8 are computed, otherwise, landsat 4-7 
+#' clouds are computed.
 #' @param overwrite logical argument. If \code{TRUE}, overwrites the existing
 #' images with the same name.
 #' @param verbose logical argument. If \code{TRUE}, the function prints the
@@ -82,7 +83,7 @@
 #' img.ls8.b1.cloud.free <- img.ls8.b1[[1]] * img.ls8.cld[[1]]
 #' spplot(img.ls8.b1.cloud.free)
 #' }
-lsCloudMask<-function(src,AppRoot,out.name,sensitivity=28000,overwrite=FALSE,verbose=FALSE,...){
+lsCloudMask<-function(src,AppRoot,out.name,ls8=TRUE,overwrite=FALSE,verbose=FALSE,...){
   arg<-list(...)
   src<-pathWinLx(src)
   if(!missing(AppRoot)){
@@ -105,6 +106,12 @@ lsCloudMask<-function(src,AppRoot,out.name,sensitivity=28000,overwrite=FALSE,ver
     qc<-"pixel_qa"
   }else{
     warning("Quality band not found!")
+  }
+  
+  if(ls8){
+    cldcl <- c(322, 386, 834, 898, 1346)
+  }else{
+    cldcl <- c(66,130)
   }
   
   for(id in imgdir.list){
@@ -133,10 +140,12 @@ lsCloudMask<-function(src,AppRoot,out.name,sensitivity=28000,overwrite=FALSE,ver
       if(verbose){
         message(paste0("Minimun: ",mn))
       }
-      ras.cloud[ras.cloud<=max(mn,1)]<-1
-      ras.cloud[ras.cloud>=sensitivity]<-1
-      ras.cloud[ras.cloud!=1]<-NA
-      
+      # ras.cloud[ras.cloud<=max(mn,1)]<-1
+      # ras.cloud[ras.cloud>=sensitivity]<-1
+      # ras.cloud[ras.cloud!=1]<-NA
+      ras.cloud[ras.cloud %in% cldcl] <- 1
+      ras.cloud[ras.cloud != 1] <- NA
+
       NAvalue(ras.cloud)<-0
       writeRaster(ras.cloud,out.img,overwrite=overwrite)
       if(grepl(".TIF",out.img)){

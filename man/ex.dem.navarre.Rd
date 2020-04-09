@@ -4,14 +4,16 @@
 \name{ex.dem.navarre}
 \alias{ex.dem.navarre}
 \title{A Digital Elevation Model (DEM) of the region of Navarre (Spain)}
-\format{The \code{RasterStack} contains 6 layers with the same DEM, one for
+\format{
+The \code{RasterStack} contains 6 layers with the same DEM, one for
 every image in the time series of the \code{\link{genSmoothingCovIMA}} example.
 The \code{RasterStack} coordinates are in the Sinusoidal projection:
 
 \describe{
   \item{name}{layer names contain the capturing date of the corresponding image in the format "\code{YYYYJJJ}"}.
   \item{size}{113 rows by 105 columns and 6 layers}.
-}}
+}
+}
 \description{
 Geographically projected \code{RasterStack} with the digital elevation model
 (DEM) of the region of Navarre (Spain). The DEM was obtained from the

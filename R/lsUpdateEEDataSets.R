@@ -14,12 +14,14 @@
 #' @return the dataset names in EarthExplorer API
 #'
 #' @examples
+#' \dontrun{
 #' setRGISToolsOpt("EE.DataSets",NULL)
 #' getRGISToolsOpt("EE.DataSets")
 #' datasetNames<-lsUpdateEEDataSets(username = "username",
 #'                                  password = "password")
 #' 
 #' getRGISToolsOpt("EE.DataSets")
+#' }
 lsUpdateEEDataSets<-function(username,password,logout=TRUE,verbose=FALSE){
   ApiKey<-getRGISToolsOpt("LS.EE.KEY")
   if(is.null(ApiKey)){

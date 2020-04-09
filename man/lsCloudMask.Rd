@@ -8,7 +8,7 @@ lsCloudMask(
   src,
   AppRoot,
   out.name,
-  sensitivity = 28000,
+  ls8 = TRUE,
   overwrite = FALSE,
   verbose = FALSE,
   ...
@@ -23,8 +23,9 @@ Landsat-8.}
 \item{out.name}{the name of the folder that stores the outputs. 
 If the arguemnt is not defined the folder will be named as "CloudMask".}
 
-\item{sensitivity}{\code{numeric} argument. Defines the sensitivity of the
-cloud detection method.}
+\item{ls8}{\code{logical} argument. Defines the lansat satellite number.
+If \code{TRUE} clouds for landsat-8 are computed, otherwise, landsat 4-7 
+clouds are computed.}
 
 \item{overwrite}{logical argument. If \code{TRUE}, overwrites the existing
 images with the same name.}

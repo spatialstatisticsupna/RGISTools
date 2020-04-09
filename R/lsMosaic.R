@@ -202,7 +202,7 @@ lsMosaic<-function(src,
           }else if(lvl2){
             nodata<--9999
           }else{
-           nodata<-0
+            nodata<-0
           }
           
           if(verbose){
