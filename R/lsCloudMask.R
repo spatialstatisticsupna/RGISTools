@@ -108,7 +108,7 @@ lsCloudMask<-function(src,AppRoot,out.name,ls8=TRUE,overwrite=FALSE,verbose=FALS
     warning("Quality band not found!")
   }
   
-  if(grepl("8",p)){
+  if(ls8){
     cldcl <- c(322, 386, 834, 898, 1346, 324,  388,  836,  900, 1348)
   }else{
     cldcl <- c(66, 130, 68, 132)
