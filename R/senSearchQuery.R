@@ -72,6 +72,12 @@ senSearchQuery<-function(...){
     }
     url<-paste0(url," AND cloudcoverpercentage:[",min(arg$cloudCover)," TO ",max(arg$cloudCover),"]")
   }
+  if("timeliness"%in%names(arg)){
+    if(arg$verbose){
+      message("Added timeliness.")
+    }
+    url<-paste0(url,' AND timeliness:"',arg$timeliness,'"')
+  }
   if("qformat"%in%names(arg)){
     url<-paste0(url,"&format=",arg$qformat)
   }else{
