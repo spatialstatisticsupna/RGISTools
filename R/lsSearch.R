@@ -4,7 +4,7 @@
 #' a particular location and date interval. The function returns a 
 #' \code{data.frame} with the names of the images and their metadata.
 #' 
-#' @param datasetName the name of the dataset. Avaliable names saved in `RGISTools'
+#' @param product the name of the dataset. Avaliable names saved in `RGISTools'
 #' (\code{getRGISToolsOpt("EE.DataSets")}).
 #' @param username NASA’s `EarthData' username.
 #' @param password NASA’s `EarthData' password.

@@ -18,6 +18,9 @@ lsSearch(
 )
 }
 \arguments{
+\item{product}{the name of the dataset. Avaliable names saved in `RGISTools'
+(\code{getRGISToolsOpt("EE.DataSets")}).}
+
 \item{startDate}{a \code{Date} class object with the starting date of the 
 study period. This argument is mandatory if 
   \code{dates} is not defined.}
@@ -59,9 +62,6 @@ running steps and warnings.}
   \code{region}, \code{pathrow} or \code{lonlat} are not defined.
   
 }}
-
-\item{datasetName}{the name of the dataset. Avaliable names saved in `RGISTools'
-(\code{getRGISToolsOpt("EE.DataSets")}).}
 }
 \value{
 a \code{data.frame} with the name of the images and their metadata.
