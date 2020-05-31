@@ -44,6 +44,7 @@
 #' @return a \code{RasterStack} with the filled/smoothed images. 
 #'
 #' @examples
+#' \dontrun{
 #' set.seed(0)
 #' # load example ndvi and dem data of Navarre
 #' data(ex.ndvi.navarre)
@@ -66,13 +67,14 @@
 #' # smoothing the image using the DEM as covariate
 #' smth.ndvi <- genSmoothingCovIMA(rStack = ex.ndvi.navarre,
 #'                                 cStack = ex.dem.navarre,
-#'                                 Img2Process = c(2,5))
+#'                                 Img2Process = c(2))
 #' # plot the distorted 1, smoothed 1, 
 #' # distorted 5, smoothed 5 images
 #' plot(stack(ex.ndvi.navarre[[2]],
 #'                  smth.ndvi[[1]],
 #'                  ex.ndvi.navarre[[5]],
 #'                  smth.ndvi[[2]]))
+#' }
 genSmoothingCovIMA <- function (rStack,
                              cStack,
                              Img2Process=NULL,

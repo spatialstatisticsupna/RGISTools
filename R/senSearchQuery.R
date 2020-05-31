@@ -1,5 +1,5 @@
 senSearchQuery<-function(...){
-  url<-paste0(getRGISToolsOpt("SCIHUBHUSURL"),"/search?q=")
+  url<-paste0(getRGISToolsOpt("SCIHUBAPIURL"),"/search?q=")
   arg<-list(...)
   if(!"verbose"%in%names(arg)){
     arg$verbose=FALSE

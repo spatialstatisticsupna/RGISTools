@@ -82,6 +82,7 @@ procedure requires a proper definition of a temporal neighbourhood for the
 target image and aggregation factor.
 }
 \examples{
+\dontrun{
 # load an example of NDVI time series in Navarre
 data(ex.ndvi.navarre)
 # the 2 images to be filled and the neighbourhood
@@ -89,7 +90,7 @@ genPlotGIS(ex.ndvi.navarre)
 
 # filled images
 tiles.mod.ndvi.filled  <- genSmoothingIMA(ex.ndvi.navarre,
-                               Img2Fill = c(1,2),
+                               Img2Fill = c(1),
                                only.na=TRUE)
 # show the filled images
 genPlotGIS(tiles.mod.ndvi.filled)
@@ -97,6 +98,7 @@ genPlotGIS(tiles.mod.ndvi.filled)
 tiles.mod.ndvi.comp <- stack(ex.ndvi.navarre[[1]], tiles.mod.ndvi.filled[[1]],
                              ex.ndvi.navarre[[2]], tiles.mod.ndvi.filled[[2]])
 genPlotGIS(tiles.mod.ndvi.comp, layout=c(2, 2))
+}
 }
 \references{
 \insertRef{militino2019interpolation}{RGISTools}

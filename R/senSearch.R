@@ -89,7 +89,7 @@ senSearch<-function(username,
   c.handle = new_handle()
 
   handle_setopt(c.handle,
-                referer=getRGISToolsOpt("SCIHUBHUSURL"),
+                referer=getRGISToolsOpt("SCIHUBAPIURL"),
                 useragent = getRGISToolsOpt("USERAGENT"),
                 followlocation = TRUE ,
                 autoreferer = TRUE ,

@@ -79,7 +79,7 @@ senPreview<-function(searchres,username,password,n,dates,lpos=c(3,2,1),add.Layer
   ser<-searchres[n]
   c.handle = new_handle()
   handle_setopt(c.handle,
-                referer=getRGISToolsOpt("SCIHUBHUSURL"),
+                referer=getRGISToolsOpt("SCIHUBAPIURL"),
                 useragent = getRGISToolsOpt("USERAGENT"),
                 followlocation = TRUE ,
                 autoreferer = TRUE ,

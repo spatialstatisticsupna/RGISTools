@@ -54,8 +54,8 @@
 #'                        platform = "Sentinel-2",
 #'                        extent = ex.navarre,
 #'                        product = "S2MSI1C",
-#'                        username = "username",
-#'                        password = "password")
+#'                        username = "rgistools",
+#'                        password = "EspacialUPNA88")
 #'
 #' # filtering the path R094 where Navarre is located
 #' names(sres)
@@ -65,9 +65,9 @@
 #' senGetDates(names(sres.sen.R094),format="%Y%j")
 #' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' # donwload the imagery
-#' senDownload(searchres = sres.sen.R094,
-#'             username = "username",
-#'             password = "password",
+#' senDownload(searchres = sres,
+#'             username = "rgistools",
+#'             password = "EspacialUPNA88",
 #'             AppRoot = wdir,
 #'             unzip = TRUE)
 #' wdir.sen.unzip <- file.path(wdir,"Sentinel","unzip")
@@ -85,7 +85,7 @@ senDownload<-function(searchres,
                         nattempts = 5,
                         unzip=FALSE,
                         overwrite=FALSE,
-                        omit.md5.error=FALSE,
+                        omit.md5.error=TRUE,
                         ...){
   arg<-list(...)
   if(class(searchres)!="senres"){stop("A response from sentinel search function is needed.")}
@@ -99,17 +99,17 @@ senDownload<-function(searchres,
   if(is.null(username)|is.null(password)){
     stop("Username and/or password not defined!")
   }
-  downFolder<-file.path(AppRoot,"/raw")
+  downFolder<-file.path(AppRoot,"raw")
   dir.create(downFolder,recursive=TRUE,showWarnings = FALSE)
   message(paste0("Downloading the images in: ",downFolder))
   if(unzip){
-    unzipFolder<-file.path(AppRoot,"/unzip")
+    unzipFolder<-file.path(AppRoot,"unzip")
     dir.create(unzipFolder,recursive=TRUE,showWarnings = FALSE)
   }
   n.imgs<-length(searchres)
   c.handle = new_handle()
   handle_setopt(c.handle,
-                referer=getRGISToolsOpt("SCIHUBHUSURL"),
+                referer=getRGISToolsOpt("SCIHUBAPIURL"),
                 useragent = getRGISToolsOpt("USERAGENT"),
                 followlocation = TRUE ,
                 autoreferer = TRUE ,
@@ -124,7 +124,34 @@ senDownload<-function(searchres,
         message(paste0("Downloading image ",file.name," (",i,"/",n.imgs,")"))
         image.url<-URLencode(url)
         if("verbose"%in%names(arg)){if(arg$verbose==T)message(paste0('Trying to download the url: ',image.url))}
-        curl_download(image.url, destfile=downPath,handle = c.handle)
+        online<-gsub("/$value","/Online/$value",image.url,fixed = T)
+        is.online<-curl_fetch_memory(online,handle=c.handle)
+        if(rawToChar(is.online$content)=="false"){
+          message("The image is archived, ordering...")
+          order<-curl_fetch_memory(image.url,handle=c.handle)
+          while(order$status_code!=202){
+            Sys.sleep(10)
+            if(order$status_code==503){
+              message("Service Unavailable. The retrieval of offline data is temporarily unavailable, please try again later")
+            }else if(order$status_code==403){
+              message("Forbidden. User offline products retrieval quota exceeded")
+            }else if(order$status_code==500){
+              message("Internal Server Error. Unexpected nav segment Navigation Property")
+            }
+            order<-curl_fetch_memory(image.url,handle=c.handle)
+          }
+          message("Image ordered!")
+          is.online<-curl_fetch_memory(online,handle=c.handle)
+          while(rawToChar(is.online$content)=="false"){
+            Sys.sleep(10)
+            is.online<-curl_fetch_memory(online,handle=c.handle)
+          }
+          curl_download(image.url, destfile=downPath,handle = c.handle)
+          
+        }else{
+          curl_download(image.url, destfile=downPath,handle = c.handle)
+        }
+        
       }
 
       #md5 check

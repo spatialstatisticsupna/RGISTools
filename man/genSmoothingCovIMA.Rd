@@ -76,6 +76,7 @@ over the anomaly images. The procedure requires a proper definition of a
 temporal neighbourhood for the target image and aggregation factor.
 }
 \examples{
+\dontrun{
 set.seed(0)
 # load example ndvi and dem data of Navarre
 data(ex.ndvi.navarre)
@@ -98,13 +99,14 @@ genPlotGIS(ex.ndvi.navarre)
 # smoothing the image using the DEM as covariate
 smth.ndvi <- genSmoothingCovIMA(rStack = ex.ndvi.navarre,
                                 cStack = ex.dem.navarre,
-                                Img2Process = c(2,5))
+                                Img2Process = c(2))
 # plot the distorted 1, smoothed 1, 
 # distorted 5, smoothed 5 images
 plot(stack(ex.ndvi.navarre[[2]],
                  smth.ndvi[[1]],
                  ex.ndvi.navarre[[5]],
                  smth.ndvi[[2]]))
+}
 }
 \references{
 \insertRef{militino2018improving}{RGISTools}

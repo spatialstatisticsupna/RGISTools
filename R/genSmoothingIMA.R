@@ -47,6 +47,7 @@
 #' 
 #' 
 #' @examples
+#' \dontrun{
 #' # load an example of NDVI time series in Navarre
 #' data(ex.ndvi.navarre)
 #' # the 2 images to be filled and the neighbourhood
@@ -54,7 +55,7 @@
 #'
 #' # filled images
 #' tiles.mod.ndvi.filled  <- genSmoothingIMA(ex.ndvi.navarre,
-#'                                Img2Fill = c(1,2),
+#'                                Img2Fill = c(1),
 #'                                only.na=TRUE)
 #' # show the filled images
 #' genPlotGIS(tiles.mod.ndvi.filled)
@@ -62,6 +63,7 @@
 #' tiles.mod.ndvi.comp <- stack(ex.ndvi.navarre[[1]], tiles.mod.ndvi.filled[[1]],
 #'                              ex.ndvi.navarre[[2]], tiles.mod.ndvi.filled[[2]])
 #' genPlotGIS(tiles.mod.ndvi.comp, layout=c(2, 2))
+#' }
 genSmoothingIMA<-function(rStack,
                           Img2Fill = NULL,
                           nDays = 3,
