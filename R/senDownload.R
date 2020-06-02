@@ -54,8 +54,8 @@
 #'                        platform = "Sentinel-2",
 #'                        extent = ex.navarre,
 #'                        product = "S2MSI1C",
-#'                        username = "rgistools",
-#'                        password = "EspacialUPNA88")
+#'                        username = "username",
+#'                        password = "password")
 #'
 #' # filtering the path R094 where Navarre is located
 #' names(sres)
@@ -66,8 +66,8 @@
 #' wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 #' # donwload the imagery
 #' senDownload(searchres = sres,
-#'             username = "rgistools",
-#'             password = "EspacialUPNA88",
+#'             username = "username",
+#'             password = "password",
 #'             AppRoot = wdir,
 #'             unzip = TRUE)
 #' wdir.sen.unzip <- file.path(wdir,"Sentinel","unzip")
