@@ -12,7 +12,7 @@ senDownload(
   nattempts = 5,
   unzip = FALSE,
   overwrite = FALSE,
-  omit.md5.error = FALSE,
+  omit.md5.error = TRUE,
   ...
 )
 }
@@ -95,7 +95,7 @@ names(sres.sen.R094)
 senGetDates(names(sres.sen.R094),format="\%Y\%j")
 wdir <- file.path(tempdir(),"Path_for_downloading_folder")
 # donwload the imagery
-senDownload(searchres = sres.sen.R094,
+senDownload(searchres = sres,
             username = "username",
             password = "password",
             AppRoot = wdir,
