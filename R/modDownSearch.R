@@ -106,7 +106,7 @@ modDownSearch<-function(product,
     dir.create(tiffdir,recursive=TRUE,showWarnings = FALSE)
   natps<-0
   dir.create(downdir,recursive = TRUE,showWarnings = FALSE)
-  for(s in search.res){
+  for(s in search.res$hdf){
     recursiveModDownload(s=s,
                          username=username,
                          password=password,

@@ -75,6 +75,7 @@ modExtractHDF<-function(filesHDF,AppRoot,overwrite=FALSE,bFilter=NULL,rm.band=NU
         bands.names<-image.data[grepl(".*SUBDATASET_.*_NAME=", image.data)]
         names<-gsub('.*":','',bands.names)
         names<-gsub(':','_',names)
+        names<-gsub("\\\"","",names)
         if(!is.null(bFilter)){
           exname<-names[Reduce("|", lapply(bFilter,grepl,names,ignore.case = TRUE))]
           bds<-which(names%in%exname)
