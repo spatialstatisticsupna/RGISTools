@@ -2,7 +2,7 @@
 Handling multiplatform satellite images.
 ```diff
 - CAUTION!!! this package is deprecated, a redefinition of it has been reprogramed under the name rsat. 
-Get it from here https://github.com/ropensci/rsat.
+- Get it from here https://github.com/ropensci/rsat.
 ```
 [![CRAN version](https://www.r-pkg.org/badges/version/RGISTools)](https://cran.r-project.org/web/packages/RGISTools/)
 [![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
