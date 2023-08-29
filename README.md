@@ -151,7 +151,7 @@ install.packages("devtools")
 # load devtools library
 library(devtools)
 
-# Install RGISTools from GitHub repositoy
+# Install RGISTools from GitHub repository
 install_github("spatialstatisticsupna/RGISTools")
 ```
 ## Dependencies for linux
